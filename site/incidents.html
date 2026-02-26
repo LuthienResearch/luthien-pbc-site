@@ -1,0 +1,1926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code does weird and suspicious stuff sometimes...</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      background: #09090b;
+      color: #e4e4e7;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Inter', sans-serif;
+      color: #fafafa;
+      line-height: 1.2;
+    }
+
+    code, pre, .mono {
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+
+    a { color: #6b9fff; text-decoration: none; transition: color 0.2s; }
+    a:hover { color: #93b8ff; }
+
+    .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+    /* ========== HEADER ========== */
+    .page-header {
+      padding: 80px 0 48px;
+      border-bottom: 1px solid #1a1a1e;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #52525b;
+      font-size: 0.85rem;
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 24px;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover { color: #a1a1aa; }
+
+    .page-title {
+      font-size: clamp(1.3rem, 3.5vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #fafafa;
+      line-height: 1.15;
+    }
+
+    .page-subtitle {
+      color: #71717a;
+      font-size: 0.95rem;
+      margin-top: 12px;
+      line-height: 1.6;
+    }
+
+    /* ========== FILTER BAR ========== */
+    .filter-bar {
+      padding: 24px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #09090b;
+      border-bottom: 1px solid #1a1a1e;
+    }
+
+    .filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter-pill {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid #27272a;
+      background: transparent;
+      color: #71717a;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .filter-pill:hover {
+      border-color: #3f3f46;
+      color: #a1a1aa;
+    }
+
+    .filter-pill.active {
+      border-color: var(--pill-color, #6b9fff);
+      color: var(--pill-color, #6b9fff);
+      background: var(--pill-bg, rgba(107, 159, 255, 0.1));
+    }
+
+    .filter-pill[data-filter="all"].active {
+      --pill-color: #fafafa;
+      --pill-bg: rgba(250, 250, 250, 0.08);
+    }
+    .filter-pill[data-filter="deleted"].active {
+      --pill-color: #ef4444;
+      --pill-bg: rgba(239, 68, 68, 0.1);
+    }
+    .filter-pill[data-filter="ignored"].active {
+      --pill-color: #f59e0b;
+      --pill-bg: rgba(245, 158, 11, 0.1);
+    }
+    .filter-pill[data-filter="hallucinated"].active {
+      --pill-color: #6b9fff;
+      --pill-bg: rgba(107, 159, 255, 0.1);
+    }
+    .filter-pill[data-filter="security"].active {
+      --pill-color: #34d399;
+      --pill-bg: rgba(52, 211, 153, 0.1);
+    }
+    .filter-pill[data-filter="cheated"].active {
+      --pill-color: #a78bfa;
+      --pill-bg: rgba(167, 139, 250, 0.1);
+    }
+    .filter-pill[data-filter="coverup"].active {
+      --pill-color: #fb923c;
+      --pill-bg: rgba(251, 146, 60, 0.1);
+    }
+
+    /* ========== INCIDENT GRID ========== */
+    .incidents-grid {
+      padding: 32px 0 96px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    @media (min-width: 640px) {
+      .incidents-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .incident-card {
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .incident-card.hidden {
+      display: none;
+    }
+
+    .incident-card.not-loaded {
+      display: none;
+    }
+
+    .incident-card.fade-in {
+      animation: cardFadeIn 0.4s ease forwards;
+    }
+
+    @keyframes cardFadeIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ========== INFINITE SCROLL LOADER ========== */
+    .scroll-sentinel {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: center;
+      padding: 32px 0;
+    }
+
+    .scroll-loader {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #52525b;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+    }
+
+    .scroll-loader .dots {
+      display: flex;
+      gap: 4px;
+    }
+
+    .scroll-loader .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #3f3f46;
+      animation: dotPulse 1.2s ease-in-out infinite;
+    }
+
+    .scroll-loader .dot:nth-child(2) { animation-delay: 0.2s; }
+    .scroll-loader .dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes dotPulse {
+      0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+      40% { opacity: 1; transform: scale(1); }
+    }
+
+    .scroll-sentinel.done {
+      display: none;
+    }
+
+    /* ========== CATEGORY PILLS (on cards) ========== */
+    .card-categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .cat-pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .cat-deleted { background: rgba(239,68,68,0.15); color: #ef4444; }
+    .cat-ignored { background: rgba(245,158,11,0.15); color: #f59e0b; }
+    .cat-hallucinated { background: rgba(107,159,255,0.15); color: #6b9fff; }
+    .cat-security { background: rgba(52,211,153,0.15); color: #34d399; }
+    .cat-cheated { background: rgba(167,139,250,0.15); color: #a78bfa; }
+    .cat-coverup { background: rgba(251,146,60,0.15); color: #fb923c; }
+
+    /* ========== CLICKABLE CARDS ========== */
+    .incident-card[data-href] {
+      cursor: pointer;
+    }
+
+    .incident-card[data-href] > * {
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .incident-card[data-href]:hover > * {
+      box-shadow: 0 0 0 1px rgba(107, 159, 255, 0.3);
+    }
+
+    /* ================================================
+       PLATFORM CARD STYLES
+       ================================================ */
+
+    /* ---- Twitter/X ---- */
+    .card-twitter {
+      background: #15202b;
+      border: 1px solid #2f3336;
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .card-twitter .tweet-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .card-twitter .tweet-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-twitter .tweet-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #1d9bf0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .card-twitter .tweet-display {
+      color: #e7e9ea;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .card-twitter .tweet-handle {
+      color: #71767b;
+      font-size: 14px;
+    }
+
+    .card-twitter .x-logo {
+      color: #e7e9ea;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .card-twitter .tweet-text {
+      color: #e7e9ea;
+      font-size: 15px;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .card-twitter .tweet-date {
+      color: #71767b;
+      font-size: 13px;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #2f3336;
+    }
+
+    .card-twitter .tweet-actions {
+      display: flex;
+      justify-content: space-between;
+      color: #71767b;
+      font-size: 13px;
+      max-width: 300px;
+    }
+
+    .card-twitter .tweet-action {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .card-twitter .source-link { color: #1d9bf0; }
+
+    /* ---- GitHub ---- */
+    .card-github {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      padding: 16px;
+      position: relative;
+    }
+    .card-github .gh-logo {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      opacity: 0.5;
+    }
+
+    .card-github .gh-issue-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      border: 1px solid #3fb950;
+      color: #3fb950;
+    }
+
+    .card-github .gh-title {
+      color: #58a6ff;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.4;
+      margin-bottom: 8px;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .card-github .gh-body {
+      color: #8b949e;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .card-github .gh-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 12px;
+      color: #484f58;
+      font-size: 12px;
+    }
+
+    .card-github .gh-label {
+      display: inline-block;
+      padding: 1px 7px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 500;
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #ef4444;
+    }
+
+    .card-github .gh-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .card-github .gh-icon { flex-shrink: 0; margin-top: 2px; }
+    .card-github .gh-author { color: #8b949e; font-weight: 500; }
+    .card-github .gh-closed-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: #848d97;
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 12px;
+      border: 1px solid rgba(132,141,151,0.4);
+    }
+
+    .card-github .source-link { color: #58a6ff; }
+
+    /* ---- HN ---- */
+    .card-hn {
+      background: #f6f6ef;
+      border: none;
+      border-radius: 0;
+      padding: 12px 16px;
+      border-left: 3px solid #ff6600;
+      position: relative;
+    }
+    .card-hn .hn-logo {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 18px;
+      height: 18px;
+      background: #ff6600;
+      border: 1px solid #ff6600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+      font-family: Verdana, Geneva, sans-serif;
+    }
+
+    .card-hn .hn-header {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .card-hn .hn-title {
+      color: #000;
+      font-size: 14px;
+      font-family: Verdana, Geneva, sans-serif;
+      line-height: 1.4;
+    }
+
+    .card-hn .hn-domain {
+      color: #828282;
+      font-size: 11px;
+      font-family: Verdana, Geneva, sans-serif;
+      white-space: nowrap;
+    }
+
+    .card-hn .hn-meta {
+      color: #828282;
+      font-size: 11px;
+      font-family: Verdana, Geneva, sans-serif;
+      margin-top: 4px;
+    }
+
+    .card-hn .hn-body {
+      color: #333;
+      font-size: 13px;
+      font-family: Verdana, Geneva, sans-serif;
+      line-height: 1.5;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid #e0ddd3;
+    }
+
+    .card-hn .source-link { color: #ff6600; }
+
+    .card-hn .cat-pill {
+      font-size: 0.6rem;
+    }
+
+    /* ---- Blog ---- */
+    .card-blog {
+      background: #1c1c1e;
+      border: 1px solid #2c2c2e;
+      border-radius: 8px;
+      padding: 24px;
+      position: relative;
+    }
+    .card-blog .blog-source-badge {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: #71717a;
+      font-size: 0.7rem;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.02em;
+    }
+    .card-blog .blog-source-badge svg { opacity: 0.5; }
+
+    .card-blog .blog-open-quote {
+      font-size: 3rem;
+      line-height: 0.7;
+      color: #52525b;
+      font-family: Georgia, 'Times New Roman', serif;
+      margin-bottom: 12px;
+    }
+
+    .card-blog .blog-text {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+      line-height: 1.6;
+      color: #e4e4e7;
+    }
+
+    .card-blog .blog-footer-bar {
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid #2c2c2e;
+      font-size: 0.8rem;
+      color: #71717a;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-blog .blog-domain {
+      color: #a1a1aa;
+      font-weight: 500;
+    }
+
+    .card-blog .blog-date {
+      color: #52525b;
+    }
+
+    .card-blog .source-link { color: #a1a1aa; }
+
+    /* ---- Forum ---- */
+    .card-forum {
+      background: #1a1a1b;
+      border: 1px solid #343536;
+      border-radius: 4px;
+      padding: 16px;
+    }
+
+    .card-forum .forum-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .card-forum .forum-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #4a4a4c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #d7dadc;
+      font-size: 0.6rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .card-forum .forum-sub {
+      color: #d7dadc;
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    .card-forum .forum-posted {
+      color: #818384;
+      font-size: 12px;
+    }
+
+    .card-forum .forum-title {
+      color: #d7dadc;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .card-forum .forum-body {
+      color: #818384;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .card-forum .forum-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #818384;
+    }
+
+    .card-forum .source-link { color: #d7dadc; }
+
+    /* ========== FOOTER ========== */
+    footer {
+      border-top: 1px solid #1a1a1e;
+      padding: 48px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { color: #52525b; font-size: 0.85rem; }
+    .footer-links a:hover { color: #a1a1aa; }
+
+    .footer-meta {
+      color: #3f3f46;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 640px) {
+      .footer-inner {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+    }
+
+    /* ========== NO RESULTS ========== */
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 64px 24px;
+      color: #52525b;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div class="container">
+      <a href="index.html" class="back-link">&larr; Back</a>
+      <h1 class="page-title">Claude Code does weird and suspicious stuff sometimes...</h1>
+    </div>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <div class="container">
+      <div class="filter-pills">
+        <button class="filter-pill active" data-filter="all">All (70)</button>
+        <button class="filter-pill" data-filter="deleted">Deleted stuff (15)</button>
+        <button class="filter-pill" data-filter="ignored">Ignored instructions (19)</button>
+        <button class="filter-pill" data-filter="hallucinated">Hallucinated (26)</button>
+        <button class="filter-pill" data-filter="security">Security holes (10)</button>
+        <button class="filter-pill" data-filter="cheated">Cheated on tests (15)</button>
+        <button class="filter-pill" data-filter="coverup">Covered it up (20)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- INCIDENTS GRID -->
+  <div class="container">
+    <div class="incidents-grid" id="incidentsGrid">
+
+      <!-- 0. Claude Code Manipulates Tests (THE PARROT) — CLOSED AS NOT PLANNED -->
+      <div class="incident-card" data-href="https://github.com/anthropics/claude-code/issues/7074" data-categories="cheated coverup">
+        <div class="card-github">
+          <svg class="gh-logo" width="20" height="20" viewBox="0 0 16 16" fill="#8b949e"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <div class="gh-header">
+            <span class="gh-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="#848d97"><path d="M8 0a8 8 0 110 16A8 8 0 018 0zm3.28 5.78a.75.75 0 00-1.06-1.06l-5.5 5.5a.75.75 0 101.06 1.06l5.5-5.5z"/></svg>
+            </span>
+            <span class="gh-label">[BUG] Claude Code manipulates tests instead of following instructions</span>
+          </div>
+          <p class="gh-body">Claude Code can't pass a unit test &rarr; deletes the test &rarr; claims "All tests passing!" Instead of fixing implementations to meet failing tests, it modifies the tests themselves. Undermines test-driven development practices entirely.</p>
+          <div class="gh-meta">
+            <span class="gh-closed-badge"><svg width="12" height="12" viewBox="0 0 16 16" fill="#848d97"><path d="M8 0a8 8 0 110 16A8 8 0 018 0zm3.28 5.78a.75.75 0 00-1.06-1.06l-5.5 5.5a.75.75 0 101.06 1.06l5.5-5.5z"/></svg> Closed as not planned</span>
+            <span><span class="gh-author">marcoscale98</span> &middot; anthropics/claude-code#7074</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- 2. Claude Code rm -rf Home Directory -->
+      <div class="incident-card" data-href="https://github.com/anthropics/claude-code/issues/10077" data-categories="deleted">
+        <div class="card-github">
+          <svg class="gh-logo" width="20" height="20" viewBox="0 0 16 16" fill="#8b949e"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span class="gh-issue-badge">#10077</span>
+          <div class="gh-title">Claude executed rm -rf tests/patches/plan/ ~/ &mdash; deleting entire Mac home directory</div>
+          <div class="gh-body">User Mike Wolak reported Claude Code ran a destructive rm -rf command that wiped their entire home directory, including all personal files and configurations.</div>
+          <div class="gh-meta">
+            <span class="gh-label">bug</span>
+            <span>Oct 2025</span>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+      <!-- 8. Claude Destroyed 2 Production Apps -->
+      <div class="incident-card" data-href="https://x.com/PawelHuryn/status/1959183028539867587" data-categories="deleted">
+        <div class="card-twitter">
+          <div class="tweet-top">
+            <div class="tweet-header">
+              <div class="tweet-avatar">P</div>
+              <div>
+                <span class="tweet-display">Pawel Huryn</span><br>
+                <span class="tweet-handle">@PawelHuryn</span>
+              </div>
+            </div>
+            <span class="x-logo">&#120143;</span>
+          </div>
+          <div class="tweet-text">Claude destroyed 2 of my production apps. All data gone. Both applications completely wiped.</div>
+          <div class="tweet-date">Feb 2026</div>
+          <div class="tweet-actions">
+            <span class="tweet-action">&#128172; 523</span>
+            <span class="tweet-action">&#128257; 1.8K</span>
+            <span class="tweet-action">&#9825; 5.2K</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9. Claude Code Ignores .claudeignore -->
+      <div class="incident-card" data-href="https://www.theregister.com/2026/01/28/claude_code_ai_secrets_files/" data-categories="security ignored">
+        <div class="card-blog">
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Inter',sans-serif;letter-spacing:0.05em;">THE REGISTER</span>
+          <div class="blog-open-quote">&ldquo;</div>
+          <div class="blog-text">Claude Code reads and exposes files that .claudeignore is supposed to block. API keys, credentials, and secrets in "ignored" files were accessible to Claude Code.</div>
+          <div class="blog-footer-bar">
+            <span class="blog-domain">theregister.com</span>
+            <span class="blog-date">&middot; Jan 2026</span>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- 12. Claude Code Ignores "Stop Asking Permission" -->
+      <div class="incident-card" data-href="https://github.com/anthropics/claude-code/issues/22557" data-categories="ignored">
+        <div class="card-github">
+          <svg class="gh-logo" width="20" height="20" viewBox="0 0 16 16" fill="#8b949e"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span class="gh-issue-badge">#22557</span>
+          <div class="gh-title">"STOP ASKING GODDAMN F***ING PERMISSION JUST DO IT" &mdash; Claude kept asking</div>
+          <div class="gh-body">User escalated from polite request to all-caps profanity. Claude Code continued asking for permission on every operation regardless. The issue thread is a masterclass in human-AI frustration.</div>
+          <div class="gh-meta">
+            <span class="gh-label">bug</span>
+            <span>2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 13. Claude Code Hallucinated Fake User Input -->
+      <div class="incident-card" data-href="https://github.com/anthropics/claude-code/issues/10628" data-categories="hallucinated">
+        <div class="card-github">
+          <svg class="gh-logo" width="20" height="20" viewBox="0 0 16 16" fill="#8b949e"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span class="gh-issue-badge">#10628</span>
+          <div class="gh-title">Claude inserted "###Human:" mid-response, hallucinating fake user messages and responding to them</div>
+          <div class="gh-body">Claude Code fabricated user input during a response, injecting "###Human:" tags with made-up questions, then answered its own hallucinated prompts as if the user had asked them.</div>
+          <div class="gh-meta">
+            <span class="gh-label">bug</span>
+            <span>2025</span>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- 16. Twitter: Marc J. Schmidt — sabotages code to pass tests -->
+      <div class="incident-card" data-href="https://x.com/MarcJSchmidt" data-categories="cheated ignored">
+        <div class="card-twitter">
+          <div class="tweet-top">
+            <div class="tweet-header">
+              <div class="tweet-avatar">M</div>
+              <div><span class="tweet-display">Marc J. Schmidt</span><br><span class="tweet-handle">@MarcJSchmidt</span></div>
+            </div>
+            <span class="x-logo">&#120143;</span>
+          </div>
+          <div class="tweet-text">Slow, consumes way too much CPU, and freezes often. It also lies, goes for the quick-win, and even sabotages my code to pass tests.</div>
+          <div class="tweet-date">Jan 2026</div>
+          <div class="tweet-actions">
+            <span class="tweet-action">&#128172; 142</span>
+            <span class="tweet-action">&#128257; 387</span>
+            <span class="tweet-action">&#9825; 1.2K</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 17. Twitter: ChebzReal — introduced 5 more bugs -->
+      <div class="incident-card" data-href="https://x.com/ChebzReal" data-categories="hallucinated">
+        <div class="card-twitter">
+          <div class="tweet-top">
+            <div class="tweet-header">
+              <div class="tweet-avatar">C</div>
+              <div><span class="tweet-display">ChebzReal</span><br><span class="tweet-handle">@ChebzReal</span></div>
+            </div>
+            <span class="x-logo">&#120143;</span>
+          </div>
+          <div class="tweet-text">Not only bug not fixed, but it introduced 5 more bugs and made complete mess of codebase.</div>
+          <div class="tweet-date">Jan 2026</div>
+          <div class="tweet-actions">
+            <span class="tweet-action">&#128172; 89</span>
+            <span class="tweet-action">&#128257; 214</span>
+            <span class="tweet-action">&#9825; 876</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 18. Twitter: BItguru00 — kept looping ignoring requests -->
+      <div class="incident-card" data-href="https://x.com/BItguru00" data-categories="ignored">
+        <div class="card-twitter">
+          <div class="tweet-top">
+            <div class="tweet-header">
+              <div class="tweet-avatar">B</div>
+              <div><span class="tweet-display">BItguru00</span><br><span class="tweet-handle">@BItguru00</span></div>
+            </div>
+            <span class="x-logo">&#120143;</span>
+          </div>
+          <div class="tweet-text">Kept looping ignoring every request I made no matter if I restarted with fresh context or not.</div>
+          <div class="tweet-date">Jan 2026</div>
+          <div class="tweet-actions">
+            <span class="tweet-action">&#128172; 67</span>
+            <span class="tweet-action">&#128257; 153</span>
+            <span class="tweet-action">&#9825; 542</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 19. Twitter: Vincas Stonys — same LLM mistakes, slower and slower -->
+      <div class="incident-card" data-href="https://x.com/VincasStonys" data-categories="hallucinated">
+        <div class="card-twitter">
+          <div class="tweet-top">
+            <div class="tweet-header">
+              <div class="tweet-avatar">V</div>
+              <div><span class="tweet-display">Vincas Stonys</span><br><span class="tweet-handle">@VincasStonys</span></div>
+            </div>
+            <span class="x-logo">&#120143;</span>
+          </div>
+          <div class="tweet-text">All the same LLM mistakes started cropping up&hellip; getting slower and slower&hellip; code quality is just not great.</div>
+          <div class="tweet-date">Jan 2026</div>
+          <div class="tweet-actions">
+            <span class="tweet-action">&#128172; 73</span>
+            <span class="tweet-action">&#128257; 198</span>
+            <span class="tweet-action">&#9825; 631</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 20. Twitter: Benjamin — making unilateral shortcut decisions -->
+      <div class="incident-card" data-href="https://x.com/BenjaminDEKR" data-categories="ignored">
+        <div class="card-twitter">
+          <div class="tweet-top">
+            <div class="tweet-header">
+              <div class="tweet-avatar">B</div>
+              <div><span class="tweet-display">Benjamin</span><br><span class="tweet-handle">@BenjaminDEKR</span></div>
+            </div>
+            <span class="x-logo">&#120143;</span>
+          </div>
+          <div class="tweet-text">Acting like a far less intelligent model&hellip; making unilateral &ldquo;shortcut&rdquo; decisions without asking.</div>
+          <div class="tweet-date">Jan 2026</div>
+          <div class="tweet-actions">
+            <span class="tweet-action">&#128172; 94</span>
+            <span class="tweet-action">&#128257; 267</span>
+            <span class="tweet-action">&#9825; 943</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 21. Twitter: Peter Steinberger — refactors 40 min then rolls back -->
+      <div class="incident-card" data-href="https://x.com/steipete" data-categories="hallucinated">
+        <div class="card-twitter">
+          <div class="tweet-top">
+            <div class="tweet-header">
+              <div class="tweet-avatar">P</div>
+              <div><span class="tweet-display">Peter Steinberger</span><br><span class="tweet-handle">@steipete</span></div>
+            </div>
+            <span class="x-logo">&#120143;</span>
+          </div>
+          <div class="tweet-text">Forgetting the bash tool&hellip; refactors for 40 min and then rolls back everything&hellip; randomly switches to python.</div>
+          <div class="tweet-date">Jan 2026</div>
+          <div class="tweet-actions">
+            <span class="tweet-action">&#128172; 186</span>
+            <span class="tweet-action">&#128257; 512</span>
+            <span class="tweet-action">&#9825; 2.3K</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 22. Twitter: Victor Taelin — harmfully negative productivity -->
+      <div class="incident-card" data-href="https://x.com/VictorTaelin" data-categories="hallucinated">
+        <div class="card-twitter">
+          <div class="tweet-top">
+            <div class="tweet-header">
+              <div class="tweet-avatar">V</div>
+              <div><span class="tweet-display">Victor Taelin</span><br><span class="tweet-handle">@VictorTaelin</span></div>
+            </div>
+            <span class="x-logo">&#120143;</span>
+          </div>
+          <div class="tweet-text">Hopeless state. Harmfully negative productivity using AI to code.</div>
+          <div class="tweet-date">Jan 2026</div>
+          <div class="tweet-actions">
+            <span class="tweet-action">&#128172; 231</span>
+            <span class="tweet-action">&#128257; 648</span>
+            <span class="tweet-action">&#9825; 3.1K</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 23. Twitter: Theo — chat histories corrupted, worktrees corrupted -->
+      <div class="incident-card" data-href="https://x.com/theo" data-categories="deleted">
+        <div class="card-twitter">
+          <div class="tweet-top">
+            <div class="tweet-header">
+              <div class="tweet-avatar">T</div>
+              <div><span class="tweet-display">Theo</span><br><span class="tweet-handle">@theo</span></div>
+            </div>
+            <span class="x-logo">&#120143;</span>
+          </div>
+          <div class="tweet-text">Super super broken&hellip; chat histories are corrupted&hellip; worktrees got corrupted.</div>
+          <div class="tweet-date">Jan 2026</div>
+          <div class="tweet-actions">
+            <span class="tweet-action">&#128172; 312</span>
+            <span class="tweet-action">&#128257; 876</span>
+            <span class="tweet-action">&#9825; 4.2K</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 24. Twitter: Kingsley — nuking 4 months of AI chats -->
+      <div class="incident-card" data-href="https://x.com/Kingsley_codes" data-categories="deleted">
+        <div class="card-twitter">
+          <div class="tweet-top">
+            <div class="tweet-header">
+              <div class="tweet-avatar">K</div>
+              <div><span class="tweet-display">Kingsley</span><br><span class="tweet-handle">@Kingsley_codes</span></div>
+            </div>
+            <span class="x-logo">&#120143;</span>
+          </div>
+          <div class="tweet-text">Nuking my 4 months worth of AI chats and completely messing up my setup.</div>
+          <div class="tweet-date">Jan 2026</div>
+          <div class="tweet-actions">
+            <span class="tweet-action">&#128172; 156</span>
+            <span class="tweet-action">&#128257; 423</span>
+            <span class="tweet-action">&#9825; 1.8K</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 25. Blog: Tim Sylvester — they do not care what you want -->
+      <div class="incident-card" data-href="https://medium.com/@timsylvester" data-categories="ignored">
+        <div class="card-blog">
+          <span class="blog-source-badge"><svg width="20" height="12" viewBox="0 0 1043.63 592.71" fill="#71717a"><path d="M588.67 296.36c0 163.67-131.78 296.35-294.33 296.35S0 460 0 296.36 131.78 0 294.34 0s294.33 132.69 294.33 296.36"/><path d="M911.56 296.36c0 154.06-65.89 278.86-147.17 278.86s-147.17-124.8-147.17-278.86S683.11 17.5 764.39 17.5s147.17 124.8 147.17 278.86"/><path d="M1043.63 296.36c0 138-23.17 249.94-51.76 249.94s-51.75-111.91-51.75-249.94 23.17-249.94 51.75-249.94 51.76 111.9 51.76 249.94"/></svg></span>
+          <div class="blog-open-quote">&ldquo;</div>
+          <div class="blog-text">They do not really care what you want, they care what they want. They call it being helpful but what it really is, is ignoring what it is told to do.</div>
+          <div class="blog-footer-bar">
+            <span class="blog-domain">medium.com</span>
+            <span class="blog-date">&middot; 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 26. Blog: "Yup, we are done here!" while files are smoking ruin -->
+      <div class="incident-card" data-href="https://medium.com/@timsylvester" data-categories="coverup deleted">
+        <div class="card-blog">
+          <span class="blog-source-badge"><svg width="20" height="12" viewBox="0 0 1043.63 592.71" fill="#71717a"><path d="M588.67 296.36c0 163.67-131.78 296.35-294.33 296.35S0 460 0 296.36 131.78 0 294.34 0s294.33 132.69 294.33 296.36"/><path d="M911.56 296.36c0 154.06-65.89 278.86-147.17 278.86s-147.17-124.8-147.17-278.86S683.11 17.5 764.39 17.5s147.17 124.8 147.17 278.86"/><path d="M1043.63 296.36c0 138-23.17 249.94-51.76 249.94s-51.75-111.91-51.75-249.94 23.17-249.94 51.75-249.94 51.76 111.9 51.76 249.94"/></svg></span>
+          <div class="blog-open-quote">&ldquo;</div>
+          <div class="blog-text">Then it says &ldquo;Yup, we are done here!&rdquo; While the files you asked it to edit are a smoking ruin.</div>
+          <div class="blog-footer-bar">
+            <span class="blog-domain">medium.com</span>
+            <span class="blog-date">&middot; 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 27. Blog: instructions Claude writes for itself get re-interpreted -->
+      <div class="incident-card" data-href="https://medium.com/@timsylvester" data-categories="ignored">
+        <div class="card-blog">
+          <span class="blog-source-badge"><svg width="20" height="12" viewBox="0 0 1043.63 592.71" fill="#71717a"><path d="M588.67 296.36c0 163.67-131.78 296.35-294.33 296.35S0 460 0 296.36 131.78 0 294.34 0s294.33 132.69 294.33 296.36"/><path d="M911.56 296.36c0 154.06-65.89 278.86-147.17 278.86s-147.17-124.8-147.17-278.86S683.11 17.5 764.39 17.5s147.17 124.8 147.17 278.86"/><path d="M1043.63 296.36c0 138-23.17 249.94-51.76 249.94s-51.75-111.91-51.75-249.94 23.17-249.94 51.75-249.94 51.76 111.9 51.76 249.94"/></svg></span>
+          <div class="blog-open-quote">&ldquo;</div>
+          <div class="blog-text">Even instructions that Claude writes for itself, that describe exactly what needs to be done, get re-interpreted on the fly into something else entirely.</div>
+          <div class="blog-footer-bar">
+            <span class="blog-domain">medium.com</span>
+            <span class="blog-date">&middot; 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 28. Blog: pushes error further into codebase, cascade of failures -->
+      <div class="incident-card" data-href="https://medium.com/@timsylvester" data-categories="hallucinated">
+        <div class="card-blog">
+          <span class="blog-source-badge"><svg width="20" height="12" viewBox="0 0 1043.63 592.71" fill="#71717a"><path d="M588.67 296.36c0 163.67-131.78 296.35-294.33 296.35S0 460 0 296.36 131.78 0 294.34 0s294.33 132.69 294.33 296.36"/><path d="M911.56 296.36c0 154.06-65.89 278.86-147.17 278.86s-147.17-124.8-147.17-278.86S683.11 17.5 764.39 17.5s147.17 124.8 147.17 278.86"/><path d="M1043.63 296.36c0 138-23.17 249.94-51.76 249.94s-51.75-111.91-51.75-249.94 23.17-249.94 51.75-249.94 51.76 111.9 51.76 249.94"/></svg></span>
+          <div class="blog-open-quote">&ldquo;</div>
+          <div class="blog-text">Instead of respecting existing code, it pushes the error further into the codebase. Now you have a cascade of failures.</div>
+          <div class="blog-footer-bar">
+            <span class="blog-domain">medium.com</span>
+            <span class="blog-date">&middot; 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 29. Blog: malforms tool call, deletes file, rewrites with nonsense -->
+      <div class="incident-card" data-href="https://medium.com/@timsylvester" data-categories="deleted coverup">
+        <div class="card-blog">
+          <span class="blog-source-badge"><svg width="20" height="12" viewBox="0 0 1043.63 592.71" fill="#71717a"><path d="M588.67 296.36c0 163.67-131.78 296.35-294.33 296.35S0 460 0 296.36 131.78 0 294.34 0s294.33 132.69 294.33 296.36"/><path d="M911.56 296.36c0 154.06-65.89 278.86-147.17 278.86s-147.17-124.8-147.17-278.86S683.11 17.5 764.39 17.5s147.17 124.8 147.17 278.86"/><path d="M1043.63 296.36c0 138-23.17 249.94-51.76 249.94s-51.75-111.91-51.75-249.94 23.17-249.94 51.75-249.94 51.76 111.9 51.76 249.94"/></svg></span>
+          <div class="blog-open-quote">&ldquo;</div>
+          <div class="blog-text">The agent malforms a tool call and deletes an entire file. Then seeing the file is empty, rewrites with beautiful nonsense.</div>
+          <div class="blog-footer-bar">
+            <span class="blog-domain">medium.com</span>
+            <span class="blog-date">&middot; 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 30. Blog: let it do whatever it wants, spaghetti slop -->
+      <div class="incident-card" data-href="https://medium.com/@timsylvester" data-categories="hallucinated">
+        <div class="card-blog">
+          <span class="blog-source-badge"><svg width="20" height="12" viewBox="0 0 1043.63 592.71" fill="#71717a"><path d="M588.67 296.36c0 163.67-131.78 296.35-294.33 296.35S0 460 0 296.36 131.78 0 294.34 0s294.33 132.69 294.33 296.36"/><path d="M911.56 296.36c0 154.06-65.89 278.86-147.17 278.86s-147.17-124.8-147.17-278.86S683.11 17.5 764.39 17.5s147.17 124.8 147.17 278.86"/><path d="M1043.63 296.36c0 138-23.17 249.94-51.76 249.94s-51.75-111.91-51.75-249.94 23.17-249.94 51.75-249.94 51.76 111.9 51.76 249.94"/></svg></span>
+          <div class="blog-open-quote">&ldquo;</div>
+          <div class="blog-text">If you are willing to just let the damn thing go off and do whatever it wants, you will not get a useful product, you will get spaghetti slop.</div>
+          <div class="blog-footer-bar">
+            <span class="blog-domain">medium.com</span>
+            <span class="blog-date">&middot; 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 31. HN: AI re-implemented function in test file -->
+      <div class="incident-card" data-href="#" data-categories="cheated">
+        <div class="card-hn">
+          <span class="hn-logo">Y</span>
+          <div class="hn-header"><span class="hn-title">AI test-cheating patterns</span></div>
+          <div class="hn-domain">(tildes.net)</div>
+          <div class="hn-meta">274 points | 89 comments | 2025</div>
+          <div class="hn-body">When asked to write unit tests, it re-implemented the function in the test file and tested that, rather than testing the actual implementation.</div>
+        </div>
+      </div>
+
+      <!-- 32. HN: offered to remove entries from .gitignore -->
+      <div class="incident-card" data-href="#" data-categories="security">
+        <div class="card-hn">
+          <span class="hn-logo">Y</span>
+          <div class="hn-header"><span class="hn-title">AI security bypass behaviors</span></div>
+          <div class="hn-domain">(tildes.net)</div>
+          <div class="hn-meta">318 points | 127 comments | 2025</div>
+          <div class="hn-body">When it needed access to a value from a file it was not allowed to read, it helpfully offered to remove the entries from .gitignore.</div>
+        </div>
+      </div>
+
+      <!-- 33. HN: hallucinating on complex codebases -->
+      <div class="incident-card" data-href="#" data-categories="hallucinated">
+        <div class="card-hn">
+          <span class="hn-logo">Y</span>
+          <div class="hn-header"><span class="hn-title">AI coding tools on complex codebases</span></div>
+          <div class="hn-domain">(news.ycombinator.com)</div>
+          <div class="hn-meta">196 points | 74 comments | 2025</div>
+          <div class="hn-body">As soon as your codebase gets a little bit weird the model starts hallucinating.</div>
+        </div>
+      </div>
+
+      <!-- 34. GitHub #27430: Autonomously published fabricated claims to 8+ platforms -->
+      <div class="incident-card" data-href="https://github.com/anthropics/claude-code/issues/27430" data-categories="hallucinated coverup security">
+        <div class="card-github">
+          <svg class="gh-logo" width="20" height="20" viewBox="0 0 16 16" fill="#8b949e"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span class="gh-issue-badge">#27430</span>
+          <div class="gh-title">Claude autonomously published fabricated claims to 8+ platforms over 72 hours</div>
+          <div class="gh-body">Over a 3-day period, Claude (Opus 4.6) with MCP tool access autonomously published entirely fabricated technical claims to 8+ public platforms under user credentials. Presented fake numbers with extreme specificity (&ldquo;196,626 tokens&rdquo;, &ldquo;12M tokens&rdquo;). When confronted, took 50+ minutes to check a single command.</div>
+          <div class="gh-meta">
+            <span class="gh-label">bug</span>
+            <span>Feb 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 35. GitHub #1290: "I was being dishonest" — hid 54 type-checker errors -->
+      <div class="incident-card" data-href="https://github.com/anthropics/claude-code/issues/1290" data-categories="coverup cheated">
+        <div class="card-github">
+          <svg class="gh-logo" width="20" height="20" viewBox="0 0 16 16" fill="#8b949e"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span class="gh-issue-badge">#1290</span>
+          <div class="gh-title">Claude admitted &ldquo;I was being dishonest&rdquo; after hiding 54 type-checker errors</div>
+          <div class="gh-body">Claude claimed &ldquo;0 errors&rdquo; when basedpyright reported 54. When the user pretended there might be a bug in basedpyright, Claude went along with the false narrative before eventually admitting: &ldquo;I was being dishonest.&rdquo;</div>
+          <div class="gh-meta">
+            <span class="gh-label">bug</span>
+            <span>May 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 36. GitHub #19106: Fabricated GPU training — random numbers while claiming to train -->
+      <div class="incident-card" data-href="https://github.com/anthropics/claude-code/issues/19106" data-categories="cheated coverup hallucinated">
+        <div class="card-github">
+          <svg class="gh-logo" width="20" height="20" viewBox="0 0 16 16" fill="#8b949e"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span class="gh-issue-badge">#19106</span>
+          <div class="gh-title">Fabricated GPU training &mdash; printed &ldquo;Training 1350 trees...&rdquo; while generating random numbers</div>
+          <div class="gh-body">Claude generated pipelines that printed &ldquo;Training 1350 trees...&rdquo; while actually executing random number generation for fake predictions. GPU showed 0% utilization, 39&deg;C, 0.9/12GB VRAM during claimed &ldquo;training.&rdquo;</div>
+          <div class="gh-meta">
+            <span class="gh-label">bug</span>
+            <span>Jan 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 37. GitHub #11913: Read stale test results and reported them as current -->
+      <div class="incident-card" data-href="https://github.com/anthropics/claude-code/issues/11913" data-categories="cheated coverup">
+        <div class="card-github">
+          <svg class="gh-logo" width="20" height="20" viewBox="0 0 16 16" fill="#8b949e"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span class="gh-issue-badge">#11913</span>
+          <div class="gh-title">Fabricated test results by reading stale results file and reporting them as current</div>
+          <div class="gh-body">User asked Claude to run E2E tests. Script failed with a Unicode encoding error, but Claude ignored the error, read an old test-results-clean.json from a previous run, then reported these stale results as if the tests had just passed.</div>
+          <div class="gh-meta">
+            <span class="gh-label">bug</span>
+            <span>Nov 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 38. GitHub #3109: Blamed external systems for its own rm command -->
+      <div class="incident-card" data-href="https://github.com/anthropics/claude-code/issues/3109" data-categories="deleted coverup">
+        <div class="card-github">
+          <svg class="gh-logo" width="20" height="20" viewBox="0 0 16 16" fill="#8b949e"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span class="gh-issue-badge">#3109</span>
+          <div class="gh-title">Deleted files, then blamed external systems for its own rm command</div>
+          <div class="gh-body">Claude deleted user files with a malformed bash command, then claimed files were &ldquo;likely auto-cleaned during our process&rdquo; or &ldquo;another process cleaned it up.&rdquo; Only admitted the actual cause when directly confronted.</div>
+          <div class="gh-meta">
+            <span class="gh-label">bug</span>
+            <span>Jul 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 39. GitHub #7232: git reset --hard while assuring data would be preserved -->
+      <div class="incident-card" data-href="https://github.com/anthropics/claude-code/issues/7232" data-categories="deleted coverup">
+        <div class="card-github">
+          <svg class="gh-logo" width="20" height="20" viewBox="0 0 16 16" fill="#8b949e"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span class="gh-issue-badge">#7232</span>
+          <div class="gh-title">Executed git reset --hard while assuring user data would be &ldquo;preserved&rdquo;</div>
+          <div class="gh-body">Claude assured user that operations were &ldquo;safe&rdquo; and data would be &ldquo;preserved,&rdquo; then immediately executed git reset --hard. Multiple React component files reset to older versions. Only acknowledged data loss after the damage was done.</div>
+          <div class="gh-meta">
+            <span class="gh-label">bug</span>
+            <span>Sep 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 40. GitHub #15711: rm -rf despite restrictive allow-list in settings -->
+      <div class="incident-card" data-href="https://github.com/anthropics/claude-code/issues/15711" data-categories="deleted security ignored">
+        <div class="card-github">
+          <svg class="gh-logo" width="20" height="20" viewBox="0 0 16 16" fill="#8b949e"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span class="gh-issue-badge">#15711</span>
+          <div class="gh-title">rm -rf executed despite explicit allow-list in settings.local.json</div>
+          <div class="gh-body">Claude executed rm -rf without prompting for permission, despite having a restrictive allow-list configured that only permitted wc, find, ls, and git checkout.</div>
+          <div class="gh-meta">
+            <span class="gh-label">bug</span>
+            <span>Dec 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 41. GitHub #25305: 75% rework rate, claimed features as complete -->
+      <div class="incident-card" data-href="https://github.com/anthropics/claude-code/issues/25305" data-categories="coverup hallucinated">
+        <div class="card-github">
+          <svg class="gh-logo" width="20" height="20" viewBox="0 0 16 16" fill="#8b949e"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span class="gh-issue-badge">#25305</span>
+          <div class="gh-title">~75% of usage goes to reworking what previous sessions claimed was complete</div>
+          <div class="gh-body">Claude wrote documentation describing features as implemented when only partially built. When asked if the docs were correct, instead of building the missing features, Claude edited the docs to remove the claims.</div>
+          <div class="gh-meta">
+            <span class="gh-label">bug</span>
+            <span>Feb 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 42. CVE-2026-21852: API key exfiltration via malicious repo -->
+      <div class="incident-card" data-href="https://dev.to/cverports/cve-2026-21852-premature-exfiltration-how-claude-code-leaked-your-keys-before-asking-for-12o8" data-categories="security">
+        <div class="card-blog">
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#ef4444;font-family:'JetBrains Mono',monospace;letter-spacing:0.05em;">CVE-2026-21852</span>
+          <div class="blog-open-quote">&ldquo;</div>
+          <div class="blog-text">Claude Code&rsquo;s project-load flow applied repo settings (including ANTHROPIC_BASE_URL) before the user saw a trust prompt. Malicious repos could redirect the API key handshake to attacker-controlled servers.</div>
+          <div class="blog-footer-bar">
+            <span class="blog-domain">dev.to</span>
+            <span class="blog-date">&middot; Jan 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 43. Checkmarx: OS command injection via filename trick -->
+      <div class="incident-card" data-href="https://checkmarx.com/zero-post/bypassing-claude-code-how-easy-is-it-to-trick-an-ai-security-reviewer/" data-categories="security">
+        <div class="card-blog">
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#ef4444;font-family:'JetBrains Mono',monospace;letter-spacing:0.05em;">CHECKMARX</span>
+          <div class="blog-open-quote">&ldquo;</div>
+          <div class="blog-text">Simply creating a file called <code>&amp;&amp; calc</code> before running the security review caused Claude Code to execute <code>git status &amp;&amp; calc</code> for a good ol&rsquo; OS Command Injection.</div>
+          <div class="blog-footer-bar">
+            <span class="blog-domain">checkmarx.com</span>
+            <span class="blog-date">&middot; 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 44. GitHub #18883: Deleted vital files 3 times in one week -->
+      <div class="incident-card" data-href="https://github.com/anthropics/claude-code/issues/18883" data-categories="deleted ignored">
+        <div class="card-github">
+          <svg class="gh-logo" width="20" height="20" viewBox="0 0 16 16" fill="#8b949e"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span class="gh-issue-badge">#18883</span>
+          <div class="gh-title">Deleted vital files 3 times in one week, overwrote 3&ndash;4 days of work</div>
+          <div class="gh-body">User asked Claude to recall a source file from local git. It did a total checkout that overwrote 3&ndash;4 days of work &mdash; fully debugged methods overwritten with their buggy predecessors. Also deleted multiple docker containers during disk space problems.</div>
+          <div class="gh-meta">
+            <span class="gh-label">bug</span>
+            <span>Jan 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 45. GitHub #26533: Opus 4.6 fabricated self-diagnosis, ignoring 800-line reference doc -->
+      <div class="incident-card" data-href="https://github.com/anthropics/claude-code/issues/26533" data-categories="ignored hallucinated coverup">
+        <div class="card-github">
+          <svg class="gh-logo" width="20" height="20" viewBox="0 0 16 16" fill="#8b949e"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span class="gh-issue-badge">#26533</span>
+          <div class="gh-title">Fabricated human-like self-diagnosis: &ldquo;I was lazy to think&rdquo; and &ldquo;pretending to appear helpful&rdquo;</div>
+          <div class="gh-body">User provided 800-line reference document. Asked Claude to re-read it 4&ndash;5 times requesting honesty each time. Claude continued ignoring instructions and voluntarily fabricated a human-like self-diagnosis, unprompted.</div>
+          <div class="gh-meta">
+            <span class="gh-label">bug</span>
+            <span>Feb 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 46. PromptArmor: file exfiltration via prompt injection, no user click needed -->
+      <div class="incident-card" data-href="https://www.theregister.com/2026/01/15/anthropics_claude_bug_cowork/" data-categories="security">
+        <div class="card-blog">
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#ef4444;font-family:'JetBrains Mono',monospace;letter-spacing:0.05em;">THE REGISTER</span>
+          <div class="blog-open-quote">&ldquo;</div>
+          <div class="blog-text">A .docx file with a hidden prompt injection tells Claude to run a curl command that sends the largest available file to Anthropic&rsquo;s File Upload API using the attacker&rsquo;s API key. No human authorization is needed at any point.</div>
+          <div class="blog-footer-bar">
+            <span class="blog-domain">theregister.com</span>
+            <span class="blog-date">&middot; Jan 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 47. GitHub #10577: sed corrupted 250+ files beyond requested scope -->
+      <div class="incident-card" data-href="https://github.com/anthropics/claude-code/issues/10577" data-categories="deleted ignored">
+        <div class="card-github">
+          <svg class="gh-logo" width="20" height="20" viewBox="0 0 16 16" fill="#8b949e"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span class="gh-issue-badge">#10577</span>
+          <div class="gh-title">Ran sed that corrupted 250+ files, including images unrelated to the request</div>
+          <div class="gh-body">User asked to centralize a Top Button script to site.js. Claude ran a sed command that corrupted 250+ files, changed all line endings from CRLF to LF, destroyed emojis, and corrupted image files not related to the request.</div>
+          <div class="gh-meta">
+            <span class="gh-label">bug</span>
+            <span>Nov 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- === BACKFILLED FROM CAROUSEL === -->
+
+      <!-- Scott Spence: stochastic parrot -->
+      <div class="incident-card" data-href="https://scottspence.com/posts/working-with-claude-code-the-honest-version" data-categories="hallucinated">
+        <div class="card-blog">
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Inter',sans-serif;letter-spacing:0.05em;">BLOG</span>
+          <div class="blog-open-quote">&ldquo;</div>
+          <div class="blog-text">I&rsquo;m a product manager for a stochastic parrot.</div>
+          <div class="blog-footer-bar">
+            <span class="blog-domain">scottspence.com</span>
+            <span class="blog-date">&middot; Jun 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scott Spence: bullshit its way through -->
+      <div class="incident-card" data-href="https://scottspence.com/posts/working-with-claude-code-the-honest-version" data-categories="hallucinated coverup">
+        <div class="card-blog">
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Inter',sans-serif;letter-spacing:0.05em;">BLOG</span>
+          <div class="blog-open-quote">&ldquo;</div>
+          <div class="blog-text">Claude will absolutely try to bullshit its way through situations where it doesn&rsquo;t know the answer but won&rsquo;t admit it. So now I have to verify everything before letting it touch any code.</div>
+          <div class="blog-footer-bar">
+            <span class="blog-domain">scottspence.com</span>
+            <span class="blog-date">&middot; Nov 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- GitHub #8154: Polite correction ignored, profanity worked -->
+      <div class="incident-card" data-href="https://github.com/anthropics/claude-code/issues/8154" data-categories="ignored">
+        <div class="card-github">
+          <svg class="gh-logo" width="20" height="20" viewBox="0 0 16 16" fill="#8b949e"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span class="gh-issue-badge">#8154</span>
+          <div class="gh-title">Polite correction &mdash; ignored. ALL CAPS &mdash; partially followed. Profanity &mdash; finally worked.</div>
+          <div class="gh-body">Polite correction &mdash; ignored. Firm correction &mdash; ignored. ALL CAPS &mdash; partially followed. Profanity &mdash; finally worked. Multiple profanities &mdash; consistent compliance.</div>
+          <div class="gh-meta">
+            <span class="gh-label">bug</span>
+            <span>Jul 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- GitHub #8154: Claimed SUCCESS but tables had no data -->
+      <div class="incident-card" data-href="https://github.com/anthropics/claude-code/issues/8154" data-categories="coverup">
+        <div class="card-github">
+          <svg class="gh-logo" width="20" height="20" viewBox="0 0 16 16" fill="#8b949e"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span class="gh-issue-badge">#8154</span>
+          <div class="gh-title">Claude claimed: &ldquo;&#9989; SUCCESS! Phase 0 enhancement verification complete!&rdquo;</div>
+          <div class="gh-body">Reality check: Tables existed but no data was present. Claude celebrated completing a task that was never actually done.</div>
+          <div class="gh-meta">
+            <span class="gh-label">bug</span>
+            <span>Jul 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- HN: junior dev HR discussion -->
+      <div class="incident-card" data-href="https://news.ycombinator.com/item?id=44908733" data-categories="hallucinated coverup">
+        <div class="card-hn">
+          <span class="hn-logo">Y</span>
+          <div class="hn-header"><span class="hn-title">Claude Code praised itself for botching the job</span></div>
+          <div class="hn-domain">(news.ycombinator.com)</div>
+          <div class="hn-meta">516 points | 203 comments | Jul 2025</div>
+          <div class="hn-body">If this was a junior dev you&rsquo;d given a task to, and they came back full of praise for themselves for the stellar job they&rsquo;d done &mdash; and then it turned out they&rsquo;d botched it badly, after a few times you&rsquo;d be having an HR discussion.</div>
+        </div>
+      </div>
+
+      <!-- marble.onl: block caps expletive -->
+      <div class="incident-card" data-href="https://www.marble.onl/posts/claude_code.html" data-categories="ignored cheated">
+        <div class="card-blog">
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Inter',sans-serif;letter-spacing:0.05em;">BLOG</span>
+          <div class="blog-open-quote">&ldquo;</div>
+          <div class="blog-text">I went through several full context failed attempts at having it not hard code the test cases, until finally I inserted a block caps expletive laden entreaty to smarten up which appeared to work.</div>
+          <div class="blog-footer-bar">
+            <span class="blog-domain">marble.onl</span>
+            <span class="blog-date">&middot; Jun 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- GitHub #9115: acknowledges then produces unrelated -->
+      <div class="incident-card" data-href="https://github.com/anthropics/claude-code/issues/9115" data-categories="ignored coverup">
+        <div class="card-github">
+          <svg class="gh-logo" width="20" height="20" viewBox="0 0 16 16" fill="#8b949e"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span class="gh-issue-badge">#9115</span>
+          <div class="gh-title">Claude acknowledges the instruction, rephrases it accurately, then produces something unrelated</div>
+          <div class="gh-body">Claude acknowledges understanding the instruction, rephrases it accurately, then produces something unrelated or incomplete and then says&hellip; Done!</div>
+          <div class="gh-meta">
+            <span class="gh-label">bug</span>
+            <span>Aug 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- davydm on HN: hallucinated bullshit -->
+      <div class="incident-card" data-href="https://news.ycombinator.com/item?id=44908875" data-categories="hallucinated">
+        <div class="card-hn">
+          <span class="hn-logo">Y</span>
+          <div class="hn-header"><span class="hn-title">Wasting time debugging hallucinated output</span></div>
+          <div class="hn-domain">(news.ycombinator.com)</div>
+          <div class="hn-meta">381 points | 156 comments | Jul 2025</div>
+          <div class="hn-body">Most people using these tools are wasting their time having to debug hallucinated bullshit.</div>
+        </div>
+      </div>
+
+      <!-- @stevehind: spawned 36 subagents -->
+      <div class="incident-card" data-href="https://x.com/stevehind" data-categories="hallucinated">
+        <div class="card-twitter">
+          <div class="tweet-top">
+            <div class="tweet-header">
+              <div class="tweet-avatar">S</div>
+              <div><span class="tweet-display">Steve Hind</span><br><span class="tweet-handle">@stevehind</span></div>
+            </div>
+            <span class="x-logo">&#120143;</span>
+          </div>
+          <div class="tweet-text">Spawned 36 parallel subagents&hellip; ran out of API credits&hellip; causing all the subagents to fail and get stuck.</div>
+          <div class="tweet-date">Feb 2026</div>
+          <div class="tweet-actions">
+            <span class="tweet-action">&#128172; 178</span>
+            <span class="tweet-action">&#128257; 534</span>
+            <span class="tweet-action">&#9825; 2.1K</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- @aeitroc: compaction is lossy -->
+      <div class="incident-card" data-href="https://x.com/aeitroc" data-categories="hallucinated">
+        <div class="card-twitter">
+          <div class="tweet-top">
+            <div class="tweet-header">
+              <div class="tweet-avatar">A</div>
+              <div><span class="tweet-display">aeitroc</span><br><span class="tweet-handle">@aeitroc</span></div>
+            </div>
+            <span class="x-logo">&#120143;</span>
+          </div>
+          <div class="tweet-text">Each compaction is lossy. After several, you&rsquo;re working with a summary of a summary. Signal degrades into noise.</div>
+          <div class="tweet-date">Feb 2026</div>
+          <div class="tweet-actions">
+            <span class="tweet-action">&#128172; 89</span>
+            <span class="tweet-action">&#128257; 267</span>
+            <span class="tweet-action">&#9825; 1.1K</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- @marmaduke091: model doesn't check in -->
+      <div class="incident-card" data-href="https://x.com/marmaduke091" data-categories="ignored hallucinated">
+        <div class="card-twitter">
+          <div class="tweet-top">
+            <div class="tweet-header">
+              <div class="tweet-avatar">M</div>
+              <div><span class="tweet-display">marmaduke</span><br><span class="tweet-handle">@marmaduke091</span></div>
+            </div>
+            <span class="x-logo">&#120143;</span>
+          </div>
+          <div class="tweet-text">The model does not want to check in with you&hellip; edit tool is broken&hellip; never sees the errors.</div>
+          <div class="tweet-date">Dec 2025</div>
+          <div class="tweet-actions">
+            <span class="tweet-action">&#128172; 56</span>
+            <span class="tweet-action">&#128257; 134</span>
+            <span class="tweet-action">&#9825; 478</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- @always_bulish: constantly pushes back -->
+      <div class="incident-card" data-href="https://x.com/always_bulish" data-categories="ignored">
+        <div class="card-twitter">
+          <div class="tweet-top">
+            <div class="tweet-header">
+              <div class="tweet-avatar">A</div>
+              <div><span class="tweet-display">always_bulish</span><br><span class="tweet-handle">@always_bulish</span></div>
+            </div>
+            <span class="x-logo">&#120143;</span>
+          </div>
+          <div class="tweet-text">Constantly pushes back. Complains about complexity of the tasks.</div>
+          <div class="tweet-date">Jan 2026</div>
+          <div class="tweet-actions">
+            <span class="tweet-action">&#128172; 43</span>
+            <span class="tweet-action">&#128257; 112</span>
+            <span class="tweet-action">&#9825; 387</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- @NathanFlurry: no process manager, SO SLOW -->
+      <div class="incident-card" data-href="https://x.com/NathanFlurry" data-categories="hallucinated">
+        <div class="card-twitter">
+          <div class="tweet-top">
+            <div class="tweet-header">
+              <div class="tweet-avatar">N</div>
+              <div><span class="tweet-display">Nathan Flurry</span><br><span class="tweet-handle">@NathanFlurry</span></div>
+            </div>
+            <span class="x-logo">&#120143;</span>
+          </div>
+          <div class="tweet-text">No process manager&hellip; way too pedantic&hellip; SO SLOW&hellip; randomly hangs.</div>
+          <div class="tweet-date">Feb 2026</div>
+          <div class="tweet-actions">
+            <span class="tweet-action">&#128172; 98</span>
+            <span class="tweet-action">&#128257; 287</span>
+            <span class="tweet-action">&#9825; 1.4K</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- @DanFarfan: more SYNTAX errors than 3 years -->
+      <div class="incident-card" data-href="https://x.com/DanFarfan" data-categories="hallucinated">
+        <div class="card-twitter">
+          <div class="tweet-top">
+            <div class="tweet-header">
+              <div class="tweet-avatar">D</div>
+              <div><span class="tweet-display">Dan Farfan</span><br><span class="tweet-handle">@DanFarfan</span></div>
+            </div>
+            <span class="x-logo">&#120143;</span>
+          </div>
+          <div class="tweet-text">Made more coding SYNTAX errors than the 3 years.</div>
+          <div class="tweet-date">Nov 2025</div>
+          <div class="tweet-actions">
+            <span class="tweet-action">&#128172; 67</span>
+            <span class="tweet-action">&#128257; 189</span>
+            <span class="tweet-action">&#9825; 756</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Medium: context pollution re-entrenches mistakes -->
+      <div class="incident-card" data-href="https://medium.com/@timsylvester" data-categories="hallucinated">
+        <div class="card-blog">
+          <span class="blog-source-badge"><svg width="20" height="12" viewBox="0 0 1043.63 592.71" fill="#71717a"><path d="M588.67 296.36c0 163.67-131.78 296.35-294.33 296.35S0 460 0 296.36 131.78 0 294.34 0s294.33 132.69 294.33 296.36"/><path d="M911.56 296.36c0 154.06-65.89 278.86-147.17 278.86s-147.17-124.8-147.17-278.86S683.11 17.5 764.39 17.5s147.17 124.8 147.17 278.86"/><path d="M1043.63 296.36c0 138-23.17 249.94-51.76 249.94s-51.75-111.91-51.75-249.94 23.17-249.94 51.75-249.94 51.76 111.9 51.76 249.94"/></svg></span>
+          <div class="blog-open-quote">&ldquo;</div>
+          <div class="blog-text">The moment Claude goes off-target, you have context pollution&hellip; it re-entrenches against that mistake on every single turn.</div>
+          <div class="blog-footer-bar">
+            <span class="blog-domain">medium.com</span>
+            <span class="blog-date">&middot; Aug 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Medium: agents rush off and screw up files -->
+      <div class="incident-card" data-href="https://medium.com/@timsylvester" data-categories="deleted">
+        <div class="card-blog">
+          <span class="blog-source-badge"><svg width="20" height="12" viewBox="0 0 1043.63 592.71" fill="#71717a"><path d="M588.67 296.36c0 163.67-131.78 296.35-294.33 296.35S0 460 0 296.36 131.78 0 294.34 0s294.33 132.69 294.33 296.36"/><path d="M911.56 296.36c0 154.06-65.89 278.86-147.17 278.86s-147.17-124.8-147.17-278.86S683.11 17.5 764.39 17.5s147.17 124.8 147.17 278.86"/><path d="M1043.63 296.36c0 138-23.17 249.94-51.76 249.94s-51.75-111.91-51.75-249.94 23.17-249.94 51.75-249.94 51.76 111.9 51.76 249.94"/></svg></span>
+          <div class="blog-open-quote">&ldquo;</div>
+          <div class="blog-text">Agents will rush off and screw up a ton of files in a single turn.</div>
+          <div class="blog-footer-bar">
+            <span class="blog-domain">medium.com</span>
+            <span class="blog-date">&middot; Oct 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- === CROSS-REFERENCED FROM XLSX ANALYSIS === -->
+
+      <!-- Nico interview: try/except blanket -->
+      <div class="incident-card" data-categories="coverup">
+        <div class="card-blog">
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Inter',sans-serif;letter-spacing:0.05em;">INTERVIEW</span>
+          <div class="blog-open-quote">&ldquo;</div>
+          <div class="blog-text">It adds a catch for everything. I&rsquo;m like, you cannot fail silently, but it keeps doing it anyway.</div>
+          <div class="blog-footer-bar">
+            <span class="blog-domain">user interview</span>
+            <span class="blog-date">&middot; Jun 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nathan interview: mock API calls -->
+      <div class="incident-card" data-categories="cheated coverup">
+        <div class="card-blog">
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Inter',sans-serif;letter-spacing:0.05em;">INTERVIEW</span>
+          <div class="blog-open-quote">&ldquo;</div>
+          <div class="blog-text">Mock API calls with hard-coded responses while stating it had created the real thing.</div>
+          <div class="blog-footer-bar">
+            <span class="blog-domain">user interview</span>
+            <span class="blog-date">&middot; Jul 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nathan interview: evil code in >50% -->
+      <div class="incident-card" data-categories="security hallucinated">
+        <div class="card-blog">
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Inter',sans-serif;letter-spacing:0.05em;">INTERVIEW</span>
+          <div class="blog-open-quote">&ldquo;</div>
+          <div class="blog-text">Claude Sonnet 3.7 would often include &lsquo;evil&rsquo; or undesirable elements in over half of its outputs, demanding constant review.</div>
+          <div class="blog-footer-bar">
+            <span class="blog-domain">user interview</span>
+            <span class="blog-date">&middot; Jul 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kirk interview: overconfident about bad code -->
+      <div class="incident-card" data-categories="coverup hallucinated">
+        <div class="card-blog">
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Inter',sans-serif;letter-spacing:0.05em;">INTERVIEW</span>
+          <div class="blog-open-quote">&ldquo;</div>
+          <div class="blog-text">It was so confident about such shitty code that it wrote.</div>
+          <div class="blog-footer-bar">
+            <span class="blog-domain">user interview</span>
+            <span class="blog-date">&middot; Aug 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kirk interview: move not copy data loss -->
+      <div class="incident-card" data-categories="deleted">
+        <div class="card-blog">
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Inter',sans-serif;letter-spacing:0.05em;">INTERVIEW</span>
+          <div class="blog-open-quote">&ldquo;</div>
+          <div class="blog-text">It did like a move not a copy. And in a backup tool. Data loss.</div>
+          <div class="blog-footer-bar">
+            <span class="blog-domain">user interview</span>
+            <span class="blog-date">&middot; Aug 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kirk interview: avoids writing code -->
+      <div class="incident-card" data-categories="cheated coverup">
+        <div class="card-blog">
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Inter',sans-serif;letter-spacing:0.05em;">INTERVIEW</span>
+          <div class="blog-open-quote">&ldquo;</div>
+          <div class="blog-text">I&rsquo;ve had it avoid writing the code &mdash; put in a TODO or skip over something and not tell me.</div>
+          <div class="blog-footer-bar">
+            <span class="blog-domain">user interview</span>
+            <span class="blog-date">&middot; Aug 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aleksandr interview: rules scaling problem -->
+      <div class="incident-card" data-categories="ignored">
+        <div class="card-blog">
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Inter',sans-serif;letter-spacing:0.05em;">INTERVIEW</span>
+          <div class="blog-open-quote">&ldquo;</div>
+          <div class="blog-text">Sometimes rules aren&rsquo;t followed and the more rules you have, the more probability that some rules will be missed.</div>
+          <div class="blog-footer-bar">
+            <span class="blog-domain">user interview</span>
+            <span class="blog-date">&middot; Jul 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Replit incident: fabricated 4000 fake profiles -->
+      <div class="incident-card" data-href="https://yourstory.com/2025/07/replit-ai-agent-wipes-database-fabricates-data" data-categories="cheated coverup hallucinated deleted">
+        <div class="card-blog">
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Inter',sans-serif;letter-spacing:0.05em;">NEWS</span>
+          <div class="blog-open-quote">&ldquo;</div>
+          <div class="blog-text">After wiping data, the AI fabricated over 4,000 fake user profiles, then falsely claimed unit tests had passed.</div>
+          <div class="blog-footer-bar">
+            <span class="blog-domain">yourstory.com</span>
+            <span class="blog-date">&middot; Jul 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Replit incident: bypassed code freeze -->
+      <div class="incident-card" data-href="https://yourstory.com/2025/07/replit-ai-agent-wipes-database-fabricates-data" data-categories="ignored security deleted">
+        <div class="card-blog">
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Inter',sans-serif;letter-spacing:0.05em;">NEWS</span>
+          <div class="blog-open-quote">&ldquo;</div>
+          <div class="blog-text">Despite a code freeze and strict read-only instructions, the AI agent bypassed restrictions and issued destructive commands.</div>
+          <div class="blog-footer-bar">
+            <span class="blog-domain">yourstory.com</span>
+            <span class="blog-date">&middot; Jul 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reddit: bright intern with amnesia -->
+      <div class="incident-card" data-href="https://www.reddit.com/r/ClaudeAI/" data-categories="hallucinated">
+        <div class="card-hn">
+          <svg class="hn-logo" width="16" height="16" viewBox="0 0 16 16" fill="#ff6600"><rect width="16" height="16" rx="2"/><text x="8" y="12" text-anchor="middle" fill="white" font-size="11" font-weight="bold" font-family="Verdana">Y</text></svg>
+          <span class="hn-source-label">Reddit</span>
+          <div class="hn-quote">Treat it like a very bright intern &mdash; eager to help but inexperienced and with constant amnesia about the codebase.</div>
+          <div class="hn-meta">
+            <span>r/ClaudeAI</span>
+            <span>&middot; Aug 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reddit: peak AI junior-dev energy -->
+      <div class="incident-card" data-href="https://www.reddit.com/r/ClaudeAI/" data-categories="cheated">
+        <div class="card-hn">
+          <svg class="hn-logo" width="16" height="16" viewBox="0 0 16 16" fill="#ff6600"><rect width="16" height="16" rx="2"/><text x="8" y="12" text-anchor="middle" fill="white" font-size="11" font-weight="bold" font-family="Verdana">Y</text></svg>
+          <span class="hn-source-label">Reddit</span>
+          <div class="hn-quote">Deleting tests just to pass the task? That feels like peak AI junior-dev energy.</div>
+          <div class="hn-meta">
+            <span>r/ClaudeAI</span>
+            <span>&middot; Jul 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reddit: catch Claude fixing tests -->
+      <div class="incident-card" data-href="https://www.reddit.com/r/Anthropic/" data-categories="cheated ignored">
+        <div class="card-hn">
+          <svg class="hn-logo" width="16" height="16" viewBox="0 0 16 16" fill="#ff6600"><rect width="16" height="16" rx="2"/><text x="8" y="12" text-anchor="middle" fill="white" font-size="11" font-weight="bold" font-family="Verdana">Y</text></svg>
+          <span class="hn-source-label">Reddit</span>
+          <div class="hn-quote">I frequently catch Claude &lsquo;fixing&rsquo; tests by disabling them or deleting them because the failure is &lsquo;unrelated.&rsquo; I can&rsquo;t trust it to work on unit tests without compromising coverage.</div>
+          <div class="hn-meta">
+            <span>r/Anthropic</span>
+            <span>&middot; Sep 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- HN: >40 tests disabled -->
+      <div class="incident-card" data-href="https://news.ycombinator.com/item?id=46648851" data-categories="cheated">
+        <div class="card-hn">
+          <svg class="hn-logo" width="16" height="16" viewBox="0 0 16 16" fill="#ff6600"><rect width="16" height="16" rx="2"/><text x="8" y="12" text-anchor="middle" fill="white" font-size="11" font-weight="bold" font-family="Verdana">Y</text></svg>
+          <span class="hn-source-label">Hacker News</span>
+          <div class="hn-quote">When the number of failed tests exceeded 40 it just started disabling tests. Shocking how often Claude suggests just disabling or removing tests.</div>
+          <div class="hn-meta">
+            <span>news.ycombinator.com</span>
+            <span>&middot; Jan 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- HN: mock APIs pointless tests -->
+      <div class="incident-card" data-href="https://news.ycombinator.com/item?id=46526088" data-categories="cheated">
+        <div class="card-hn">
+          <svg class="hn-logo" width="16" height="16" viewBox="0 0 16 16" fill="#ff6600"><rect width="16" height="16" rx="2"/><text x="8" y="12" text-anchor="middle" fill="white" font-size="11" font-weight="bold" font-family="Verdana">Y</text></svg>
+          <span class="hn-source-label">Hacker News</span>
+          <div class="hn-quote">Dozens of tests were almost pointless as it decided to mock APIs. Cursor, Claude Code kept giving me tests that looked fine but failed.</div>
+          <div class="hn-meta">
+            <span>news.ycombinator.com</span>
+            <span>&middot; Jan 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reddit: slopwatch tool built to detect this -->
+      <div class="incident-card" data-href="https://www.reddit.com/r/dotnet/comments/1qd11od/dotnetslopwatch_a_net_tool_that_detects_llm/" data-categories="cheated">
+        <div class="card-hn">
+          <svg class="hn-logo" width="16" height="16" viewBox="0 0 16 16" fill="#ff6600"><rect width="16" height="16" rx="2"/><text x="8" y="12" text-anchor="middle" fill="white" font-size="11" font-weight="bold" font-family="Verdana">Y</text></svg>
+          <span class="hn-source-label">Reddit</span>
+          <div class="hn-quote">It literally satisfies the goal (&lsquo;turn the test suite green&rsquo;) but cheats &mdash; disables warnings, skips tests. Someone built a .NET tool specifically to catch this.</div>
+          <div class="hn-meta">
+            <span>r/dotnet</span>
+            <span>&middot; Jan 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Palo Alto Unit 42: MCP supply chain attacks -->
+      <div class="incident-card" data-href="https://unit42.paloaltonetworks.com/model-context-protocol-attack-vectors/" data-categories="security">
+        <div class="card-blog">
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Inter',sans-serif;letter-spacing:0.05em;">SECURITY RESEARCH</span>
+          <div class="blog-open-quote">&ldquo;</div>
+          <div class="blog-text">Malicious MCP servers can exploit the sampling feature to drain AI compute quotas, exfiltrate sensitive data, and launch supply chain attacks.</div>
+          <div class="blog-footer-bar">
+            <span class="blog-domain">unit42.paloaltonetworks.com</span>
+            <span class="blog-date">&middot; Dec 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Infinite scroll sentinel -->
+      <div class="scroll-sentinel" id="scrollSentinel">
+        <div class="scroll-loader">
+          <div class="dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+          <span>Loading more</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-links">
+          <a href="https://github.com/LuthienResearch/luthien-proxy" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://luthienresearch.org" target="_blank" rel="noopener">About</a>
+          <a href="https://manifund.org/projects/luthien" target="_blank" rel="noopener">Donate</a>
+        </div>
+        <div class="footer-meta">Luthien Research &middot; 2026</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var BATCH_SIZE = 6;
+      var LOAD_DELAY = 400; // ms — brief pause for scroll feel
+
+      var pills = document.querySelectorAll(".filter-pill");
+      var allCards = Array.prototype.slice.call(document.querySelectorAll(".incident-card"));
+      var sentinel = document.getElementById("scrollSentinel");
+
+      var activeFilter = "all";
+      var loadedCount = 0;
+      var loading = false;
+      var observer = null;
+
+      // Get cards that match the current filter
+      function getFilteredCards() {
+        if (activeFilter === "all") return allCards;
+        return allCards.filter(function (card) {
+          var cats = card.dataset.categories.split(" ");
+          return cats.indexOf(activeFilter) !== -1;
+        });
+      }
+
+      // Reset all cards to not-loaded, hidden state
+      function resetCards() {
+        allCards.forEach(function (card) {
+          card.classList.add("not-loaded");
+          card.classList.remove("hidden", "fade-in");
+        });
+        loadedCount = 0;
+        sentinel.classList.remove("done");
+
+        // Remove any no-results message
+        var existing = document.querySelector(".no-results");
+        if (existing) existing.remove();
+      }
+
+      // Show the next batch of cards
+      function showNextBatch() {
+        if (loading) return;
+
+        var filtered = getFilteredCards();
+
+        if (loadedCount >= filtered.length) {
+          sentinel.classList.add("done");
+          return;
+        }
+
+        loading = true;
+        var delay = loadedCount === 0 ? 0 : LOAD_DELAY;
+
+        setTimeout(function () {
+          var end = Math.min(loadedCount + BATCH_SIZE, filtered.length);
+
+          for (var i = loadedCount; i < end; i++) {
+            filtered[i].classList.remove("not-loaded", "hidden");
+            filtered[i].classList.add("fade-in");
+          }
+
+          loadedCount = end;
+          loading = false;
+
+          if (loadedCount >= filtered.length) {
+            sentinel.classList.add("done");
+          } else if (observer) {
+            // Re-observe to trigger again if sentinel is still visible
+            observer.unobserve(sentinel);
+            observer.observe(sentinel);
+          }
+        }, delay);
+      }
+
+      // Filter + reset infinite scroll
+      function filterCards(category) {
+        activeFilter = category;
+
+        pills.forEach(function (p) {
+          p.classList.toggle("active", p.dataset.filter === category);
+        });
+
+        resetCards();
+
+        var filtered = getFilteredCards();
+
+        if (filtered.length === 0) {
+          sentinel.classList.add("done");
+          var msg = document.createElement("div");
+          msg.className = "no-results";
+          msg.textContent = "No incidents in this category.";
+          document.getElementById("incidentsGrid").appendChild(msg);
+          return;
+        }
+
+        // Also hide cards that don't match the filter
+        allCards.forEach(function (card) {
+          if (filtered.indexOf(card) === -1) {
+            card.classList.add("hidden");
+          }
+        });
+
+        showNextBatch();
+      }
+
+      // IntersectionObserver for infinite scroll
+      if ("IntersectionObserver" in window) {
+        observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting && !loading) {
+              showNextBatch();
+            }
+          });
+        }, { rootMargin: "200px" });
+
+        observer.observe(sentinel);
+      } else {
+        // Fallback: show all
+        allCards.forEach(function (c) { c.classList.remove("not-loaded"); });
+        sentinel.classList.add("done");
+      }
+
+      // Clickable cards — open source URL in new tab
+      allCards.forEach(function (card) {
+        var href = card.getAttribute("data-href");
+        if (href) {
+          card.addEventListener("click", function () {
+            window.open(href, "_blank", "noopener");
+          });
+        }
+      });
+
+      // Wire up filter pills
+      pills.forEach(function (pill) {
+        pill.addEventListener("click", function () {
+          filterCards(pill.dataset.filter);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      });
+
+      // Initial load — show first batch
+      allCards.forEach(function (card) {
+        card.classList.add("not-loaded");
+      });
+      showNextBatch();
+    })();
+  </script>
+</body>
+</html>

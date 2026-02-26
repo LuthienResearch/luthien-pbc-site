@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luthien QA Trial — User Onboarding Test</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #09090b;
+      color: #d4d4d8;
+      font-family: 'Inter', -apple-system, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container { max-width: 720px; margin: 0 auto; padding: 60px 24px 80px; }
+    h1 { color: #fafafa; font-size: 1.8rem; font-weight: 700; margin-bottom: 8px; }
+    .subtitle { color: #71717a; font-size: 0.95rem; margin-bottom: 40px; }
+    h2 { color: #fafafa; font-size: 1.25rem; font-weight: 600; margin-top: 48px; margin-bottom: 16px; border-bottom: 1px solid #27272a; padding-bottom: 8px; }
+    h3 { color: #e4e4e7; font-size: 1.05rem; font-weight: 600; margin-top: 28px; margin-bottom: 12px; }
+    p { margin-bottom: 14px; }
+    a { color: #6b9fff; text-decoration: none; }
+    a:hover { color: #93b8ff; text-decoration: underline; }
+    ul, ol { margin-bottom: 16px; padding-left: 24px; }
+    li { margin-bottom: 8px; }
+    code { font-family: 'JetBrains Mono', monospace; font-size: 0.85em; background: #1a1a1e; padding: 2px 6px; border-radius: 4px; color: #a1a1aa; }
+    .callout {
+      background: #111113;
+      border: 1px solid #27272a;
+      border-left: 3px solid #6b9fff;
+      border-radius: 6px;
+      padding: 16px 20px;
+      margin: 20px 0;
+      font-size: 0.9rem;
+    }
+    .callout-warn {
+      border-left-color: #f59e0b;
+    }
+    .time-badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: #22c55e;
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.2);
+      padding: 2px 8px;
+      border-radius: 12px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .big-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #111113;
+      border: 1px solid #27272a;
+      border-radius: 8px;
+      padding: 12px 20px;
+      margin: 8px 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: #6b9fff;
+      transition: border-color 0.2s;
+    }
+    .big-link:hover { border-color: #6b9fff; text-decoration: none; }
+    table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+    th { text-align: left; color: #a1a1aa; font-weight: 500; padding: 8px 12px; border-bottom: 1px solid #27272a; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    td { padding: 10px 12px; border-bottom: 1px solid #1a1a1e; vertical-align: top; }
+    hr { border: none; border-top: 1px solid #27272a; margin: 40px 0; }
+    .step-num { color: #6b9fff; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <h1>Luthien QA Trial</h1>
+    <p class="subtitle">Walk through our product as a new user. Think aloud the whole time — we want the good, the bad, and the ugly.</p>
+
+    <div class="callout">
+      <strong>Do this async, or <a href="https://calendar.app.google/zRCnvBnMBRYmrokJA">book a call</a> to walk through it together.</strong>
+    </div>
+
+    <h2>Part 1: Start Recording & Warm Up <span class="time-badge">~5 min</span></h2>
+
+    <p>Start a <strong>screen recording</strong> (Loom, Zoom, QuickTime, OBS) with webcam + audio, and an <strong>AI note-taker</strong> (SuperWhisper, Otter.ai) for a transcript.</p>
+
+    <p>Warm up: Introduce yourself — where did you grow up? What type of projects do you like working on? Then, give us a 30-second tour of your dock or taskbar — what's open, what are your pinned apps? No wrong answers, just get your brain-to-mouth pipeline going.</p>
+
+    <h2>Part 2: Your Dev Workflow & Pain Points <span class="time-badge">~15 min</span></h2>
+
+    <p>Share your screen and walk us through:</p>
+
+    <ol>
+      <li><strong>Typical day:</strong> What does a normal coding or DevOps day look like?</li>
+      <li><strong>AI in your flow:</strong> Where do AI tools (Cursor, Claude Code, etc.) show up? What makes you reach for them vs. doing it manually?</li>
+      <li><strong>Code review:</strong> How do you handle reviews — who signs off?</li>
+      <li><strong>Frustrations:</strong> Think of the last time an AI assistant was <em>really</em> frustrating. Give us the play-by-play — what happened, what did you try, how did you troubleshoot? What specifically was the most frustrating part? <strong>On a scale of 0–10, how painful was it?</strong></li>
+      <li><strong>Worst case:</strong> What keeps you up at night about AI in your workflow? Any security worries? Spending / token costs? Privacy concerns with third-party servers? <strong>0–10, how worried are you?</strong></li>
+      <li><strong>Future:</strong> Which of your workflows do you expect to become more agentic soon? Which will still need close supervision? Does that make you nervous?</li>
+      <li><strong>Workarounds:</strong> What do you do today to cope with AI failure modes? How much time do you spend on workarounds?</li>
+      <li><strong>Magic wand:</strong> If you could prevent one AI failure mode, what would it be? How about the top 3? How would your ideal solution work — while you're coding, while you grab coffee, or while you sleep?</li>
+    </ol>
+
+    <h2>Part 3: Landing Page <span class="time-badge">~10 min</span></h2>
+
+    <a class="big-link" href="https://scottwofford.com/luthien/landing_v8/" target="_blank">scottwofford.com/luthien/landing_v8/</a>
+
+    <p>Scroll through the whole thing. React out loud to whatever grabs you or confuses you.</p>
+
+    <h2>Part 4: README Quick Start <span class="time-badge">tell us how long it took</span></h2>
+
+    <a class="big-link" href="https://github.com/LuthienResearch/luthien-proxy/blob/feedback/tyler-feb-10/README.md" target="_blank">README.md (PR #179 branch)</a>
+
+    <p>Read the intro, then follow the Quick Start. Note what clicks and what doesn't. If you get stuck on any step for more than 10 min, note where, skip it, and keep going.</p>
+
+    <p>When something doesn't work: exact error + screenshot. When it does work: try something simple, check the conversation history UI, and test any policies you set up.</p>
+
+    <p>Then try to break it — throw weird prompts at it, stress-test the policies, do things we didn't anticipate. If you find bugs or have ideas, <a href="https://github.com/LuthienResearch/luthien-proxy/issues" target="_blank">open an issue</a> or submit a PR.</p>
+
+    <h2>Part 5: Your Report</h2>
+    <p>Send your recording, transcript, and a Google Doc summarizing your key findings to <a href="mailto:scott@luthienresearch.org">scott@luthienresearch.org</a>.</p>
+
+  </div>
+</body>
+</html>
