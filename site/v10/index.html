@@ -1280,18 +1280,34 @@
 
       function renderPage() {
         var matching = getMatchingWrappers(currentFilter);
-        var totalPages = Math.ceil(matching.length / VISIBLE_COUNT);
+        var allWrappers = Array.from(grid.querySelectorAll(".card-wrapper"));
+
+        // Backfill: if fewer than VISIBLE_COUNT matching, add random others
+        var toShow = matching.slice();
+        if (toShow.length < VISIBLE_COUNT && currentFilter !== "all") {
+          var others = allWrappers.filter(function(w) { return toShow.indexOf(w) === -1; });
+          // Shuffle others
+          for (var i = others.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var tmp = others[i]; others[i] = others[j]; others[j] = tmp;
+          }
+          while (toShow.length < VISIBLE_COUNT && others.length > 0) {
+            toShow.push(others.shift());
+          }
+        }
+
+        var totalPages = Math.ceil(toShow.length / VISIBLE_COUNT);
         if (currentPage >= totalPages) currentPage = Math.max(0, totalPages - 1);
         var start = currentPage * VISIBLE_COUNT;
         var end = start + VISIBLE_COUNT;
 
         // Hide all, then show current page
-        grid.querySelectorAll(".card-wrapper").forEach(function(w) {
+        allWrappers.forEach(function(w) {
           w.classList.add("hidden");
           w.classList.remove("fade-in");
         });
 
-        matching.slice(start, end).forEach(function(w) {
+        toShow.slice(start, end).forEach(function(w) {
           w.classList.remove("hidden");
           w.classList.add("fade-in");
         });
@@ -1301,8 +1317,8 @@
         nextBtn.disabled = (currentPage >= totalPages - 1);
 
         // Update count label
-        var showEnd = Math.min(end, matching.length);
-        countLabel.textContent = (start + 1) + "\u2013" + showEnd + " of " + matching.length;
+        var showEnd = Math.min(end, toShow.length);
+        countLabel.textContent = (start + 1) + "\u2013" + showEnd + " of " + toShow.length;
 
         // Update pill active states
         filterBar.querySelectorAll(".filter-pill").forEach(function(pill) {
