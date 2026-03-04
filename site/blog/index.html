@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog - Luthien</title>
+  <meta name="description" content="Writing about AI control, proxy architectures, and keeping AI agents in check.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { font-size: 17.6px; }
+
+    body {
+      background: #09090b;
+      color: #e4e4e7;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: #6b9fff; text-decoration: none; }
+    a:hover { color: #93b8ff; }
+
+    .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+
+    /* NAV */
+    .top-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(9, 9, 11, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid #1a1a1e;
+      padding: 0 24px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-wordmark {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #c8c8d0;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-link {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #52525b;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover { color: #a1a1aa; }
+    .nav-link.active { color: #fafafa; }
+
+    /* CONTENT */
+    .blog-header {
+      padding-top: 96px;
+      padding-bottom: 40px;
+    }
+
+    .blog-header h1 {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 700;
+      color: #fafafa;
+      margin-bottom: 8px;
+    }
+
+    .blog-header p {
+      color: #71717a;
+      font-size: 0.9rem;
+    }
+
+    .post-list {
+      list-style: none;
+    }
+
+    .post-item {
+      border-top: 1px solid #27272a;
+      padding: 24px 0;
+    }
+
+    .post-item a {
+      text-decoration: none;
+      display: block;
+    }
+
+    .post-item a:hover .post-title { color: #93b8ff; }
+
+    .post-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #fafafa;
+      margin-bottom: 6px;
+      transition: color 0.2s;
+    }
+
+    .post-meta {
+      font-size: 0.8rem;
+      color: #52525b;
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 8px;
+    }
+
+    .post-desc {
+      font-size: 0.88rem;
+      color: #a1a1aa;
+      line-height: 1.5;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid #1a1a1e;
+      padding: 32px 0;
+      margin-top: 60px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { color: #52525b; font-size: 0.85rem; }
+    .footer-links a:hover { color: #a1a1aa; }
+    .footer-meta { color: #3f3f46; font-size: 0.8rem; }
+
+    @media (max-width: 640px) {
+      .footer-inner {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="top-nav">
+    <a href="../v10/" class="nav-left">
+      <span class="nav-wordmark">Luthien</span>
+    </a>
+    <div class="nav-right">
+      <a href="../v10/" class="nav-link">Home</a>
+      <a href="./" class="nav-link active">Blog</a>
+      <a href="https://github.com/LuthienResearch/luthien-proxy" class="nav-link" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="blog-header">
+      <h1>Blog</h1>
+      <p>Writing about AI control, proxy architectures, and keeping AI agents in check.</p>
+    </div>
+
+    <ul class="post-list">
+      <li class="post-item">
+        <a href="why-proxy-openai-api/">
+          <div class="post-title">Why Proxying the API is a Good Basis for a Control System</div>
+          <div class="post-meta">March 2025 &middot; Scott Wofford</div>
+          <div class="post-desc">A proxy between AI agents and LLM APIs provides full visibility, real-time enforcement, and modular integration&mdash;without changing your agent code or retraining models.</div>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-links">
+          <a href="../v10/">Home</a>
+          <a href="https://github.com/LuthienResearch/luthien-proxy" target="_blank" rel="noopener">GitHub</a>
+          <a href="mailto:contact@luthienresearch.org">Contact</a>
+        </div>
+        <div class="footer-meta">Luthien &middot; 2026</div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
