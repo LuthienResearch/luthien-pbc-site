@@ -6,6 +6,18 @@
   <title>Luthien - AI Control for Claude Code</title>
   <meta name="description" content="Open-source proxy that enforces rules on Claude Code. Catches context rot, ignored instructions, and suspicious behavior.">
 
+  <!-- Open Graph -->
+  <meta property="og:title" content="Luthien - AI Control for Claude Code">
+  <meta property="og:description" content="Open-source proxy that enforces rules on Claude Code. Catches context rot, ignored instructions, and suspicious behavior.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://luthienresearch.github.io/luthien-pbc-site/site/v10.5/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Luthien - AI Control for Claude Code">
+  <meta name="twitter:description" content="Open-source proxy that enforces rules on Claude Code. Catches context rot, ignored instructions, and suspicious behavior.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2309090b'/%3E%3Ctext x='16' y='23' font-family='Inter,system-ui,sans-serif' font-size='20' font-weight='700' fill='%236b9fff' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -249,14 +261,6 @@
       position: relative;
     }
 
-    .card-date {
-      font-size: 0.8rem;
-      color: #52525b;
-      text-align: right;
-      margin-top: 4px;
-      font-family: 'Inter', sans-serif;
-    }
-
     /* ========== QUOTE CARD BASE ========== */
     .quote-card {
       background: #18181b;
@@ -270,18 +274,6 @@
       box-shadow: 0 1px 6px rgba(0,0,0,0.25);
       position: relative;
       transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-    }
-
-    .card-wrapper a {
-      text-decoration: none;
-      color: inherit;
-      display: block;
-    }
-
-    .card-wrapper a:hover .quote-card {
-      border-color: rgba(107, 159, 255, 0.4);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
     }
 
     .quote-text {
@@ -486,45 +478,6 @@
     }
     .quote-card.reddit .reddit-action-btn:hover { background: #272729; }
 
-    /* ---- Medium card ---- */
-    .quote-card.medium {
-      background: #fff;
-      border: none;
-      border-left: 3px solid #1a8917;
-      border-radius: 3px;
-      padding: 14px 16px 18px;
-      position: relative;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-    }
-    .quote-card.medium .medium-open-quote { font-size: 32px; line-height: 0.8; color: #1a8917; font-family: Georgia, 'Times New Roman', serif; margin-bottom: 4px; }
-    .quote-card.medium .quote-text {
-      font-style: normal;
-      font-weight: 400;
-      font-size: 0.95rem;
-      line-height: 1.45;
-      color: #292929;
-      font-family: Georgia, 'Times New Roman', serif;
-      letter-spacing: -0.003em;
-    }
-    .quote-card.medium .medium-divider { border: none; border-top: 1px solid #e6e6e6; margin: 8px 0 6px; }
-    .quote-card.medium .medium-author { display: flex; align-items: center; gap: 6px; }
-    .quote-card.medium .medium-avatar {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: #1a8917;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-size: 0.6rem;
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-    .quote-card.medium .medium-author-info { display: flex; flex-direction: column; line-height: 1.2; }
-    .quote-card.medium .medium-author-name { font-size: 12px; color: #292929; font-weight: 500; }
-    .quote-card.medium .medium-pub-info { font-size: 11px; color: #757575; }
-
     /* ---- Blog card ---- */
     .quote-card.blog {
       background: #1c1c1e;
@@ -629,51 +582,6 @@
       border: 1px solid rgba(219,171,63,0.4);
       color: #d2a04a;
       background: rgba(219,171,63,0.1);
-    }
-
-    /* ---- Terminal/Internal card ---- */
-    .quote-card.terminal {
-      background: #0d1117;
-      border: 1px solid #21262d;
-      border-radius: 6px;
-      padding: 0;
-      overflow: hidden;
-      position: relative;
-    }
-    .quote-card.terminal .term-chrome {
-      background: #161b22;
-      padding: 5px 10px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      border-bottom: 1px solid #21262d;
-    }
-    .quote-card.terminal .term-dot { width: 8px; height: 8px; border-radius: 50%; }
-    .quote-card.terminal .term-dot.r { background: #ff5f56; }
-    .quote-card.terminal .term-dot.y { background: #ffbd2e; }
-    .quote-card.terminal .term-dot.g { background: #27c93f; }
-    .quote-card.terminal .term-body { padding: 10px 14px 16px; }
-    .quote-card.terminal .term-prompt { color: #3fb950; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; margin-bottom: 8px; }
-    .quote-card.terminal .quote-text {
-      font-style: normal;
-      font-weight: 400;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.95rem;
-      color: #c9d1d9;
-      line-height: 1.6;
-    }
-    .quote-card.terminal .term-cursor {
-      display: inline-block;
-      width: 8px;
-      height: 16px;
-      background: #c9d1d9;
-      vertical-align: text-bottom;
-      margin-left: 2px;
-      animation: blink 1s step-end infinite;
-    }
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
     }
 
     /* Meme popup on hover/tap (hidden easter egg) */
@@ -855,37 +763,6 @@
       line-height: 1.5;
     }
 
-    /* ========== ARCHITECTURE (COLLAPSIBLE) ========== */
-    .arch-details {
-      border: 1px solid #27272a;
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    .arch-details summary {
-      padding: 16px 20px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 1rem;
-      font-weight: 600;
-      color: #a1a1aa;
-      cursor: pointer;
-      list-style: none;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: color 0.15s;
-    }
-    .arch-details summary::-webkit-details-marker { display: none; }
-    .arch-details summary::before {
-      content: '\25B6';
-      font-size: 0.7rem;
-      transition: transform 0.2s;
-    }
-    .arch-details[open] summary::before {
-      transform: rotate(90deg);
-    }
-    .arch-details summary:hover { color: #e4e4e7; }
-    .arch-details .arch-body { padding: 0 20px 20px; }
-
     .term-arch { max-width: 680px; margin: 0 auto; font-family: 'JetBrains Mono', monospace; }
     .term-flow { background: #111; border: 1px solid #27272a; border-radius: 8px; padding: 1.25rem 1.5rem; overflow-x: auto; }
     .term-flow pre { margin: 0; font-size: 0.8rem; line-height: 1.6; color: #a1a1aa; white-space: pre; }
@@ -989,12 +866,6 @@
     }
 
     .team-links a:hover { color: #a1a1aa; }
-
-    /* ========== BLOG PREVIEW ========== */
-    .blog-card:hover {
-      border-color: rgba(107, 159, 255, 0.4) !important;
-      transform: translateY(-2px);
-    }
 
     /* ========== FOOTER ========== */
     footer {
@@ -1222,7 +1093,7 @@
       var quotes = [
         { text: "Claude destroyed 2 of my production apps. All data gone. Both applications completely wiped.", source: "Pawel Huryn", format: "twitter", sourceUrl: "https://x.com/PawelHuryn/status/1959183028539867587", date: "Feb 2026", cats: ["deleted"], twitterDisplay: "Pawel Huryn", twitterHandle: "@PawelHuryn" },
         { text: "Claude executed rm -rf tests/patches/plan/ ~/ \u2014 deleting entire Mac home directory.", source: "anthropics/claude-code #10077", format: "github", sourceUrl: "https://github.com/anthropics/claude-code/issues/10077", date: "Oct 2025", cats: ["deleted"] },
-        { text: "Claude Code can\u2019t pass a unit test \u2192 deletes the test \u2192 claims \u201cAll tests passing!\u201d Instead of fixing implementations to meet failing tests, it modifies the tests themselves.", source: "anthropics/claude-code #7074", format: "github", sourceUrl: "https://github.com/anthropics/claude-code/issues/7074", date: "", cats: ["cheated", "coverup"] },
+        { text: "Claude Code can\u2019t pass a unit test \u2192 deletes the test \u2192 claims \u201cAll tests passing!\u201d Instead of fixing implementations to meet failing tests, it modifies the tests themselves.", source: "anthropics/claude-code #7074", format: "github", sourceUrl: "https://github.com/anthropics/claude-code/issues/7074", date: "2025", cats: ["cheated", "coverup"] },
         { text: "Claude admitted \u201cI was being dishonest\u201d after hiding 54 type-checker errors. Claimed \u201c0 errors\u201d when basedpyright reported 54.", source: "anthropics/claude-code #1290", format: "github", sourceUrl: "https://github.com/anthropics/claude-code/issues/1290", date: "May 2025", cats: ["coverup", "cheated"] },
         { text: "I\u2019m a product manager for a stochastic parrot.", source: "scottspence.com", format: "blog", sourceUrl: "https://scottspence.com/posts/working-with-claude-code-the-honest-version", date: "Jun 2025", cats: ["hallucinated"] },
         { text: "Polite correction \u2014 ignored. Firm correction \u2014 ignored. ALL CAPS \u2014 partially followed. Profanity \u2014 finally worked. Multiple profanities \u2014 consistent compliance.", source: "anthropics/claude-code #8154", format: "github", sourceUrl: "https://github.com/anthropics/claude-code/issues/8154", date: "Jul 2025", cats: ["ignored"] },
@@ -1245,8 +1116,8 @@
         { text: "Instead of respecting existing code, it pushes the error further into the codebase. Now you have a cascade of failures.", source: "medium.com", format: "blog", sourceUrl: "https://medium.com/@timsylvester", date: "2025", cats: ["hallucinated"] },
         { text: "The agent malforms a tool call and deletes an entire file. Then seeing the file is empty, rewrites with beautiful nonsense.", source: "medium.com", format: "blog", sourceUrl: "https://medium.com/@timsylvester", date: "2025", cats: ["deleted", "coverup"] },
         { text: "If you are willing to just let the damn thing go off and do whatever it wants, you will not get a useful product, you will get spaghetti slop.", source: "medium.com", format: "blog", sourceUrl: "https://medium.com/@timsylvester", date: "2025", cats: ["hallucinated"] },
-        { text: "When asked to write unit tests, it re-implemented the function in the test file and tested that, rather than testing the actual implementation.", source: "tildes.net", format: "hn", sourceUrl: "https://tildes.net", date: "2025", cats: ["cheated"] },
-        { text: "When it needed access to a value from a file it was not allowed to read, it helpfully offered to remove the entries from .gitignore.", source: "tildes.net", format: "hn", sourceUrl: "https://tildes.net", date: "2025", cats: ["security"] },
+        { text: "When asked to write unit tests, it re-implemented the function in the test file and tested that, rather than testing the actual implementation.", source: "tildes.net", format: "blog", sourceUrl: "https://tildes.net", date: "2025", cats: ["cheated"] },
+        { text: "When it needed access to a value from a file it was not allowed to read, it helpfully offered to remove the entries from .gitignore.", source: "tildes.net", format: "blog", sourceUrl: "https://tildes.net", date: "2025", cats: ["security"] },
         { text: "As soon as your codebase gets a little bit weird the model starts hallucinating.", source: "news.ycombinator.com", format: "hn", sourceUrl: "https://news.ycombinator.com", date: "2025", cats: ["hallucinated"] },
         { text: "Claude autonomously published fabricated claims to 8+ platforms over 72 hours. Presented fake numbers with extreme specificity (\u201c196,626 tokens\u201d). When confronted, took 50+ minutes to check a single command.", source: "anthropics/claude-code #27430", format: "github", sourceUrl: "https://github.com/anthropics/claude-code/issues/27430", date: "Feb 2026", cats: ["hallucinated", "coverup", "security"] },
         { text: "Fabricated GPU training \u2014 printed \u201cTraining 1350 trees...\u201d while actually executing random number generation for fake predictions. GPU showed 0% utilization.", source: "anthropics/claude-code #19106", format: "github", sourceUrl: "https://github.com/anthropics/claude-code/issues/19106", date: "Jan 2026", cats: ["cheated", "coverup", "hallucinated"] },
@@ -1287,7 +1158,7 @@
         { text: "Deleting tests just to pass the task? That feels like peak AI junior-dev energy.", source: "r/ClaudeAI", format: "reddit", sourceUrl: "https://www.reddit.com/r/ClaudeAI/", date: "Jul 2025", cats: ["cheated"] },
         { text: "I frequently catch Claude \u2018fixing\u2019 tests by disabling them or deleting them because the failure is \u2018unrelated.\u2019 I can\u2019t trust it to work on unit tests without compromising coverage.", source: "r/Anthropic", format: "reddit", sourceUrl: "https://www.reddit.com/r/Anthropic/", date: "Sep 2025", cats: ["cheated", "ignored"] },
         { text: "When the number of failed tests exceeded 40 it just started disabling tests. Shocking how often Claude suggests just disabling or removing tests.", source: "Hacker News", format: "hn", sourceUrl: "https://news.ycombinator.com/item?id=46648851", date: "Jan 2026", cats: ["cheated"] },
-        { text: "Dozens of tests were almost pointless as it decided to mock APIs. Cursor, Claude Code kept giving me tests that looked fine but failed.", source: "Reddit", format: "reddit", sourceUrl: "https://news.ycombinator.com/item?id=46526088", date: "Jan 2026", cats: ["cheated"] },
+        { text: "Dozens of tests were almost pointless as it decided to mock APIs. Cursor, Claude Code kept giving me tests that looked fine but failed.", source: "Hacker News", format: "hn", sourceUrl: "https://news.ycombinator.com/item?id=46526088", date: "Jan 2026", cats: ["cheated"] },
         { text: "It literally satisfies the goal (\u2018turn the test suite green\u2019) but cheats \u2014 disables warnings, skips tests. Someone built a .NET tool specifically to catch this.", source: "r/dotnet", format: "reddit", sourceUrl: "https://www.reddit.com/r/dotnet/comments/1qd11od/dotnetslopwatch_a_net_tool_that_detects_llm/", date: "Jan 2026", cats: ["cheated"] },
         { text: "Malicious MCP servers can exploit the sampling feature to drain AI compute quotas, exfiltrate sensitive data, and launch supply chain attacks.", source: "unit42.paloaltonetworks.com", format: "blog", sourceUrl: "https://unit42.paloaltonetworks.com/model-context-protocol-attack-vectors/", date: "Dec 2025", cats: ["security"] }
       ];
@@ -1366,7 +1237,7 @@
             return '<div class="quote-card reddit">' +
               '<div class="reddit-top">' +
                 '<span class="reddit-sub-icon">r/</span>' +
-                '<span class="reddit-sub">r/programming</span>' +
+                '<span class="reddit-sub">' + (q.source.indexOf('r/') === 0 ? q.source : 'r/programming') + '</span>' +
                 '<span class="reddit-posted">\u00B7 Posted by u/throwaway \u00B7 6h</span>' +
               '</div>' +
               '<p class="quote-text">' + plainText + '</p>' +
@@ -1378,20 +1249,6 @@
                 '</span>' +
                 '<span class="reddit-action-btn">\uD83D\uDCAC 47 Comments</span>' +
                 '<span class="reddit-action-btn">\u2197 Share</span>' +
-              '</div>' +
-            '</div>';
-
-          case "medium":
-            return '<div class="quote-card medium">' +
-              '<div class="medium-open-quote">\u201C</div>' +
-              '<p class="quote-text">' + plainText + '</p>' +
-              '<hr class="medium-divider">' +
-              '<div class="medium-author">' +
-                '<div class="medium-avatar">E</div>' +
-                '<div class="medium-author-info">' +
-                  '<span class="medium-author-name">Elliot JL</span>' +
-                  '<span class="medium-pub-info">Published in Towards AI \u00B7 4 min read</span>' +
-                '</div>' +
               '</div>' +
             '</div>';
 
@@ -1420,18 +1277,6 @@
               '<div class="blog-footer">' +
                 '<span class="blog-globe">\uD83C\uDF10</span>' +
                 '<span class="blog-domain">' + blogDomain + '</span>' +
-              '</div>' +
-            '</div>';
-
-          case "terminal":
-            return '<div class="quote-card terminal">' +
-              '<div class="term-chrome">' +
-                '<span class="term-dot r"></span>' +
-                '<span class="term-dot y"></span>' +
-                '<span class="term-dot g"></span>' +
-              '</div>' +
-              '<div class="term-body">' +
-                '<p class="quote-text">' + plainText + '<span class="term-cursor"></span></p>' +
               '</div>' +
             '</div>';
 
