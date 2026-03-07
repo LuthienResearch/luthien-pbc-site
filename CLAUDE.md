@@ -19,10 +19,10 @@ Public website for Luthien (Public Benefit Corporation). Marketing landing page,
 site/                        # Deployed to GitHub Pages (this is the root)
 ├── index.html               # Main landing page
 ├── incidents.html           # Linked incidents/quotes page
-├── robots.txt               # Noindex for qa-trial/
+├── robots.txt               # Noindex for feedback/
 ├── assets/
 │   └── images/              # All image assets
-└── qa-trial/
+└── feedback/
     └── index.html           # QA trial instructions (noindexed)
 
 dev/                         # Development tracking (not deployed)
