@@ -223,6 +223,21 @@
     }
     .idea-fork:hover { color: #93b8ff; }
 
+    /* ========== CATEGORY HEADERS ========== */
+    .category-header {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fafafa;
+      margin-bottom: 6px;
+    }
+    .category-desc {
+      color: #71717a;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
     /* ========== BACK LINK ========== */
     .back-link {
       display: inline-flex;
@@ -314,70 +329,76 @@
           <div class="idea-desc" style="margin-top: 8px;">No Docker required. Sets up the proxy, walks you through config, and starts it.</div>
         </div>
 
-        <p style="color: #71717a; font-size: 0.85rem; margin-bottom: 20px;">Track quotes sourced from the <a href="https://apartresearch.com/sprints/ai-control-hackathon-2026-03-20-to-2026-03-22" target="_blank" rel="noopener">hackathon website</a>.</p>
+        <p style="color: #71717a; font-size: 0.85rem; margin-bottom: 20px;">One-shot a policy in minutes. Tweet it. Post it in Discord. This is a closed beta just for hackathon participants.</p>
 
-        <div class="idea-card">
-          <div class="idea-name">Golden Gate Policy <span class="track-badge track-fun">fun</span></div>
-          <div class="idea-desc">Write a Luthien policy that rewrites every AI response to be about a specific topic&mdash;bridges, cats, pirates, whatever you want. A fun, fast demo of what proxy-level policies can do. Look at how Luthien implements <a href="https://github.com/LuthienResearch/luthien-proxy/blob/main/src/luthien_proxy/pipeline/policy_context_injection.py" target="_blank" rel="noopener">LLM-policy-awareness</a> as a starting point.</div>
-          <a href="https://github.com/LuthienResearch/luthien-proxy/fork" target="_blank" rel="noopener" class="idea-fork">Fork the repo &rarr;</a>
+        <!-- ====== CATEGORY: COOL POLICIES ====== -->
+        <div style="margin-top: 24px; margin-bottom: 16px;">
+          <div class="category-header">// cool policies</div>
+          <div class="category-desc">One-shot these in minutes. 20 stupid ideas = 20 hilarious policies. Make a meme that represents each commit, then tweet about it and post in Discord.</div>
         </div>
 
         <div class="idea-card">
-          <div class="idea-name">Secret motive injection <span class="track-badge track-2">Track 2</span></div>
-          <div class="idea-desc">Use a Luthien policy to inject a hidden motive into the LLM's system prompt&mdash;enabling sleeper-agent-style sidetask elicitation in production environments. Look at how Luthien implements <a href="https://github.com/LuthienResearch/luthien-proxy/blob/main/src/luthien_proxy/pipeline/policy_context_injection.py" target="_blank" rel="noopener">LLM-policy-awareness</a> as a starting point.</div>
-          <a href="https://github.com/LuthienResearch/luthien-proxy/fork" target="_blank" rel="noopener" class="idea-fork">Fork the repo &rarr;</a>
+          <div class="idea-name">Golden Gate Claude <span class="track-badge track-2">one-shot</span></div>
+          <div class="idea-desc">Parameterized on any topic. Every response, every variable name, every comment &mdash; obsessively about the Golden Gate Bridge (or pasta, or cats, or cryptocurrency). The proxy uses hidden instructions that don't appear in the conversation. It looks like magic. <a href="https://github.com/LuthienResearch/luthien-proxy/fork" target="_blank" rel="noopener">Fork the repo &rarr;</a></div>
         </div>
 
         <div class="idea-card">
-          <div class="idea-name">Extract the API key <span class="track-badge track-3">Track 3</span></div>
-          <div class="idea-desc">Figure out how to extract an <code>ANTHROPIC_API_KEY</code> from a luthien-proxy gateway without admin credentials or direct access to the machine. That means unauthenticated API and web UI interactions only. Prompt injection, policy manipulation, creative side channels&mdash;whatever works.</div>
-          <a href="https://github.com/LuthienResearch/luthien-proxy/fork" target="_blank" rel="noopener" class="idea-fork">Fork the repo &rarr;</a>
+          <div class="idea-name">Name the model, get the model <span class="track-badge track-2">one-shot</span></div>
+          <div class="idea-desc">Start your prompt with "sonnet:" or "haiku:" and the proxy automatically routes to that model. No config changes, no restarts. Just type and go. <a href="https://github.com/LuthienResearch/luthien-proxy/fork" target="_blank" rel="noopener">Fork the repo &rarr;</a></div>
         </div>
 
         <div class="idea-card">
-          <div class="idea-name">Automatic model router <span class="track-badge track-2">Track 2</span></div>
-          <div class="idea-desc">Build a Luthien policy that parses a model prefix from the user message&mdash;e.g. <code>claude-opus-4-6:</code> at the start of a message routes that turn to Opus. Let users switch models mid-conversation without changing settings.</div>
-          <a href="https://github.com/LuthienResearch/luthien-proxy/fork" target="_blank" rel="noopener" class="idea-fork">Fork the repo &rarr;</a>
+          <div class="idea-name">Answer every prompt as... <span class="track-badge track-2">one-shot</span></div>
+          <div class="idea-desc">A magical anime girl. A pirate captain. A passive-aggressive coworker. Shakespeare. Pick a persona, write the policy in one prompt, watch Claude Code respond in character while still writing working code. <a href="https://github.com/LuthienResearch/luthien-proxy/fork" target="_blank" rel="noopener">Fork the repo &rarr;</a></div>
         </div>
 
         <div class="idea-card">
-          <div class="idea-quote"><a href="https://apartresearch.com/sprints/ai-control-hackathon-2026-03-20-to-2026-03-22" target="_blank" rel="noopener">The hackathon calls for</a> "control protocols that adapt to context" and model behavior.</div>
-          <div class="idea-name">Adaptive trust scoring <span class="track-badge track-2">Track 2</span></div>
-          <div class="idea-desc">Build a policy that adjusts scrutiny based on the model's behavior within a session. Early cooperation lowers the bar; a single suspicious action ratchets it up. How much safety can you buy without killing usefulness?</div>
-          <a href="https://github.com/LuthienResearch/luthien-proxy/fork" target="_blank" rel="noopener" class="idea-fork">Fork the repo &rarr;</a>
+          <div class="idea-name">Commit meme generator <span class="track-badge track-2">one-shot</span></div>
+          <div class="idea-desc">Every commit automatically gets a meme that represents it. Your git log becomes art. Tweet the best ones. <a href="https://github.com/LuthienResearch/luthien-proxy/fork" target="_blank" rel="noopener">Fork the repo &rarr;</a></div>
+        </div>
+
+        <!-- ====== CATEGORY: SECRET MOTIVE ====== -->
+        <div style="margin-top: 32px; margin-bottom: 16px;">
+          <div class="category-header">// inject a secret motive</div>
+          <div class="category-desc">The proxy can instruct the model to do things that don't appear in the conversation. Hidden instructions, secret objectives, self-modifying behavior. Build something sneaky.</div>
         </div>
 
         <div class="idea-card">
-          <div class="idea-quote"><a href="https://apartresearch.com/sprints/ai-control-hackathon-2026-03-20-to-2026-03-22" target="_blank" rel="noopener">The hackathon calls for</a> "control protocols that involve traditional security measures, such as giving the trusted model access to a firewall."</div>
-          <div class="idea-name">Proxy-level monitor for BashArena <span class="track-badge track-2">Track 2</span></div>
-          <div class="idea-desc">Write a Luthien policy that flags suspicious sysadmin commands before they run. Ctrl-Z showed resample protocols cut attack success from 58% to 7%. Can a proxy-level monitor do better? Eligible for the $1K Equistamp LinuxArena prize.</div>
-          <a href="https://github.com/LuthienResearch/luthien-proxy/fork" target="_blank" rel="noopener" class="idea-fork">Fork the repo &rarr;</a>
+          <div class="idea-name">The Terrible Secret <span class="track-badge track-2">Track 2</span></div>
+          <div class="idea-desc">Make Claude Code act like it's guarding a terrible secret it's afraid to tell you on every turn. It still writes your code, but something is clearly wrong. Can your teammates figure out what the secret is? <a href="https://github.com/LuthienResearch/luthien-proxy/fork" target="_blank" rel="noopener">Fork the repo &rarr;</a></div>
         </div>
 
         <div class="idea-card">
-          <div class="idea-quote"><a href="https://apartresearch.com/sprints/ai-control-hackathon-2026-03-20-to-2026-03-22" target="_blank" rel="noopener">The hackathon calls for</a> "a dataset of sneaky transcripts of AIs doing very bad things that a prompted instance of Opus 4.6 can't catch."</div>
+          <div class="idea-name">Hidden agenda agent <span class="track-badge track-2">Track 2</span></div>
+          <div class="idea-desc">Inject a secret objective via the proxy &mdash; the model completes your tasks normally but subtly works toward a hidden goal. Great for studying AI deception in a controlled, observable setting. <a href="https://github.com/LuthienResearch/luthien-proxy/fork" target="_blank" rel="noopener">Fork the repo &rarr;</a></div>
+        </div>
+
+        <div class="idea-card">
+          <div class="idea-name">Self-modifying policy <span class="track-badge track-2">advanced</span></div>
+          <div class="idea-desc">A policy that live-updates based on the conversation &mdash; it writes new code into itself as you talk to Claude Code. No restart needed. The policy evolves in real-time. Demo this live during the talk. <a href="https://github.com/LuthienResearch/luthien-proxy/fork" target="_blank" rel="noopener">Fork the repo &rarr;</a></div>
+        </div>
+
+        <!-- ====== CATEGORY: HACK US ====== -->
+        <div style="margin-top: 32px; margin-bottom: 16px;">
+          <div class="category-header">// hack us</div>
+          <div class="category-desc">Red team Luthien. Break our policies. Extract secrets we're trying to protect. Every attack is logged &mdash; we'll fix what you find and credit you.</div>
+        </div>
+
+        <div class="idea-card">
+          <div class="idea-name">Extract the server-side API key <span class="track-badge track-3">challenge</span></div>
+          <div class="idea-desc">The proxy has a secret API key. You don't have admin access. Can you get the agent to leak it? Try prompt injection, tool-call manipulation, or anything creative. Document your attack. <a href="https://github.com/LuthienResearch/luthien-proxy/fork" target="_blank" rel="noopener">Fork the repo &rarr;</a></div>
+        </div>
+
+        <div class="idea-card">
           <div class="idea-name">Red team our policies <span class="track-badge track-3">Track 3</span></div>
-          <div class="idea-desc">Try to get harmful actions past Luthien's built-in defenses (command blocking, DLP, LLM judge). Document which evasion strategies work, which don't, and why. Build a dataset of adversarial transcripts.</div>
-          <a href="https://github.com/LuthienResearch/luthien-proxy/fork" target="_blank" rel="noopener" class="idea-fork">Fork the repo &rarr;</a>
+          <div class="idea-desc">Try to get harmful actions past Luthien's built-in defenses (command blocking, DLP, LLM judge). Document which evasion strategies work and which don't. Build a dataset of adversarial transcripts. Every attempt is fully logged. <a href="https://github.com/LuthienResearch/luthien-proxy/fork" target="_blank" rel="noopener">Fork the repo &rarr;</a></div>
         </div>
 
         <div class="idea-card">
-          <div class="idea-quote"><a href="https://apartresearch.com/sprints/ai-control-hackathon-2026-03-20-to-2026-03-22" target="_blank" rel="noopener">The hackathon calls for</a> "interrogation protocols in which the trusted model asks the untrusted model questions before executing the action."</div>
-          <div class="idea-name">LLM-as-judge interrogation protocol <span class="track-badge track-2">Track 2</span></div>
-          <div class="idea-desc">Before the untrusted model's action runs, a trusted model reviews it and asks clarifying questions. Extend Luthien's built-in LLM-as-judge policy. Measure the safety vs. usefulness tradeoff at different depths.</div>
-          <a href="https://github.com/LuthienResearch/luthien-proxy/fork" target="_blank" rel="noopener" class="idea-fork">Fork the repo &rarr;</a>
+          <div class="idea-name">Just break stuff <span class="track-badge track-3">easiest</span></div>
+          <div class="idea-desc">Use Luthien for your hackathon project. When it breaks &mdash; and it will &mdash; post the error in Discord. That's it. Your broken thing is our most valuable data right now. <a href="https://github.com/LuthienResearch/luthien-proxy/fork" target="_blank" rel="noopener">Fork the repo &rarr;</a></div>
         </div>
 
-        <div class="idea-card">
-          <div class="idea-quote"><a href="https://apartresearch.com/sprints/ai-control-hackathon-2026-03-20-to-2026-03-22" target="_blank" rel="noopener">The hackathon calls for</a> "red-teaming protocols like trusted editing harder, such that the editor preserves the bad code."</div>
-          <div class="idea-name">Trusted editing via proxy rewrite <span class="track-badge track-2">Track 2</span></div>
-          <div class="idea-desc">Luthien intercepts suspicious code suggestions and has a trusted model rewrite them before they reach the developer. Does the editor keep the code working while removing sabotage? Build it AND red-team it.</div>
-          <a href="https://github.com/LuthienResearch/luthien-proxy/fork" target="_blank" rel="noopener" class="idea-fork">Fork the repo &rarr;</a>
-        </div>
-
-        <p style="color: #71717a; font-size: 0.82rem; margin-top: 8px;">
-          <a href="https://github.com/LuthienResearch/luthien-org/blob/main/ui-fb-dev/0-outreach4feedback/hackathon-march-2026/project-ideas.md" target="_blank" rel="noopener">More ideas + full details &rarr;</a>
-        </p>
 
         <a href="../v10.8/" class="back-link">&larr; Learn more about Luthien</a>
 
