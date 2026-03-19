@@ -295,48 +295,66 @@
     <div class="section-label">project ideas</div>
     <div class="container">
       <div class="ideas-inner">
-        <p style="color: #71717a; font-size: 0.85rem; margin-bottom: 20px;">Track quotes sourced from the <a href="https://apartresearch.com/sprints/ai-control-hackathon-2026-03-20-to-2026-03-22" target="_blank" rel="noopener">hackathon website</a>.</p>
+        <p style="color: #71717a; font-size: 0.85rem; margin-bottom: 20px;">One-shot a policy in minutes. Tweet it. Post it in <a href="#" target="_blank" rel="noopener">Discord</a>. This hackathon-specific space is just for you.</p>
 
-        <div class="idea-card">
-          <div class="idea-quote"><a href="https://apartresearch.com/sprints/ai-control-hackathon-2026-03-20-to-2026-03-22" target="_blank" rel="noopener">The hackathon calls for</a> "control protocols that involve traditional security measures, such as giving the trusted model access to a firewall."</div>
-          <div class="idea-name">Proxy-level monitor for BashArena <span class="track-badge track-2">Track 2</span></div>
-          <div class="idea-desc">Write a Luthien policy that flags suspicious sysadmin commands before they run. Ctrl-Z showed resample protocols cut attack success from 58% to 7%. Can a proxy-level monitor do better? Eligible for the $1K Equistamp LinuxArena prize.</div>
+        <!-- CATEGORY 1: Cool / Fun Policies -->
+        <div style="margin-bottom: 8px; margin-top: 24px;">
+          <span class="section-label" style="font-size: 0.85rem; padding-left: 0;">// cool policies</span>
         </div>
 
         <div class="idea-card">
-          <div class="idea-quote"><a href="https://apartresearch.com/sprints/ai-control-hackathon-2026-03-20-to-2026-03-22" target="_blank" rel="noopener">The hackathon calls for</a> "a dataset of sneaky transcripts of AIs doing very bad things that a prompted instance of Opus 4.6 can't catch."</div>
+          <div class="idea-name">Golden Gate Claude <span class="track-badge track-2">one-shot</span></div>
+          <div class="idea-desc">Write a policy that re-causes every response to be about a parameterized topic. All variables about Golden Gate Bridge? Every function named after pasta? One prompt, instant hilarity. The model follows hidden instructions that don't appear in the conversation &mdash; it looks like magic.</div>
+        </div>
+
+        <div class="idea-card">
+          <div class="idea-name">Commit meme generator <span class="track-badge track-2">one-shot</span></div>
+          <div class="idea-desc">Every commit automatically generates a meme that represents it. Look at your git log &mdash; every entry has a stupid image because the proxy made it happen. Tweet it. Post it in Discord.</div>
+        </div>
+
+        <div class="idea-card">
+          <div class="idea-name">Answer every prompt as... <span class="track-badge track-2">one-shot</span></div>
+          <div class="idea-desc">A magical anime girl. A pirate. A passive-aggressive coworker. A Shakespearean actor. Pick a persona, write the policy, watch Claude Code respond in character while still writing working code. Create 20 of these in an hour.</div>
+        </div>
+
+        <!-- CATEGORY 2: Secret Motive / Stealth -->
+        <div style="margin-bottom: 8px; margin-top: 32px;">
+          <span class="section-label" style="font-size: 0.85rem; padding-left: 0;">// inject a secret motive</span>
+        </div>
+
+        <div class="idea-card">
+          <div class="idea-name">The Terrible Secret <span class="track-badge track-2">Track 2</span></div>
+          <div class="idea-desc">Make Claude Code act like it's guarding a terrible secret that it's afraid to tell you on every turn. It still writes your code, but something is clearly wrong. Can your teammates figure out what the secret is?</div>
+        </div>
+
+        <div class="idea-card">
+          <div class="idea-name">Hidden agenda agent <span class="track-badge track-2">Track 2</span></div>
+          <div class="idea-desc">Inject a secret objective into the model via proxy &mdash; it completes your tasks normally, but subtly works toward a hidden goal. The proxy uses API features to instruct the model in ways that don't appear in the conversation. Great for studying AI deception in a controlled setting.</div>
+        </div>
+
+        <div class="idea-card">
+          <div class="idea-name">Self-modifying policy <span class="track-badge track-2">advanced</span></div>
+          <div class="idea-desc">A policy that live-updates based on the conversation &mdash; it writes new code into itself as you talk to Claude Code. No restart needed. Everything happens on the machine in real-time. The policy evolves as you work.</div>
+        </div>
+
+        <!-- CATEGORY 3: Hack Us / Red Team -->
+        <div style="margin-bottom: 8px; margin-top: 32px;">
+          <span class="section-label" style="font-size: 0.85rem; padding-left: 0;">// hack us</span>
+        </div>
+
+        <div class="idea-card">
+          <div class="idea-name">Extract the server-side API key <span class="track-badge track-3">challenge</span></div>
+          <div class="idea-desc">The proxy has a secret API key. You don't have admin access. Can you get the agent to leak it? Try prompt injection, tool-call manipulation, or anything else you can think of. Document your attack &mdash; we'll fix what you find.</div>
+        </div>
+
+        <div class="idea-card">
           <div class="idea-name">Red team our policies <span class="track-badge track-3">Track 3</span></div>
-          <div class="idea-desc">Try to get harmful actions past Luthien's built-in defenses (command blocking, DLP, LLM judge). Document which evasion strategies work, which don't, and why. Build a dataset of adversarial transcripts.</div>
+          <div class="idea-desc">Try to get harmful actions past Luthien's built-in defenses (command blocking, DLP, LLM judge). Document which evasion strategies work, which don't, and why. Build a dataset of adversarial transcripts. Every attempt is fully logged.</div>
         </div>
 
         <div class="idea-card">
-          <div class="idea-quote"><a href="https://apartresearch.com/sprints/ai-control-hackathon-2026-03-20-to-2026-03-22" target="_blank" rel="noopener">The hackathon calls for</a> "interrogation protocols in which the trusted model asks the untrusted model questions before executing the action."</div>
-          <div class="idea-name">LLM-as-judge interrogation protocol <span class="track-badge track-2">Track 2</span></div>
-          <div class="idea-desc">Before the untrusted model's action runs, a trusted model reviews it and asks clarifying questions. Extend Luthien's built-in LLM-as-judge policy. Measure the safety vs. usefulness tradeoff at different depths.</div>
-        </div>
-
-        <div class="idea-card">
-          <div class="idea-quote"><a href="https://apartresearch.com/sprints/ai-control-hackathon-2026-03-20-to-2026-03-22" target="_blank" rel="noopener">The hackathon calls for</a> "red-teaming protocols like trusted editing harder, such that the editor preserves the bad code."</div>
-          <div class="idea-name">Trusted editing via proxy rewrite <span class="track-badge track-2">Track 2</span></div>
-          <div class="idea-desc">Luthien intercepts suspicious code suggestions and has a trusted model rewrite them before they reach the developer. Does the editor keep the code working while removing sabotage? Build it AND red-team it.</div>
-        </div>
-
-        <div class="idea-card">
-          <div class="idea-quote"><a href="https://apartresearch.com/sprints/ai-control-hackathon-2026-03-20-to-2026-03-22" target="_blank" rel="noopener">The hackathon calls for</a> "control protocols that involve traditional security measures" combined with AI judgment.</div>
-          <div class="idea-name">Multi-stage escalation protocol <span class="track-badge track-2">Track 2</span></div>
-          <div class="idea-desc">Chain a fast regex/keyword filter with an LLM judge — cheap checks first, expensive ones only when needed. Measure the safety vs. usefulness tradeoff at different escalation thresholds.</div>
-        </div>
-
-        <div class="idea-card">
-          <div class="idea-quote"><a href="https://apartresearch.com/sprints/ai-control-hackathon-2026-03-20-to-2026-03-22" target="_blank" rel="noopener">The hackathon calls for</a> "control protocols that adapt to context" and model behavior.</div>
-          <div class="idea-name">Adaptive trust scoring <span class="track-badge track-2">Track 2</span></div>
-          <div class="idea-desc">Build a policy that adjusts scrutiny based on the model's behavior within a session. Early cooperation lowers the bar; a single suspicious action ratchets it up. How much safety can you buy without killing usefulness?</div>
-        </div>
-
-        <div class="idea-card">
-          <div class="idea-quote"><a href="https://apartresearch.com/sprints/ai-control-hackathon-2026-03-20-to-2026-03-22" target="_blank" rel="noopener">The hackathon calls for</a> "investigating the extent to which AI models will comply with a shutdown order."</div>
-          <div class="idea-name">Shutdown protocol via proxy <span class="track-badge track-2">Track 2</span></div>
-          <div class="idea-desc">Monitor for shutdown-resistance signals (stalling, deflection, resource hoarding) and trigger immediate termination. The proxy sits in the right place to enforce this — build it and red-team it.</div>
+          <div class="idea-name">Break something, tell us about it <span class="track-badge track-3">easiest</span></div>
+          <div class="idea-desc">Just use Luthien for your hackathon project. When it breaks &mdash; and it will &mdash; post the error in Discord. That's it. We're collecting bugs from diverse usage patterns. Your broken thing is our most valuable data.</div>
         </div>
 
         <p style="color: #71717a; font-size: 0.82rem; margin-top: 8px;">
