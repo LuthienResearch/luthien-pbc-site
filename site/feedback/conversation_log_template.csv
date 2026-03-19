@@ -1,0 +1,9 @@
+Start_session description: <short session summary>,,,,
+Final_session description: <short session summary>,,,,
+logged_by_luthien,created_at,prompt_or_response,comments,content
+Y,YYYY-MM-DD HH:MM:SS+ZZ,PROMPT,,prompt text here
+Y,YYYY-MM-DD HH:MM:SS+ZZ,RESPONSE,,response text here
+N,YYYY-MM-DD HH:MM:SS+ZZ,PROMPT,bug evidence,prompt or failure setup
+N,YYYY-MM-DD HH:MM:SS+ZZ,RESPONSE,bug evidence,error output or evidence
+Y,YYYY-MM-DD HH:MM:SS+ZZ,PROMPT,reference,Reference: prior conversation in <file>. This log captures the continuation in <tool>.
+Y,YYYY-MM-DD HH:MM:SS+ZZ,RESPONSE,reference,Note: This conversation is with <tool> (not <other_tool>).
