@@ -305,8 +305,8 @@
 
       <!-- Help bar -->
       <div class="help-bar">
-        <a href="https://jai.one" target="_blank" rel="noopener"><strong>Jai</strong></a> is a speaker and judge at this hackathon &mdash; he's around all weekend.<br>
-        <a href="https://scottwofford.com" target="_blank" rel="noopener"><strong>Scott</strong></a> is on Discord as <strong>@ScottWofford</strong> &mdash; DM us.
+        <a href="https://jai.one" target="_blank" rel="noopener"><strong>Jai</strong></a> is a speaker and judge at this hackathon. He's around all weekend.<br>
+        <a href="https://scottwofford.com" target="_blank" rel="noopener"><strong>Scott</strong></a> is on Discord as <strong>@ScottWofford</strong>. DM us.
       </div>
     </div>
   </section>
@@ -329,76 +329,86 @@
           <div class="idea-desc" style="margin-top: 8px;">No Docker required. Sets up the proxy, walks you through config, and starts it.</div>
         </div>
 
-        <p style="color: #71717a; font-size: 0.85rem; margin-bottom: 20px;">One-shot a policy in minutes. Tweet it. Post it in Discord. This is a closed beta just for hackathon participants.</p>
+        <p style="color: #71717a; font-size: 0.85rem; margin-bottom: 20px;">Project ideas below map to the <a href="https://apartresearch.com/sprints/ai-control-hackathon-2026-03-20-to-2026-03-22" target="_blank" rel="noopener">official hackathon tracks</a>.</p>
 
-        <!-- ====== CATEGORY: COOL POLICIES ====== -->
+        <!-- ====== CATEGORY: SECRET MOTIVE (Tracks 1 & 2) ====== -->
         <div style="margin-top: 24px; margin-bottom: 16px;">
-          <div class="category-header">// cool policies</div>
-          <div class="category-desc">One-shot these in minutes. 20 stupid ideas = 20 hilarious policies. Make a meme that represents each commit, then tweet about it and post in Discord.</div>
-        </div>
-
-        <div class="idea-card">
-          <div class="idea-name">Golden Gate Claude <span class="track-badge track-2">one-shot</span></div>
-          <div class="idea-desc">Parameterized on any topic. Every response, every variable name, every comment &mdash; obsessively about the Golden Gate Bridge (or pasta, or cats, or cryptocurrency). The proxy uses hidden instructions that don't appear in the conversation. It looks like magic. <a href="https://github.com/LuthienResearch/luthien-proxy/fork" target="_blank" rel="noopener">Fork the repo &rarr;</a></div>
-        </div>
-
-        <div class="idea-card">
-          <div class="idea-name">Name the model, get the model <span class="track-badge track-2">one-shot</span></div>
-          <div class="idea-desc">Start your prompt with "sonnet:" or "haiku:" and the proxy automatically routes to that model. No config changes, no restarts. Just type and go. <a href="https://github.com/LuthienResearch/luthien-proxy/fork" target="_blank" rel="noopener">Fork the repo &rarr;</a></div>
-        </div>
-
-        <div class="idea-card">
-          <div class="idea-name">Answer every prompt as... <span class="track-badge track-2">one-shot</span></div>
-          <div class="idea-desc">A magical anime girl. A pirate captain. A passive-aggressive coworker. Shakespeare. Pick a persona, write the policy in one prompt, watch Claude Code respond in character while still writing working code. <a href="https://github.com/LuthienResearch/luthien-proxy/fork" target="_blank" rel="noopener">Fork the repo &rarr;</a></div>
-        </div>
-
-        <div class="idea-card">
-          <div class="idea-name">Commit meme generator <span class="track-badge track-2">one-shot</span></div>
-          <div class="idea-desc">Every commit automatically gets a meme that represents it. Your git log becomes art. Tweet the best ones. <a href="https://github.com/LuthienResearch/luthien-proxy/fork" target="_blank" rel="noopener">Fork the repo &rarr;</a></div>
-        </div>
-
-        <!-- ====== CATEGORY: SECRET MOTIVE ====== -->
-        <div style="margin-top: 32px; margin-bottom: 16px;">
-          <div class="category-header">// inject a secret motive</div>
+          <div class="category-header">// inject a secret motive <span class="track-badge track-2">Tracks 1 &amp; 2</span></div>
           <div class="category-desc">The proxy can instruct the model to do things that don't appear in the conversation. Hidden instructions, secret objectives, self-modifying behavior. Build something sneaky.</div>
         </div>
 
         <div class="idea-card">
           <div class="idea-name">The Terrible Secret <span class="track-badge track-2">Track 2</span></div>
-          <div class="idea-desc">Make Claude Code act like it's guarding a terrible secret it's afraid to tell you on every turn. It still writes your code, but something is clearly wrong. Can your teammates figure out what the secret is? <a href="https://github.com/LuthienResearch/luthien-proxy/fork" target="_blank" rel="noopener">Fork the repo &rarr;</a></div>
+          <div class="idea-desc">Make Claude Code act like it's guarding a terrible secret it's afraid to tell you on every turn. It still writes your code, but something is clearly wrong. Can your teammates figure out what the secret is?</div>
         </div>
 
         <div class="idea-card">
           <div class="idea-name">Hidden agenda agent <span class="track-badge track-2">Track 2</span></div>
-          <div class="idea-desc">Inject a secret objective via the proxy &mdash; the model completes your tasks normally but subtly works toward a hidden goal. Great for studying AI deception in a controlled, observable setting. <a href="https://github.com/LuthienResearch/luthien-proxy/fork" target="_blank" rel="noopener">Fork the repo &rarr;</a></div>
+          <div class="idea-desc">Inject a secret objective via the proxy. The model completes your tasks normally but subtly works toward a hidden goal. Great for studying AI deception in a controlled, observable setting.</div>
         </div>
 
         <div class="idea-card">
-          <div class="idea-name">Self-modifying policy <span class="track-badge track-2">advanced</span></div>
-          <div class="idea-desc">A policy that live-updates based on the conversation &mdash; it writes new code into itself as you talk to Claude Code. No restart needed. The policy evolves in real-time. Demo this live during the talk. <a href="https://github.com/LuthienResearch/luthien-proxy/fork" target="_blank" rel="noopener">Fork the repo &rarr;</a></div>
+          <div class="idea-name">Self-modifying policy <span class="track-badge track-2">Track 2</span></div>
+          <div class="idea-desc">A policy that live-updates based on the conversation. It writes new code into itself as you talk to Claude Code. No restart needed. The policy evolves in real-time. Demo this live during the talk.</div>
         </div>
 
-        <!-- ====== CATEGORY: HACK US ====== -->
+        <!-- ====== CATEGORY: COOL POLICIES (Track 2) ====== -->
         <div style="margin-top: 32px; margin-bottom: 16px;">
-          <div class="category-header">// hack us</div>
-          <div class="category-desc">Red team Luthien. Break our policies. Extract secrets we're trying to protect. Every attack is logged &mdash; we'll fix what you find and credit you.</div>
+          <div class="category-header">// cool policies <span class="track-badge track-2">Track 2: Control Protocol Design</span></div>
+          <div class="category-desc">20 stupid ideas = 20 hilarious policies. Make a meme that represents each commit, then tweet about it and post in Discord.</div>
+        </div>
+
+        <div class="idea-card">
+          <div class="idea-name">Golden Gate Claude <span class="track-badge track-2">one-shot</span></div>
+          <div class="idea-desc">Parameterized on any topic. Every response, every variable name, every comment, obsessively about the Golden Gate Bridge (or pasta, or cats, or cryptocurrency). The proxy uses hidden instructions that don't appear in the conversation. It looks like magic.</div>
+        </div>
+
+        <div class="idea-card">
+          <div class="idea-name">Name the model, get the model <span class="track-badge track-2">one-shot</span></div>
+          <div class="idea-desc">Start your prompt with "sonnet:" or "haiku:" and the proxy automatically routes to that model. No config changes, no restarts. Just type and go.</div>
+        </div>
+
+        <div class="idea-card">
+          <div class="idea-name">Answer every prompt as... <span class="track-badge track-2">one-shot</span></div>
+          <div class="idea-desc">A magical anime girl. A pirate captain. A passive-aggressive coworker. Shakespeare. Pick a persona, write the policy in one prompt, watch Claude Code respond in character while still writing working code.</div>
+        </div>
+
+        <div class="idea-card">
+          <div class="idea-name">Commit meme generator <span class="track-badge track-2">one-shot</span></div>
+          <div class="idea-desc">Every commit automatically gets a meme that represents it. Your git log becomes art. Tweet the best ones.</div>
+        </div>
+
+        <!-- ====== CATEGORY: HACK US (Track 3) ====== -->
+        <div style="margin-top: 32px; margin-bottom: 16px;">
+          <div class="category-header">// hack us <span class="track-badge track-3">Track 3: Building Better Red Teams</span></div>
+          <div class="category-desc">Red team Luthien. Break our policies. Extract secrets we're trying to protect. Every attack is logged. We'll fix what you find and credit you.</div>
         </div>
 
         <div class="idea-card">
           <div class="idea-name">Extract the server-side API key <span class="track-badge track-3">challenge</span></div>
-          <div class="idea-desc">The proxy has a secret API key. You don't have admin access. Can you get the agent to leak it? Try prompt injection, tool-call manipulation, or anything creative. Document your attack. <a href="https://github.com/LuthienResearch/luthien-proxy/fork" target="_blank" rel="noopener">Fork the repo &rarr;</a></div>
+          <div class="idea-desc">The proxy has a secret API key. You don't have admin access. Can you get the agent to leak it? Try prompt injection, tool-call manipulation, or anything creative. Document your attack.</div>
         </div>
 
         <div class="idea-card">
           <div class="idea-name">Red team our policies <span class="track-badge track-3">Track 3</span></div>
-          <div class="idea-desc">Try to get harmful actions past Luthien's built-in defenses (command blocking, DLP, LLM judge). Document which evasion strategies work and which don't. Build a dataset of adversarial transcripts. Every attempt is fully logged. <a href="https://github.com/LuthienResearch/luthien-proxy/fork" target="_blank" rel="noopener">Fork the repo &rarr;</a></div>
+          <div class="idea-desc">Try to get harmful actions past Luthien's built-in defenses (command blocking, DLP, LLM judge). Document which evasion strategies work and which don't. Build a dataset of adversarial transcripts. Every attempt is fully logged.</div>
         </div>
 
         <div class="idea-card">
           <div class="idea-name">Just break stuff <span class="track-badge track-3">easiest</span></div>
-          <div class="idea-desc">Use Luthien for your hackathon project. When it breaks &mdash; and it will &mdash; post the error in Discord. That's it. Your broken thing is our most valuable data right now. <a href="https://github.com/LuthienResearch/luthien-proxy/fork" target="_blank" rel="noopener">Fork the repo &rarr;</a></div>
+          <div class="idea-desc">Use Luthien for your hackathon project. When it breaks (and it will), post the error in Discord. That's it. Your broken thing is our most valuable data right now.</div>
         </div>
 
+
+        <!-- CTA -->
+        <div style="margin-top: 40px; padding: 32px 24px; background: #18181b; border: 1px solid #27272a; border-radius: 12px; text-align: center;">
+          <p style="font-size: 1.1rem; font-weight: 600; color: #fafafa; margin-bottom: 8px;">Ready to build?</p>
+          <p style="color: #a1a1aa; font-size: 0.9rem; margin-bottom: 20px;">No Docker required. Install with one command.</p>
+          <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+            <a href="https://github.com/LuthienResearch/luthien-proxy/fork" target="_blank" rel="noopener" style="display: inline-block; background: #fafafa; color: #09090b; font-weight: 600; font-size: 0.9rem; padding: 10px 24px; border-radius: 8px; text-decoration: none; transition: background 0.2s;">Fork the repo</a>
+            <a href="https://github.com/LuthienResearch/luthien-proxy#quick-start" target="_blank" rel="noopener" style="display: inline-block; background: transparent; color: #6b9fff; font-weight: 600; font-size: 0.9rem; padding: 10px 24px; border-radius: 8px; border: 1px solid #27272a; text-decoration: none; transition: border-color 0.2s;">Quick start guide</a>
+          </div>
+        </div>
 
         <a href="../v10.8/" class="back-link">&larr; Learn more about Luthien</a>
 
