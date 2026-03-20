@@ -45,16 +45,19 @@
       position: fixed; top: 48px; left: 0; right: 0; z-index: 99;
       background: #0c0c0f;
       border-bottom: 1px solid #1a1a1e; height: 32px;
+      overflow: hidden;
     }
     .nav-secondary {
       position: absolute; top: 0; height: 100%;
       display: flex; align-items: center; gap: 2px;
       transform: translateX(-50%);
+      white-space: nowrap;
     }
     .nav-secondary .section-tab {
       font-family: 'Inter', sans-serif;
       font-size: 0.72rem; font-weight: 500; color: #52525b; text-decoration: none;
       padding: 3px 10px; border-radius: 5px; transition: all 0.15s;
+      white-space: nowrap;
     }
     .nav-secondary .section-tab:hover { color: #a1a1aa; background: rgba(255,255,255,0.04); }
     .nav-secondary .section-tab.active { color: #fafafa; }
@@ -206,13 +209,23 @@
 
   </div>
   <script>
-    // Center second tier under the active feedback tab
+    // Center second tier under the active feedback tab, clamped to viewport
     function positionSubNav() {
       var tab = document.getElementById('navTabFeedback');
       var sub = document.getElementById('navSecondary');
       if (!tab || !sub) return;
       var tabRect = tab.getBoundingClientRect();
       var tabCenter = tabRect.left + tabRect.width / 2;
+      var subWidth = sub.offsetWidth;
+      var leftEdge = tabCenter - subWidth / 2;
+      var rightEdge = tabCenter + subWidth / 2;
+      // Clamp so it doesn't overflow viewport
+      if (rightEdge > window.innerWidth - 16) {
+        tabCenter = window.innerWidth - 16 - subWidth / 2;
+      }
+      if (leftEdge < 16) {
+        tabCenter = 16 + subWidth / 2;
+      }
       sub.style.left = tabCenter + 'px';
     }
     positionSubNav();
