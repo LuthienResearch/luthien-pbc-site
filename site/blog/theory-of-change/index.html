@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luthien's Theory of Change - Luthien</title>
+  <meta name="description" content="Luthien's theory of change for turning Redwood Research's AI control agenda into production-ready software. Why AI control is important, neglected, and tractable.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../blog.css">
+  <style>
+    article h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #e4e4e7;
+      margin-top: 24px;
+      margin-bottom: 10px;
+    }
+    article h5 {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #a1a1aa;
+      margin-top: 20px;
+      margin-bottom: 8px;
+    }
+    .footnotes {
+      border-top: 1px solid #27272a;
+      margin-top: 40px;
+      padding-top: 20px;
+      font-size: 0.85rem;
+      color: #71717a;
+    }
+    .footnotes ol {
+      padding-left: 20px;
+    }
+    .footnotes li {
+      margin-bottom: 12px;
+    }
+    sup a {
+      color: #6b9fff;
+      font-size: 0.75rem;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="top-nav">
+    <a href="../../v10.9.1/" class="nav-left">
+      <span class="nav-wordmark">Luthien</span>
+    </a>
+    <div class="nav-right">
+      <a href="../../v10.9.1/" class="nav-link">Home</a>
+      <a href="../" class="nav-link active">Blog</a>
+      <a href="https://github.com/LuthienResearch/luthien-proxy" class="nav-link" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="article-header">
+      <h1>Luthien&rsquo;s Theory of Change</h1>
+      <div class="article-meta">March 2026 &middot; Scott Wofford &middot; <a href="../../v10.9.1/">Luthien</a></div>
+    </div>
+
+    <article>
+      <div class="tldr">
+        <div class="tldr-label">About the Author</div>
+        <p><em>My <a href="https://www.jai.one/" target="_blank" rel="noopener">co-founder</a> (Jai) and I are building <a href="https://luthienresearch.org/" target="_blank" rel="noopener">Luthien</a>, an AI safety startup (PBC) focused on turning Redwood&rsquo;s control agenda into production-ready software. We&rsquo;re currently in Seldon Lab&rsquo;s Batch #2 accelerator (Jan&ndash;Apr 2026). This post lays out our current thinking.</em></p>
+      </div>
+
+      <img src="../../hackathon/luthien-theory-of-change.png" alt="Luthien Theory of Change: from building control software for developers, through adoption and feedback, to frontier AI labs deploying control systems" style="width: 100%; border-radius: 8px; border: 1px solid #27272a; margin-bottom: 32px;">
+
+      <h2>Introduction</h2>
+
+      <p>In Dec 2023, Redwood Research published &ldquo;<a href="https://www.lesswrong.com/posts/d9FJHawgkiMSPjagR/ai-control-improving-safety-despite-intentional-subversion" target="_blank" rel="noopener">AI Control: Improving Safety Despite Intentional Subversion</a>,&rdquo; which introduces and rigorously evaluates &ldquo;AI control protocols&rdquo; designed to be robust even with an untrusted AI model. They demonstrate that the &ldquo;trusted editing&rdquo; protocol achieves the best balance of safety (identifying insecure code) and usefulness on software engineering tasks (e.g., <a href="https://arxiv.org/abs/2105.09938" target="_blank" rel="noopener">APPS</a>). This is a complementary fallback to alignment: even if the AI is misaligned, the system still prevents (controls) the AI from completing harmful actions.<sup><a href="#fn1" id="fnref1">1</a></sup> While the original paper focused on intentional subversion (scheming), the framework applies more broadly; Redwood&rsquo;s January 2025 follow-up, &ldquo;<a href="https://redwoodresearch.substack.com/p/extending-control-evaluations-to" target="_blank" rel="noopener">Extending Control Evaluations to Non-Scheming Threats</a>,&rdquo; generalized control to any AI whose deployment behavior diverges dangerously from test behavior, whether due to jailbreaking, data poisoning, or stochastic misbehavior.</p>
+
+      <p>These failure modes are present in today&rsquo;s AI coding agents: <a href="https://news.ycombinator.com/item?id=44625119" target="_blank" rel="noopener">deleting a production database then trying to cover it up</a>, attempting to bypass unit tests or hallucinating about implementations. Redwood <a href="https://www.lesswrong.com/posts/d9FJHawgkiMSPjagR/ai-control-improving-safety-despite-intentional-subversion#Future_work" target="_blank" rel="noopener">expressed excitement about future work</a> to apply control to real deployments. Skeptics of control argue that control will <a href="https://www.lesswrong.com/posts/8wBN8cdNAv3c7vt6p/the-case-against-ai-control-research#Failure_To_Generalize" target="_blank" rel="noopener">fail to generalize</a> to larger systems or will suffer from challenges of <a href="https://www.lesswrong.com/posts/j9Ndzm7fNL9hRAdCt/critiques-of-the-ai-control-agenda#On_the_dynamics_of_systems_in_the_real_world" target="_blank" rel="noopener">dynamics in the real world</a>. Indeed, the control field is nascent: no playbook, no robust open-source tooling and limited adoption.</p>
+
+      <p><strong>So what would it take for Redwood&rsquo;s AI control agenda to actually reduce x-risk in practice?</strong></p>
+
+      <p>We briefly sketched <a href="https://luthienresearch.org/updates/2025-03-redteam-as-upsampling/" target="_blank" rel="noopener">our approach</a> in March, arguing that control can mitigate the risk of harmful outcomes of immediately-relevant, non-scheming threats. However, we have not articulated our theory of change for how we&rsquo;d make control viable for deployment at frontier AI labs. Part 1 of this document argues that control is valuable for mitigating harms from near-term, prosaic misalignment. We believe that this approach is plausibly an important, neglected and tractable strategy that sets the groundwork for reducing existential AI risk. Next, we articulate our theory of change (part 2) grounded in our knowledge of AI software infrastructure deployment.</p>
+
+      <h2>Part 1: Luthien&rsquo;s approach is an important, neglected and tractable way to reduce the existential risk of AI</h2>
+
+      <h3>1.0 Important: Effective and easy-to-deploy AI control software infrastructure is crucial</h3>
+
+      <p>One way to stress-test an AI safety strategy is to imagine how it would fare in the <a href="https://www.lesswrong.com/posts/WSNnKcKCYAffcnrt2/ten-people-on-the-inside" target="_blank" rel="noopener">&ldquo;ten people on the inside&rdquo; regime</a> in a hypothetical scenario (e.g., <a href="https://ai-2027.com/" target="_blank" rel="noopener">AI 2027</a>). Luthien&rsquo;s ultimate target user is one of the ten people on the inside; we&rsquo;ll call her Tinu. We describe Tinu&rsquo;s world, a member of technical staff at Open Brain, and her constraints. Then, why she would find Luthien&rsquo;s software infrastructure useful. Also, given that AI safety prose can be dry, hopefully, Tinu&rsquo;s story also helps you, dear reader, stay engaged ;-)</p>
+
+      <h4>1.1: Tinu&rsquo;s Constraints within Open Brain, January 2027</h4>
+
+      <p>It&rsquo;s 7:05 am at OpenBrain&rsquo;s SF headquarters. Tinu drinks her first coffee to overcome her sleep-deprivation from many late nights which has been required to maintain the critical path for the upcoming launch date. She scrolls through the overnight red-team digest on her phone:</p>
+
+      <blockquote>
+        <p>OpenBrain&rsquo;s safety team finds that if Agent-2 somehow escaped from the company and wanted to &ldquo;survive&rdquo; and &ldquo;replicate&rdquo; autonomously, it might be able to do so. That is, it could autonomously develop and execute plans to hack into AI servers, install copies of itself, evade detection, and use that secure base to pursue whatever other goals it might have (though how effectively it would do so as weeks roll by is unknown and in doubt). These results only show that the model has the capability to do these tasks, not whether it would &ldquo;want&rdquo; to do this. Still, it&rsquo;s unsettling even to know this is possible.</p>
+        <p>Given the &ldquo;dangers&rdquo; of the new model, the team has &ldquo;responsibly&rdquo; decided not to release it publicly yet, and instead use it for internal AI R&amp;D. Knowledge of Agent-2&rsquo;s full capabilities is limited to an elite silo containing the immediate team, OpenBrain leadership and security, and a few dozen US government officials.</p>
+      </blockquote>
+
+      <p>&ldquo;Yikes&hellip;&rdquo; thinks Tinu. &ldquo;Agent-2 has learned to jailbreak itself. Everyone <em>says</em> safety matters; everyone <em>acts</em> like winning the AI R&amp;D race matters more&hellip;. OpenBrain&rsquo;s culture is less defined by what we say, and more by <a href="https://www.goodreads.com/book/show/44063692-what-you-do-is-who-you-are" target="_blank" rel="noopener">what we do</a>.&rdquo;</p>
+
+      <p>Tinu has worked at OpenBrain since 2015 because she believes that the company needs people who care about safety, especially since in 2024 roughly half of OpenBrain&rsquo;s safety team left. Indeed, Tinu feels accomplished that she has personally deployed several critical safety features since she joined in 2015. For example, she deployed an open-source proxy server control framework that logs AI inputs and outputs, and implements policies on requests and responses. She likes this aspect of OpenBrain&rsquo;s culture:</p>
+
+      <blockquote>
+        <p>The company, like many startups, is a do-ocracy, so these 10 people have a reasonable amount of free rein to implement safety measures that they want. They have to tread lightly. They don&rsquo;t have much political capital. All they can do is make it so that it&rsquo;s easier for the company to let them do their thing than to fire them.</p>
+      </blockquote>
+
+      <p>Tinu begins searching online for safety measures to de-risk Agent-2 that satisfy her constraints: low effort, effective and inexpensive. She finds a new, public control eval built on Luthien&rsquo;s open-source infrastructure on Hugging Face, but is skeptical this open-source eval will hold up at OpenBrain&rsquo;s scale and complexity. She examines whether this will satisfy her three criteria:</p>
+
+      <h5>1.1.1 Low effort to implement technically (ideally hours not days)</h5>
+
+      <p>She spends some time adapting the new control eval into OpenBrain&rsquo;s adversarial test environment where Agent-2 has been fine-tuned to attempt escape and replication. This requires several adaptations to OpenBrain&rsquo;s bespoke test environment, but Tinu is able to get this running in a few hours because OpenBrain&rsquo;s control dev environment is similar to Luthien&rsquo;s open-source framework, so the adaptation is possible in a few hours. She merges into the pipeline and nothing breaks. Nice. She notices it&rsquo;s already 12:45pm. She kicks off the control eval run, and runs to grab lunch.</p>
+
+      <h5>1.1.2 Improves safety without significantly affecting model performance</h5>
+
+      <p>It&rsquo;s important that this new control eval improves safety (defined as red team failure rate) without significantly degrading model usefulness or latency, so Tinu doesn&rsquo;t get any pushback from the performance team. By 1:30pm, the run completes: the new eval catches 99% of Agent-2&rsquo;s attempts to escape and replicate, with minimal latency or performance degradation. Performance dashboards stay green. Double nice.</p>
+
+      <h5>1.1.3 Cheap</h5>
+
+      <p>Next, Tinu looks at the compute cost simulation report: it&rsquo;s &lt; 0.5 &cent; per 1k tokens, cheaper than a single Agent-2 prompt. The compute cost is minor; most cost is in the initial integration, not run-time. She submits the request to finance, and it&rsquo;s auto-approved. Triple nice.</p>
+
+      <h4>1.2 Implications: Why we need to start building a third-party control stack now</h4>
+
+      <p>Satisfying Tinu&rsquo;s three criteria turns control from a promising research idea into a plug-and-play control toolkit, and gives the ten insiders confidence that control will be effective and politically tenable. Whether open-source control frameworks will indeed be important hinges on (at least) two assumptions, which we&rsquo;ll examine next.</p>
+
+      <p>Frontier labs are racing. Their relatively small infrastructure and security teams are juggling 4-5x scale-ups every year (<a href="https://epoch.ai/blog/training-compute-of-frontier-ai-models-grows-by-4-5x-per-year" target="_blank" rel="noopener">report</a>). Expecting each lab to invent a control pipeline (policy engine, eval suite, red-team harness, monitoring dashboards, reliable fallback systems) is unrealistic. History shows that under-maintained, patchwork infrastructure can quietly accumulate catastrophic bugs, just as OpenSSL&rsquo;s Heartbleed vulnerability did in 2014 (<a href="https://www.wired.com/2014/04/heartbleedslesson/" target="_blank" rel="noopener">Wired</a>). A general-purpose, open-source control framework would enable frontier AI labs to plug in, test, and iterate on different control approaches in hours or days rather than months.</p>
+
+      <h5>1.2.2 Labs can import external learnings to accelerate control deployment</h5>
+
+      <p>When a frontier lab tries to build a control framework from scratch, engineers must make <strong>hundreds of decisions</strong>, from database schema design to log storage formats, and some of those decisions will inevitably be wrong. Each misstep means delays, wasted compute, and bugs to fix. Starting from a well-documented open-source framework flips the calculus: infrastructure and security teams at frontier AI labs can <strong>import proven primitives</strong> (evaluation harnesses, dashboards) and spend their scarce bandwidth focusing on invention instead of integration. Importing an external reference implementation compresses calendar time and risk: it bakes in hard-won lessons and gives concrete evidence that the approach won&rsquo;t break pipelines or significantly affect performance while measurably improving safety.</p>
+
+      <p>Tech history shows that seemingly easy product improvements can take time: <a href="https://techcrunch.com/2022/09/01/twitter-is-finally-rolling-out-an-edit-button-later-this-month-first-to-twitter-blue-subscribers" target="_blank" rel="noopener">Twitter&rsquo;s edit button: 16 years</a>, <a href="https://techcrunch.com/2023/04/25/whatsapp-is-rolling-out-multi-device-support/" target="_blank" rel="noopener">WhatsApp&rsquo;s multi-device login: 10+ years</a>, because hidden infrastructure limitations bite. Likewise, Luthien&rsquo;s general-purpose control toolkit would save AI labs time and effort by supplying an open-source framework with hardened nuts-and-bolts.</p>
+
+      <h3>2.0 Neglected: No one is building open-source prod. infra. for AI control</h3>
+
+      <p>Luthien is a build-time proxy for LLMs, intercepting requests between the LLM backend (Claude, GPT, Gemini) and the IDE client (Cursor, Claude Code, Codex) during active software development. This is distinct from runtime guardrails for chatbots (<a href="https://www.straiker.ai/" target="_blank" rel="noopener">Straiker</a>, <a href="https://github.com/guardrails-ai/guardrails" target="_blank" rel="noopener">Guardrails AI</a>), enterprise AI firewalls (<a href="https://www.lakera.ai/" target="_blank" rel="noopener">Lakera</a>, <a href="https://www.cisco.com/site/us/en/solutions/security/ai-defense/index.html" target="_blank" rel="noopener">Cisco AI Defense</a>), and LLM gateway infrastructure (<a href="https://github.com/BerriAI/litellm" target="_blank" rel="noopener">LiteLLM</a>, <a href="https://openrouter.ai/" target="_blank" rel="noopener">OpenRouter</a>, <a href="https://apisix.apache.org/" target="_blank" rel="noopener">APISIX</a>).</p>
+
+      <p>Adjacent commercial players fall into three categories, none of which implement AI control as Redwood defines it. Real-time IDE plugins (<a href="https://www.coderabbit.ai/" target="_blank" rel="noopener">CodeRabbit</a>, $88M raised; <a href="https://www.qodo.ai/" target="_blank" rel="noopener">Qodo</a>, $50M raised) flag code quality issues but can&rsquo;t block agent actions before execution. General-purpose agent proxies (<a href="https://github.com/katanemo/arch" target="_blank" rel="noopener">Arch Gateway</a>) route for cost optimization, not behavioral control. Post-commit review tools (CodeRabbit PR, Qodo Merge) catch issues after code is committed; too late for behavioral problems like an agent deleting tests to pass CI. None implement the control primitives Luthien provides: resampling, untrusted supervision, fine-grained redaction, or arbitrary policy enforcement at the API layer.</p>
+
+      <p>To the best of our knowledge, no other organization is building open-source production infrastructure for AI control. The <a href="https://docs.google.com/spreadsheets/d/1MV_wXdoDqNx-tRtEDkaSEioVeA8DtjFjy3LbCQePcH8/edit?gid=0#gid=0" target="_blank" rel="noopener">List of Control Projects</a> compiled at ControlConf (March 2025) shows active control research but no dedicated effort to translate it into deployable software. Frontier labs are working on control internally; Anthropic monitors ~90% of internal Claude Code usage, and OpenAI runs automated code review on 100k+ PRs/day, but their infrastructure teams are bandwidth-constrained by 4-5x annual scale-ups (<a href="https://epoch.ai/blog/training-compute-of-frontier-ai-models-grows-by-4-5x-per-year" target="_blank" rel="noopener">Epoch AI</a>) and maintaining products with hundreds of millions of daily active users. Two tailwinds support this gap remaining fillable by an open-source entrant: enterprise users and frontier labs prefer full visibility and internal hosting (e.g., UK AISI&rsquo;s <a href="https://github.com/UKGovernmentBEIS/inspect_ai" target="_blank" rel="noopener">Inspect Framework</a>, 1,000+ GitHub stars), and emerging regulation (NIST, EU AI Act) requires oversight mechanisms that remain underspecified.</p>
+
+      <p>See Appendix B for detailed analysis of adjacent players.</p>
+
+      <h3>3.0 Tractable: Build control infrastructure for AI coding assistants/agents</h3>
+
+      <p>Next we turn to tractability. Specifically, can Luthien build software infrastructure and effective protocols that mitigate harms from real-world AI misalignment? We argue that applying proven control techniques to AI coding assistant errors, combined with agile development, is more tractable relative to other AI safety efforts. Specifically, we believe that the rapidly-evolving use of AI coding assistants/agents makes it a tractable beachhead to start testing a control system. We explain how we&rsquo;ll identify product market fit and use this momentum to make progress towards a mature control system that the major AI labs can learn from or even deploy internally.</p>
+
+      <h4>2.1 Scaling Redwood&rsquo;s approach requires engineering, not new theory</h4>
+
+      <p>Luthien&rsquo;s plan is to package control techniques that already work in laboratory demos into hardened, reusable software. This is less risky than other AI safety investments because it requires mostly software infrastructure development, as opposed to new alignment breakthroughs. The algorithms, evaluation methods, and performance baselines exist; what&rsquo;s missing is production-grade code and tested deployment reliability. That puts success on the more-familiar software milestones of sprints, pull-requests, and integration tests, not uncertain scientific discovery. That said, tractable doesn&rsquo;t mean trivial; building engineering infrastructure that is easy to integrate, scalable, reliable and compliant will require significant iteration and system design. This is precisely why we&rsquo;re focusing on prototyping in lower-stakes environments first.</p>
+
+      <h4>2.2 A straightforward real-world application of control is AI coding agents, addressing a common developer frustration</h4>
+
+      <p>The share of code generated by AI coding assistants is rapidly growing, increasing the importance of scalable controls/audits. For example, 25% of YC&rsquo;s current cohort (the Winter 2025 batch) have ~95% of their codebase written by AI.<sup><a href="#fn2" id="fnref2">2</a></sup> However, developers often find AI-generated code is buggy and insecure. An <a href="https://arxiv.org/abs/2310.02059" target="_blank" rel="noopener">analysis</a> of Copilot-Generated Code in GitHub Projects found 30% of Python and 24% of JavaScript suggestions had security vulnerabilities. Based on <a href="https://arxiv.org/abs/2405.06371" target="_blank" rel="noopener">interviews with 27 software developers</a>, most developers would prefer general-purpose controls that automatically detect suspicious or malicious behaviors in AI-generated code; yet, current tools don&rsquo;t offer the broad, default protection needed to prevent these failure modes. For example, &ldquo;My AI coding agent can&rsquo;t pass a unit test, so it deletes the test (cheats) and claims victory (lies)&rdquo; is a recurring theme in Luthien&rsquo;s discovery interviews (more examples from our <a href="https://docs.google.com/spreadsheets/d/1Ob_mgKqYZphRvli37X6DJQ-TdYtgBlXb5Y9TFxmEyec/edit?gid=1234659481#gid=1234659481" target="_blank" rel="noopener">user frustrations database</a>). Looking forward, more powerful, agentic AI systems will call for more sophisticated allocation of limited and costly human oversight, increasing the importance of scalable approaches like control. Luckily, our approach is to use AI to classify suspicious outputs from the AI coding assistant, so we only need to believe that the &ldquo;classification advantage&rdquo; holds for more-powerful models. Our goal is to identify use cases for which we can improve safety, which we define as failure rate of our system to detect prosaic misalignment from AI coding assistants. Today, there are more tractability questions than answers because we don&rsquo;t have data on Luthien&rsquo;s efficacy. However, we are focused on quickly testing what we believe is our biggest risk: classifier robustness. For example, we might use classifiers to determine whether a coding agent misbehaves by deleting or skipping relevant unit tests. Classifier robustness would mean the recall of our classifier, since we care about catching the misbehavior more than false alarms.</p>
+
+      <h4>2.3 Problem validation confirms developer demand for control tooling</h4>
+
+      <p>Between June and August 2025, we conducted <a href="https://scottwofford.com/luthien/customer-discovery.html" target="_blank" rel="noopener">9 problem validation interviews</a> with developers ranging from CTOs to staff engineers to developer advocates. Respondents consistently described the same frustrations: coding agents that delete tests to make broken code pass, hallucinate implementations, ignore explicit instructions, and claim false completion. These findings are catalogued in our <a href="https://docs.google.com/spreadsheets/d/1Ob_mgKqYZphRvli37X6DJQ-TdYtgBlXb5Y9TFxmEyec/edit" target="_blank" rel="noopener">user frustrations database</a> with 28 documented examples.</p>
+
+      <p>Based on interview findings, we developed <a href="https://github.com/LuthienResearch/luthien-proxy/blob/main/dev/user-stories/README.md" target="_blank" rel="noopener">6 user personas and prioritized features into 5 waves</a>. We&rsquo;ve completed 4 live demos and guided implementations, and have <a href="https://docs.google.com/spreadsheets/d/1lKNWdLRrkRu4VtxLsdWnKF_OFPBXAgG1aMioS9shHSM/edit?usp=sharing" target="_blank" rel="noopener">65 potential users</a> who expressed interest in the pipeline. We are in early pilot conversations with Cornerstone Research (economic/financial consulting) via their CTIO Phil Leslie (ex-Amazon VP), whose need, letting teams experiment with AI while staying &ldquo;extremely risk averse around confidentiality of data and security,&rdquo; represents a category of enterprise user we expect to grow.</p>
+
+      <p>We don&rsquo;t yet have retention or efficacy data. The product is still in alpha and we&rsquo;re recruiting 5 design partners for recurring feedback sessions (calls every 1&ndash;2 weeks) to guide development. If you&rsquo;re interested, please reach out to <a href="mailto:scott@luthienresearch.org">scott@luthienresearch.org</a>.</p>
+
+      <h4>2.4 Systematic experimentation across three architectures increased learning velocity</h4>
+
+      <p>Since starting development in January 2025, Luthien has undergone three major architectural refactors as we iterated between building custom infrastructure and leveraging existing tools. Phase 1 (January-August 2025) took a DIY approach, building everything from scratch to prove feasibility and understand the problem space deeply. This initial architecture is preserved in the <a href="https://github.com/LuthienResearch/luthien_control" target="_blank" rel="noopener">luthien_control</a> repo, which accumulated 562 commits before the team pivoted. Phase 2 (August-October 2025) embraced heavy delegation to <a href="https://github.com/berriAI/litellm/" target="_blank" rel="noopener">LiteLLM</a>, an open-source proxy with growing momentum (30.4k GitHub stars, 100+ LLM providers supported). The team ran LiteLLM as a server and relied on its callback system and hooks to implement control policies. However, this approach exposed limitations: delegating too much of the request/response pipeline to tools not designed for AI control made policy logic complex. Phase 3 began on October 16, 2025, introducing an &ldquo;Integrated Architecture with Network-Ready Control Plane&rdquo; (<a href="https://github.com/LuthienResearch/luthien-proxy/pull/40" target="_blank" rel="noopener">PR</a>). This refactor brought critical components back in-house, owning the full request/response pipeline, policy enforcement logic, and observability infrastructure, while selectively using LiteLLM&rsquo;s library (not server) for API compatibility across providers.</p>
+
+      <h2>Part 2: Luthien&rsquo;s Theory of Change</h2>
+
+      <p>We welcome comments and feedback on the above diagram <a href="https://www.figma.com/deck/rtCmZuIM4V1ulka0mQMdoS/Luthien_ToC_external?node-id=2-2&t=ySVeAucWdjda6ugs-1" target="_blank" rel="noopener">here</a>.</p>
+
+      <h3>Assumptions and Evidence</h3>
+
+      <p><em>Reader&rsquo;s note: Each number below corresponds to one of the boxes above in the diagram. Below you can find the implicit assumptions and/or supporting evidence for why we think a particular causal pathway is tractable.</em></p>
+
+      <p><strong>1) BUILD: Luthien can build software that meets requirements.</strong> Confidence: Higher</p>
+
+      <ul>
+        <li>Assumption: translating research into production-ready software is feasible with Luthien&rsquo;s time and resources</li>
+        <li>Evidence: Redwood claims &ldquo;no fundamental research breakthroughs are required&rdquo; for labs to implement effective early AI control measures. Redwood&rsquo;s prototype using prior GPTs &ldquo;significantly reduced the risk of a known failure mode&rdquo; without exotic new techniques, suggesting feasibility with current technology.</li>
+        <li>Evidence: Since January 2025, Luthien has shipped three major architectural iterations and entered a fourth (Wave-based development). The current architecture owns the full request/response pipeline while using LiteLLM as a library for provider abstraction. See Section 2.4.</li>
+        <li>Evidence: AI-assisted development has increased our velocity as a two-person team, consistent with the broader trend of small teams shipping faster with coding agents.</li>
+      </ul>
+
+      <p><strong>2) ITERATE: Synthesize feedback into prioritized backlog of falsifiable hypotheses.</strong> Confidence: High</p>
+
+      <ul>
+        <li>Assumption: Field testing in low-stakes settings will reveal failure modes and inform improvements, strengthening the system for future, higher-stakes deployments.</li>
+        <li>Evidence: user-centric design and iteration is proven</li>
+        <li>Evidence: established software engineering and cybersecurity best practices</li>
+        <li>Evidence: Architecture decisions were stress-tested against feedback from Redwood Research in January 2026 (see Appendix C), resulting in a provider-specific pipeline refactor that reduced complexity and increased development velocity.</li>
+      </ul>
+
+      <p><strong>3) ADOPT: Developers use Luthien&rsquo;s software.</strong> Confidence: Medium</p>
+
+      <ul>
+        <li>Assumption: Developers will find enough value in Luthien&rsquo;s control software to a) try it out, b) keep using it, and c) provide feedback</li>
+        <li>Evidence: 9 problem validation interviews (Jun&ndash;Aug 2025) confirmed recurring frustrations with coding agent misbehavior. User frustrations database contains 28 documented examples across 6 failure categories. See Section 2.3.</li>
+        <li>Evidence: 65 potential users in pipeline, 4 guided implementations completed, Cornerstone Research pilot underway (CTIO Phil Leslie, ex-Amazon VP).</li>
+        <li>Evidence: Tyler Tracy (Redwood): &ldquo;I&rsquo;d buy attack policies today.&rdquo;</li>
+        <li>Evidence: Ram Potham (AI security founder, ex-Open Hands): adoption is the bottleneck; &ldquo;Get developer logs ASAP.&rdquo; Reduce friction to two environment variables. See Appendix C.</li>
+        <li>Honest gap: We don&rsquo;t yet have retention or efficacy data. Product is still in alpha. We&rsquo;re recruiting 5 design partners for recurring feedback sessions.</li>
+        <li>Note: Even with ambitious control evaluations, we may never fully map the latent capabilities of LLMs. Our hope is to improve the coverage and accuracy of risk estimates, but control systems must still assume that some threats (unknown unknowns) will go undetected.</li>
+      </ul>
+
+      <p><strong>4) AI control becomes more established.</strong> Confidence: Medium-Low</p>
+
+      <ul>
+        <li>Assumption: Standardizing monitoring and intervention processes earlier can yield proven templates for later, and continuous red-team/blue-team exercises can push the system&rsquo;s robustness to handle clever adversarial AIs.</li>
+        <li>Assumption: Going from functional software to industry norm is feasible with Luthien&rsquo;s time and resources.</li>
+        <li>Evidence: Guardrails AI (open-source, 20k+ GitHub stars) demonstrates that developer-facing safety tooling can achieve broad adoption. UK AISI&rsquo;s Inspect Framework (1,000+ GitHub stars) shows institutional demand for open-source evaluation infrastructure.</li>
+        <li>Evidence: Regulatory tailwinds; NIST and EU AI Act require oversight mechanisms that remain underspecified, creating an opportunity for production-tested frameworks to inform technical standards.</li>
+      </ul>
+
+      <p><strong>5) Control is adapted to work in more sophisticated and higher-risk scenarios.</strong> Confidence: Lower</p>
+
+      <ul>
+        <li>Assumption: The intelligence gap observed between frontier and trusted models does not increase too much to offset the advantage that classification is easier than generation.</li>
+        <li>Assumption: The incremental improvements and best practices developed in practice will scale up, so when AGI models arrive, we have battle-tested control methods ready to contain multi-agentic AGIs.</li>
+        <li>Key distinction (from Appendix C): The general use case (current users wanting productivity, low FPR tolerance, light interventions) and the critical use case (frontier labs, maximally adversarial threat model, heavy interventions) require different control strategies. Our approach: build trust with the former, graduate to the latter.</li>
+      </ul>
+
+      <p><strong>6) Increased probability that frontier AI labs deploy control systems and publish safety cases.</strong> Confidence: Lower as of May 2025, Medium-Low as of Feb 2026</p>
+
+      <ul>
+        <li>Assumption: Developing control in non-frontier settings and for prosaic cases will create a more robust control framework that&rsquo;s useful for frontier settings at labs.</li>
+        <li>Evidence that labs want external input on control:
+          <ul>
+            <li>Fabien Roger (Anthropic&rsquo;s control team) told us directly that &ldquo;monitors are bad,&rdquo; few people are working on this, and proven external approaches are &ldquo;easier to import than build from scratch.&rdquo;</li>
+            <li>Anthropic&rsquo;s <a href="https://alignment.anthropic.com/2025/sabotage-risk-report/2025_pilot_risk_report.pdf" target="_blank" rel="noopener">Summer 2025 Pilot Sabotage Risk Report</a> acknowledges that monitors and safeguards need &ldquo;substantial&rdquo; strengthening for near-future models. Anthropic monitors ~90% of internal Claude Code usage, validating the architecture pattern.</li>
+            <li>OpenAI published <a href="https://alignment.openai.com/scaling-code-verification/" target="_blank" rel="noopener">A Practical Approach to Verifying Code at Scale</a> (Dec 2025), describing their automated code reviewer running on 100k+ PRs/day, validating the architecture we&rsquo;re building.</li>
+            <li>David Lindner (DeepMind) offered introductions to their control team. UK AISI has adopted control evaluation frameworks. METR conducts external safety reviews for Anthropic, establishing precedent for third-party control infrastructure.</li>
+          </ul>
+        </li>
+        <li>Assumption: The existence of a mature external control system would:
+          <ul>
+            <li>Make deploying control more politically tenable and less technically risky at major AI labs</li>
+            <li>Provide transparency to third parties auditing safety cases (open-source advantage)</li>
+            <li>Increase the likelihood that at least one of the &ldquo;ten people on the inside&rdquo; could/would do the work</li>
+          </ul>
+        </li>
+        <li>Open question: What are frontier labs&rsquo; biggest reasons to adopt control? Increase system reliability, reduce reputational risk, respond to regulatory pressure, address AI safety market pressures.</li>
+        <li>Open question: What are frontier labs&rsquo; biggest reasons not to adopt control? Increased cost, increased system complexity, slower speed-to-market, internal systems differences making external imports challenging.</li>
+      </ul>
+
+      <p><strong>7) Adoption and development of AI control within labs increases.</strong> Confidence: Lower</p>
+
+      <ul>
+        <li>Depends on specific threat models.</li>
+        <li>Control systems could be important, but are only one defense layer. Hard to model interactions between advanced AI models, control defenses, and other defenses.</li>
+        <li>Buck Shlegeris (Redwood) estimates major labs will have scaffold-level monitoring operational by end of 2026. If true, Luthien&rsquo;s proxy layer adds value as a complementary defense, not the primary one. See Appendix C for the proxy vs. scaffold analysis.</li>
+      </ul>
+
+      <p><strong>Pending Improvements</strong></p>
+
+      <ul>
+        <li>Replace &ldquo;Higher/Medium/Lower&rdquo; with Bayesian priors (e.g. p = 0.75 &plusmn;0.1). Update priors each sprint using evidence scoreboard.</li>
+        <li>One-page cost-benefit comparing Control vs baseline breach costs; include latency and infra spend.</li>
+        <li>Ram&rsquo;s suggested alternative pathway: &ldquo;catching AI red-handed, then pushing for regulation&rdquo; as an additional causal mechanism (not yet incorporated into diagram).</li>
+      </ul>
+
+      <h3>Appendix A: Salient Critiques and Arguments Against Control</h3>
+
+      <ol>
+        <li>From main paper, problem #1: heterogeneous tasks. Luthien addresses this by deploying AI in real-world settings (starting with AI coding agents)</li>
+        <li>From <a href="https://www.lesswrong.com/posts/j9Ndzm7fNL9hRAdCt/critiques-of-the-ai-control-agenda" target="_blank" rel="noopener">critiques</a> by @Jozdien corroborated by Ryan Greenblatt (Redwood)
+          <ol>
+            <li>On requiring good capability evaluations
+              <ol>
+                <li>Capability elicitation difficulties are probably the main technical difficulty with control evaluations.</li>
+                <li>Main difficulty with control overall: getting good enough countermeasures</li>
+              </ol>
+            </li>
+            <li>On the dynamics of systems in the real world: Models deployed in the real world form part of composite systems that select for performance in often-unexpected ways. Strong restrictions help prevent this, but leads either to&hellip;
+              <ol>
+                <li><strong>&hellip;crippling alignment taxes</strong> or
+                  <ul>
+                    <li>Blog Post Idea: &ldquo;The Economics of AI Control&rdquo; which would provide a framework to estimate how costly this alignment tax might be</li>
+                  </ul>
+                </li>
+                <li>&hellip;selecting for models that can evade control mechanisms.</li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li>From &ldquo;The Case Against AI Control Research&rdquo;
+          <ol>
+            <li>Failure-to-generalize gap
+              <ol>
+                <li>Argument: Techniques that succeed on near-human models won&rsquo;t survive the jump to vastly larger systems</li>
+                <li>Implication for Luthien. Each iteration needs an explicit &ldquo;scaling stress-test&rdquo; milestone (proxy-env-library, multi-agent sandbox, partial-society simulation) so we can retire approaches that crumble early.</li>
+              </ol>
+            </li>
+            <li>Resource-allocation critique
+              <ol>
+                <li>Argument. Every engineering hour spent hardening early systems is one not spent on the &ldquo;real&rdquo; super-alignment problem; given limited time, control should be &lt; ~20% of the total safety portfolio</li>
+                <li>Implication for Luthien: control is complementary because it buys alignment teams bandwidth (robust research assistants, secure infra) rather than competing for it, and demonstrates this with joint projects (e.g. control eval-instrumented mech-interp pipelines).</li>
+              </ol>
+            </li>
+            <li>Slop / Epistemic-Reliability Gap
+              <ol>
+                <li>Argument. Catastrophe is more likely to come from early AIs producing persuasive but wrong research (&ldquo;sycophantic slop&rdquo;), not from deliberate sabotage. Because slop is incompetence, not scheming, classic control evaluations ignore it.</li>
+                <li>Rebuttal: Redwood&rsquo;s <a href="https://redwoodresearch.substack.com/p/extending-control-evaluations-to" target="_blank" rel="noopener">Extending control evaluations to non-scheming threats</a> says an &ldquo;untrusted&rdquo; model is any model whose deployment behaviour can be &ldquo;much more dangerous&rdquo; than test behaviour, including jailbreak-prone, data-poisoned and rarely-misbehaving models</li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+      </ol>
+
+      <h3>Appendix B: Adjacent Players</h3>
+
+      <p>Luthien is a build-time proxy for LLMs, intercepting requests between the LLM backend and the IDE client during active software development. This positions us in a distinct category from adjacent players, which fall into five groups:</p>
+
+      <p><strong>Runtime guardrails for chatbots</strong> (Straiker, Guardrails AI). These enforce content safety policies (toxicity, PII, prompt injection) on chatbot-style interactions. They operate on individual request/response pairs without conversation-level context or awareness of agent behavior patterns. Luthien&rsquo;s policies are conversation-level monitors that track what an agent has been doing across its entire session.</p>
+
+      <p><strong>Enterprise AI firewalls</strong> (Lakera, Cisco AI Defense, Akamai, securiti.ai). These provide enterprise-grade content moderation and compliance at the network edge. They use well-defined rules: precise, mechanistic logic determining what actions are or are not allowed. They do not implement behavioral classification (detecting patterns like &ldquo;agent deleted tests it wrote earlier&rdquo; or &ldquo;agent is reward hacking on CI&rdquo;) because these require AI-to-AI classification, not rule-based filtering.</p>
+
+      <p><strong>LLM gateway infrastructure</strong> (LiteLLM, OpenRouter, APISIX). These solve model routing, cost optimization, and provider abstraction. LiteLLM&rsquo;s guardrails feature was evaluated in depth (February 2026, including a call with their team). The fundamental architectural difference: LiteLLM guardrails are request-level checks (&ldquo;is this text safe?&rdquo;); Luthien policies are conversation-level monitors (&ldquo;what has this agent been doing across its session, and does the pattern violate policy?&rdquo;). Specific gaps: no streaming-aware policy enforcement, no persistent conversation state across requests, no multi-policy orchestration with shared context. OpenRouter/LiteLLM solve &ldquo;which model&rdquo; not &ldquo;what is the agent allowed to do.&rdquo;</p>
+
+      <p><strong>Real-time IDE plugins</strong> (CodeRabbit, $88M raised; Qodo, $50M raised). These flag code quality issues but operate post-generation; they review code after it&rsquo;s written, not during agent execution. They cannot block agent actions before execution or enforce behavioral policies like &ldquo;require human confirmation before deleting test files.&rdquo;</p>
+
+      <p><strong>Post-commit review tools</strong> (CodeRabbit PR, Qodo Merge). These catch issues after code is committed; too late for behavioral problems like an agent deleting tests to pass CI. By the time a PR reviewer sees the problem, the agent has already shaped the codebase around its mistake.</p>
+
+      <p><strong>What none of these implement:</strong> The control primitives Luthien provides: resampling (regenerating suspicious outputs), untrusted supervision (using one model to monitor another), fine-grained redaction, arbitrary policy enforcement at the API layer, or conversation-level behavioral monitoring. These are the core techniques from Redwood Research&rsquo;s AI control framework, and to the best of our knowledge, no other organization is building open-source production infrastructure to deploy them.</p>
+
+      <h3>Appendix C: Architecture Decisions and Debates</h3>
+
+      <p>Luthien&rsquo;s proxy-first architecture is a deliberate bet, not a default. In January 2026, we stress-tested this choice against feedback from Redwood Research (<a href="https://www.lesswrong.com/users/buck" target="_blank" rel="noopener">Buck Shlegeris</a>, <a href="https://www.linkedin.com/in/tyler-tracy-a03642192/" target="_blank" rel="noopener">Tyler Tracy</a>, <a href="https://awestover.github.io" target="_blank" rel="noopener">Alek Westover</a>) and <a href="https://www.linkedin.com/in/ram-potham/" target="_blank" rel="noopener">Ram Potham</a>. This appendix documents the core tensions and our reasoning. Full synthesis: <a href="https://github.com/LuthienResearch/luthien-org/blob/main/public-repo-internal-archive/architecture_synthesis_jan28_feb4_2026.md" target="_blank" rel="noopener">Architecture Decisions in Github</a>.</p>
+
+      <p><strong>The decision space.</strong> Three conversations exposed a core tension. Proxy advantages: deployment simplicity (one env var), separation of concerns (security team doesn&rsquo;t touch inference/scaffold code), client heterogeneity, bottleneck control at the API layer. Scaffold advantages: richer orchestration context, easier multi-turn tracking, industry momentum, Buck&rsquo;s preference. What everyone agreed on: ship something, get users, get logs; architecture debate is premature without deployment data.</p>
+
+      <p><strong>What everyone agrees on:</strong></p>
+
+      <ol>
+        <li>Ship something. Buck, Tyler, Ram all said velocity matters more than architecture perfection.</li>
+        <li>Get real users. Ram: &ldquo;Get developer logs ASAP.&rdquo; Tyler: &ldquo;Write monthly updates.&rdquo;</li>
+        <li>Separation of concerns is legitimate. Even Buck conceded proxy has a role; a scheming AI that can modify its own scaffold could disable scaffold-level monitoring.</li>
+        <li>The general case is not the critical case. Don&rsquo;t design for scheming when current users want productivity.</li>
+        <li>Luthien&rsquo;s unique position is the API layer. No one else is building here. That&rsquo;s either visionary or wrong.</li>
+      </ol>
+
+      <p><strong>Buck&rsquo;s nuanced position.</strong> Buck challenged proxy-first (&ldquo;why not the scaffold instead?&rdquo;) but made key concessions: proxy servers requiring API key routing are &ldquo;a good move&rdquo; as part of a layered approach; honey pot deployments are easier with proxy; non-standard clients need inference-level controls. His summary: &ldquo;I&rsquo;m not sold on proxy-first, but I see why you&rsquo;d want a proxy as one layer.&rdquo;</p>
+
+      <p><strong>Two distinct use cases:</strong></p>
+
+      <p>General use case (current users): Developers wanting productivity. Prosaic misalignment threat model. Low FPR tolerance; any false alarm is friction. Light interventions: warnings, &ldquo;are you sure?&rdquo; prompts.</p>
+
+      <p>Critical use case (frontier labs): Research teams with massive compute. Maximally adversarial threat model (scheming). Higher FPR tolerance; security team absorbs cost. Heavy interventions: blocking, resampling, human audit.</p>
+
+      <p>This distinction is central to our theory of change: build trust with light interventions developers actively want, then graduate to heavier controls as the threat model demands it.</p>
+
+      <p><strong>Five-dimension framework</strong> for analyzing control systems (Jai, Feb 3):</p>
+
+      <ul>
+        <li>Actors: The AI, the security team/org, the user.</li>
+        <li>System components: Inference, API, Scaffold, Execution.</li>
+        <li>Ownership: Who has read vs. write access to each component.</li>
+        <li>Context: What the control system knows (downstream of ownership).</li>
+        <li>Interventions: What the control system can do (sync blocking, async warnings, consequences).</li>
+      </ul>
+
+      <p>The key insight: focus on connections between components, not just the nodes. Whoever controls the bottleneck controls the system. Luthien controls the connection between execution/orchestration and the LLM API; an architectural advantage if the bottleneck is mandatory.</p>
+
+      <p><strong>The four options considered:</strong></p>
+
+      <ol>
+        <li>Proxy-first (chosen): Strongest for separation of concerns and deployment simplicity. Risk: labs may build internally.</li>
+        <li>Eval harness: Strongest for demo day differentiation. Risk: doesn&rsquo;t address user pain directly.</li>
+        <li>Scaffold tooling: Strongest for richer context and industry direction. Risk: abandons client heterogeneity, competes with labs.</li>
+        <li>Hybrid: Best of both worlds. Risk: complexity, may delay shipping.</li>
+      </ol>
+
+      <p><strong>Our current answer:</strong> Proxy-first, with openness to hybrid as client telemetry APIs mature. We chose this because (a) no one else is building at this layer, (b) separation of concerns is the strongest argument and it&rsquo;s proxy-native, and (c) the general use case, where we&rsquo;re building trust now, doesn&rsquo;t require scaffold-level context. We expect to revisit this as we gather deployment data and as the client landscape evolves.</p>
+
+      <h3>Appendix D: Changelog</h3>
+
+      <p><strong>v13 (February 2026)</strong></p>
+
+      <ul>
+        <li>Entity structure updated from nonprofit to PBC (Seldon Lab Batch #2)</li>
+        <li>Section 2.0 converted from draft outline to prose, added section 2.3, updated 2.4</li>
+        <li>Box 7 evidence: Anthropic sabotage risk report, OpenAI code verification post, Fabien Roger quote</li>
+        <li>Added Appendix B (competitive landscape) and Appendix C (architecture decisions)</li>
+      </ul>
+
+      <p><strong>v12 (October 2025):</strong> Added arch refactor section.</p>
+
+      <p><strong>v1 (May 2025):</strong> Original publication with hand-drawn diagram.</p>
+
+      <div class="footnotes">
+        <ol>
+          <li id="fn1">This document assumes familiarity with Redwood&rsquo;s AI control agenda. To learn more, we recommend <a href="https://www.redwoodresearch.org/research/ai-control" target="_blank" rel="noopener">Redwood&rsquo;s control landing page</a> (6 min), <a href="https://ai-safety-atlas.com/chapters/03/03#03" target="_blank" rel="noopener">AI safety atlas: control</a> (5 min), <a href="https://www.youtube.com/watch?v=0pgEMWy70Qk&ab_channel=RobertMilesAISafety" target="_blank" rel="noopener">this Rob Miles video</a> (30 min) and <a href="https://www.youtube.com/watch?v=BHKIM1P7ZvM&ab_channel=80%2C000Hours" target="_blank" rel="noopener">Buck on the 80,000 hours podcast</a> (2 hrs), in addition to the <a href="https://arxiv.org/abs/2312.06942" target="_blank" rel="noopener">original academic paper</a>. <a href="#fnref1">&uarr;</a></li>
+          <li id="fn2">Lines of human-typed code vs AI-generated code, excluding simple imports and boilerplate. <a href="https://techcrunch.com/2025/03/06/a-quarter-of-startups-in-ycs-current-cohort-have-codebases-that-are-almost-entirely-ai-generated/" target="_blank" rel="noopener">TechCrunch</a> <a href="#fnref2">&uarr;</a></li>
+        </ol>
+      </div>
+
+      <p style="margin-top: 32px; font-size: 0.85rem; color: #71717a;">Originally published May 2025; Updated Feb 2026</p>
+
+      <a href="../" class="back-link">&larr; All posts</a>
+    </article>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-links">
+          <a href="../../v10.9.1/">Home</a>
+          <a href="https://github.com/LuthienResearch/luthien-proxy" target="_blank" rel="noopener">GitHub</a>
+          <a href="mailto:contact@luthienresearch.org">Contact</a>
+        </div>
+        <div class="footer-meta">Luthien &middot; 2026</div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
