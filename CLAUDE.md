@@ -46,6 +46,7 @@ Same objective workflow as luthien-proxy:
 3. Make changes, commit frequently
 4. Push to origin, open draft PR
 5. When done: update `CHANGELOG.md`, clear `dev/OBJECTIVE.md` and `dev/NOTES.md`, mark PR ready
+6. **Update the version tracking doc:** Every new landing page version MUST get a row added to `luthien-org/ui-fb-dev/2-requirements/1-value-prop-requirements-live.md` (landing page versions table) + a changelog entry at the bottom. Commit and push to luthien-org as part of the same work session.
 
 ## Editing Pages
 
