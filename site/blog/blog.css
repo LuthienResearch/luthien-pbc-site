@@ -59,7 +59,7 @@ code, pre { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
   font-family: 'Inter', sans-serif;
   font-size: 0.8rem;
   font-weight: 500;
-  color: #52525b;
+  color: #a1a1aa;
   text-decoration: none;
   transition: color 0.2s;
 }
@@ -81,7 +81,7 @@ code, pre { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
 }
 
 .blog-header p {
-  color: #71717a;
+  color: #a1a1aa;
   font-size: 0.9rem;
 }
 
@@ -109,7 +109,7 @@ code, pre { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
 
 .post-meta {
   font-size: 0.8rem;
-  color: #52525b;
+  color: #a1a1aa;
   font-family: 'JetBrains Mono', monospace;
   margin-bottom: 8px;
 }
@@ -138,11 +138,11 @@ code, pre { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
 
 .article-meta {
   font-size: 0.8rem;
-  color: #52525b;
+  color: #a1a1aa;
   font-family: 'JetBrains Mono', monospace;
 }
 
-.article-meta a { color: #71717a; }
+.article-meta a { color: #a1a1aa; }
 .article-meta a:hover { color: #a1a1aa; }
 
 article h2 {
@@ -180,7 +180,7 @@ article blockquote {
   border-left: 3px solid #3f3f46;
   padding-left: 16px;
   margin: 20px 0;
-  color: #71717a;
+  color: #a1a1aa;
   font-style: italic;
 }
 
@@ -299,7 +299,7 @@ article pre code {
   align-items: center;
   gap: 6px;
   font-size: 0.85rem;
-  color: #52525b;
+  color: #a1a1aa;
   margin-top: 40px;
   transition: color 0.2s;
 }
@@ -323,7 +323,7 @@ article pre code {
   font-family: 'Inter', sans-serif;
   font-size: 0.7rem;
   font-weight: 700;
-  color: #52525b;
+  color: #a1a1aa;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin-bottom: 12px;
@@ -333,7 +333,7 @@ article pre code {
   display: block;
   font-size: 0.78rem;
   line-height: 1.4;
-  color: #52525b;
+  color: #a1a1aa;
   text-decoration: none;
   padding: 4px 0 4px 12px;
   border-left: 2px solid transparent;
@@ -382,9 +382,9 @@ footer {
 }
 
 .footer-links { display: flex; gap: 24px; }
-.footer-links a { color: #52525b; font-size: 0.85rem; }
+.footer-links a { color: #a1a1aa; font-size: 0.85rem; }
 .footer-links a:hover { color: #a1a1aa; }
-.footer-meta { color: #3f3f46; font-size: 0.8rem; }
+.footer-meta { color: #71717a; font-size: 0.8rem; }
 
 @media (max-width: 640px) {
   .footer-inner {
