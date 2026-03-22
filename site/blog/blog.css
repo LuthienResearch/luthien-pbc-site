@@ -306,6 +306,68 @@ article pre code {
 
 .back-link:hover { color: #a1a1aa; }
 
+/* TABLE OF CONTENTS - LessWrong-style left sidebar */
+.toc-sidebar {
+  position: fixed;
+  top: 96px;
+  width: 200px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  padding-right: 16px;
+  scrollbar-width: none;
+}
+
+.toc-sidebar::-webkit-scrollbar { display: none; }
+
+.toc-sidebar .toc-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #52525b;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+
+.toc-sidebar a {
+  display: block;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: #52525b;
+  text-decoration: none;
+  padding: 4px 0 4px 12px;
+  border-left: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.toc-sidebar a:hover {
+  color: #a1a1aa;
+}
+
+.toc-sidebar a.active {
+  color: #e4e4e7;
+  border-left-color: #6b9fff;
+}
+
+.toc-sidebar a.toc-h3 {
+  padding-left: 24px;
+  font-size: 0.73rem;
+}
+
+/* Position the ToC to the left of the content container */
+@media (min-width: 1100px) {
+  .toc-sidebar {
+    left: calc((100vw - 720px) / 2 - 232px);
+  }
+}
+
+/* Hide ToC on screens too narrow for sidebar */
+@media (max-width: 1099px) {
+  .toc-sidebar {
+    display: none;
+  }
+}
+
 /* FOOTER */
 footer {
   border-top: 1px solid #1a1a1e;
