@@ -73,5 +73,45 @@
     </div>
   </footer>
 
+  <script>
+  (function() {
+    var article = document.querySelector('article');
+    if (!article) return;
+    var headings = article.querySelectorAll('h2, h3');
+    if (headings.length < 3) return;
+
+    headings.forEach(function(h, i) {
+      if (!h.id) h.id = 'section-' + i;
+    });
+
+    var nav = document.createElement('nav');
+    nav.className = 'toc-sidebar';
+    headings.forEach(function(h) {
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      if (h.tagName === 'H3') a.className = 'toc-h3';
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById(h.id).scrollIntoView({ behavior: 'smooth' });
+      });
+      nav.appendChild(a);
+    });
+    document.body.appendChild(nav);
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          nav.querySelectorAll('a').forEach(function(a) { a.classList.remove('active'); });
+          var active = nav.querySelector('a[href="#' + entry.target.id + '"]');
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-80px 0px -70% 0px' });
+
+    headings.forEach(function(h) { observer.observe(h); });
+  })();
+  </script>
+
 </body>
 </html>
