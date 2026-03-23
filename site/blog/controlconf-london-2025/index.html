@@ -13,11 +13,11 @@
 <body>
 
   <nav class="top-nav">
-    <a href="../../v10/" class="nav-left">
+    <a href="../../v10.9.1/" class="nav-left">
       <span class="nav-wordmark">Luthien</span>
     </a>
     <div class="nav-right">
-      <a href="../../v10/" class="nav-link">Home</a>
+      <a href="../../v10.9.1/" class="nav-link">Home</a>
       <a href="../" class="nav-link active">Blog</a>
       <a href="https://github.com/LuthienResearch/luthien-proxy" class="nav-link" target="_blank" rel="noopener">GitHub</a>
     </div>
@@ -26,7 +26,7 @@
   <div class="container">
     <div class="article-header">
       <h1>Luthien at ControlConf London 2025</h1>
-      <div class="article-meta">March 1, 2025 &middot; Luthien &middot; <a href="../../v10/">Home</a></div>
+      <div class="article-meta">March 1, 2025 &middot; Luthien &middot; <a href="../../v10.9.1/">Home</a></div>
     </div>
 
     <article>
@@ -64,7 +64,7 @@
     <div class="container">
       <div class="footer-inner">
         <div class="footer-links">
-          <a href="../../v10/">Home</a>
+          <a href="../../v10.9.1/">Home</a>
           <a href="https://github.com/LuthienResearch/luthien-proxy" target="_blank" rel="noopener">GitHub</a>
           <a href="mailto:contact@luthienresearch.org">Contact</a>
         </div>
@@ -72,6 +72,46 @@
       </div>
     </div>
   </footer>
+
+  <script>
+  (function() {
+    var article = document.querySelector('article');
+    if (!article) return;
+    var headings = article.querySelectorAll('h2, h3');
+    if (headings.length < 3) return;
+
+    headings.forEach(function(h, i) {
+      if (!h.id) h.id = 'section-' + i;
+    });
+
+    var nav = document.createElement('nav');
+    nav.className = 'toc-sidebar';
+    headings.forEach(function(h) {
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      if (h.tagName === 'H3') a.className = 'toc-h3';
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById(h.id).scrollIntoView({ behavior: 'smooth' });
+      });
+      nav.appendChild(a);
+    });
+    document.body.appendChild(nav);
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          nav.querySelectorAll('a').forEach(function(a) { a.classList.remove('active'); });
+          var active = nav.querySelector('a[href="#' + entry.target.id + '"]');
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-80px 0px -70% 0px' });
+
+    headings.forEach(function(h) { observer.observe(h); });
+  })();
+  </script>
 
 </body>
 </html>
