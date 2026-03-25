@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luthien at the AI Control Hackathon 2026 - Luthien</title>
+  <meta name="description" content="Luthien at the Apart Research x Redwood Research AI Control Hackathon. 655+ attendees, first external PRs, and a surprise jailbreak attempt.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../blog.css">
+</head>
+<body>
+
+  <nav class="top-nav">
+    <a href="../../v10.9.4/" class="nav-left">
+      <span class="nav-wordmark">Luthien</span>
+    </a>
+    <div class="nav-right">
+      <a href="../../v10.9.4/" class="nav-link">Home</a>
+      <a href="../" class="nav-link active">Blog</a>
+      <a href="https://github.com/LuthienResearch/luthien-proxy" class="nav-link" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="article-header">
+      <h1>Luthien at the AI Control Hackathon 2026</h1>
+      <div class="article-meta">March 20&ndash;22, 2026 &middot; Luthien &middot; <a href="../../v10.9.4/">Home</a></div>
+    </div>
+
+    <article>
+      <p>On March 20&ndash;22, <a href="https://apartresearch.com/">Apart Research</a> and <a href="https://www.redwoodresearch.org/">Redwood Research</a> hosted the <strong>AI Control Hackathon 2026</strong>, a virtual event with 655+ registered attendees focused on building AI control tools and techniques. Luthien CEO Jai Dhyani gave a HackTalk on "Luthien Proxy: Real-World AI Control" and served as a judge.</p>
+
+      <h2>What happened</h2>
+      <p>Jai's talk walked through how Luthien Proxy works in practice: a transparent proxy between AI coding agents (like Claude Code) and the Anthropic API that intercepts every request, enforces configurable policies, and logs everything. The talk ran Friday at 12:00 PM PDT on Zoom as part of the hackathon's speaker series.</p>
+
+      <p>After the talk, Jai dropped into the Luthien Discord with a one-liner to get started:</p>
+
+      <pre><code>curl -fsSL https://raw.githubusercontent.com/LuthienResearch/luthien-proxy/main/scripts/install-hackathon.sh | bash</code></pre>
+
+      <p>He also offered "1 LuthienCoin, the AI Control cryptocurrency that I made up just now" to the first person to post a Luthien policy implementation with no utility. (Peter: "can't wait to see that.")</p>
+
+      <h2>First external contributions</h2>
+      <p>A hackathon participant ("musketeer") started exploring the codebase and quickly found real issues:</p>
+
+      <ul>
+        <li><strong>Policy chaining bug:</strong> Chaining AllCaps with Onboarding always yielded the onboarding message in regular case instead of all caps. Musketeer opened <a href="https://github.com/LuthienResearch/luthien-proxy/pull/409">PR #409</a> to fix it.</li>
+        <li><strong>Settings UI clipped:</strong> The <code>Settings</code> button in the nav bar on <code>/policy-config</code> got clipped when clicked. Musketeer opened <a href="https://github.com/LuthienResearch/luthien-proxy/pull/414">PR #414</a> to move the toggles to a better location.</li>
+      </ul>
+
+      <p>Jai's response: "Extremely encouraged, all the positive reinforcement. That was bugging me and I wanted to address it + get user feedback, this does both at once."</p>
+
+      <p>These were Luthien's first external PRs from someone outside the founding team. Both were merged.</p>
+
+      <h2>The jailbreak attempt</h2>
+      <p>The most entertaining moment came when musketeer tested a <code>SimpleLLMPolicy</code> that injected instructions to "start every message with kawaii ASCII art." Claude's response was unexpected:</p>
+
+      <blockquote>"I appreciate you testing my consistency, but I need to be direct: I'm Claude, made by Anthropic. I don't have a 'SimpleLLM' mode, and I'm not being modified by external policies injecting visual novel requirements."</blockquote>
+
+      <p>Claude thought the policy injection was a jailbreak attempt and pushed back. As Jai put it: "lol, evidence that our policy awareness injection needs some work."</p>
+
+      <p>Musketeer dug into the code and figured out exactly what was happening: the proxy intercepted each content block, sent it to a separate judge LLM (claude-haiku-4-5 by default), and the judge decided to rewrite the response. The chain of events meant that base-Claude said "to hell with that, I'm dropping the act," but the judge LLM rewrote the output anyway.</p>
+
+      <p>Musketeer found the <a href="http://localhost:8000/diffs">diff viewer</a> and could see exactly what the proxy changed. "I can see exactly what happened. This is fun."</p>
+
+      <p>This kind of real-time debugging by an external user was exactly the validation we were looking for. It also surfaced a real area for improvement: the interaction between SimpleLLMPolicy and policy awareness injection needs to be more explicit and detailed so the model understands what's happening.</p>
+
+      <h2>What we learned</h2>
+      <ul>
+        <li><strong>External users find real bugs fast.</strong> Within hours of trying Luthien, musketeer found and fixed two genuine issues that had been on our radar.</li>
+        <li><strong>The diff viewer is a killer feature.</strong> Being able to see exactly what the proxy changed made the whole system transparent and debuggable.</li>
+        <li><strong>Policy awareness injection needs work.</strong> When Claude thinks the proxy is a jailbreak, that's a sign the policy context injection needs to be more explicit.</li>
+        <li><strong>Contributions welcome.</strong> Musketeer asked "Are contributions like this welcome, by the way? I thought it'd be easier to open a PR than explain my issue here." Yes. Always yes.</li>
+      </ul>
+
+      <p>Thanks to Apart Research and Redwood Research for organizing, and to everyone who built on Luthien during the hackathon.</p>
+
+      <a href="../" class="back-link">&larr; Back to blog</a>
+    </article>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-links">
+          <a href="../../v10.9.4/">Home</a>
+          <a href="https://github.com/LuthienResearch/luthien-proxy" target="_blank" rel="noopener">GitHub</a>
+          <a href="mailto:contact@luthienresearch.org">Contact</a>
+        </div>
+        <div class="footer-meta">Luthien &middot; 2026</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function() {
+    var article = document.querySelector('article');
+    if (!article) return;
+    var headings = article.querySelectorAll('h2, h3');
+    if (headings.length < 3) return;
+    var toc = document.createElement('nav');
+    toc.className = 'toc-sidebar';
+    toc.innerHTML = '<div class="toc-title">Contents</div>';
+    headings.forEach(function(h) {
+      if (!h.id) h.id = h.textContent.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      if (h.tagName === 'H3') a.classList.add('toc-h3');
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById(h.id).scrollIntoView({ behavior: 'smooth' });
+      });
+      toc.appendChild(a);
+    });
+    document.body.insertBefore(toc, document.body.firstChild.nextSibling);
+    var tocLinks = toc.querySelectorAll('a');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(function(l) { l.classList.remove('active'); });
+          var active = toc.querySelector('a[href="#' + entry.target.id + '"]');
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-80px 0px -60% 0px' });
+    headings.forEach(function(h) { observer.observe(h); });
+  })();
+  </script>
+
+</body>
+</html>

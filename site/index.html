@@ -104,53 +104,39 @@
 
     .btn-group { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
 
-    /* ========== HACKATHON BANNER (white, image left) ========== */
-    .hackathon-banner {
+    /* ========== SECURITY NOTICE BANNER ========== */
+    .security-banner {
       margin-top: 48px;
-      background: #ffffff;
-      padding: 32px 0;
+      background: #f0fdf4;
+      border-bottom: 1px solid #bbf7d0;
     }
-    .hackathon-banner .banner-inner {
-      max-width: 960px; margin: 0 auto; padding: 0 24px;
-      display: flex; gap: 28px; align-items: center;
+    .security-banner .banner-strip {
+      max-width: 960px; margin: 0 auto; padding: 10px 24px;
+      display: flex; align-items: center; gap: 10px;
+      cursor: pointer; user-select: none;
     }
-    .hackathon-banner .banner-image-wrap {
-      flex-shrink: 0; text-align: center;
+    .security-banner .banner-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #22c55e; flex-shrink: 0;
     }
-    .hackathon-banner .banner-image {
-      width: 180px; height: 180px;
-      border-radius: 12px; overflow: hidden;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    .security-banner .banner-headline {
+      flex: 1; font-size: 0.82rem; color: #166534; font-weight: 600;
     }
-    .hackathon-banner .banner-image-caption {
-      font-size: 0.78rem; color: #6b7280; margin-top: 8px; font-weight: 500;
+    .security-banner .banner-headline span { font-weight: 400; color: #4ade80; margin: 0 6px; }
+    .security-banner .banner-toggle {
+      font-size: 0.75rem; color: #16a34a; font-weight: 500;
+      white-space: nowrap;
     }
-    .hackathon-banner .banner-image img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
-    .hackathon-banner .banner-text { flex: 1; min-width: 0; }
-    .hackathon-banner .banner-eyebrow {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em;
-      text-transform: uppercase; color: #6b7280; margin-bottom: 8px;
+    .security-banner .banner-toggle::after { content: ' +'; font-weight: 700; }
+    .security-banner.open .banner-toggle::after { content: ' \2212'; }
+    .security-banner .banner-details {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.25s ease;
     }
-    .hackathon-banner .banner-title {
-      font-size: clamp(1.2rem, 2.5vw, 1.5rem); font-weight: 800;
-      color: #111; letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.25;
-    }
-    .hackathon-banner .banner-details {
-      font-size: 0.85rem; color: #4b5563; line-height: 1.6; margin-bottom: 16px;
-    }
-    .hackathon-banner .banner-details strong { color: #111; }
-    .hackathon-banner .banner-cta-primary {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 10px 22px; border-radius: 8px; font-weight: 700; font-size: 0.88rem;
-      color: #fff; background: #111; text-decoration: none;
-      transition: background 0.2s, transform 0.15s;
-    }
-    .hackathon-banner .banner-cta-primary:hover { background: #333; color: #fff; transform: translateY(-1px); }
-    @media (max-width: 640px) {
-      .hackathon-banner .banner-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
-      .hackathon-banner .banner-image { width: 140px; height: 140px; }
-      .hackathon-banner .banner-image-wrap { text-align: left; }
+    .security-banner.open .banner-details { max-height: 200px; }
+    .security-banner .banner-details-inner {
+      max-width: 960px; margin: 0 auto; padding: 0 24px 14px 42px;
+      font-size: 0.8rem; color: #14532d; line-height: 1.65;
     }
 
     /* ========== HERO ========== */
@@ -1050,30 +1036,27 @@
       <a href="#team" class="nav-link" data-section="team">team</a>
       <a href="#quotes" class="nav-link" data-section="quotes">quotes</a>
       <a href="#blog" class="nav-link" data-section="blog">blog</a>
-      <a href="hackathon/" class="nav-link">hackathon</a>
       <a href="#feedback" class="nav-link" data-section="feedback">feedback</a>
       <a href="https://calendar.app.google/9Cye1yr6fMJVZNLD6" class="nav-setup" target="_blank" rel="noopener">Book a setup call</a>
       <a href="https://github.com/LuthienResearch/luthien-proxy" class="nav-gh" target="_blank" rel="noopener" aria-label="GitHub"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
     </div>
   </nav>
 
-  <!-- HACKATHON BANNER -->
-  <div class="hackathon-banner">
-    <div class="banner-inner">
-      <div class="banner-image-wrap">
-        <div class="banner-image">
-          <img src="https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,anim=false,background=white,quality=75,width=500,height=500/event-covers/vr/03832919-09d5-460d-b809-cb54db1e2a63.png" alt="HackTalk: Jai Dhyani on Luthien Proxy">
-        </div>
-        <div class="banner-image-caption" id="bannerCaption" style="display: none;">Speaker and Judge</div>
-      </div>
-      <div class="banner-text">
-        <div class="banner-eyebrow">Apart Research x Redwood Research</div>
-        <div class="banner-title">Jai (Luthien CEO) gives HackTalk<br>at AI Control Hackathon 2026</div>
-        <div class="banner-details">
-          <strong>Friday, March 20</strong> / 12:00 - 12:45 PM PDT / Zoom<br>
-          655+ attendees. "Luthien Proxy: Real-World AI Control"
-        </div>
-        <a href="https://luma.com/ai-control-hackathon-2026-jai-dhyani?tk=bfMBjG" target="_blank" rel="noopener" class="banner-cta-primary" id="bannerCta">Register for the talk &rarr;</a>
+  <!-- SECURITY NOTICE BANNER -->
+  <div class="security-banner" id="securityBanner" onclick="this.classList.toggle('open')">
+    <div class="banner-strip">
+      <div class="banner-dot"></div>
+      <div class="banner-headline">Luthien Proxy is not affected by the LiteLLM supply chain compromise</div>
+      <div class="banner-toggle">More info</div>
+    </div>
+    <div class="banner-details">
+      <div class="banner-details-inner">
+        On March 24, 2026 at ~08:30 UTC, malicious versions of LiteLLM (v1.82.7 and v1.82.8) were published to PyPI via a compromised CI/CD pipeline.
+        The compromised versions were removed and the PyPI quarantine lifted by ~20:15 UTC the same day.
+        Luthien pins LiteLLM at v1.81.5 (locked January 29, 2026) and uses it only for optional judge policy evaluation.
+        The core proxy pipeline uses native Anthropic SDKs directly.
+        No action is required from Luthien users.
+        <a href="https://github.com/BerriAI/litellm/issues/24518" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="color: #16a34a; font-weight: 600; text-decoration: underline;">Follow the live status on GitHub</a>
       </div>
     </div>
   </div>
@@ -1258,6 +1241,10 @@
     <div class="section-label" style="text-transform: none;">blog</div>
     <div class="container">
       <div style="display: flex; flex-direction: column; gap: 1px;">
+        <a href="blog/ai-control-hackathon-2026/" style="display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0; border-bottom: 1px solid #27272a; text-decoration: none; transition: background 0.15s;">
+          <span style="font-size: 0.95rem; font-weight: 600; color: #fafafa;">Luthien at the AI Control Hackathon 2026</span>
+          <span style="font-size: 0.75rem; color: #a1a1aa; font-family: 'JetBrains Mono', monospace; white-space: nowrap; margin-left: 16px;">March 20-22, 2026 &middot; Luthien</span>
+        </a>
         <a href="blog/theory-of-change/" style="display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0; border-bottom: 1px solid #27272a; text-decoration: none; transition: background 0.15s;">
           <span style="font-size: 0.95rem; font-weight: 600; color: #fafafa;">Luthien's Theory of Change</span>
           <span style="font-size: 0.75rem; color: #a1a1aa; font-family: 'JetBrains Mono', monospace; white-space: nowrap; margin-left: 16px;">May 2025 (updated Feb 2026) · Scott Wofford</span>
@@ -1277,22 +1264,10 @@
 
   <hr class="divider">
 
-  <!-- HACKATHON -->
-  <section id="hackathon" style="padding-top: 32px; padding-bottom: 32px;">
-    <div class="section-label" style="text-transform: none;">hackathon</div>
-    <div class="container" style="text-align: center;">
-      <p style="font-size: 1rem; color: #e4e4e7; margin-bottom: 8px; font-weight: 600;">Apart Research AI Control Hackathon, Mar 20&ndash;22</p>
-      <p style="font-size: 0.9rem; color: #a1a1aa; margin-bottom: 16px;">Project ideas for building on Luthien this weekend. Jai is a speaker and judge.</p>
-      <a href="hackathon/" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; color: #09090b; background: #fafafa; text-decoration: none; transition: background 0.2s;">See project ideas &rarr;</a>
-    </div>
-  </section>
-
-  <hr class="divider">
-
   <!-- FEEDBACK -->
   <section id="feedback" style="padding-top: 32px; padding-bottom: 32px;">
-    <div class="section-label" style="text-transform: none;">feedback</div>
     <div class="container" style="text-align: center;">
+      <div class="section-label" style="text-transform: none; text-align: center; padding-left: 0;">feedback</div>
       <p style="font-size: 1rem; color: #e4e4e7; margin-bottom: 8px; font-weight: 600;">Try it + give feedback</p>
       <p style="font-size: 0.9rem; color: #a1a1aa; margin-bottom: 16px;">Run Luthien on your codebase. Tell us what works, what breaks and what's missing.</p>
       <a href="feedback/" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; color: #fafafa; background: transparent; border: 1px solid #3f3f46; text-decoration: none; transition: border-color 0.2s;">Start a trial &rarr;</a>
@@ -1673,31 +1648,6 @@
     })();
   </script>
 
-  <!-- Switch banner after Jai's talk ends (Fri Mar 20, 12:45 PM PDT = 19:45 UTC) -->
-  <script>
-    (function() {
-      var talkEnd = new Date('2026-03-20T19:45:00Z');
-      if (new Date() > talkEnd) {
-        var cta = document.getElementById('bannerCta');
-        if (cta) {
-          cta.href = 'hackathon/';
-          cta.removeAttribute('target');
-          cta.removeAttribute('rel');
-          cta.textContent = 'See hackathon project ideas \u2192';
-        }
-        var img = document.querySelector('.hackathon-banner .banner-image img');
-        if (img) {
-          img.src = 'jai-judge.png';
-          img.alt = 'Jai Dhyani - Speaker and Judge';
-        }
-        var caption = document.getElementById('bannerCaption');
-        if (caption) { caption.style.display = 'block'; }
-        var title = document.querySelector('.hackathon-banner .banner-title');
-        if (title) { title.innerHTML = 'Jai (Luthien CEO) is judging at<br>AI Control Hackathon 2026'; }
-        var details = document.querySelector('.hackathon-banner .banner-details');
-        if (details) { details.innerHTML = '<strong>March 20\u201322, 2026</strong> / Apart Research x Redwood Research<br>655+ attendees. Build on Luthien this weekend.'; }
-      }
-    })();
-  </script>
+
 </body>
 </html>
