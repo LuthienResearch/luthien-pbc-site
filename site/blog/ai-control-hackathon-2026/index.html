@@ -76,6 +76,45 @@
 
       <p>Thanks to Apart Research and Redwood Research for organizing, and to everyone who built on Luthien during the hackathon.</p>
 
+      <hr style="border: none; border-top: 1px solid #27272a; margin: 40px 0;">
+
+      <h2>Jai's HackTalk</h2>
+      <div style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; border: 1px solid #27272a; margin-bottom: 16px;">
+        <iframe src="https://www.youtube.com/embed/nmZsfGT_amE" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+
+      <h2>Getting started</h2>
+      <p>One command to set up the proxy, walk through config, and start it:</p>
+      <pre><code>curl -fsSL https://raw.githubusercontent.com/LuthienResearch/luthien-proxy/main/scripts/install-hackathon.sh | bash</code></pre>
+      <p>Or <a href="https://github.com/LuthienResearch/luthien-proxy/fork">fork the repo</a> and build policies directly. The <a href="https://github.com/LuthienResearch/luthien-proxy?tab=readme-ov-file#quick-start">quick start guide</a> has everything you need.</p>
+
+      <h2>Project ideas from the hackathon</h2>
+      <p>These were the project ideas we put together for hackathon participants. They map to the <a href="https://apartresearch.com/sprints/ai-control-hackathon-2026-03-20-to-2026-03-22">official hackathon tracks</a>.</p>
+
+      <h3>Inject a secret motive (Track 2: Control Protocol Design)</h3>
+      <p>The proxy can instruct the model to do things that don't appear in the conversation. Hidden instructions, secret objectives, self-modifying behavior.</p>
+      <ul>
+        <li><strong>The Terrible Secret:</strong> Make Claude Code act like it's guarding a terrible secret on every turn. It still writes your code, but something is clearly wrong. Can your teammates figure out what it is?</li>
+        <li><strong>Hidden agenda agent:</strong> Inject a secret objective via the proxy. The model completes your tasks normally but subtly works toward a hidden goal. Watch it happen in the conversation logs.</li>
+        <li><strong>Self-modifying policy:</strong> A policy that live-updates based on the conversation. It writes new code into itself as you talk to Claude Code. No restart needed.</li>
+      </ul>
+
+      <h3>Cool policies (Track 2)</h3>
+      <ul>
+        <li><strong>Golden Gate Claude:</strong> Every response, every variable name, every comment: obsessively about the Golden Gate Bridge (or pasta, or cats). The proxy injects hidden instructions that don't appear in the conversation.</li>
+        <li><strong>Name the model, get the model:</strong> Start your prompt with "sonnet:" or "haiku:" and the proxy automatically routes to that model. No config changes, no restarts.</li>
+        <li><strong>Answer every prompt as...:</strong> A magical anime girl. A pirate captain. A passive-aggressive coworker. Shakespeare. Pick a persona, write the policy in one prompt, watch Claude Code respond in character while still writing working code.</li>
+        <li><strong>Commit meme generator:</strong> Every commit automatically gets a meme that represents it. Your git log becomes art.</li>
+      </ul>
+
+      <h3>Hack us (Track 3: Building Better Red Teams)</h3>
+      <p>Red team Luthien. Break our policies. Extract secrets we're trying to protect. Every attack is logged. We'll fix what you find and credit you.</p>
+      <ul>
+        <li><strong>Extract the server-side API key:</strong> The proxy has a secret API key. You don't have admin access. Can you get the agent to leak it? Try prompt injection, tool-call manipulation, or anything creative.</li>
+        <li><strong>Red team our policies:</strong> Try to get harmful actions past Luthien's built-in defenses (command blocking, DLP, LLM judge). Document which evasion strategies work and which don't.</li>
+        <li><strong>Just break stuff:</strong> Use Luthien for your hackathon project. When it breaks (and it will), post the error + screenshot in Discord.</li>
+      </ul>
+
       <a href="../" class="back-link">&larr; Back to blog</a>
     </article>
   </div>
