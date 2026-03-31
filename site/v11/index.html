@@ -621,27 +621,6 @@
       background: rgba(219,171,63,0.1);
     }
 
-    /* Meme popup on hover/tap (hidden easter egg) */
-    .meme-popup {
-      display: none;
-      position: fixed;
-      width: 160px;
-      z-index: 9999;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
-      border: 1px solid #27272a;
-    }
-    .meme-popup.visible {
-      display: block;
-      animation: memeIn 0.15s ease-out;
-    }
-    @keyframes memeIn {
-      from { opacity: 0; transform: translateX(6px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-    .meme-trigger:hover { color: #a1a1aa; }
-
     /* ========== FILTER PILLS (problem section) ========== */
     .filter-bar {
       display: flex;
@@ -1116,11 +1095,6 @@
           <span class="card-nav-count" id="cardCount"></span>
           <button class="card-nav-btn" id="cardNext" aria-label="Next cards">&rarr;</button>
         </div>
-        <span class="meme-trigger" id="memeTrigger" style="font-family: 'JetBrains Mono', monospace; color: #71717a; font-size: 0.65rem; font-style: italic; cursor: pointer;">meanwhile...</span>
-        <a href="../v8/incidents.html" style="color: #6b9fff; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; text-decoration: none; border-bottom: 1px solid rgba(107,159,255,0.3);">see more &rarr;</a>
-      </div>
-      <div class="meme-popup" id="memePopup">
-        <img src="ceo-ai-meme.jpg" alt="CEO AI meme" style="width: 100%; display: block; border-radius: 6px;">
       </div>
     </div>
   </section>
@@ -1538,40 +1512,6 @@
     })();
   </script>
 
-  <!-- Meme popup: hover on desktop, tap on mobile (hidden easter egg) -->
-  <script>
-    (function () {
-      var trigger = document.getElementById('memeTrigger');
-      var popup = document.getElementById('memePopup');
-      if (!trigger || !popup) return;
-
-      function positionPopup() {
-        var rect = trigger.getBoundingClientRect();
-        popup.style.right = (window.innerWidth - rect.left + 10) + 'px';
-        popup.style.top = Math.max(8, rect.top + rect.height / 2 - popup.offsetHeight / 2) + 'px';
-      }
-
-      function showPopup() { popup.classList.add('visible'); positionPopup(); }
-      function hidePopup() { popup.classList.remove('visible'); }
-
-      trigger.addEventListener('mouseenter', showPopup);
-      trigger.addEventListener('mouseleave', function () {
-        setTimeout(function () { if (!popup.matches(':hover')) hidePopup(); }, 150);
-      });
-      popup.addEventListener('mouseleave', function () {
-        setTimeout(function () { if (!trigger.matches(':hover')) hidePopup(); }, 150);
-      });
-
-      trigger.addEventListener('click', function (e) {
-        e.preventDefault();
-        if (popup.classList.contains('visible')) { hidePopup(); } else { showPopup(); }
-      });
-
-      document.addEventListener('click', function (e) {
-        if (!trigger.contains(e.target) && !popup.contains(e.target)) { hidePopup(); }
-      });
-    })();
-  </script>
 
 
 </body>
