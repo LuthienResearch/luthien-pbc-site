@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="620" height="505" viewBox="0 0 620 505">
+<svg xmlns="http://www.w3.org/2000/svg" width="620" height="555" viewBox="0 0 620 555">
   <!-- Terminal background -->
-  <rect width="620" height="505" rx="8" fill="#1e1e1e"/>
+  <rect width="620" height="555" rx="8" fill="#1e1e1e"/>
 
   <!-- Title bar -->
   <rect width="620" height="32" rx="8" fill="#323233"/>
