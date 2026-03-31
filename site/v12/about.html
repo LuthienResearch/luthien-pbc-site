@@ -14,7 +14,7 @@
 
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; font-size: 17.6px; }
+    html { scroll-behavior: smooth; font-size: 17.6px; overflow-y: scroll; }
     body {
       background: #09090b;
       color: #e4e4e7;
@@ -120,24 +120,19 @@
 
     /* FOOTER */
     footer { border-top: 1px solid #1a1a1e; padding: 32px 0; }
-    .footer-inner { display: flex; justify-content: space-between; align-items: center; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; }
+    .footer-brand { display: flex; align-items: flex-start; gap: 12px; }
+    .footer-logo { width: 28px; height: 28px; flex-shrink: 0; margin-top: 1px; }
+    .footer-brand-text { display: flex; flex-direction: column; gap: 4px; }
+    .footer-meta { color: #a1a1aa; font-size: 0.8rem; }
+    .footer-tagline { color: #71717a; font-size: 0.8rem; font-style: italic; text-decoration: none; display: block; }
+    .footer-tagline:hover { color: #a1a1aa; }
+    .footer-version { font-size: 0.7rem; color: #3f3f46; font-family: 'JetBrains Mono', monospace; }
     .footer-links { display: flex; gap: 24px; }
     .footer-links a { color: #a1a1aa; font-size: 0.85rem; }
     .footer-links a:hover { color: #d4d4d8; }
-    .footer-meta { color: #a1a1aa; font-size: 0.8rem; }
-    .footer-tagline {
-      color: #a1a1aa; font-size: 0.9rem; font-style: italic;
-      text-align: center; margin-top: 12px; display: block;
-    }
-    .footer-tagline:hover { color: #d4d4d8; }
-    .footer-bottom {
-      display: flex; justify-content: space-between; align-items: center; margin-top: 12px;
-    }
-    .footer-version {
-      font-size: 0.7rem; color: #3f3f46; font-family: 'JetBrains Mono', monospace;
-    }
     @media (max-width: 640px) {
-      .footer-inner { flex-direction: column; align-items: center; text-align: center; }
+      .footer-inner { flex-direction: column; align-items: center; text-align: center; gap: 20px; }
     }
   </style>
 </head>
@@ -215,17 +210,20 @@
   <footer>
     <div class="container">
       <div class="footer-inner">
+        <div class="footer-brand">
+          <svg class="footer-logo" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="32" rx="6" fill="#09090b" stroke="#27272a" stroke-width="1"/><text x="16" y="23" font-family="Inter,system-ui,sans-serif" font-size="20" font-weight="700" fill="#6b9fff" text-anchor="middle">L</text></svg>
+          <div class="footer-brand-text">
+            <span class="footer-meta">Luthien &middot; 2026</span>
+            <a href="https://www.youtube.com/watch?v=YzjvBw96kas" target="_blank" rel="noopener" class="footer-tagline">Power is nothing without control.</a>
+            <span class="footer-version">v12</span>
+          </div>
+        </div>
         <div class="footer-links">
           <a href="https://github.com/LuthienResearch/luthien-proxy" target="_blank" rel="noopener">GitHub</a>
           <a href="https://linkedin.com/company/luthien-control" target="_blank" rel="noopener">LinkedIn</a>
           <a href="https://www.youtube.com/@LuthienControl" target="_blank" rel="noopener">YouTube</a>
           <a href="mailto:contact@luthienresearch.org">Email</a>
         </div>
-        <div class="footer-meta">Luthien &middot; 2026</div>
-      </div>
-      <div class="footer-bottom">
-        <span class="footer-version">v12</span>
-        <a href="https://www.youtube.com/watch?v=YzjvBw96kas" target="_blank" rel="noopener" class="footer-tagline" style="margin-top: 0;">Power is nothing without control.</a>
       </div>
     </div>
   </footer>
