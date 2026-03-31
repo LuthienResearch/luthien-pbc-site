@@ -1056,6 +1056,103 @@
     .footer-version {
       font-size: 0.7rem; color: #3f3f46; font-family: 'JetBrains Mono', monospace;
     }
+
+    /* ========== HERO ENTRANCE ANIMATION ========== */
+    @keyframes heroFadeIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero .badge-beta {
+      opacity: 0;
+      animation: heroFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.05s forwards;
+    }
+    .hero h1 {
+      opacity: 0;
+      animation: heroFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.12s forwards;
+    }
+    .hero .hero-oneliner {
+      opacity: 0;
+      animation: heroFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+    }
+    .hero .cta-row {
+      opacity: 0;
+      animation: heroFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+    }
+
+    /* ========== SECTION FADE-IN ON SCROLL ========== */
+    .section-reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .section-reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ========== CLI INSTALL COPY FEEDBACK ========== */
+    .cli-install.copied {
+      border-color: #22c55e;
+    }
+    .cli-install.copied .cli-copy {
+      color: #22c55e;
+    }
+
+    /* ========== QUOTE CARD HOVER LIFT ========== */
+    .quote-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    /* ========== BUTTON PRESS EFFECT ========== */
+    .btn {
+      transition: all 0.2s, transform 0.1s;
+    }
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    /* ========== NAV LOGO HOVER ========== */
+    .nav-wordmark {
+      transition: color 0.2s;
+    }
+    .nav-left:hover .nav-wordmark {
+      color: #fafafa;
+    }
+
+    /* ========== FOOTER LINK UNDERLINE ANIMATION ========== */
+    .footer-links a {
+      position: relative;
+    }
+    .footer-links a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background: #d4d4d8;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.2s ease;
+    }
+    .footer-links a:hover::after {
+      transform: scaleX(1);
+    }
+
+    /* ========== REDUCED MOTION ========== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .section-reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1097,7 +1194,7 @@
   </div>
   <div style="display: flex; flex-direction: column; align-items: center; gap: 4px; width: 220px;">
     <div class="cli-install" style="width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"
-         onclick="try{navigator.clipboard.writeText('curl -fsSL https://raw.githubusercontent.com/LuthienResearch/luthien-proxy/main/scripts/install.sh | bash')}catch(e){}" title="Click to copy">
+         onclick="try{navigator.clipboard.writeText('curl -fsSL https://raw.githubusercontent.com/LuthienResearch/luthien-proxy/main/scripts/install.sh | bash');this.classList.add('copied');var el=this;setTimeout(function(){el.classList.remove('copied')},1500)}catch(e){}" title="Click to copy">
       <span class="cli-prompt">$</span> curl -fsSL https://raw.githubusercontent.com/LuthienResearch/luthien-proxy/main/scripts/install.sh | bash
       <span class="cli-copy"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
     </div>
@@ -1109,7 +1206,7 @@
 
 
  <!-- DEMO: WITHOUT / WITH LUTHIEN -->
-  <section id="demo" style="padding-top: 48px; padding-bottom: 32px;">
+  <section id="demo" class="section-reveal" style="padding-top: 48px; padding-bottom: 32px;">
     <div class="section-label">how it works</div>
     <div class="container">
       
@@ -1132,7 +1229,7 @@
 
   
   <!-- PROBLEM: THEME BADGES + FILTERABLE CARDS -->
-  <section class="card-grid-section" id="problem" style="padding-top: 32px; padding-bottom: 32px;">
+  <section class="card-grid-section section-reveal" id="problem" style="padding-top: 32px; padding-bottom: 32px;">
     <div class="section-label">problem</div>
     <div class="container">
       <h2 style="font-size: clamp(1.2rem, 2.5vw, 1.5rem); font-weight: 700; color: #fafafa; letter-spacing: -0.01em; margin-bottom: 20px; text-align: left;">Claude Code does weird and lazy stuff sometimes.</h2>
@@ -1149,7 +1246,7 @@
           <span class="card-nav-count" id="cardCount"></span>
           <button class="card-nav-btn" id="cardNext" aria-label="Next cards">&rarr;</button>
         </div>
-        <span class="meme-trigger" id="memeTrigger" role="button" aria-label="Show meme" tabindex="0" style="font-family: 'JetBrains Mono', monospace; color: #71717a; font-size: 0.65rem; font-style: italic; cursor: pointer;">meanwhile...</span>
+        <span class="meme-trigger" id="memeTrigger" role="button" aria-label="Show meme" tabindex="0" style="font-family: 'JetBrains Mono', monospace; color: #71717a; font-size: 0.65rem; font-style: italic; cursor: help;">meanwhile...</span>
         <a href="../incidents.html" style="color: #6b9fff; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; text-decoration: none; border-bottom: 1px solid rgba(107,159,255,0.3);">see more &rarr;</a>
       </div>
       <div class="meme-popup" id="memePopup">
@@ -1162,7 +1259,7 @@
 
 
 <!-- SOLUTION -->
-<section id="solution" style="padding-top: 32px; padding-bottom: 32px;">
+<section id="solution" class="section-reveal" style="padding-top: 32px; padding-bottom: 32px;">
   <div class="section-label">architecture</div>
   <div class="container">
     <div class="term-arch">
@@ -1188,7 +1285,7 @@
 <hr class="divider">
 
 <!-- EARLY FEEDBACK -->
-  <section id="quotes" style="padding-top: 32px; padding-bottom: 32px;">
+  <section id="quotes" class="section-reveal" style="padding-top: 32px; padding-bottom: 32px;">
     <div class="section-label">early feedback</div>
     <div class="container">
       <div class="testimonial-card">
@@ -1208,7 +1305,7 @@
 
 <!-- Get started --> 
 
-<section id="setup" style="padding-top: 32px; padding-bottom: 40px;">
+<section id="setup" class="section-reveal" style="padding-top: 32px; padding-bottom: 40px;">
   <div class="section-label">get started</div>
   <div class="container">
     <h2 style="font-size: clamp(1.2rem, 2.5vw, 1.5rem); font-weight: 700; color: #fafafa; letter-spacing: -0.01em; margin-bottom: 24px; text-align: center;">Up and running in minutes.</h2>
@@ -1244,7 +1341,7 @@
       </div>
       <div style="display: flex; flex-direction: column; align-items: center; gap: 4px; width: 220px;">
         <div class="cli-install" style="width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"
-             onclick="try{navigator.clipboard.writeText('curl -fsSL https://raw.githubusercontent.com/LuthienResearch/luthien-proxy/main/scripts/install.sh | bash')}catch(e){}" title="Click to copy">
+             onclick="try{navigator.clipboard.writeText('curl -fsSL https://raw.githubusercontent.com/LuthienResearch/luthien-proxy/main/scripts/install.sh | bash');this.classList.add('copied');var el=this;setTimeout(function(){el.classList.remove('copied')},1500)}catch(e){}" title="Click to copy">
           <span class="cli-prompt">$</span> curl -fsSL https://raw.githubusercontent.com/LuthienResearch/luthien-proxy/main/scripts/install.sh | bash
           <span class="cli-copy"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
         </div>
@@ -1606,6 +1703,23 @@
       document.addEventListener('click', function (e) {
         if (!trigger.contains(e.target) && !popup.contains(e.target)) { hidePopup(); }
       });
+    })();
+  </script>
+
+  <!-- Section reveal on scroll -->
+  <script>
+    (function () {
+      var sections = document.querySelectorAll('.section-reveal');
+      if (!sections.length) return;
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      sections.forEach(function (s) { observer.observe(s); });
     })();
   </script>
 
