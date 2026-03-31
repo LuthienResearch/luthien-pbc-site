@@ -50,13 +50,15 @@
     a:hover { color: #93b8ff; }
 
     .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+    .hero .container {
+  max-width: 1200px;
+}
 
     .section-label {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 1.5rem;
+      font-size: 1.1rem;
       font-weight: 700;
       letter-spacing: 0.18em;
-      text-transform: uppercase;
       color: #a1a1aa;
       margin-bottom: 20px;
       padding-left: 24px;
@@ -124,7 +126,7 @@
     }
     .security-banner .banner-headline span { font-weight: 400; color: #4ade80; margin: 0 6px; }
     .security-banner .banner-toggle {
-      font-size: 1.25rem; color: #16a34a; font-weight: 500;
+      font-size: 0.75rem; color: #16a34a; font-weight: 500;
       white-space: nowrap;
     }
     .security-banner .banner-toggle::after { content: ' +'; font-weight: 700; }
@@ -144,26 +146,28 @@
       min-height: auto;
       display: flex;
       align-items: center;
-      padding-top: 40px;
+      padding-top: 80px;
       padding-bottom: 40px;
     }
 
-    .hero-content { max-width: 780px; margin: 0 auto; text-align: center; }
+    .hero-content { max-width: 1200px; margin: 0 auto; text-align: center; }
+
 
     .hero h1 {
-      font-size: clamp(1.3rem, 3vw, 1.8rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 16px;
-    }
+ font-size: clamp(2.2rem, 6vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
 
-    .hero-oneliner {
-      font-size: clamp(0.85rem, 2vw, 1.03rem);
-      color: #a1a1aa;
-      margin-bottom: 8px;
-      max-width: 780px;
-      line-height: 1.7;
-    }
+.hero-oneliner {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  color: #a1a1aa;
+  margin-bottom: 24px;
+  max-width: 100%;
+  line-height: 1.7;
+  text-wrap: balance;
+}
 
     .hero-differentiator {
       font-size: clamp(0.8rem, 1.8vw, 0.92rem);
@@ -199,7 +203,7 @@
 
     .nav-wordmark {
       font-family: 'Inter', sans-serif;
-      font-size: 0.85rem;
+      font-size: 0.95rem;
       font-weight: 700;
       color: #c8c8d0;
       letter-spacing: 0.18em;
@@ -214,7 +218,7 @@
 
     .nav-link {
       font-family: 'Inter', sans-serif;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       font-weight: 500;
       color: #a1a1aa;
       text-decoration: none;
@@ -226,7 +230,7 @@
 
     .nav-setup {
       font-family: 'Inter', sans-serif;
-      font-size: 0.7rem;
+      font-size: 0.8rem;
       font-weight: 600;
       color: #e4e4e7;
       text-decoration: none;
@@ -819,7 +823,7 @@
     }
 
     @media (max-width: 600px) {
-      .term-flow { padding: 1.25rem; }
+      .term-flow { padding: 0.75rem; }
       .term-flow pre { font-size: 0.55rem; line-height: 1.5; }
     }
     @media (max-width: 400px) {
@@ -835,15 +839,17 @@
       flex-wrap: wrap;
     }
     .get-started-card {
-      background: #18181b;
-      border: 1px solid #27272a;
-      border-radius: 12px;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-    }
+  background: #18181b;
+  border: 1px solid #27272a;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: auto;
+  align-self: center;
+}
     .get-started-card .btn-primary {
       border-radius: 8px;
       width: 100%;
@@ -885,8 +891,6 @@
     .cta-section { text-align: center; }
     .cta-section .section-header { margin-left: auto; margin-right: auto; }
     .cta-section .cta-row { flex-direction: column; align-items: center; }
-    .cta-section .get-started-card { min-width: 320px; }
-    .cta-section .btn-secondary { min-width: 320px; justify-content: center; }
 
     .cta-fine {
       color: #71717a;
@@ -1030,73 +1034,60 @@
       <span class="nav-wordmark">Luthien</span>
     </a>
     <div class="nav-right">
-      <a href="#demo" class="nav-link active" data-section="demo">ui</a>
-      <a href="#problem" class="nav-link" data-section="problem">problem</a>
-      <a href="#architecture" class="nav-link" data-section="architecture">architecture</a>
-      <a href="#team" class="nav-link" data-section="team">team</a>
-      <a href="#quotes" class="nav-link" data-section="quotes">quotes</a>
-      <a href="#blog" class="nav-link" data-section="blog">blog</a>
-      <a href="#feedback" class="nav-link" data-section="feedback">feedback</a>
+      <a href="index.html" class="nav-link">home</a>
+      <a href="about.html" class="nav-link">about</a>
+      <a href="blog.html" class="nav-link">blog</a>
       <a href="https://calendar.app.google/9Cye1yr6fMJVZNLD6" class="nav-setup" target="_blank" rel="noopener">Book a setup call</a>
       <a href="https://github.com/LuthienResearch/luthien-proxy" class="nav-gh" target="_blank" rel="noopener" aria-label="GitHub"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
     </div>
   </nav>
 
-  <!-- SECURITY NOTICE BANNER -->
-  <div class="security-banner" id="securityBanner" onclick="this.classList.toggle('open')">
-    <div class="banner-strip">
-      <div class="banner-dot"></div>
-      <div class="banner-headline">Luthien Proxy is not affected by the LiteLLM supply chain compromise</div>
-      <div class="banner-toggle">More info</div>
-    </div>
-    <div class="banner-details">
-      <div class="banner-details-inner">
-        On March 24, 2026 at ~08:30 UTC, malicious versions of LiteLLM (v1.82.7 and v1.82.8) were published to PyPI via a compromised CI/CD pipeline.
-        The compromised versions were removed and the PyPI quarantine lifted by ~20:15 UTC the same day.
-        Luthien pins LiteLLM at v1.81.5 (locked January 29, 2026) and uses it only for optional judge policy evaluation.
-        The core proxy pipeline uses native Anthropic SDKs directly.
-        No action is required from Luthien users.
-        <a href="https://github.com/BerriAI/litellm/issues/24518" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="color: #16a34a; font-weight: 600; text-decoration: underline;">Follow the live status on GitHub</a>
-      </div>
-    </div>
-  </div>
 
   <!-- HERO -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <h1>Claude Code builds. You stay in control.</h1>
-        <p class="hero-oneliner">Open-source proxy that sits between Claude Code and the Anthropic API.<br>Logs every request. Enforces your rules.</p>
-        <div class="cta-row">
-          <a href="https://calendar.app.google/9Cye1yr6fMJVZNLD6" class="btn btn-secondary" target="_blank" rel="noopener">Book a setup call</a>
-          <div class="get-started-card">
-            <a href="https://github.com/LuthienResearch/luthien-proxy" class="btn btn-primary" target="_blank" rel="noopener">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-              View on GitHub
-            </a>
-            <span class="cli-divider">or install now for Linux or macOS</span>
-            <div class="cli-install" onclick="navigator.clipboard.writeText('curl -fsSL https://raw.githubusercontent.com/LuthienResearch/luthien-proxy/main/scripts/install.sh | bash')" title="Click to copy">
-              <span class="cli-prompt">$</span> curl -fsSL https://raw.githubusercontent.com/LuthienResearch/luthien-proxy/main/scripts/install.sh | bash
-              <span class="cli-copy"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
-            </div>
-          </div>
-        </div>
+ <section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(107, 159, 255, 0.1); border: 1px solid rgba(107, 159, 255, 0.3); border-radius: 20px; padding: 4px 12px; margin-bottom: 20px;">
+        <span style="width: 6px; height: 6px; border-radius: 50%; background: #6b9fff; display: inline-block;"></span>
+        <span style="font-size: 0.75rem; font-weight: 600; color: #6b9fff; letter-spacing: 0.08em;">EARLY BETA</span>
       </div>
-    </div>
-  </section>
+      <h1>Claude Code builds.<br>You stay in control.</h1>
+      <p class="hero-oneliner">Open-source proxy that sits between Claude Code and the Anthropic API.<br>Logs every request. Enforces your rules.<br> </p>
 
-  <!-- DEMO: WITHOUT / WITH LUTHIEN -->
+      <div class="cta-row" style="flex-direction: column; align-items: center; gap: 12px;">
+  <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+    <a href="https://github.com/LuthienResearch/luthien-proxy" class="btn btn-primary" style="width: 220px; justify-content: center;" target="_blank" rel="noopener">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      View on GitHub
+    </a>
+    <a href="https://calendar.app.google/9Cye1yr6fMJVZNLD6" class="btn btn-secondary" style="width: 220px; justify-content: center;" target="_blank" rel="noopener">Book a setup call</a>
+  </div>
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 4px; width: 220px;">
+    <div class="cli-install" style="width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"
+         onclick="navigator.clipboard.writeText('curl -fsSL https://raw.githubusercontent.com/LuthienResearch/luthien-proxy/main/scripts/install.sh | bash')" title="Click to copy">
+      <span class="cli-prompt">$</span> curl -fsSL https://raw.githubusercontent.com/LuthienResearch/luthien-proxy/main/scripts/install.sh | bash
+      <span class="cli-copy"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
+    </div>
+    <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #71717a;">Paste in terminal · ~2 min<br>Linux & macOS</span>
+  </div>
+</div>
+</section>
+ 
+
+
+ <!-- DEMO: WITHOUT / WITH LUTHIEN -->
   <section id="demo" style="padding-top: 56px; padding-bottom: 32px;">
-    <div class="section-label">ui</div>
+    <div class="section-label">how it works</div>
     <div class="container">
+      
       <div class="ux-grid">
         <div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; font-weight: 700; color: #ef4444; letter-spacing: 0.12em; margin-bottom: 12px;">without luthien</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 1rem; font-weight: 700; color: #ef4444; letter-spacing: 0.12em; margin-bottom: 12px;">without luthien</div>
           <img src="terminal-without-luthien.svg" alt="Without Luthien: Claude Code ignores your CLAUDE.md rules and you correct it manually" style="width: 100%; border-radius: 8px; border: 1px solid #27272a;">
           <p class="demo-annotation">Claude ignores your CLAUDE.md rule and you correct it manually.</p>
         </div>
         <div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; font-weight: 700; color: #22c55e; letter-spacing: 0.12em; margin-bottom: 12px;">with luthien</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 1rem; font-weight: 700; color: #22c55e; letter-spacing: 0.12em; margin-bottom: 12px;">with luthien</div>
           <img src="terminal-with-luthien.svg" alt="With Luthien: Luthien catches the violation and auto-corrects" style="width: 100%; border-radius: 8px; border: 1px solid #27272a;">
           <p class="demo-annotation">Luthien catches the violation and auto-corrects. No human intervention needed.</p>
         </div>
@@ -1106,6 +1097,7 @@
 
   <hr class="divider">
 
+  
   <!-- PROBLEM: THEME BADGES + FILTERABLE CARDS -->
   <section class="card-grid-section" id="problem" style="padding-top: 32px; padding-bottom: 24px;">
     <div class="section-label" style="text-transform: none;">problem</div>
@@ -1125,7 +1117,7 @@
           <button class="card-nav-btn" id="cardNext" aria-label="Next cards">&rarr;</button>
         </div>
         <span class="meme-trigger" id="memeTrigger" style="font-family: 'JetBrains Mono', monospace; color: #71717a; font-size: 0.65rem; font-style: italic; cursor: pointer;">meanwhile...</span>
-        <a href="v8/incidents.html" style="color: #6b9fff; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; text-decoration: none; border-bottom: 1px solid rgba(107,159,255,0.3);">see more &rarr;</a>
+        <a href="../v8/incidents.html" style="color: #6b9fff; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; text-decoration: none; border-bottom: 1px solid rgba(107,159,255,0.3);">see more &rarr;</a>
       </div>
       <div class="meme-popup" id="memePopup">
         <img src="ceo-ai-meme.jpg" alt="CEO AI meme" style="width: 100%; display: block; border-radius: 6px;">
@@ -1135,91 +1127,36 @@
 
   <hr class="divider">
 
-  <!-- ARCHITECTURE -->
-  <section id="architecture" style="padding-top: 32px; padding-bottom: 32px;">
-    <div class="section-label" style="text-transform: none;">architecture</div>
-    <div class="container">
-      <div class="term-arch">
-        <div class="term-flow"><pre>&#x1F9D1;&#x200D;&#x1F4BB; <span class="hl-you">You</span> <span class="hl-arrow">&hArr;</span> &#x1F4BB; <span class="hl-you">Claude Code</span> <span class="hl-arrow">&hArr;</span> <span class="hl-luthien">Luthien</span> <span class="hl-arrow">&hArr;</span> &#x2601;&#xFE0F; <span class="hl-api">Anthropic API</span>
-                              <span class="hl-pipe">|</span>
-                       <span class="hl-desc">logs every request and response.</span>   <span class="arch-latency" style="display: inline;">~5-15ms</span>
-                       <span class="hl-desc">you can configure rules/policies to</span>
-                       <span class="hl-desc">modify or block certain responses or requests:</span>
-                              <span class="hl-pipe">|</span>
-                              <span class="hl-pipe">|--</span> <span class="hl-monitor">did it do what I asked?</span>
-                              <span class="hl-pipe">|--</span> <span class="hl-change">did it follow CLAUDE.md?</span>
-                              <span class="hl-pipe">+--</span> <span class="hl-block">did it do something suspicious?</span></pre></div>
 
-        <p class="arch-judge-note">Luthien can call a separate model to check whether each response follows your rules. Runs alongside normal requests, adding almost no delay.</p>
-        <p class="arch-judge-note" style="margin-top: 0.5rem;">When Claude Code compacts or starts a new session, Luthien still remembers. Your rules stay enforced from first prompt to last.</p>
-
-        <a href="https://github.com/LuthienResearch/luthien-proxy?tab=readme-ov-file#what-can-it-do" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 6px; margin-top: 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #6b9fff;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-          How to set up a custom policy
-        </a>
-      </div>
+<!-- SOLUTION -->
+<section id="solution" style="padding-top: 32px; padding-bottom: 32px;">
+  <div class="section-label">architecture</div>
+  <div class="container">
+    <div class="term-arch">
+      <div class="term-flow"><pre>&#x1F9D1;&#x200D;&#x1F4BB; <span class="hl-you">You</span> <span class="hl-arrow">&hArr;</span> &#x1F4BB; <span class="hl-you">Claude Code</span> <span class="hl-arrow">&hArr;</span> <span class="hl-luthien">Luthien</span> <span class="hl-arrow">&hArr;</span> &#x2601;&#xFE0F; <span class="hl-api">Anthropic API</span>
+                            <span class="hl-pipe">|</span>
+                     <span class="hl-desc">logs every request and response.</span>   <span class="arch-latency" style="display: inline;">~5-15ms</span>
+                     <span class="hl-desc">you can configure rules/policies to</span>
+                     <span class="hl-desc">modify or block certain responses or requests:</span>
+                            <span class="hl-pipe">|</span>
+                            <span class="hl-pipe">|--</span> <span class="hl-monitor">did it do what I asked?</span>
+                            <span class="hl-pipe">|--</span> <span class="hl-change">did it follow CLAUDE.md?</span>
+                            <span class="hl-pipe">+--</span> <span class="hl-block">did it do something suspicious?</span></pre></div>
+      <p class="arch-judge-note">Luthien can call a separate model to check whether each response follows your rules. Runs alongside normal requests, adding almost no delay.</p>
+      <p class="arch-judge-note" style="margin-top: 0.5rem;">When Claude Code compacts or starts a new session, Luthien still remembers. Your rules stay enforced from first prompt to last.</p>
+      <a href="https://github.com/LuthienResearch/luthien-proxy?tab=readme-ov-file#what-can-it-do" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 6px; margin-top: 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #6b9fff;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        How to set up a custom policy
+      </a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <hr class="divider">
+<hr class="divider">
 
-  <!-- TEAM -->
-  <section id="team" style="padding-top: 32px; padding-bottom: 32px;">
-    <div class="section-label" style="text-transform: none;">team</div>
-    <div class="container">
-      <div class="team-grid">
-
-        <!-- Jai -->
-        <div class="team-card">
-          <img src="jai.png" alt="Jai Dhyani" class="team-photo">
-          <div class="team-name">Jai Dhyani</div>
-          <div class="team-role">Co-Founder &amp; CEO</div>
-          <p class="team-bio">ML engineer with over a decade of experience at Amazon, Meta, and startups. A <a href="https://www.matsprogram.org/" target="_blank" rel="noopener" style="color: #6b9fff;">MATS</a> alum who co-authored <a href="https://arxiv.org/abs/2411.15114" target="_blank" rel="noopener" style="color: #6b9fff;">RE-Bench</a>, which METR now uses in its <a href="https://metr.org/blog/2025-03-19-measuring-ai-ability-to-complete-long-tasks/" target="_blank" rel="noopener" style="color: #6b9fff;">AI Agent time-horizon tracking (The Chart)</a>. Founded Luthien in January 2025.</p>
-          <div class="team-links">
-            <!-- Email -->
-            <a href="mailto:jai@luthienresearch.org" title="Email"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
-            <!-- Website -->
-            <a href="https://jai.one" target="_blank" rel="noopener" title="jai.one"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
-            <!-- GitHub -->
-            <a href="https://github.com/jaidhyani" target="_blank" rel="noopener" title="GitHub"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
-            <!-- Substack -->
-            <a href="https://laneless.substack.com" target="_blank" rel="noopener" title="Substack"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg></a>
-            <!-- X/Twitter -->
-            <a href="https://x.com/Laneless_" target="_blank" rel="noopener" title="X / Twitter"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-          </div>
-        </div>
-
-        <!-- Scott -->
-        <div class="team-card">
-          <img src="https://avatars.githubusercontent.com/scottwofford" alt="Scott Wofford" class="team-photo">
-          <div class="team-name">Scott Wofford</div>
-          <div class="team-role">Co-Founder</div>
-          <p class="team-bio">Spent nearly a decade building the AI behind Amazon's cart, delivery and Prime customer experience. Then he took an AI safety pill and co-founded Luthien in March 2025.</p>
-          <div class="team-links">
-            <!-- Email -->
-            <a href="mailto:scott@luthienresearch.org" title="Email"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
-            <!-- Website -->
-            <a href="https://scottwofford.com" target="_blank" rel="noopener" title="scottwofford.com"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
-            <!-- GitHub -->
-            <a href="https://github.com/scottwofford" target="_blank" rel="noopener" title="GitHub"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
-            <!-- Substack -->
-            <a href="https://substack.com/@scwoff" target="_blank" rel="noopener" title="Substack"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg></a>
-            <!-- LinkedIn -->
-            <a href="https://linkedin.com/in/scottwofford" target="_blank" rel="noopener" title="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-            <!-- X/Twitter -->
-            <a href="https://x.com/scottwofford" target="_blank" rel="noopener" title="X / Twitter"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- EARLY FEEDBACK -->
+<!-- EARLY FEEDBACK -->
   <section id="quotes" style="padding-top: 32px; padding-bottom: 32px;">
-    <div class="section-label" style="text-transform: none;">quotes</div>
+    <div class="section-label" style="text-transform: none;">early feedback</div>
     <div class="container">
       <div class="testimonial-card">
         <p class="testimonial-text">"I saw the website and immediately thought, 'I want that.' I have to correct the pip install thing multiple times per day. You see pip and you're like, I already gave you permissions for uv. But it blocks on that permission and you lose hours of work. Awesome job, guys, it's like CLAUDE.md that actually works."</p>
@@ -1236,67 +1173,57 @@
 
   <hr class="divider">
 
-  <!-- BLOG -->
-  <section id="blog" style="padding-top: 32px; padding-bottom: 32px;">
-    <div class="section-label" style="text-transform: none;">blog</div>
-    <div class="container">
-      <div style="display: flex; flex-direction: column; gap: 1px;">
-        <a href="blog/ai-control-hackathon-2026/" style="display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0; border-bottom: 1px solid #27272a; text-decoration: none; transition: background 0.15s;">
-          <span style="font-size: 0.95rem; font-weight: 600; color: #fafafa;">Luthien at the AI Control Hackathon 2026</span>
-          <span style="font-size: 0.75rem; color: #a1a1aa; font-family: 'JetBrains Mono', monospace; white-space: nowrap; margin-left: 16px;">March 20-22, 2026 &middot; Luthien</span>
-        </a>
-        <a href="blog/theory-of-change/" style="display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0; border-bottom: 1px solid #27272a; text-decoration: none; transition: background 0.15s;">
-          <span style="font-size: 0.95rem; font-weight: 600; color: #fafafa;">Luthien's Theory of Change</span>
-          <span style="font-size: 0.75rem; color: #a1a1aa; font-family: 'JetBrains Mono', monospace; white-space: nowrap; margin-left: 16px;">May 2025 (updated Feb 2026) · Scott Wofford</span>
-        </a>
-        <a href="blog/21-points/" style="display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0; border-bottom: 1px solid #27272a; text-decoration: none; transition: background 0.15s;">
-          <span style="font-size: 0.95rem; font-weight: 600; color: #fafafa;">Luthien's Approach to Prosaic AI Control in 21 Points</span>
-          <span style="font-size: 0.75rem; color: #a1a1aa; font-family: 'JetBrains Mono', monospace; white-space: nowrap; margin-left: 16px;">March 17, 2025 · Jai Dhyani</span>
-        </a>
+<!-- Get started --> 
+
+<section id="setup" style="padding-top: 32px; padding-bottom: 80px;">
+  <div class="section-label">get started</div>
+  <div class="container">
+    <h2 style="font-size: clamp(1.1rem, 2.5vw, 1.4rem); font-weight: 600; color: #fafafa; margin-bottom: 24px; text-align: center;">Up and running in minutes.</h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 720px; margin: 0 auto 40px;">
+      <div style="display: flex; flex-direction: column; gap: 8px; background: #18181b; border: 1px solid #27272a; border-radius: 12px; padding: 20px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #6b9fff; font-weight: 700;">step 01</div>
+        <div style="font-weight: 700; font-size: 1rem; color: #fafafa;">Install</div>
+        <p style="font-size: 0.85rem; color: #a1a1aa; line-height: 1.5;">Works with your existing Claude Code setup.</p>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #a1a1aa;">~2 mins</div>
       </div>
-      <a href="blog/" style="display: inline-block; margin-top: 16px; font-size: 0.85rem; color: #6b9fff; text-decoration: none;">All posts &rarr;</a>
+      <div style="display: flex; flex-direction: column; gap: 8px; background: #18181b; border: 1px solid #27272a; border-radius: 12px; padding: 20px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #6b9fff; font-weight: 700;">step 02</div>
+        <div style="font-weight: 700; font-size: 1rem; color: #fafafa;">Configure your rules</div>
+        <p style="font-size: 0.85rem; color: #a1a1aa; line-height: 1.5;">Define what Claude is and isn't allowed to do.</p>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #a1a1aa;">~5 mins</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px; background: #18181b; border: 1px solid #27272a; border-radius: 12px; padding: 20px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #6b9fff; font-weight: 700;">step 03</div>
+        <div style="font-weight: 700; font-size: 1rem; color: #fafafa;">Let Claude build</div>
+        <p style="font-size: 0.85rem; color: #a1a1aa; line-height: 1.5;">Luthien runs in the background. Your rules get enforced.</p>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #a1a1aa;">~from now on</div>
+      </div>
     </div>
-  </section>
 
-  <hr class="divider">
-
-  <!-- FEEDBACK -->
-  <section id="feedback" style="padding-top: 32px; padding-bottom: 32px;">
-    <div class="section-label" style="text-transform: none;">feedback</div>
-    <div class="container" style="text-align: center;">
-      <p style="font-size: 1rem; color: #e4e4e7; margin-bottom: 8px; font-weight: 600;">Try it + give feedback</p>
-      <p style="font-size: 0.9rem; color: #a1a1aa; margin-bottom: 16px;">Run Luthien on your codebase. Tell us what works, what breaks and what's missing.</p>
-      <a href="feedback/" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; color: #fafafa; background: transparent; border: 1px solid #3f3f46; text-decoration: none; transition: border-color 0.2s;">Start a trial &rarr;</a>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- CTA -->
-  <section class="cta-section" id="cta">
-    <div class="container">
-      <p style="font-size: 1.1rem; color: #a1a1aa; margin-bottom: 8px; text-align: center;">Open source. Growing fast.</p>
-
-      <div class="cta-row">
-        <a href="https://calendar.app.google/9Cye1yr6fMJVZNLD6" class="btn btn-secondary" target="_blank" rel="noopener">Book a setup call</a>
-        <div class="get-started-card">
-          <a href="https://github.com/LuthienResearch/luthien-proxy" class="btn btn-primary" target="_blank" rel="noopener">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-            View on GitHub
-          </a>
-          <span class="cli-divider">or install now for Linux or macOS</span>
-          <div class="cli-install" onclick="navigator.clipboard.writeText('curl -fsSL https://raw.githubusercontent.com/LuthienResearch/luthien-proxy/main/scripts/install.sh | bash')" title="Click to copy">
-            <span class="cli-prompt">$</span> curl -fsSL https://raw.githubusercontent.com/LuthienResearch/luthien-proxy/main/scripts/install.sh | bash
-            <span class="cli-copy"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
-          </div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
+      <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+        <a href="https://github.com/LuthienResearch/luthien-proxy" class="btn btn-primary" style="width: 220px; justify-content: center;" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          View on GitHub
+        </a>
+        <a href="https://calendar.app.google/9Cye1yr6fMJVZNLD6" class="btn btn-secondary" style="width: 220px; justify-content: center;" target="_blank" rel="noopener">Book a setup call</a>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 4px; width: 220px;">
+        <div class="cli-install" style="width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"
+             onclick="navigator.clipboard.writeText('curl -fsSL https://raw.githubusercontent.com/LuthienResearch/luthien-proxy/main/scripts/install.sh | bash')" title="Click to copy">
+          <span class="cli-prompt">$</span> curl -fsSL https://raw.githubusercontent.com/LuthienResearch/luthien-proxy/main/scripts/install.sh | bash
+          <span class="cli-copy"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
         </div>
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #71717a; text-align: center; display: block;">Paste in terminal · ~2 min<br>Linux & macOS</span>
       </div>
-      <p class="cta-fine">Apache 2.0 &middot; <a href="mailto:contact@luthienresearch.org">contact@luthienresearch.org</a></p>
     </div>
-  </section>
+  </div>
+</section>
 
+  
   <!-- FOOTER -->
-  <footer>
+<footer style="margin-top: 48px;">
     <div class="container">
       <div class="footer-inner">
         <div class="footer-links">
@@ -1308,13 +1235,15 @@
         <div class="footer-meta">Luthien &middot; 2026</div>
       </div>
       <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px;">
-        <span style="font-size: 0.7rem; color: #3f3f46; font-family: 'JetBrains Mono', monospace;">v10.9.3</span>
+        <span style="font-size: 0.7rem; color: #3f3f46; font-family: 'JetBrains Mono', monospace;">v11</span>
         <a href="https://www.youtube.com/watch?v=YzjvBw96kas" target="_blank" rel="noopener" class="footer-tagline" style="margin-top: 0;">Power is nothing without control.</a>
       </div>
     </div>
   </footer>
 
-  <script>
+    
+    
+   <script>
     (function () {
       "use strict";
 
