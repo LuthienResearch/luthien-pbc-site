@@ -15,6 +15,8 @@
   <meta name="twitter:title" content="Luthien - AI Control for Claude Code">
   <meta name="twitter:description" content="Open-source proxy that enforces rules on Claude Code. Catches context rot, ignored instructions, and suspicious behavior.">
 
+  <meta name="theme-color" content="#09090b">
+
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2309090b'/%3E%3Ctext x='16' y='23' font-family='Inter,system-ui,sans-serif' font-size='20' font-weight='700' fill='%236b9fff' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
 
@@ -116,7 +118,7 @@
       min-height: auto;
       display: flex;
       align-items: center;
-      padding-top: 80px;
+      padding-top: 180px;
       padding-bottom: 40px;
     }
 
@@ -142,13 +144,6 @@
   text-wrap: balance;
 }
 
-    .hero-differentiator {
-      font-size: clamp(0.8rem, 1.8vw, 0.92rem);
-      color: #a1a1aa;
-      margin-bottom: 24px;
-      font-style: italic;
-    }
-
     /* ========== TOP NAV ========== */
     .top-nav {
       position: fixed;
@@ -156,7 +151,7 @@
       left: 0;
       right: 0;
       z-index: 100;
-      background: rgba(9, 9, 11, 1);
+      background: rgba(9, 9, 11, 0.97);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid #1a1a1e;
@@ -669,7 +664,7 @@
     .filter-bar::-webkit-scrollbar { display: none; }
 
     .filter-pill {
-      padding: 5px 12px;
+      padding: 10px 14px;
       border-radius: 20px;
       border: 1px solid #27272a;
       background: transparent;
@@ -748,8 +743,8 @@
     }
 
     .card-nav-btn {
-      width: 32px;
-      height: 32px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       border: 1px solid #27272a;
       background: transparent;
@@ -835,18 +830,24 @@
     }
 
     .arch-judge-note {
-      margin: 16px auto 0;
+      margin-top: 16px;
       font-size: 0.9rem;
       color: #a1a1aa;
       line-height: 1.65;
       max-width: 700px;
-      text-align: center;
+      text-align: left;
+      font-family: 'Inter', sans-serif;
     }
 
     @media (max-width: 600px) {
       .term-flow-body { padding: 0.85rem 1rem; }
       .term-flow pre { font-size: 0.74rem; line-height: 1.55; }
       .term-chrome-title { display: none; }
+      /* Scroll hint: fade right edge when diagram overflows on narrow screens */
+      .term-flow {
+        -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+        mask-image: linear-gradient(to right, black 85%, transparent 100%);
+      }
     }
 
     /* ========== GET STARTED CARD (Option A) ========== */
@@ -856,28 +857,6 @@
       justify-content: center;
       align-items: flex-start;
       flex-wrap: wrap;
-    }
-    .get-started-card {
-  background: #18181b;
-  border: 1px solid #27272a;
-  border-radius: 12px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  width: auto;
-  align-self: center;
-}
-    .get-started-card .btn-primary {
-      border-radius: 8px;
-      width: 100%;
-      justify-content: center;
-    }
-    .cli-divider {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem;
-      color: #a1a1aa;
     }
     .cli-install {
       display: flex;
@@ -907,85 +886,9 @@
     @media (max-width: 480px) {
       .cta-row { flex-direction: column; align-items: center; }
       .cta-row .btn-secondary { width: 100%; text-align: center; justify-content: center; }
-      .get-started-card { width: 100%; }
       .cli-install { font-size: 0.82rem; padding: 12px 16px; }
       .testimonial-card { padding: 16px 20px; }
     }
-
-    /* ========== CTA ========== */
-    .cta-section { text-align: center; }
-    .cta-section .section-header { margin-left: auto; margin-right: auto; }
-    .cta-section .cta-row { flex-direction: column; align-items: center; }
-
-    .cta-fine {
-      color: #71717a;
-      font-size: 0.8rem;
-      font-family: 'JetBrains Mono', monospace;
-      margin-top: 20px;
-    }
-    .cta-fine a { color: #a1a1aa; }
-    .cta-fine a:hover { color: #d4d4d8; }
-
-    /* ========== TEAM ========== */
-    .team-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    @media (max-width: 640px) {
-      .team-grid { grid-template-columns: 1fr; gap: 40px; }
-    }
-
-    .team-card { text-align: center; }
-
-    .team-photo {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 16px;
-      border: 2px solid #27272a;
-    }
-
-    .team-name {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #fafafa;
-      margin-bottom: 4px;
-    }
-
-    .team-role {
-      font-size: 0.85rem;
-      color: #a1a1aa;
-      margin-bottom: 12px;
-    }
-
-    .team-bio {
-      font-size: 0.85rem;
-      color: #a1a1aa;
-      line-height: 1.6;
-      max-width: 360px;
-      margin: 0 auto 16px;
-    }
-
-    .team-links {
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .team-links a {
-      color: #a1a1aa;
-      transition: color 0.2s;
-      display: flex;
-      align-items: center;
-    }
-
-    .team-links a:hover { color: #fafafa; }
 
     /* ========== FOOTER ========== */
     footer {
@@ -1203,6 +1106,24 @@
       transform: scaleX(1);
     }
 
+    /* ========== FOCUS VISIBLE ========== */
+    :focus-visible {
+      outline: 2px solid #6b9fff;
+      outline-offset: 2px;
+    }
+    .btn:focus-visible,
+    .filter-pill:focus-visible,
+    .card-nav-btn:focus-visible,
+    .cli-install:focus-visible,
+    .nav-link:focus-visible,
+    .nav-setup:focus-visible,
+    .nav-gh:focus-visible,
+    .nav-hamburger:focus-visible {
+      outline: 2px solid #6b9fff;
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
     /* ========== REDUCED MOTION ========== */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -1222,7 +1143,7 @@
 
   <!-- TOP NAV -->
   <nav class="top-nav">
-    <a href="#" class="nav-left">
+    <a href="index.html" class="nav-left">
       <span class="nav-wordmark">Luthien</span>
     </a>
     <div class="nav-right" id="navRight">
@@ -1232,7 +1153,7 @@
       <a href="https://calendar.app.google/9Cye1yr6fMJVZNLD6" class="nav-setup" target="_blank" rel="noopener">Book a setup call</a>
       <a href="https://github.com/LuthienResearch/luthien-proxy" class="nav-gh" target="_blank" rel="noopener" aria-label="GitHub"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
     </div>
-    <button class="nav-hamburger" id="navHamburger" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect y="3" width="20" height="2" rx="1" fill="#a1a1aa"/><rect y="9" width="20" height="2" rx="1" fill="#a1a1aa"/><rect y="15" width="20" height="2" rx="1" fill="#a1a1aa"/></svg></button>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect y="3" width="20" height="2" rx="1" fill="#a1a1aa"/><rect y="9" width="20" height="2" rx="1" fill="#a1a1aa"/><rect y="15" width="20" height="2" rx="1" fill="#a1a1aa"/></svg></button>
   </nav>
 
   <main>
@@ -1241,10 +1162,6 @@
  <section class="hero">
   <div class="container">
     <div class="hero-content">
-      <div class="badge-beta">
-        <span class="badge-dot"></span>
-        <span class="badge-text">EARLY BETA</span>
-      </div>
       <h1>Claude Code builds.<br>You stay in control.</h1>
       <p class="hero-oneliner">Open-source proxy that sits between Claude Code and the Anthropic API. Logs every request. Enforces your rules.</p>
 
@@ -1305,10 +1222,9 @@
       <div class="card-grid-footer">
         <div class="card-nav">
           <button class="card-nav-btn" id="cardPrev" aria-label="Previous cards">&larr;</button>
-          <span class="card-nav-count" id="cardCount"></span>
+          <span class="card-nav-count" id="cardCount" aria-live="polite"></span>
           <button class="card-nav-btn" id="cardNext" aria-label="Next cards">&rarr;</button>
         </div>
-        <a href="../incidents.html" style="color: #6b9fff; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; text-decoration: none; border-bottom: 1px solid rgba(107,159,255,0.3);">see more &rarr;</a>
       </div>
     </div>
   </section>
@@ -1328,7 +1244,7 @@
           <span class="term-chrome-dot" style="background:#22c55e;"></span>
           <span class="term-chrome-title">luthien-proxy — request pipeline</span>
         </div>
-        <div class="term-flow-body"><pre>&#x1F9D1;&#x200D;&#x1F4BB; <span class="hl-you">You</span> <span class="hl-arrow">&hArr;</span> &#x1F4BB; <span class="hl-you">Claude Code</span> <span class="hl-arrow">&hArr;</span> <span class="hl-luthien">Luthien</span> <span class="hl-arrow">&hArr;</span> &#x2601;&#xFE0F; <span class="hl-api">Anthropic API</span>
+        <div class="term-flow-body"><pre role="img" aria-label="Architecture: You connect to Claude Code, which connects to Luthien (the proxy), which connects to the Anthropic API. Luthien logs every request and response in 5-15ms and enforces your configured rules: did it do what you asked, did it follow CLAUDE.md, did it do something suspicious.">&#x1F9D1;&#x200D;&#x1F4BB; <span class="hl-you">You</span> <span class="hl-arrow">&hArr;</span> &#x1F4BB; <span class="hl-you">Claude Code</span> <span class="hl-arrow">&hArr;</span> <span class="hl-luthien">Luthien</span> <span class="hl-arrow">&hArr;</span> &#x2601;&#xFE0F; <span class="hl-api">Anthropic API</span>
                             <span class="hl-pipe">|</span>
                      <span class="hl-desc">logs every request and response.</span>   <span class="arch-latency" style="display: inline;">~5-15ms</span>
                      <span class="hl-desc">you can configure rules/policies to</span>
@@ -1341,7 +1257,7 @@
       <p class="arch-judge-note">Luthien can call a separate model to check whether each response follows your rules. Runs alongside normal requests, adding almost no delay.</p>
       <p class="arch-judge-note" style="margin-top: 0.5rem;">When Claude Code compacts or starts a new session, Luthien still remembers. Your rules stay enforced from first prompt to last.</p>
       <p class="arch-judge-note" style="margin-top: 0.5rem;">Uses your existing Anthropic subscription via OAuth. Luthien never sees your API key and there are no extra charges.</p>
-      <a href="https://github.com/LuthienResearch/luthien-proxy?tab=readme-ov-file#what-can-it-do" target="_blank" rel="noopener" style="display: flex; justify-content: center; align-items: center; gap: 6px; margin-top: 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #6b9fff;">
+      <a href="https://github.com/LuthienResearch/luthien-proxy?tab=readme-ov-file#what-can-it-do" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 6px; margin-top: 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #6b9fff;">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
         How to set up a custom policy
       </a>
@@ -1358,7 +1274,7 @@
       <div class="testimonial-card">
         <p class="testimonial-text">"I saw the website and immediately thought, 'I want that.' I have to correct the pip install thing multiple times per day. You see pip and you're like, I already gave you permissions for uv. But it blocks on that permission and you lose hours of work. Awesome job, guys, it's like CLAUDE.md that actually works."</p>
         <div class="testimonial-attribution">
-          <img src="https://avatars.githubusercontent.com/nicolasmesa" alt="Nicolás Mesa" class="testimonial-photo">
+          <img src="https://avatars.githubusercontent.com/nicolasmesa" alt="Nicolás Mesa" class="testimonial-photo" loading="lazy">
           <div>
             <div class="testimonial-name">Nicolás Mesa</div>
             <div class="testimonial-title">Cofounder &amp; CTO @ Veleiro AI | Ex-Amazon | Ex-Meta</div>
@@ -1405,13 +1321,6 @@
         <span class="cli-copy"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
       </div>
       <span class="cli-hint" style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #71717a; text-align: center;">Paste in terminal · ~2 min setup time · Linux &amp; macOS</span>
-      <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-        <a href="https://github.com/LuthienResearch/luthien-proxy" class="btn btn-primary" target="_blank" rel="noopener">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-          View on GitHub
-        </a>
-        <a href="https://calendar.app.google/9Cye1yr6fMJVZNLD6" class="btn btn-secondary" target="_blank" rel="noopener">Book a setup call</a>
-      </div>
     </div>
   </div>
 </section>
@@ -1440,7 +1349,7 @@
             <a href="https://www.youtube.com/@LuthienControl" target="_blank" rel="noopener">YouTube</a>
             <a href="mailto:contact@luthienresearch.org">Email</a>
           </div>
-          <span class="footer-version">v11.1</span>
+          <span class="footer-version">v11.2</span>
         </div>
       </div>
     </div>
@@ -1762,6 +1671,13 @@
 
   <!-- CLI copy with icon swap -->
   <script>
+    // Keyboard support for cli-install divs
+    document.querySelectorAll('.cli-install').forEach(function(el) {
+      el.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); copyInstallCmd(el); }
+      });
+    });
+
     function copyInstallCmd(el) {
       navigator.clipboard.writeText('curl -fsSL https://luthien.cc/install.sh | bash').then(function () {
         var icon = el.querySelector('.cli-copy');
