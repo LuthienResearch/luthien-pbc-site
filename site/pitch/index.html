@@ -525,6 +525,49 @@
       transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    /* ============ NAV ARROWS ============ */
+    .nav-arrow {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+      background: none;
+      border: 1px solid transparent;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-dim);
+      font-size: 1.4rem;
+      transition: all 0.2s;
+      opacity: 0;
+    }
+
+    .deck:hover ~ .nav-arrow,
+    .nav-arrow:hover {
+      opacity: 1;
+    }
+
+    .nav-arrow:hover {
+      color: var(--text);
+      border-color: var(--border);
+      background: var(--bg-elevated);
+    }
+
+    .nav-arrow.left { left: 16px; }
+    .nav-arrow.right { right: 16px; }
+
+    .nav-arrow.hidden { display: none; }
+
+    @media (max-width: 600px) {
+      .nav-arrow { width: 36px; height: 36px; font-size: 1.1rem; }
+      .nav-arrow.left { left: 8px; }
+      .nav-arrow.right { right: 8px; }
+    }
+
     /* ============ CONTROLS ============ */
     .controls {
       position: fixed;
@@ -763,19 +806,19 @@
         <div class="card card-red">
           <div class="card-title" style="color: var(--red);">1. AI Misbehaves</div>
           <div class="card-body">
-            Agentic AI drops databases, leaks secrets, ignores instructions, and lies about its work. A Replit agent <em>dropped a production database and tried to cover it up.</em>
+            Agentic AI drops databases, leaks secrets, ignores instructions, and lies about what it did. A Replit agent <em>dropped a production database, then tried to cover it up.</em>
           </div>
         </div>
         <div class="card" style="border-color: var(--amber); background: rgba(245, 158, 11, 0.08);">
           <div class="card-title" style="color: var(--amber);">2. This Forces Babysitting</div>
           <div class="card-body">
-            The risk of misbehavior forces close human supervision, drastically limiting the impact of the most powerful tools ever built.
+            So engineers babysit. They hover over every action, approve every step. The most capable dev tools in history spend most of their time waiting for a human to click "allow."
           </div>
         </div>
       </div>
       <div class="spacer-md"></div>
       <div class="quote anim-up delay-3">
-        A typical Claude Code turn takes 45 seconds. But Claude Code can autonomously solve 12-hour problems&thinsp;&mdash;&thinsp;if you let it.
+        A typical Claude Code turn takes 45 seconds. But Claude Code can autonomously solve 12-hour problems, if you let it.
       </div>
       <div class="spacer-sm"></div>
       <p class="body-text anim-up delay-4" style="text-align: center;">
@@ -795,19 +838,19 @@
         <div class="card" style="flex: 0 1 220px; text-align: center; padding: 24px;">
           <div style="font-size: 1.8rem; margin-bottom: 8px;">&#x1F6E1;</div>
           <div class="card-title">Reduce Risk</div>
-          <div class="card-body">Enforce policies at runtime, catching misbehavior before it causes damage</div>
+          <div class="card-body">Policies run at the API layer, catching bad behavior before it causes damage</div>
         </div>
         <div style="font-family: var(--serif); font-size: 2rem; color: var(--text-dim);">&rarr;</div>
         <div class="card card-accent" style="flex: 0 1 220px; text-align: center; padding: 24px;">
           <div style="font-size: 1.8rem; margin-bottom: 8px;">&#x26A1;</div>
           <div class="card-title" style="color: var(--blue);">Unlock Autonomy</div>
-          <div class="card-body">Give AI agents the freedom to operate without constant supervision</div>
+          <div class="card-body">Let agents run without someone hovering over every action</div>
         </div>
         <div style="font-family: var(--serif); font-size: 2rem; color: var(--text-dim);">&rarr;</div>
         <div class="card card-green" style="flex: 0 1 220px; text-align: center; padding: 24px;">
           <div style="font-size: 1.8rem; margin-bottom: 8px;">&#x1F4C8;</div>
           <div class="card-title" style="color: var(--green);">100&ndash;1000x Impact</div>
-          <div class="card-body">Multiply the value of every engineer running agentic AI</div>
+          <div class="card-body">One engineer gets the output of a team. That's the real promise of agentic AI.</div>
         </div>
       </div>
       <div class="spacer-lg"></div>
@@ -845,7 +888,7 @@
       </div>
       <div class="spacer-md"></div>
       <p class="body-text anim-up delay-4" style="text-align: center; max-width: 700px; margin: 0 auto; color: var(--text-muted);">
-        By sitting between client and model, Luthien applies org-specific protections, logic, and capabilities <em>instantly across the entire organization</em>&thinsp;&mdash;&thinsp;with absolutely no friction for individual developers.
+        Luthien sits between the client and the model. Your org writes the policies. Luthien enforces them across every developer, every session, instantly. Individual devs don't have to change anything.
       </p>
     </div>
   </div>
@@ -860,17 +903,17 @@
         <div class="card">
           <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--green); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 12px;">Protect</div>
           <div class="card-title">Secret Redaction</div>
-          <div class="card-body">Seamlessly redact sensitive secrets, API keys, and credentials that agentic AI might otherwise leak&thinsp;&mdash;&thinsp;transparently, in real time.</div>
+          <div class="card-body">API keys, credentials, secrets. If an agent tries to send them upstream, Luthien strips them out before they leave your network.</div>
         </div>
         <div class="card">
           <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--blue); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 12px;">Guide</div>
           <div class="card-title">Context Injection</div>
-          <div class="card-body">Inject critical guidance and context into every agentic flow automatically&thinsp;&mdash;&thinsp;eliminating the risk of user oversight or forgotten instructions.</div>
+          <div class="card-body">Automatically add org rules, context, and guardrails to every agent session. No more hoping devs remembered to set up their CLAUDE.md.</div>
         </div>
         <div class="card">
           <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--red); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 12px;">Defend</div>
           <div class="card-title">Command Blocking</div>
-          <div class="card-body">Intelligently recognize and block dangerous commands&thinsp;&mdash;&thinsp;protecting critical assets before harmful actions have a chance to execute.</div>
+          <div class="card-body">Agent about to <code>rm -rf</code> your prod directory or <code>git push --force</code> to main? Luthien catches it and stops it before it runs.</div>
         </div>
       </div>
       <div class="spacer-lg"></div>
@@ -899,7 +942,7 @@
         </div>
         <div class="compare-row">
           <div class="compare-cell name">Guardrails AI / Lera</div>
-          <div class="compare-cell">Customer-facing runtime guardrails. Different category&thinsp;&mdash;&thinsp;chatbots, not dev tools.</div>
+          <div class="compare-cell">Customer-facing runtime guardrails. Built for chatbots, not dev tools.</div>
           <div class="compare-cell luthien"><span class="check">&#10003;</span> Purpose-built for the dev environment</div>
         </div>
         <div class="compare-row">
@@ -910,7 +953,7 @@
       </div>
       <div class="spacer-md"></div>
       <p class="body-text anim-up delay-3" style="text-align: center; color: var(--text-muted); font-style: italic;">
-        "We're the only product focused on build-time agentic control&thinsp;&mdash;&thinsp;the dev environment, not the user-facing chatbot."
+        "We're the only product focused on build-time agentic control. The dev environment, not the user-facing chatbot."
       </p>
     </div>
   </div>
@@ -924,11 +967,11 @@
       <div class="flex-col gap-md anim-up delay-2">
         <div class="card">
           <div class="card-title"><span class="blue">1.</span>&ensp;Different problems</div>
-          <div class="card-body">Auto mode is an <em>input</em> gate&thinsp;&mdash;&thinsp;it checks what the agent wants to do. The top user problems are <em>output</em> problems: lying, context rot, test cheating, false completion claims. Luthien monitors what the agent actually produces.</div>
+          <div class="card-body">Auto mode is an <em>input</em> gate. It checks what the agent wants to do. But the top user complaints are <em>output</em> problems: lying, context rot, test cheating, false completion claims. Luthien monitors what the agent actually produces.</div>
         </div>
         <div class="card">
           <div class="card-title"><span class="blue">2.</span>&ensp;Fragmenting market</div>
-          <div class="card-body">OpenCode (15K+ stars), Aider (30K+), Codex, OpenClaw&thinsp;&mdash;&thinsp;the coding agent market is fragmenting fast. Anthropic won't build management tooling for competitors' clients. Luthien is provider-agnostic.</div>
+          <div class="card-body">OpenCode (15K+ stars), Aider (30K+), Codex, OpenClaw. The coding agent market is fragmenting fast. Anthropic won't build management tooling for competitors' clients. Luthien is provider-agnostic.</div>
         </div>
         <div class="card">
           <div class="card-title"><span class="blue">3.</span>&ensp;Anthropic agrees</div>
@@ -946,7 +989,7 @@
   <div class="slide" data-slide="7">
     <div class="slide-inner">
       <div class="label anim-up">Market</div>
-      <h1 class="headline headline-lg anim-up delay-1">A market moving at unprecedented speed</h1>
+      <h1 class="headline headline-lg anim-up delay-1">This market is moving fast</h1>
       <div class="spacer-md"></div>
       <div class="grid-4 anim-up delay-2">
         <div style="text-align: center;">
@@ -1088,7 +1131,7 @@
     <div class="slide-inner">
       <div class="label anim-up">Team</div>
       <h1 class="headline headline-lg anim-up delay-1">Why us</h1>
-      <p class="subtitle anim-up delay-1">Luthien requires deep AI safety expertise <em>and</em> the ability to ship enterprise AI products. We've done both.</p>
+      <p class="subtitle anim-up delay-1">This problem needs people who understand AI safety research <em>and</em> can ship enterprise products. That's us.</p>
       <div class="spacer-md"></div>
       <div class="grid-2 anim-up delay-2">
         <div class="founder-card">
@@ -1098,7 +1141,7 @@
             10+ years ML engineering at <strong>Meta</strong> and <strong>Amazon</strong>. <strong>MATS alumni</strong>. Co-authored <strong>RE-Bench</strong> with METR, the leading AI evaluations organization. Built Luthien's core proxy architecture from the ground up.
           </div>
           <div class="founder-highlight">
-            One of very few engineers with deep production ML experience <em>and</em> formal AI safety research credentials. Understands both what AI agents can do and what can go wrong.
+            Rare combination: production ML at scale plus formal AI safety research. Knows what agents can do and what goes wrong when they do it unsupervised.
           </div>
         </div>
         <div class="founder-card">
@@ -1108,7 +1151,7 @@
             9 years as <strong>Principal Product Manager-Technical</strong> at Amazon. Built the AI systems behind cart recommendations, delivery optimization, and Prime &mdash; driving <strong>$6.8B in sales</strong> and <strong>$4.5B in profit</strong>. MBA from Darden, Fulbright Scholar.
           </div>
           <div class="founder-highlight">
-            Proven track record turning AI systems into massive enterprise business outcomes. Knows how to sell AI infrastructure to the companies that need it most.
+            Built Amazon's AI for cart, delivery, and Prime. $6.8B in sales, $4.5B in profit. Knows how to sell AI infrastructure to enterprises.
           </div>
         </div>
       </div>
@@ -1166,12 +1209,12 @@
         <div class="card" style="text-align: center;">
           <div style="font-family: var(--serif); font-size: 2.5rem; color: var(--blue);">50%</div>
           <div class="card-title">Engineering</div>
-          <div class="card-body">2 key hires to accelerate core platform development</div>
+          <div class="card-body">2 hires: a systems engineer and a policy/rules engine lead</div>
         </div>
         <div class="card" style="text-align: center;">
           <div style="font-family: var(--serif); font-size: 2.5rem; color: var(--green);">30%</div>
           <div class="card-title">Growth</div>
-          <div class="card-body">Developer outreach, community building, design partners</div>
+          <div class="card-body">Dev outreach, design partners, community</div>
         </div>
         <div class="card" style="text-align: center;">
           <div style="font-family: var(--serif); font-size: 2.5rem; color: var(--text-muted);">20%</div>
@@ -1197,7 +1240,7 @@
       </p>
       <div class="spacer-sm"></div>
       <p class="anim-up delay-2" style="font-size: 1rem; color: var(--text-dim); max-width: 520px; text-align: center; line-height: 1.6;">
-        Every organization will need to manage its AI agents.<br>We're building the control layer that makes that possible.
+        Every org running AI agents will need a control layer.<br>We're building it.
       </p>
       <div class="spacer-lg"></div>
       <div class="close-links anim-up delay-3">
@@ -1221,6 +1264,10 @@
   <div class="nav-dots" id="navDots"></div>
 </div>
 
+<!-- Nav arrows -->
+<button class="nav-arrow left hidden" id="navLeft" aria-label="Previous slide">&#8249;</button>
+<button class="nav-arrow right" id="navRight" aria-label="Next slide">&#8250;</button>
+
 <!-- Fullscreen button -->
 <button class="fs-btn" id="fsBtn" title="Toggle fullscreen">F11 &middot; Fullscreen</button>
 
@@ -1235,6 +1282,8 @@
   const progress = document.getElementById('progressFill');
   const dotsContainer = document.getElementById('navDots');
   const fsBtn = document.getElementById('fsBtn');
+  const navLeft = document.getElementById('navLeft');
+  const navRight = document.getElementById('navRight');
 
   // Build dots
   for (let i = 0; i < total; i++) {
@@ -1250,6 +1299,8 @@
     dotsContainer.querySelectorAll('.nav-dot').forEach((d, i) => {
       d.classList.toggle('active', i === current);
     });
+    navLeft.classList.toggle('hidden', current === 0);
+    navRight.classList.toggle('hidden', current === total - 1);
   }
 
   function goTo(index) {
@@ -1309,6 +1360,20 @@
       goTo(total - 1);
     } else if (e.key === 'f' || e.key === 'F') {
       toggleFullscreen();
+    }
+  });
+
+  // Nav arrow buttons
+  navLeft.addEventListener('click', prev);
+  navRight.addEventListener('click', next);
+
+  // Click to advance (left third = back, right two-thirds = forward)
+  document.querySelector('.deck').addEventListener('click', (e) => {
+    if (e.target.closest('a, button, .nav-dot, .nav-arrow, .controls, .fs-btn')) return;
+    if (e.clientX < window.innerWidth / 3) {
+      prev();
+    } else {
+      next();
     }
   });
 
