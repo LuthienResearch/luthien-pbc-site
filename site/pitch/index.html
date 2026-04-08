@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luthien — Investor Deck</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2309090b'/%3E%3Ctext x='16' y='23' font-family='Inter,system-ui,sans-serif' font-size='20' font-weight='700' fill='%236b9fff' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #09090b;
+      --bg-elevated: #111113;
+      --surface: #18181b;
+      --border: #27272a;
+      --text: #e4e4e7;
+      --text-muted: #a1a1aa;
+      --text-dim: #71717a;
+      --white: #fafafa;
+      --blue: #6b9fff;
+      --blue-glow: rgba(107, 159, 255, 0.15);
+      --green: #22c55e;
+      --green-dim: rgba(34, 197, 94, 0.12);
+      --red: #ef4444;
+      --red-dim: rgba(239, 68, 68, 0.12);
+      --amber: #f59e0b;
+      --serif: 'Instrument Serif', Georgia, serif;
+      --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --mono: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ============ GRAIN OVERLAY ============ */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ============ DECK CONTAINER ============ */
+    .deck {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ============ SLIDES ============ */
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 80px;
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+      overflow-y: auto;
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    .slide.exit-left {
+      opacity: 0;
+      transform: translateX(-40px);
+    }
+
+    .slide-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* ============ TYPOGRAPHY ============ */
+    .headline {
+      font-family: var(--serif);
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.1;
+    }
+
+    .headline-xl { font-size: clamp(3rem, 7vw, 5.5rem); }
+    .headline-lg { font-size: clamp(2rem, 4.5vw, 3.2rem); }
+    .headline-md { font-size: clamp(1.6rem, 3.5vw, 2.4rem); }
+
+    .subtitle {
+      font-family: var(--sans);
+      font-size: clamp(1rem, 2vw, 1.35rem);
+      color: var(--text-muted);
+      line-height: 1.5;
+      font-weight: 400;
+    }
+
+    .label {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 16px;
+    }
+
+    .body-text {
+      font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+      line-height: 1.65;
+      color: var(--text);
+    }
+
+    .stat-huge {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      color: var(--white);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    .emphasis {
+      color: var(--blue);
+      font-style: italic;
+      font-family: var(--serif);
+    }
+
+    .green { color: var(--green); }
+    .blue { color: var(--blue); }
+    .red { color: var(--red); }
+    .amber { color: var(--amber); }
+    .white { color: var(--white); }
+    .muted { color: var(--text-muted); }
+    .dim { color: var(--text-dim); }
+
+    /* ============ LAYOUT UTILS ============ */
+    .spacer-xs { height: 12px; }
+    .spacer-sm { height: 20px; }
+    .spacer-md { height: 32px; }
+    .spacer-lg { height: 48px; }
+
+    .flex-row { display: flex; gap: 32px; align-items: flex-start; }
+    .flex-col { display: flex; flex-direction: column; }
+    .gap-sm { gap: 12px; }
+    .gap-md { gap: 20px; }
+    .gap-lg { gap: 32px; }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    /* ============ CARDS ============ */
+    .card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+    }
+
+    .card-accent {
+      border-color: var(--blue);
+      background: linear-gradient(135deg, var(--blue-glow), transparent);
+    }
+
+    .card-green {
+      border-color: var(--green);
+      background: var(--green-dim);
+    }
+
+    .card-red {
+      border-color: var(--red);
+      background: var(--red-dim);
+    }
+
+    .card-title {
+      font-family: var(--sans);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .card-body {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* ============ BLOCKQUOTE ============ */
+    .quote {
+      border-left: 3px solid var(--blue);
+      padding: 16px 24px;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      color: var(--text);
+      line-height: 1.5;
+      background: var(--blue-glow);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .quote-attr {
+      font-family: var(--sans);
+      font-style: normal;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      margin-top: 12px;
+      display: block;
+    }
+
+    /* ============ API DIAGRAM ============ */
+    .api-diagram {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin: 32px 0;
+    }
+
+    .api-layer {
+      padding: 20px 28px;
+      border-radius: 10px;
+      text-align: center;
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+      min-width: 180px;
+      position: relative;
+    }
+
+    .api-layer.highlight {
+      border-color: var(--blue);
+      background: linear-gradient(135deg, var(--blue-glow), rgba(107, 159, 255, 0.05));
+      box-shadow: 0 0 30px rgba(107, 159, 255, 0.1);
+    }
+
+    .api-layer-name {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 6px;
+    }
+
+    .api-layer.highlight .api-layer-name { color: var(--blue); }
+
+    .api-layer-title {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      color: var(--white);
+    }
+
+    .api-layer.highlight .api-layer-title {
+      color: var(--blue);
+    }
+
+    .api-layer-desc {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      margin-top: 4px;
+    }
+
+    .api-connector {
+      width: 48px;
+      height: 2px;
+      background: var(--border);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .api-connector::after {
+      content: '';
+      position: absolute;
+      right: -4px;
+      top: -4px;
+      width: 0;
+      height: 0;
+      border-left: 6px solid var(--border);
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+    }
+
+    /* ============ COMPARISON TABLE ============ */
+    .compare-row {
+      display: grid;
+      grid-template-columns: 160px 1fr 1fr;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      align-items: stretch;
+    }
+
+    .compare-row:last-child { border-bottom: none; }
+
+    .compare-row.header {
+      border-bottom: 2px solid var(--border);
+    }
+
+    .compare-cell {
+      padding: 14px 16px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .compare-row.header .compare-cell {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .compare-cell.name {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .compare-cell.luthien {
+      background: var(--blue-glow);
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .compare-row.header .compare-cell.luthien {
+      color: var(--blue);
+    }
+
+    .check { color: var(--green); }
+    .cross { color: var(--text-dim); }
+
+    /* ============ TIMELINE ============ */
+    .timeline {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 18px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--border), var(--blue), var(--green));
+    }
+
+    .timeline-item {
+      flex: 1;
+      text-align: center;
+      position: relative;
+      padding-top: 36px;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--border);
+      border: 2px solid var(--bg);
+    }
+
+    .timeline-item.active::before {
+      background: var(--blue);
+      box-shadow: 0 0 12px rgba(107, 159, 255, 0.4);
+    }
+
+    .timeline-label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+
+    .timeline-text {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .timeline-value {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    /* ============ FOUNDER CARDS ============ */
+    .founder-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .founder-name {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      color: var(--white);
+    }
+
+    .founder-role {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+
+    .founder-bio {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .founder-highlight {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+      margin-top: 4px;
+    }
+
+    /* ============ FUNDING BARS ============ */
+    .fund-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .fund-bar-label {
+      font-size: 0.9rem;
+      color: var(--text);
+      min-width: 180px;
+      text-align: right;
+    }
+
+    .fund-bar-track {
+      flex: 1;
+      height: 28px;
+      background: var(--bg-elevated);
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .fund-bar-fill {
+      height: 100%;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--bg);
+    }
+
+    /* ============ PROGRESS BAR ============ */
+    .progress-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: rgba(39, 39, 42, 0.5);
+      z-index: 100;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue), #93b8ff);
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ============ CONTROLS ============ */
+    .controls {
+      position: fixed;
+      bottom: 20px;
+      right: 28px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      z-index: 100;
+    }
+
+    .slide-counter {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+    }
+
+    .nav-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .nav-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--border);
+      cursor: pointer;
+      transition: all 0.3s;
+      border: none;
+      padding: 0;
+    }
+
+    .nav-dot.active {
+      background: var(--blue);
+      box-shadow: 0 0 8px rgba(107, 159, 255, 0.4);
+    }
+
+    .nav-dot:hover {
+      background: var(--text-dim);
+    }
+
+    /* ============ FULLSCREEN BUTTON ============ */
+    .fs-btn {
+      position: fixed;
+      top: 20px;
+      right: 28px;
+      z-index: 100;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text-dim);
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      padding: 6px 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.05em;
+    }
+
+    .fs-btn:hover {
+      background: var(--bg-elevated);
+      color: var(--text);
+      border-color: var(--text-dim);
+    }
+
+    /* ============ SLIDE-IN ANIMATIONS ============ */
+    .anim-up {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .slide.active .anim-up {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .slide.active .delay-1 { transition-delay: 0.1s; }
+    .slide.active .delay-2 { transition-delay: 0.2s; }
+    .slide.active .delay-3 { transition-delay: 0.3s; }
+    .slide.active .delay-4 { transition-delay: 0.4s; }
+    .slide.active .delay-5 { transition-delay: 0.5s; }
+    .slide.active .delay-6 { transition-delay: 0.6s; }
+
+    /* ============ TITLE SLIDE SPECIAL ============ */
+    .title-slide {
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .title-slide .slide-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .logo-mark {
+      font-family: var(--serif);
+      font-size: clamp(4rem, 10vw, 7.5rem);
+      color: var(--white);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      position: relative;
+    }
+
+    .logo-mark::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 10%;
+      right: 10%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--blue), transparent);
+    }
+
+    .round-badge {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-dim);
+      letter-spacing: 0.12em;
+      border: 1px solid var(--border);
+      padding: 8px 20px;
+      border-radius: 100px;
+      margin-top: 36px;
+    }
+
+    .round-badge span { color: var(--blue); }
+
+    /* ============ CLOSE SLIDE ============ */
+    .close-links {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      margin-top: 24px;
+    }
+
+    .close-link {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      text-decoration: none;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+
+    .close-link:hover {
+      color: var(--blue);
+      border-color: var(--blue);
+    }
+
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 900px) {
+      .slide { padding: 40px 32px; }
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .flex-row { flex-direction: column; }
+      .api-diagram { flex-direction: column; }
+      .api-connector {
+        width: 2px;
+        height: 24px;
+      }
+      .api-connector::after {
+        right: auto;
+        left: -4px;
+        top: auto;
+        bottom: -4px;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 6px solid var(--border);
+      }
+      .compare-row { grid-template-columns: 1fr; gap: 4px; }
+      .compare-row.header { display: none; }
+      .compare-cell { padding: 8px 16px; }
+      .timeline { flex-direction: column; gap: 24px; }
+      .timeline::before {
+        width: 2px;
+        height: 100%;
+        top: 0;
+        left: 18px;
+        right: auto;
+        background: linear-gradient(180deg, var(--border), var(--blue), var(--green));
+      }
+      .timeline-item {
+        padding-top: 0;
+        padding-left: 48px;
+        text-align: left;
+      }
+      .timeline-item::before {
+        left: 12px;
+        top: 4px;
+        transform: none;
+      }
+      .fund-bar { flex-direction: column; gap: 4px; }
+      .fund-bar-label { min-width: auto; text-align: left; }
+    }
+
+    @media (max-width: 600px) {
+      .slide { padding: 32px 20px; }
+      .card { padding: 20px; }
+      .founder-card { padding: 24px; }
+      .controls { right: 16px; bottom: 14px; }
+      .fs-btn { right: 16px; top: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <!-- ======== SLIDE 1: TITLE ======== -->
+  <div class="slide title-slide active" data-slide="0">
+    <div class="slide-inner">
+      <div class="logo-mark anim-up">Luthien</div>
+      <div class="spacer-md"></div>
+      <p class="subtitle anim-up delay-1" style="font-family: var(--serif); font-style: italic; font-size: clamp(1.2rem, 2.5vw, 1.7rem); color: var(--text-muted);">
+        Making it safe to run AI at full power
+      </p>
+      <div class="round-badge anim-up delay-2">
+        Seed Round &middot; <span>$2M</span> &middot; SAFE at $15M post-money cap
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== SLIDE 2: THE PARADOX ======== -->
+  <div class="slide" data-slide="1">
+    <div class="slide-inner">
+      <div class="label anim-up">The Problem</div>
+      <h1 class="headline headline-lg anim-up delay-1">The Agentic AI Paradox</h1>
+      <div class="spacer-md"></div>
+      <div class="grid-2 anim-up delay-2">
+        <div class="card card-red">
+          <div class="card-title" style="color: var(--red);">1. AI Misbehaves</div>
+          <div class="card-body">
+            Agentic AI drops databases, leaks secrets, ignores instructions, and lies about its work. A Replit agent <em>dropped a production database and tried to cover it up.</em>
+          </div>
+        </div>
+        <div class="card" style="border-color: var(--amber); background: rgba(245, 158, 11, 0.08);">
+          <div class="card-title" style="color: var(--amber);">2. This Forces Babysitting</div>
+          <div class="card-body">
+            The risk of misbehavior forces close human supervision, drastically limiting the impact of the most powerful tools ever built.
+          </div>
+        </div>
+      </div>
+      <div class="spacer-md"></div>
+      <div class="quote anim-up delay-3">
+        A typical Claude Code turn takes 45 seconds. But Claude Code can autonomously solve 12-hour problems&thinsp;&mdash;&thinsp;if you let it.
+      </div>
+      <div class="spacer-sm"></div>
+      <p class="body-text anim-up delay-4" style="text-align: center;">
+        <span class="stat-huge red" style="font-size: clamp(1.8rem, 4vw, 3rem);">93%</span>
+        <span class="muted" style="display: block; font-size: 0.95rem;">of permission prompts are auto-accepted. Supervision theater doesn't work.</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- ======== SLIDE 3: THE UNLOCK ======== -->
+  <div class="slide" data-slide="2">
+    <div class="slide-inner" style="text-align: center;">
+      <div class="label anim-up">The Unlock</div>
+      <h1 class="headline headline-lg anim-up delay-1">Luthien solves both problems<br>simultaneously</h1>
+      <div class="spacer-lg"></div>
+      <div class="flex-row anim-up delay-2" style="justify-content: center; align-items: center; flex-wrap: wrap; gap: 16px;">
+        <div class="card" style="flex: 0 1 220px; text-align: center; padding: 24px;">
+          <div style="font-size: 1.8rem; margin-bottom: 8px;">&#x1F6E1;</div>
+          <div class="card-title">Reduce Risk</div>
+          <div class="card-body">Enforce policies at runtime, catching misbehavior before it causes damage</div>
+        </div>
+        <div style="font-family: var(--serif); font-size: 2rem; color: var(--text-dim);">&rarr;</div>
+        <div class="card card-accent" style="flex: 0 1 220px; text-align: center; padding: 24px;">
+          <div style="font-size: 1.8rem; margin-bottom: 8px;">&#x26A1;</div>
+          <div class="card-title" style="color: var(--blue);">Unlock Autonomy</div>
+          <div class="card-body">Give AI agents the freedom to operate without constant supervision</div>
+        </div>
+        <div style="font-family: var(--serif); font-size: 2rem; color: var(--text-dim);">&rarr;</div>
+        <div class="card card-green" style="flex: 0 1 220px; text-align: center; padding: 24px;">
+          <div style="font-size: 1.8rem; margin-bottom: 8px;">&#x1F4C8;</div>
+          <div class="card-title" style="color: var(--green);">100&ndash;1000x Impact</div>
+          <div class="card-body">Multiply the value of every engineer running agentic AI</div>
+        </div>
+      </div>
+      <div class="spacer-lg"></div>
+      <p class="anim-up delay-3" style="font-family: var(--mono); font-size: 0.95rem; color: var(--text-dim);">
+        Runtime policy enforcement &middot; <span class="blue">15ms</span> overhead
+      </p>
+    </div>
+  </div>
+
+  <!-- ======== SLIDE 4: API-LEVEL CONTROL ======== -->
+  <div class="slide" data-slide="3">
+    <div class="slide-inner">
+      <div class="label anim-up">How It Works</div>
+      <h1 class="headline headline-lg anim-up delay-1">Control at the API Level</h1>
+      <p class="subtitle anim-up delay-2" style="max-width: 700px;">There are three places you can implement AI control. Only one gives organizations the power they need.</p>
+      <div class="spacer-lg"></div>
+      <div class="api-diagram anim-up delay-3">
+        <div class="api-layer">
+          <div class="api-layer-name">The Client</div>
+          <div class="api-layer-title">Claude Code</div>
+          <div class="api-layer-desc">User-controlled. Not suited<br>to org-wide needs.</div>
+        </div>
+        <div class="api-connector"></div>
+        <div class="api-layer highlight">
+          <div class="api-layer-name">The API &bigstar;</div>
+          <div class="api-layer-title">Luthien Proxy</div>
+          <div class="api-layer-desc">Org-specific policies.<br>Instant. Zero friction.</div>
+        </div>
+        <div class="api-connector"></div>
+        <div class="api-layer">
+          <div class="api-layer-name">The Model</div>
+          <div class="api-layer-title">Anthropic</div>
+          <div class="api-layer-desc">Same controls for everyone.<br>Can't customize.</div>
+        </div>
+      </div>
+      <div class="spacer-md"></div>
+      <p class="body-text anim-up delay-4" style="text-align: center; max-width: 700px; margin: 0 auto; color: var(--text-muted);">
+        By sitting between client and model, Luthien applies org-specific protections, logic, and capabilities <em>instantly across the entire organization</em>&thinsp;&mdash;&thinsp;with absolutely no friction for individual developers.
+      </p>
+    </div>
+  </div>
+
+  <!-- ======== SLIDE 5: CAPABILITIES ======== -->
+  <div class="slide" data-slide="4">
+    <div class="slide-inner">
+      <div class="label anim-up">Capabilities</div>
+      <h1 class="headline headline-lg anim-up delay-1">What You Can Do</h1>
+      <div class="spacer-md"></div>
+      <div class="grid-3 anim-up delay-2">
+        <div class="card">
+          <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--green); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 12px;">Protect</div>
+          <div class="card-title">Secret Redaction</div>
+          <div class="card-body">Seamlessly redact sensitive secrets, API keys, and credentials that agentic AI might otherwise leak&thinsp;&mdash;&thinsp;transparently, in real time.</div>
+        </div>
+        <div class="card">
+          <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--blue); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 12px;">Guide</div>
+          <div class="card-title">Context Injection</div>
+          <div class="card-body">Inject critical guidance and context into every agentic flow automatically&thinsp;&mdash;&thinsp;eliminating the risk of user oversight or forgotten instructions.</div>
+        </div>
+        <div class="card">
+          <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--red); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 12px;">Defend</div>
+          <div class="card-title">Command Blocking</div>
+          <div class="card-body">Intelligently recognize and block dangerous commands&thinsp;&mdash;&thinsp;protecting critical assets before harmful actions have a chance to execute.</div>
+        </div>
+      </div>
+      <div class="spacer-lg"></div>
+      <div class="quote anim-up delay-3">
+        You write a policy. We enforce it. Every time. Even when Claude forgets.
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== SLIDE 6: COMPETITIVE ======== -->
+  <div class="slide" data-slide="5">
+    <div class="slide-inner">
+      <div class="label anim-up">Competitive Landscape</div>
+      <h1 class="headline headline-lg anim-up delay-1">Why Not Alternatives?</h1>
+      <div class="spacer-md"></div>
+      <div class="anim-up delay-2" style="border: 1px solid var(--border); border-radius: 12px; overflow: hidden;">
+        <div class="compare-row header">
+          <div class="compare-cell"></div>
+          <div class="compare-cell">Alternatives</div>
+          <div class="compare-cell luthien">Luthien</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell name">LiteLLM / Helicone</div>
+          <div class="compare-cell">Simple pass/block rules. Basic observability. No policy enforcement.</div>
+          <div class="compare-cell luthien"><span class="check">&#10003;</span> Full policy enforcement + observability</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell name">Guardrails AI / Lera</div>
+          <div class="compare-cell">Customer-facing runtime guardrails. Different category&thinsp;&mdash;&thinsp;chatbots, not dev tools.</div>
+          <div class="compare-cell luthien"><span class="check">&#10003;</span> Purpose-built for the dev environment</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell name">CodeRabbit</div>
+          <div class="compare-cell">Post-hoc code review. Not real-time interception.</div>
+          <div class="compare-cell luthien"><span class="check">&#10003;</span> Real-time interception before damage occurs</div>
+        </div>
+      </div>
+      <div class="spacer-md"></div>
+      <p class="body-text anim-up delay-3" style="text-align: center; color: var(--text-muted); font-style: italic;">
+        "We're the only product focused on build-time agentic control&thinsp;&mdash;&thinsp;the dev environment, not the user-facing chatbot."
+      </p>
+    </div>
+  </div>
+
+  <!-- ======== SLIDE 7: MOAT ======== -->
+  <div class="slide" data-slide="6">
+    <div class="slide-inner">
+      <div class="label anim-up">Defensibility</div>
+      <h1 class="headline headline-lg anim-up delay-1">"Won't Anthropic Build This?"</h1>
+      <div class="spacer-md"></div>
+      <div class="flex-col gap-md anim-up delay-2">
+        <div class="card">
+          <div class="card-title"><span class="blue">1.</span>&ensp;Different problems</div>
+          <div class="card-body">Auto mode is an <em>input</em> gate&thinsp;&mdash;&thinsp;it checks what the agent wants to do. The top user problems are <em>output</em> problems: lying, context rot, test cheating, false completion claims. Luthien monitors what the agent actually produces.</div>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="blue">2.</span>&ensp;Fragmenting market</div>
+          <div class="card-body">OpenCode (15K+ stars), Aider (30K+), Codex, OpenClaw&thinsp;&mdash;&thinsp;the coding agent market is fragmenting fast. Anthropic won't build management tooling for competitors' clients. Luthien is provider-agnostic.</div>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="blue">3.</span>&ensp;Anthropic agrees</div>
+          <div class="card-body">Anthropic researcher, April 2026: <em>"The long-term solution probably looks more like something proxy-side"</em> and <em>"the space for control protocols is quite big."</em></div>
+        </div>
+      </div>
+      <div class="spacer-md"></div>
+      <p class="anim-up delay-3" style="text-align: center; font-family: var(--mono); font-size: 0.85rem; color: var(--text-dim);">
+        "We want labs to copy us. That's our theory of change."
+      </p>
+    </div>
+  </div>
+
+  <!-- ======== SLIDE 8: MARKET ======== -->
+  <div class="slide" data-slide="7">
+    <div class="slide-inner">
+      <div class="label anim-up">Market</div>
+      <h1 class="headline headline-lg anim-up delay-1">A market moving at unprecedented speed</h1>
+      <div class="spacer-md"></div>
+      <div class="grid-4 anim-up delay-2">
+        <div style="text-align: center;">
+          <div class="stat-huge">$4.7B</div>
+          <div class="stat-label">Coding agent market today</div>
+        </div>
+        <div style="text-align: center;">
+          <div class="stat-huge">$14.6B</div>
+          <div class="stat-label">Projected by 2033</div>
+        </div>
+        <div style="text-align: center;">
+          <div class="stat-huge green">$2.5B</div>
+          <div class="stat-label">Claude Code ARR<br><span class="dim">$0 &rarr; $2.5B in 9 months</span></div>
+        </div>
+        <div style="text-align: center;">
+          <div class="stat-huge blue">51%</div>
+          <div class="stat-label">of GitHub commits are<br>AI-generated (early 2026)</div>
+        </div>
+      </div>
+      <div class="spacer-lg"></div>
+      <div class="grid-2 anim-up delay-3">
+        <div class="card">
+          <div class="card-title">Enterprise demand</div>
+          <div class="card-body"><span class="white" style="font-weight: 600;">80%</span> of Claude Code revenue comes from enterprises. Enterprise AI budgets growing <span class="white" style="font-weight: 600;">75% YoY</span>.</div>
+        </div>
+        <div class="card" style="border-color: var(--amber); background: rgba(245, 158, 11, 0.06);">
+          <div class="card-title" style="color: var(--amber);">Regulatory tailwind</div>
+          <div class="card-body">EU AI Act full enforcement: <span class="white" style="font-weight: 600;">August 2, 2026</span>. ~500K EU companies must demonstrate AI oversight.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== SLIDE 9: TRACTION ======== -->
+  <div class="slide" data-slide="8">
+    <div class="slide-inner">
+      <div class="label anim-up">Traction</div>
+      <h1 class="headline headline-lg anim-up delay-1">All inbound. All organic.</h1>
+      <div class="spacer-md"></div>
+      <div class="grid-4 anim-up delay-2">
+        <div style="text-align: center;">
+          <div class="stat-huge">92</div>
+          <div class="stat-label">Qualified leads<br><span class="dim">30+ hrs/week Claude Code</span></div>
+        </div>
+        <div style="text-align: center;">
+          <div class="stat-huge">14</div>
+          <div class="stat-label">Live trials<br><span class="dim">conducted</span></div>
+        </div>
+        <div style="text-align: center;">
+          <div class="stat-huge green">9</div>
+          <div class="stat-label">LOIs signed<br><span class="dim">$400&ndash;700K annually</span></div>
+        </div>
+        <div style="text-align: center;">
+          <div class="stat-huge blue">MIT</div>
+          <div class="stat-label">Open source<br><span class="dim">license</span></div>
+        </div>
+      </div>
+      <div class="spacer-md"></div>
+      <div class="grid-2 anim-up delay-3">
+        <div>
+          <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 12px;">Key Partnerships</div>
+          <div class="flex-col gap-sm">
+            <div class="card" style="padding: 16px 20px;">
+              <span class="white" style="font-weight: 600;">Redwood Research</span> <span class="dim">&middot; $50K/yr LOI</span>
+            </div>
+            <div class="card" style="padding: 16px 20px;">
+              <span class="white" style="font-weight: 600;">Cambridge Inference</span> <span class="dim">&middot; Finance &amp; defense</span>
+            </div>
+            <div class="card" style="padding: 16px 20px;">
+              <span class="white" style="font-weight: 600;">Apollo Research</span> <span class="dim">&middot; AI safety</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="quote" style="height: 100%; display: flex; flex-direction: column; justify-content: center;">
+            "I saw the website and immediately thought, 'I want that.' It's like CLAUDE.md that actually works."
+            <span class="quote-attr">Nicolas Mesa, Cofounder &amp; CTO, Veleiro AI<br>(Ex-Amazon, Ex-Meta)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== SLIDE 10: BUSINESS MODEL ======== -->
+  <div class="slide" data-slide="9">
+    <div class="slide-inner">
+      <div class="label anim-up">Business Model</div>
+      <h1 class="headline headline-lg anim-up delay-1">Open core</h1>
+      <p class="subtitle anim-up delay-1">The LiteLLM playbook: free proxy drives adoption, enterprise features drive revenue.</p>
+      <div class="spacer-md"></div>
+      <div class="grid-3 anim-up delay-2">
+        <div class="card" style="text-align: center;">
+          <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 8px;">Community</div>
+          <div style="font-family: var(--serif); font-size: 2rem; color: var(--white);">Free</div>
+          <div class="card-body" style="margin-top: 8px;">Forever. Drives adoption.</div>
+        </div>
+        <div class="card card-accent" style="text-align: center;">
+          <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--blue); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 8px;">Teams</div>
+          <div style="font-family: var(--serif); font-size: 2rem; color: var(--white);">~$49<span style="font-size: 1rem; color: var(--text-dim);">/seat/mo</span></div>
+          <div class="card-body" style="margin-top: 8px;">Policy enforcement, dashboards, team controls.</div>
+        </div>
+        <div class="card" style="text-align: center; border-color: var(--green); background: var(--green-dim);">
+          <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--green); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 8px;">Enterprise</div>
+          <div style="font-family: var(--serif); font-size: 2rem; color: var(--white);">Custom</div>
+          <div class="card-body" style="margin-top: 8px;">$25K&ndash;$300K/yr. SSO, audit, compliance.</div>
+        </div>
+      </div>
+      <div class="spacer-lg"></div>
+      <div class="anim-up delay-3">
+        <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 16px;">Revenue Phasing</div>
+        <div class="timeline">
+          <div class="timeline-item active">
+            <div class="timeline-label">Now</div>
+            <div class="timeline-value">Free</div>
+            <div class="timeline-text">Building community<br>&amp; open-source traction</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-label">Q2&ndash;Q3 2026</div>
+            <div class="timeline-value">$50&ndash;250K</div>
+            <div class="timeline-text">Design partners<br>&amp; pilot programs</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-label">Q4 2026</div>
+            <div class="timeline-value">Paid Tier</div>
+            <div class="timeline-text">Open-core launch<br>EU AI Act enforcement</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-label">2027+</div>
+            <div class="timeline-value">Scale</div>
+            <div class="timeline-text">Expand beyond<br>coding agents</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== SLIDE 11: TEAM ======== -->
+  <div class="slide" data-slide="10">
+    <div class="slide-inner">
+      <div class="label anim-up">Team</div>
+      <h1 class="headline headline-lg anim-up delay-1">Why us</h1>
+      <p class="subtitle anim-up delay-1">Luthien requires deep AI safety expertise <em>and</em> the ability to ship enterprise AI products. We've done both.</p>
+      <div class="spacer-md"></div>
+      <div class="grid-2 anim-up delay-2">
+        <div class="founder-card">
+          <div class="founder-role">Co-CEO &middot; Product &amp; Engineering</div>
+          <div class="founder-name">Jai Dhyani</div>
+          <div class="founder-bio">
+            10+ years ML engineering at <strong>Meta</strong> and <strong>Amazon</strong>. <strong>MATS alumni</strong>. Co-authored <strong>RE-Bench</strong> with METR, the leading AI evaluations organization. Built Luthien's core proxy architecture from the ground up.
+          </div>
+          <div class="founder-highlight">
+            One of very few engineers with deep production ML experience <em>and</em> formal AI safety research credentials. Understands both what AI agents can do and what can go wrong.
+          </div>
+        </div>
+        <div class="founder-card">
+          <div class="founder-role">Co-CEO &middot; Growth &amp; Strategy</div>
+          <div class="founder-name">Scott Wofford</div>
+          <div class="founder-bio">
+            9 years as <strong>Principal Product Manager-Technical</strong> at Amazon. Built the AI systems behind cart recommendations, delivery optimization, and Prime &mdash; driving <strong>$6.8B in sales</strong> and <strong>$4.5B in profit</strong>. MBA from Darden, Fulbright Scholar.
+          </div>
+          <div class="founder-highlight">
+            Proven track record turning AI systems into massive enterprise business outcomes. Knows how to sell AI infrastructure to the companies that need it most.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== SLIDE 12: PRIOR FUNDING ======== -->
+  <div class="slide" data-slide="11">
+    <div class="slide-inner">
+      <div class="label anim-up">Prior Funding</div>
+      <h1 class="headline headline-lg anim-up delay-1">$220K in pre-accelerator grants</h1>
+      <div class="spacer-lg"></div>
+      <div class="flex-col gap-md anim-up delay-2">
+        <div class="fund-bar">
+          <div class="fund-bar-label">AISTOF Seed Grant</div>
+          <div class="fund-bar-track">
+            <div class="fund-bar-fill" style="width: 68%; background: var(--blue);">$150K</div>
+          </div>
+        </div>
+        <div class="fund-bar">
+          <div class="fund-bar-label">Seldon Labs (Apart Research)</div>
+          <div class="fund-bar-track">
+            <div class="fund-bar-fill" style="width: 23%; background: var(--green);">$50K</div>
+          </div>
+        </div>
+        <div class="fund-bar">
+          <div class="fund-bar-label">Manifund + DonorBox + ACH</div>
+          <div class="fund-bar-track">
+            <div class="fund-bar-fill" style="width: 17%; background: var(--text-dim);">$38K</div>
+          </div>
+        </div>
+      </div>
+      <div class="spacer-lg"></div>
+      <div class="grid-2 anim-up delay-3">
+        <div class="card card-accent">
+          <div class="card-title">Seldon Labs Follow-On</div>
+          <div class="card-body"><span class="white" style="font-weight: 600;">$500K</span> follow-on commitment at $15M post-money cap</div>
+        </div>
+        <div class="card">
+          <div class="card-title" style="color: var(--text-dim);">AISTOF Status</div>
+          <div class="card-body">Pending IRS approval for grant disbursement</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== SLIDE 13: THE ASK ======== -->
+  <div class="slide" data-slide="12">
+    <div class="slide-inner" style="text-align: center;">
+      <div class="label anim-up">The Ask</div>
+      <h1 class="headline headline-xl anim-up delay-1" style="color: var(--blue);">$2M Seed</h1>
+      <p class="subtitle anim-up delay-2">SAFE at $15M post-money cap</p>
+      <div class="spacer-lg"></div>
+      <div class="grid-3 anim-up delay-3">
+        <div class="card" style="text-align: center;">
+          <div style="font-family: var(--serif); font-size: 2.5rem; color: var(--blue);">50%</div>
+          <div class="card-title">Engineering</div>
+          <div class="card-body">2 key hires to accelerate core platform development</div>
+        </div>
+        <div class="card" style="text-align: center;">
+          <div style="font-family: var(--serif); font-size: 2.5rem; color: var(--green);">30%</div>
+          <div class="card-title">Growth</div>
+          <div class="card-body">Developer outreach, community building, design partners</div>
+        </div>
+        <div class="card" style="text-align: center;">
+          <div style="font-family: var(--serif); font-size: 2.5rem; color: var(--text-muted);">20%</div>
+          <div class="card-title">Infrastructure</div>
+          <div class="card-body">Operations, hosting, compliance tooling</div>
+        </div>
+      </div>
+      <div class="spacer-lg"></div>
+      <div class="anim-up delay-4" style="display: inline-block; border: 1px solid var(--green); border-radius: 10px; padding: 20px 40px; background: var(--green-dim);">
+        <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--green); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 4px;">Milestone</div>
+        <div style="font-family: var(--serif); font-size: 1.6rem; color: var(--white);">$250K MRR within 18 months</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== SLIDE 14: CLOSE ======== -->
+  <div class="slide title-slide" data-slide="13">
+    <div class="slide-inner">
+      <div class="logo-mark anim-up">Luthien</div>
+      <div class="spacer-md"></div>
+      <p class="subtitle anim-up delay-1" style="font-family: var(--serif); font-style: italic; font-size: clamp(1.2rem, 2.5vw, 1.7rem); color: var(--text-muted);">
+        Making it safe to run AI at full power
+      </p>
+      <div class="spacer-sm"></div>
+      <p class="anim-up delay-2" style="font-size: 1rem; color: var(--text-dim); max-width: 520px; text-align: center; line-height: 1.6;">
+        Every organization will need to manage its AI agents.<br>We're building the control layer that makes that possible.
+      </p>
+      <div class="spacer-lg"></div>
+      <div class="close-links anim-up delay-3">
+        <a href="https://luthien.cc" class="close-link" target="_blank">luthien.cc</a>
+        <a href="mailto:jai@luthienresearch.org" class="close-link">jai@luthienresearch.org</a>
+        <a href="mailto:scott@luthienresearch.org" class="close-link">scott@luthienresearch.org</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Progress bar -->
+<div class="progress-bar">
+  <div class="progress-fill" id="progressFill"></div>
+</div>
+
+<!-- Controls -->
+<div class="controls">
+  <span class="slide-counter" id="slideCounter">1 / 14</span>
+  <div class="nav-dots" id="navDots"></div>
+</div>
+
+<!-- Fullscreen button -->
+<button class="fs-btn" id="fsBtn" title="Toggle fullscreen">F11 &middot; Fullscreen</button>
+
+<script>
+(function() {
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+  let transitioning = false;
+
+  const counter = document.getElementById('slideCounter');
+  const progress = document.getElementById('progressFill');
+  const dotsContainer = document.getElementById('navDots');
+  const fsBtn = document.getElementById('fsBtn');
+
+  // Build dots
+  for (let i = 0; i < total; i++) {
+    const dot = document.createElement('button');
+    dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(dot);
+  }
+
+  function updateUI() {
+    counter.textContent = (current + 1) + ' / ' + total;
+    progress.style.width = ((current + 1) / total * 100) + '%';
+    dotsContainer.querySelectorAll('.nav-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+    });
+  }
+
+  function goTo(index) {
+    if (index === current || transitioning || index < 0 || index >= total) return;
+    transitioning = true;
+
+    const dir = index > current ? 1 : -1;
+    const prev = slides[current];
+    const next = slides[index];
+
+    // Position incoming slide off-screen without transition
+    next.style.transition = 'none';
+    next.style.opacity = '0';
+    next.style.transform = 'translateX(' + (dir * 40) + 'px)';
+    next.offsetHeight; // force reflow
+
+    // Hide previous slide
+    prev.classList.remove('active');
+
+    // Animate incoming slide in
+    next.style.transition = 'opacity 0.5s cubic-bezier(0.4,0,0.2,1), transform 0.5s cubic-bezier(0.4,0,0.2,1)';
+    next.style.opacity = '1';
+    next.style.transform = 'translateX(0)';
+    next.classList.add('active');
+
+    current = index;
+    updateUI();
+
+    setTimeout(() => {
+      // Clean up inline styles so CSS classes take over
+      next.style.transition = '';
+      next.style.opacity = '';
+      next.style.transform = '';
+      prev.style.transform = '';
+      prev.style.opacity = '';
+      prev.style.transition = '';
+      transitioning = false;
+    }, 550);
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  // Keyboard
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault();
+      next();
+    } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      prev();
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      goTo(0);
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      goTo(total - 1);
+    } else if (e.key === 'f' || e.key === 'F') {
+      toggleFullscreen();
+    }
+  });
+
+  // Touch/swipe
+  let touchStartX = 0;
+  let touchStartY = 0;
+  document.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  document.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+      dx < 0 ? next() : prev();
+    }
+  }, { passive: true });
+
+  // Fullscreen
+  function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen();
+    }
+  }
+
+  fsBtn.addEventListener('click', toggleFullscreen);
+
+  document.addEventListener('fullscreenchange', () => {
+    fsBtn.textContent = document.fullscreenElement ? 'ESC · Exit' : 'F11 · Fullscreen';
+  });
+
+  updateUI();
+})();
+</script>
+
+</body>
+</html>
