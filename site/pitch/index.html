@@ -92,6 +92,19 @@
       max-width: 1100px;
       margin: 0 auto;
       width: 100%;
+      position: relative;
+    }
+
+    .slide-title {
+      position: absolute;
+      top: -44px;
+      right: 0;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
     }
 
     /* ============ TYPOGRAPHY ============ */
@@ -862,8 +875,7 @@
   <!-- ======== SLIDE 2: THE PARADOX ======== -->
   <div class="slide" data-slide="1">
     <div class="slide-inner">
-      <div class="label anim-up">The Problem</div>
-      <h1 class="headline headline-lg anim-up delay-1">The Agentic AI Paradox</h1>
+      <div class="slide-title">The Problem</div>
       <div class="spacer-md"></div>
       <div class="grid-2 anim-up delay-2">
         <div class="card card-red">
@@ -896,8 +908,7 @@
   <!-- ======== SLIDE 3: THE UNLOCK ======== -->
   <div class="slide" data-slide="2">
     <div class="slide-inner" style="text-align: center;">
-      <div class="label anim-up">The Unlock</div>
-      <h1 class="headline headline-lg anim-up delay-1">Luthien solves both problems<br>simultaneously</h1>
+      <h1 class="headline headline-lg anim-up">Luthien solves both problems<br>simultaneously</h1>
       <div class="spacer-lg"></div>
       <div class="flex-row anim-up delay-2" style="justify-content: center; align-items: center; flex-wrap: wrap; gap: 16px;">
         <div class="card" style="flex: 0 1 220px; text-align: center; padding: 24px;">
@@ -928,8 +939,7 @@
   <!-- ======== SLIDE 4: ORG-LEVEL CONTROL ======== -->
   <div class="slide" data-slide="3">
     <div class="slide-inner">
-      <div class="label anim-up">How It Works</div>
-      <h1 class="headline headline-lg anim-up delay-1">One Control Plane for Your Entire Org</h1>
+      <div class="slide-title">How It Works</div>
       <div class="spacer-md"></div>
       <div class="grid-2 anim-up delay-2" style="gap: 40px; align-items: start;">
 
@@ -1026,8 +1036,7 @@
   <!-- ======== SLIDE 5: CAPABILITIES ======== -->
   <div class="slide" data-slide="4">
     <div class="slide-inner">
-      <div class="label anim-up">Why Luthien</div>
-      <h1 class="headline headline-lg anim-up delay-1">The Control Layer Orgs Need</h1>
+      <div class="slide-title">Why Luthien</div>
       <div class="spacer-md"></div>
       <div class="grid-3 anim-up delay-2">
         <div class="card">
@@ -1065,8 +1074,7 @@
   <!-- ======== SLIDE 6: COMPETITIVE ======== -->
   <div class="slide" data-slide="5">
     <div class="slide-inner">
-      <div class="label anim-up">Competitive Landscape</div>
-      <h1 class="headline headline-lg anim-up delay-1">Why Not Alternatives?</h1>
+      <div class="slide-title">Competitive Landscape</div>
       <div class="spacer-md"></div>
       <div class="anim-up delay-2" style="border: 1px solid var(--border); border-radius: 12px; overflow: hidden;">
         <div class="compare-row header">
@@ -1100,8 +1108,7 @@
   <!-- ======== SLIDE 7: MOAT ======== -->
   <div class="slide" data-slide="6">
     <div class="slide-inner">
-      <div class="label anim-up">Defensibility</div>
-      <h1 class="headline headline-lg anim-up delay-1">"Won't Anthropic Build This?"</h1>
+      <div class="slide-title">Defensibility</div>
       <div class="spacer-md"></div>
       <div class="flex-col gap-md anim-up delay-2">
         <div class="card">
@@ -1128,8 +1135,7 @@
   <!-- ======== SLIDE 8: MARKET ======== -->
   <div class="slide" data-slide="7">
     <div class="slide-inner">
-      <div class="label anim-up">Market</div>
-      <h1 class="headline headline-lg anim-up delay-1">This market is moving fast</h1>
+      <div class="slide-title">Market</div>
       <div class="spacer-md"></div>
       <div class="grid-4 anim-up delay-2">
         <div style="text-align: center;">
@@ -1172,8 +1178,7 @@
   <!-- ======== SLIDE 9: TRACTION ======== -->
   <div class="slide" data-slide="8">
     <div class="slide-inner">
-      <div class="label anim-up">Traction</div>
-      <h1 class="headline headline-lg anim-up delay-1">Early traction</h1>
+      <div class="slide-title">Traction</div>
       <div class="spacer-md"></div>
       <div class="grid-4 anim-up delay-2">
         <div style="text-align: center;">
@@ -1225,8 +1230,7 @@
   <!-- ======== SLIDE 10: BUSINESS MODEL ======== -->
   <div class="slide" data-slide="9">
     <div class="slide-inner">
-      <div class="label anim-up">Business Model</div>
-      <h1 class="headline headline-lg anim-up delay-1">Open core</h1>
+      <div class="slide-title">Business Model</div>
       <p class="subtitle anim-up delay-1">The LiteLLM playbook: free proxy drives adoption, enterprise features drive revenue.</p>
       <div class="spacer-md"></div>
       <div class="grid-3 anim-up delay-2">
@@ -1278,8 +1282,7 @@
   <!-- ======== SLIDE 11: TEAM ======== -->
   <div class="slide" data-slide="10">
     <div class="slide-inner">
-      <div class="label anim-up">Team</div>
-      <h1 class="headline headline-lg anim-up delay-1">Why us</h1>
+      <div class="slide-title">Team</div>
       <p class="subtitle anim-up delay-1">This problem needs people who understand AI safety research <em>and</em> can ship enterprise products. That's us.</p>
       <div class="spacer-md"></div>
       <div class="grid-2 anim-up delay-2">
@@ -1310,8 +1313,7 @@
   <!-- ======== SLIDE 12: PRIOR FUNDING ======== -->
   <div class="slide" data-slide="11">
     <div class="slide-inner">
-      <div class="label anim-up">Prior Funding</div>
-      <h1 class="headline headline-lg anim-up delay-1">$220K in pre-accelerator grants</h1>
+      <div class="slide-title">Prior Funding</div>
       <div class="spacer-lg"></div>
       <div class="flex-col gap-md anim-up delay-2">
         <div class="fund-bar">
@@ -1350,8 +1352,7 @@
   <!-- ======== SLIDE 13: THE ASK ======== -->
   <div class="slide" data-slide="12">
     <div class="slide-inner" style="text-align: center;">
-      <div class="label anim-up">The Ask</div>
-      <h1 class="headline headline-xl anim-up delay-1" style="color: var(--blue);">$2M Seed</h1>
+      <h1 class="headline headline-xl anim-up" style="color: var(--blue);">$2M Seed</h1>
       <p class="subtitle anim-up delay-2">SAFE at $15M post-money cap</p>
       <div class="spacer-lg"></div>
       <div class="grid-3 anim-up delay-3">
