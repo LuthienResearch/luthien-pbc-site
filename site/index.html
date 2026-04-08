@@ -1070,6 +1070,16 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.4);
     }
 
+    .quote-card[data-url] {
+      cursor: pointer;
+    }
+
+    .quote-card[data-url]:active {
+      transform: translateY(0);
+      box-shadow: none;
+      opacity: 0.85;
+    }
+
     /* ========== BUTTON PRESS EFFECT ========== */
     .btn {
       transition: all 0.2s, transform 0.1s;
@@ -1562,6 +1572,15 @@
         wrapper.className = "card-wrapper";
         wrapper.setAttribute("data-cats", q.cats.join(" "));
         wrapper.innerHTML = buildCardHTML(q);
+        if (q.sourceUrl) {
+          var card = wrapper.querySelector(".quote-card");
+          card.setAttribute("data-url", q.sourceUrl);
+          card.addEventListener("click", function(e) {
+            // Don't fire if the user clicked a link/button inside the card
+            if (e.target.closest("a, button")) return;
+            window.open(q.sourceUrl, "_blank", "noopener,noreferrer");
+          });
+        }
         grid.appendChild(wrapper);
       });
 
