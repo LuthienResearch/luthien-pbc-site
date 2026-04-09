@@ -3,45 +3,271 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Luthien — Problem Widget (standalone)</title>
+  <title>Luthien - AI Control for Claude Code</title>
+  <meta name="description" content="Open-source proxy that enforces rules on Claude Code. Catches context rot, ignored instructions, and suspicious behavior.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Luthien - AI Control for Claude Code">
+  <meta property="og:description" content="Open-source proxy that enforces rules on Claude Code. Catches context rot, ignored instructions, and suspicious behavior.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://luthien.cc/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Luthien - AI Control for Claude Code">
+  <meta name="twitter:description" content="Open-source proxy that enforces rules on Claude Code. Catches context rot, ignored instructions, and suspicious behavior.">
+
+  <meta name="theme-color" content="#141216">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&family=Lora:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Lora:wght@400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { font-size: 17.6px; }
+
+    html { scroll-behavior: smooth; font-size: 17.6px; overflow-y: scroll; }
+
     body {
-      background: transparent;
+      background: #141216;
       color: #EDE5D8;
-      font-family: 'Lora', Georgia, 'Times New Roman', serif;
+      font-family: 'Lora', Georgia, serif;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      padding: 24px;
+      overflow-x: hidden;
     }
+
     h1, h2, h3 {
-      font-family: 'Raleway', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Raleway', sans-serif;
       color: #EDE5D8;
       line-height: 1.2;
     }
+
     code, pre, .mono {
       font-family: 'JetBrains Mono', 'Fira Code', monospace;
     }
-    .container {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 0 24px;
+
+    a { color: #3B9494; text-decoration: none; }
+    a:hover { color: #4AADAD; }
+
+    .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+    .hero .container {
+      max-width: 1200px;
     }
+
     .section-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem;
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #EDE5D8;
+      margin-bottom: 20px;
+      max-width: 960px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    section { padding: 40px 0; }
+    @media (max-width: 640px) {
+      section { padding: 28px 0; }
+    }
+
+    hr.divider {
+      border: none;
+      border-top: 1px solid #28243A;
+      margin: 0;
+    }
+
+    /* ========== SECTION HEADERS ========== */
+    .section-header {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+
+    /* ========== BUTTONS ========== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 0;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary { background: #3B9494; color: #141216; }
+    .btn-primary:hover { background: #2A8080; color: #141216; }
+
+    .btn-secondary { background: transparent; color: #EDE5D8; border: 1px solid #3B9494; }
+    .btn-secondary:hover { border-color: #4AADAD; color: #4AADAD; }
+
+    .btn-group { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+
+    /* ========== HERO ========== */
+    .hero {
+      min-height: auto;
+      display: flex;
+      align-items: center;
+      padding-top: 180px;
+      padding-bottom: 40px;
+    }
+
+    .hero-content { max-width: 1200px; margin: 0 auto; text-align: center; }
+
+
+    .hero h1 {
+ font-size: clamp(2.2rem, 6vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.hero-oneliner {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  color: #EDE5D8;
+  margin-bottom: 24px;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.5;
+  text-wrap: balance;
+}
+
+    /* ========== TOP NAV ========== */
+    .top-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(20, 18, 22, 0.97);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid #28243A;
+      padding: 0 3%;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-wordmark {
+      display: block;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-link {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
       color: #7A7290;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 8px;
+      text-decoration: none;
+      transition: color 0.2s;
     }
-    .card-grid-section {
-      padding: 0;
+
+    .nav-link:hover { color: #EDE5D8; }
+    .nav-link.active { color: #EDE5D8; }
+
+    .nav-setup {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #141216;
+      text-decoration: none;
+      padding: 5px 14px;
+      background: #3B9494;
+      border: 1px solid #3B9494;
+      border-radius: 0;
+      transition: all 0.15s;
+      cursor: pointer;
     }
+    .nav-setup:hover { background: #2A8080; border-color: #2A8080; color: #141216; }
+
+    .nav-gh {
+      display: flex;
+      background: #3B9494;
+      padding: 6px;
+      border-radius: 0;
+      transition: background 0.2s;
+    }
+    .nav-gh svg { fill: #141216; }
+    .nav-gh:hover { background: #2A8080; }
+
+    /* Hamburger menu button (mobile only) */
+    .nav-hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      margin: -10px;
+    }
+    .nav-hamburger svg { fill: #EDE5D8; }
+    .nav-hamburger:hover svg { fill: #EDE5D8; }
+
+    @media (max-width: 640px) {
+      .nav-link { display: none; }
+      .nav-right { gap: 64px; }
+      .nav-setup { display: none; }
+      .nav-gh { display: none; }
+      .nav-hamburger { display: flex; align-items: center; }
+
+      /* Mobile menu overlay */
+      .nav-right.open {
+        position: fixed;
+        top: 58px;
+        left: 0;
+        right: 0;
+        background: rgba(20, 18, 22, 0.97);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid #28243A;
+        flex-direction: column;
+        padding: 16px 24px;
+        gap: 0;
+        z-index: 99;
+      }
+      .nav-right.open .nav-link,
+      .nav-right.open .nav-setup {
+        display: block;
+        padding: 12px 0;
+        font-size: 1rem;
+        width: 100%;
+        border-bottom: 1px solid #28243A;
+      }
+      .nav-right.open .nav-setup {
+        border: none;
+        border-bottom: 1px solid #28243A;
+        border-radius: 0;
+        padding: 12px 0;
+        text-align: left;
+      }
+      .nav-right.open .nav-gh { display: none; }
+    }
+
     /* ========== MULTI-CARD GRID ========== */
     .card-grid-section {
       background: #141216;
@@ -61,7 +287,7 @@
         overflow-x: auto;
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
-        gap: 12px;
+        gap: 64px;
         padding-bottom: 8px;
       }
       .card-grid > .card-wrapper {
@@ -85,9 +311,9 @@
 
     /* ========== QUOTE CARD BASE ========== */
     .quote-card {
-      background: #201C2A;
+      background: #181520;
       border: 1px solid #28243A;
-      border-radius: 2px;
+      border-radius: 8px;
       padding: 12px 14px;
       max-width: 100%;
       display: flex;
@@ -100,15 +326,15 @@
 
     .quote-text {
       font-size: 0.95rem;
-      color: #e4e4e7;
+      color: #EDE5D8;
       line-height: 1.45;
       flex-grow: 1;
     }
 
     /* ---- Twitter/X card ---- */
     .quote-card.twitter {
-      background: #15202b;
-      border: 1px solid #2f3336;
+      background: #1A1729;
+      border: 1px solid #28243A;
       border-radius: 10px;
       padding: 12px 14px 20px;
       position: relative;
@@ -128,7 +354,7 @@
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background: #2f3336;
+      background: #28243A;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -308,28 +534,28 @@
       padding: 14px 16px;
       position: relative;
     }
-    .quote-card.blog .blog-open-quote { font-size: 2rem; line-height: 0.7; color: #a1a1aa; font-family: Georgia, 'Times New Roman', serif; margin-bottom: 6px; }
+    .quote-card.blog .blog-open-quote { font-size: 2rem; line-height: 0.7; color: #EDE5D8; font-family: Georgia, 'Times New Roman', serif; margin-bottom: 6px; }
     .quote-card.blog .quote-text {
       font-style: normal;
       font-weight: 400;
       font-size: 0.95rem;
       line-height: 1.45;
       font-family: Georgia, 'Times New Roman', serif;
-      color: #e4e4e7;
+      color: #EDE5D8;
     }
     .quote-card.blog .blog-footer {
       margin-top: 8px;
       padding-top: 6px;
       border-top: 1px solid #2c2c2e;
       font-size: 0.8rem;
-      color: #a1a1aa;
-      font-family: 'Inter', sans-serif;
+      color: #EDE5D8;
+      font-family: 'Raleway', sans-serif;
       display: flex;
       align-items: center;
       gap: 5px;
     }
     .quote-card.blog .blog-footer .blog-globe { font-size: 0.85rem; }
-    .quote-card.blog .blog-footer .blog-domain { color: #a1a1aa; font-weight: 500; }
+    .quote-card.blog .blog-footer .blog-domain { color: #EDE5D8; font-weight: 500; }
 
     /* ---- GitHub Issue card ---- */
     .quote-card.github {
@@ -367,9 +593,9 @@
       display: flex;
       align-items: center;
       gap: 3px;
-      color: #a1a1aa;
+      color: #EDE5D8;
       font-size: 0.65rem;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Raleway', sans-serif;
       letter-spacing: 0.02em;
     }
     .quote-card.blog .blog-badge svg { opacity: 0.4; width: 15px; height: 15px; }
@@ -401,9 +627,9 @@
       font-weight: 600;
       line-height: 1.5;
       border-radius: 2em;
-      border: 1px solid rgba(219,171,63,0.4);
-      color: #d2a04a;
-      background: rgba(219,171,63,0.1);
+      border: 1px solid rgba(196,123,66,0.4);
+      color: #C47B42;
+      background: rgba(196,123,66,0.1);
     }
 
 
@@ -439,8 +665,8 @@
       border-radius: 20px;
       border: 1px solid #28243A;
       background: transparent;
-      color: #a1a1aa;
-      font-family: 'Inter', sans-serif;
+      color: #7A7290;
+      font-family: 'Raleway', sans-serif;
       font-size: 0.75rem;
       font-weight: 500;
       cursor: pointer;
@@ -449,9 +675,15 @@
       flex-shrink: 0;
     }
 
-    .filter-pill:hover {
-      border-color: #3f3f46;
-      color: #a1a1aa;
+    .filter-pill:not(.active):hover {
+      border-color: #3B9494;
+      color: #B0A8BE;
+    }
+
+    .filter-pill.active:hover {
+      border-color: var(--pill-color, #3B9494);
+      color: var(--pill-color, #3B9494);
+      background: var(--pill-bg, rgba(59, 148, 148, 0.1));
     }
 
     .filter-pill.active {
@@ -462,11 +694,11 @@
 
     .filter-pill[data-filter="all"].active {
       --pill-color: #EDE5D8;
-      --pill-bg: rgba(237, 229, 216, 0.08);
+      --pill-bg: rgba(250, 250, 250, 0.08);
     }
     .filter-pill[data-filter="deleted"].active {
-      --pill-color: #C45050;
-      --pill-bg: rgba(196, 80, 80, 0.1);
+      --pill-color: #ef4444;
+      --pill-bg: rgba(239, 68, 68, 0.1);
     }
     .filter-pill[data-filter="ignored"].active {
       --pill-color: #C47B42;
@@ -519,7 +751,7 @@
       border-radius: 50%;
       border: 1px solid #28243A;
       background: transparent;
-      color: #a1a1aa;
+      color: #EDE5D8;
       font-size: 1rem;
       cursor: pointer;
       display: flex;
@@ -542,15 +774,438 @@
     .card-nav-count {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.7rem;
-      color: #a1a1aa;
+      color: #EDE5D8;
       white-space: nowrap;
     }
 
+    /* ========== UX: BEFORE/AFTER ========== */
+    .ux-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      max-width: 900px;
+      align-items: start;
+    }
+    @media (max-width: 640px) {
+      .ux-grid { grid-template-columns: 1fr !important; }
+    }
+
+    .demo-annotation {
+      margin-top: 10px;
+      font-size: 0.82rem;
+      color: #EDE5D8;
+      line-height: 1.5;
+    }
+
+    .term-arch { max-width: 880px; margin: 0 auto; font-family: 'JetBrains Mono', monospace; }
+    .term-flow { background: #111; border: 1px solid #28243A; border-radius: 10px; overflow: hidden; }
+    .term-chrome {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 16px;
+      background: #141216;
+      border-bottom: 1px solid #28243A;
+    }
+    .term-chrome-dot { width: 11px; height: 11px; border-radius: 50%; }
+    .term-chrome-title {
+      margin-left: auto;
+      font-size: 0.68rem;
+      color: #EDE5D8;
+      letter-spacing: 0.02em;
+    }
+    .term-flow-body { padding: 1.5rem 1.75rem; overflow-x: auto; display: flex; justify-content: center; }
+    .term-flow pre { margin: 0; font-size: 0.9rem; line-height: 1.7; color: #EDE5D8; white-space: pre; }
+    .term-flow .hl-you { color: #EDE5D8; }
+    .term-flow .hl-luthien { color: #3B9494; font-weight: 700; }
+    .term-flow .hl-api { color: #EDE5D8; }
+    .term-flow .hl-arrow { color: #EDE5D8; }
+    .term-flow .hl-pipe { color: #EDE5D8; }
+    .term-flow .hl-desc { color: #EDE5D8; }
+    .term-flow .hl-monitor { color: #C47B42; }
+    .term-flow .hl-block { color: #ef4444; }
+    .term-flow .hl-change { color: #C47B42; }
+    .arch-latency { font-size: 0.68rem; color: #22c55e; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.25); padding: 0.15rem 0.55rem; border-radius: 20px; font-family: 'JetBrains Mono', monospace; animation: latency-pulse 2.8s ease-in-out infinite; }
+
+    @keyframes latency-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.35); }
+      50% { box-shadow: 0 0 0 3px rgba(34,197,94,0); }
+    }
+
+    .arch-judge-note {
+      margin-top: 16px;
+      font-size: 0.9rem;
+      color: #EDE5D8;
+      line-height: 1.65;
+      max-width: 700px;
+      text-align: left;
+      font-family: 'Raleway', sans-serif;
+    }
+
+    @media (max-width: 600px) {
+      .term-flow-body { padding: 0.85rem 1rem; }
+      .term-flow pre { font-size: 0.74rem; line-height: 1.55; }
+      .term-chrome-title { display: none; }
+      /* Scroll hint: fade right edge when diagram overflows on narrow screens */
+      .term-flow {
+        -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+        mask-image: linear-gradient(to right, black 85%, transparent 100%);
+      }
+    }
+
+    /* ========== GET STARTED CARD (Option A) ========== */
+    .cta-row {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    @media (max-width: 480px) {
+      .cta-row { flex-direction: column; align-items: center; }
+      .cta-row .btn-secondary { width: 100%; text-align: center; justify-content: center; }
+      .testimonial-card { padding: 16px 20px; }
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      border-top: 1px solid #28243A;
+      padding: 32px 0;
+      margin-top: 48px;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .footer-wordmark {
+      display: block;
+    }
+    .footer-year { font-family: 'Raleway', sans-serif; color: #EDE5D8; font-size: 0.8rem; line-height: 1.7; }
+    .footer-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+    .footer-links { display: flex; gap: 64px; }
+    .footer-links a { color: #EDE5D8; font-size: 0.85rem; line-height: 1.7; }
+    .footer-links a:hover { color: #C8C0B4; }
+
+    @media (max-width: 640px) {
+      .footer-inner {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+      }
+      .footer-right { align-items: center; }
+      .engage-grid { grid-template-columns: 1fr !important; }
+      .setup-grid { grid-template-columns: 1fr !important; }
+    }
+
+    /* ========== EARLY FEEDBACK / TESTIMONIAL ========== */
+    .testimonial-card {
+      max-width: 640px;
+      margin: 0 auto;
+      border-left: 3px solid #C47B42;
+      padding: 24px 28px;
+      background: #181520;
+      border-radius: 0 8px 8px 0;
+    }
+    .testimonial-text {
+      font-size: 1rem;
+      color: #EDE5D8;
+      line-height: 1.6;
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+    .testimonial-attribution {
+      display: flex;
+      align-items: center;
+      gap: 64px;
+    }
+    .testimonial-photo {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .testimonial-name {
+      font-size: 0.9rem;
+      color: #EDE5D8;
+      font-weight: 600;
+    }
+    .testimonial-title {
+      font-size: 0.8rem;
+      color: #EDE5D8;
+    }
+
+    /* ========== BADGE ========== */
+    .badge-beta {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(59, 148, 148, 0.1); border: 1px solid rgba(59, 148, 148, 0.3);
+      border-radius: 20px; padding: 4px 12px; margin-bottom: 20px;
+    }
+    .badge-beta .badge-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: #3B9494; display: inline-block;
+    }
+    .badge-beta .badge-text {
+      font-size: 0.75rem; font-weight: 600; color: #3B9494; letter-spacing: 0.08em;
+    }
+
+    /* ========== SETUP GRID ========== */
+    .setup-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 64px;
+      max-width: 720px; margin: 0 auto 40px;
+    }
+    .setup-step {
+      display: flex; flex-direction: column; gap: 8px;
+      background: #181520; border: 1px solid #28243A; border-radius: 12px; padding: 20px;
+    }
+    .setup-step-num {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #C47B42; font-weight: 700;
+    }
+    .setup-step-title { font-weight: 700; font-size: 1rem; color: #EDE5D8; }
+    .setup-step-desc { font-size: 0.85rem; color: #EDE5D8; line-height: 1.5; }
+    .setup-step-time { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #C47B42; line-height: 1.7; }
+
+    /* ========== FOOTER BOTTOM ========== */
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center; margin-top: 12px;
+    }
+    .footer-version {
+      font-size: 0.7rem; color: #28243A; font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ========== HERO ENTRANCE ANIMATION ========== */
+    @keyframes heroFadeIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero .badge-beta {
+      opacity: 0;
+      animation: heroFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.05s forwards;
+    }
+    .hero h1 {
+      opacity: 0;
+      animation: heroFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.12s forwards;
+    }
+    .hero .hero-oneliner {
+      opacity: 0;
+      animation: heroFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+    }
+    .hero .cta-row {
+      opacity: 0;
+      animation: heroFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+    }
+
+    .quote-card[data-url] {
+      cursor: pointer;
+    }
+
+    .quote-card[data-url]:active {
+      transform: translateY(0);
+      box-shadow: none;
+      opacity: 0.85;
+    }
+
+    /* ========== APPLY FOR BETA INLINE FORM ========== */
+    .hero-cta-note {
+      font-family: 'Lora', serif;
+      font-weight: 400;
+      font-size: 0.85rem;
+      color: #EDE5D8;
+      text-align: center;
+      max-width: 520px;
+      margin: 0.9rem auto 0;
+      line-height: 1.4;
+    }
+    .apply-beta-form {
+      max-width: 640px;
+      margin: 0 auto;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.5s ease, opacity 0.3s ease, margin-top 0.3s ease;
+    }
+    .apply-beta-form.open {
+      max-height: 2000px;
+      opacity: 1;
+      margin-top: 2rem;
+      overflow: visible;
+    }
+    .apply-beta-form iframe {
+      width: 100%;
+      border: 0;
+      display: block;
+      background: transparent;
+    }
+
+    /* ========== SECTION FADE-IN ON SCROLL ========== */
+    .section-reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .section-reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ========== QUOTE CARD HOVER LIFT ========== */
+    .quote-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    /* ========== BUTTON PRESS EFFECT ========== */
+    .btn {
+      transition: all 0.2s, transform 0.1s;
+    }
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    /* ========== NAV LOGO HOVER ========== */
+    .nav-wordmark {
+      transition: opacity 0.2s;
+    }
+    .nav-left:hover .nav-wordmark {
+      opacity: 0.8;
+    }
+
+    /* ========== FOOTER LINK UNDERLINE ANIMATION ========== */
+    .footer-links a {
+      position: relative;
+    }
+    .footer-links a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background: #C8C0B4;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.2s ease;
+    }
+    .footer-links a:hover::after {
+      transform: scaleX(1);
+    }
+
+    /* ========== FOCUS VISIBLE ========== */
+    :focus-visible {
+      outline: 2px solid #3B9494;
+      outline-offset: 2px;
+    }
+    .btn:focus-visible,
+    .filter-pill:focus-visible,
+    .card-nav-btn:focus-visible,
+    .nav-link:focus-visible,
+    .nav-setup:focus-visible,
+    .nav-gh:focus-visible,
+    .nav-hamburger:focus-visible {
+      outline: 2px solid #3B9494;
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    /* ========== REDUCED MOTION ========== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .section-reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
   </style>
 </head>
 <body>
-  <section class="card-grid-section section-reveal" id="problem" style="padding-top: 16px; padding-bottom: 16px;">
+
+  <!-- TOP NAV -->
+  <nav class="top-nav">
+    <a href="index.html" class="nav-left" style="display: flex; align-items: center;">
+      <img src="luthien-new.svg" alt="Luthien" style="height: 38px; width: auto; display: block;">
+    </a>
+    <div class="nav-right" id="navRight">
+      <a href="index.html" class="nav-link active">home</a>
+      <a href="about.html" class="nav-link">about</a>
+      <a href="blog.html" class="nav-link">blog</a>
+      <a href="#apply" class="nav-setup" onclick="event.preventDefault(); openApplyForm();">Apply for beta</a>
+    </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect y="3" width="20" height="2" rx="1" fill="#EDE5D8"/><rect y="9" width="20" height="2" rx="1" fill="#EDE5D8"/><rect y="15" width="20" height="2" rx="1" fill="#EDE5D8"/></svg></button>
+  </nav>
+
+  <main>
+
+  <!-- HERO -->
+ <section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1>Claude Code builds.<br><span style="color: #C47B42;">You</span> stay in control.</h1>
+      <p class="hero-oneliner">Open-source proxy that sits between Claude Code and the Anthropic API. Logs every request. Enforces your rules.</p>
+
+      <div class="cta-row" style="justify-content: center; gap: 64px; margin-top: 1.5rem;">
+        <button type="button" class="btn btn-primary" onclick="openApplyForm('applyBetaForm')" aria-controls="applyBetaForm" aria-expanded="false">
+          Apply for beta
+        </button>
+      </div>
+      <p class="hero-cta-note">We'll help set Luthien up in your dev environment for you and your org.</p>
+
+      <div id="apply" class="apply-anchor" aria-hidden="true"></div>
+      <div id="applyBetaForm" class="apply-beta-form" aria-hidden="true">
+        <iframe data-tally-src="https://tally.so/embed/EkJl0N?alignLeft=1&amp;hideTitle=1&amp;transparentBackground=1&amp;dynamicHeight=1&amp;hideBranding=1"
+                loading="lazy" width="100%" height="400"
+                title="Apply for Luthien beta"></iframe>
+      </div>
+    </div>
+  </div>
+
+</section>
+ 
+
+
+ <!-- DEMO: WITHOUT / WITH LUTHIEN -->
+  <section id="demo" class="section-reveal" style="padding-top: 48px; padding-bottom: 32px;">
+    <div class="section-label">how it works</div>
     <div class="container">
+      
+      <div class="ux-grid">
+        <div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 1rem; font-weight: 700; color: #ef4444; letter-spacing: 0.18em; margin-bottom: 12px;">without luthien</div>
+          <img src="terminal-without-luthien.svg" alt="Without Luthien: Claude Code ignores your CLAUDE.md rules and you correct it manually" style="width: 100%; border-radius: 8px; border: 1px solid #28243A;">
+          <p class="demo-annotation">Claude ignores your CLAUDE.md rule and you correct it manually.</p>
+        </div>
+        <div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 1rem; font-weight: 700; color: #22c55e; letter-spacing: 0.18em; margin-bottom: 12px;">with luthien</div>
+          <img src="terminal-with-luthien.svg" alt="With Luthien: Luthien catches the violation and auto-corrects" style="width: 100%; border-radius: 8px; border: 1px solid #28243A;">
+          <p class="demo-annotation">Luthien catches the violation and auto-corrects. No human intervention needed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  
+  <!-- PROBLEM: THEME BADGES + FILTERABLE CARDS -->
+  <section class="card-grid-section section-reveal" id="problem" style="padding-top: 32px; padding-bottom: 32px;">
+    <div class="section-label">problem</div>
+    <div class="container">
+      <h2 style="font-size: clamp(1.2rem, 2.5vw, 1.5rem); font-weight: 700; color: #EDE5D8; letter-spacing: -0.01em; margin-bottom: 20px; text-align: left;">Claude Code does weird and lazy stuff sometimes.</h2>
+
       <!-- Filter pills -->
       <div class="filter-bar" id="filterBar"></div>
 
@@ -566,6 +1221,137 @@
       </div>
     </div>
   </section>
+
+  <hr class="divider">
+
+
+<!-- SOLUTION -->
+<section id="solution" class="section-reveal" style="padding-top: 32px; padding-bottom: 32px;">
+  <div class="section-label">architecture</div>
+  <div class="container">
+    <div class="term-arch">
+      <div class="term-flow">
+        <div class="term-chrome">
+          <span class="term-chrome-dot" style="background:#ef4444;"></span>
+          <span class="term-chrome-dot" style="background:#f59e0b;"></span>
+          <span class="term-chrome-dot" style="background:#22c55e;"></span>
+          <span class="term-chrome-title">luthien-proxy — request pipeline</span>
+        </div>
+        <div class="term-flow-body"><pre role="img" aria-label="Architecture: You connect to Claude Code, which connects to Luthien (the proxy), which connects to the Anthropic API. Luthien logs every request and response in 5-15ms and enforces your configured rules: did it do what you asked, did it follow CLAUDE.md, did it do something suspicious.">&#x1F9D1;&#x200D;&#x1F4BB; <span class="hl-you">You</span> <span class="hl-arrow">&hArr;</span> &#x1F4BB; <span class="hl-you">Claude Code</span> <span class="hl-arrow">&hArr;</span> <span class="hl-luthien">Luthien</span> <span class="hl-arrow">&hArr;</span> &#x2601;&#xFE0F; <span class="hl-api">Anthropic API</span>
+                            <span class="hl-pipe">|</span>
+                     <span class="hl-desc">logs every request and response.</span>   <span class="arch-latency" style="display: inline;">~5-15ms</span>
+                     <span class="hl-desc">you can configure rules/policies to</span>
+                     <span class="hl-desc">modify or block certain responses or requests:</span>
+                            <span class="hl-pipe">|</span>
+                            <span class="hl-pipe">|--</span> <span class="hl-monitor">did it do what I asked?</span>
+                            <span class="hl-pipe">|--</span> <span class="hl-change">did it follow CLAUDE.md?</span>
+                            <span class="hl-pipe">+--</span> <span class="hl-block">did it do something suspicious?</span></pre></div>
+      </div>
+      <p class="arch-judge-note">Luthien can call a separate model to check whether each response follows your rules. Runs alongside normal requests, adding almost no delay. When Claude Code compacts or starts a new session, Luthien still remembers. Your rules stay enforced from first prompt to last.</p>
+      <p class="arch-judge-note" style="margin-top: 0.5rem;">Uses your existing Anthropic subscription via OAuth. Luthien never sees your API key and there are no extra charges.</p>
+      <a href="https://github.com/LuthienResearch/luthien-proxy?tab=readme-ov-file#what-can-it-do" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 6px; margin-top: 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #3B9494;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        How to set up a custom policy
+      </a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- EARLY FEEDBACK -->
+  <section id="quotes" class="section-reveal" style="padding-top: 32px; padding-bottom: 32px;">
+    <div class="section-label">early feedback</div>
+    <div class="container">
+      <div class="testimonial-card">
+        <p class="testimonial-text">"I saw the website and immediately thought, 'I want that.' I have to correct the pip install thing multiple times per day. You see pip and you're like, I already gave you permissions for uv. But it blocks on that permission and you lose hours of work. Awesome job, guys, it's like CLAUDE.md that actually works."</p>
+        <div class="testimonial-attribution">
+          <img src="https://avatars.githubusercontent.com/nicolasmesa" alt="Nicolás Mesa" class="testimonial-photo" loading="lazy">
+          <div>
+            <div class="testimonial-name">Nicolás Mesa</div>
+            <div class="testimonial-title">Cofounder &amp; CTO @ Veleiro AI | Ex-Amazon | Ex-Meta</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+<!-- Get started --> 
+
+<section id="setup" class="section-reveal" style="padding-top: 32px; padding-bottom: 40px;">
+  <div class="section-label">get started</div>
+  <div class="container">
+    <h2 style="font-size: clamp(1.2rem, 2.5vw, 1.5rem); font-weight: 700; color: #EDE5D8; letter-spacing: -0.01em; margin-bottom: 24px; text-align: center;">Up and running in minutes.</h2>
+    
+    <div class="setup-grid">
+      <div class="setup-step">
+        <div class="setup-step-num">step 01</div>
+        <div class="setup-step-title">Install</div>
+        <p class="setup-step-desc">Works with your existing Claude Code setup.</p>
+        <div class="setup-step-time">~2 mins</div>
+      </div>
+      <div class="setup-step">
+        <div class="setup-step-num">step 02</div>
+        <div class="setup-step-title">Configure your rules</div>
+        <p class="setup-step-desc">Define what Claude is and isn't allowed to do.</p>
+        <div class="setup-step-time">~5 mins</div>
+      </div>
+      <div class="setup-step">
+        <div class="setup-step-num">step 03</div>
+        <div class="setup-step-title">Let Claude build</div>
+        <p class="setup-step-desc">Luthien runs in the background. Your rules get enforced.</p>
+        <div class="setup-step-time">~from now on</div>
+      </div>
+    </div>
+
+    <div class="cta-row" style="justify-content: center; gap: 64px;">
+      <button type="button" class="btn btn-primary" onclick="openApplyForm('applyBetaFormBottom')" aria-controls="applyBetaFormBottom" aria-expanded="false">
+        Apply for beta
+      </button>
+    </div>
+    <p class="hero-cta-note">We'll help set Luthien up in your dev environment for you and your org.</p>
+
+    <div id="applyBetaFormBottom" class="apply-beta-form" aria-hidden="true">
+      <iframe data-tally-src="https://tally.so/embed/EkJl0N?alignLeft=1&amp;hideTitle=1&amp;transparentBackground=1&amp;dynamicHeight=1&amp;hideBranding=1"
+              loading="lazy" width="100%" height="400"
+              title="Apply for Luthien beta"></iframe>
+    </div>
+  </div>
+</section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand" style="flex-direction: column; align-items: flex-start; gap: 6px;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <img src="luthien-new.svg" alt="Luthien" style="height: 34px; width: auto; display: block;">
+            <span class="footer-year">&middot; 2026</span>
+          </div>
+          <a href="https://www.youtube.com/watch?v=YzjvBw96kas" target="_blank" rel="noopener"
+             style="font-family: 'Raleway', sans-serif; font-size: 0.75rem; font-style: italic; color: #D3D3D3; text-decoration: none; transition: color 0.2s;"
+             onmouseover="this.style.color='#EDE5D8'" onmouseout="this.style.color='#EDE5D8'">
+            Power is nothing without control.
+          </a>
+        </div>
+        <div class="footer-right">
+          <div class="footer-links">
+            <a href="https://github.com/LuthienResearch" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://linkedin.com/company/luthien-control" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://www.youtube.com/@LuthienControl" target="_blank" rel="noopener">YouTube</a>
+            <a href="mailto:contact@luthienresearch.org">Email</a>
+          </div>
+          <span class="footer-version">v12</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
 
    <script>
     (function () {
@@ -753,7 +1539,7 @@
           case "blog":
             var blogDomain = q.sourceUrl ? new URL(q.sourceUrl).hostname.replace('www.', '') : q.source;
             return '<div class="quote-card blog">' +
-              '<span class="blog-badge"><svg width="16" height="10" viewBox="0 0 1043.63 592.71" fill="#71717a"><path d="M588.67 296.36c0 163.67-131.78 296.35-294.33 296.35S0 460 0 296.36 131.78 0 294.34 0s294.33 132.69 294.33 296.36"/><path d="M911.56 296.36c0 154.06-65.89 278.86-147.17 278.86s-147.17-124.8-147.17-278.86S683.11 17.5 764.39 17.5s147.17 124.8 147.17 278.86"/><path d="M1043.63 296.36c0 138-23.17 249.94-51.76 249.94s-51.75-111.91-51.75-249.94 23.17-249.94 51.75-249.94 51.76 111.9 51.76 249.94"/></svg></span>' +
+              '<span class="blog-badge"><svg width="16" height="10" viewBox="0 0 1043.63 592.71" fill="#EDE5D8"><path d="M588.67 296.36c0 163.67-131.78 296.35-294.33 296.35S0 460 0 296.36 131.78 0 294.34 0s294.33 132.69 294.33 296.36"/><path d="M911.56 296.36c0 154.06-65.89 278.86-147.17 278.86s-147.17-124.8-147.17-278.86S683.11 17.5 764.39 17.5s147.17 124.8 147.17 278.86"/><path d="M1043.63 296.36c0 138-23.17 249.94-51.76 249.94s-51.75-111.91-51.75-249.94 23.17-249.94 51.75-249.94 51.76 111.9 51.76 249.94"/></svg></span>' +
               '<div class="blog-open-quote">\u201C</div>' +
               '<p class="quote-text">' + plainText + '</p>' +
               '<div class="blog-footer">' +
@@ -773,6 +1559,7 @@
         wrapper.className = "card-wrapper";
         wrapper.setAttribute("data-cats", q.cats.join(" "));
         wrapper.innerHTML = buildCardHTML(q);
+        grid.appendChild(wrapper);
         if (q.sourceUrl) {
           var card = wrapper.querySelector(".quote-card");
           card.setAttribute("data-url", q.sourceUrl);
@@ -782,7 +1569,6 @@
             window.open(q.sourceUrl, "_blank", "noopener,noreferrer");
           });
         }
-        grid.appendChild(wrapper);
       });
 
       // === FILTER + PAGINATION LOGIC ===
@@ -844,59 +1630,69 @@
 
       // Initial render
       renderPage();
-
-      // === Auto-rotate with pill and card modes, configurable via URL hash ===
-      // Supported hash params (e.g. #mode=pill&pillInterval=5000):
-      //   mode          : "cards" | "pill" | "dual"  (default: "cards")
-      //   cardInterval  : ms between card page advances (default 5000)
-      //   pillInterval  : ms between filter pill advances (default 5000)
-      var hashParams = new URLSearchParams(location.hash.replace(/^#/, ""));
-      var rotateMode = hashParams.get("mode") || "cards";
-      var cardInterval = parseInt(hashParams.get("cardInterval"), 10) || 5000;
-      var pillInterval = parseInt(hashParams.get("pillInterval"), 10) || 5000;
-
-      function advanceCardPage() {
-        var totalPages = Math.max(1, Math.ceil(getMatchingWrappers(currentFilter).length / VISIBLE_COUNT));
-        currentPage = (currentPage + 1) % totalPages;
-        renderPage();
-      }
-
-      function advancePill() {
-        var keys = categories.map(function (c) { return c.key; });
-        var idx = keys.indexOf(currentFilter);
-        currentFilter = keys[(idx + 1) % keys.length];
-        currentPage = 0;
-        renderPage();
-      }
-
-      var pillTimer = null;
-      var cardTimer = null;
-
-      function startAutoRotate() {
-        stopAutoRotate();
-        if (rotateMode === "pill") {
-          pillTimer = setInterval(advancePill, pillInterval);
-        } else if (rotateMode === "dual") {
-          cardTimer = setInterval(advanceCardPage, cardInterval);
-          pillTimer = setInterval(advancePill, pillInterval);
-        } else {
-          cardTimer = setInterval(advanceCardPage, cardInterval);
-        }
-      }
-      function stopAutoRotate() {
-        if (pillTimer) { clearInterval(pillTimer); pillTimer = null; }
-        if (cardTimer) { clearInterval(cardTimer); cardTimer = null; }
-      }
-      // Pause on hover, resume on leave
-      document.body.addEventListener("mouseenter", stopAutoRotate);
-      document.body.addEventListener("mouseleave", startAutoRotate);
-      // Reset timers on manual interaction
-      filterBar.addEventListener("click", startAutoRotate);
-      prevBtn.addEventListener("click", startAutoRotate);
-      nextBtn.addEventListener("click", startAutoRotate);
-      // Kick it off
-      startAutoRotate();
     })();
   </script>
+
+  <!-- Mobile hamburger menu toggle -->
+  <script>
+    (function () {
+      var btn = document.getElementById('navHamburger');
+      var nav = document.getElementById('navRight');
+      if (!btn || !nav) return;
+      btn.addEventListener('click', function () {
+        nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', nav.classList.contains('open'));
+      });
+      // Close menu when a link is clicked
+      nav.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () { nav.classList.remove('open'); });
+      });
+    })();
+  </script>
+
+  <!-- Section reveal on scroll -->
+  <script>
+    (function () {
+      var sections = document.querySelectorAll('.section-reveal');
+      if (!sections.length) return;
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      sections.forEach(function (s) { observer.observe(s); });
+    })();
+  </script>
+
+  <!-- Apply-for-beta inline form reveal -->
+  <script>
+    function openApplyForm(formId) {
+      formId = formId || 'applyBetaForm';
+      var form = document.getElementById(formId);
+      if (!form) return;
+      form.classList.add('open');
+      form.setAttribute('aria-hidden', 'false');
+      var btn = document.querySelector('button[aria-controls="' + formId + '"]');
+      if (btn) btn.setAttribute('aria-expanded', 'true');
+      // Wait for the max-height expand transition (~500ms) so the form has its
+      // real size, then scroll only if it isn't already in view. Using "nearest"
+      // (not "center") prevents jumping toward the top of the page when the user
+      // clicks the bottom CTA — it only scrolls the minimum needed.
+      setTimeout(function () {
+        form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 520);
+    }
+    // Auto-open the hero form when landing on the page with #apply (e.g. from nav on about/blog)
+    if (window.location.hash === '#apply') {
+      window.addEventListener('load', function () {
+        setTimeout(function () { openApplyForm('applyBetaForm'); }, 300);
+      });
+    }
+  </script>
+  <script async src="https://tally.so/widgets/embed.js"></script>
+
 </body>
 </html>

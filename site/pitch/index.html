@@ -6,32 +6,35 @@
   <title>Luthien — Investor Deck</title>
   <meta name="robots" content="noindex, nofollow">
 
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2309090b'/%3E%3Ctext x='16' y='23' font-family='Inter,system-ui,sans-serif' font-size='20' font-weight='700' fill='%236b9fff' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23141216'/%3E%3Ctext x='16' y='23' font-family='Raleway,system-ui,sans-serif' font-size='20' font-weight='600' fill='%233B9494' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&family=Lora:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #09090b;
-      --bg-elevated: #111113;
-      --surface: #18181b;
-      --border: #27272a;
-      --text: #e4e4e7;
-      --text-muted: #a1a1aa;
-      --text-dim: #71717a;
-      --white: #fafafa;
-      --blue: #6b9fff;
-      --blue-glow: rgba(107, 159, 255, 0.15);
-      --green: #22c55e;
-      --green-dim: rgba(34, 197, 94, 0.12);
-      --red: #ef4444;
-      --red-dim: rgba(239, 68, 68, 0.12);
-      --amber: #f59e0b;
-      --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      /* Lumen palette — aligns with site/v12/lumentheme-branding-guideline.md in #41 */
+      --bg: #141216;             /* Plum Dark */
+      --bg-elevated: #1A1720;    /* slight lift above bg */
+      --surface: #201C2A;        /* cards / elevated surfaces */
+      --border: #28243A;         /* Divider */
+      --text: #EDE5D8;           /* Linen */
+      --text-muted: #B0A8BE;     /* Soft Label */
+      --text-dim: #7A7290;       /* Muted Label */
+      --white: #EDE5D8;          /* Lumen has no pure white — linen is the brightest */
+      --blue: #3B9494;           /* Verdigris — Lumen accent / CTAs / positive */
+      --blue-glow: rgba(59, 148, 148, 0.15);
+      --green: #3B9494;          /* Lumen uses Verdigris for positive states too */
+      --green-dim: rgba(59, 148, 148, 0.12);
+      --red: #C45050;            /* Signal Red — errors only */
+      --red-dim: rgba(196, 80, 80, 0.12);
+      --amber: #C47B42;          /* Amber — warmth / secondary accent */
+      --code-bg: #0E0C16;        /* Code Block BG */
+      --sans: 'Raleway', -apple-system, BlinkMacSystemFont, sans-serif;
+      --body: 'Lora', Georgia, 'Times New Roman', serif;
       --mono: 'JetBrains Mono', 'Fira Code', monospace;
     }
 
@@ -40,7 +43,7 @@
       overflow: hidden;
       background: var(--bg);
       color: var(--text);
-      font-family: var(--sans);
+      font-family: var(--body);
       -webkit-font-smoothing: antialiased;
     }
 
@@ -108,7 +111,7 @@
     .headline-md { font-size: clamp(1.6rem, 3.5vw, 2.4rem); }
 
     .subtitle {
-      font-family: var(--sans);
+      font-family: var(--body);
       font-size: clamp(1rem, 2vw, 1.35rem);
       color: var(--text-muted);
       line-height: 1.5;
@@ -194,7 +197,7 @@
     .card {
       background: var(--bg-elevated);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 3px;
       padding: 28px;
     }
 
@@ -231,13 +234,13 @@
     .quote {
       border-left: 3px solid var(--blue);
       padding: 16px 24px;
-      font-family: var(--sans);
+      font-family: var(--body);
       font-size: clamp(1rem, 1.8vw, 1.25rem);
       font-weight: 500;
       color: var(--text);
       line-height: 1.5;
       background: var(--blue-glow);
-      border-radius: 0 8px 8px 0;
+      border-radius: 0;
     }
 
     .quote-attr {
@@ -260,7 +263,7 @@
 
     .api-layer {
       padding: 20px 28px;
-      border-radius: 10px;
+      border-radius: 3px;
       text-align: center;
       border: 1px solid var(--border);
       background: var(--bg-elevated);
@@ -270,8 +273,8 @@
 
     .api-layer.highlight {
       border-color: var(--blue);
-      background: linear-gradient(135deg, var(--blue-glow), rgba(107, 159, 255, 0.05));
-      box-shadow: 0 0 30px rgba(107, 159, 255, 0.1);
+      background: linear-gradient(135deg, var(--blue-glow), rgba(59, 148, 148, 0.05));
+      box-shadow: 0 0 30px rgba(59, 148, 148, 0.1);
     }
 
     .api-layer-name {
@@ -410,7 +413,7 @@
 
     .timeline-item.active::before {
       background: var(--blue);
-      box-shadow: 0 0 12px rgba(107, 159, 255, 0.4);
+      box-shadow: 0 0 12px rgba(59, 148, 148, 0.4);
     }
 
     .timeline-label {
@@ -438,7 +441,7 @@
     .founder-card {
       background: var(--bg-elevated);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 3px;
       padding: 36px;
       display: flex;
       flex-direction: column;
@@ -534,7 +537,7 @@
 
     .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, var(--blue), #93b8ff);
+      background: linear-gradient(90deg, var(--blue), #4AADAD);
       transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
@@ -617,7 +620,7 @@
 
     .nav-dot.active {
       background: var(--blue);
-      box-shadow: 0 0 8px rgba(107, 159, 255, 0.4);
+      box-shadow: 0 0 8px rgba(59, 148, 148, 0.4);
     }
 
     .nav-dot:hover {
@@ -683,8 +686,8 @@
       font-family: var(--mono);
       font-size: 0.65rem;
       color: var(--text-dim);
-      background: rgba(107, 159, 255, 0.08);
-      border: 1px solid rgba(107, 159, 255, 0.2);
+      background: rgba(59, 148, 148, 0.08);
+      border: 1px solid rgba(59, 148, 148, 0.2);
       border-radius: 4px;
       padding: 3px 7px;
       margin-top: 4px;
@@ -851,9 +854,9 @@
 
     /* ========== QUOTE CARDS (imported from landing page for slide 2 variants) ========== */
     .quote-card {
-      background: #18181b;
-      border: 1px solid #27272a;
-      border-radius: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 2px;
       padding: 12px 14px;
       max-width: 100%;
       display: flex;
@@ -875,7 +878,7 @@
     .quote-card.twitter {
       background: #15202b;
       border: 1px solid #2f3336;
-      border-radius: 10px;
+      border-radius: 3px;
       padding: 12px 14px 20px;
       position: relative;
     }
@@ -1043,7 +1046,7 @@
       align-items: center;
       gap: 3px;
       background: #272729;
-      border-radius: 14px;
+      border-radius: 3px;
       padding: 2px 6px;
       margin-right: 5px;
     }
@@ -1057,7 +1060,7 @@
       align-items: center;
       gap: 3px;
       padding: 2px 5px;
-      border-radius: 14px;
+      border-radius: 3px;
       cursor: pointer;
       transition: background 0.15s;
       font-size: 12px;
@@ -1196,9 +1199,9 @@
       <p class="subtitle anim-up delay-1" style="max-width: 900px;">Average Claude Code turn: 45 seconds. Autonomous potential: 12 hours.</p>
       <div class="spacer-md"></div>
       <p class="anim-up delay-2" style="text-align: center; font-size: 1.6rem; color: var(--white); font-weight: 700; margin-bottom: 18px; line-height: 1.3;">
-        <span style="color: #ef4444;">93%</span> of permission prompts get auto-accepted.
+        <span style="color: #C45050;">93%</span> of permission prompts get auto-accepted.
       </p>
-      <iframe src="problem-widget.html#mode=pill&pillInterval=3000" style="width: 100%; height: 440px; border: 1px solid var(--border); border-radius: 12px; background: #09090b;"></iframe>
+      <iframe src="problem-widget.html#mode=pill&pillInterval=3000" style="width: 100%; height: 440px; border: 1px solid var(--border); border-radius: 3px; background: #141216;"></iframe>
     </div>
   </div>
   <!-- ======== SLIDE 3: THE UNLOCK ======== -->
@@ -1253,25 +1256,25 @@
               <div class="org-client">IT</div>
             </div>
             <svg viewBox="0 0 60 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 60px; height: 120px; flex-shrink: 0;">
-              <line x1="0" y1="12" x2="52" y2="12" stroke="#ef4444" stroke-width="1" opacity="0.5"/>
-              <line x1="0" y1="36" x2="52" y2="36" stroke="#ef4444" stroke-width="1" opacity="0.5"/>
-              <line x1="0" y1="60" x2="52" y2="60" stroke="#ef4444" stroke-width="1" opacity="0.5"/>
-              <line x1="0" y1="84" x2="52" y2="84" stroke="#ef4444" stroke-width="1" opacity="0.5"/>
-              <line x1="0" y1="108" x2="52" y2="108" stroke="#ef4444" stroke-width="1" opacity="0.5"/>
-              <polygon points="52,9 52,15 58,12" fill="#ef4444" opacity="0.5"/>
-              <polygon points="52,33 52,39 58,36" fill="#ef4444" opacity="0.5"/>
-              <polygon points="52,57 52,63 58,60" fill="#ef4444" opacity="0.5"/>
-              <polygon points="52,81 52,87 58,84" fill="#ef4444" opacity="0.5"/>
-              <polygon points="52,105 52,111 58,108" fill="#ef4444" opacity="0.5"/>
-              <polygon points="0,9 0,15 -6,12" fill="#ef4444" opacity="0.5"/>
-              <polygon points="0,33 0,39 -6,36" fill="#ef4444" opacity="0.5"/>
-              <polygon points="0,57 0,63 -6,60" fill="#ef4444" opacity="0.5"/>
-              <polygon points="0,81 0,87 -6,84" fill="#ef4444" opacity="0.5"/>
-              <polygon points="0,105 0,111 -6,108" fill="#ef4444" opacity="0.5"/>
+              <line x1="0" y1="12" x2="52" y2="12" stroke="#C45050" stroke-width="1" opacity="0.5"/>
+              <line x1="0" y1="36" x2="52" y2="36" stroke="#C45050" stroke-width="1" opacity="0.5"/>
+              <line x1="0" y1="60" x2="52" y2="60" stroke="#C45050" stroke-width="1" opacity="0.5"/>
+              <line x1="0" y1="84" x2="52" y2="84" stroke="#C45050" stroke-width="1" opacity="0.5"/>
+              <line x1="0" y1="108" x2="52" y2="108" stroke="#C45050" stroke-width="1" opacity="0.5"/>
+              <polygon points="52,9 52,15 58,12" fill="#C45050" opacity="0.5"/>
+              <polygon points="52,33 52,39 58,36" fill="#C45050" opacity="0.5"/>
+              <polygon points="52,57 52,63 58,60" fill="#C45050" opacity="0.5"/>
+              <polygon points="52,81 52,87 58,84" fill="#C45050" opacity="0.5"/>
+              <polygon points="52,105 52,111 58,108" fill="#C45050" opacity="0.5"/>
+              <polygon points="0,9 0,15 -6,12" fill="#C45050" opacity="0.5"/>
+              <polygon points="0,33 0,39 -6,36" fill="#C45050" opacity="0.5"/>
+              <polygon points="0,57 0,63 -6,60" fill="#C45050" opacity="0.5"/>
+              <polygon points="0,81 0,87 -6,84" fill="#C45050" opacity="0.5"/>
+              <polygon points="0,105 0,111 -6,108" fill="#C45050" opacity="0.5"/>
             </svg>
-            <div style="padding: 16px 20px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg-elevated); text-align: center; min-width: 100px;">
+            <div style="padding: 16px 20px; border-radius: 3px; border: 1px solid var(--border); background: var(--bg-elevated); text-align: center; min-width: 100px;">
               <svg viewBox="0 0 180 28" style="width: 100px; height: 16px; margin-bottom: 4px;">
-                <text x="90" y="22" text-anchor="middle" fill="#a1a1aa" font-family="Inter, sans-serif" font-size="22" font-weight="600">anthropic</text>
+                <text x="90" y="22" text-anchor="middle" fill="#7A7290" font-family="Raleway, system-ui, sans-serif" font-size="22" font-weight="600">anthropic</text>
               </svg>
               <div style="font-size: 0.7rem; color: var(--text-dim);">No org control</div>
             </div>
@@ -1282,7 +1285,7 @@
         <div>
           <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--green); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 16px; text-align: center;">With Luthien</div>
           <div style="display: flex; align-items: center; gap: 0;">
-            <div style="border: 1.5px solid var(--blue); border-radius: 14px; padding: 12px; background: rgba(107,159,255,0.04); display: flex; align-items: center; gap: 0; position: relative;">
+            <div style="border: 1.5px solid var(--blue); border-radius: 3px; padding: 12px; background: rgba(59, 148, 148,0.04); display: flex; align-items: center; gap: 0; position: relative;">
               <div style="position: absolute; top: -10px; left: 16px; font-family: var(--mono); font-size: 0.6rem; color: var(--blue); background: var(--bg); padding: 0 6px; letter-spacing: 0.08em; text-transform: uppercase;">Internal Network</div>
               <div style="display: flex; flex-direction: column; gap: 6px;">
                 <div class="org-client">Developer</div>
@@ -1292,19 +1295,19 @@
                 <div class="org-client">IT</div>
               </div>
               <svg viewBox="0 0 40 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 40px; height: 120px; flex-shrink: 0;">
-                <line x1="0" y1="12" x2="32" y2="60" stroke="#27272a" stroke-width="1"/>
-                <line x1="0" y1="36" x2="32" y2="60" stroke="#27272a" stroke-width="1"/>
-                <line x1="0" y1="60" x2="32" y2="60" stroke="#27272a" stroke-width="1"/>
-                <line x1="0" y1="84" x2="32" y2="60" stroke="#27272a" stroke-width="1"/>
-                <line x1="0" y1="108" x2="32" y2="60" stroke="#27272a" stroke-width="1"/>
-                <polygon points="32,57 32,63 38,60" fill="#27272a"/>
-                <polygon points="0,9 0,15 -6,12" fill="#27272a"/>
-                <polygon points="0,33 0,39 -6,36" fill="#27272a"/>
-                <polygon points="0,57 0,63 -6,60" fill="#27272a"/>
-                <polygon points="0,81 0,87 -6,84" fill="#27272a"/>
-                <polygon points="0,105 0,111 -6,108" fill="#27272a"/>
+                <line x1="0" y1="12" x2="32" y2="60" stroke="#28243A" stroke-width="1"/>
+                <line x1="0" y1="36" x2="32" y2="60" stroke="#28243A" stroke-width="1"/>
+                <line x1="0" y1="60" x2="32" y2="60" stroke="#28243A" stroke-width="1"/>
+                <line x1="0" y1="84" x2="32" y2="60" stroke="#28243A" stroke-width="1"/>
+                <line x1="0" y1="108" x2="32" y2="60" stroke="#28243A" stroke-width="1"/>
+                <polygon points="32,57 32,63 38,60" fill="#28243A"/>
+                <polygon points="0,9 0,15 -6,12" fill="#28243A"/>
+                <polygon points="0,33 0,39 -6,36" fill="#28243A"/>
+                <polygon points="0,57 0,63 -6,60" fill="#28243A"/>
+                <polygon points="0,81 0,87 -6,84" fill="#28243A"/>
+                <polygon points="0,105 0,111 -6,108" fill="#28243A"/>
               </svg>
-              <div style="padding: 14px 16px; border-radius: 10px; border: 1px solid var(--blue); background: linear-gradient(135deg, var(--blue-glow), rgba(107,159,255,0.05)); text-align: left; min-width: 140px;">
+              <div style="padding: 14px 16px; border-radius: 3px; border: 1px solid var(--blue); background: linear-gradient(135deg, var(--blue-glow), rgba(59, 148, 148,0.05)); text-align: left; min-width: 140px;">
                 <div style="font-family: var(--mono); font-size: 0.65rem; color: var(--blue); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 6px;">Luthien Proxy</div>
                 <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.72rem; color: var(--text-muted); line-height: 1.7;">
                   <li>&bull; Block harmful actions</li>
@@ -1315,13 +1318,13 @@
               </div>
             </div>
             <svg viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 40px; height: 20px; flex-shrink: 0;">
-              <line x1="0" y1="10" x2="32" y2="10" stroke="#22c55e" stroke-width="1.5"/>
-              <polygon points="32,7 32,13 38,10" fill="#22c55e"/>
-              <polygon points="0,7 0,13 -6,10" fill="#22c55e"/>
+              <line x1="0" y1="10" x2="32" y2="10" stroke="#3B9494" stroke-width="1.5"/>
+              <polygon points="32,7 32,13 38,10" fill="#3B9494"/>
+              <polygon points="0,7 0,13 -6,10" fill="#3B9494"/>
             </svg>
-            <div style="padding: 16px 20px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg-elevated); text-align: center; min-width: 100px;">
+            <div style="padding: 16px 20px; border-radius: 3px; border: 1px solid var(--border); background: var(--bg-elevated); text-align: center; min-width: 100px;">
               <svg viewBox="0 0 180 28" style="width: 100px; height: 16px;">
-                <text x="90" y="22" text-anchor="middle" fill="#a1a1aa" font-family="Inter, sans-serif" font-size="22" font-weight="600">anthropic</text>
+                <text x="90" y="22" text-anchor="middle" fill="#7A7290" font-family="Raleway, system-ui, sans-serif" font-size="22" font-weight="600">anthropic</text>
               </svg>
             </div>
           </div>
@@ -1376,7 +1379,7 @@
       <div class="label anim-up">Competitive Landscape</div>
       <h1 class="headline headline-lg anim-up delay-1">Why Not Alternatives?</h1>
       <div class="spacer-md"></div>
-      <div class="anim-up delay-2" style="border: 1px solid var(--border); border-radius: 12px; overflow: hidden;">
+      <div class="anim-up delay-2" style="border: 1px solid var(--border); border-radius: 3px; overflow: hidden;">
         <div class="compare-row header">
           <div class="compare-cell"></div>
           <div class="compare-cell">Alternatives</div>
@@ -1468,7 +1471,7 @@
           <div class="card-body"><span class="white" style="font-weight: 600;">80%</span> of Claude Code revenue comes from enterprises. Enterprise AI budgets growing <span class="white" style="font-weight: 600;">75% YoY</span>.</div>
           <div class="citation">Anthropic enterprise reports; Gartner AI spending surveys</div>
         </div>
-        <div class="card" style="border-color: var(--amber); background: rgba(245, 158, 11, 0.06);">
+        <div class="card" style="border-color: var(--amber); background: rgba(196, 123, 66, 0.06);">
           <div class="card-title" style="color: var(--amber);">Regulatory tailwind</div>
           <div class="card-body">EU AI Act full enforcement: <span class="white" style="font-weight: 600;">August 2, 2026</span>. ~500K EU companies must demonstrate AI oversight.</div>
           <div class="citation">EU AI Act (Regulation 2024/1689), Article 113</div>
@@ -1536,7 +1539,7 @@
       <div class="label anim-up">GTM Strategy</div>
       <h1 class="headline headline-lg anim-up delay-1">Target startup CTOs and Principal Engineers</h1>
       <div class="spacer-md"></div>
-      <div class="anim-up delay-2" style="border: 1px solid var(--border); border-radius: 12px; overflow: hidden;">
+      <div class="anim-up delay-2" style="border: 1px solid var(--border); border-radius: 3px; overflow: hidden;">
 
         <div class="compare-row header" style="grid-template-columns: 180px 1.2fr 1.8fr 140px;">
           <div class="compare-cell"></div>

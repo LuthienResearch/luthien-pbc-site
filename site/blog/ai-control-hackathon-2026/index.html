@@ -5,25 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Luthien at Apart Research's Largest Hackathon Yet - Luthien</title>
   <meta name="description" content="Luthien at the Apart Research x Redwood Research AI Control Hackathon 2026 — the largest event Apart has ever run. 750+ signups, 126 projects, first external PRs, and a surprise jailbreak attempt.">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Lora:wght@400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../blog.css">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2309090b'/%3E%3Ctext x='16' y='23' font-family='Inter,system-ui,sans-serif' font-size='20' font-weight='700' fill='%236b9fff' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
 </head>
 <body>
 
   <nav class="top-nav">
     <a href="../../" class="nav-left">
-      <span class="nav-wordmark">Luthien</span>
+      <img src="../../v12/luthien-new.svg" alt="Luthien" style="height: 38px; width: auto; display: block;">
     </a>
-    <div class="nav-right">
-      <a href="../../" class="nav-link">Home</a>
-      <a href="../" class="nav-link active">Blog</a>
-      <a href="https://github.com/LuthienResearch/luthien-proxy" class="nav-link" target="_blank" rel="noopener">GitHub</a>
+    <div class="nav-right" id="navRight">
+      <a href="../../" class="nav-link">home</a>
+      <a href="../../about.html" class="nav-link">about</a>
+      <a href="../../blog.html" class="nav-link active">blog</a>
+      <a href="../../#apply" class="nav-setup">Apply for beta</a>
     </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu" aria-expanded="false">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect y="3" width="20" height="2" rx="1"/><rect y="9" width="20" height="2" rx="1"/><rect y="15" width="20" height="2" rx="1"/></svg>
+    </button>
   </nav>
 
+  <main>
   <div class="container">
     <div class="article-header">
       <h1>Luthien at Apart Research's Largest Hackathon Yet</h1>
@@ -31,7 +36,7 @@
     </div>
 
     <article>
-      <p>On March 20&ndash;22, <a href="https://apartresearch.com/">Apart Research</a> and <a href="https://www.redwoodresearch.org/">Redwood Research</a> hosted the <strong>AI Control Hackathon 2026</strong>&mdash;the largest event Apart Research has ever run. 750+ signups, 126 project submissions, 30+ judges and speakers. Luthien CEO Jai Dhyani gave a HackTalk on "Luthien Proxy: Real-World AI Control" and served as a judge.</p>
+      <p>On March 20&ndash;22, <a href="https://apartresearch.com/">Apart Research</a> and <a href="https://www.redwoodresearch.org/">Redwood Research</a> hosted the <strong>AI Control Hackathon 2026</strong>, the largest event Apart Research has ever run. 750+ signups, 126 project submissions, 30+ judges and speakers. Luthien CEO Jai Dhyani gave a HackTalk on "Luthien Proxy: Real-World AI Control" and served as a judge.</p>
 
       <h2>What happened</h2>
       <p>Jai's talk walked through how Luthien Proxy works in practice: a transparent proxy between AI coding agents (like Claude Code) and the Anthropic API that intercepts every request, enforces configurable policies, and logs everything. The talk ran Friday at 12:00 PM PDT on Zoom as part of the hackathon's speaker series.</p>
@@ -116,22 +121,49 @@
         <li><strong>Just break stuff:</strong> Use Luthien for your hackathon project. When it breaks (and it will), post the error + screenshot in Discord.</li>
       </ul>
 
-      <a href="../" class="back-link">&larr; Back to blog</a>
+      <a href="../../blog.html" class="back-link">&larr; Back to blog</a>
     </article>
   </div>
+
+  </main>
 
   <footer>
     <div class="container">
       <div class="footer-inner">
-        <div class="footer-links">
-          <a href="../../">Home</a>
-          <a href="https://github.com/LuthienResearch/luthien-proxy" target="_blank" rel="noopener">GitHub</a>
-          <a href="mailto:contact@luthienresearch.org">Contact</a>
+        <div class="footer-brand">
+          <div class="footer-brand-row">
+            <img src="../../v12/luthien-new.svg" alt="Luthien" style="height: 34px; width: auto; display: block;">
+            <span class="footer-year">&middot; 2026</span>
+          </div>
+          <a href="https://www.youtube.com/watch?v=YzjvBw96kas" target="_blank" rel="noopener noreferrer" class="footer-tagline">Power is nothing without control.</a>
         </div>
-        <div class="footer-meta">Luthien &middot; 2026</div>
+        <div class="footer-right">
+          <div class="footer-links">
+            <a href="https://github.com/LuthienResearch" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://linkedin.com/company/luthien-control" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://www.youtube.com/@LuthienControl" target="_blank" rel="noopener noreferrer">YouTube</a>
+            <a href="mailto:contact@luthienresearch.org">Email</a>
+          </div>
+          <span class="footer-version">v12</span>
+        </div>
       </div>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      var btn = document.getElementById('navHamburger');
+      var nav = document.getElementById('navRight');
+      if (!btn || !nav) return;
+      btn.addEventListener('click', function () {
+        nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', nav.classList.contains('open'));
+      });
+      nav.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () { nav.classList.remove('open'); });
+      });
+    })();
+  </script>
 
   <script>
   (function() {
