@@ -1568,6 +1568,17 @@
     fsBtn.textContent = document.fullscreenElement ? 'ESC · Exit' : 'F11 · Fullscreen';
   });
 
+  // Deep-link: ?slide=N opens directly on slide N (1-indexed for human readability)
+  const slideParam = parseInt(new URLSearchParams(location.search).get('slide'), 10);
+  if (Number.isFinite(slideParam) && slideParam >= 1 && slideParam <= total) {
+    const target = slideParam - 1;
+    if (target !== current) {
+      slides[current].classList.remove('active');
+      slides[target].classList.add('active');
+      current = target;
+    }
+  }
+
   updateUI();
 })();
 </script>
