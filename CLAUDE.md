@@ -73,9 +73,8 @@ Checklist:
 ## Adding New Pages
 
 1. Create `site/new-page/index.html` (directory + index.html for clean URLs)
-2. Use the same font imports (Inter + JetBrains Mono from Google Fonts)
-3. Use the same color scheme (dark: `#09090b` bg, `#e4e4e7` text, `#22c55e` accent)
-4. Link from the main nav if appropriate
+2. **Follow the shared design system** — colors, fonts, layout patterns, and voice/tone are documented in `luthien-org/ui-fb-dev/design-system.md` (the cross-surface source of truth). For the in-repo Lumen branding specifics (palette hex codes, type scale, iconography), see `site/v12/lumentheme-branding-guideline.md`.
+3. Link from the main nav if appropriate
 
 ## Deployment
 
