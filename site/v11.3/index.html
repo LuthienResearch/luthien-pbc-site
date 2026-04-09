@@ -1216,7 +1216,7 @@
 
       <div id="apply" class="apply-anchor" aria-hidden="true"></div>
       <div id="applyBetaForm" class="apply-beta-form" aria-hidden="true">
-        <iframe data-tally-src="https://tally.so/embed/EkJl0N?alignLeft=1&amp;hideTitle=1&amp;transparentBackground=1&amp;dynamicHeight=1"
+        <iframe data-tally-src="https://tally.so/embed/EkJl0N?alignLeft=1&amp;hideTitle=1&amp;transparentBackground=1&amp;dynamicHeight=1&amp;hideBranding=1"
                 loading="lazy" width="100%" height="400"
                 title="Apply for Luthien beta"></iframe>
       </div>
@@ -1363,7 +1363,7 @@
     <p class="hero-cta-note">We'll help set Luthien up in your dev environment for you and your org.</p>
 
     <div id="applyBetaFormBottom" class="apply-beta-form" aria-hidden="true">
-      <iframe data-tally-src="https://tally.so/embed/EkJl0N?alignLeft=1&amp;hideTitle=1&amp;transparentBackground=1&amp;dynamicHeight=1"
+      <iframe data-tally-src="https://tally.so/embed/EkJl0N?alignLeft=1&amp;hideTitle=1&amp;transparentBackground=1&amp;dynamicHeight=1&amp;hideBranding=1"
               loading="lazy" width="100%" height="400"
               title="Apply for Luthien beta"></iframe>
     </div>
@@ -1788,9 +1788,13 @@
       form.setAttribute('aria-hidden', 'false');
       var btn = document.querySelector('button[aria-controls="' + formId + '"]');
       if (btn) btn.setAttribute('aria-expanded', 'true');
+      // Wait for the max-height expand transition (~500ms) so the form has its
+      // real size, then scroll only if it isn't already in view. Using "nearest"
+      // (not "center") prevents jumping toward the top of the page when the user
+      // clicks the bottom CTA — it only scrolls the minimum needed.
       setTimeout(function () {
-        form.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }, 120);
+        form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 520);
     }
     // Auto-open the hero form when landing on the page with #apply (e.g. from nav on about/blog)
     if (window.location.hash === '#apply') {
