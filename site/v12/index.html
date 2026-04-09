@@ -627,9 +627,9 @@
       font-weight: 600;
       line-height: 1.5;
       border-radius: 2em;
-      border: 1px solid rgba(219,171,63,0.4);
-      color: #d2a04a;
-      background: rgba(219,171,63,0.1);
+      border: 1px solid rgba(196,123,66,0.4);
+      color: #C47B42;
+      background: rgba(196,123,66,0.1);
     }
 
 
@@ -675,9 +675,15 @@
       flex-shrink: 0;
     }
 
-    .filter-pill:hover {
-      border-color: #28243A;
-      color: #7A7290;
+    .filter-pill:not(.active):hover {
+      border-color: #3B9494;
+      color: #B0A8BE;
+    }
+
+    .filter-pill.active:hover {
+      border-color: var(--pill-color, #3B9494);
+      color: var(--pill-color, #3B9494);
+      background: var(--pill-bg, rgba(59, 148, 148, 0.1));
     }
 
     .filter-pill.active {
@@ -695,8 +701,8 @@
       --pill-bg: rgba(239, 68, 68, 0.1);
     }
     .filter-pill[data-filter="ignored"].active {
-      --pill-color: #f59e0b;
-      --pill-bg: rgba(245, 158, 11, 0.1);
+      --pill-color: #C47B42;
+      --pill-bg: rgba(196, 123, 66, 0.1);
     }
     .filter-pill[data-filter="hallucinated"].active {
       --pill-color: #3B9494;
@@ -816,9 +822,9 @@
     .term-flow .hl-arrow { color: #EDE5D8; }
     .term-flow .hl-pipe { color: #EDE5D8; }
     .term-flow .hl-desc { color: #EDE5D8; }
-    .term-flow .hl-monitor { color: #3B9494; }
+    .term-flow .hl-monitor { color: #C47B42; }
     .term-flow .hl-block { color: #ef4444; }
-    .term-flow .hl-change { color: #f59e0b; }
+    .term-flow .hl-change { color: #C47B42; }
     .arch-latency { font-size: 0.68rem; color: #22c55e; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.25); padding: 0.15rem 0.55rem; border-radius: 20px; font-family: 'JetBrains Mono', monospace; animation: latency-pulse 2.8s ease-in-out infinite; }
 
     @keyframes latency-pulse {
@@ -935,7 +941,7 @@
     .testimonial-card {
       max-width: 640px;
       margin: 0 auto;
-      border-left: 3px solid #3B9494;
+      border-left: 3px solid #C47B42;
       padding: 24px 28px;
       background: #181520;
       border-radius: 0 8px 8px 0;
@@ -991,11 +997,11 @@
       background: #181520; border: 1px solid #28243A; border-radius: 12px; padding: 20px;
     }
     .setup-step-num {
-      font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #3B9494; font-weight: 700;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #C47B42; font-weight: 700;
     }
     .setup-step-title { font-weight: 700; font-size: 1rem; color: #EDE5D8; }
     .setup-step-desc { font-size: 0.85rem; color: #EDE5D8; line-height: 1.5; }
-    .setup-step-time { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #EDE5D8; line-height: 1.7; }
+    .setup-step-time { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #C47B42; line-height: 1.7; }
 
     /* ========== FOOTER BOTTOM ========== */
     .footer-bottom {
@@ -1196,7 +1202,7 @@
  <section class="hero">
   <div class="container">
     <div class="hero-content">
-      <h1>Claude Code builds.<br>You stay in control.</h1>
+      <h1>Claude Code builds.<br><span style="color: #C47B42;">You</span> stay in control.</h1>
       <p class="hero-oneliner">Open-source proxy that sits between Claude Code and the Anthropic API. Logs every request. Enforces your rules.</p>
 
       <div class="cta-row" style="justify-content: center; gap: 64px; margin-top: 1.5rem;">
@@ -1227,12 +1233,12 @@
       <div class="ux-grid">
         <div>
           <div style="font-family: 'JetBrains Mono', monospace; font-size: 1rem; font-weight: 700; color: #ef4444; letter-spacing: 0.18em; margin-bottom: 12px;">without luthien</div>
-          <img src="v12/terminal-without-luthien.svg" alt="Without Luthien: Claude Code ignores your CLAUDE.md rules and you correct it manually" style="width: 100%; border-radius: 8px; border: 1px solid #28243A;">
+          <img src="terminal-without-luthien.svg" alt="Without Luthien: Claude Code ignores your CLAUDE.md rules and you correct it manually" style="width: 100%; border-radius: 8px; border: 1px solid #28243A;">
           <p class="demo-annotation">Claude ignores your CLAUDE.md rule and you correct it manually.</p>
         </div>
         <div>
           <div style="font-family: 'JetBrains Mono', monospace; font-size: 1rem; font-weight: 700; color: #22c55e; letter-spacing: 0.18em; margin-bottom: 12px;">with luthien</div>
-          <img src="v12/terminal-with-luthien.svg" alt="With Luthien: Luthien catches the violation and auto-corrects" style="width: 100%; border-radius: 8px; border: 1px solid #28243A;">
+          <img src="terminal-with-luthien.svg" alt="With Luthien: Luthien catches the violation and auto-corrects" style="width: 100%; border-radius: 8px; border: 1px solid #28243A;">
           <p class="demo-annotation">Luthien catches the violation and auto-corrects. No human intervention needed.</p>
         </div>
       </div>
