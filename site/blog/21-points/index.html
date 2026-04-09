@@ -5,24 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Luthien's Approach to Prosaic AI Control in 21 Points - Luthien</title>
   <meta name="description" content="Why AI Control matters now — even without scheming AIs. 21 points on prosaic threats, classification advantages, and how production deployment builds toward stronger safety.">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Lora:wght@400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../blog.css">
 </head>
 <body>
 
   <nav class="top-nav">
     <a href="../../" class="nav-left">
-      <span class="nav-wordmark">Luthien</span>
+      <img src="../../v12/luthien-new.svg" alt="Luthien" style="height: 38px; width: auto; display: block;">
     </a>
-    <div class="nav-right">
-      <a href="../../" class="nav-link">Home</a>
-      <a href="../" class="nav-link active">Blog</a>
-      <a href="https://github.com/LuthienResearch/luthien-proxy" class="nav-link" target="_blank" rel="noopener">GitHub</a>
+    <div class="nav-right" id="navRight">
+      <a href="../../" class="nav-link">home</a>
+      <a href="../../about.html" class="nav-link">about</a>
+      <a href="../../blog.html" class="nav-link active">blog</a>
+      <a href="../../#apply" class="nav-setup">Apply for beta</a>
     </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu" aria-expanded="false">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect y="3" width="20" height="2" rx="1"/><rect y="9" width="20" height="2" rx="1"/><rect y="15" width="20" height="2" rx="1"/></svg>
+    </button>
   </nav>
 
+  <main>
   <div class="container">
     <div class="article-header">
       <h1>Luthien's Approach to Prosaic AI Control in 21 Points</h1>
@@ -33,14 +39,14 @@
       <div class="tldr">
         <div class="tldr-label">TL;DR</div>
         <ul>
-          <li><strong>AI Control works now</strong>&mdash;not just against hypothetical scheming AIs, but against the prosaic failures already happening in production: jailbreaking, data poisoning, alignment-faking, and stochastic misbehavior.</li>
-          <li><strong>Classification is easier than generation.</strong> AI systems paired with adversarial screening can effectively judge whether other AI outputs are dangerous&mdash;and strategies exist to reduce the attack surface without hurting usefulness.</li>
+          <li><strong>AI Control works now.</strong> Not just against hypothetical scheming AIs, but against the prosaic failures already happening in production: jailbreaking, data poisoning, alignment-faking, and stochastic misbehavior.</li>
+          <li><strong>Classification is easier than generation.</strong> AI systems paired with adversarial screening can effectively judge whether other AI outputs are dangerous, and strategies exist to reduce the attack surface without hurting usefulness.</li>
           <li><strong>Production deployment is the path to stronger safety.</strong> Lessons from real-world control systems build toward handling high-stakes scenarios, including potential future scheming risks.</li>
         </ul>
       </div>
 
       <h2>Introduction</h2>
-      <p>AI Control was originally developed to mitigate risks from &ldquo;scheming&rdquo; AIs&mdash;systems acting as highly capable adversaries optimizing for harmful outcomes. However, as of early 2025, scheming does not represent an immediate practical threat from frontier models.</p>
+      <p>AI Control was originally developed to mitigate risks from &ldquo;scheming&rdquo; AIs: systems acting as highly capable adversaries optimizing for harmful outcomes. However, as of early 2025, scheming does not represent an immediate practical threat from frontier models.</p>
       <p>This raises an important question: <strong>why should Luthien develop and deploy practical AI Control mechanisms now?</strong></p>
       <p>The distinction matters: AI Control focuses on mitigating risks from misaligned AI rather than aligning it. Control mechanisms assume the AI is misaligned and will cause harm unless prevented. While scheming represents the most dangerous form of misalignment, negative outcomes can result from <em>any</em> form of misalignment. Therefore, control systems can significantly reduce harms across diverse deployment scenarios regardless of scheming risk.</p>
       <p>Redwood Research's January publication explored how scenarios like jailbreaking, data poisoning, alignment-faking, and low-frequency stochastic misbehavior could result in model failure modes that emerge only in production. These constitute immediate, practical threats that AI Control can address.</p>
@@ -48,11 +54,11 @@
       <h2>The 21 Points</h2>
 
       <ol class="points-list">
-        <li>User intent and AI implementation typically diverge&mdash;AI systems frequently perform unintended actions.</li>
+        <li>User intent and AI implementation typically diverge: AI systems frequently perform unintended actions.</li>
         <li>AI applications increasingly operate in domains offering significant freedom to effect real-world changes through tools like customer interaction, financial management, database updates, and machinery operation.</li>
         <li>These applications will encounter situations where AI optimizes for something other than user intent through mechanisms such as data poisoning, alignment-faking, and stochastic misbehavior.</li>
         <li>System usefulness depends on problem-solving effectiveness and required costs in latency, financial resources, and other inputs.</li>
-        <li>Safety assessment involves defining adversarial outcomes, identifying untrustworthy system components, and assigning red teams to maximize adversarial outcome rates. The failure rate&mdash;how often systems prevent intended harms despite optimization&mdash;measures safety.</li>
+        <li>Safety assessment involves defining adversarial outcomes, identifying untrustworthy system components, and assigning red teams to maximize adversarial outcome rates. The failure rate (how often systems prevent intended harms despite optimization) measures safety.</li>
         <li>Traditional digital security relies on precise, mechanistic rules governing permissible actions under specific circumstances.</li>
         <li>Tool-augmented AI systems can perform harmful actions: transferring funds to scammers, corrupting databases, or misusing machinery.</li>
         <li>Many negative outcomes resist precise mechanical definition. While humans recognize certain failures intuitively, translating those insights into executable functions proves nearly impossible.</li>
@@ -60,10 +66,10 @@
         <li>Classification generally presents an easier problem than generation.</li>
         <li>This principle may not apply to adversarial examples.</li>
         <li>Strategies exist that substantially reduce &ldquo;attack surface&rdquo; for adversarial examples involving AI outputs within context without significantly harming system usefulness.</li>
-        <li>Specific strategies&mdash;including output paraphrasing and rejection of non-conforming formats&mdash;drastically reduce adversarial attack surfaces while maintaining usefulness.</li>
+        <li>Specific strategies, including output paraphrasing and rejection of non-conforming formats, drastically reduce adversarial attack surfaces while maintaining usefulness.</li>
         <li>AI systems paired with effective adversarial screening mechanisms can effectively classify other AI outputs as dangerous or safe.</li>
-        <li>&ldquo;Output&rdquo; means &ldquo;output in context&rdquo;&mdash;identical strings may be safe or dangerous depending on receiving system states.</li>
-        <li>Iterated red/blue teaming, where red teams minimize safety and blue teams maximize usefulness while maintaining safety, effectively identifies and mitigates failure modes before production&mdash;assuming production adversaries remain sub-superhuman.</li>
+        <li>&ldquo;Output&rdquo; means &ldquo;output in context&rdquo;: identical strings may be safe or dangerous depending on receiving system states.</li>
+        <li>Iterated red/blue teaming, where red teams minimize safety and blue teams maximize usefulness while maintaining safety, effectively identifies and mitigates failure modes before production, assuming production adversaries remain sub-superhuman.</li>
         <li>Contemporary AI systems can plausibly automate iterated red/blue teaming through novel strategy generation and effective testing frameworks. Success doesn't require high individual team success rates, only continuous strategy discovery preventing novel production attacks.</li>
         <li>AI Control likely addresses prosaic alignment issues effectively.</li>
         <li>AI security improves through standardizing monitoring of outputs in context and determining whether outputs should be forwarded, modified, or rejected.</li>
@@ -72,25 +78,37 @@
       </ol>
 
       <h2>What This Means for Practitioners</h2>
-      <p>The key insight is that you don't need to wait for scheming AIs to benefit from AI Control. The same mechanisms that would detect a scheming model&mdash;monitoring outputs in context, applying classification-based screening, and iterating on policies&mdash;also catch the prosaic failures that are already costing developers time and money today.</p>
-      <p>Points 9&ndash;14 are especially relevant: classification is easier than generation, and practical strategies exist to reduce the adversarial attack surface. This means a &ldquo;judge&rdquo; model reviewing another model's outputs can be effective even against sophisticated failure modes&mdash;and the attack surface can be narrowed enough to make adversarial evasion impractical.</p>
+      <p>The key insight is that you don't need to wait for scheming AIs to benefit from AI Control. The same mechanisms that would detect a scheming model (monitoring outputs in context, applying classification-based screening, and iterating on policies) also catch the prosaic failures that are already costing developers time and money today.</p>
+      <p>Points 9&ndash;14 are especially relevant: classification is easier than generation, and practical strategies exist to reduce the adversarial attack surface. This means a &ldquo;judge&rdquo; model reviewing another model's outputs can be effective even against sophisticated failure modes, and the attack surface can be narrowed enough to make adversarial evasion impractical.</p>
       <p>Point 21 ties it all together: <strong>the path to handling future, more dangerous AI risks runs through deploying control systems today.</strong> Every production incident caught, every policy refined, every red/blue teaming cycle completed builds institutional knowledge that compounds over time.</p>
 
       <p style="margin-top: 32px;">Originally published on <a href="https://luthienresearch.org/updates/2025-03-redteam-as-upsampling/">luthienresearch.org</a>.</p>
 
-      <a href="../" class="back-link">&larr; Back to blog</a>
+      <a href="../../blog.html" class="back-link">&larr; Back to blog</a>
     </article>
   </div>
+
+  </main>
 
   <footer>
     <div class="container">
       <div class="footer-inner">
-        <div class="footer-links">
-          <a href="../../">Home</a>
-          <a href="https://github.com/LuthienResearch/luthien-proxy" target="_blank" rel="noopener">GitHub</a>
-          <a href="mailto:contact@luthienresearch.org">Contact</a>
+        <div class="footer-brand">
+          <div class="footer-brand-row">
+            <img src="../../v12/luthien-new.svg" alt="Luthien" style="height: 34px; width: auto; display: block;">
+            <span class="footer-year">&middot; 2026</span>
+          </div>
+          <a href="https://www.youtube.com/watch?v=YzjvBw96kas" target="_blank" rel="noopener noreferrer" class="footer-tagline">Power is nothing without control.</a>
         </div>
-        <div class="footer-meta">Luthien &middot; 2026</div>
+        <div class="footer-right">
+          <div class="footer-links">
+            <a href="https://github.com/LuthienResearch" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://linkedin.com/company/luthien-control" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://www.youtube.com/@LuthienControl" target="_blank" rel="noopener noreferrer">YouTube</a>
+            <a href="mailto:contact@luthienresearch.org">Email</a>
+          </div>
+          <span class="footer-version">v12</span>
+        </div>
       </div>
     </div>
   </footer>
@@ -133,6 +151,21 @@
 
     headings.forEach(function(h) { observer.observe(h); });
   })();
+  </script>
+
+  <script>
+    (function () {
+      var btn = document.getElementById('navHamburger');
+      var nav = document.getElementById('navRight');
+      if (!btn || !nav) return;
+      btn.addEventListener('click', function () {
+        nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', nav.classList.contains('open'));
+      });
+      nav.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () { nav.classList.remove('open'); });
+      });
+    })();
   </script>
 
 </body>
