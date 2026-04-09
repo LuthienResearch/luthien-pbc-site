@@ -195,15 +195,16 @@
       font-family: 'Raleway', sans-serif;
       font-size: 0.8rem;
       font-weight: 600;
-      color: #EDE5D8;
+      color: #141216;
       text-decoration: none;
       padding: 5px 14px;
+      background: #3B9494;
       border: 1px solid #3B9494;
       border-radius: 0;
       transition: all 0.15s;
       cursor: pointer;
     }
-    .nav-setup:hover { border-color: #4AADAD; color: #4AADAD; }
+    .nav-setup:hover { background: #2A8080; border-color: #2A8080; color: #141216; }
 
     .nav-gh {
       display: flex;
@@ -229,7 +230,7 @@
 
     @media (max-width: 640px) {
       .nav-link { display: none; }
-      .nav-right { gap: 12px; }
+      .nav-right { gap: 64px; }
       .nav-setup { display: none; }
       .nav-gh { display: none; }
       .nav-hamburger { display: flex; align-items: center; }
@@ -286,7 +287,7 @@
         overflow-x: auto;
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
-        gap: 12px;
+        gap: 64px;
         padding-bottom: 8px;
       }
       .card-grid > .card-wrapper {
@@ -857,7 +858,7 @@
     .cli-install {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 64px;
       background: #0E0C16;
       border: 1px solid #28243A;
       border-left: 2px solid #3B9494;
@@ -913,7 +914,7 @@
       align-items: flex-end;
       gap: 8px;
     }
-    .footer-links { display: flex; gap: 24px; }
+    .footer-links { display: flex; gap: 64px; }
     .footer-links a { color: #EDE5D8; font-size: 0.85rem; line-height: 1.7; }
     .footer-links a:hover { color: #C8C0B4; }
 
@@ -949,7 +950,7 @@
     .testimonial-attribution {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 64px;
     }
     .testimonial-photo {
       width: 48px;
@@ -982,7 +983,7 @@
 
     /* ========== SETUP GRID ========== */
     .setup-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 64px;
       max-width: 720px; margin: 0 auto 40px;
     }
     .setup-step {
@@ -1038,9 +1039,10 @@
 
     /* ========== APPLY FOR BETA INLINE FORM ========== */
     .hero-cta-note {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Lora', serif;
+      font-weight: 400;
       font-size: 0.85rem;
-      color: #a1a1aa;
+      color: #EDE5D8;
       text-align: center;
       max-width: 520px;
       margin: 0.9rem auto 0;
@@ -1176,8 +1178,8 @@
 
   <!-- TOP NAV -->
   <nav class="top-nav">
-    <a href="index.html" class="nav-left">
-      <img src="v12/luthlogo.svg" alt="Luthien" class="nav-wordmark" style="height: 38px; width: auto; display: block;">
+    <a href="index.html" class="nav-left" style="display: flex; align-items: center;">
+      <img src="v12/luthien-new.svg" alt="Luthien" style="height: 38px; width: auto; display: block;">
     </a>
     <div class="nav-right" id="navRight">
       <a href="index.html" class="nav-link active">home</a>
@@ -1197,7 +1199,7 @@
       <h1>Claude Code builds.<br>You stay in control.</h1>
       <p class="hero-oneliner">Open-source proxy that sits between Claude Code and the Anthropic API. Logs every request. Enforces your rules.</p>
 
-      <div class="cta-row" style="justify-content: center; gap: 12px; margin-top: 1.5rem;">
+      <div class="cta-row" style="justify-content: center; gap: 64px; margin-top: 1.5rem;">
         <button type="button" class="btn btn-primary" onclick="openApplyForm('applyBetaForm')" aria-controls="applyBetaForm" aria-expanded="false">
           Apply for beta
         </button>
@@ -1346,7 +1348,7 @@
       </div>
     </div>
 
-    <div class="cta-row" style="justify-content: center; gap: 12px;">
+    <div class="cta-row" style="justify-content: center; gap: 64px;">
       <button type="button" class="btn btn-primary" onclick="openApplyForm('applyBetaFormBottom')" aria-controls="applyBetaFormBottom" aria-expanded="false">
         Apply for beta
       </button>
@@ -1368,8 +1370,8 @@
     <div class="container">
       <div class="footer-inner">
         <div class="footer-brand" style="flex-direction: column; align-items: flex-start; gap: 6px;">
-          <div style="display: flex; align-items: center; gap: 8px;">
-            <img src="v12/luthlogo.svg" alt="Luthien" class="footer-wordmark" style="height: 34px; width: auto; display: block;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <img src="v12/luthien-new.svg" alt="Luthien" style="height: 34px; width: auto; display: block;">
             <span class="footer-year">&middot; 2026</span>
           </div>
           <a href="https://www.youtube.com/watch?v=YzjvBw96kas" target="_blank" rel="noopener"
