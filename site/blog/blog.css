@@ -34,8 +34,9 @@ a:hover { color: #4AADAD; }
 /* ========== SKIP LINK ========== */
 .skip-link {
   position: absolute;
-  top: -40px;
+  top: 0;
   left: 0;
+  transform: translateY(-100%);
   background: #3B9494;
   color: #141216;
   padding: 8px 16px;
@@ -43,9 +44,9 @@ a:hover { color: #4AADAD; }
   font-weight: 600;
   font-size: 0.875rem;
   z-index: 200;
-  transition: top 0.2s;
+  transition: transform 0.2s;
 }
-.skip-link:focus { top: 0; }
+.skip-link:focus { transform: translateY(0); }
 
 /* ========== NAV ========== */
 .top-nav {
@@ -177,7 +178,7 @@ a:hover { color: #4AADAD; }
 .article-header {
   padding-top: 104px;
   padding-bottom: 32px;
-  border-bottom: 1px solid #28243A;
+  border-bottom: 1px solid #C47B42;
   margin-bottom: 32px;
 }
 
@@ -192,11 +193,11 @@ a:hover { color: #4AADAD; }
 
 .article-meta {
   font-size: 0.8rem;
-  color: #9891A8;
+  color: #C47B42;
   font-family: 'JetBrains Mono', monospace;
   letter-spacing: 0.02em;
 }
-.article-meta a { color: #9891A8; }
+.article-meta a { color: #C47B42; }
 .article-meta a:hover { color: #EDE5D8; }
 
 /* ========== BLOG INDEX ========== */
@@ -290,12 +291,12 @@ article strong { color: #EDE5D8; font-weight: 600; }
 article em { color: #B0A8BE; }
 
 article blockquote {
-  border-left: 2px solid #3B9494;
+  border-left: 2px solid #C47B42;
   padding: 12px 20px;
   margin: 24px 0;
   color: #B0A8BE;
   font-style: italic;
-  background: rgba(59, 148, 148, 0.05);
+  background: rgba(196, 123, 66, 0.06);
 }
 
 article code {
@@ -384,7 +385,7 @@ hr.divider { border: none; border-top: 1px solid #28243A; margin: 32px 0; }
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.7rem;
   font-weight: 700;
-  color: #3B9494;
+  color: #C47B42;
   top: 14px;
   letter-spacing: 0.05em;
 }
@@ -444,7 +445,7 @@ hr.divider { border: none; border-top: 1px solid #28243A; margin: 32px 0; }
   transition: color 0.15s, border-color 0.15s;
 }
 .toc-sidebar a:hover { color: #EDE5D8; border-left-color: #9891A8; }
-.toc-sidebar a.active { color: #EDE5D8; border-left-color: #3B9494; }
+.toc-sidebar a.active { color: #EDE5D8; border-left-color: #C47B42; }
 .toc-sidebar a.toc-h3 { padding-left: 24px; font-size: 0.73rem; }
 
 @media (min-width: 1100px) {
