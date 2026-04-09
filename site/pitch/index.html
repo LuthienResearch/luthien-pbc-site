@@ -848,6 +848,329 @@
       .controls { right: 16px; bottom: 14px; }
       .fs-btn { right: 16px; top: 14px; }
     }
+
+    /* ========== QUOTE CARDS (imported from landing page for slide 2 variants) ========== */
+    .quote-card {
+      background: #18181b;
+      border: 1px solid #27272a;
+      border-radius: 8px;
+      padding: 12px 14px;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.25);
+      position: relative;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+
+    .quote-text {
+      font-size: 0.95rem;
+      color: #e4e4e7;
+      line-height: 1.45;
+      flex-grow: 1;
+    }
+
+    /* ---- Twitter/X card ---- */
+    .quote-card.twitter {
+      background: #15202b;
+      border: 1px solid #2f3336;
+      border-radius: 10px;
+      padding: 12px 14px 20px;
+      position: relative;
+    }
+    .quote-card.twitter .tweet-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 6px;
+    }
+    .quote-card.twitter .tweet-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .quote-card.twitter .tweet-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #2f3336;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #8899a6;
+      font-weight: 700;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+    }
+    .quote-card.twitter .tweet-name-row {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      flex-wrap: wrap;
+    }
+    .quote-card.twitter .tweet-display {
+      color: #e7e9ea;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    .quote-card.twitter .tweet-handle {
+      color: #71767b;
+      font-size: 0.8rem;
+    }
+    .quote-card.twitter .x-logo {
+      color: #71767b;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+    .quote-card.twitter .quote-text {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 0.95rem;
+      color: #e7e9ea;
+      line-height: 1.45;
+      margin-bottom: 6px;
+    }
+    .quote-card.twitter .tweet-actions {
+      display: flex;
+      justify-content: space-between;
+      max-width: 300px;
+      color: #71767b;
+      font-size: 0.75rem;
+      padding-top: 2px;
+    }
+    .quote-card.twitter .tweet-action {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      transition: color 0.15s;
+    }
+    .quote-card.twitter .tweet-action:hover { color: #1d9bf0; }
+    .quote-card.twitter .tweet-action.retweet:hover { color: #00ba7c; }
+    .quote-card.twitter .tweet-action.like:hover { color: #f91880; }
+    .quote-card.twitter .tweet-action-icon { font-size: 0.85rem; }
+
+    /* ---- HN card ---- */
+    .quote-card.hn {
+      background: #f6f6ef;
+      border: none;
+      border-radius: 3px;
+      padding: 10px 14px 14px;
+      position: relative;
+    }
+    .quote-card.hn .hn-title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+      margin-bottom: 2px;
+    }
+    .quote-card.hn .hn-upvote { color: #ff6600; font-size: 0.8rem; cursor: pointer; }
+    .quote-card.hn .hn-title {
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 14px;
+      color: #000;
+      font-weight: normal;
+    }
+    .quote-card.hn .hn-meta {
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 11px;
+      color: #828282;
+      margin-bottom: 5px;
+      line-height: 1.3;
+    }
+    .quote-card.hn .hn-meta a { color: #828282; text-decoration: none; }
+    .quote-card.hn .hn-meta a:hover { text-decoration: underline; }
+    .quote-card.hn .quote-text {
+      font-family: Verdana, Geneva, sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      color: #000;
+      line-height: 1.4;
+      padding-bottom: 12px;
+    }
+
+    /* ---- Reddit card ---- */
+    .quote-card.reddit {
+      background: #1a1a1b;
+      border: 1px solid #343536;
+      border-radius: 6px;
+      padding: 12px 14px 20px;
+      position: relative;
+    }
+    .quote-card.reddit .reddit-top {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      color: #818384;
+      margin-bottom: 5px;
+    }
+    .quote-card.reddit .reddit-sub-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff4500, #ff8717);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 0.4rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .quote-card.reddit .reddit-sub { color: #d7dadc; font-weight: 700; font-size: 12px; }
+    .quote-card.reddit .reddit-posted { color: #818384; font-size: 12px; }
+    .quote-card.reddit .quote-text {
+      font-style: normal;
+      font-weight: normal;
+      color: #d7dadc;
+      font-size: 0.95rem;
+      line-height: 1.45;
+      margin-bottom: 5px;
+    }
+    .quote-card.reddit .reddit-actions {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 12px;
+      color: #818384;
+      font-weight: 700;
+    }
+    .quote-card.reddit .reddit-vote-group {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      background: #272729;
+      border-radius: 14px;
+      padding: 2px 6px;
+      margin-right: 5px;
+    }
+    .quote-card.reddit .reddit-upvote-btn { color: #818384; cursor: pointer; font-size: 13px; }
+    .quote-card.reddit .reddit-upvote-btn:hover { color: #ff4500; }
+    .quote-card.reddit .reddit-vote-count { color: #d7dadc; font-size: 12px; font-weight: 700; min-width: 14px; text-align: center; }
+    .quote-card.reddit .reddit-downvote-btn { color: #818384; cursor: pointer; font-size: 13px; }
+    .quote-card.reddit .reddit-downvote-btn:hover { color: #7193ff; }
+    .quote-card.reddit .reddit-action-btn {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      padding: 2px 5px;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: background 0.15s;
+      font-size: 12px;
+      font-weight: 700;
+      color: #818384;
+    }
+    .quote-card.reddit .reddit-action-btn:hover { background: #272729; }
+
+    /* ---- Blog card ---- */
+    .quote-card.blog {
+      background: #1c1c1e;
+      border: 1px solid #2c2c2e;
+      border-radius: 6px;
+      padding: 14px 16px;
+      position: relative;
+    }
+    .quote-card.blog .blog-open-quote { font-size: 2rem; line-height: 0.7; color: #a1a1aa; font-family: Georgia, 'Times New Roman', serif; margin-bottom: 6px; }
+    .quote-card.blog .quote-text {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 0.95rem;
+      line-height: 1.45;
+      font-family: Georgia, 'Times New Roman', serif;
+      color: #e4e4e7;
+    }
+    .quote-card.blog .blog-footer {
+      margin-top: 8px;
+      padding-top: 6px;
+      border-top: 1px solid #2c2c2e;
+      font-size: 0.8rem;
+      color: #a1a1aa;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .quote-card.blog .blog-footer .blog-globe { font-size: 0.85rem; }
+    .quote-card.blog .blog-footer .blog-domain { color: #a1a1aa; font-weight: 500; }
+
+    /* ---- GitHub Issue card ---- */
+    .quote-card.github {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 5px;
+      padding: 12px 14px;
+    }
+    .quote-card .platform-logo {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      opacity: 0.5;
+    }
+    .quote-card .platform-logo svg { width: 18px; height: 18px; }
+    .quote-card.hn .hn-badge {
+      position: absolute;
+      top: 7px;
+      right: 8px;
+      width: 16px;
+      height: 16px;
+      background: #ff6600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      color: #fff;
+      font-family: Verdana, Geneva, sans-serif;
+    }
+    .quote-card.blog .blog-badge {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      color: #a1a1aa;
+      font-size: 0.65rem;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.02em;
+    }
+    .quote-card.blog .blog-badge svg { opacity: 0.4; width: 15px; height: 15px; }
+    .quote-card.github .gh-header {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 5px;
+      font-size: 0.85rem;
+    }
+    .quote-card.github .gh-icon { width: 16px; height: 16px; fill: #3fb950; flex-shrink: 0; }
+    .quote-card.github .gh-repo { color: #58a6ff; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
+    .quote-card.github .gh-issue-num { color: #8b949e; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
+    .quote-card.github .quote-text { font-size: 0.95rem; line-height: 1.45; color: #e6edf3; }
+    .quote-card.github .gh-footer {
+      margin-top: 6px;
+      padding-top: 5px;
+      border-top: 1px solid #21262d;
+      font-size: 0.8rem;
+      color: #8b949e;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .quote-card.github .gh-label {
+      display: inline-block;
+      padding: 0 5px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      line-height: 1.5;
+      border-radius: 2em;
+      border: 1px solid rgba(219,171,63,0.4);
+      color: #d2a04a;
+      background: rgba(219,171,63,0.1);
+    }
   </style>
 </head>
 <body>
@@ -869,36 +1192,15 @@
   <div class="slide" data-slide="1">
     <div class="slide-inner">
       <div class="label anim-up">The Problem</div>
-      <h1 class="headline headline-lg anim-up delay-1">The Agentic AI Paradox</h1>
+      <h1 class="headline headline-lg anim-up delay-1" style="max-width: 900px;">AI misbehaves, forcing babysitting</h1>
+      <p class="subtitle anim-up delay-1" style="max-width: 900px;">Average Claude Code turn: 45 seconds. Autonomous potential: 12 hours.</p>
       <div class="spacer-md"></div>
-      <div class="grid-2 anim-up delay-2">
-        <div class="card card-red">
-          <div class="card-title" style="color: var(--red);">1. AI Misbehaves</div>
-          <div class="card-body">
-            Agentic AI drops databases, leaks secrets, ignores instructions, and lies about what it did. A Replit agent <em>dropped a production database, then tried to cover it up.</em>
-            <div class="citation">Reported on X/Twitter, widely covered in dev press 2025</div>
-          </div>
-        </div>
-        <div class="card" style="border-color: var(--amber); background: rgba(245, 158, 11, 0.08);">
-          <div class="card-title" style="color: var(--amber);">2. This Forces Babysitting</div>
-          <div class="card-body">
-            So engineers babysit. They hover over every action, approve every step. The most capable dev tools in history spend most of their time waiting for a human to click "allow."
-          </div>
-        </div>
-      </div>
-      <div class="spacer-md"></div>
-      <div class="quote anim-up delay-3">
-        A typical Claude Code turn takes 45 seconds. But Claude Code can autonomously solve 12-hour problems, if you let it.
-      </div>
-      <div class="spacer-sm"></div>
-      <p class="body-text anim-up delay-4" style="text-align: center;">
-        <span class="stat-huge red" style="font-size: clamp(1.8rem, 4vw, 3rem);">93%</span>
-        <span class="muted" style="display: block; font-size: 0.95rem;">of permission prompts are auto-accepted. Supervision theater doesn't work.</span>
-        <span class="citation">Luthien user research, 204 developer frustrations tracked across 6 sources (Summer 2025&ndash;2026)</span>
+      <p class="anim-up delay-2" style="text-align: center; font-size: 1.6rem; color: var(--white); font-weight: 700; margin-bottom: 18px; line-height: 1.3;">
+        <span style="color: #ef4444;">93%</span> of permission prompts get auto-accepted.
       </p>
+      <iframe src="problem-widget.html#mode=pill&pillInterval=3000" style="width: 100%; height: 440px; border: 1px solid var(--border); border-radius: 12px; background: #09090b;"></iframe>
     </div>
   </div>
-
   <!-- ======== SLIDE 3: THE UNLOCK ======== -->
   <div class="slide" data-slide="2">
     <div class="slide-inner" style="text-align: center;">
