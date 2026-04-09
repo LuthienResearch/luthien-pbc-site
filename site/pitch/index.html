@@ -95,12 +95,13 @@
     }
 
     /* Slide-title is positioned relative to .slide (not .slide-inner) so it
-       sits at a fixed top offset regardless of content height. Right edge
-       aligns with .slide-inner's right edge at any viewport width. */
+       sits at a fixed top offset regardless of content height. Anchored to
+       the LEFT edge of .slide-inner because the top-right is occupied by
+       the Sources (.cite-btn) and Fullscreen (.fs-btn) buttons. */
     .slide-title {
       position: absolute;
       top: 24px;
-      right: max(80px, calc((100% - 1100px) / 2));
+      left: max(80px, calc((100% - 1100px) / 2));
       font-family: var(--mono);
       font-size: 0.7rem;
       font-weight: 600;
@@ -1571,6 +1572,17 @@
   document.addEventListener('fullscreenchange', () => {
     fsBtn.textContent = document.fullscreenElement ? 'ESC · Exit' : 'F11 · Fullscreen';
   });
+
+  // Deep-link: ?slide=N opens directly on slide N (1-indexed for human readability)
+  const slideParam = parseInt(new URLSearchParams(location.search).get('slide'), 10);
+  if (Number.isFinite(slideParam) && slideParam >= 1 && slideParam <= total) {
+    const target = slideParam - 1;
+    if (target !== current) {
+      slides[current].classList.remove('active');
+      slides[target].classList.add('active');
+      current = target;
+    }
+  }
 
   updateUI();
 })();
