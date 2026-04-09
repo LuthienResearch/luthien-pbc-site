@@ -845,28 +845,55 @@
       // Initial render
       renderPage();
 
-      // Auto-rotate: advance page every 5 seconds. Pauses on mouse enter, resumes on leave.
-      // Any manual interaction (filter click, arrow click) also resets the timer.
-      var AUTO_ROTATE_MS = 5000;
-      var autoTimer = null;
+      // === Auto-rotate with pill and card modes, configurable via URL hash ===
+      // Supported hash params (e.g. #mode=pill&pillInterval=5000):
+      //   mode          : "cards" | "pill" | "dual"  (default: "cards")
+      //   cardInterval  : ms between card page advances (default 5000)
+      //   pillInterval  : ms between filter pill advances (default 5000)
+      var hashParams = new URLSearchParams(location.hash.replace(/^#/, ""));
+      var rotateMode = hashParams.get("mode") || "cards";
+      var cardInterval = parseInt(hashParams.get("cardInterval"), 10) || 5000;
+      var pillInterval = parseInt(hashParams.get("pillInterval"), 10) || 5000;
+
+      function advanceCardPage() {
+        var totalPages = Math.max(1, Math.ceil(getMatchingWrappers(currentFilter).length / VISIBLE_COUNT));
+        currentPage = (currentPage + 1) % totalPages;
+        renderPage();
+      }
+
+      function advancePill() {
+        var keys = categories.map(function (c) { return c.key; });
+        var idx = keys.indexOf(currentFilter);
+        currentFilter = keys[(idx + 1) % keys.length];
+        currentPage = 0;
+        renderPage();
+      }
+
+      var pillTimer = null;
+      var cardTimer = null;
+
       function startAutoRotate() {
         stopAutoRotate();
-        autoTimer = setInterval(function () {
-          var totalPages = Math.max(1, Math.ceil(getMatchingWrappers(currentFilter).length / VISIBLE_COUNT));
-          currentPage = (currentPage + 1) % totalPages;
-          renderPage();
-        }, AUTO_ROTATE_MS);
+        if (rotateMode === "pill") {
+          pillTimer = setInterval(advancePill, pillInterval);
+        } else if (rotateMode === "dual") {
+          cardTimer = setInterval(advanceCardPage, cardInterval);
+          pillTimer = setInterval(advancePill, pillInterval);
+        } else {
+          cardTimer = setInterval(advanceCardPage, cardInterval);
+        }
       }
       function stopAutoRotate() {
-        if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+        if (pillTimer) { clearInterval(pillTimer); pillTimer = null; }
+        if (cardTimer) { clearInterval(cardTimer); cardTimer = null; }
       }
       // Pause on hover, resume on leave
-      document.body.addEventListener('mouseenter', stopAutoRotate);
-      document.body.addEventListener('mouseleave', startAutoRotate);
-      // Reset timer on manual interaction
-      filterBar.addEventListener('click', startAutoRotate);
-      prevBtn.addEventListener('click', startAutoRotate);
-      nextBtn.addEventListener('click', startAutoRotate);
+      document.body.addEventListener("mouseenter", stopAutoRotate);
+      document.body.addEventListener("mouseleave", startAutoRotate);
+      // Reset timers on manual interaction
+      filterBar.addEventListener("click", startAutoRotate);
+      prevBtn.addEventListener("click", startAutoRotate);
+      nextBtn.addEventListener("click", startAutoRotate);
       // Kick it off
       startAutoRotate();
     })();
