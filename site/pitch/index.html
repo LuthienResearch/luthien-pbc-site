@@ -92,19 +92,22 @@
       max-width: 1100px;
       margin: 0 auto;
       width: 100%;
-      position: relative;
     }
 
+    /* Slide-title is positioned relative to .slide (not .slide-inner) so it
+       sits at a fixed top offset regardless of content height. Right edge
+       aligns with .slide-inner's right edge at any viewport width. */
     .slide-title {
       position: absolute;
-      top: -44px;
-      right: 0;
+      top: 24px;
+      right: max(80px, calc((100% - 1100px) / 2));
       font-family: var(--mono);
       font-size: 0.7rem;
       font-weight: 600;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--text-dim);
+      z-index: 10;
     }
 
     /* ============ TYPOGRAPHY ============ */
