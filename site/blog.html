@@ -6,27 +6,27 @@
   <title>Luthien - Blog</title>
   <meta name="description" content="Writing from the Luthien team on AI control, safety, and Claude Code.">
 
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Lora:wght@400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; font-size: 17.6px; overflow-y: scroll; }
     body {
-      background: #09090b;
-      color: #e4e4e7;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #141216;
+      color: #EDE5D8;
+      font-family: 'Lora', Georgia, serif;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
-    h1, h2, h3 { font-family: 'Inter', sans-serif; color: #fafafa; line-height: 1.2; }
+    h1, h2, h3 { font-family: 'Raleway', sans-serif; color: #EDE5D8; line-height: 1.2; }
     code, pre, .mono { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
-    a { color: #6b9fff; text-decoration: none; }
-    a:hover { color: #93b8ff; }
+    a { color: #3B9494; text-decoration: none; }
+    a:hover { color: #4AADAD; }
     .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
     section { padding: 40px 0; }
     @media (max-width: 640px) {
@@ -36,37 +36,36 @@
     /* NAV */
     .top-nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(9, 9, 11, 1);
+      background: rgba(20, 18, 22, 1);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid #1a1a1e;
-      padding: 0 24px; height: 48px;
+      border-bottom: 1px solid #28243A;
+      padding: 0 3%; height: 58px;
       display: flex; align-items: center; justify-content: space-between;
     }
     .nav-left { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .nav-wordmark {
-      font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 700;
-      color: #c8c8d0; letter-spacing: 0.18em; text-transform: uppercase;
+      display: block;
     }
     .nav-right { display: flex; align-items: center; gap: 16px; }
     .nav-link {
-      font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 500;
-      color: #a1a1aa; text-decoration: none; transition: color 0.2s;
+      font-family: 'Raleway', sans-serif; font-size: 0.9rem; font-weight: 500;
+      color: #7A7290; text-decoration: none; transition: color 0.2s;
     }
-    .nav-link:hover { color: #fafafa; }
-    .nav-link.active { color: #fafafa; }
+    .nav-link:hover { color: #EDE5D8; }
+    .nav-link.active { color: #EDE5D8; }
     .nav-setup {
-      font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 600;
-      color: #09090b; background: #fafafa; text-decoration: none; padding: 5px 14px;
-      border: 1px solid #fafafa; border-radius: 6px; transition: all 0.15s; cursor: pointer;
+      font-family: 'Raleway', sans-serif; font-size: 0.8rem; font-weight: 600;
+      color: #141216; text-decoration: none; padding: 5px 14px;
+      background: #3B9494; border: 1px solid #3B9494; border-radius: 0; transition: all 0.15s; cursor: pointer;
     }
-    .nav-setup:hover { background: #e4e4e7; border-color: #e4e4e7; color: #09090b; }
+    .nav-setup:hover { background: #2A8080; border-color: #2A8080; color: #141216; }
     .nav-gh {
-      display: flex; background: #fafafa; padding: 6px;
-      border-radius: 6px; transition: background 0.2s;
+      display: flex; background: #3B9494; padding: 6px;
+      border-radius: 0; transition: background 0.2s;
     }
-    .nav-gh svg { fill: #09090b; }
-    .nav-gh:hover { background: #d4d4d8; }
+    .nav-gh svg { fill: #141216; }
+    .nav-gh:hover { background: #2A8080; }
     /* Hamburger menu button (mobile only) */
     .nav-hamburger {
       display: none;
@@ -76,8 +75,8 @@
       padding: 10px;
       margin: -10px;
     }
-    .nav-hamburger svg { fill: #a1a1aa; }
-    .nav-hamburger:hover svg { fill: #fafafa; }
+    .nav-hamburger svg { fill: #7A7290; }
+    .nav-hamburger:hover svg { fill: #EDE5D8; }
 
     @media (max-width: 640px) {
       .nav-link { display: none; }
@@ -89,13 +88,13 @@
       /* Mobile menu overlay */
       .nav-right.open {
         position: fixed;
-        top: 48px;
+        top: 58px;
         left: 0;
         right: 0;
-        background: rgba(9, 9, 11, 0.97);
+        background: rgba(20, 18, 22, 0.97);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
-        border-bottom: 1px solid #1a1a1e;
+        border-bottom: 1px solid #28243A;
         flex-direction: column;
         padding: 16px 24px;
         gap: 0;
@@ -107,13 +106,13 @@
         padding: 12px 0;
         font-size: 1rem;
         width: 100%;
-        border-bottom: 1px solid #1a1a1e;
+        border-bottom: 1px solid #28243A;
       }
       .nav-right.open .nav-setup {
         border: none;
         padding-left: 0;
         font-size: 1rem;
-        color: #a1a1aa;
+        color: #7A7290;
       }
       .nav-right.open .nav-gh {
         display: flex;
@@ -129,20 +128,20 @@
     }
     .page-header h1 {
       font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 800;
+      font-weight: 700;
       letter-spacing: -0.025em;
       line-height: 1.1;
       margin-bottom: 12px;
     }
     .page-header p {
       font-size: 1rem;
-      color: #a1a1aa;
+      color: #7A7290;
       max-width: 560px;
       margin: 0 auto;
       line-height: 1.6;
     }
 
-    hr.divider { border: none; border-top: 1px solid #27272a; margin: 0; }
+    hr.divider { border: none; border-top: 1px solid #28243A; margin: 0; }
 
     /* BLOG LIST */
     .blog-list {
@@ -154,7 +153,7 @@
       justify-content: space-between;
       align-items: baseline;
       padding: 20px 0;
-      border-bottom: 1px solid #27272a;
+      border-bottom: 1px solid #28243A;
       text-decoration: none;
       transition: opacity 0.15s, transform 0.15s;
       gap: 24px;
@@ -163,12 +162,12 @@
     .blog-post-title {
       font-size: 1rem;
       font-weight: 600;
-      color: #fafafa;
+      color: #EDE5D8;
       line-height: 1.4;
     }
     .blog-post-meta {
       font-size: 0.75rem;
-      color: #a1a1aa;
+      color: #7A7290;
       font-family: 'JetBrains Mono', monospace;
       white-space: nowrap;
       flex-shrink: 0;
@@ -176,16 +175,16 @@
     }
 
     /* FOOTER */
-    footer { border-top: 1px solid #1a1a1e; padding: 32px 0; margin-top: 48px; }
+    footer { border-top: 1px solid #28243A; padding: 32px 0; margin-top: 58px; }
     .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; }
     .footer-brand { display: flex; align-items: center; gap: 8px; }
-    .footer-wordmark { font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 700; color: #c8c8d0; letter-spacing: 0.18em; text-transform: uppercase; }
-    .footer-year { color: #71717a; font-size: 0.8rem; line-height: 1.7; }
+    .footer-wordmark { display: block; }
+    .footer-year { color: #7A7290; font-size: 0.8rem; line-height: 1.7; }
     .footer-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
-    .footer-version { font-size: 0.7rem; color: #3f3f46; font-family: 'JetBrains Mono', monospace; }
+    .footer-version { font-size: 0.7rem; color: #28243A; font-family: 'JetBrains Mono', monospace; }
     .footer-links { display: flex; gap: 24px; }
-    .footer-links a { color: #a1a1aa; font-size: 0.85rem; line-height: 1.7; position: relative; }
-    .footer-links a:hover { color: #d4d4d8; }
+    .footer-links a { color: #7A7290; font-size: 0.85rem; line-height: 1.7; position: relative; }
+    .footer-links a:hover { color: #C8C0B4; }
     .footer-links a::after {
       content: '';
       position: absolute;
@@ -193,7 +192,7 @@
       bottom: 0;
       width: 100%;
       height: 1px;
-      background: #d4d4d8;
+      background: #C8C0B4;
       transform: scaleX(0);
       transform-origin: left;
       transition: transform 0.2s ease;
@@ -201,8 +200,8 @@
     .footer-links a:hover::after { transform: scaleX(1); }
 
     /* Nav logo hover */
-    .nav-wordmark { transition: color 0.2s; }
-    .nav-left:hover .nav-wordmark { color: #fafafa; }
+    .nav-wordmark { transition: opacity 0.2s; }
+    .nav-left:hover .nav-wordmark { opacity: 0.8; }
 
     @media (max-width: 640px) {
       .footer-inner { flex-direction: column; align-items: center; text-align: center; gap: 20px; }
@@ -254,8 +253,8 @@
 
   <!-- TOP NAV -->
   <nav class="top-nav">
-    <a href="index.html" class="nav-left">
-      <span class="nav-wordmark">Luthien</span>
+    <a href="index.html" class="nav-left" style="display: flex; align-items: center;">
+      <img src="v12/luthien-new.svg" alt="Luthien" style="height: 38px; width: auto; display: block;">
     </a>
     <div class="nav-right" id="navRight">
       <a href="index.html" class="nav-link">home</a>
@@ -263,7 +262,7 @@
       <a href="blog.html" class="nav-link active">blog</a>
       <a href="index.html#apply" class="nav-setup">Apply for beta</a>
     </div>
-    <button class="nav-hamburger" id="navHamburger" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect y="3" width="20" height="2" rx="1" fill="#a1a1aa"/><rect y="9" width="20" height="2" rx="1" fill="#a1a1aa"/><rect y="15" width="20" height="2" rx="1" fill="#a1a1aa"/></svg></button>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect y="3" width="20" height="2" rx="1" fill="#EDE5D8"/><rect y="9" width="20" height="2" rx="1" fill="#EDE5D8"/><rect y="15" width="20" height="2" rx="1" fill="#EDE5D8"/></svg></button>
   </nav>
 
   <main>
@@ -308,9 +307,16 @@
   <footer>
     <div class="container">
       <div class="footer-inner">
-        <div class="footer-brand">
-          <span class="footer-wordmark">Luthien</span>
-          <span class="footer-year">&middot; 2026</span>
+        <div class="footer-brand" style="flex-direction: column; align-items: flex-start; gap: 6px;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <img src="v12/luthien-new.svg" alt="Luthien" style="height: 34px; width: auto; display: block;">
+            <span class="footer-year">&middot; 2026</span>
+          </div>
+          <a href="https://www.youtube.com/watch?v=YzjvBw96kas" target="_blank" rel="noopener"
+             style="font-family: 'Raleway', sans-serif; font-size: 0.75rem; font-style: italic; color: #D3D3D3; text-decoration: none; transition: color 0.2s;"
+             onmouseover="this.style.color='#EDE5D8'" onmouseout="this.style.color='#EDE5D8'">
+            Power is nothing without control.
+          </a>
         </div>
         <div class="footer-right">
           <div class="footer-links">
@@ -319,7 +325,7 @@
             <a href="https://www.youtube.com/@LuthienControl" target="_blank" rel="noopener">YouTube</a>
             <a href="mailto:contact@luthienresearch.org">Email</a>
           </div>
-          <span class="footer-version">v11.1</span>
+          <span class="footer-version">v12</span>
         </div>
       </div>
     </div>
