@@ -6,21 +6,21 @@
   <title>Luthien — Problem Widget (standalone)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&family=Lora:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { font-size: 17.6px; }
     body {
       background: transparent;
-      color: #e4e4e7;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #EDE5D8;
+      font-family: 'Lora', Georgia, 'Times New Roman', serif;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       padding: 24px;
     }
     h1, h2, h3 {
-      font-family: 'Inter', sans-serif;
-      color: #fafafa;
+      font-family: 'Raleway', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #EDE5D8;
       line-height: 1.2;
     }
     code, pre, .mono {
@@ -34,7 +34,7 @@
     .section-label {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.72rem;
-      color: #71717a;
+      color: #7A7290;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       margin-bottom: 8px;
@@ -44,7 +44,7 @@
     }
     /* ========== MULTI-CARD GRID ========== */
     .card-grid-section {
-      background: #0c0c0f;
+      background: #141216;
     }
 
     .card-grid {
@@ -85,9 +85,9 @@
 
     /* ========== QUOTE CARD BASE ========== */
     .quote-card {
-      background: #18181b;
-      border: 1px solid #27272a;
-      border-radius: 8px;
+      background: #201C2A;
+      border: 1px solid #28243A;
+      border-radius: 2px;
       padding: 12px 14px;
       max-width: 100%;
       display: flex;
@@ -437,7 +437,7 @@
     .filter-pill {
       padding: 10px 14px;
       border-radius: 20px;
-      border: 1px solid #27272a;
+      border: 1px solid #28243A;
       background: transparent;
       color: #a1a1aa;
       font-family: 'Inter', sans-serif;
@@ -455,26 +455,26 @@
     }
 
     .filter-pill.active {
-      border-color: var(--pill-color, #6b9fff);
-      color: var(--pill-color, #6b9fff);
-      background: var(--pill-bg, rgba(107, 159, 255, 0.1));
+      border-color: var(--pill-color, #3B9494);
+      color: var(--pill-color, #3B9494);
+      background: var(--pill-bg, rgba(59, 148, 148, 0.1));
     }
 
     .filter-pill[data-filter="all"].active {
-      --pill-color: #fafafa;
-      --pill-bg: rgba(250, 250, 250, 0.08);
+      --pill-color: #EDE5D8;
+      --pill-bg: rgba(237, 229, 216, 0.08);
     }
     .filter-pill[data-filter="deleted"].active {
-      --pill-color: #ef4444;
-      --pill-bg: rgba(239, 68, 68, 0.1);
+      --pill-color: #C45050;
+      --pill-bg: rgba(196, 80, 80, 0.1);
     }
     .filter-pill[data-filter="ignored"].active {
-      --pill-color: #f59e0b;
-      --pill-bg: rgba(245, 158, 11, 0.1);
+      --pill-color: #C47B42;
+      --pill-bg: rgba(196, 123, 66, 0.1);
     }
     .filter-pill[data-filter="hallucinated"].active {
-      --pill-color: #6b9fff;
-      --pill-bg: rgba(107, 159, 255, 0.1);
+      --pill-color: #3B9494;
+      --pill-bg: rgba(59, 148, 148, 0.1);
     }
     .filter-pill[data-filter="security"].active {
       --pill-color: #34d399;
@@ -517,7 +517,7 @@
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      border: 1px solid #27272a;
+      border: 1px solid #28243A;
       background: transparent;
       color: #a1a1aa;
       font-size: 1rem;
@@ -530,8 +530,8 @@
     }
 
     .card-nav-btn:hover:not(:disabled) {
-      border-color: #6b9fff;
-      color: #6b9fff;
+      border-color: #3B9494;
+      color: #3B9494;
     }
 
     .card-nav-btn:disabled {
