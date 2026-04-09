@@ -847,6 +847,31 @@
 
       // Initial render
       renderPage();
+
+      // Auto-rotate: advance page every 5 seconds. Pauses on mouse enter, resumes on leave.
+      // Any manual interaction (filter click, arrow click) also resets the timer.
+      var AUTO_ROTATE_MS = 5000;
+      var autoTimer = null;
+      function startAutoRotate() {
+        stopAutoRotate();
+        autoTimer = setInterval(function () {
+          var totalPages = Math.max(1, Math.ceil(getMatchingWrappers(currentFilter).length / VISIBLE_COUNT));
+          currentPage = (currentPage + 1) % totalPages;
+          renderPage();
+        }, AUTO_ROTATE_MS);
+      }
+      function stopAutoRotate() {
+        if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+      }
+      // Pause on hover, resume on leave
+      document.body.addEventListener('mouseenter', stopAutoRotate);
+      document.body.addEventListener('mouseleave', startAutoRotate);
+      // Reset timer on manual interaction
+      filterBar.addEventListener('click', startAutoRotate);
+      prevBtn.addEventListener('click', startAutoRotate);
+      nextBtn.addEventListener('click', startAutoRotate);
+      // Kick it off
+      startAutoRotate();
     })();
   </script>
 </body>
