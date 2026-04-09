@@ -1568,8 +1568,13 @@
     fsBtn.textContent = document.fullscreenElement ? 'ESC · Exit' : 'F11 · Fullscreen';
   });
 
-  // Deep-link: ?slide=N opens directly on slide N (1-indexed for human readability)
-  const slideParam = parseInt(new URLSearchParams(location.search).get('slide'), 10);
+  // Deep-link: ?slide=N or #slide=N opens directly on slide N (1-indexed)
+  // Hash form is required for file:// URLs, which strip query strings via `open`.
+  let slideParam = parseInt(new URLSearchParams(location.search).get('slide'), 10);
+  if (!Number.isFinite(slideParam) && location.hash) {
+    const hashMatch = location.hash.match(/slide=(\d+)/);
+    if (hashMatch) slideParam = parseInt(hashMatch[1], 10);
+  }
   if (Number.isFinite(slideParam) && slideParam >= 1 && slideParam <= total) {
     const target = slideParam - 1;
     if (target !== current) {
