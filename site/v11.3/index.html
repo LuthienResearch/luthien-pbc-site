@@ -200,14 +200,16 @@
       font-family: 'Inter', sans-serif;
       font-size: 0.8rem;
       font-weight: 600;
-      color: #e4e4e7;
+      color: #09090b;
+      background: #fafafa;
       text-decoration: none;
       padding: 5px 14px;
-      border: 1px solid #3f3f46;
+      border: 1px solid #fafafa;
       border-radius: 6px;
       transition: all 0.15s;
+      cursor: pointer;
     }
-    .nav-setup:hover { border-color: #6b9fff; color: #6b9fff; }
+    .nav-setup:hover { background: #e4e4e7; border-color: #e4e4e7; color: #09090b; }
 
     .nav-gh {
       display: flex;
@@ -1034,6 +1036,28 @@
       animation: heroFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
     }
 
+    /* ========== APPLY FOR BETA INLINE FORM ========== */
+    .apply-beta-form {
+      max-width: 640px;
+      margin: 0 auto;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.5s ease, opacity 0.3s ease, margin-top 0.3s ease;
+    }
+    .apply-beta-form.open {
+      max-height: 2000px;
+      opacity: 1;
+      margin-top: 2rem;
+      overflow: visible;
+    }
+    .apply-beta-form iframe {
+      width: 100%;
+      border: 0;
+      display: block;
+      background: transparent;
+    }
+
     /* ========== SECTION FADE-IN ON SCROLL ========== */
     .section-reveal {
       opacity: 0;
@@ -1160,7 +1184,7 @@
       <a href="index.html" class="nav-link active">home</a>
       <a href="about.html" class="nav-link">about</a>
       <a href="blog.html" class="nav-link">blog</a>
-      <a href="https://tally.so/r/EkJl0N" class="nav-setup" target="_blank" rel="noopener">Apply for beta</a>
+      <a href="#apply" class="nav-setup" onclick="event.preventDefault(); openApplyForm();">Apply for beta</a>
     </div>
     <button class="nav-hamburger" id="navHamburger" aria-label="Menu" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect y="3" width="20" height="2" rx="1" fill="#a1a1aa"/><rect y="9" width="20" height="2" rx="1" fill="#a1a1aa"/><rect y="15" width="20" height="2" rx="1" fill="#a1a1aa"/></svg></button>
   </nav>
@@ -1175,12 +1199,19 @@
       <p class="hero-oneliner">Open-source proxy that sits between Claude Code and the Anthropic API. Logs every request. Enforces your rules.</p>
 
       <div class="cta-row" style="justify-content: center; gap: 12px; margin-top: 1.5rem;">
-    <a href="https://tally.so/r/EkJl0N" class="btn btn-primary" target="_blank" rel="noopener">
-      Apply for beta &rarr;
-    </a>
-    <a href="https://calendar.app.google/9Cye1yr6fMJVZNLD6" class="btn btn-secondary" target="_blank" rel="noopener">Book a setup call</a>
+        <button type="button" class="btn btn-primary" onclick="openApplyForm()" aria-controls="applyBetaForm" aria-expanded="false">
+          Apply for beta &rarr;
+        </button>
+      </div>
+
+      <div id="apply" class="apply-anchor" aria-hidden="true"></div>
+      <div id="applyBetaForm" class="apply-beta-form" aria-hidden="true">
+        <iframe data-tally-src="https://tally.so/embed/EkJl0N?alignLeft=1&amp;hideTitle=1&amp;transparentBackground=1&amp;dynamicHeight=1"
+                loading="lazy" width="100%" height="400"
+                title="Apply for Luthien beta"></iframe>
+      </div>
+    </div>
   </div>
-</div>
 </section>
  
 
@@ -1315,9 +1346,9 @@
     </div>
 
     <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
-      <a href="https://tally.so/r/EkJl0N" class="btn btn-primary" target="_blank" rel="noopener">
+      <button type="button" class="btn btn-primary" onclick="openApplyForm()" aria-controls="applyBetaForm">
         Apply for beta &rarr;
-      </a>
+      </button>
       <span class="cli-hint" style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #71717a; text-align: center;">Private beta &middot; Linux &amp; macOS</span>
     </div>
   </div>
@@ -1458,7 +1489,7 @@
         var pill = document.createElement("button");
         pill.className = "filter-pill" + (cat.key === "all" ? " active" : "");
         pill.setAttribute("data-filter", cat.key);
-        pill.textContent = cat.label + " (" + cat.count + ")";
+        pill.textContent = cat.label;
         filterBar.appendChild(pill);
       });
 
@@ -1731,6 +1762,27 @@
     })();
   </script>
 
+  <!-- Apply-for-beta inline form reveal -->
+  <script>
+    function openApplyForm() {
+      var form = document.getElementById('applyBetaForm');
+      if (!form) return;
+      form.classList.add('open');
+      form.setAttribute('aria-hidden', 'false');
+      var heroBtn = document.querySelector('.hero .cta-row button[aria-controls="applyBetaForm"]');
+      if (heroBtn) heroBtn.setAttribute('aria-expanded', 'true');
+      setTimeout(function () {
+        form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 120);
+    }
+    // Auto-open the form when landing on the page with #apply (e.g. from nav on about/blog)
+    if (window.location.hash === '#apply') {
+      window.addEventListener('load', function () {
+        setTimeout(openApplyForm, 300);
+      });
+    }
+  </script>
+  <script async src="https://tally.so/widgets/embed.js"></script>
 
 </body>
 </html>
