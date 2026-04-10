@@ -445,7 +445,7 @@
     }
 
     .funnel-visual {
-      flex: 0 0 300px;
+      flex: 0 0 380px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -469,14 +469,14 @@
     .funnel-mrow .f-count {
       font-family: var(--sans);
       font-weight: 800;
-      font-size: 2rem;
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
       color: var(--white);
-      min-width: 60px;
+      min-width: 80px;
       line-height: 1;
     }
 
     .funnel-mrow .f-desc {
-      font-size: 0.92rem;
+      font-size: 1rem;
       color: var(--text-muted);
       line-height: 1.3;
     }
@@ -484,7 +484,7 @@
     .funnel-mrow .f-dollar {
       margin-left: auto;
       font-family: var(--mono);
-      font-size: 0.82rem;
+      font-size: 0.92rem;
       font-weight: 600;
       white-space: nowrap;
     }
@@ -498,7 +498,7 @@
     }
 
     .funnel-mrow.f-highlight .f-count {
-      font-size: 2.5rem;
+      font-size: clamp(3rem, 6vw, 4rem);
       color: var(--green);
     }
 
@@ -508,6 +508,38 @@
       color: var(--amber);
       letter-spacing: 0.04em;
       font-style: italic;
+    }
+
+    /* Quote avatars */
+    .q-card {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 14px 18px;
+      font-size: 0.92rem;
+    }
+    .q-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      object-fit: cover;
+      border: 1px solid var(--border);
+    }
+    .q-avatar-init {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--blue);
+      background: var(--blue-glow);
+      border: 1px solid rgba(59, 148, 148, 0.25);
     }
 
     /* ============ FOUNDER CARDS ============ */
@@ -1486,7 +1518,7 @@
   <div class="slide" data-slide="6">
     <div class="slide-inner">
       <div class="label anim-up">Defensibility</div>
-      <h1 class="headline headline-lg anim-up delay-1">"Won't Anthropic Build/Fix This?"</h1>
+      <h1 class="headline headline-lg anim-up delay-1">"Won't Anthropic Build This?"</h1>
       <div class="spacer-md"></div>
       <div class="flex-col gap-md anim-up delay-2">
         <div class="card">
@@ -1611,35 +1643,40 @@
   <div class="slide" data-slide="10">
     <div class="slide-inner">
       <div class="label anim-up">Traction</div>
-      <h1 class="headline headline-lg anim-up delay-1">Sales pipeline</h1>
+      <!-- HEADLINE OPTIONS — pick one, comment out the rest -->
+      <!-- Option A: --> <h1 class="headline headline-lg anim-up delay-1">&ldquo;I want this thing to exist.&rdquo;</h1>
+      <!-- Option B: <h1 class="headline headline-lg anim-up delay-1">Customers really want this</h1> -->
+      <!-- Option C: <h1 class="headline headline-lg anim-up delay-1">Selling this is easy</h1> -->
+      <!-- Option D: <h1 class="headline headline-lg anim-up delay-1">&ldquo;More valuable than Datadog.&rdquo;</h1> -->
+      <!-- Option E: <h1 class="headline headline-lg anim-up delay-1">We haven&rsquo;t needed any outbound</h1> -->
       <div class="spacer-md"></div>
 
       <div class="funnel-layout anim-up delay-2">
         <!-- SVG funnel shape -->
         <div class="funnel-visual">
-          <svg viewBox="0 0 300 310" width="300" height="310" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="0 0 380 310" width="380" height="310" xmlns="http://www.w3.org/2000/svg">
             <!-- Stage 1: Sales & Outreach (widest) -->
-            <polygon points="0,0 300,0 278,58 22,58" fill="rgba(59,148,148,0.04)" stroke="rgba(59,148,148,0.12)" stroke-width="1"/>
-            <text x="150" y="26" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">SALES &amp;</text>
-            <text x="150" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">OUTREACH</text>
+            <polygon points="0,0 380,0 352,58 28,58" fill="rgba(59,148,148,0.04)" stroke="rgba(59,148,148,0.12)" stroke-width="1"/>
+            <text x="190" y="26" text-anchor="middle" font-family="Raleway, sans-serif" font-size="14" fill="#7A7290" font-weight="600">sales &amp;</text>
+            <text x="190" y="44" text-anchor="middle" font-family="Raleway, sans-serif" font-size="14" fill="#7A7290" font-weight="600">outreach</text>
 
             <!-- Stage 2: Qualification -->
-            <polygon points="22,62 278,62 252,120 48,120" fill="rgba(59,148,148,0.06)" stroke="rgba(59,148,148,0.15)" stroke-width="1"/>
-            <text x="150" y="97" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">QUALIFICATION</text>
+            <polygon points="28,62 352,62 318,120 62,120" fill="rgba(59,148,148,0.06)" stroke="rgba(59,148,148,0.15)" stroke-width="1"/>
+            <text x="190" y="97" text-anchor="middle" font-family="Raleway, sans-serif" font-size="14" fill="#7A7290" font-weight="600">qualification</text>
 
             <!-- Stage 3: Collect Requirements -->
-            <polygon points="48,124 252,124 222,182 78,182" fill="rgba(59,148,148,0.08)" stroke="rgba(59,148,148,0.18)" stroke-width="1"/>
-            <text x="150" y="150" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">COLLECT</text>
-            <text x="150" y="166" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">REQUIREMENTS</text>
+            <polygon points="62,124 318,124 280,182 100,182" fill="rgba(59,148,148,0.08)" stroke="rgba(59,148,148,0.18)" stroke-width="1"/>
+            <text x="190" y="148" text-anchor="middle" font-family="Raleway, sans-serif" font-size="14" fill="#7A7290" font-weight="600">collect</text>
+            <text x="190" y="166" text-anchor="middle" font-family="Raleway, sans-serif" font-size="14" fill="#7A7290" font-weight="600">requirements</text>
 
             <!-- Stage 4: Trial -->
-            <polygon points="78,186 222,186 196,244 104,244" fill="rgba(59,148,148,0.11)" stroke="rgba(59,148,148,0.22)" stroke-width="1"/>
-            <text x="150" y="221" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#B0A8BE" font-weight="600" letter-spacing="1.2">TRIAL</text>
+            <polygon points="100,186 280,186 248,244 132,244" fill="rgba(59,148,148,0.11)" stroke="rgba(59,148,148,0.22)" stroke-width="1"/>
+            <text x="190" y="221" text-anchor="middle" font-family="Raleway, sans-serif" font-size="14" fill="#B0A8BE" font-weight="600">trial</text>
 
             <!-- Stage 5: Pilot / Conversion (narrowest, highlighted) -->
-            <polygon points="104,248 196,248 178,306 122,306" fill="rgba(59,148,148,0.18)" stroke="rgba(59,148,148,0.45)" stroke-width="1.5"/>
-            <text x="150" y="274" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#3B9494" font-weight="700" letter-spacing="1.2">PILOT /</text>
-            <text x="150" y="290" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#3B9494" font-weight="700" letter-spacing="1.2">CONVERSION</text>
+            <polygon points="132,248 248,248 224,306 156,306" fill="rgba(59,148,148,0.18)" stroke="rgba(59,148,148,0.45)" stroke-width="1.5"/>
+            <text x="190" y="272" text-anchor="middle" font-family="Raleway, sans-serif" font-size="14" fill="#3B9494" font-weight="700">pilot /</text>
+            <text x="190" y="290" text-anchor="middle" font-family="Raleway, sans-serif" font-size="14" fill="#3B9494" font-weight="700">conversion</text>
           </svg>
         </div>
 
@@ -1647,13 +1684,13 @@
         <div class="funnel-metrics">
           <!-- Sales & Outreach -->
           <div class="funnel-mrow">
-            <div class="f-desc" style="color: var(--text-dim); font-style: italic;">We haven't needed any outbound or sales</div>
+            <div class="f-desc" style="color: var(--text-dim); font-style: italic; font-size: 1.05rem;">No outbound or sales &mdash; orgs inbound based on the problem we&rsquo;re solving</div>
           </div>
 
           <!-- Qualification -->
           <div class="funnel-mrow">
             <div class="f-count">93</div>
-            <div class="f-desc">orgs qualified</div>
+            <div class="f-desc" style="font-size: 1.05rem;">orgs with internal champion using Claude Code <strong class="white">30+ hrs/week</strong></div>
             <div class="f-dollar"><span class="f-tbu">$ to be updated</span></div>
           </div>
 
@@ -1672,7 +1709,7 @@
           <!-- Pilot / Conversion -->
           <div class="funnel-mrow f-highlight">
             <div class="f-count">7</div>
-            <div class="f-desc">LOIs signed</div>
+            <div class="f-desc">LOIs signed <span id="loiDays" style="font-family: var(--mono); font-size: 0.78rem; color: var(--blue);"></span></div>
             <div class="f-dollar" style="color: var(--green);">$330&ndash;500K</div>
           </div>
         </div>
@@ -1691,25 +1728,37 @@
         </div>
       </div>
 
-      <!-- User Quotes -->
+      <!-- User Quotes with avatars -->
       <div class="anim-up delay-3">
-        <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 12px;">What users say</div>
+        <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 12px;">What users are saying</div>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-          <div class="quote" style="padding: 14px 18px; font-size: 0.92rem;">
-            &ldquo;I saw the website and immediately thought, &lsquo;I want that.&rsquo; It&rsquo;s like CLAUDE.md that actually works.&rdquo;
-            <span class="quote-attr">Nicolas Mesa, Cofounder &amp; CTO, Veleiro AI (Ex-Amazon, Ex-Meta)</span>
+          <div class="quote q-card">
+            <img class="q-avatar" src="../assets/images/quotes/nico-mesa.jpg" alt="Nicolas Mesa">
+            <div>
+              &ldquo;I saw the website and immediately thought, &lsquo;I want that.&rsquo; It&rsquo;s like CLAUDE.md that actually works.&rdquo;
+              <span class="quote-attr">Nicolas Mesa, Cofounder &amp; CTO, Veleiro AI</span>
+            </div>
           </div>
-          <div class="quote" style="padding: 14px 18px; font-size: 0.92rem;">
-            &ldquo;I want this thing to exist. I could do maybe 30&ndash;50% more parallel threads&hellip; this is about freeing up cognitive resources.&rdquo;
-            <span class="quote-attr">Elvis Sikora, Data Analyst, CloudWalk</span>
+          <div class="quote q-card">
+            <img class="q-avatar" src="../assets/images/quotes/elvis-sikora.jpg" alt="Elvis Sikora">
+            <div>
+              &ldquo;I could do maybe <span style="font-family: var(--sans); font-weight: 800; font-size: 1.6rem; color: var(--white);">30&ndash;50%</span> more parallel threads&hellip; this is about freeing up cognitive resources.&rdquo;
+              <span class="quote-attr">Elvis Sikora, AI Engineer, CloudWalk</span>
+            </div>
           </div>
-          <div class="quote" style="padding: 14px 18px; font-size: 0.92rem;">
-            &ldquo;You&rsquo;re doing what I&rsquo;m trying to do and actually doing it.&rdquo;
-            <span class="quote-attr">Paolo Calvi, Engineer, Airbus</span>
+          <div class="quote q-card">
+            <img class="q-avatar" src="../assets/images/quotes/sami-jawhar.jpg" alt="Sami Jawhar">
+            <div>
+              &ldquo;This would probably be more valuable than Datadog&hellip; ~<span style="font-family: var(--sans); font-weight: 800; font-size: 1.6rem; color: var(--white);">$100K</span>/year for a reasonably resourced org.&rdquo;
+              <span class="quote-attr">Sami Jawhar, Agent Wrangler, Trajectory Labs</span>
+            </div>
           </div>
-          <div class="quote" style="padding: 14px 18px; font-size: 0.92rem;">
-            &ldquo;As soon as I saw custom policies, I was like, Okay, this is cool. I would consider using this.&rdquo;
-            <span class="quote-attr">Zac Saber, CTO, Counterweight AI</span>
+          <div class="quote q-card">
+            <img class="q-avatar" src="../assets/images/quotes/matt-handzel.jpg" alt="Matthew Handzel">
+            <div>
+              &ldquo;If this problem were solved, it would <span style="font-family: var(--sans); font-weight: 800; font-size: 1.6rem; color: var(--white);">2x</span> my task completion efficiency.&rdquo;
+              <span class="quote-attr">Matthew Handzel, Stealth AI Safety Startup</span>
+            </div>
           </div>
         </div>
       </div>
@@ -1787,6 +1836,16 @@
 <button class="fs-btn" id="fsBtn" title="Toggle fullscreen">F11 &middot; Fullscreen</button>
 
 <script>
+/* Dynamic LOI day count — first LOI signed Wed Apr 9, 2026 */
+(function() {
+  const firstLOI = new Date('2026-04-09');
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const days = Math.max(1, Math.round((today - firstLOI) / 86400000));
+  const el = document.getElementById('loiDays');
+  if (el) el.textContent = 'in ' + days + ' day' + (days !== 1 ? 's' : '');
+})();
+
 (function() {
   const slides = document.querySelectorAll('.slide');
   const total = slides.length;
