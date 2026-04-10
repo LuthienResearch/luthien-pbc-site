@@ -912,6 +912,10 @@
       filterBar.addEventListener("click", startAutoRotate);
       prevBtn.addEventListener("click", startAutoRotate);
       nextBtn.addEventListener("click", startAutoRotate);
+      // Reset on touch/scroll interaction (mobile swipe)
+      cardGrid.addEventListener("touchstart", function() { stopAutoRotate(); }, { passive: true });
+      cardGrid.addEventListener("touchend", function() { startAutoRotate(); }, { passive: true });
+      cardGrid.addEventListener("scroll", function() { stopAutoRotate(); clearTimeout(cardGrid._scrollRestart); cardGrid._scrollRestart = setTimeout(startAutoRotate, pillInterval); }, { passive: true });
       // Kick it off
       startAutoRotate();
     })();

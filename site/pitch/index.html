@@ -944,17 +944,25 @@
     @media (max-width: 600px) {
       .slide { padding: 32px 20px; overflow-y: auto; justify-content: flex-start; padding-top: 60px; }
       .slide.title-slide { justify-content: center; padding-top: 32px; }
-      .headline-lg { font-size: 1.5rem; }
+      .headline-lg { font-size: 1.5rem; margin-bottom: 8px; }
+      .subtitle { margin-bottom: 8px; }
       .grid-2 { grid-template-columns: 1fr; }
       .card { padding: 20px; }
       .founder-card { padding: 16px; }
       .founder-photo { width: 80px; height: 80px; }
-      .spacer-md { height: 16px; }
-      .spacer-lg { height: 24px; }
+      .spacer-md { height: 24px; }
+      .spacer-lg { height: 32px; }
       .controls { right: 16px; bottom: 14px; }
       .top-controls { right: 16px; top: 14px; }
       .fs-btn { display: none; }
-      iframe { height: 360px !important; }
+      iframe { height: 420px !important; }
+      /* How It Works - hide desktop diagram, show mobile version */
+      [data-slide="3"] .anim-up.delay-2,
+      [data-slide="3"] .anim-up.delay-3,
+      [data-slide="3"] .spacer-lg { display: none; }
+      [data-slide="3"] .arch-mobile { display: block !important; }
+      [data-slide="3"] .slide-inner > div[style*="border-top"] { display: none; }
+      .nav-arrow { display: none !important; }
     }
 
     /* ========== QUOTE CARDS (imported from landing page for slide 2 variants) ========== */
@@ -1357,6 +1365,51 @@
       <h1 class="headline headline-lg anim-up delay-1" style="text-align: left;">A proxy between LLM APIs<br>and your dev environment</h1>
       <div class="spacer-sm"></div>
       <p class="subtitle anim-up delay-1" style="text-align: left;">Log every request &amp; response. Enforce custom rules.</p>
+
+      <!-- Mobile architecture diagram (hidden on desktop) -->
+      <div class="arch-mobile" style="display: none; margin-top: 24px;">
+        <!-- DEV flow -->
+        <div style="font-family: var(--mono); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 8px;">Dev</div>
+        <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 6px;">
+          <div class="arch-box" style="width: auto;">&#x1F9D1;&#x200D;&#x1F4BB; User</div>
+          <div style="color: var(--blue); font-size: 1.2rem;">→</div>
+          <div class="arch-box" style="width: auto;">Claude Code</div>
+        </div>
+        <div style="text-align: right; color: var(--blue); font-size: 1.2rem; padding-right: 25%;">↓</div>
+        <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: start; gap: 6px;">
+          <div class="arch-box" style="width: auto;">Anthropic API</div>
+          <div style="color: var(--blue); font-size: 1.2rem; margin-top: 10px;">←</div>
+          <div>
+            <div class="arch-box" style="width: auto; border-color: var(--blue); background: linear-gradient(135deg, rgba(59,148,148,0.15), transparent); color: var(--blue); font-weight: 700;">Luthien</div>
+            <div style="font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); margin-top: 4px; text-align: center;">did it do what I asked?</div>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div style="border-top: 1px solid var(--border); margin: 16px 0;"></div>
+
+        <!-- ORG flow -->
+        <div style="font-family: var(--mono); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--amber); margin-bottom: 8px;">Org</div>
+        <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 6px;">
+          <div class="arch-box" style="width: auto;">&#x1F465; All Users</div>
+          <div style="color: var(--amber); font-size: 1.2rem;">→</div>
+          <div class="arch-box" style="width: auto;">Any AI Client</div>
+        </div>
+        <div style="text-align: right; color: var(--amber); font-size: 1.2rem; padding-right: 25%;">↓</div>
+        <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: start; gap: 6px;">
+          <div class="arch-box" style="width: auto;">Any AI Provider</div>
+          <div style="color: var(--amber); font-size: 1.2rem; margin-top: 10px;">←</div>
+          <div>
+            <div class="arch-box" style="width: auto; border-color: var(--blue); background: linear-gradient(135deg, rgba(59,148,148,0.15), transparent); color: var(--blue); font-weight: 700;">Luthien</div>
+            <div style="font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); margin-top: 4px; text-align: center;">follow company/team policy</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 16px;">
+          <span style="font-size: 0.68rem; color: var(--blue); background: rgba(59,148,148,0.1); border: 1px solid rgba(59,148,148,0.25); padding: 0.15rem 0.55rem; border-radius: 20px; font-family: var(--mono);">adds ~5-15ms</span>
+        </div>
+      </div>
+
       <div class="spacer-lg"></div>
 
       <!-- DEV row -->
