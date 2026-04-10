@@ -548,6 +548,22 @@
       white-space: nowrap;
     }
 
+    @media (max-width: 500px) {
+      body { padding: 12px; }
+      .container { padding: 0 8px; }
+      .filter-bar {
+        margin-left: -12px;
+        margin-right: -12px;
+        padding-left: 12px;
+        padding-right: 12px;
+        gap: 6px;
+        margin-bottom: 12px;
+      }
+      .filter-pill { padding: 6px 10px; font-size: 0.68rem; }
+      .card-grid > .card-wrapper { flex: 0 0 80vw; }
+      .card-grid-footer { margin-top: 6px; }
+      .card-nav-btn { width: 32px; height: 32px; }
+    }
   </style>
 </head>
 <body>
