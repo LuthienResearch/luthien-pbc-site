@@ -800,6 +800,7 @@
       align-items: center;
       gap: 8px;
       justify-content: center;
+      width: 160px;
     }
 
     .arch-connector {
@@ -808,16 +809,23 @@
       background: var(--border);
       position: relative;
       flex-shrink: 0;
+      margin: 0 8px;
     }
 
     .arch-connector::after {
       content: '';
       position: absolute;
-      right: -1px;
+      right: -6px;
       top: -3px;
+      width: 0;
+      height: 0;
       border: 4px solid transparent;
       border-left: 5px solid var(--border);
     }
+    .arch-connector.accent { background: var(--blue); }
+    .arch-connector.accent::after { border-left-color: var(--blue); }
+    .arch-connector.accent-amber { background: var(--amber); }
+    .arch-connector.accent-amber::after { border-left-color: var(--amber); }
 
     /* ============ SLIDE-IN ANIMATIONS ============ */
     .anim-up {
@@ -1367,17 +1375,17 @@
         <div style="display: flex; align-items: flex-start; justify-content: center; gap: 0;">
           <div style="font-family: var(--mono); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); width: 56px; flex-shrink: 0; text-align: right; padding-right: 16px; padding-top: 14px;">Dev</div>
           <div class="arch-box">&#x1F9D1;&#x200D;&#x1F4BB; User</div>
-          <div class="arch-connector" style="background: var(--blue); margin-top: 18px;"></div>
+          <div class="arch-connector accent" style="margin-top: 18px;"></div>
           <div class="arch-box">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><g stroke="#D97757" stroke-width="1.6" stroke-linecap="round"><line x1="12" y1="12" x2="12" y2="2"/><line x1="12" y1="12" x2="19.1" y2="4.9"/><line x1="12" y1="12" x2="22" y2="12"/><line x1="12" y1="12" x2="17.5" y2="19.5"/><line x1="12" y1="12" x2="12" y2="22"/><line x1="12" y1="12" x2="4.9" y2="19.1"/><line x1="12" y1="12" x2="2" y2="12"/><line x1="12" y1="12" x2="4.9" y2="4.9"/><line x1="12" y1="12" x2="7" y2="3"/><line x1="12" y1="12" x2="21" y2="7"/><line x1="12" y1="12" x2="17" y2="21"/><line x1="12" y1="12" x2="3" y2="17"/></g></svg>
             Claude Code
           </div>
-          <div class="arch-connector" style="background: var(--blue); margin-top: 18px;"></div>
-          <div style="display: flex; flex-direction: column; align-items: center;">
-            <div class="arch-box" style="border-color: var(--blue); background: linear-gradient(135deg, rgba(59,148,148,0.15), transparent); color: var(--blue); font-weight: 700;">Luthien</div>
+          <div class="arch-connector accent" style="margin-top: 18px; width: 48px;"></div>
+          <div style="display: flex; flex-direction: column; align-items: center; width: 160px;">
+            <div class="arch-box" style="border-color: var(--blue); background: linear-gradient(135deg, rgba(59,148,148,0.15), transparent); color: var(--blue); font-weight: 700; width: 100%;">Luthien</div>
             <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); margin-top: 8px;">did it do what I asked?</div>
           </div>
-          <div class="arch-connector" style="background: var(--blue); margin-top: 18px;"></div>
+          <div class="arch-connector accent" style="margin-top: 18px; width: 48px;"></div>
           <div class="arch-box">
             <svg width="16" height="16" viewBox="0 7 46 32" fill="none"><path d="M32.73 7h-6.945L38.45 39h6.945L32.73 7ZM12.665 7 0 39h7.082l2.59-6.72h13.25l2.59 6.72h7.082L19.929 7h-7.264Zm-.702 19.337 4.334-11.246 4.334 11.246h-8.668Z" fill="#D4A574"/></svg>
             Anthropic API
@@ -1393,14 +1401,14 @@
         <div style="display: flex; align-items: flex-start; justify-content: center; gap: 0;">
           <div style="font-family: var(--mono); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--amber); width: 56px; flex-shrink: 0; text-align: right; padding-right: 16px; padding-top: 14px;">Org</div>
           <div class="arch-box">&#x1F465; All Users</div>
-          <div class="arch-connector" style="margin-top: 18px;"></div>
+          <div class="arch-connector accent-amber" style="margin-top: 18px;"></div>
           <div class="arch-box">Any AI Client</div>
-          <div class="arch-connector" style="margin-top: 18px;"></div>
-          <div style="display: flex; flex-direction: column; align-items: center;">
-            <div class="arch-box" style="border-color: var(--blue); background: linear-gradient(135deg, rgba(59,148,148,0.15), transparent); color: var(--blue); font-weight: 700;">Luthien</div>
+          <div class="arch-connector accent-amber" style="margin-top: 18px; width: 48px;"></div>
+          <div style="display: flex; flex-direction: column; align-items: center; width: 160px;">
+            <div class="arch-box" style="border-color: var(--blue); background: linear-gradient(135deg, rgba(59,148,148,0.15), transparent); color: var(--blue); font-weight: 700; width: 100%;">Luthien</div>
             <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); margin-top: 8px;">follow company/team policy</div>
           </div>
-          <div class="arch-connector" style="margin-top: 18px;"></div>
+          <div class="arch-connector accent-amber" style="margin-top: 18px; width: 48px;"></div>
           <div class="arch-box">Any AI Provider</div>
         </div>
       </div>
