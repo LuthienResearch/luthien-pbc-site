@@ -1279,10 +1279,10 @@
   <!-- ======== SLIDE 4: HOW IT WORKS (PROXY ARCHITECTURE) ======== -->
   <div class="slide" data-slide="3">
     <div class="slide-inner" style="text-align: center;">
-      <div class="label anim-up">How It Works</div>
-      <h1 class="headline headline-lg anim-up delay-1">A proxy between LLM APIs<br>and your dev environment</h1>
+      <div class="label anim-up" style="text-align: left;">How It Works</div>
+      <h1 class="headline headline-lg anim-up delay-1" style="text-align: left;">A proxy between LLM APIs<br>and your dev environment</h1>
       <div class="spacer-sm"></div>
-      <p class="subtitle anim-up delay-1">Log every request &amp; response. Enforce custom rules.</p>
+      <p class="subtitle anim-up delay-1" style="text-align: left;">Log every request &amp; response. Enforce custom rules.</p>
       <div class="spacer-lg"></div>
 
       <!-- DEV row -->
@@ -1330,7 +1330,7 @@
 
       <div class="spacer-lg"></div>
       <p class="anim-up delay-3" style="font-family: var(--mono); font-size: 0.85rem; color: var(--text-dim);">
-        adds ~5-15ms &middot; <span class="blue">transparent to developers</span>
+        adds ~5-15ms
       </p>
     </div>
   </div>
@@ -1418,16 +1418,16 @@
       <div class="flex-col gap-md anim-up delay-2">
         <div class="card">
           <div class="card-title"><span class="blue">1.</span>&ensp;They told us our approach is the long-term solution</div>
-          <div class="card-body"><em>"The long-term solution probably looks more like something proxy-side"</em> — <em>"the space for control protocols is quite big."</em></div>
+          <div class="card-body"><em>"The long-term solution probably looks more like something proxy-side"</em> and <em>"the space for control protocols is quite big."</em></div>
           <div class="citation">Fabien Roger (Anthropic), conversation Apr 1 2026</div>
         </div>
         <div class="card">
           <div class="card-title"><span class="blue">2.</span>&ensp;Doesn't make sense for labs to build provider-agnostic tooling</div>
-          <div class="card-body">The coding agent market is fragmenting fast — OpenCode, Codex, Cursor, OpenClaw. Anthropic won't build management tooling for competitors' clients.</div>
+          <div class="card-body">The coding agent market is fragmenting fast: OpenCode, Codex, Cursor, OpenClaw. Anthropic won't build management tooling for competitors' clients.</div>
         </div>
         <div class="card">
           <div class="card-title"><span class="blue">3.</span>&ensp;We help drive Claude Code enterprise adoption</div>
-          <div class="card-body">LLM gateways are already an enterprise infrastructure standard, and Claude Code is <a href="https://code.claude.com/docs/en/third-party-integrations#llm-gateway" target="_blank" style="color: var(--blue);">designed to work with them</a>. Anthropic benefits from what we're building — it accelerates enterprise adoption of Claude Code.</div>
+          <div class="card-body">LLM gateways are already an enterprise infrastructure standard, and Claude Code is <a href="https://code.claude.com/docs/en/third-party-integrations#llm-gateway" target="_blank" style="color: var(--blue);">designed to work with them</a>. Anthropic benefits from what we're building: it accelerates enterprise adoption of Claude Code.</div>
         </div>
         <div class="card">
           <div class="card-title"><span class="blue">4.</span>&ensp;If they do, great: defense in depth</div>
@@ -1481,8 +1481,61 @@
     </div>
   </div>
 
-  <!-- ======== SLIDE 9: TRACTION ======== -->
-  <div class="slide" data-slide="8">
+  <!-- ======== SLIDE 10: GTM STRATEGY ======== -->
+  <div class="slide" data-slide="9">
+    <div class="slide-inner">
+      <div class="label anim-up">GTM Strategy</div>
+      <h1 class="headline headline-lg anim-up delay-1">Target startup CTOs and Principal Engineers</h1>
+      <div class="spacer-md"></div>
+      <div class="anim-up delay-2" style="border: 1px solid var(--border); border-radius: 3px; overflow: hidden;">
+
+        <div class="compare-row header" style="grid-template-columns: 180px 1.2fr 1.8fr 140px;">
+          <div class="compare-cell">Phase</div>
+          <div class="compare-cell">Who</div>
+          <div class="compare-cell">The signal</div>
+          <div class="compare-cell">Deal size</div>
+        </div>
+
+        <div class="compare-row" style="grid-template-columns: 180px 1.2fr 1.8fr 140px;">
+          <div class="compare-cell name" style="padding-top: 18px;">
+            <div style="color: var(--blue); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">Now</div>
+            <div style="color: var(--white); font-weight: 600; margin-top: 4px;">Design partners</div>
+          </div>
+          <div class="compare-cell">Startup CTOs &amp; Principal Engineers at AI-native orgs that want fine-grained agent control. 8&ndash;12 week pilots.</div>
+          <div class="compare-cell" style="font-style: italic;">&ldquo;I'll just fix it myself.&rdquo;<br><span style="font-style: normal; color: var(--text-dim); font-size: 0.78rem;">&mdash; Sami Jawhar, Meter</span></div>
+          <div class="compare-cell" style="color: var(--white); font-weight: 600;">$50&ndash;250K</div>
+        </div>
+
+        <div class="compare-row" style="grid-template-columns: 180px 1.2fr 1.8fr 140px;">
+          <div class="compare-cell name" style="padding-top: 18px;">
+            <div style="color: var(--blue); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">Next</div>
+            <div style="color: var(--white); font-weight: 600; margin-top: 4px;">Eng budgets</div>
+          </div>
+          <div class="compare-cell">All devs in org. Devs advocate; engineering budgets sign. 75% YoY growth.</div>
+          <div class="compare-cell" style="font-style: italic;">&ldquo;Cool, I'll tell my whole team to use this.&rdquo;<br><span style="font-style: normal; color: var(--text-dim); font-size: 0.78rem;">&mdash; Tyler Tracy, Redwood Research</span></div>
+          <div class="compare-cell" style="color: var(--white); font-weight: 600;">$1&ndash;10M</div>
+        </div>
+
+        <div class="compare-row" style="grid-template-columns: 180px 1.2fr 1.8fr 140px;">
+          <div class="compare-cell name" style="padding-top: 18px;">
+            <div style="color: var(--blue); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">starting AUG '26</div>
+            <div style="color: var(--white); font-weight: 600; margin-top: 4px;">Compliance</div>
+          </div>
+          <div class="compare-cell">CISOs &amp; procurement join the buying table. Same playbook cybersecurity ran.</div>
+          <div class="compare-cell">EU AI Act enforcement lands <strong class="white">Aug 2, 2026</strong>. Luthien maps to <strong class="white">7 of 8</strong> mandatory requirements.</div>
+          <div class="compare-cell" style="color: var(--amber); font-weight: 600;">Mandatory</div>
+        </div>
+
+      </div>
+      <div class="spacer-md"></div>
+      <p class="anim-up delay-3" style="font-family: var(--mono); font-size: 0.95rem; color: var(--text-dim); text-align: center;">
+        The AI compliance control that <span class="blue">developers already love</span>.
+      </p>
+    </div>
+  </div>
+
+  <!-- ======== SLIDE 11: TRACTION ======== -->
+  <div class="slide" data-slide="10">
     <div class="slide-inner">
       <div class="label anim-up">Traction</div>
       <h1 class="headline headline-lg anim-up delay-1">Early traction</h1>
@@ -1534,61 +1587,8 @@
     </div>
   </div>
 
-  <!-- ======== SLIDE 10: GTM STRATEGY ======== -->
-  <div class="slide" data-slide="9">
-    <div class="slide-inner">
-      <div class="label anim-up">GTM Strategy</div>
-      <h1 class="headline headline-lg anim-up delay-1">Target startup CTOs and Principal Engineers</h1>
-      <div class="spacer-md"></div>
-      <div class="anim-up delay-2" style="border: 1px solid var(--border); border-radius: 3px; overflow: hidden;">
-
-        <div class="compare-row header" style="grid-template-columns: 180px 1.2fr 1.8fr 140px;">
-          <div class="compare-cell"></div>
-          <div class="compare-cell">Who buys</div>
-          <div class="compare-cell">The signal</div>
-          <div class="compare-cell">Deal size</div>
-        </div>
-
-        <div class="compare-row" style="grid-template-columns: 180px 1.2fr 1.8fr 140px;">
-          <div class="compare-cell name" style="padding-top: 18px;">
-            <div style="color: var(--blue); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">Now &middot; 2026</div>
-            <div style="color: var(--white); font-weight: 600; margin-top: 4px;">Design partners</div>
-          </div>
-          <div class="compare-cell">Startup CTOs &amp; Principal Engineers at AI-native orgs that want fine-grained agent control. 8&ndash;12 week pilots.</div>
-          <div class="compare-cell" style="font-style: italic;">&ldquo;I'll just fix it myself.&rdquo;<br><span style="font-style: normal; color: var(--text-dim); font-size: 0.78rem;">&mdash; Sami Jawhar, Meter</span></div>
-          <div class="compare-cell" style="color: var(--white); font-weight: 600;">$50&ndash;250K</div>
-        </div>
-
-        <div class="compare-row" style="grid-template-columns: 180px 1.2fr 1.8fr 140px;">
-          <div class="compare-cell name" style="padding-top: 18px;">
-            <div style="color: var(--blue); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">Next &middot; 2027</div>
-            <div style="color: var(--white); font-weight: 600; margin-top: 4px;">Eng budgets</div>
-          </div>
-          <div class="compare-cell">All devs, all knowledge workers. Devs advocate; engineering budgets sign. 75% YoY growth.</div>
-          <div class="compare-cell" style="font-style: italic;">&ldquo;Cool, I'll tell my whole team to use this.&rdquo;<br><span style="font-style: normal; color: var(--text-dim); font-size: 0.78rem;">&mdash; Tyler Tracy, Redwood Research</span></div>
-          <div class="compare-cell" style="color: var(--white); font-weight: 600;">$1&ndash;10M</div>
-        </div>
-
-        <div class="compare-row" style="grid-template-columns: 180px 1.2fr 1.8fr 140px;">
-          <div class="compare-cell name" style="padding-top: 18px;">
-            <div style="color: var(--blue); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">From Aug '26</div>
-            <div style="color: var(--white); font-weight: 600; margin-top: 4px;">Compliance</div>
-          </div>
-          <div class="compare-cell">CISOs &amp; procurement join the buying table. Same playbook cybersecurity ran.</div>
-          <div class="compare-cell">EU AI Act enforcement lands <strong class="white">Aug 2, 2026</strong>. Luthien maps to <strong class="white">7 of 8</strong> mandatory requirements.</div>
-          <div class="compare-cell" style="color: var(--amber); font-weight: 600;">Mandatory</div>
-        </div>
-
-      </div>
-      <div class="spacer-md"></div>
-      <p class="anim-up delay-3" style="font-family: var(--mono); font-size: 0.95rem; color: var(--text-dim); text-align: center;">
-        The AI compliance control that <span class="blue">developers already love</span>.
-      </p>
-    </div>
-  </div>
-
-  <!-- ======== SLIDE 11: THE ASK ======== -->
-  <div class="slide" data-slide="10">
+  <!-- ======== SLIDE 12: THE ASK ======== -->
+  <div class="slide" data-slide="11">
     <div class="slide-inner" style="text-align: center;">
       <div class="label anim-up">The Ask</div>
       <h1 class="headline headline-xl anim-up delay-1" style="color: var(--blue);">$2M Seed</h1>
