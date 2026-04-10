@@ -437,6 +437,79 @@
       margin-bottom: 4px;
     }
 
+    /* ============ TRACTION FUNNEL ============ */
+    .funnel-layout {
+      display: flex;
+      gap: 0;
+      align-items: stretch;
+    }
+
+    .funnel-visual {
+      flex: 0 0 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .funnel-metrics {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .funnel-mrow {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding: 0 0 0 32px;
+      gap: 16px;
+      min-height: 50px;
+    }
+
+    .funnel-mrow .f-count {
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: 2rem;
+      color: var(--white);
+      min-width: 60px;
+      line-height: 1;
+    }
+
+    .funnel-mrow .f-desc {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.3;
+    }
+
+    .funnel-mrow .f-dollar {
+      margin-left: auto;
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .funnel-mrow.f-highlight {
+      background: rgba(59, 148, 148, 0.06);
+      border-radius: 3px;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      padding-right: 16px;
+    }
+
+    .funnel-mrow.f-highlight .f-count {
+      font-size: 2.5rem;
+      color: var(--green);
+    }
+
+    .f-tbu {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--amber);
+      letter-spacing: 0.04em;
+      font-style: italic;
+    }
+
     /* ============ FOUNDER CARDS ============ */
     .founder-card {
       text-align: center;
@@ -1538,49 +1611,105 @@
   <div class="slide" data-slide="10">
     <div class="slide-inner">
       <div class="label anim-up">Traction</div>
-      <h1 class="headline headline-lg anim-up delay-1">Early traction</h1>
+      <h1 class="headline headline-lg anim-up delay-1">Sales pipeline</h1>
       <div class="spacer-md"></div>
-      <div class="grid-4 anim-up delay-2">
-        <div style="text-align: center;">
-          <div class="stat-huge">92</div>
-          <div class="stat-label">Qualified leads<br><span class="dim">30+ hrs/week Claude Code</span></div>
-          <div class="citation">Inbound pipeline, Apr 2026</div>
+
+      <div class="funnel-layout anim-up delay-2">
+        <!-- SVG funnel shape -->
+        <div class="funnel-visual">
+          <svg viewBox="0 0 300 310" width="300" height="310" xmlns="http://www.w3.org/2000/svg">
+            <!-- Stage 1: Sales & Outreach (widest) -->
+            <polygon points="0,0 300,0 278,58 22,58" fill="rgba(59,148,148,0.04)" stroke="rgba(59,148,148,0.12)" stroke-width="1"/>
+            <text x="150" y="26" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">SALES &amp;</text>
+            <text x="150" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">OUTREACH</text>
+
+            <!-- Stage 2: Qualification -->
+            <polygon points="22,62 278,62 252,120 48,120" fill="rgba(59,148,148,0.06)" stroke="rgba(59,148,148,0.15)" stroke-width="1"/>
+            <text x="150" y="97" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">QUALIFICATION</text>
+
+            <!-- Stage 3: Collect Requirements -->
+            <polygon points="48,124 252,124 222,182 78,182" fill="rgba(59,148,148,0.08)" stroke="rgba(59,148,148,0.18)" stroke-width="1"/>
+            <text x="150" y="150" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">COLLECT</text>
+            <text x="150" y="166" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">REQUIREMENTS</text>
+
+            <!-- Stage 4: Trial -->
+            <polygon points="78,186 222,186 196,244 104,244" fill="rgba(59,148,148,0.11)" stroke="rgba(59,148,148,0.22)" stroke-width="1"/>
+            <text x="150" y="221" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#B0A8BE" font-weight="600" letter-spacing="1.2">TRIAL</text>
+
+            <!-- Stage 5: Pilot / Conversion (narrowest, highlighted) -->
+            <polygon points="104,248 196,248 178,306 122,306" fill="rgba(59,148,148,0.18)" stroke="rgba(59,148,148,0.45)" stroke-width="1.5"/>
+            <text x="150" y="274" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#3B9494" font-weight="700" letter-spacing="1.2">PILOT /</text>
+            <text x="150" y="290" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#3B9494" font-weight="700" letter-spacing="1.2">CONVERSION</text>
+          </svg>
         </div>
-        <div style="text-align: center;">
-          <div class="stat-huge">14</div>
-          <div class="stat-label">Live trials<br><span class="dim">conducted</span></div>
-          <div class="citation">Internal trial log, Apr 2026</div>
-        </div>
-        <div style="text-align: center;">
-          <div class="stat-huge green">7</div>
-          <div class="stat-label">LOIs from organizations<br><span class="dim">$330&ndash;500K annually</span></div>
-          <div class="citation">Signed LOIs on file (Redwood, Velerio AI, Catalyze, Movement Mortgage, +3)</div>
-        </div>
-        <div style="text-align: center;">
-          <div class="stat-huge blue" style="font-size: clamp(1.5rem, 4vw, 2.5rem);">Apache 2.0</div>
-          <div class="stat-label">Open source<br><span class="dim">license</span></div>
-        </div>
-      </div>
-      <div class="spacer-md"></div>
-      <div class="grid-2 anim-up delay-3">
-        <div>
-          <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 12px;">Key Partnerships</div>
-          <div class="flex-col gap-sm">
-            <div class="card" style="padding: 16px 20px;">
-              <span class="white" style="font-weight: 600;">Redwood Research</span> <span class="dim">&middot; $50K/yr LOI</span>
-            </div>
-            <div class="card" style="padding: 16px 20px;">
-              <span class="white" style="font-weight: 600;">Cambridge Inference</span> <span class="dim">&middot; Finance &amp; defense</span>
-            </div>
-            <div class="card" style="padding: 16px 20px;">
-              <span class="white" style="font-weight: 600;">Apollo Research</span> <span class="dim">&middot; AI safety</span>
-            </div>
+
+        <!-- Metrics aligned to funnel rows -->
+        <div class="funnel-metrics">
+          <!-- Sales & Outreach -->
+          <div class="funnel-mrow">
+            <div class="f-desc" style="color: var(--text-dim); font-style: italic;">We haven't needed any outbound or sales</div>
+          </div>
+
+          <!-- Qualification -->
+          <div class="funnel-mrow">
+            <div class="f-count">93</div>
+            <div class="f-desc">orgs qualified</div>
+            <div class="f-dollar"><span class="f-tbu">$ to be updated</span></div>
+          </div>
+
+          <!-- Collect Requirements -->
+          <div class="funnel-mrow">
+            <div class="f-count">20</div>
+            <div class="f-desc">problem discoveries</div>
+          </div>
+
+          <!-- Trial -->
+          <div class="funnel-mrow">
+            <div class="f-count">14</div>
+            <div class="f-desc">live trials</div>
+          </div>
+
+          <!-- Pilot / Conversion -->
+          <div class="funnel-mrow f-highlight">
+            <div class="f-count">7</div>
+            <div class="f-desc">LOIs signed</div>
+            <div class="f-dollar" style="color: var(--green);">$330&ndash;500K</div>
           </div>
         </div>
-        <div>
-          <div class="quote" style="height: 100%; display: flex; flex-direction: column; justify-content: center;">
-            "I saw the website and immediately thought, 'I want that.' It's like CLAUDE.md that actually works."
-            <span class="quote-attr">Nicolas Mesa, Cofounder &amp; CTO, Veleiro AI<br>(Ex-Amazon, Ex-Meta)</span>
+      </div>
+
+      <div class="spacer-md"></div>
+
+      <!-- Key Partnerships -->
+      <div class="anim-up delay-3" style="display: flex; gap: 16px; margin-bottom: 20px;">
+        <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; white-space: nowrap; padding-top: 4px;">Partners</div>
+        <div class="card" style="padding: 10px 16px; flex: 1;">
+          <span class="white" style="font-weight: 600;">Redwood Research</span> <span class="dim">&middot; AI safety research</span>
+        </div>
+        <div class="card" style="padding: 10px 16px; flex: 1;">
+          <span class="white" style="font-weight: 600;">Cambridge Inference</span> <span class="dim">&middot; Finance &amp; defense</span>
+        </div>
+      </div>
+
+      <!-- User Quotes -->
+      <div class="anim-up delay-3">
+        <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 12px;">What users say</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="quote" style="padding: 14px 18px; font-size: 0.92rem;">
+            &ldquo;I saw the website and immediately thought, &lsquo;I want that.&rsquo; It&rsquo;s like CLAUDE.md that actually works.&rdquo;
+            <span class="quote-attr">Nicolas Mesa, Cofounder &amp; CTO, Veleiro AI (Ex-Amazon, Ex-Meta)</span>
+          </div>
+          <div class="quote" style="padding: 14px 18px; font-size: 0.92rem;">
+            &ldquo;I want this thing to exist. I could do maybe 30&ndash;50% more parallel threads&hellip; this is about freeing up cognitive resources.&rdquo;
+            <span class="quote-attr">Elvis Sikora, Data Analyst, CloudWalk</span>
+          </div>
+          <div class="quote" style="padding: 14px 18px; font-size: 0.92rem;">
+            &ldquo;You&rsquo;re doing what I&rsquo;m trying to do and actually doing it.&rdquo;
+            <span class="quote-attr">Paolo Calvi, Engineer, Airbus</span>
+          </div>
+          <div class="quote" style="padding: 14px 18px; font-size: 0.92rem;">
+            &ldquo;As soon as I saw custom policies, I was like, Okay, this is cool. I would consider using this.&rdquo;
+            <span class="quote-attr">Zac Saber, CTO, Counterweight AI</span>
           </div>
         </div>
       </div>
