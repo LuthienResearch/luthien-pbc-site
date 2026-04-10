@@ -917,9 +917,16 @@
         border-right: 5px solid transparent;
         border-top: 6px solid var(--border);
       }
-      .compare-row { grid-template-columns: 1fr; gap: 4px; }
+      .compare-row { grid-template-columns: 1fr; gap: 0; padding: 12px 0; }
       .compare-row.header { display: none; }
       .compare-cell { padding: 8px 16px; }
+      .compare-cell.name { font-size: 1rem; margin-bottom: 4px; }
+      .compare-cell.luthien { border-radius: 3px; margin: 4px 8px 0; }
+      .compare-cell.luthien::before {
+        content: 'Luthien: ';
+        font-weight: 700;
+        color: var(--blue);
+      }
       .timeline { flex-direction: column; gap: 24px; }
       .timeline::before {
         width: 2px;
