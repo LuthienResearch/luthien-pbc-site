@@ -510,14 +510,6 @@
       color: var(--green);
     }
 
-    .f-tbu {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      color: var(--amber);
-      letter-spacing: 0.04em;
-      font-style: italic;
-    }
-
     /* Quote avatars */
     .q-card {
       display: flex;
@@ -1398,7 +1390,6 @@
   <div class="slide" data-slide="1">
     <div class="slide-inner">
       <div class="label anim-up">The Team</div>
-      <h1 class="headline headline-lg anim-up delay-1">We can build AI infra and sell it</h1>
       <div class="spacer-md"></div>
       <div class="grid-2 anim-up delay-2">
         <div class="founder-card">
@@ -1435,13 +1426,17 @@
     </div>
   </div>
 
-  <!-- ======== SLIDE 3: THE PARADOX ======== -->
+  <!-- ======== SLIDE 3: THE PROBLEM ======== -->
   <div class="slide" data-slide="2">
     <div class="slide-inner">
       <div class="label anim-up">The Problem</div>
-      <h1 class="headline headline-lg anim-up delay-1" style="max-width: 900px;">AI misbehaves, forcing babysitting</h1>
-      <p class="subtitle anim-up delay-1" style="max-width: 900px;">Average Claude Code turn: 45 seconds. Autonomous potential: 12 hours.</p>
+      <h1 class="headline headline-lg anim-up delay-1" style="max-width: 900px;">Secure the dev environment</h1>
+      <p class="subtitle anim-up delay-1" style="max-width: 900px;">Your CTO wants her team on Claude Code. Her CISO is screaming. Agentic AI unlocks 12-hour autonomous potential &mdash; but only with real-time protection.</p>
       <div class="spacer-md"></div>
+      <p class="anim-up delay-2" style="text-align: center; font-size: 1.05rem; color: var(--text-muted); margin-bottom: 14px; line-height: 1.4;">
+        3 weeks ago: LiteLLM supply chain attack. Last week: Mythos found 15 zero-days.<br>
+        <span style="color: var(--white); font-weight: 600;">Agentic AI needs real-time protection from rapidly-emerging threats.</span>
+      </p>
       <p class="anim-up delay-2" style="text-align: center; font-size: 1.35rem; color: var(--white); font-weight: 700; margin-bottom: 18px; line-height: 1.3;">
         <span style="color: #C45050;">93%</span> of permission prompts get auto-accepted.
       </p>
@@ -1689,8 +1684,8 @@
           <div class="card-body"><span class="white" style="font-weight: 600;">80%</span> of Claude Code revenue comes from enterprises. Enterprise AI budgets growing <span class="white" style="font-weight: 600;">75% YoY</span>.</div>
           <div class="citation">Anthropic enterprise reports; Gartner AI spending surveys</div>
         </div>
-        <div class="card" style="border-color: var(--amber); background: rgba(196, 123, 66, 0.06);">
-          <div class="card-title" style="color: var(--amber);">Regulatory tailwind</div>
+        <div class="card">
+          <div class="card-title">Regulatory tailwind</div>
           <div class="card-body">EU AI Act full enforcement: <span class="white" style="font-weight: 600;">August 2, 2026</span>. ~500K EU companies must demonstrate AI oversight.</div>
           <div class="citation">EU AI Act (Regulation 2024/1689), Article 113</div>
         </div>
@@ -1816,17 +1811,6 @@
 
       <div class="spacer-md"></div>
 
-      <!-- Key Partnerships -->
-      <div class="anim-up delay-3" style="display: flex; gap: 16px; margin-bottom: 20px;">
-        <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; white-space: nowrap; padding-top: 4px;">Partners</div>
-        <div class="card" style="padding: 10px 16px; flex: 1;">
-          <span class="white" style="font-weight: 600;">Redwood Research</span> <span class="dim">&middot; AI safety research</span>
-        </div>
-        <div class="card" style="padding: 10px 16px; flex: 1;">
-          <span class="white" style="font-weight: 600;">Cambridge Inference</span> <span class="dim">&middot; Finance &amp; defense</span>
-        </div>
-      </div>
-
       <!-- User Quotes with avatars -->
       <div class="anim-up delay-3">
         <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 12px;">What users are saying</div>
@@ -1935,7 +1919,7 @@
 </div>
 
 <script>
-/* Dynamic LOI day count — first LOI signed Wed Apr 9, 2026 */
+/* Dynamic LOI day count — LOI sign effort started late March 2026 */
 (function() {
   const firstLOI = new Date('2026-04-01T00:00:00');
   const today = new Date();

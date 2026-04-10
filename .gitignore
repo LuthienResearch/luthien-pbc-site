@@ -24,6 +24,7 @@ package-lock.json
 dist/
 .cache/
 /dev
+dev/OBJECTIVE.md
 
 # Claude Code
 .claude/
