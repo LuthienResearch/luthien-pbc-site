@@ -1630,28 +1630,31 @@
         <!-- SVG funnel shape -->
         <div class="funnel-visual">
           <svg viewBox="0 0 300 310" width="300" height="310" xmlns="http://www.w3.org/2000/svg">
-            <!-- Stage 1: Sales & Outreach (widest) -->
-            <polygon points="0,0 300,0 278,58 22,58" fill="rgba(59,148,148,0.04)" stroke="rgba(59,148,148,0.12)" stroke-width="1"/>
-            <text x="150" y="26" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">SALES &amp;</text>
-            <text x="150" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">OUTREACH</text>
+            <!-- Continuous funnel: left edge goes from x=0 to x=110, right edge from x=300 to x=190 -->
+            <!-- Each stage's bottom matches next stage's top exactly -->
+
+            <!-- Stage 1: Sales & Outreach -->
+            <polygon points="0,0 300,0 278,62 22,62" fill="rgba(59,148,148,0.04)" stroke="rgba(59,148,148,0.12)" stroke-width="1"/>
+            <text x="150" y="28" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">SALES &amp;</text>
+            <text x="150" y="44" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">OUTREACH</text>
 
             <!-- Stage 2: Qualification -->
-            <polygon points="22,62 278,62 252,120 48,120" fill="rgba(59,148,148,0.06)" stroke="rgba(59,148,148,0.15)" stroke-width="1"/>
-            <text x="150" y="97" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">QUALIFICATION</text>
+            <polygon points="22,62 278,62 256,124 44,124" fill="rgba(59,148,148,0.06)" stroke="rgba(59,148,148,0.15)" stroke-width="1"/>
+            <text x="150" y="99" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">QUALIFICATION</text>
 
             <!-- Stage 3: Collect Requirements -->
-            <polygon points="48,124 252,124 222,182 78,182" fill="rgba(59,148,148,0.08)" stroke="rgba(59,148,148,0.18)" stroke-width="1"/>
-            <text x="150" y="150" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">COLLECT</text>
-            <text x="150" y="166" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">REQUIREMENTS</text>
+            <polygon points="44,124 256,124 234,186 66,186" fill="rgba(59,148,148,0.08)" stroke="rgba(59,148,148,0.18)" stroke-width="1"/>
+            <text x="150" y="152" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">COLLECT</text>
+            <text x="150" y="168" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">REQUIREMENTS</text>
 
             <!-- Stage 4: Trial -->
-            <polygon points="78,186 222,186 196,244 104,244" fill="rgba(59,148,148,0.11)" stroke="rgba(59,148,148,0.22)" stroke-width="1"/>
-            <text x="150" y="221" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#B0A8BE" font-weight="600" letter-spacing="1.2">TRIAL</text>
+            <polygon points="66,186 234,186 212,248 88,248" fill="rgba(59,148,148,0.11)" stroke="rgba(59,148,148,0.22)" stroke-width="1"/>
+            <text x="150" y="223" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#B0A8BE" font-weight="600" letter-spacing="1.2">TRIAL</text>
 
-            <!-- Stage 5: Pilot / Conversion (narrowest, highlighted) -->
-            <polygon points="104,248 196,248 178,306 122,306" fill="rgba(59,148,148,0.18)" stroke="rgba(59,148,148,0.45)" stroke-width="1.5"/>
-            <text x="150" y="274" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#3B9494" font-weight="700" letter-spacing="1.2">PILOT /</text>
-            <text x="150" y="290" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#3B9494" font-weight="700" letter-spacing="1.2">CONVERSION</text>
+            <!-- Stage 5: Pilot / Conversion -->
+            <polygon points="88,248 212,248 190,310 110,310" fill="rgba(59,148,148,0.18)" stroke="rgba(59,148,148,0.45)" stroke-width="1.5"/>
+            <text x="150" y="276" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#3B9494" font-weight="700" letter-spacing="1.2">PILOT /</text>
+            <text x="150" y="292" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#3B9494" font-weight="700" letter-spacing="1.2">CONVERSION</text>
           </svg>
         </div>
 
