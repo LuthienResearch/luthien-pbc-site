@@ -510,6 +510,14 @@
       color: var(--green);
     }
 
+    .f-tbu {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--amber);
+      letter-spacing: 0.04em;
+      font-style: italic;
+    }
+
     /* Quote avatars */
     .q-card {
       display: flex;
@@ -1807,6 +1815,17 @@
 
       <div class="spacer-md"></div>
 
+      <!-- Key Partnerships -->
+      <div class="anim-up delay-3" style="display: flex; gap: 16px; margin-bottom: 20px;">
+        <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; white-space: nowrap; padding-top: 4px;">Partners</div>
+        <div class="card" style="padding: 10px 16px; flex: 1;">
+          <span class="white" style="font-weight: 600;">Redwood Research</span> <span class="dim">&middot; AI safety research</span>
+        </div>
+        <div class="card" style="padding: 10px 16px; flex: 1;">
+          <span class="white" style="font-weight: 600;">Cambridge Inference</span> <span class="dim">&middot; Finance &amp; defense</span>
+        </div>
+      </div>
+
       <!-- User Quotes with avatars -->
       <div class="anim-up delay-3">
         <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 12px;">What users are saying</div>
@@ -1915,7 +1934,7 @@
 </div>
 
 <script>
-/* Dynamic LOI day count — LOI sign effort started late March 2026 */
+/* Dynamic LOI day count — first LOI signed Wed Apr 9, 2026 */
 (function() {
   const firstLOI = new Date('2026-04-01T00:00:00');
   const today = new Date();
