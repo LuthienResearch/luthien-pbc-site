@@ -449,7 +449,7 @@
     }
 
     .funnel-visual {
-      flex: 0 0 240px;
+      flex: 0 0 300px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -465,9 +465,9 @@
       flex: 1;
       display: flex;
       align-items: center;
-      padding: 0 0 0 32px;
-      gap: 16px;
-      min-height: 50px;
+      padding: 0 0 0 28px;
+      gap: 12px;
+      min-height: 52px;
     }
 
     .funnel-mrow .f-count {
@@ -1651,66 +1651,57 @@
       <div class="spacer-md"></div>
 
       <div class="funnel-layout anim-up delay-2">
-        <!-- SVG funnel — Peter's balanced proportions, lowercase, bigger font -->
+        <!-- Peter's exact SVG funnel -->
         <div class="funnel-visual">
-          <svg viewBox="0 0 240 280" width="240" height="280" xmlns="http://www.w3.org/2000/svg">
-            <!-- Peter's balanced proportions: 240→64px, steeper taper -->
-
-            <!-- Stage 1: Sales & Outreach -->
-            <polygon points="0,0 240,0 222,56 18,56" fill="rgba(59,148,148,0.04)" stroke="rgba(59,148,148,0.12)" stroke-width="1"/>
-            <text x="120" y="25" text-anchor="middle" font-family="Raleway, sans-serif" font-size="11" fill="#7A7290" font-weight="600">sales &amp;</text>
-            <text x="120" y="41" text-anchor="middle" font-family="Raleway, sans-serif" font-size="11" fill="#7A7290" font-weight="600">outreach</text>
-
-            <!-- Stage 2: Qualification -->
-            <polygon points="18,56 222,56 200,112 40,112" fill="rgba(59,148,148,0.06)" stroke="rgba(59,148,148,0.15)" stroke-width="1"/>
-            <text x="120" y="90" text-anchor="middle" font-family="Raleway, sans-serif" font-size="11" fill="#7A7290" font-weight="600">qualification</text>
-
-            <!-- Stage 3: Collect Requirements -->
-            <polygon points="40,112 200,112 178,168 62,168" fill="rgba(59,148,148,0.08)" stroke="rgba(59,148,148,0.18)" stroke-width="1"/>
-            <text x="120" y="136" text-anchor="middle" font-family="Raleway, sans-serif" font-size="11" fill="#7A7290" font-weight="600">collect</text>
-            <text x="120" y="152" text-anchor="middle" font-family="Raleway, sans-serif" font-size="11" fill="#7A7290" font-weight="600">requirements</text>
-
-            <!-- Stage 4: Trial -->
-            <polygon points="62,168 178,168 156,224 84,224" fill="rgba(59,148,148,0.11)" stroke="rgba(59,148,148,0.22)" stroke-width="1"/>
-            <text x="120" y="202" text-anchor="middle" font-family="Raleway, sans-serif" font-size="11" fill="#B0A8BE" font-weight="600">trial</text>
-
-            <!-- Stage 5: Pilot / Conversion -->
-            <polygon points="84,224 156,224 142,280 98,280" fill="rgba(59,148,148,0.18)" stroke="rgba(59,148,148,0.45)" stroke-width="1.5"/>
-            <text x="120" y="248" text-anchor="middle" font-family="Raleway, sans-serif" font-size="11" fill="#3B9494" font-weight="700">pilot /</text>
-            <text x="120" y="264" text-anchor="middle" font-family="Raleway, sans-serif" font-size="11" fill="#3B9494" font-weight="700">conversion</text>
+          <svg viewBox="0 0 300 310" width="300" height="310" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="0,0 300,0 278,62 22,62" fill="rgba(59,148,148,0.04)" stroke="rgba(59,148,148,0.12)" stroke-width="1"/>
+            <text x="150" y="28" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">SALES &amp;</text>
+            <text x="150" y="44" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">OUTREACH</text>
+            <polygon points="22,62 278,62 256,124 44,124" fill="rgba(59,148,148,0.06)" stroke="rgba(59,148,148,0.15)" stroke-width="1"/>
+            <text x="150" y="99" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">QUALIFICATION</text>
+            <polygon points="44,124 256,124 234,186 66,186" fill="rgba(59,148,148,0.08)" stroke="rgba(59,148,148,0.18)" stroke-width="1"/>
+            <text x="150" y="152" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">COLLECT</text>
+            <text x="150" y="168" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">REQUIREMENTS</text>
+            <polygon points="66,186 234,186 212,248 88,248" fill="rgba(59,148,148,0.11)" stroke="rgba(59,148,148,0.22)" stroke-width="1"/>
+            <text x="150" y="223" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#B0A8BE" font-weight="600" letter-spacing="1.2">TRIAL</text>
+            <polygon points="88,248 212,248 190,310 110,310" fill="rgba(59,148,148,0.18)" stroke="rgba(59,148,148,0.45)" stroke-width="1.5"/>
+            <text x="150" y="276" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#3B9494" font-weight="700" letter-spacing="1.2">PILOT /</text>
+            <text x="150" y="292" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#3B9494" font-weight="700" letter-spacing="1.2">CONVERSION</text>
           </svg>
         </div>
 
-        <!-- Metrics aligned to funnel rows -->
+        <!-- Metrics — right-aligned $ column header -->
         <div class="funnel-metrics">
-          <!-- Sales & Outreach -->
-          <div class="funnel-mrow">
-            <div class="f-desc" style="color: var(--text-dim);"><strong class="white" style="font-style: normal;">No outbound or sales:</strong><br><span style="font-style: italic;">orgs inbound based on the problem we&rsquo;re solving</span></div>
+          <div class="funnel-mrow" style="min-height: 16px; justify-content: flex-end; padding-right: 4px;">
+            <div class="f-dollar" style="color: var(--text-dim); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase;">$</div>
           </div>
 
           <!-- Qualification -->
           <div class="funnel-mrow">
             <div class="f-count">93</div>
             <div class="f-desc">orgs with internal champion using<br>Claude Code <strong class="white">30+ hrs/week</strong></div>
+            <div class="f-dollar" style="color: var(--text-muted);">$10M&ndash;$20M</div>
           </div>
 
           <!-- Collect Requirements -->
           <div class="funnel-mrow">
             <div class="f-count">20</div>
-            <div class="f-desc">user problem discovery calls</div>
+            <div class="f-desc">problem discovery calls</div>
+            <div class="f-dollar" style="color: var(--text-muted);">$750k&ndash;$1.5M</div>
           </div>
 
           <!-- Trial -->
           <div class="funnel-mrow">
             <div class="f-count">14</div>
-            <div class="f-desc">live trials of Luthien</div>
+            <div class="f-desc">live trials, <strong class="white">9</strong> LOIs in pipeline. 50&ndash;150 seats</div>
+            <div class="f-dollar" style="color: var(--text-muted);">$284&ndash;690k</div>
           </div>
 
           <!-- Pilot / Conversion -->
           <div class="funnel-mrow f-highlight">
-            <div class="f-count">7</div>
-            <div class="f-desc">LOIs signed <span id="loiDays" style="font-family: var(--mono); font-size: 0.78rem; color: var(--blue);"></span></div>
-            <div class="f-dollar" style="color: var(--green);">$330&ndash;500K</div>
+            <div class="f-count">3</div>
+            <div class="f-desc">LOIs signed <span id="loiDays" style="font-family: var(--mono); font-size: 0.72rem; color: var(--blue);"></span>, 26&ndash;37 seats</div>
+            <div class="f-dollar" style="color: var(--green); font-size: 1.1rem; font-weight: 800;">$330&ndash;500K</div>
           </div>
         </div>
       </div>
@@ -1838,7 +1829,7 @@
 <script>
 /* Dynamic LOI day count — first LOI signed Wed Apr 9, 2026 */
 (function() {
-  const firstLOI = new Date('2026-04-09');
+  const firstLOI = new Date('2026-04-01T00:00:00');
   const today = new Date();
   today.setHours(0,0,0,0);
   const days = Math.max(1, Math.round((today - firstLOI) / 86400000));
