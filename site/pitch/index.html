@@ -970,6 +970,53 @@
       [data-slide="3"] .arch-mobile { display: block !important; }
       [data-slide="3"] .slide-inner > div[style*="border-top"] { display: none; }
       .nav-arrow { display: none !important; }
+      /* GTM table - card layout on mobile */
+      .compare-row[style*="180px"] {
+        grid-template-columns: 1fr !important;
+        gap: 0 !important;
+        padding: 14px 12px;
+        margin-bottom: 8px;
+        background: var(--bg-elevated);
+        border-radius: 3px;
+        border-bottom: none !important;
+      }
+      .compare-row.header[style*="180px"] { display: none !important; }
+      .compare-row[style*="180px"] .compare-cell { padding: 6px 0; font-size: 0.82rem; }
+      .compare-row[style*="180px"] .compare-cell.name { padding-bottom: 10px; border-bottom: 1px solid var(--border); margin-bottom: 6px; }
+      .compare-row[style*="180px"] .compare-cell:nth-child(2)::before {
+        content: 'Who: ';
+        font-family: var(--mono);
+        font-size: 0.65rem;
+        font-weight: 600;
+        color: var(--text-dim);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .compare-row[style*="180px"] .compare-cell:nth-child(3)::before {
+        content: 'Signal: ';
+        font-family: var(--mono);
+        font-size: 0.65rem;
+        font-weight: 600;
+        color: var(--text-dim);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .compare-row[style*="180px"] .compare-cell:nth-child(4) {
+        font-size: 1rem;
+        color: var(--white);
+        margin-top: 4px;
+      }
+      .compare-row[style*="180px"] .compare-cell:nth-child(4)::before {
+        content: 'Deal size: ';
+        font-family: var(--mono);
+        font-size: 0.65rem;
+        font-weight: 600;
+        color: var(--text-dim);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .grid-4 { grid-template-columns: 1fr 1fr; }
+      .grid-3 { grid-template-columns: 1fr; }
     }
 
     /* ========== QUOTE CARDS (imported from landing page for slide 2 variants) ========== */
