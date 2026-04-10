@@ -334,14 +334,14 @@
       display: grid;
       grid-template-columns: 160px 1fr 1fr;
       gap: 0;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--text-dim);
       align-items: stretch;
     }
 
     .compare-row:last-child { border-bottom: none; }
 
     .compare-row.header {
-      border-bottom: 2px solid var(--border);
+      border-bottom: 2px solid var(--text-dim);
     }
 
     .compare-cell {
@@ -942,11 +942,12 @@
     }
 
     @media (max-width: 600px) {
-      .slide { padding: 32px 20px; }
+      .slide { padding: 32px 20px; overflow-y: auto; }
       .card { padding: 20px; }
       .founder-card { padding: 24px; }
       .controls { right: 16px; bottom: 14px; }
       .top-controls { right: 16px; top: 14px; }
+      .fs-btn { display: none; }
     }
 
     /* ========== QUOTE CARDS (imported from landing page for slide 2 variants) ========== */
