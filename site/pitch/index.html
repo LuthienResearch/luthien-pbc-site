@@ -1054,6 +1054,20 @@
       }
       .grid-4 { grid-template-columns: 1fr 1fr; }
       .grid-3 { grid-template-columns: 1fr; }
+      /* Traction funnel - hide SVG, stack metrics */
+      .funnel-layout { flex-direction: column; }
+      .funnel-visual { display: none; }
+      .funnel-metrics { gap: 8px; }
+      .funnel-mrow { padding-left: 0 !important; min-height: auto !important; padding: 6px 0 !important; }
+      .funnel-mrow .f-count { font-size: 1.4rem !important; min-width: 36px !important; }
+      .funnel-mrow.f-highlight .f-count { font-size: 1.6rem !important; }
+      .funnel-mrow .f-desc { font-size: 0.78rem !important; }
+      .funnel-mrow .f-desc span[style*="font-size"] { font-size: 0.9rem !important; }
+      .funnel-mrow .f-dollar { font-size: 0.78rem !important; white-space: nowrap; }
+      /* Stack partners */
+      [data-slide="10"] .delay-3[style*="display: flex"] { flex-direction: column; }
+      /* Stack quotes */
+      [data-slide="10"] div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
     }
 
     /* ========== QUOTE CARDS (imported from landing page for slide 2 variants) ========== */
