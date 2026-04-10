@@ -38,6 +38,10 @@
       --mono: 'JetBrains Mono', 'Fira Code', monospace;
     }
 
+    html {
+      font-size: 112%; /* Scale all rem-based sizes ~12% larger — balanced for projector */
+    }
+
     html, body {
       height: 100%;
       overflow: hidden;
@@ -465,22 +469,22 @@
       flex: 1;
       display: flex;
       align-items: center;
-      padding: 0 0 0 32px;
-      gap: 16px;
-      min-height: 50px;
+      padding: 0 0 0 28px;
+      gap: 12px;
+      min-height: 52px;
     }
 
     .funnel-mrow .f-count {
       font-family: var(--sans);
       font-weight: 800;
-      font-size: 2rem;
+      font-size: clamp(2rem, 4vw, 2.8rem);
       color: var(--white);
-      min-width: 60px;
+      min-width: 56px;
       line-height: 1;
     }
 
     .funnel-mrow .f-desc {
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       color: var(--text-muted);
       line-height: 1.3;
     }
@@ -488,7 +492,7 @@
     .funnel-mrow .f-dollar {
       margin-left: auto;
       font-family: var(--mono);
-      font-size: 0.82rem;
+      font-size: 0.85rem;
       font-weight: 600;
       white-space: nowrap;
     }
@@ -502,7 +506,7 @@
     }
 
     .funnel-mrow.f-highlight .f-count {
-      font-size: 2.5rem;
+      font-size: clamp(2.5rem, 5vw, 3.2rem);
       color: var(--green);
     }
 
@@ -512,6 +516,38 @@
       color: var(--amber);
       letter-spacing: 0.04em;
       font-style: italic;
+    }
+
+    /* Quote avatars */
+    .q-card {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 14px 18px;
+      font-size: 0.92rem;
+    }
+    .q-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      object-fit: cover;
+      border: 1px solid var(--border);
+    }
+    .q-avatar-init {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--blue);
+      background: var(--blue-glow);
+      border: 1px solid rgba(59, 148, 148, 0.25);
     }
 
     /* ============ FOUNDER CARDS ============ */
@@ -1406,7 +1442,7 @@
       <h1 class="headline headline-lg anim-up delay-1" style="max-width: 900px;">AI misbehaves, forcing babysitting</h1>
       <p class="subtitle anim-up delay-1" style="max-width: 900px;">Average Claude Code turn: 45 seconds. Autonomous potential: 12 hours.</p>
       <div class="spacer-md"></div>
-      <p class="anim-up delay-2" style="text-align: center; font-size: 1.6rem; color: var(--white); font-weight: 700; margin-bottom: 18px; line-height: 1.3;">
+      <p class="anim-up delay-2" style="text-align: center; font-size: 1.35rem; color: var(--white); font-weight: 700; margin-bottom: 18px; line-height: 1.3;">
         <span style="color: #C45050;">93%</span> of permission prompts get auto-accepted.
       </p>
       <iframe src="problem-widget.html#mode=pill&pillInterval=5000" scrolling="no" style="width: 100%; height: 440px; border: 1px solid var(--border); border-radius: 3px; background: #141216; overflow: hidden;"></iframe>
@@ -1594,7 +1630,7 @@
   <div class="slide" data-slide="6">
     <div class="slide-inner">
       <div class="label anim-up">Defensibility</div>
-      <h1 class="headline headline-lg anim-up delay-1">"Won't Anthropic build/fix this?"</h1>
+      <h1 class="headline headline-lg anim-up delay-1">"Won't Anthropic build this?"</h1>
       <div class="spacer-md"></div>
       <div class="flex-col gap-md anim-up delay-2">
         <div class="card">
@@ -1670,47 +1706,47 @@
       <div class="spacer-md"></div>
       <div class="anim-up delay-2" style="border: 1px solid var(--border); border-radius: 3px; overflow: hidden;">
 
-        <div class="compare-row header" style="grid-template-columns: 180px 1.2fr 1.8fr 140px;">
+        <div class="compare-row header" style="grid-template-columns: 180px 1.2fr 1.8fr 160px;">
           <div class="compare-cell">Phase</div>
           <div class="compare-cell">Who</div>
           <div class="compare-cell">The signal</div>
           <div class="compare-cell">Deal size</div>
         </div>
 
-        <div class="compare-row" style="grid-template-columns: 180px 1.2fr 1.8fr 140px;">
+        <div class="compare-row" style="grid-template-columns: 180px 1.2fr 1.8fr 160px;">
           <div class="compare-cell name" style="padding-top: 18px;">
             <div style="color: var(--blue); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">Now</div>
-            <div style="color: var(--white); font-weight: 600; margin-top: 4px;">Design partners</div>
+            <div style="color: var(--white); font-weight: 600; margin-top: 4px;">Pilots</div>
           </div>
           <div class="compare-cell">Startup CTOs &amp; Principal Engineers at AI-native orgs that want fine-grained agent control. 8&ndash;12 week pilots.</div>
-          <div class="compare-cell" style="font-style: italic;">&ldquo;I'll just fix it myself.&rdquo;<br><span style="font-style: normal; color: var(--text-dim); font-size: 0.78rem;">&mdash; Sami Jawhar, Meter</span></div>
-          <div class="compare-cell" style="color: var(--white); font-weight: 600;">$50&ndash;250K</div>
+          <div class="compare-cell">I&rsquo;ll just <span style="font-family: var(--sans); font-weight: 800; font-size: 1.3rem; color: var(--white);">fix it myself.</span><br><span style="color: var(--text-dim); font-size: 0.78rem;">Sami Jawhar, Agent Wrangler, Trajectory Labs</span></div>
+          <div class="compare-cell" style="color: var(--white); font-family: var(--sans); font-weight: 800; font-size: 1.5rem;">$100k&ndash;$1M</div>
         </div>
 
-        <div class="compare-row" style="grid-template-columns: 180px 1.2fr 1.8fr 140px;">
+        <div class="compare-row" style="grid-template-columns: 180px 1.2fr 1.8fr 160px;">
           <div class="compare-cell name" style="padding-top: 18px;">
             <div style="color: var(--blue); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">Next</div>
-            <div style="color: var(--white); font-weight: 600; margin-top: 4px;">Eng budgets</div>
+            <div style="color: var(--white); font-weight: 600; margin-top: 4px;">Contracts</div>
           </div>
-          <div class="compare-cell">All devs in org. Devs advocate; engineering budgets sign. 75% YoY growth.</div>
-          <div class="compare-cell" style="font-style: italic;">&ldquo;Cool, I'll tell my whole team to use this.&rdquo;<br><span style="font-style: normal; color: var(--text-dim); font-size: 0.78rem;">&mdash; Tyler Tracy, Redwood Research</span></div>
-          <div class="compare-cell" style="color: var(--white); font-weight: 600;">$1&ndash;10M</div>
+          <div class="compare-cell">All devs in org. Devs advocate; CTOs sign. Enterprise AI budgets <span style="font-family: var(--sans); font-weight: 800; color: var(--white);">+75%</span> YoY</div>
+          <div class="compare-cell">Cool, I&rsquo;ll <span style="font-family: var(--sans); font-weight: 800; font-size: 1.3rem; color: var(--white);">tell my whole team</span> to use this.<br><span style="color: var(--text-dim); font-size: 0.78rem;">Tyler Tracy, Member of Technical Staff, Redwood Research</span></div>
+          <div class="compare-cell" style="color: var(--white); font-family: var(--sans); font-weight: 800; font-size: 1.5rem;">$1&ndash;10M</div>
         </div>
 
-        <div class="compare-row" style="grid-template-columns: 180px 1.2fr 1.8fr 140px;">
+        <div class="compare-row" style="grid-template-columns: 180px 1.2fr 1.8fr 160px;">
           <div class="compare-cell name" style="padding-top: 18px;">
-            <div style="color: var(--blue); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">starting AUG '26</div>
+            <div style="color: var(--blue); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">starting Aug &rsquo;26</div>
             <div style="color: var(--white); font-weight: 600; margin-top: 4px;">Compliance</div>
           </div>
           <div class="compare-cell">CISOs &amp; procurement join the buying table. Same playbook cybersecurity ran.</div>
-          <div class="compare-cell">EU AI Act enforcement lands <strong class="white">Aug 2, 2026</strong>. Luthien maps to <strong class="white">7 of 8</strong> mandatory requirements.</div>
-          <div class="compare-cell" style="color: var(--blue); font-weight: 600;">Mandatory</div>
+          <div class="compare-cell">EU AI Act enforcement lands <strong class="white">Aug 2, 2026</strong>.<br>Luthien addresses <span style="font-family: var(--sans); font-weight: 800; font-size: 1.3rem; color: var(--white);">7 of 8</span> mandatory requirements.</div>
+          <div class="compare-cell" style="color: var(--blue); font-family: var(--sans); font-weight: 800; font-size: 1.5rem;">Mandatory</div>
         </div>
 
       </div>
       <div class="spacer-md"></div>
       <p class="anim-up delay-3" style="font-family: var(--mono); font-size: 0.95rem; color: var(--text-dim); text-align: center;">
-        The AI compliance control that <span class="amber">developers already love</span>.
+        AI control &amp; compliance that <span class="amber">developers love</span>.
       </p>
     </div>
   </div>
@@ -1719,72 +1755,61 @@
   <div class="slide" data-slide="10">
     <div class="slide-inner">
       <div class="label anim-up">Traction</div>
-      <h1 class="headline headline-lg anim-up delay-1">Sales pipeline</h1>
+      <h1 class="headline headline-lg anim-up delay-1">Selling this is easy</h1>
       <div class="spacer-md"></div>
 
       <div class="funnel-layout anim-up delay-2">
-        <!-- SVG funnel shape -->
+        <!-- Peter's exact SVG funnel -->
         <div class="funnel-visual">
           <svg viewBox="0 0 300 310" width="300" height="310" xmlns="http://www.w3.org/2000/svg">
-            <!-- Continuous funnel: left edge goes from x=0 to x=110, right edge from x=300 to x=190 -->
-            <!-- Each stage's bottom matches next stage's top exactly -->
-
-            <!-- Stage 1: Sales & Outreach -->
             <polygon points="0,0 300,0 278,62 22,62" fill="rgba(59,148,148,0.04)" stroke="rgba(59,148,148,0.12)" stroke-width="1"/>
             <text x="150" y="28" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">SALES &amp;</text>
             <text x="150" y="44" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">OUTREACH</text>
-
-            <!-- Stage 2: Qualification -->
             <polygon points="22,62 278,62 256,124 44,124" fill="rgba(59,148,148,0.06)" stroke="rgba(59,148,148,0.15)" stroke-width="1"/>
             <text x="150" y="99" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">QUALIFICATION</text>
-
-            <!-- Stage 3: Collect Requirements -->
             <polygon points="44,124 256,124 234,186 66,186" fill="rgba(59,148,148,0.08)" stroke="rgba(59,148,148,0.18)" stroke-width="1"/>
             <text x="150" y="152" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">COLLECT</text>
             <text x="150" y="168" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">REQUIREMENTS</text>
-
-            <!-- Stage 4: Trial -->
             <polygon points="66,186 234,186 212,248 88,248" fill="rgba(59,148,148,0.11)" stroke="rgba(59,148,148,0.22)" stroke-width="1"/>
             <text x="150" y="223" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#B0A8BE" font-weight="600" letter-spacing="1.2">TRIAL</text>
-
-            <!-- Stage 5: Pilot / Conversion -->
             <polygon points="88,248 212,248 190,310 110,310" fill="rgba(59,148,148,0.18)" stroke="rgba(59,148,148,0.45)" stroke-width="1.5"/>
             <text x="150" y="276" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#3B9494" font-weight="700" letter-spacing="1.2">PILOT /</text>
             <text x="150" y="292" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#3B9494" font-weight="700" letter-spacing="1.2">CONVERSION</text>
           </svg>
         </div>
 
-        <!-- Metrics aligned to funnel rows -->
+        <!-- Metrics — right-aligned $ column header -->
         <div class="funnel-metrics">
-          <!-- Sales & Outreach -->
-          <div class="funnel-mrow">
-            <div class="f-desc" style="color: var(--text-dim); font-style: italic;">We haven't needed any outbound or sales</div>
+          <div class="funnel-mrow" style="min-height: 16px; justify-content: flex-end; padding-right: 4px;">
+            <div class="f-dollar" style="color: var(--text-dim); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase;">$</div>
           </div>
 
           <!-- Qualification -->
           <div class="funnel-mrow">
             <div class="f-count">93</div>
-            <div class="f-desc">orgs qualified</div>
-            <div class="f-dollar"><span class="f-tbu">$ to be updated</span></div>
+            <div class="f-desc">orgs with internal champion using<br>Claude Code <strong class="white">30+ hrs/week</strong></div>
+            <div class="f-dollar" style="color: var(--text-muted);">$10M&ndash;$20M</div>
           </div>
 
           <!-- Collect Requirements -->
           <div class="funnel-mrow">
             <div class="f-count">20</div>
-            <div class="f-desc">problem discoveries</div>
+            <div class="f-desc">problem discovery calls</div>
+            <div class="f-dollar" style="color: var(--text-muted);">$750k&ndash;$1.5M</div>
           </div>
 
           <!-- Trial -->
           <div class="funnel-mrow">
             <div class="f-count">14</div>
-            <div class="f-desc">live trials</div>
+            <div class="f-desc">live trials, <strong class="white">9</strong> LOIs in pipeline. 50&ndash;150 seats</div>
+            <div class="f-dollar" style="color: var(--text-muted);">$284&ndash;690k</div>
           </div>
 
           <!-- Pilot / Conversion -->
           <div class="funnel-mrow f-highlight">
-            <div class="f-count">7</div>
-            <div class="f-desc">LOIs signed</div>
-            <div class="f-dollar" style="color: var(--green);">$330&ndash;500K</div>
+            <div class="f-count">3</div>
+            <div class="f-desc">LOIs signed <span id="loiDays" style="font-family: var(--mono); font-size: 0.72rem; color: var(--blue);"></span>, 26&ndash;37 seats</div>
+            <div class="f-dollar" style="color: var(--green); font-size: 1.1rem; font-weight: 800;">$330&ndash;500K</div>
           </div>
         </div>
       </div>
@@ -1802,25 +1827,37 @@
         </div>
       </div>
 
-      <!-- User Quotes -->
+      <!-- User Quotes with avatars -->
       <div class="anim-up delay-3">
-        <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 12px;">What users say</div>
+        <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 12px;">What users are saying</div>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-          <div class="quote quote-amber" style="padding: 14px 18px; font-size: 0.92rem;">
-            &ldquo;I saw the website and immediately thought, &lsquo;I want that.&rsquo; It&rsquo;s like CLAUDE.md that actually works.&rdquo;
-            <span class="quote-attr">Nicolas Mesa, Cofounder &amp; CTO, Veleiro AI (Ex-Amazon, Ex-Meta)</span>
+          <div class="quote q-card">
+            <img class="q-avatar" src="../assets/images/quotes/nico-mesa.jpg" alt="Nicolas Mesa">
+            <div>
+              &ldquo;I saw the website and immediately thought, &lsquo;I want that.&rsquo; It&rsquo;s like CLAUDE.md that actually works.&rdquo;
+              <span class="quote-attr">Nicolas Mesa, Cofounder &amp; CTO, Veleiro AI</span>
+            </div>
           </div>
-          <div class="quote quote-amber" style="padding: 14px 18px; font-size: 0.92rem;">
-            &ldquo;I want this thing to exist. I could do maybe 30&ndash;50% more parallel threads&hellip; this is about freeing up cognitive resources.&rdquo;
-            <span class="quote-attr">Elvis Sikora, Data Analyst, CloudWalk</span>
+          <div class="quote q-card">
+            <img class="q-avatar" src="../assets/images/quotes/elvis-sikora.jpg" alt="Elvis Sikora">
+            <div>
+              &ldquo;I could do maybe <span style="font-family: var(--sans); font-weight: 800; font-size: 1.35rem; color: var(--white);">30&ndash;50%</span> more parallel threads&hellip; this is about freeing up cognitive resources.&rdquo;
+              <span class="quote-attr">Elvis Sikora, AI Engineer, CloudWalk</span>
+            </div>
           </div>
-          <div class="quote quote-amber" style="padding: 14px 18px; font-size: 0.92rem;">
-            &ldquo;You&rsquo;re doing what I&rsquo;m trying to do and actually doing it.&rdquo;
-            <span class="quote-attr">Paolo Calvi, Engineer, Airbus</span>
+          <div class="quote q-card">
+            <img class="q-avatar" src="../assets/images/quotes/sami-jawhar.jpg" alt="Sami Jawhar">
+            <div>
+              &ldquo;This would probably be more valuable than Datadog&hellip; ~<span style="font-family: var(--sans); font-weight: 800; font-size: 1.35rem; color: var(--white);">$100K</span>/year for a reasonably resourced org.&rdquo;
+              <span class="quote-attr">Sami Jawhar, Agent Wrangler, Trajectory Labs</span>
+            </div>
           </div>
-          <div class="quote quote-amber" style="padding: 14px 18px; font-size: 0.92rem;">
-            &ldquo;As soon as I saw custom policies, I was like, Okay, this is cool. I would consider using this.&rdquo;
-            <span class="quote-attr">Zac Saber, CTO, Counterweight AI</span>
+          <div class="quote q-card">
+            <img class="q-avatar" src="../assets/images/quotes/matt-handzel.jpg" alt="Matthew Handzel">
+            <div>
+              &ldquo;If this problem were solved, it would <span style="font-family: var(--sans); font-weight: 800; font-size: 1.35rem; color: var(--white);">2x</span> my task completion efficiency.&rdquo;
+              <span class="quote-attr">Matthew Handzel, Stealth AI Safety Startup</span>
+            </div>
           </div>
         </div>
       </div>
@@ -1898,6 +1935,16 @@
 </div>
 
 <script>
+/* Dynamic LOI day count — first LOI signed Wed Apr 9, 2026 */
+(function() {
+  const firstLOI = new Date('2026-04-01T00:00:00');
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const days = Math.max(1, Math.round((today - firstLOI) / 86400000));
+  const el = document.getElementById('loiDays');
+  if (el) el.textContent = 'in ' + days + ' day' + (days !== 1 ? 's' : '');
+})();
+
 (function() {
   const slides = document.querySelectorAll('.slide');
   const total = slides.length;
