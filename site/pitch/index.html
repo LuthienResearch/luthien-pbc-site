@@ -692,11 +692,16 @@
     }
 
     /* ============ FULLSCREEN BUTTON ============ */
-    .fs-btn {
+    .top-controls {
       position: fixed;
       top: 20px;
       right: 28px;
       z-index: 100;
+      display: flex;
+      gap: 8px;
+    }
+
+    .fs-btn, .cite-btn {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 6px;
@@ -709,31 +714,7 @@
       letter-spacing: 0.05em;
     }
 
-    .fs-btn:hover {
-      background: var(--bg-elevated);
-      color: var(--text);
-      border-color: var(--text-dim);
-    }
-
-    /* ============ CITATION TOGGLE ============ */
-    .cite-btn {
-      position: fixed;
-      top: 20px;
-      right: 160px;
-      z-index: 100;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      color: var(--text-dim);
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      padding: 6px 12px;
-      cursor: pointer;
-      transition: all 0.2s;
-      letter-spacing: 0.05em;
-    }
-
-    .cite-btn:hover {
+    .fs-btn:hover, .cite-btn:hover {
       background: var(--bg-elevated);
       color: var(--text);
       border-color: var(--text-dim);
@@ -965,7 +946,7 @@
       .card { padding: 20px; }
       .founder-card { padding: 24px; }
       .controls { right: 16px; bottom: 14px; }
-      .fs-btn { right: 16px; top: 14px; }
+      .top-controls { right: 16px; top: 14px; }
     }
 
     /* ========== QUOTE CARDS (imported from landing page for slide 2 variants) ========== */
@@ -1795,11 +1776,11 @@
 <button class="nav-arrow left hidden" id="navLeft" aria-label="Previous slide">&#8249;</button>
 <button class="nav-arrow right" id="navRight" aria-label="Next slide">&#8250;</button>
 
-<!-- Citation toggle -->
-<button class="cite-btn" id="citeBtn" title="Toggle citations">Sources</button>
-
-<!-- Fullscreen button -->
-<button class="fs-btn" id="fsBtn" title="Toggle fullscreen">F11 &middot; Fullscreen</button>
+<!-- Top-right controls -->
+<div class="top-controls">
+  <button class="cite-btn" id="citeBtn" title="Toggle citations">Sources</button>
+  <button class="fs-btn" id="fsBtn" title="Toggle fullscreen">F11 &middot; Fullscreen</button>
+</div>
 
 <script>
 (function() {
