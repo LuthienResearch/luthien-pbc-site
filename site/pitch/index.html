@@ -942,9 +942,15 @@
     }
 
     @media (max-width: 600px) {
-      .slide { padding: 32px 20px; overflow-y: auto; }
+      .slide { padding: 32px 20px; overflow-y: auto; justify-content: flex-start; padding-top: 60px; }
+      .slide.title-slide { justify-content: center; padding-top: 32px; }
+      .headline-lg { font-size: 1.5rem; }
+      .grid-2 { grid-template-columns: 1fr; }
       .card { padding: 20px; }
-      .founder-card { padding: 24px; }
+      .founder-card { padding: 16px; }
+      .founder-photo { width: 80px; height: 80px; }
+      .spacer-md { height: 16px; }
+      .spacer-lg { height: 24px; }
       .controls { right: 16px; bottom: 14px; }
       .top-controls { right: 16px; top: 14px; }
       .fs-btn { display: none; }
