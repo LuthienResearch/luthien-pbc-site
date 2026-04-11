@@ -3,11 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Claude Code does weird and suspicious stuff sometimes...</title>
+  <title>Frustrations — Claude Code does weird and lazy stuff sometimes</title>
+
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&family=Lora:wght@400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -15,9 +17,9 @@
     html { scroll-behavior: smooth; font-size: 16px; }
 
     body {
-      background: #09090b;
-      color: #e4e4e7;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #141216;
+      color: #EDE5D8;
+      font-family: 'Lora', Georgia, serif;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -25,8 +27,8 @@
     }
 
     h1, h2, h3 {
-      font-family: 'Inter', sans-serif;
-      color: #fafafa;
+      font-family: 'Raleway', sans-serif;
+      color: #EDE5D8;
       line-height: 1.2;
     }
 
@@ -34,40 +36,40 @@
       font-family: 'JetBrains Mono', 'Fira Code', monospace;
     }
 
-    a { color: #6b9fff; text-decoration: none; transition: color 0.2s; }
-    a:hover { color: #93b8ff; }
+    a { color: #3B9494; text-decoration: none; transition: color 0.2s; }
+    a:hover { color: #4AADAD; }
 
     .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
 
     /* ========== HEADER ========== */
     .page-header {
       padding: 80px 0 48px;
-      border-bottom: 1px solid #1a1a1e;
+      border-bottom: 1px solid #28243A;
     }
 
     .back-link {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      color: #52525b;
+      color: #7A7290;
       font-size: 0.85rem;
       font-family: 'JetBrains Mono', monospace;
       margin-bottom: 24px;
       transition: color 0.2s;
     }
 
-    .back-link:hover { color: #a1a1aa; }
+    .back-link:hover { color: #B0A8BE; }
 
     .page-title {
       font-size: clamp(1.3rem, 3.5vw, 2rem);
       font-weight: 800;
       letter-spacing: -0.03em;
-      color: #fafafa;
+      color: #EDE5D8;
       line-height: 1.15;
     }
 
     .page-subtitle {
-      color: #71717a;
+      color: #B0A8BE;
       font-size: 0.95rem;
       margin-top: 12px;
       line-height: 1.6;
@@ -79,8 +81,8 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: #09090b;
-      border-bottom: 1px solid #1a1a1e;
+      background: #141216;
+      border-bottom: 1px solid #28243A;
     }
 
     .filter-pills {
@@ -90,32 +92,38 @@
     }
 
     .filter-pill {
-      padding: 6px 14px;
-      border-radius: 20px;
-      border: 1px solid #27272a;
+      padding: 10px 14px;
+      border-radius: 4px;
+      border: 1px solid #28243A;
       background: transparent;
-      color: #71717a;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.8rem;
+      color: #EDE5D8;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.75rem;
       font-weight: 500;
       cursor: pointer;
       transition: all 0.2s;
       white-space: nowrap;
     }
 
-    .filter-pill:hover {
-      border-color: #3f3f46;
-      color: #a1a1aa;
+    .filter-pill:not(.active):hover {
+      border-color: #3B9494;
+      color: #B0A8BE;
+    }
+
+    .filter-pill.active:hover {
+      border-color: var(--pill-color, #3B9494);
+      color: var(--pill-color, #3B9494);
+      background: var(--pill-bg, rgba(59, 148, 148, 0.1));
     }
 
     .filter-pill.active {
-      border-color: var(--pill-color, #6b9fff);
-      color: var(--pill-color, #6b9fff);
-      background: var(--pill-bg, rgba(107, 159, 255, 0.1));
+      border-color: var(--pill-color, #3B9494);
+      color: var(--pill-color, #3B9494);
+      background: var(--pill-bg, rgba(59, 148, 148, 0.1));
     }
 
     .filter-pill[data-filter="all"].active {
-      --pill-color: #fafafa;
+      --pill-color: #EDE5D8;
       --pill-bg: rgba(250, 250, 250, 0.08);
     }
     .filter-pill[data-filter="deleted"].active {
@@ -123,12 +131,12 @@
       --pill-bg: rgba(239, 68, 68, 0.1);
     }
     .filter-pill[data-filter="ignored"].active {
-      --pill-color: #f59e0b;
-      --pill-bg: rgba(245, 158, 11, 0.1);
+      --pill-color: #C47B42;
+      --pill-bg: rgba(196, 123, 66, 0.1);
     }
     .filter-pill[data-filter="hallucinated"].active {
-      --pill-color: #6b9fff;
-      --pill-bg: rgba(107, 159, 255, 0.1);
+      --pill-color: #3B9494;
+      --pill-bg: rgba(59, 148, 148, 0.1);
     }
     .filter-pill[data-filter="security"].active {
       --pill-color: #34d399;
@@ -190,7 +198,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      color: #52525b;
+      color: #7A7290;
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.8rem;
     }
@@ -204,7 +212,7 @@
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: #3f3f46;
+      background: #3B3556;
       animation: dotPulse 1.2s ease-in-out infinite;
     }
 
@@ -256,7 +264,7 @@
     }
 
     .incident-card[data-href]:hover > * {
-      box-shadow: 0 0 0 1px rgba(107, 159, 255, 0.3);
+      box-shadow: 0 0 0 1px rgba(59, 148, 148, 0.3);
     }
 
     /* ================================================
@@ -515,7 +523,7 @@
       gap: 5px;
       color: #71717a;
       font-size: 0.7rem;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Raleway', sans-serif;
       letter-spacing: 0.02em;
     }
     .card-blog .blog-source-badge svg { opacity: 0.5; }
@@ -541,7 +549,7 @@
       border-top: 1px solid #2c2c2e;
       font-size: 0.8rem;
       color: #71717a;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Raleway', sans-serif;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -626,7 +634,7 @@
 
     /* ========== FOOTER ========== */
     footer {
-      border-top: 1px solid #1a1a1e;
+      border-top: 1px solid #28243A;
       padding: 48px 0;
     }
 
@@ -639,11 +647,11 @@
     }
 
     .footer-links { display: flex; gap: 24px; }
-    .footer-links a { color: #52525b; font-size: 0.85rem; }
-    .footer-links a:hover { color: #a1a1aa; }
+    .footer-links a { color: #7A7290; font-size: 0.85rem; }
+    .footer-links a:hover { color: #B0A8BE; }
 
     .footer-meta {
-      color: #3f3f46;
+      color: #3B3556;
       font-size: 0.8rem;
     }
 
@@ -660,7 +668,7 @@
       grid-column: 1 / -1;
       text-align: center;
       padding: 64px 24px;
-      color: #52525b;
+      color: #7A7290;
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.9rem;
     }
@@ -671,8 +679,8 @@
   <!-- HEADER -->
   <div class="page-header">
     <div class="container">
-      <a href="index.html" class="back-link">&larr; Back</a>
-      <h1 class="page-title">Claude Code does weird and suspicious stuff sometimes...</h1>
+      <a href="index.html" class="back-link">&larr; luthien.cc</a>
+      <h1 class="page-title">Claude Code does weird and lazy stuff sometimes.</h1>
     </div>
   </div>
 
@@ -680,13 +688,13 @@
   <div class="filter-bar">
     <div class="container">
       <div class="filter-pills">
-        <button class="filter-pill active" data-filter="all">All (70)</button>
-        <button class="filter-pill" data-filter="deleted">Deleted stuff (15)</button>
-        <button class="filter-pill" data-filter="ignored">Ignored instructions (19)</button>
-        <button class="filter-pill" data-filter="hallucinated">Hallucinated (26)</button>
-        <button class="filter-pill" data-filter="security">Security holes (10)</button>
-        <button class="filter-pill" data-filter="cheated">Cheated on tests (15)</button>
-        <button class="filter-pill" data-filter="coverup">Covered it up (20)</button>
+        <button class="filter-pill active" data-filter="all">All</button>
+        <button class="filter-pill" data-filter="deleted">Deleted stuff</button>
+        <button class="filter-pill" data-filter="ignored">Ignored instructions</button>
+        <button class="filter-pill" data-filter="hallucinated">Hallucinated</button>
+        <button class="filter-pill" data-filter="security">Security holes</button>
+        <button class="filter-pill" data-filter="cheated">Cheated on tests</button>
+        <button class="filter-pill" data-filter="coverup">Covered it up</button>
       </div>
     </div>
   </div>
@@ -759,7 +767,7 @@
       <!-- 9. Claude Code Ignores .claudeignore -->
       <div class="incident-card" data-href="https://www.theregister.com/2026/01/28/claude_code_ai_secrets_files/" data-categories="security ignored">
         <div class="card-blog">
-          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Inter',sans-serif;letter-spacing:0.05em;">THE REGISTER</span>
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Raleway',sans-serif;letter-spacing:0.05em;">THE REGISTER</span>
           <div class="blog-open-quote">&ldquo;</div>
           <div class="blog-text">Claude Code reads and exposes files that .claudeignore is supposed to block. API keys, credentials, and secrets in "ignored" files were accessible to Claude Code.</div>
           <div class="blog-footer-bar">
@@ -1290,7 +1298,7 @@
       <!-- Scott Spence: stochastic parrot -->
       <div class="incident-card" data-href="https://scottspence.com/posts/working-with-claude-code-the-honest-version" data-categories="hallucinated">
         <div class="card-blog">
-          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Inter',sans-serif;letter-spacing:0.05em;">BLOG</span>
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Raleway',sans-serif;letter-spacing:0.05em;">BLOG</span>
           <div class="blog-open-quote">&ldquo;</div>
           <div class="blog-text">I&rsquo;m a product manager for a stochastic parrot.</div>
           <div class="blog-footer-bar">
@@ -1303,7 +1311,7 @@
       <!-- Scott Spence: bullshit its way through -->
       <div class="incident-card" data-href="https://scottspence.com/posts/working-with-claude-code-the-honest-version" data-categories="hallucinated coverup">
         <div class="card-blog">
-          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Inter',sans-serif;letter-spacing:0.05em;">BLOG</span>
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Raleway',sans-serif;letter-spacing:0.05em;">BLOG</span>
           <div class="blog-open-quote">&ldquo;</div>
           <div class="blog-text">Claude will absolutely try to bullshit its way through situations where it doesn&rsquo;t know the answer but won&rsquo;t admit it. So now I have to verify everything before letting it touch any code.</div>
           <div class="blog-footer-bar">
@@ -1355,7 +1363,7 @@
       <!-- marble.onl: block caps expletive -->
       <div class="incident-card" data-href="https://www.marble.onl/posts/claude_code.html" data-categories="ignored cheated">
         <div class="card-blog">
-          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Inter',sans-serif;letter-spacing:0.05em;">BLOG</span>
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Raleway',sans-serif;letter-spacing:0.05em;">BLOG</span>
           <div class="blog-open-quote">&ldquo;</div>
           <div class="blog-text">I went through several full context failed attempts at having it not hard code the test cases, until finally I inserted a block caps expletive laden entreaty to smarten up which appeared to work.</div>
           <div class="blog-footer-bar">
@@ -1541,7 +1549,7 @@
       <!-- Nico interview: try/except blanket -->
       <div class="incident-card" data-categories="coverup">
         <div class="card-blog">
-          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Inter',sans-serif;letter-spacing:0.05em;">INTERVIEW</span>
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Raleway',sans-serif;letter-spacing:0.05em;">INTERVIEW</span>
           <div class="blog-open-quote">&ldquo;</div>
           <div class="blog-text">It adds a catch for everything. I&rsquo;m like, you cannot fail silently, but it keeps doing it anyway.</div>
           <div class="blog-footer-bar">
@@ -1554,7 +1562,7 @@
       <!-- Nathan interview: mock API calls -->
       <div class="incident-card" data-categories="cheated coverup">
         <div class="card-blog">
-          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Inter',sans-serif;letter-spacing:0.05em;">INTERVIEW</span>
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Raleway',sans-serif;letter-spacing:0.05em;">INTERVIEW</span>
           <div class="blog-open-quote">&ldquo;</div>
           <div class="blog-text">Mock API calls with hard-coded responses while stating it had created the real thing.</div>
           <div class="blog-footer-bar">
@@ -1567,7 +1575,7 @@
       <!-- Nathan interview: evil code in >50% -->
       <div class="incident-card" data-categories="security hallucinated">
         <div class="card-blog">
-          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Inter',sans-serif;letter-spacing:0.05em;">INTERVIEW</span>
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Raleway',sans-serif;letter-spacing:0.05em;">INTERVIEW</span>
           <div class="blog-open-quote">&ldquo;</div>
           <div class="blog-text">Claude Sonnet 3.7 would often include &lsquo;evil&rsquo; or undesirable elements in over half of its outputs, demanding constant review.</div>
           <div class="blog-footer-bar">
@@ -1580,7 +1588,7 @@
       <!-- Kirk interview: overconfident about bad code -->
       <div class="incident-card" data-categories="coverup hallucinated">
         <div class="card-blog">
-          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Inter',sans-serif;letter-spacing:0.05em;">INTERVIEW</span>
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Raleway',sans-serif;letter-spacing:0.05em;">INTERVIEW</span>
           <div class="blog-open-quote">&ldquo;</div>
           <div class="blog-text">It was so confident about such shitty code that it wrote.</div>
           <div class="blog-footer-bar">
@@ -1593,7 +1601,7 @@
       <!-- Kirk interview: move not copy data loss -->
       <div class="incident-card" data-categories="deleted">
         <div class="card-blog">
-          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Inter',sans-serif;letter-spacing:0.05em;">INTERVIEW</span>
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Raleway',sans-serif;letter-spacing:0.05em;">INTERVIEW</span>
           <div class="blog-open-quote">&ldquo;</div>
           <div class="blog-text">It did like a move not a copy. And in a backup tool. Data loss.</div>
           <div class="blog-footer-bar">
@@ -1606,7 +1614,7 @@
       <!-- Kirk interview: avoids writing code -->
       <div class="incident-card" data-categories="cheated coverup">
         <div class="card-blog">
-          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Inter',sans-serif;letter-spacing:0.05em;">INTERVIEW</span>
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Raleway',sans-serif;letter-spacing:0.05em;">INTERVIEW</span>
           <div class="blog-open-quote">&ldquo;</div>
           <div class="blog-text">I&rsquo;ve had it avoid writing the code &mdash; put in a TODO or skip over something and not tell me.</div>
           <div class="blog-footer-bar">
@@ -1619,7 +1627,7 @@
       <!-- Aleksandr interview: rules scaling problem -->
       <div class="incident-card" data-categories="ignored">
         <div class="card-blog">
-          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Inter',sans-serif;letter-spacing:0.05em;">INTERVIEW</span>
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Raleway',sans-serif;letter-spacing:0.05em;">INTERVIEW</span>
           <div class="blog-open-quote">&ldquo;</div>
           <div class="blog-text">Sometimes rules aren&rsquo;t followed and the more rules you have, the more probability that some rules will be missed.</div>
           <div class="blog-footer-bar">
@@ -1632,7 +1640,7 @@
       <!-- Replit incident: fabricated 4000 fake profiles -->
       <div class="incident-card" data-href="https://yourstory.com/2025/07/replit-ai-agent-wipes-database-fabricates-data" data-categories="cheated coverup hallucinated deleted">
         <div class="card-blog">
-          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Inter',sans-serif;letter-spacing:0.05em;">NEWS</span>
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Raleway',sans-serif;letter-spacing:0.05em;">NEWS</span>
           <div class="blog-open-quote">&ldquo;</div>
           <div class="blog-text">After wiping data, the AI fabricated over 4,000 fake user profiles, then falsely claimed unit tests had passed.</div>
           <div class="blog-footer-bar">
@@ -1645,7 +1653,7 @@
       <!-- Replit incident: bypassed code freeze -->
       <div class="incident-card" data-href="https://yourstory.com/2025/07/replit-ai-agent-wipes-database-fabricates-data" data-categories="ignored security deleted">
         <div class="card-blog">
-          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Inter',sans-serif;letter-spacing:0.05em;">NEWS</span>
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Raleway',sans-serif;letter-spacing:0.05em;">NEWS</span>
           <div class="blog-open-quote">&ldquo;</div>
           <div class="blog-text">Despite a code freeze and strict read-only instructions, the AI agent bypassed restrictions and issued destructive commands.</div>
           <div class="blog-footer-bar">
@@ -1736,7 +1744,7 @@
       <!-- Palo Alto Unit 42: MCP supply chain attacks -->
       <div class="incident-card" data-href="https://unit42.paloaltonetworks.com/model-context-protocol-attack-vectors/" data-categories="security">
         <div class="card-blog">
-          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Inter',sans-serif;letter-spacing:0.05em;">SECURITY RESEARCH</span>
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Raleway',sans-serif;letter-spacing:0.05em;">SECURITY RESEARCH</span>
           <div class="blog-open-quote">&ldquo;</div>
           <div class="blog-text">Malicious MCP servers can exploit the sampling feature to drain AI compute quotas, exfiltrate sensitive data, and launch supply chain attacks.</div>
           <div class="blog-footer-bar">
