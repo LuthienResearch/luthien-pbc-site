@@ -2331,6 +2331,17 @@
     });
     navLeft.classList.toggle('hidden', current === 0);
     navRight.classList.toggle('hidden', current === total - 1);
+
+    // Reflect current slide in the URL hash so readers can bookmark,
+    // reload, or share a direct link without scrolling through the deck.
+    // Uses replaceState so the browser back button isn't flooded with
+    // per-slide history entries.
+    try {
+      const targetHash = '#slide=' + (current + 1);
+      if (location.hash !== targetHash) {
+        history.replaceState(null, '', targetHash);
+      }
+    } catch (_e) { /* no-op on file:// URLs that disallow replaceState */ }
   }
 
   function goTo(index) {
