@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Traction Layout Options</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Lora:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #141216; --bg-elevated: #1A1720; --surface: #201C2A; --border: #28243A;
+      --text: #EDE5D8; --text-muted: #B0A8BE; --text-dim: #7A7290; --white: #EDE5D8;
+      --blue: #3B9494; --blue-glow: rgba(59,148,148,0.15); --green: #3B9494;
+      --amber: #C47B42;
+      --sans: 'Raleway', sans-serif; --body: 'Lora', serif; --mono: 'JetBrains Mono', monospace;
+    }
+    html { font-size: 112%; }
+    body { background: var(--bg); color: var(--text); font-family: var(--body); padding: 40px 60px; max-width: 1200px; margin: 0 auto; }
+    h1 { font-family: var(--sans); color: var(--white); font-size: 1.8rem; margin-bottom: 8px; }
+    .page-sub { color: var(--text-dim); font-size: 0.85rem; margin-bottom: 48px; }
+    .option { margin-bottom: 64px; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+    .option-header { background: var(--bg-elevated); padding: 16px 24px; border-bottom: 1px solid var(--border); }
+    .option-label { font-family: var(--mono); font-size: 0.65rem; color: var(--blue); letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600; }
+    .option-name { font-family: var(--sans); font-size: 1.1rem; font-weight: 700; color: var(--white); margin-top: 2px; }
+    .option-desc { color: var(--text-dim); font-size: 0.8rem; margin-top: 2px; }
+    .preview { padding: 48px 60px; }
+    .headline { font-family: var(--sans); font-weight: 700; color: var(--white); font-size: 2rem; margin-bottom: 24px; }
+    .label { font-family: var(--mono); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
+    .white { color: var(--white); }
+    .green { color: var(--green); }
+    .dim { color: var(--text-dim); }
+    .blue { color: var(--blue); }
+
+    /* Shared funnel */
+    .fl { display: flex; gap: 0; align-items: stretch; }
+    .fv { flex: 0 0 220px; display: flex; flex-direction: column; align-items: center; }
+    .fm { flex: 1; display: flex; flex-direction: column; }
+    .fr { flex: 1; display: flex; align-items: center; padding: 0 0 0 24px; gap: 12px; min-height: 52px; }
+    .fr .num { font-family: var(--sans); font-weight: 800; font-size: 1.8rem; color: var(--white); min-width: 48px; line-height: 1; }
+    .fr .desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.35; flex: 1; }
+    .fr .val { font-family: var(--mono); font-size: 0.78rem; font-weight: 600; color: var(--text-muted); white-space: nowrap; text-align: right; }
+    .fr .val-green { font-family: var(--mono); font-size: 0.85rem; font-weight: 700; color: var(--green); white-space: nowrap; text-align: right; }
+    .fr.hl { background: rgba(59,148,148,0.06); border-radius: 3px; padding: 8px 16px 8px 24px; }
+    .fr.hl .num { font-size: 2.2rem; color: var(--green); }
+    .sub { font-size: 0.72rem; color: var(--text-dim); margin-top: 1px; }
+  </style>
+</head>
+<body>
+
+<h1>Traction Slide — 4 Layout Options</h1>
+<p class="page-sub">All keep the funnel. Differ in how Users + Contract Value are shown. "9 LOIs in pipeline" same weight as trial count.</p>
+
+<!-- ====== OPTION A: Users woven into description text ====== -->
+<div class="option">
+  <div class="option-header">
+    <div class="option-label">Option A</div>
+    <div class="option-name">Users &amp; value woven into descriptions</div>
+    <div class="option-desc">Cleanest — no extra columns. Users and contract value appear naturally in the text.</div>
+  </div>
+  <div class="preview">
+    <div class="label">Traction</div>
+    <div class="headline">Selling this is easy</div>
+    <div class="fl">
+      <div class="fv">
+        <svg viewBox="0 0 220 240" width="220" height="240" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="0,0 220,0 200,60 20,60" fill="rgba(59,148,148,0.05)" stroke="rgba(59,148,148,0.12)" stroke-width="1"/>
+          <text x="110" y="36" text-anchor="middle" font-family="Raleway,sans-serif" font-size="11" fill="#7A7290" font-weight="600">qualification</text>
+          <polygon points="20,60 200,60 176,120 44,120" fill="rgba(59,148,148,0.07)" stroke="rgba(59,148,148,0.16)" stroke-width="1"/>
+          <text x="110" y="86" text-anchor="middle" font-family="Raleway,sans-serif" font-size="11" fill="#7A7290" font-weight="600">collect</text>
+          <text x="110" y="100" text-anchor="middle" font-family="Raleway,sans-serif" font-size="11" fill="#7A7290" font-weight="600">requirements</text>
+          <polygon points="44,120 176,120 152,180 68,180" fill="rgba(59,148,148,0.10)" stroke="rgba(59,148,148,0.20)" stroke-width="1"/>
+          <text x="110" y="156" text-anchor="middle" font-family="Raleway,sans-serif" font-size="11" fill="#B0A8BE" font-weight="600">trial</text>
+          <polygon points="68,180 152,180 136,240 84,240" fill="rgba(59,148,148,0.16)" stroke="rgba(59,148,148,0.40)" stroke-width="1.5"/>
+          <text x="110" y="206" text-anchor="middle" font-family="Raleway,sans-serif" font-size="11" fill="#3B9494" font-weight="700">pilot /</text>
+          <text x="110" y="220" text-anchor="middle" font-family="Raleway,sans-serif" font-size="11" fill="#3B9494" font-weight="700">conversion</text>
+        </svg>
+      </div>
+      <div class="fm">
+        <div class="fr">
+          <div class="num">93</div>
+          <div class="desc">orgs with internal champion using<br>Claude Code <strong class="white">30+ hrs/week</strong></div>
+          <div class="val">$10M–$20M</div>
+        </div>
+        <div class="fr">
+          <div class="num">20</div>
+          <div class="desc">user problem discovery calls</div>
+          <div class="val">$750k–$1.5M</div>
+        </div>
+        <div class="fr">
+          <div class="num">14</div>
+          <div class="desc">live trials, <strong class="white">9</strong> LOIs in pipeline<br><span class="sub">53–166 users · $284–690k</span></div>
+        </div>
+        <div class="fr hl">
+          <div class="num" style="color: var(--green); font-size: 2.2rem;">3</div>
+          <div class="desc">LOIs signed <span style="font-family:var(--mono);font-size:0.72rem;color:var(--blue);">in 9 days</span><br><span class="sub">26–37 users</span></div>
+          <div class="val-green">$330–500K</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== OPTION B: Contract value right-aligned, users in text ====== -->
+<div class="option">
+  <div class="option-header">
+    <div class="option-label">Option B</div>
+    <div class="option-name">Contract value as right column, users in description</div>
+    <div class="option-desc">Every row gets a right-aligned dollar figure. Users mentioned in text only where relevant.</div>
+  </div>
+  <div class="preview">
+    <div class="label">Traction</div>
+    <div class="headline">Selling this is easy</div>
+    <div class="fl">
+      <div class="fv">
+        <svg viewBox="0 0 220 240" width="220" height="240" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="0,0 220,0 200,60 20,60" fill="rgba(59,148,148,0.05)" stroke="rgba(59,148,148,0.12)" stroke-width="1"/>
+          <text x="110" y="36" text-anchor="middle" font-family="Raleway,sans-serif" font-size="11" fill="#7A7290" font-weight="600">qualification</text>
+          <polygon points="20,60 200,60 176,120 44,120" fill="rgba(59,148,148,0.07)" stroke="rgba(59,148,148,0.16)" stroke-width="1"/>
+          <text x="110" y="86" text-anchor="middle" font-family="Raleway,sans-serif" font-size="11" fill="#7A7290" font-weight="600">collect</text>
+          <text x="110" y="100" text-anchor="middle" font-family="Raleway,sans-serif" font-size="11" fill="#7A7290" font-weight="600">requirements</text>
+          <polygon points="44,120 176,120 152,180 68,180" fill="rgba(59,148,148,0.10)" stroke="rgba(59,148,148,0.20)" stroke-width="1"/>
+          <text x="110" y="156" text-anchor="middle" font-family="Raleway,sans-serif" font-size="11" fill="#B0A8BE" font-weight="600">trial</text>
+          <polygon points="68,180 152,180 136,240 84,240" fill="rgba(59,148,148,0.16)" stroke="rgba(59,148,148,0.40)" stroke-width="1.5"/>
+          <text x="110" y="206" text-anchor="middle" font-family="Raleway,sans-serif" font-size="11" fill="#3B9494" font-weight="700">pilot /</text>
+          <text x="110" y="220" text-anchor="middle" font-family="Raleway,sans-serif" font-size="11" fill="#3B9494" font-weight="700">conversion</text>
+        </svg>
+      </div>
+      <div class="fm">
+        <div class="fr">
+          <div class="num">93</div>
+          <div class="desc">orgs with internal champion using<br>Claude Code <strong class="white">30+ hrs/week</strong></div>
+          <div class="val">$10M–$20M</div>
+        </div>
+        <div class="fr">
+          <div class="num">20</div>
+          <div class="desc">user problem discovery calls</div>
+          <div class="val">$750k–$1.5M</div>
+        </div>
+        <div class="fr">
+          <div class="num">14</div>
+          <div class="desc">live trials, <strong class="white">9</strong> LOIs in pipeline<br><span class="sub">representing 53–166 users</span></div>
+          <div class="val">$284–690k</div>
+        </div>
+        <div class="fr hl">
+          <div class="num" style="color: var(--green); font-size: 2.2rem;">3</div>
+          <div class="desc">LOIs signed <span style="font-family:var(--mono);font-size:0.72rem;color:var(--blue);">in 9 days</span><br><span class="sub">representing 26–37 users</span></div>
+          <div class="val-green">$330–500K</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== OPTION C: Two-line per row (main + detail) ====== -->
+<div class="option">
+  <div class="option-header">
+    <div class="option-label">Option C</div>
+    <div class="option-name">Main metric + detail line per row</div>
+    <div class="option-desc">Each row has a bold first line and a dimmer detail line with users + value. More info, still clean.</div>
+  </div>
+  <div class="preview">
+    <div class="label">Traction</div>
+    <div class="headline">Selling this is easy</div>
+    <div class="fl">
+      <div class="fv">
+        <svg viewBox="0 0 220 240" width="220" height="240" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="0,0 220,0 200,60 20,60" fill="rgba(59,148,148,0.05)" stroke="rgba(59,148,148,0.12)" stroke-width="1"/>
+          <text x="110" y="36" text-anchor="middle" font-family="Raleway,sans-serif" font-size="11" fill="#7A7290" font-weight="600">qualification</text>
+          <polygon points="20,60 200,60 176,120 44,120" fill="rgba(59,148,148,0.07)" stroke="rgba(59,148,148,0.16)" stroke-width="1"/>
+          <text x="110" y="86" text-anchor="middle" font-family="Raleway,sans-serif" font-size="11" fill="#7A7290" font-weight="600">collect</text>
+          <text x="110" y="100" text-anchor="middle" font-family="Raleway,sans-serif" font-size="11" fill="#7A7290" font-weight="600">requirements</text>
+          <polygon points="44,120 176,120 152,180 68,180" fill="rgba(59,148,148,0.10)" stroke="rgba(59,148,148,0.20)" stroke-width="1"/>
+          <text x="110" y="156" text-anchor="middle" font-family="Raleway,sans-serif" font-size="11" fill="#B0A8BE" font-weight="600">trial</text>
+          <polygon points="68,180 152,180 136,240 84,240" fill="rgba(59,148,148,0.16)" stroke="rgba(59,148,148,0.40)" stroke-width="1.5"/>
+          <text x="110" y="206" text-anchor="middle" font-family="Raleway,sans-serif" font-size="11" fill="#3B9494" font-weight="700">pilot /</text>
+          <text x="110" y="220" text-anchor="middle" font-family="Raleway,sans-serif" font-size="11" fill="#3B9494" font-weight="700">conversion</text>
+        </svg>
+      </div>
+      <div class="fm">
+        <div class="fr" style="flex-direction: column; align-items: stretch; gap: 0;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div class="num">93</div>
+            <div class="desc">orgs with internal champion using Claude Code <strong class="white">30+ hrs/week</strong></div>
+          </div>
+          <div style="padding-left: 60px; font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim);">contract value: $10M–$20M</div>
+        </div>
+        <div class="fr" style="flex-direction: column; align-items: stretch; gap: 0;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div class="num">20</div>
+            <div class="desc">user problem discovery calls</div>
+          </div>
+          <div style="padding-left: 60px; font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim);">contract value: $750k–$1.5M</div>
+        </div>
+        <div class="fr" style="flex-direction: column; align-items: stretch; gap: 0;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div class="num">14</div>
+            <div class="desc">live trials, <strong class="white">9</strong> LOIs in pipeline</div>
+          </div>
+          <div style="padding-left: 60px; font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim);">53–166 users · contract value: $284–690k</div>
+        </div>
+        <div class="fr hl" style="flex-direction: column; align-items: stretch; gap: 0;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div class="num" style="color: var(--green); font-size: 2.2rem;">3</div>
+            <div class="desc">LOIs signed <span style="font-family:var(--mono);font-size:0.72rem;color:var(--blue);">in 9 days</span></div>
+            <div class="val-green" style="margin-left: auto;">$330–500K</div>
+          </div>
+          <div style="padding-left: 60px; font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim);">26–37 users</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== OPTION D: Funnel + clean metrics, summary strip below ====== -->
+<div class="option">
+  <div class="option-header">
+    <div class="option-label">Option D</div>
+    <div class="option-name">Clean funnel metrics + summary strip below</div>
+    <div class="option-desc">Funnel stays simple (count + description). Users &amp; contract value in a separate summary strip underneath.</div>
+  </div>
+  <div class="preview">
+    <div class="label">Traction</div>
+    <div class="headline">Selling this is easy</div>
+    <div class="fl">
+      <div class="fv">
+        <svg viewBox="0 0 220 240" width="220" height="240" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="0,0 220,0 200,60 20,60" fill="rgba(59,148,148,0.05)" stroke="rgba(59,148,148,0.12)" stroke-width="1"/>
+          <text x="110" y="36" text-anchor="middle" font-family="Raleway,sans-serif" font-size="11" fill="#7A7290" font-weight="600">qualification</text>
+          <polygon points="20,60 200,60 176,120 44,120" fill="rgba(59,148,148,0.07)" stroke="rgba(59,148,148,0.16)" stroke-width="1"/>
+          <text x="110" y="86" text-anchor="middle" font-family="Raleway,sans-serif" font-size="11" fill="#7A7290" font-weight="600">collect</text>
+          <text x="110" y="100" text-anchor="middle" font-family="Raleway,sans-serif" font-size="11" fill="#7A7290" font-weight="600">requirements</text>
+          <polygon points="44,120 176,120 152,180 68,180" fill="rgba(59,148,148,0.10)" stroke="rgba(59,148,148,0.20)" stroke-width="1"/>
+          <text x="110" y="156" text-anchor="middle" font-family="Raleway,sans-serif" font-size="11" fill="#B0A8BE" font-weight="600">trial</text>
+          <polygon points="68,180 152,180 136,240 84,240" fill="rgba(59,148,148,0.16)" stroke="rgba(59,148,148,0.40)" stroke-width="1.5"/>
+          <text x="110" y="206" text-anchor="middle" font-family="Raleway,sans-serif" font-size="11" fill="#3B9494" font-weight="700">pilot /</text>
+          <text x="110" y="220" text-anchor="middle" font-family="Raleway,sans-serif" font-size="11" fill="#3B9494" font-weight="700">conversion</text>
+        </svg>
+      </div>
+      <div class="fm">
+        <div class="fr">
+          <div class="num">93</div>
+          <div class="desc">orgs with internal champion using<br>Claude Code <strong class="white">30+ hrs/week</strong></div>
+        </div>
+        <div class="fr">
+          <div class="num">20</div>
+          <div class="desc">user problem discovery calls</div>
+        </div>
+        <div class="fr">
+          <div class="num">14</div>
+          <div class="desc">live trials, <strong class="white">9</strong> LOIs in pipeline</div>
+        </div>
+        <div class="fr hl">
+          <div class="num" style="color: var(--green); font-size: 2.2rem;">3</div>
+          <div class="desc">LOIs signed <span style="font-family:var(--mono);font-size:0.72rem;color:var(--blue);">in 9 days</span></div>
+          <div class="val-green">$330–500K</div>
+        </div>
+      </div>
+    </div>
+    <!-- Summary strip -->
+    <div style="margin-top: 20px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
+      <div style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 3px; padding: 12px 16px; text-align: center;">
+        <div style="font-family: var(--sans); font-weight: 800; font-size: 1.5rem; color: var(--white);">93</div>
+        <div style="font-size: 0.7rem; color: var(--text-dim);">qualified orgs</div>
+        <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--text-muted); margin-top: 4px;">$10M–$20M</div>
+      </div>
+      <div style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 3px; padding: 12px 16px; text-align: center;">
+        <div style="font-family: var(--sans); font-weight: 800; font-size: 1.5rem; color: var(--white);">9</div>
+        <div style="font-size: 0.7rem; color: var(--text-dim);">LOIs in pipeline</div>
+        <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--text-muted); margin-top: 4px;">53–166 users</div>
+      </div>
+      <div style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 3px; padding: 12px 16px; text-align: center;">
+        <div style="font-family: var(--sans); font-weight: 800; font-size: 1.5rem; color: var(--green);">3</div>
+        <div style="font-size: 0.7rem; color: var(--text-dim);">LOIs signed</div>
+        <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--green); margin-top: 4px;">$330–500K</div>
+      </div>
+      <div style="background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 3px; padding: 12px 16px; text-align: center;">
+        <div style="font-family: var(--sans); font-weight: 800; font-size: 1.5rem; color: var(--white);">26–37</div>
+        <div style="font-size: 0.7rem; color: var(--text-dim);">users in signed LOIs</div>
+        <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--text-muted); margin-top: 4px;">$284k–690k pipeline</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="height: 80px;"></div>
+</body>
+</html>
