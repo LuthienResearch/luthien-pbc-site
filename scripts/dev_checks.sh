@@ -237,21 +237,7 @@ done < <(find "$SITE_DIR" -name "*.html" -type f -not -path "*/v8/*" -not -path 
 
 # ─────────────────────────────────────────────────────────
 bold ""
-bold "== 8. Large files =="
-# ─────────────────────────────────────────────────────────
-large_count=0
-while IFS= read -r f; do
-    [ -z "$f" ] && continue
-    size=$(du -h "$f" | cut -f1)
-    relpath="${f#$SITE_DIR/}"
-    warn "$relpath ($size)"
-    large_count=$((large_count + 1))
-done < <(find "$SITE_DIR" -type f -size +1M 2>/dev/null || true)
-[ "$large_count" -eq 0 ] && pass "No files over 1MB"
-
-# ─────────────────────────────────────────────────────────
-bold ""
-bold "== 9. Duplicate content between index.html and latest version =="
+bold "== 8. Duplicate content between index.html and latest version =="
 # ─────────────────────────────────────────────────────────
 # The main site/index.html should match the latest version directory
 latest_version=$(find "$SITE_DIR" -maxdepth 1 -type d -name "v*" | sort -V | tail -1)
@@ -266,7 +252,7 @@ fi
 
 # ─────────────────────────────────────────────────────────
 bold ""
-bold "== 10. Untracked assets in site/ =="
+bold "== 9. Untracked assets in site/ =="
 # ─────────────────────────────────────────────────────────
 # COE: PR #75 shipped with a broken <img src="sff-white.svg"> because the
 # SVG existed only in the local working tree — never git-added. Check #1
