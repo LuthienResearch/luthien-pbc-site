@@ -855,6 +855,39 @@
       border-bottom-color: var(--blue);
     }
 
+    /* ============ SLIDE FOOTNOTES (bottom-left, revealed by Footnotes toggle) ============ */
+    /* Per-slide footnote container. Pinned to the bottom-left of the slide,
+       revealed when the user toggles the Footnotes button. Scott's preference
+       (Apr 11): every slide's footnotes live in the same spot so readers know
+       where to find them. */
+    .slide-footnotes {
+      position: absolute;
+      left: 80px;
+      right: 80px;
+      bottom: 56px;
+      max-width: 780px;
+      display: none;
+      z-index: 50;
+    }
+    .citations-visible .slide-footnotes {
+      display: block;
+    }
+    .slide-footnotes .citation {
+      display: block;
+      background: rgba(20, 18, 22, 0.92);
+      border: 1px solid rgba(59, 148, 148, 0.28);
+      border-left: 2px solid var(--blue);
+      border-radius: 3px;
+      padding: 10px 14px;
+      font-size: 0.7rem;
+      line-height: 1.55;
+      margin-top: 0;
+      backdrop-filter: blur(4px);
+    }
+    @media (max-width: 900px) {
+      .slide-footnotes { left: 32px; right: 32px; bottom: 64px; }
+    }
+
     .org-client {
       padding: 10px 16px;
       border-radius: 8px;
@@ -1915,44 +1948,44 @@
     </div>
   </div>
 
-  <!-- ======== SLIDE 10a: THE AUTH0 PLAYBOOK (radically simplified) ======== -->
+  <!-- ======== SLIDE 10a: DISTRIBUTION (Auth0 playbook) ======== -->
   <div class="slide" data-slide="8">
-    <div class="slide-inner" style="text-align: center;">
-      <div class="label anim-up" style="text-align: left;">Distribution</div>
-      <h1 class="headline headline-lg anim-up delay-1" style="text-align: left;">The same playbook built Auth0.</h1>
-      <div class="spacer-lg"></div>
+    <div class="slide-inner">
+      <div class="label anim-up">Distribution</div>
+      <h1 class="headline headline-lg anim-up delay-1">The same playbook built Auth0.</h1>
+      <p class="subtitle anim-up delay-1" style="color: var(--text-muted); font-family: var(--mono); font-size: 0.95rem;">
+        AI control and compliance that <span class="amber">developers love</span>.
+      </p>
+      <div class="spacer-md"></div>
 
-      <!-- Auth0 mark + $6.5B — one breathing hero block -->
-      <div class="anim-up delay-2" style="display: flex; align-items: center; justify-content: center; gap: 36px;">
-        <img src="../assets/images/logos/auth0-mark.svg" alt="Auth0 logo" style="height: clamp(72px, 11vw, 128px); width: auto;">
+      <!-- Hero row: Auth0 wordmark + $6.5B -->
+      <div class="anim-up delay-2" style="display: flex; align-items: center; justify-content: center; gap: 48px; margin: 28px 0;">
+        <img src="../assets/images/logos/auth0-wordmark.png" alt="Auth0" style="height: clamp(64px, 9vw, 100px); width: auto; filter: brightness(0) invert(1);">
         <div style="font-family: var(--sans); font-weight: 800; font-size: clamp(4rem, 10vw, 7.5rem); color: var(--blue); line-height: 0.95; letter-spacing: -0.02em;">$6.5B</div>
       </div>
 
-      <div class="spacer-lg"></div>
+      <div class="spacer-md"></div>
 
-      <!-- One human sentence. The citation does the rest. -->
-      <p class="anim-up delay-3" style="font-family: var(--body); font-size: clamp(1.1rem, 2vw, 1.45rem); color: var(--white); max-width: 820px; margin: 0 auto; line-height: 1.55;">
-        In 2021, Okta paid this for a company whose whole pitch was &ldquo;built for developers.&rdquo;<sup class="blue" style="font-size: 0.7em;">1</sup>
-      </p>
+      <!-- Substantiating body: complete sentences, straight quotes, named source. -->
+      <div class="anim-up delay-3" style="max-width: 920px; margin: 0 auto;">
+        <p class="body-text" style="color: var(--white); line-height: 1.65;">
+          Auth0 was founded in 2013 as a developer-first identity SDK. In May 2021, Okta acquired it for <strong class="white">$6.5B in all-stock</strong>, even though Okta already sold its own customer identity product. Auth0 had built what SuperTokens later described as <span class="white" style="font-weight: 600;">"a developer first bottoms up acquisition strategy,"</span> and Okta's top-down enterprise sales motion could not replicate it.
+        </p>
+      </div>
 
-      <div class="spacer-lg"></div>
-
-      <!-- Close line -->
-      <p class="anim-up delay-3" style="font-family: var(--sans); font-size: clamp(1rem, 1.7vw, 1.25rem); color: var(--white); font-weight: 600; max-width: 780px; margin: 0 auto; line-height: 1.5;">
-        Devs install it on Monday. <span class="blue">The CISO signs the contract on Friday.</span>
-      </p>
-
-      <!-- Footnote (hidden until Footnotes toggle is on) -->
-      <p class="citation anim-up delay-3" style="max-width: 820px; margin: 24px auto 0; font-size: 0.72rem; line-height: 1.55;">
-        <sup>1</sup> &ldquo;Auth0&rsquo;s DNA is rooted in developers.&rdquo; &mdash; Todd McKinnon, Okta CEO. <a href="https://auth0.com/blog/okta-auth0-announcement/" target="_blank" rel="noopener noreferrer">Okta/Auth0 joint announcement, Mar 3, 2021</a>. Okta already sold its own customer-identity product; paid ~33&times; Auth0&rsquo;s forward revenue anyway.
-      </p>
+      <!-- Slide-level footnotes (pinned bottom-left, revealed by Footnotes toggle) -->
+      <div class="slide-footnotes">
+        <div class="citation">
+          Advait Ruia, <a href="https://supertokens.com/blog/the-real-reason-okta-spent-on-auth0" target="_blank" rel="noopener noreferrer">"The Real Reason Okta Spent $6.5B on Auth0,"</a> SuperTokens, March 5, 2021. Auth0's prior valuation was $1.9B at its July 2020 Series F, so the acquisition was roughly 3.5x that price. The deal also doubled Okta's total addressable market from approximately $30B (workforce identity) to $55B (workforce plus customer identity).
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- ======== SLIDE 10: GTM STRATEGY ======== -->
   <div class="slide" data-slide="9">
     <div class="slide-inner">
-      <div class="label anim-up">GTM Strategy</div>
+      <div class="label anim-up">Go-to-market Strategy</div>
       <h1 class="headline headline-lg anim-up delay-1" style="white-space: nowrap; font-size: clamp(1.6rem, 3.8vw, 2.8rem);">Target startup CTOs and Principal Engineers</h1>
       <div class="spacer-md"></div>
       <div class="anim-up delay-2" style="border: 1px solid var(--border); border-radius: 3px; overflow: hidden;">
@@ -1995,10 +2028,6 @@
         </div>
 
       </div>
-      <div class="spacer-md"></div>
-      <p class="anim-up delay-3" style="font-family: var(--mono); font-size: 0.95rem; color: var(--text-dim); text-align: center;">
-        AI control &amp; compliance that <span class="amber">developers love</span>.
-      </p>
     </div>
   </div>
 
