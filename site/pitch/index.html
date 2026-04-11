@@ -947,10 +947,30 @@
       align-items: center;
       justify-content: flex-end;
       padding: 14px 0;
+    }
+    .ask-f3-spotlight-photo-link {
+      display: block;
       text-decoration: none;
       transition: transform 0.2s;
+      flex-shrink: 0;
     }
-    .ask-f3-spotlight:hover { transform: translateY(-2px); }
+    .ask-f3-spotlight-photo-link:hover { transform: translateY(-2px); }
+    .ask-f3-spotlight-name-link {
+      color: inherit;
+      text-decoration: none;
+    }
+    .ask-f3-spotlight-name-link:hover { color: var(--blue); }
+    .ask-f3-r2-link {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      padding: 2px 4px;
+      border-radius: 2px;
+      transition: background 0.2s;
+    }
+    .ask-f3-r2-link:hover {
+      background: rgba(59, 148, 148, 0.12);
+    }
     .ask-f3-spotlight-photo {
       width: 76px;
       height: 76px;
@@ -2378,15 +2398,23 @@
       <div class="spacer-md"></div>
 
       <div class="ask-f3 anim-up delay-2">
-        <a class="ask-f3-spotlight" href="https://www.linkedin.com/in/gbravo11/" target="_blank" rel="noopener noreferrer">
-          <img class="ask-f3-spotlight-photo" src="../assets/images/photo-gbravo11.png" alt="Guillermo Bravo">
+        <div class="ask-f3-spotlight">
+          <a class="ask-f3-spotlight-photo-link" href="https://www.linkedin.com/in/gbravo11/" target="_blank" rel="noopener noreferrer">
+            <img class="ask-f3-spotlight-photo" src="../assets/images/photo-gbravo11.png" alt="Guillermo Bravo">
+          </a>
           <div class="ask-f3-spotlight-text">
             <div class="ask-f3-spotlight-label">first angel</div>
-            <div class="ask-f3-spotlight-name">Guillermo Bravo</div>
-            <div class="ask-f3-spotlight-title">CPO at <img src="../assets/images/logos/r2-light.svg" alt="R2" class="ask-f3-inline-logo"></div>
+            <div class="ask-f3-spotlight-name">
+              <a href="https://www.linkedin.com/in/gbravo11/" target="_blank" rel="noopener noreferrer" class="ask-f3-spotlight-name-link">Guillermo Bravo</a>
+            </div>
+            <div class="ask-f3-spotlight-title">CPO at
+              <a href="https://www.ycombinator.com/companies/r2" target="_blank" rel="noopener noreferrer" class="ask-f3-r2-link">
+                <img src="../assets/images/logos/r2-light.svg" alt="R2 on Y Combinator" class="ask-f3-inline-logo">
+              </a>
+            </div>
             <div class="ask-f3-spotlight-meta">YC W21 &middot; acq. Ant International, Oct 2025</div>
           </div>
-        </a>
+        </div>
 
         <div class="ask-f3-divider"></div>
 
