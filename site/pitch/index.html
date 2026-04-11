@@ -611,6 +611,70 @@
 
     .bio-detail { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
 
+    /* ============ CHART HOVER PREVIEW (team slide) ============ */
+    /* Hover 'The Chart' inline thumbnail to show the METR time-horizon chart full-size. */
+    .chart-hover {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      vertical-align: middle;
+      cursor: zoom-in;
+    }
+    .chart-hover-thumb {
+      display: inline-block;
+      height: 22px;
+      width: auto;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      background: #fff;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .chart-hover:hover .chart-hover-thumb {
+      transform: scale(1.05);
+      box-shadow: 0 0 0 1px var(--blue);
+    }
+    .chart-hover-preview {
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 14px);
+      transform: translateX(-50%) translateY(6px) scale(0.96);
+      width: min(720px, 80vw);
+      padding: 12px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--blue);
+      border-radius: 4px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(59,148,148,0.2);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+      z-index: 1000;
+    }
+    .chart-hover-preview img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 2px;
+    }
+    .chart-hover-preview .chart-hover-caption {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 8px;
+      text-align: center;
+    }
+    .chart-hover:hover .chart-hover-preview,
+    .chart-hover:focus-within .chart-hover-preview {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0) scale(1);
+    }
+    /* Mobile: tap to expand instead of hover */
+    @media (hover: none) {
+      .chart-hover-preview { display: none; }
+    }
+
     .bio-dollars { line-height: 1.3; }
     .bio-dollars .big { font-family: var(--sans); font-weight: 800; font-size: 1.9rem; color: var(--white); }
     .bio-dollars .context { font-size: 0.9rem; color: var(--text-muted); }
@@ -1549,7 +1613,7 @@
           <div class="bio-title">ML Engineer</div>
           <div class="bio-years">10 yrs</div>
           <div class="bio-achievement"><span class="big">Co-author</span> <span class="context">of RE-Bench: METR's</span></div>
-          <div class="bio-detail">coding agent time horizon tracking "The Chart"</div>
+          <div class="bio-detail">coding agent time horizon tracking &mdash; <span class="chart-hover" tabindex="0">&ldquo;The Chart&rdquo;<img src="../assets/images/metr-the-chart.png" alt="METR time horizon chart thumbnail" class="chart-hover-thumb"><span class="chart-hover-preview" role="tooltip"><img src="../assets/images/metr-the-chart.png" alt="METR: Time horizon of software tasks different LLMs can complete 50% of the time — task duration grows exponentially, doubling ~every 4–6 months from GPT-2 (4 sec) to Claude Opus 4.6 (~10 hours)."><span class="chart-hover-caption">METR Horizon v1.1 &middot; doubling time ~<strong class="white">129 days</strong> since 2023</span></span></span></div>
           <div class="logo-row">
             <img src="../assets/images/logos/aws-light.svg" alt="AWS" style="height: 24px;">
             <img src="../assets/images/logos/Meta_lockup_negative primary_white_RGB.svg" alt="Meta" style="width: 100px; height: auto;">
