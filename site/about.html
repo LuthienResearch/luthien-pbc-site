@@ -185,37 +185,53 @@
     .team-links a { color: #9891A8; transition: color 0.2s; display: flex; align-items: center; }
     .team-links a:hover { color: #C47B42; }
 
-    /* MISSION */
-    .mission {
-      max-width: 720px;
-      margin: 0 auto;
-    }
-    .mission h2 {
-      font-size: clamp(1.4rem, 3vw, 1.9rem);
-      font-weight: 700;
+    /* SECTION LABELS (match landing page) */
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.5rem;
+      font-weight: 600;
       letter-spacing: -0.02em;
-      margin-bottom: 24px;
-      text-align: center;
-    }
-    .mission p {
-      font-size: 1.05rem;
-      color: #C8C0B4;
-      line-height: 1.75;
-      margin-bottom: 20px;
-    }
-    .mission p:last-child {
-      margin-bottom: 0;
-    }
-    .mission em {
       color: #EDE5D8;
-      font-style: italic;
+      margin-bottom: 20px;
+      max-width: 960px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 24px;
+      padding-right: 24px;
     }
-    .mission code {
-      font-size: 0.9em;
-      color: #3B9494;
-      background: rgba(59, 148, 148, 0.08);
-      padding: 2px 6px;
-      border-radius: 3px;
+
+    /* WHY QUOTES (match landing page testimonial pattern) */
+    .why-quotes {
+      max-width: 640px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .why-card {
+      border-left: 3px solid #C47B42;
+      padding: 24px 28px;
+      background: #181520;
+      border-radius: 0 8px 8px 0;
+    }
+    .why-text {
+      font-size: 1.05rem;
+      color: #EDE5D8;
+      line-height: 1.65;
+      font-style: italic;
+      margin-bottom: 18px;
+    }
+    .why-attribution {
+      font-family: 'Raleway', sans-serif;
+    }
+    .why-name {
+      font-size: 0.9rem;
+      color: #EDE5D8;
+      font-weight: 600;
+    }
+    .why-role {
+      font-size: 0.8rem;
+      color: #9891A8;
     }
 
     /* FOOTER */
@@ -338,6 +354,7 @@
 
   <!-- TEAM -->
   <section class="section-reveal">
+    <div class="section-label">team</div>
     <div class="container">
       <div class="team-grid">
 
@@ -378,14 +395,25 @@
 
   <hr class="divider">
 
-  <!-- MISSION -->
+  <!-- WHY -->
   <section class="section-reveal">
+    <div class="section-label">why?</div>
     <div class="container">
-      <div class="mission">
-        <h2>Our mission</h2>
-        <p>We're Claude Code power users. We built this because we were <em>furious</em> that it didn't already exist, and we wanted to change that.</p>
-        <p>We want AI to do the things we want it to do. We want it to be consistent and predictable. We want full control over agentic behavior that isn't subject to Claude deciding to ignore <code>CLAUDE.md</code>.</p>
-        <p>This is just a thing that should exist.</p>
+      <div class="why-quotes">
+        <div class="why-card">
+          <p class="why-text">"I was furious that this didn't already exist, and I wanted to change that."</p>
+          <div class="why-attribution">
+            <div class="why-name">Jai Dhyani</div>
+            <div class="why-role">Co-Founder &amp; CTO</div>
+          </div>
+        </div>
+        <div class="why-card">
+          <p class="why-text">"I left Amazon to work on this because powerful agents are about to be everywhere, and we need to make sure they follow the rules."</p>
+          <div class="why-attribution">
+            <div class="why-name">Scott Wofford</div>
+            <div class="why-role">Co-Founder &amp; CEO</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
