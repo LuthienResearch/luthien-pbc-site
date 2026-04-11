@@ -1069,13 +1069,10 @@
       gap: 10px;
       align-items: start;
     }
-    .ask-f3-face.ask-f3-face-wide {
-      align-items: flex-start;
-    }
     .ask-f3-face-logos.ask-f3-face-logos-nowrap {
       flex-wrap: nowrap;
       white-space: nowrap;
-      justify-content: flex-start;
+      justify-content: center;
     }
     .ask-f3-face {
       display: flex;
@@ -2459,7 +2456,7 @@
         <div class="ask-f3-divider"></div>
 
         <div class="ask-f3-also">
-          <div class="ask-f3-also-label">plus 8 more in the last 48 hours</div>
+          <div class="ask-f3-also-label">plus 8 more <span id="askWindow">in the last 48 hours</span></div>
           <div class="ask-f3-faces">
             <a class="ask-f3-face" href="https://www.linkedin.com/in/tom-divinnie-07964323/" target="_blank" rel="noopener noreferrer">
               <img src="../assets/images/photo-tom-divinnie.png" alt="Tom DiVinnie">
@@ -2505,7 +2502,7 @@
                 <img class="ask-f3-face-logo invert" src="../assets/images/logos/amazon-light.svg" alt="Amazon">
               </div>
             </a>
-            <a class="ask-f3-face ask-f3-face-wide" href="https://www.linkedin.com/in/espinlaura/" target="_blank" rel="noopener noreferrer">
+            <a class="ask-f3-face" href="https://www.linkedin.com/in/espinlaura/" target="_blank" rel="noopener noreferrer">
               <img src="../assets/images/photo-laura-espin.png" alt="Laura Espin">
               <div class="ask-f3-face-logos ask-f3-face-logos-nowrap">
                 <span class="ask-f3-face-cred">Sr. Dir. Growth @</span>
@@ -2590,21 +2587,23 @@
   if (el) el.textContent = 'in ' + days + ' day' + (days !== 1 ? 's' : '');
 })();
 
-/* Dynamic angel-investor commitment age. Each card sets its own
-   data-commit-date so cards committed on different days render the
-   correct 'committed today / yesterday / N days ago' label. */
+/* Dynamic Ask-slide angel window label. First angel (Tom DiVinnie)
+   committed Fri Apr 10, 2026 3:00 PM local. Label reads 'in the
+   last 24 hours' until 48 hours elapsed, then 'in the last 48 hours'
+   until 72 hours, then 'in the last N days' where N = completed
+   24-hour buckets since Fri 3pm. */
 (function() {
-  const today = new Date();
-  today.setHours(0,0,0,0);
-  document.querySelectorAll('.angel-days-ago[data-commit-date]').forEach(function(el) {
-    const date = new Date(el.getAttribute('data-commit-date') + 'T00:00:00');
-    const diffDays = Math.round((today - date) / 86400000);
-    let label;
-    if (diffDays <= 0)       label = 'committed today';
-    else if (diffDays === 1) label = 'committed yesterday';
-    else                     label = 'committed ' + diffDays + ' days ago';
-    el.textContent = label;
-  });
+  const el = document.getElementById('askWindow');
+  if (!el) return;
+  const firstCommit = new Date('2026-04-10T15:00:00');
+  const now = new Date();
+  const hoursElapsed = (now - firstCommit) / 3600000;
+  const days = Math.floor(hoursElapsed / 24);
+  let label;
+  if (days <= 1)      label = 'in the last 24 hours';
+  else if (days === 2) label = 'in the last 48 hours';
+  else                 label = 'in the last ' + days + ' days';
+  el.textContent = label;
 })();
 
 (function() {
