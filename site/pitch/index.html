@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Luthien: Investor Deck</title>
   <meta name="robots" content="noindex, nofollow">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
 
   <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
 
@@ -2520,11 +2523,23 @@
     current = targetIdx;
   }
 
-  // Respond to manual hash changes (user edits the URL bar or clicks
-  // a bookmarked link without a full page reload).
-  window.addEventListener('hashchange', () => {
+  // Belt-and-suspenders hash sync. Fires on every scenario where the
+  // URL bar might get updated externally:
+  //   - hashchange: user edits URL, clicks a bookmarked deep link
+  //   - pageshow:   browser restores tab from bfcache (back/forward)
+  //   - focus:      macOS `open file://...#name` focuses an existing
+  //                 tab and updates the hash; Chrome sometimes
+  //                 doesn't fire hashchange in this case
+  //   - visibilitychange: tab becomes visible again
+  function syncFromHash() {
     const idx = slideIndexFromHash();
     if (idx !== null && idx !== current) goTo(idx);
+  }
+  window.addEventListener('hashchange',       syncFromHash);
+  window.addEventListener('pageshow',         syncFromHash);
+  window.addEventListener('focus',            syncFromHash);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) syncFromHash();
   });
 
   updateUI();
