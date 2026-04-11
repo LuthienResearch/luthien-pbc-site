@@ -947,6 +947,90 @@
       border-color: var(--blue);
     }
 
+    /* Memo card (inline thumbnail + text) */
+    .memo-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .memo-card:hover {
+      border-color: var(--blue);
+      background: var(--bg-elevated);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(59, 148, 148, 0.12);
+    }
+
+    .memo-card .mini-cover {
+      width: 48px;
+      height: 64px;
+      background: #000;
+      border-radius: 3px;
+      display: flex;
+      flex-direction: column;
+      padding: 8px 6px 6px;
+      flex-shrink: 0;
+      border: 1px solid #333;
+    }
+
+    .memo-card .mini-cover-title {
+      font-family: var(--sans);
+      font-size: 0.3rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+    }
+
+    .memo-card .mini-cover-line {
+      width: 100%;
+      height: 1px;
+      background: var(--blue);
+      margin: 3px 0 2px;
+    }
+
+    .memo-card .mini-cover-sub {
+      font-family: var(--body);
+      font-size: 0.18rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .memo-card .card-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .memo-card .card-title {
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .memo-card .card-sub {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--text-dim);
+    }
+
+    .memo-card .card-arrow {
+      font-size: 1.2rem;
+      color: var(--text-dim);
+      transition: color 0.2s, transform 0.2s;
+      margin-left: 8px;
+    }
+
+    .memo-card:hover .card-arrow {
+      color: var(--blue);
+      transform: translateX(3px);
+    }
+
     /* ============ RESPONSIVE ============ */
     @media (max-width: 900px) {
       .slide { padding: 40px 32px; }
@@ -1686,23 +1770,23 @@
         <div style="text-align: center;">
           <div class="stat-huge">$4.7B</div>
           <div class="stat-label">Coding agent market today</div>
-          <div class="citation">Investment memo, market sizing (Apr 2026)</div>
+          <div class="citation"><a href="https://finance.yahoo.com/news/ai-code-assistant-market-set-143000983.html" target="_blank" rel="noopener noreferrer">SNS Insider, AI Code Assistant Market Report</a></div>
         </div>
         <div style="text-align: center;">
           <div class="stat-huge">$14.6B</div>
           <div class="stat-label">Projected by 2033</div>
-          <div class="citation">15% CAGR projection, investment memo</div>
+          <div class="citation"><a href="https://finance.yahoo.com/news/ai-code-assistant-market-set-143000983.html" target="_blank" rel="noopener noreferrer">SNS Insider, 15.31% CAGR to 2033</a></div>
         </div>
         <div style="text-align: center;">
           <div class="stat-huge green">$2.5B</div>
           <div class="stat-label">Claude Code ARR</div>
           <div style="font-family: var(--sans); font-size: 1.3rem; color: var(--white); font-weight: 700; margin-top: 6px;">$0 &rarr; $2.5B in 9 months</div>
-          <div class="citation">Anthropic investor materials / press reports</div>
+          <div class="citation"><a href="https://www.anthropic.com/news/anthropic-raises-30-billion-series-g-funding-380-billion-post-money-valuation" target="_blank" rel="noopener noreferrer">Anthropic Series G announcement, Feb 2026</a></div>
         </div>
         <div style="text-align: center;">
-          <div class="stat-huge blue">51%</div>
-          <div class="stat-label">of GitHub commits are<br>AI-generated (early 2026)</div>
-          <div class="citation">GitHub CEO Thomas Dohmke, public statements 2026</div>
+          <div class="stat-huge blue">46%</div>
+          <div class="stat-label">of code on GitHub is<br>AI-generated (2025)</div>
+          <div class="citation"><a href="https://www.theregister.com/2025/08/07/github_ceo_ai_coding/" target="_blank" rel="noopener noreferrer">GitHub / Microsoft developer surveys, 2025</a></div>
         </div>
       </div>
       <div class="spacer-lg"></div>
@@ -1710,7 +1794,7 @@
         <div class="card">
           <div class="card-title">Enterprise demand</div>
           <div class="card-body"><span class="white" style="font-weight: 600;">80%</span> of Claude Code revenue comes from enterprises. Enterprise AI budgets growing <span class="white" style="font-weight: 600;">75% YoY</span>.</div>
-          <div class="citation">Anthropic enterprise reports; Gartner AI spending surveys</div>
+          <div class="citation"><a href="https://www.saastr.com/anthropic-just-hit-14-billion-in-arr-up-from-1-billion-just-14-months-ago/" target="_blank" rel="noopener noreferrer">Dario Amodei (Anthropic CEO)</a>; <a href="https://www.saastr.com/a16z-enterprise-ai-spending-is-growing-75-a-year/" target="_blank" rel="noopener noreferrer">a16z enterprise AI spending analysis</a></div>
         </div>
         <div class="card">
           <div class="card-title">Regulatory tailwind</div>
@@ -1916,6 +2000,20 @@
         Every org running AI agents will need a control layer.<br>We're building it.
       </p>
       <div class="spacer-lg"></div>
+
+      <a href="https://docsend.com/view/s/hpf4szbc5u2cqu4v" class="memo-card anim-up delay-3" target="_blank">
+        <div class="mini-cover">
+          <div class="mini-cover-title">Luthien Research</div>
+          <div class="mini-cover-line"></div>
+          <div class="mini-cover-sub">Investment Memo</div>
+        </div>
+        <div class="card-text">
+          <div class="card-title">Investment Memo</div>
+          <div class="card-sub">April 2026 &middot; PDF</div>
+        </div>
+        <div class="card-arrow">&rsaquo;</div>
+      </a>
+
       <div class="close-links anim-up delay-3">
         <a href="https://luthien.cc" class="close-link" target="_blank">luthien.cc</a>
         <a href="mailto:jai@luthienresearch.org" class="close-link">jai@luthienresearch.org</a>
