@@ -1065,9 +1065,17 @@
     }
     .ask-f3-faces {
       display: grid;
-      grid-template-columns: repeat(8, 1fr);
+      grid-template-columns: repeat(7, 1fr) 1.8fr;
       gap: 10px;
       align-items: start;
+    }
+    .ask-f3-face.ask-f3-face-wide {
+      align-items: flex-start;
+    }
+    .ask-f3-face-logos.ask-f3-face-logos-nowrap {
+      flex-wrap: nowrap;
+      white-space: nowrap;
+      justify-content: flex-start;
     }
     .ask-f3-face {
       display: flex;
@@ -2491,17 +2499,17 @@
                 <img class="ask-f3-face-logo" src="../assets/images/logos/hellofresh-light.svg" alt="HelloFresh">
               </div>
             </a>
-            <a class="ask-f3-face" href="https://www.linkedin.com/in/espinlaura/" target="_blank" rel="noopener noreferrer">
-              <img src="../assets/images/photo-laura-espin.png" alt="Laura Espin">
-              <div class="ask-f3-face-logos">
-                <span class="ask-f3-face-cred">Sr. Dir. Growth @</span>
-                <img class="ask-f3-face-logo" src="../assets/images/logos/eventbrite.png" alt="Eventbrite">
-              </div>
-            </a>
             <a class="ask-f3-face" href="https://www.linkedin.com/in/saranya-selvamani/" target="_blank" rel="noopener noreferrer">
               <img src="../assets/images/photo-saranya-selvamani.png" alt="Saranya Selvamani">
               <div class="ask-f3-face-logos">
                 <img class="ask-f3-face-logo invert" src="../assets/images/logos/amazon-light.svg" alt="Amazon">
+              </div>
+            </a>
+            <a class="ask-f3-face ask-f3-face-wide" href="https://www.linkedin.com/in/espinlaura/" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/images/photo-laura-espin.png" alt="Laura Espin">
+              <div class="ask-f3-face-logos ask-f3-face-logos-nowrap">
+                <span class="ask-f3-face-cred">Sr. Dir. Growth @</span>
+                <img class="ask-f3-face-logo" src="../assets/images/logos/eventbrite.png" alt="Eventbrite">
               </div>
             </a>
           </div>
