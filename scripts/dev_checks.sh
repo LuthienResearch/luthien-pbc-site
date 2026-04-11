@@ -266,6 +266,28 @@ fi
 
 # ─────────────────────────────────────────────────────────
 bold ""
+bold "== 10. Untracked assets in site/ =="
+# ─────────────────────────────────────────────────────────
+# COE: PR #75 shipped with a broken <img src="sff-white.svg"> because the
+# SVG existed only in the local working tree — never git-added. Check #1
+# passed locally (filesystem test -f succeeds) but the file was missing
+# from the deployed repo, so GitHub Pages served a broken image.
+# This check catches that class of bug before push.
+untracked_errors=0
+REPO_ROOT="$(cd "$SITE_DIR/.." && pwd)"
+while IFS= read -r f; do
+    [ -z "$f" ] && continue
+    case "$f" in
+        site/*.svg|site/*.png|site/*.jpg|site/*.jpeg|site/*.gif|site/*.webp|site/*.ico|site/*.css|site/*.js|site/*.woff|site/*.woff2|site/*.html|site/*.pdf)
+            fail "Untracked asset: $f (exists locally but not in git — will 404 on deploy if referenced)"
+            untracked_errors=$((untracked_errors + 1))
+            ;;
+    esac
+done < <(cd "$REPO_ROOT" 2>/dev/null && git ls-files --others --exclude-standard -- site/ 2>/dev/null || true)
+[ "$untracked_errors" -eq 0 ] && pass "No untracked asset files in site/"
+
+# ─────────────────────────────────────────────────────────
+bold ""
 bold "=========================================="
 if [ "$ERRORS" -gt 0 ]; then
     red "FAILED: $ERRORS error(s), $WARNINGS warning(s)"
