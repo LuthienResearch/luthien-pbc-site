@@ -935,10 +935,10 @@
     /* ============ ASK SLIDE: F3 V3 (spotlight + gradient center divider + 8 faces) ============ */
     .ask-f3 {
       display: grid;
-      grid-template-columns: 1fr 2px 1fr;
+      grid-template-columns: 0.8fr 2px 1.2fr;
       gap: 40px;
       align-items: center;
-      max-width: 1200px;
+      max-width: 1440px;
       margin: 0 auto;
     }
     .ask-f3-spotlight {
@@ -1018,6 +1018,28 @@
       letter-spacing: 0.03em;
       margin-top: 6px;
     }
+    .ask-f3-spotlight-prior {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .ask-f3-spotlight-prior-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      letter-spacing: 0.04em;
+    }
+    .ask-f3-spotlight-prior-logo {
+      height: 15px;
+      width: auto;
+      max-width: 70px;
+      object-fit: contain;
+    }
+    .ask-f3-spotlight-prior-logo.invert {
+      filter: brightness(0) invert(1);
+      opacity: 0.9;
+    }
 
     /* V3 gradient divider: dim at top/bottom, full verdigris in the middle */
     .ask-f3-divider {
@@ -1042,10 +1064,10 @@
       margin-bottom: 16px;
     }
     .ask-f3-faces {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      align-items: flex-start;
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 10px;
+      align-items: start;
     }
     .ask-f3-face {
       display: flex;
@@ -1054,7 +1076,7 @@
       gap: 8px;
       text-decoration: none;
       transition: transform 0.2s;
-      min-width: 44px;
+      min-width: 0;
     }
     .ask-f3-face:hover { transform: translateY(-2px); }
     .ask-f3-face > img:first-child {
@@ -1070,7 +1092,10 @@
       gap: 4px;
       align-items: center;
       justify-content: center;
+      flex-wrap: wrap;
       min-height: 14px;
+      max-width: 100%;
+      text-align: center;
     }
     .ask-f3-face-logo {
       height: 14px;
@@ -1084,10 +1109,12 @@
     }
     .ask-f3-face-cred {
       font-family: var(--sans);
-      font-size: 0.64rem;
+      font-size: 0.58rem;
       font-weight: 600;
       color: var(--text-muted);
-      letter-spacing: 0.01em;
+      letter-spacing: 0;
+      line-height: 1.2;
+      text-align: center;
     }
 
     /* ============ SLIDE FOOTNOTES (bottom-left, revealed by Footnotes toggle) ============ */
@@ -2413,6 +2440,11 @@
               </a>
             </div>
             <div class="ask-f3-spotlight-meta">YC W21 &middot; acq. Ant International, Oct 2025</div>
+            <div class="ask-f3-spotlight-prior">
+              <span class="ask-f3-spotlight-prior-label">ex</span>
+              <img class="ask-f3-spotlight-prior-logo invert" src="../assets/images/logos/amazon-light.svg" alt="Amazon">
+              <img class="ask-f3-spotlight-prior-logo invert" src="../assets/images/logos/jpmorgan-brown.svg" alt="J.P. Morgan">
+            </div>
           </div>
         </div>
 
@@ -2442,11 +2474,15 @@
             </a>
             <a class="ask-f3-face" href="https://www.linkedin.com/in/will-reuter-86741415/" target="_blank" rel="noopener noreferrer">
               <img src="../assets/images/photo-will-reuter.png" alt="Will Reuter">
-              <div class="ask-f3-face-logos"></div>
+              <div class="ask-f3-face-logos">
+                <img class="ask-f3-face-logo invert" src="../assets/images/logos/amazon-light.svg" alt="Amazon">
+              </div>
             </a>
             <a class="ask-f3-face" href="https://www.linkedin.com/in/arjunmishra0491/" target="_blank" rel="noopener noreferrer">
               <img src="../assets/images/photo-arjun-mishra.png" alt="Arjun Mishra">
-              <div class="ask-f3-face-logos"></div>
+              <div class="ask-f3-face-logos">
+                <img class="ask-f3-face-logo invert" src="../assets/images/logos/amazon-light.svg" alt="Amazon">
+              </div>
             </a>
             <a class="ask-f3-face" href="https://www.linkedin.com/in/luisalbertocaballero/" target="_blank" rel="noopener noreferrer">
               <img src="../assets/images/photo-luis-caballero.png" alt="Luis Caballero">
@@ -2457,7 +2493,10 @@
             </a>
             <a class="ask-f3-face" href="https://www.linkedin.com/in/espinlaura/" target="_blank" rel="noopener noreferrer">
               <img src="../assets/images/photo-laura-espin.png" alt="Laura Espin">
-              <div class="ask-f3-face-logos"></div>
+              <div class="ask-f3-face-logos">
+                <span class="ask-f3-face-cred">Sr. Dir. Growth @</span>
+                <img class="ask-f3-face-logo" src="../assets/images/logos/eventbrite.png" alt="Eventbrite">
+              </div>
             </a>
             <a class="ask-f3-face" href="https://www.linkedin.com/in/saranya-selvamani/" target="_blank" rel="noopener noreferrer">
               <img src="../assets/images/photo-saranya-selvamani.png" alt="Saranya Selvamani">
