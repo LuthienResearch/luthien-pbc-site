@@ -75,3 +75,25 @@ Same objective workflow as luthien-proxy:
 ## One PR = One Concern
 
 Same rule as luthien-proxy: keep PRs focused. Bug fix? Separate PR. New page? Separate PR.
+
+## Writing Voice (READ THIS BEFORE YOU WRITE ANY COPY)
+
+The full voice/tone source of truth lives in `luthien-org/ui-fb-dev/design-system.md` (section: "Content credibility / No AI slop irony" and "Anti-Patterns"). Read it before writing any user-facing copy. The rules below are the non-negotiables Scott has called out most often:
+
+**Do:**
+- **Write complete sentences.** No fragments. "Devs install it on Monday." is not a sentence you would say to a person, so do not put it on a slide.
+- **Substantiate every claim.** If you assert something, either cite a primary source (quote with attribution + link) or tie it to a number already shown on another slide. Vague framings like "whose whole pitch was 'built for developers'" read as filler and get cut in review.
+- **Match the voice of the existing slides.** The Moat slide is the reference: real quote, real attribution, real date, followed by a complete sentence explaining why the fact matters. The Problem slides are the reference for data-driven prose (12 hours autonomous, 45-second increments, because of specific named risks).
+- **Prefer named third-party sources** over your own synthesis. "According to SuperTokens' analysis" beats "the real reason Okta paid this is..."
+- **Use straight quotes** `"like this"`, not curly `"like this"`. The design system explicitly flags curly quotes as AI-slop.
+
+**Do not:**
+- **No em dashes anywhere.** `&mdash;` and `—` are banned. Use a period, a semicolon, or parentheses. The design system calls this "AI slop irony" (R6, Quentin S3). This rule applies to new copy you are adding, even if you see em dashes in existing slides that have not been cleaned up yet.
+- **No punchy one-liner closers** like "Devs install it on Monday. The CISO signs the contract on Friday." That is fabricated comedy, and the design system explicitly says "the real quotes ARE the humor, don't add AI-generated filler between them" (Round 4 lesson).
+- **No editorialized framing you cannot cite.** "Okta paid this to buy what they couldn't build" is a synthesis I cannot attribute, so it is out. If the slide makes a claim, a reviewer should be able to click through to a source that makes the same claim in almost the same words.
+- **No curly quotes, no AI-generated preamble, no fabricated UI, no fictional class names.**
+- **No generic phrases** like "developer-first mindset" when a specific quote or metric exists.
+
+**If you catch yourself writing a sentence that is more memorable than informative, delete it.** The slide should read like something an experienced operator would actually say out loud to another operator, not like a pitch-template Mad Lib.
+
+*(Added 2026-04-11 after the Auth0 slide had to be rewritten three times to remove em dashes, curly quotes, a fabricated "couldn't build" framing, and a fabricated Monday/Friday closer.)*
