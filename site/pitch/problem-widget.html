@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Luthien — Problem Widget (standalone)</title>
+  <title>Luthien: Problem Widget (standalone)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&family=Lora:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -788,13 +788,13 @@
       // === RENDER CARDS ===
       // Hyperlink friction (Apr 11 feedback): card clicks only open the
       // source URL if the parent deck has toggled Footnotes on. Otherwise
-      // a click is a no-op — avoids unintentional navigation mid-pitch.
+      // a click is a no-op  -  avoids unintentional navigation mid-pitch.
       function footnotesEnabled() {
         try {
           return window.parent && window.parent.document &&
             window.parent.document.body.classList.contains('citations-visible');
         } catch (_e) {
-          // Cross-origin or standalone — default to enabled so the widget
+          // Cross-origin or standalone  -  default to enabled so the widget
           // still works when opened directly.
           return true;
         }
