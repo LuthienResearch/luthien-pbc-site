@@ -932,74 +932,135 @@
       opacity: 0.85;
     }
 
-    /* ============ ASK SLIDE ANGELS (faces + credentials for notable people) ============ */
-    .ask-angels-row {
+    /* ============ ASK SLIDE: F3 CONCEPT (Guillermo spotlight + 8 small faces) ============ */
+    .ask-f3 {
       display: grid;
-      grid-template-columns: repeat(9, 1fr);
-      gap: 10px;
-      max-width: 1400px;
-      margin: 0 auto;
-      align-items: start;
-    }
-    .ask-angel {
-      display: flex;
-      flex-direction: column;
+      grid-template-columns: 320px 1fr;
+      gap: 56px;
       align-items: center;
-      text-align: center;
-      gap: 6px;
-      min-width: 0;
+      max-width: 1200px;
+      margin: 0 auto;
     }
-    .ask-angel-photo-link {
-      display: block;
+    .ask-f3-spotlight {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      padding: 14px 0 14px 24px;
+      border-left: 2px solid var(--blue);
       text-decoration: none;
       transition: transform 0.2s;
     }
-    .ask-angel-photo-link:hover { transform: translateY(-2px); }
-    .ask-angel-photo-link img {
-      width: 68px;
-      height: 68px;
+    .ask-f3-spotlight:hover { transform: translateY(-2px); }
+    .ask-f3-spotlight-photo {
+      width: 76px;
+      height: 76px;
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid var(--border);
+      flex-shrink: 0;
     }
-    .ask-angel-initials {
-      width: 68px;
-      height: 68px;
+    .ask-f3-spotlight-text { min-width: 0; text-align: left; }
+    .ask-f3-spotlight-label {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: var(--blue);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .ask-f3-spotlight-name {
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--white);
+      line-height: 1.2;
+    }
+    .ask-f3-spotlight-title {
+      font-family: var(--body);
+      font-size: 0.9rem;
+      color: var(--white);
+      line-height: 1.4;
+      margin-top: 4px;
+    }
+    .ask-f3-r2-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--blue);
+      border-bottom: 1px solid rgba(59, 148, 148, 0.35);
+    }
+    .ask-f3-inline-logo {
+      height: 13px;
+      width: auto;
+      vertical-align: middle;
+    }
+    .ask-f3-spotlight-meta {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+      margin-top: 6px;
+    }
+    .ask-f3-also { text-align: left; }
+    .ask-f3-also-label {
+      font-family: var(--mono);
+      font-size: 0.64rem;
+      color: var(--text-dim);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .ask-f3-faces {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+    .ask-f3-face {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: transform 0.2s;
+    }
+    .ask-f3-face:hover { transform: translateY(-2px); }
+    .ask-f3-face > img:first-child {
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
-      border: 2px solid var(--border);
+      object-fit: cover;
+      border: 1px solid var(--border);
+      display: block;
+    }
+    .ask-f3-face-initials {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
       background: var(--bg-elevated);
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: var(--sans);
-      font-size: 1.3rem;
+      font-size: 0.85rem;
       font-weight: 700;
       color: var(--blue);
     }
-    .ask-angel-name {
-      font-family: var(--sans);
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--white);
-      line-height: 1.25;
-      margin-top: 2px;
+    .ask-f3-face-logo {
+      height: 13px;
+      width: auto;
+      max-width: 48px;
+      object-fit: contain;
     }
-    .ask-angel-cred {
-      font-family: var(--mono);
-      font-size: 0.58rem;
-      color: var(--text-muted);
-      line-height: 1.4;
-      letter-spacing: 0.02em;
-      padding: 0 2px;
+    .ask-f3-face-logo.invert {
+      filter: brightness(0) invert(1);
+      opacity: 0.92;
     }
-    .ask-angel-cred a {
-      color: var(--blue);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(59, 148, 148, 0.35);
-      transition: border-color 0.2s;
-    }
-    .ask-angel-cred a:hover {
-      border-bottom-color: var(--blue);
+    .ask-f3-face-logo-blank {
+      height: 13px;
     }
 
     /* ============ SLIDE FOOTNOTES (bottom-left, revealed by Footnotes toggle) ============ */
@@ -2302,7 +2363,7 @@
     </div>
   </div>
 
-  <!-- ======== SLIDE 12: THE ASK (faces + credentials for notable angels) ======== -->
+  <!-- ======== SLIDE 12: THE ASK (F3 concept — Guillermo spotlight + 8 supporting faces with real logos) ======== -->
   <div class="slide" data-slide="11" data-slide-name="ask">
     <div class="slide-inner" style="text-align: center;">
       <div class="label anim-up">The Ask</div>
@@ -2310,67 +2371,53 @@
       <p class="subtitle anim-up delay-1" style="max-width: 900px;">9 angels committed in the past 10 days.</p>
       <div class="spacer-md"></div>
 
-      <div class="anim-up delay-2 ask-angels-row">
-        <div class="ask-angel">
-          <a class="ask-angel-photo-link" href="https://www.linkedin.com/in/gbravo11/" target="_blank" rel="noopener noreferrer">
-            <img src="../assets/images/photo-gbravo11.png" alt="Guillermo Bravo">
-          </a>
-          <div class="ask-angel-name">Guillermo Bravo</div>
-          <div class="ask-angel-cred">CPO @ <a href="https://www.ycombinator.com/companies/r2" target="_blank" rel="noopener noreferrer">R2 (YC W21)</a>, acq. by Ant International</div>
-        </div>
-        <div class="ask-angel">
-          <a class="ask-angel-photo-link" href="https://www.linkedin.com/in/tom-divinnie-07964323/" target="_blank" rel="noopener noreferrer">
-            <img src="../assets/images/photo-tom-divinnie.png" alt="Tom DiVinnie">
-          </a>
-          <div class="ask-angel-name">Tom DiVinnie</div>
-          <div class="ask-angel-cred">CEO, Habitat Health</div>
-        </div>
-        <div class="ask-angel">
-          <a class="ask-angel-photo-link" href="https://www.linkedin.com/in/chris-porter-25ab068b/" target="_blank" rel="noopener noreferrer">
-            <img src="../assets/images/photo-chris-porter.png" alt="Chris Porter">
-          </a>
-          <div class="ask-angel-name">Chris Porter</div>
-          <div class="ask-angel-cred">Built <a href="https://aws.amazon.com/fraud-detector/" target="_blank" rel="noopener noreferrer">Amazon Fraud Detector</a></div>
-        </div>
-        <div class="ask-angel">
-          <a class="ask-angel-photo-link" href="https://www.linkedin.com/in/beth-anne-porter-5a491132/" target="_blank" rel="noopener noreferrer">
-            <img src="../assets/images/photo-beth-anne-porter.jpeg" alt="Beth Anne Porter">
-          </a>
-          <div class="ask-angel-name">Beth Anne Porter</div>
-          <div class="ask-angel-cred">Built <a href="https://buywithprime.amazon.com/" target="_blank" rel="noopener noreferrer">Buy with Prime</a></div>
-        </div>
-        <div class="ask-angel">
-          <a class="ask-angel-photo-link" href="https://www.linkedin.com/in/will-reuter-86741415/" target="_blank" rel="noopener noreferrer">
-            <img src="../assets/images/photo-will-reuter.png" alt="Will Reuter">
-          </a>
-          <div class="ask-angel-name">Will Reuter</div>
-          <div class="ask-angel-cred">&nbsp;</div>
-        </div>
-        <div class="ask-angel">
-          <div class="ask-angel-photo-link ask-angel-initials">AM</div>
-          <div class="ask-angel-name">Arjun Mishra</div>
-          <div class="ask-angel-cred">&nbsp;</div>
-        </div>
-        <div class="ask-angel">
-          <a class="ask-angel-photo-link" href="https://www.linkedin.com/in/luisalbertocaballero/" target="_blank" rel="noopener noreferrer">
-            <img src="../assets/images/photo-luis-caballero.png" alt="Luis Caballero">
-          </a>
-          <div class="ask-angel-name">Luis Caballero</div>
-          <div class="ask-angel-cred">VP Marketing, HelloFresh &middot; ex-Amazon</div>
-        </div>
-        <div class="ask-angel">
-          <a class="ask-angel-photo-link" href="https://www.linkedin.com/in/espinlaura/" target="_blank" rel="noopener noreferrer">
-            <img src="../assets/images/photo-laura-espin.png" alt="Laura Espin">
-          </a>
-          <div class="ask-angel-name">Laura Espin</div>
-          <div class="ask-angel-cred">VP Growth Marketing, SeekOut</div>
-        </div>
-        <div class="ask-angel">
-          <a class="ask-angel-photo-link" href="https://www.linkedin.com/in/saranya-selvamani/" target="_blank" rel="noopener noreferrer">
-            <img src="../assets/images/photo-saranya-selvamani.png" alt="Saranya Selvamani">
-          </a>
-          <div class="ask-angel-name">Saranya Selvamani</div>
-          <div class="ask-angel-cred">Founder, Sproutron AI &middot; ex-Amazon</div>
+      <div class="ask-f3 anim-up delay-2">
+        <a class="ask-f3-spotlight" href="https://www.linkedin.com/in/gbravo11/" target="_blank" rel="noopener noreferrer">
+          <img class="ask-f3-spotlight-photo" src="../assets/images/photo-gbravo11.png" alt="Guillermo Bravo">
+          <div class="ask-f3-spotlight-text">
+            <div class="ask-f3-spotlight-label">First angel</div>
+            <div class="ask-f3-spotlight-name">Guillermo Bravo</div>
+            <div class="ask-f3-spotlight-title">CPO at <span class="ask-f3-r2-link">R2 <img src="../assets/images/logos/r2-light.svg" alt="R2" class="ask-f3-inline-logo"></span></div>
+            <div class="ask-f3-spotlight-meta">YC W21 &middot; acq. Ant International, Oct 2025</div>
+          </div>
+        </a>
+
+        <div class="ask-f3-also">
+          <div class="ask-f3-also-label">Plus 8 more in the last 48 hours</div>
+          <div class="ask-f3-faces">
+            <a class="ask-f3-face" href="https://www.linkedin.com/in/tom-divinnie-07964323/" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/images/photo-tom-divinnie.png" alt="Tom DiVinnie">
+              <img class="ask-f3-face-logo" src="../assets/images/logos/habitathealth.jpg" alt="Habitat Health">
+            </a>
+            <a class="ask-f3-face" href="https://www.linkedin.com/in/chris-porter-25ab068b/" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/images/photo-chris-porter.png" alt="Chris Porter">
+              <img class="ask-f3-face-logo invert" src="../assets/images/logos/amazon-light.svg" alt="Amazon">
+            </a>
+            <a class="ask-f3-face" href="https://www.linkedin.com/in/beth-anne-porter-5a491132/" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/images/photo-beth-anne-porter.jpeg" alt="Beth Anne Porter">
+              <img class="ask-f3-face-logo invert" src="../assets/images/logos/amazon-light.svg" alt="Amazon">
+            </a>
+            <a class="ask-f3-face" href="https://www.linkedin.com/in/will-reuter-86741415/" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/images/photo-will-reuter.png" alt="Will Reuter">
+              <div class="ask-f3-face-logo-blank"></div>
+            </a>
+            <div class="ask-f3-face">
+              <div class="ask-f3-face-initials">AM</div>
+              <div class="ask-f3-face-logo-blank"></div>
+            </div>
+            <a class="ask-f3-face" href="https://www.linkedin.com/in/luisalbertocaballero/" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/images/photo-luis-caballero.png" alt="Luis Caballero">
+              <img class="ask-f3-face-logo" src="../assets/images/logos/hellofresh-light.svg" alt="HelloFresh">
+            </a>
+            <a class="ask-f3-face" href="https://www.linkedin.com/in/espinlaura/" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/images/photo-laura-espin.png" alt="Laura Espin">
+              <img class="ask-f3-face-logo" src="../assets/images/logos/seekout.png" alt="SeekOut">
+            </a>
+            <a class="ask-f3-face" href="https://www.linkedin.com/in/saranya-selvamani/" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/images/photo-saranya-selvamani.png" alt="Saranya Selvamani">
+              <img class="ask-f3-face-logo invert" src="../assets/images/logos/amazon-light.svg" alt="Amazon (ex)">
+            </a>
+          </div>
         </div>
       </div>
     </div>
