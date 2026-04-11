@@ -1003,27 +1003,58 @@
     .memo-card .card-text {
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 4px;
     }
 
     .memo-card .card-title {
       font-family: var(--sans);
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--text);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--white);
     }
 
     .memo-card .card-sub {
       font-family: var(--mono);
-      font-size: 0.65rem;
-      color: var(--text-dim);
+      font-size: 0.78rem;
+      color: var(--text-muted);
     }
 
     .memo-card .card-arrow {
-      font-size: 1.2rem;
-      color: var(--text-dim);
+      font-size: 1.6rem;
+      color: var(--blue);
       transition: color 0.2s, transform 0.2s;
-      margin-left: 8px;
+      margin-left: 12px;
+    }
+
+    /* Book-a-call CTA — matches memo-card sibling sizing */
+    .cta-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 28px;
+      background: var(--blue-glow);
+      border: 1px solid var(--blue);
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--white);
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 1.35rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      margin-left: 16px;
+    }
+    .cta-card:hover {
+      background: rgba(59,148,148,0.28);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(59,148,148,0.22);
+    }
+    .cta-card .cta-arrow { color: var(--blue); font-size: 1.6rem; }
+    .close-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
     }
 
     .memo-card:hover .card-arrow {
@@ -2079,31 +2110,33 @@
     <div class="slide-inner">
       <div class="logo-mark anim-up">Luthien</div>
       <div class="spacer-md"></div>
-      <p class="subtitle anim-up delay-1" style="font-size: clamp(1.2rem, 2.5vw, 1.7rem); color: var(--text-muted);">
-        Making it safe to run AI at full speed
-      </p>
-      <div class="spacer-sm"></div>
-      <p class="anim-up delay-2" style="font-size: 1rem; color: var(--text-dim); max-width: 520px; text-align: center; line-height: 1.6;">
+      <p class="anim-up delay-2" style="font-size: clamp(1.15rem, 2vw, 1.5rem); color: var(--white); max-width: 640px; text-align: center; line-height: 1.5; font-family: var(--body);">
         Every org running AI agents will need a control layer.<br>We're building it.
       </p>
       <div class="spacer-lg"></div>
 
-      <a href="https://docsend.com/view/s/hpf4szbc5u2cqu4v" class="memo-card anim-up delay-3" target="_blank">
-        <div class="mini-cover">
-          <div class="mini-cover-title">Luthien Research</div>
-          <div class="mini-cover-line"></div>
-          <div class="mini-cover-sub">Investment Memo</div>
-        </div>
-        <div class="card-text">
-          <div class="card-title">Investment Memo</div>
-          <div class="card-sub">April 2026 &middot; PDF</div>
-        </div>
-        <div class="card-arrow">&rsaquo;</div>
-      </a>
+      <div class="close-actions anim-up delay-3">
+        <a href="https://docsend.com/view/s/hpf4szbc5u2cqu4v" class="memo-card" target="_blank">
+          <div class="mini-cover">
+            <div class="mini-cover-title">Luthien Research</div>
+            <div class="mini-cover-line"></div>
+            <div class="mini-cover-sub">Investment Memo</div>
+          </div>
+          <div class="card-text">
+            <div class="card-title">Investment Memo</div>
+            <div class="card-sub">April 2026 &middot; PDF</div>
+          </div>
+          <div class="card-arrow">&rsaquo;</div>
+        </a>
+
+        <a href="https://calendar.app.google/5tyqLKrCU9JWHW5Q9" class="cta-card" target="_blank" rel="noopener noreferrer">
+          Book a call
+          <span class="cta-arrow">&rsaquo;</span>
+        </a>
+      </div>
 
       <div class="close-links anim-up delay-3">
         <a href="https://luthien.cc" class="close-link" target="_blank">luthien.cc</a>
-        <a href="Luthien_Investment_Memo.pdf" class="close-link" target="_blank">Investment Memo</a>
         <a href="mailto:jai@luthienresearch.org" class="close-link">jai@luthienresearch.org</a>
         <a href="mailto:scott@luthienresearch.org" class="close-link">scott@luthienresearch.org</a>
       </div>
