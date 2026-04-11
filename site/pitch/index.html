@@ -932,6 +932,76 @@
       opacity: 0.85;
     }
 
+    /* ============ ASK SLIDE ANGELS (faces + credentials for notable people) ============ */
+    .ask-angels-row {
+      display: grid;
+      grid-template-columns: repeat(9, 1fr);
+      gap: 10px;
+      max-width: 1400px;
+      margin: 0 auto;
+      align-items: start;
+    }
+    .ask-angel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 6px;
+      min-width: 0;
+    }
+    .ask-angel-photo-link {
+      display: block;
+      text-decoration: none;
+      transition: transform 0.2s;
+    }
+    .ask-angel-photo-link:hover { transform: translateY(-2px); }
+    .ask-angel-photo-link img {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--border);
+    }
+    .ask-angel-initials {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      background: var(--bg-elevated);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--sans);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--blue);
+    }
+    .ask-angel-name {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.25;
+      margin-top: 2px;
+    }
+    .ask-angel-cred {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      letter-spacing: 0.02em;
+      padding: 0 2px;
+    }
+    .ask-angel-cred a {
+      color: var(--blue);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(59, 148, 148, 0.35);
+      transition: border-color 0.2s;
+    }
+    .ask-angel-cred a:hover {
+      border-bottom-color: var(--blue);
+    }
+
     /* ============ SLIDE FOOTNOTES (bottom-left, revealed by Footnotes toggle) ============ */
     /* Per-slide footnote container. Pinned to the bottom-left of the slide,
        revealed when the user toggles the Footnotes button. Scott's preference
@@ -2232,18 +2302,77 @@
     </div>
   </div>
 
-  <!-- ======== SLIDE 12: THE ASK (simplified per Finn + Esben Apr 11) ======== -->
+  <!-- ======== SLIDE 12: THE ASK (faces + credentials for notable angels) ======== -->
   <div class="slide" data-slide="11" data-slide-name="ask">
     <div class="slide-inner" style="text-align: center;">
       <div class="label anim-up">The Ask</div>
       <h1 class="headline headline-xl anim-up delay-1" style="color: var(--blue);">$2M Pre-Seed</h1>
-      <div class="spacer-lg"></div>
-      <p class="anim-up delay-2" style="font-family: var(--body); font-size: clamp(1.1rem, 2vw, 1.45rem); color: var(--white); max-width: 680px; margin: 0 auto; line-height: 1.55;">
-        <strong class="white">9 angels</strong> committed in the past 10 days,
-        including <strong class="white">4 ex-Amazon</strong> product leaders
-        and the first angel, <strong class="white">Guillermo Bravo</strong>
-        (CPO at R2, acquired).
-      </p>
+      <p class="subtitle anim-up delay-1" style="max-width: 900px;">9 angels committed in the past 10 days.</p>
+      <div class="spacer-md"></div>
+
+      <div class="anim-up delay-2 ask-angels-row">
+        <div class="ask-angel">
+          <a class="ask-angel-photo-link" href="https://www.linkedin.com/in/gbravo11/" target="_blank" rel="noopener noreferrer">
+            <img src="../assets/images/photo-gbravo11.png" alt="Guillermo Bravo">
+          </a>
+          <div class="ask-angel-name">Guillermo Bravo</div>
+          <div class="ask-angel-cred">CPO @ <a href="https://www.ycombinator.com/companies/r2" target="_blank" rel="noopener noreferrer">R2 (YC W21)</a>, acq. by Ant International</div>
+        </div>
+        <div class="ask-angel">
+          <a class="ask-angel-photo-link" href="https://www.linkedin.com/in/tom-divinnie-07964323/" target="_blank" rel="noopener noreferrer">
+            <img src="../assets/images/photo-tom-divinnie.png" alt="Tom DiVinnie">
+          </a>
+          <div class="ask-angel-name">Tom DiVinnie</div>
+          <div class="ask-angel-cred">CEO, Habitat Health</div>
+        </div>
+        <div class="ask-angel">
+          <a class="ask-angel-photo-link" href="https://www.linkedin.com/in/chris-porter-25ab068b/" target="_blank" rel="noopener noreferrer">
+            <img src="../assets/images/photo-chris-porter.png" alt="Chris Porter">
+          </a>
+          <div class="ask-angel-name">Chris Porter</div>
+          <div class="ask-angel-cred">Built <a href="https://aws.amazon.com/fraud-detector/" target="_blank" rel="noopener noreferrer">Amazon Fraud Detector</a></div>
+        </div>
+        <div class="ask-angel">
+          <a class="ask-angel-photo-link" href="https://www.linkedin.com/in/beth-anne-porter-5a491132/" target="_blank" rel="noopener noreferrer">
+            <img src="../assets/images/photo-beth-anne-porter.jpeg" alt="Beth Anne Porter">
+          </a>
+          <div class="ask-angel-name">Beth Anne Porter</div>
+          <div class="ask-angel-cred">Built <a href="https://buywithprime.amazon.com/" target="_blank" rel="noopener noreferrer">Buy with Prime</a></div>
+        </div>
+        <div class="ask-angel">
+          <a class="ask-angel-photo-link" href="https://www.linkedin.com/in/will-reuter-86741415/" target="_blank" rel="noopener noreferrer">
+            <img src="../assets/images/photo-will-reuter.png" alt="Will Reuter">
+          </a>
+          <div class="ask-angel-name">Will Reuter</div>
+          <div class="ask-angel-cred">&nbsp;</div>
+        </div>
+        <div class="ask-angel">
+          <div class="ask-angel-photo-link ask-angel-initials">AM</div>
+          <div class="ask-angel-name">Arjun Mishra</div>
+          <div class="ask-angel-cred">&nbsp;</div>
+        </div>
+        <div class="ask-angel">
+          <a class="ask-angel-photo-link" href="https://www.linkedin.com/in/luisalbertocaballero/" target="_blank" rel="noopener noreferrer">
+            <img src="../assets/images/photo-luis-caballero.png" alt="Luis Caballero">
+          </a>
+          <div class="ask-angel-name">Luis Caballero</div>
+          <div class="ask-angel-cred">VP Marketing, HelloFresh &middot; ex-Amazon</div>
+        </div>
+        <div class="ask-angel">
+          <a class="ask-angel-photo-link" href="https://www.linkedin.com/in/espinlaura/" target="_blank" rel="noopener noreferrer">
+            <img src="../assets/images/photo-laura-espin.png" alt="Laura Espin">
+          </a>
+          <div class="ask-angel-name">Laura Espin</div>
+          <div class="ask-angel-cred">VP Growth Marketing, SeekOut</div>
+        </div>
+        <div class="ask-angel">
+          <a class="ask-angel-photo-link" href="https://www.linkedin.com/in/saranya-selvamani/" target="_blank" rel="noopener noreferrer">
+            <img src="../assets/images/photo-saranya-selvamani.png" alt="Saranya Selvamani">
+          </a>
+          <div class="ask-angel-name">Saranya Selvamani</div>
+          <div class="ask-angel-cred">Founder, Sproutron AI &middot; ex-Amazon</div>
+        </div>
+      </div>
     </div>
   </div>
 
