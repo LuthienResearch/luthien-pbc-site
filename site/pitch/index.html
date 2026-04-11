@@ -1677,68 +1677,62 @@
     </div>
   </div>
 
-  <!-- ======== SLIDE 5: CAPABILITIES ======== -->
-  <div class="slide" data-slide="4">
-    <div class="slide-inner">
-      <div class="label anim-up">Why Luthien?</div>
-      <h1 class="headline headline-lg anim-up delay-1">Org-Wide AI Control &amp; Protection</h1>
-      <div class="spacer-lg"></div>
-      <div class="anim-up delay-2" style="border-top: 1px solid var(--border);">
-        <div style="display: flex; align-items: baseline; gap: 18px; padding: 20px 0; border-bottom: 1px solid var(--border);">
-          <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); flex-shrink: 0;"></span>
-          <span style="font-family: var(--sans); font-size: clamp(1.15rem, 2vw, 1.6rem); font-weight: 600; color: var(--white);">Full Control Over All AI Agents</span>
-        </div>
-        <div style="display: flex; align-items: baseline; gap: 18px; padding: 20px 0; border-bottom: 1px solid var(--border);">
-          <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); flex-shrink: 0;"></span>
-          <span style="font-family: var(--sans); font-size: clamp(1.15rem, 2vw, 1.6rem); font-weight: 600; color: var(--white);">Intuitive, Fine-Grained Policy</span>
-        </div>
-        <div style="display: flex; align-items: baseline; gap: 18px; padding: 20px 0; border-bottom: 1px solid var(--border);">
-          <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); flex-shrink: 0;"></span>
-          <span style="font-family: var(--sans); font-size: clamp(1.15rem, 2vw, 1.6rem); font-weight: 600; color: var(--white);">Instant Rollouts, Even Mid-Workflow</span>
-        </div>
-        <div style="display: flex; align-items: baseline; gap: 18px; padding: 20px 0; border-bottom: 1px solid var(--border);">
-          <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); flex-shrink: 0;"></span>
-          <span style="font-family: var(--sans); font-size: clamp(1.15rem, 2vw, 1.6rem); font-weight: 600; color: var(--white);">Guaranteed Compliance</span>
-        </div>
-        <div style="display: flex; align-items: baseline; gap: 18px; padding: 20px 0; border-bottom: 1px solid var(--border);">
-          <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); flex-shrink: 0;"></span>
-          <span style="font-family: var(--sans); font-size: clamp(1.15rem, 2vw, 1.6rem); font-weight: 600; color: var(--white);">Frictionless User Experience</span>
-        </div>
-        <div style="display: flex; align-items: baseline; gap: 18px; padding: 20px 0; border-bottom: 1px solid var(--border);">
-          <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); flex-shrink: 0;"></span>
-          <span style="font-family: var(--sans); font-size: clamp(1.15rem, 2vw, 1.6rem); font-weight: 600; color: var(--white);">Effortless Observability</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ======== SLIDE 6: COMPETITIVE ======== -->
+  <!-- ======== SLIDE 6: COMPETITIVE (FEATURE × COMPETITOR MATRIX) ======== -->
   <div class="slide" data-slide="5">
     <div class="slide-inner">
-      <div class="label anim-up">Competitive Landscape</div>
-      <h1 class="headline headline-lg anim-up delay-1">Why not alternatives?</h1>
+      <div class="label anim-up">How is it different?</div>
+      <h1 class="headline headline-lg anim-up delay-1">Features vs. alternatives</h1>
       <p class="subtitle anim-up delay-1" style="max-width: 900px;">Luthien targets custom guardrails for the dev environment &mdash; not customer-facing chatbots.</p>
       <div class="spacer-md"></div>
-      <div class="anim-up delay-2" style="border: 1px solid var(--border); border-radius: 3px; overflow: hidden;">
-        <div class="compare-row header">
+      <div class="anim-up delay-2 feature-matrix" style="border: 1px solid var(--border); border-radius: 3px; overflow: hidden;">
+        <div class="compare-row header" style="grid-template-columns: 1.6fr 0.9fr 0.9fr 0.9fr 0.9fr;">
           <div class="compare-cell"></div>
-          <div class="compare-cell">Alternatives</div>
+          <div class="compare-cell">LiteLLM /<br>Helicone</div>
+          <div class="compare-cell">Guardrails AI /<br>Lera</div>
+          <div class="compare-cell">CodeRabbit</div>
           <div class="compare-cell luthien">Luthien</div>
         </div>
-        <div class="compare-row">
-          <div class="compare-cell name">LiteLLM / Helicone</div>
-          <div class="compare-cell">Simple pass/block rules. Basic observability.<br>No policy enforcement.</div>
-          <div class="compare-cell luthien"><span class="check">&#10003;</span> Full policy enforcement + observability</div>
+        <div class="compare-row" style="grid-template-columns: 1.6fr 0.9fr 0.9fr 0.9fr 0.9fr;">
+          <div class="compare-cell name">Full control over all AI agents</div>
+          <div class="compare-cell" style="text-align: center;"><span class="cross">&ndash;</span></div>
+          <div class="compare-cell" style="text-align: center;"><span class="cross">&ndash;</span></div>
+          <div class="compare-cell" style="text-align: center;"><span class="cross">&ndash;</span></div>
+          <div class="compare-cell luthien" style="text-align: center;"><span class="check">&#10003;</span></div>
         </div>
-        <div class="compare-row">
-          <div class="compare-cell name">Guardrails AI / Lera</div>
-          <div class="compare-cell">Customer-facing runtime guardrails.<br>Built for chatbots, not dev tools.</div>
-          <div class="compare-cell luthien"><span class="check">&#10003;</span> Purpose-built for the dev environment</div>
+        <div class="compare-row" style="grid-template-columns: 1.6fr 0.9fr 0.9fr 0.9fr 0.9fr;">
+          <div class="compare-cell name">Intuitive, fine-grained policy</div>
+          <div class="compare-cell" style="text-align: center;"><span class="cross">&ndash;</span></div>
+          <div class="compare-cell" style="text-align: center;"><span class="check">&#10003;</span></div>
+          <div class="compare-cell" style="text-align: center;"><span class="cross">&ndash;</span></div>
+          <div class="compare-cell luthien" style="text-align: center;"><span class="check">&#10003;</span></div>
         </div>
-        <div class="compare-row">
-          <div class="compare-cell name">CodeRabbit</div>
-          <div class="compare-cell">Post-hoc code review. Not real-time interception.</div>
-          <div class="compare-cell luthien"><span class="check">&#10003;</span> Real-time interception before damage occurs</div>
+        <div class="compare-row" style="grid-template-columns: 1.6fr 0.9fr 0.9fr 0.9fr 0.9fr;">
+          <div class="compare-cell name">Real-time interception (not post-hoc)</div>
+          <div class="compare-cell" style="text-align: center;"><span class="check">&#10003;</span></div>
+          <div class="compare-cell" style="text-align: center;"><span class="check">&#10003;</span></div>
+          <div class="compare-cell" style="text-align: center;"><span class="cross">&ndash;</span></div>
+          <div class="compare-cell luthien" style="text-align: center;"><span class="check">&#10003;</span></div>
+        </div>
+        <div class="compare-row" style="grid-template-columns: 1.6fr 0.9fr 0.9fr 0.9fr 0.9fr;">
+          <div class="compare-cell name">Instant rollouts, even mid-workflow</div>
+          <div class="compare-cell" style="text-align: center;"><span class="cross">&ndash;</span></div>
+          <div class="compare-cell" style="text-align: center;"><span class="cross">&ndash;</span></div>
+          <div class="compare-cell" style="text-align: center;"><span class="cross">&ndash;</span></div>
+          <div class="compare-cell luthien" style="text-align: center;"><span class="check">&#10003;</span></div>
+        </div>
+        <div class="compare-row" style="grid-template-columns: 1.6fr 0.9fr 0.9fr 0.9fr 0.9fr;">
+          <div class="compare-cell name">Purpose-built for the dev environment</div>
+          <div class="compare-cell" style="text-align: center;"><span class="cross">&ndash;</span></div>
+          <div class="compare-cell" style="text-align: center;"><span class="cross">&ndash;</span></div>
+          <div class="compare-cell" style="text-align: center;"><span class="check">&#10003;</span></div>
+          <div class="compare-cell luthien" style="text-align: center;"><span class="check">&#10003;</span></div>
+        </div>
+        <div class="compare-row" style="grid-template-columns: 1.6fr 0.9fr 0.9fr 0.9fr 0.9fr;">
+          <div class="compare-cell name">Org-wide observability</div>
+          <div class="compare-cell" style="text-align: center;"><span class="check">&#10003;</span></div>
+          <div class="compare-cell" style="text-align: center;"><span class="cross">&ndash;</span></div>
+          <div class="compare-cell" style="text-align: center;"><span class="cross">&ndash;</span></div>
+          <div class="compare-cell luthien" style="text-align: center;"><span class="check">&#10003;</span></div>
         </div>
       </div>
     </div>
@@ -2108,7 +2102,7 @@
 
 <!-- Controls -->
 <div class="controls">
-  <span class="slide-counter" id="slideCounter">1 / 15</span>
+  <span class="slide-counter" id="slideCounter">1 / 14</span>
   <div class="nav-dots" id="navDots"></div>
 </div>
 
