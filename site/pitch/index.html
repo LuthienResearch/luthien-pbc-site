@@ -1017,6 +1017,34 @@
       color: var(--text-dim);
       letter-spacing: 0.03em;
       margin-top: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .ask-f3-yc-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      text-decoration: none;
+      padding: 2px 6px 2px 4px;
+      border-radius: 2px;
+      background: rgba(255, 102, 0, 0.1);
+      border: 1px solid rgba(255, 102, 0, 0.4);
+      color: #FF6600;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      transition: background 0.2s;
+    }
+    .ask-f3-yc-badge:hover {
+      background: rgba(255, 102, 0, 0.2);
+    }
+    .ask-f3-yc-mark {
+      height: 12px;
+      width: 12px;
+      display: block;
     }
     .ask-f3-spotlight-prior {
       display: flex;
@@ -2454,11 +2482,17 @@
               <a href="https://www.linkedin.com/in/gbravo11/" target="_blank" rel="noopener noreferrer" class="ask-f3-spotlight-name-link">Guillermo Bravo</a>
             </div>
             <div class="ask-f3-spotlight-title">CPO at
-              <a href="https://www.ycombinator.com/companies/r2" target="_blank" rel="noopener noreferrer" class="ask-f3-r2-link">
-                <img src="../assets/images/logos/r2-light.svg" alt="R2 on Y Combinator" class="ask-f3-inline-logo">
+              <a href="https://r2.co/" target="_blank" rel="noopener noreferrer" class="ask-f3-r2-link">
+                <img src="../assets/images/logos/r2-light.svg" alt="R2" class="ask-f3-inline-logo">
               </a>
             </div>
-            <div class="ask-f3-spotlight-meta">YC W21 &middot; acq. Ant International, Oct 2025</div>
+            <div class="ask-f3-spotlight-meta">
+              <a href="https://www.ycombinator.com/companies/r2" target="_blank" rel="noopener noreferrer" class="ask-f3-yc-badge">
+                <img src="../assets/images/logos/ycombinator-orange.svg" alt="Y Combinator" class="ask-f3-yc-mark">
+                <span>YC W21</span>
+              </a>
+              &middot; acq. Ant International, Oct 2025
+            </div>
             <div class="ask-f3-spotlight-prior">
               <img class="ask-f3-spotlight-prior-logo invert" src="../assets/images/logos/amazon-light.svg" alt="Amazon">
               <img class="ask-f3-spotlight-prior-logo invert" src="../assets/images/logos/jpmorgan-brown.svg" alt="J.P. Morgan">
