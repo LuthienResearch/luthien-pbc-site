@@ -2121,7 +2121,7 @@
 
 <!-- Top-right controls -->
 <div class="top-controls">
-  <button class="cite-btn" id="citeBtn" title="Toggle citations">Sources</button>
+  <button class="cite-btn" id="citeBtn" title="Toggle footnotes">Footnotes</button>
   <button class="fs-btn" id="fsBtn" title="Toggle fullscreen">F11 &middot; Fullscreen</button>
 </div>
 
@@ -2265,7 +2265,7 @@
   citeBtn.addEventListener('click', () => {
     document.body.classList.toggle('citations-visible');
     citeBtn.classList.toggle('active');
-    citeBtn.textContent = citeBtn.classList.contains('active') ? 'Sources ✓' : 'Sources';
+    citeBtn.textContent = citeBtn.classList.contains('active') ? 'Footnotes ✓' : 'Footnotes';
   });
 
   document.addEventListener('fullscreenchange', () => {
