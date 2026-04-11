@@ -22,8 +22,8 @@
       --surface: #201C2A;        /* cards / elevated surfaces */
       --border: #28243A;         /* Divider */
       --text: #EDE5D8;           /* Linen */
-      --text-muted: #B0A8BE;     /* Soft Label */
-      --text-dim: #7A7290;       /* Muted Label */
+      --text-muted: #EDE5D8;     /* Apr 11 feedback: all body text → white (linen) */
+      --text-dim: #9A92AE;       /* Apr 11 feedback: lifted from #7A7290 for stronger contrast on citations */
       --white: #EDE5D8;          /* Lumen has no pure white — linen is the brightest */
       --blue: #3B9494;           /* Verdigris — Lumen accent / CTAs / positive */
       --blue-glow: rgba(59, 148, 148, 0.15);
@@ -117,7 +117,7 @@
     .subtitle {
       font-family: var(--body);
       font-size: clamp(1rem, 2vw, 1.35rem);
-      color: var(--text-muted);
+      color: var(--white);
       line-height: 1.5;
       font-weight: 400;
     }
@@ -149,7 +149,7 @@
 
     .stat-label {
       font-size: 0.95rem;
-      color: var(--text-muted);
+      color: var(--white);
       margin-top: 6px;
     }
 
@@ -230,7 +230,7 @@
 
     .card-body {
       font-size: 0.9rem;
-      color: var(--text-muted);
+      color: var(--white);
       line-height: 1.55;
     }
 
@@ -255,7 +255,7 @@
       font-family: var(--sans);
       font-style: normal;
       font-size: 0.85rem;
-      color: var(--text-dim);
+      color: var(--white);
       margin-top: 12px;
       display: block;
     }
