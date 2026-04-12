@@ -1563,6 +1563,23 @@
         top: 4px;
         transform: none;
       }
+      /* Body split (CTO slide) - stack vertically */
+      .body-split { grid-template-columns: 1fr; gap: 32px; }
+      .split-rule { display: none; }
+      /* Ask F3 - stack vertically */
+      .ask-f3 { grid-template-columns: 1fr; gap: 24px; }
+      .ask-f3-divider { display: none; }
+      .ask-f3-spotlight { justify-content: flex-start; }
+      .ask-f3-faces { grid-template-columns: repeat(5, 1fr); }
+      /* Feature matrix - card layout (inline styles override class rules without !important) */
+      .feature-matrix .compare-row { grid-template-columns: 1fr !important; padding: 12px 0; }
+      .feature-matrix .compare-row.header { display: none !important; }
+      .feature-matrix .compare-cell { padding: 6px 16px; }
+      .feature-matrix .compare-cell.name { font-size: 1rem; margin-bottom: 4px; }
+      .feature-matrix .compare-cell.luthien { border-radius: 3px; margin: 4px 8px 0; }
+      .feature-matrix .compare-cell:nth-child(2)::before { content: 'LiteLLM / Helicone: '; font-weight: 700; color: var(--text-dim); }
+      .feature-matrix .compare-cell:nth-child(3)::before { content: 'Guardrails AI: '; font-weight: 700; color: var(--text-dim); }
+      .feature-matrix .compare-cell:nth-child(4)::before { content: 'CodeRabbit: '; font-weight: 700; color: var(--text-dim); }
     }
 
     @media (max-width: 600px) {
@@ -1648,6 +1665,32 @@
       [data-slide="10"] .delay-3[style*="display: flex"] { flex-direction: column; }
       /* Stack quotes */
       [data-slide="10"] div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+      /* Headlines - prevent overflow from inline white-space: nowrap */
+      .headline { white-space: normal !important; overflow-wrap: break-word; }
+      /* Feature matrix - card visual treatment */
+      .feature-matrix .compare-row { padding: 14px 12px !important; margin-bottom: 8px; background: var(--bg-elevated); border-radius: 3px; border-bottom: none !important; }
+      .feature-matrix .compare-cell.name { padding-bottom: 10px !important; border-bottom: 1px solid var(--border); margin-bottom: 6px !important; }
+      /* Body split - reduce stat size */
+      .facts-hero-stat { font-size: clamp(3rem, 10vw, 5rem) !important; margin-bottom: 16px !important; }
+      /* Distribution - tame hero row and body text */
+      [data-slide-name="distribution"] .slide-inner > .anim-up.delay-2 { gap: 20px !important; flex-wrap: wrap; justify-content: center; }
+      [data-slide-name="distribution"] .slide-inner > .anim-up.delay-2 > img { height: 48px !important; }
+      [data-slide-name="distribution"] .slide-inner > .anim-up.delay-2 > div { font-size: clamp(2.5rem, 12vw, 4rem) !important; }
+      [data-slide-name="distribution"] .body-text span[style*="2.2em"] { font-size: 1.4em !important; }
+      /* Ask slide - simplify faces grid */
+      .ask-f3-faces { grid-template-columns: repeat(3, 1fr) !important; gap: 12px !important; }
+      .ask-f3-face > img:first-child { width: 36px !important; height: 36px !important; }
+      .ask-f3-face-logos { display: none !important; }
+      .ask-f3-face-funding { display: none !important; }
+      .ask-f3-also-label { font-size: 0.65rem; }
+      .ask-f3-spotlight-photo { width: 48px !important; height: 48px !important; }
+      .ask-f3-spotlight-meta { flex-wrap: wrap; }
+      /* Close slide - wrap links and actions */
+      .close-links { flex-direction: column; gap: 12px; align-items: center; }
+      .close-link { font-size: 0.75rem; word-break: break-all; }
+      .close-actions { flex-direction: column; gap: 12px; align-items: center; }
+      .cta-card { margin-left: 0 !important; font-size: 1.1rem; }
+      .memo-card .card-title { font-size: 1.1rem; }
     }
 
     /* ========== QUOTE CARDS (imported from landing page for slide 2 variants) ========== */
