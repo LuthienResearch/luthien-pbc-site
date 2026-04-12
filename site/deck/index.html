@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luthien: Investor Deck</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Lora:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #141216;
+      --bg-elevated: #1A1720;
+      --surface: #201C2A;
+      --border: #28243A;
+      --text: #EDE5D8;
+      --text-dim: #9A92AE;
+      --blue: #3B9494;
+      --blue-glow: rgba(59, 148, 148, 0.15);
+      --sans: 'Raleway', -apple-system, BlinkMacSystemFont, sans-serif;
+      --body: 'Lora', Georgia, serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+    }
+
+    .gate {
+      text-align: center;
+      max-width: 480px;
+    }
+
+    .logo {
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: clamp(3rem, 8vw, 5rem);
+      color: var(--text);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      position: relative;
+      display: inline-block;
+    }
+
+    .logo::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 10%;
+      right: 10%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--blue), transparent);
+    }
+
+    .subtitle {
+      font-family: var(--body);
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--text-dim);
+      margin-top: 24px;
+      line-height: 1.5;
+    }
+
+    .request-btn {
+      display: inline-block;
+      margin-top: 40px;
+      padding: 16px 32px;
+      background: var(--blue-glow);
+      border: 1px solid var(--blue);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .request-btn:hover {
+      background: rgba(59, 148, 148, 0.28);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(59, 148, 148, 0.22);
+    }
+
+    .contact {
+      margin-top: 32px;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    .contact a {
+      color: var(--text-dim);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(154, 146, 174, 0.3);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .contact a:hover {
+      color: var(--blue);
+      border-bottom-color: var(--blue);
+    }
+
+    /* Grain overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+  <div class="gate">
+    <div class="logo">Luthien</div>
+    <p class="subtitle">Investor deck access is by request.</p>
+    <a class="request-btn" href="mailto:scott@luthienresearch.org?subject=Deck%20access%20request&body=Hi%20Scott%2C%0A%0AI'm%20%5BName%5D%20from%20%5BOrganization%5D%2C%20and%20I'd%20like%20access%20to%20your%20deck%20please.%0A%0A%5BPlease%20provide%20relevant%20context%5D">Request access</a>
+    <div class="contact">
+      <a href="mailto:scott@luthienresearch.org">scott@luthienresearch.org</a>
+    </div>
+  </div>
+
+<script data-goatcounter="https://luthien.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
