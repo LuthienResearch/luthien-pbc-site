@@ -2140,12 +2140,12 @@
       <iframe class="anim-up delay-2" src="problem-widget.html#mode=pill&pillInterval=5000" scrolling="no" style="width: 100%; height: 360px; border: 1px solid var(--border); border-radius: 3px; background: #141216; overflow: hidden;"></iframe>
       <div class="spacer-sm"></div>
       <p class="anim-up delay-3" style="text-align: center; font-size: clamp(1rem, 1.5vw, 1.2rem); color: var(--text); line-height: 1.5; max-width: 900px; margin: 0 auto;">
-        Claude Code can run autonomously for <span style="color: var(--blue); font-weight: 700;">12 hours</span>. In practice, humans babysit in <span style="color: #C45050; font-weight: 700;">45-second</span> increments because the risks of letting it run are too high: compliance violations, technical mistakes, security vulnerabilities, or simply failing to follow instructions.
+        Claude Code can run autonomously for <span style="color: var(--blue); font-weight: 700;">12 hours</span>.<sup class="blue" style="font-size: 0.7em; font-weight: 700;">1</sup> In practice, humans babysit in <span style="color: #C45050; font-weight: 700;">45-second</span> increments<sup class="blue" style="font-size: 0.7em; font-weight: 700;">2</sup> because the risks of letting it run are too high: compliance violations, technical mistakes, security vulnerabilities, or simply failing to follow instructions.
       </p>
       <div class="slide-footnotes">
         <div class="citation">
-          12-hour autonomy: <a href="https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview" target="_blank" rel="noopener noreferrer">Claude Code documentation, Anthropic</a>.
-          45-second babysitting cadence: observed across 20+ user discovery calls with developers using Claude Code 30+ hrs/week (Luthien internal research, Mar-Apr 2026).
+          <sup>1</sup> 12-hour autonomy: <a href="https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview" target="_blank" rel="noopener noreferrer">Claude Code documentation, Anthropic</a>.
+          <sup>2</sup> 45-second babysitting cadence: observed across 20+ user discovery calls with developers using Claude Code 30+ hrs/week (Luthien internal research, Mar-Apr 2026).
         </div>
       </div>
     </div>
@@ -2162,7 +2162,7 @@
       <div class="body-split anim-up delay-2">
         <div style="text-align: center;">
           <div class="facts-pull" style="text-align: center;">
-            "Top-quartile developer velocity correlates with <span style="font-family: var(--sans); font-weight: 800; font-size: 1.9em; color: var(--white);">4-5x</span><br>faster revenue growth than bottom-quartile."
+            "Top-quartile developer velocity correlates with <span style="font-family: var(--sans); font-weight: 800; font-size: 1.9em; color: var(--white);">4-5x</span><br>faster revenue growth than bottom-quartile."<sup class="blue" style="font-size: 0.7em; font-weight: 700;">1</sup>
           </div>
           <div class="facts-attrib" style="margin-top: 14px; justify-content: flex-start;">
             <span class="mck-pill"><img src="../assets/images/logos/mckinsey.png" alt="McKinsey &amp; Company" style="height: 45px;"></span>
@@ -2181,7 +2181,7 @@
     </div>
     <div class="slide-footnotes">
       <div class="citation">
-        Verbatim: "Our research reveals that top-quartile DVI scores correlate with 2014-18 revenue growth that is four to five times faster than bottom-quartile DVI scores." McKinsey &amp; Company, <em>Developer Velocity: How software excellence fuels business performance</em>, April 2020. <a href="https://www.mckinsey.com/industries/technology-media-and-telecommunications/our-insights/developer-velocity-how-software-excellence-fuels-business-performance" target="_blank" rel="noopener noreferrer">mckinsey.com/&hellip;/developer-velocity-how-software-excellence-fuels-business-performance</a>
+        <sup>1</sup> Verbatim: "Our research reveals that top-quartile DVI scores correlate with 2014-18 revenue growth that is four to five times faster than bottom-quartile DVI scores." McKinsey &amp; Company, <em>Developer Velocity: How software excellence fuels business performance</em>, April 2020. <a href="https://www.mckinsey.com/industries/technology-media-and-telecommunications/our-insights/developer-velocity-how-software-excellence-fuels-business-performance" target="_blank" rel="noopener noreferrer">mckinsey.com/&hellip;/developer-velocity-how-software-excellence-fuels-business-performance</a>
       </div>
     </div>
   </div>
@@ -2234,7 +2234,7 @@
         </div>
 
         <div style="text-align: center; margin-top: 16px;">
-          <span style="font-size: 0.68rem; color: var(--blue); background: rgba(59,148,148,0.1); border: 1px solid rgba(59,148,148,0.25); padding: 0.15rem 0.55rem; border-radius: 20px; font-family: var(--mono);">adds ~5-15ms</span>
+          <span style="font-size: 0.68rem; color: var(--blue); background: rgba(59,148,148,0.1); border: 1px solid rgba(59,148,148,0.25); padding: 0.15rem 0.55rem; border-radius: 20px; font-family: var(--mono);">adds ~5-15ms<sup style="font-size: 0.8em; font-weight: 700;">1</sup></span>
         </div>
       </div>
 
@@ -2285,11 +2285,11 @@
 
       <div class="spacer-lg"></div>
       <div class="anim-up delay-3" style="text-align: center;">
-        <span style="font-size: 0.68rem; color: var(--blue); background: rgba(59,148,148,0.1); border: 1px solid rgba(59,148,148,0.25); padding: 0.15rem 0.55rem; border-radius: 20px; font-family: var(--mono);">adds ~5-15ms</span>
+        <span style="font-size: 0.68rem; color: var(--blue); background: rgba(59,148,148,0.1); border: 1px solid rgba(59,148,148,0.25); padding: 0.15rem 0.55rem; border-radius: 20px; font-family: var(--mono);">adds ~5-15ms<sup style="font-size: 0.8em; font-weight: 700;">1</sup></span>
       </div>
       <div class="slide-footnotes">
         <div class="citation">
-          5-15ms latency: measured on Luthien internal benchmarks, proxy-side rule evaluation on typical Claude Code requests (Apr 2026).
+          <sup>1</sup> 5-15ms latency: measured on Luthien internal benchmarks, proxy-side rule evaluation on typical Claude Code requests (Apr 2026).
         </div>
       </div>
     </div>
@@ -2407,40 +2407,40 @@
       <div class="grid-4 anim-up delay-2">
         <div style="text-align: center;">
           <div class="stat-huge">$4.7B</div>
-          <div class="stat-label">Coding agent market today</div>
+          <div class="stat-label">Coding agent market today<sup class="blue" style="font-size: 0.7em; font-weight: 700;">1</sup></div>
         </div>
         <div style="text-align: center;">
           <div class="stat-huge">$14.6B</div>
-          <div class="stat-label">Projected by 2033</div>
+          <div class="stat-label">Projected by 2033<sup class="blue" style="font-size: 0.7em; font-weight: 700;">1</sup></div>
         </div>
         <div style="text-align: center;">
           <div class="stat-huge green">$2.5B</div>
-          <div class="stat-label">Claude Code ARR</div>
+          <div class="stat-label">Claude Code ARR<sup class="blue" style="font-size: 0.7em; font-weight: 700;">2</sup></div>
           <div style="font-family: var(--sans); font-size: 1.3rem; color: var(--white); font-weight: 700; margin-top: 6px;">$0 &rarr; $2.5B in 9 months</div>
         </div>
         <div style="text-align: center;">
           <div class="stat-huge blue">46%</div>
-          <div class="stat-label">of code on GitHub is<br>AI-generated (2025)</div>
+          <div class="stat-label">of code on GitHub is<br>AI-generated (2025)<sup class="blue" style="font-size: 0.7em; font-weight: 700;">3</sup></div>
         </div>
       </div>
       <div class="spacer-lg"></div>
       <div class="grid-2 anim-up delay-3">
         <div class="card">
           <div class="card-title">Enterprise demand</div>
-          <div class="card-body"><span class="white" style="font-weight: 600;">80%</span> of Claude Code revenue comes from enterprises. Enterprise AI budgets growing <span class="white" style="font-weight: 600;">75% YoY</span>.</div>
+          <div class="card-body"><span class="white" style="font-weight: 600;">80%</span> of Claude Code revenue comes from enterprises.<sup class="blue" style="font-size: 0.7em; font-weight: 700;">4</sup> Enterprise AI budgets growing <span class="white" style="font-weight: 600;">75% YoY</span>.<sup class="blue" style="font-size: 0.7em; font-weight: 700;">4</sup></div>
         </div>
         <div class="card">
           <div class="card-title">Regulatory tailwind</div>
-          <div class="card-body">EU AI Act full enforcement: <span class="white" style="font-weight: 600;">August 2, 2026</span>.<br>~<span class="white" style="font-weight: 600;">500K EU companies</span> must demonstrate AI oversight.</div>
+          <div class="card-body">EU AI Act full enforcement: <span class="white" style="font-weight: 600;">August 2, 2026</span>.<sup class="blue" style="font-size: 0.7em; font-weight: 700;">5</sup><br>~<span class="white" style="font-weight: 600;">500K EU companies</span> must demonstrate AI oversight.</div>
         </div>
       </div>
       <div class="slide-footnotes">
         <div class="citation">
-          Market size and CAGR: <a href="https://finance.yahoo.com/news/ai-code-assistant-market-set-143000983.html" target="_blank" rel="noopener noreferrer">SNS Insider AI Code Assistant Market Report (15.31% CAGR to 2033)</a>.
-          Claude Code ARR: <a href="https://www.anthropic.com/news/anthropic-raises-30-billion-series-g-funding-380-billion-post-money-valuation" target="_blank" rel="noopener noreferrer">Anthropic Series G announcement, Feb 2026</a>.
-          AI-generated code share: <a href="https://www.theregister.com/2025/08/07/github_ceo_ai_coding/" target="_blank" rel="noopener noreferrer">GitHub / Microsoft developer surveys, 2025</a>.
-          Enterprise demand: <a href="https://www.saastr.com/anthropic-just-hit-14-billion-in-arr-up-from-1-billion-just-14-months-ago/" target="_blank" rel="noopener noreferrer">Dario Amodei (Anthropic CEO)</a>; <a href="https://www.saastr.com/a16z-enterprise-ai-spending-is-growing-75-a-year/" target="_blank" rel="noopener noreferrer">a16z enterprise AI spending analysis</a>.
-          Regulation: EU AI Act (Regulation 2024/1689), Article 113.
+          <sup>1</sup> Market size and CAGR: <a href="https://finance.yahoo.com/news/ai-code-assistant-market-set-143000983.html" target="_blank" rel="noopener noreferrer">SNS Insider AI Code Assistant Market Report (15.31% CAGR to 2033)</a>.
+          <sup>2</sup> Claude Code ARR: <a href="https://www.anthropic.com/news/anthropic-raises-30-billion-series-g-funding-380-billion-post-money-valuation" target="_blank" rel="noopener noreferrer">Anthropic Series G announcement, Feb 2026</a>.
+          <sup>3</sup> AI-generated code share: <a href="https://www.theregister.com/2025/08/07/github_ceo_ai_coding/" target="_blank" rel="noopener noreferrer">GitHub / Microsoft developer surveys, 2025</a>.
+          <sup>4</sup> Enterprise demand: <a href="https://www.saastr.com/anthropic-just-hit-14-billion-in-arr-up-from-1-billion-just-14-months-ago/" target="_blank" rel="noopener noreferrer">Dario Amodei (Anthropic CEO)</a>; <a href="https://www.saastr.com/a16z-enterprise-ai-spending-is-growing-75-a-year/" target="_blank" rel="noopener noreferrer">a16z enterprise AI spending analysis</a>.
+          <sup>5</sup> Regulation: EU AI Act (Regulation 2024/1689), Article 113.
         </div>
       </div>
     </div>
@@ -2515,18 +2515,19 @@
 
         <div class="compare-row" style="grid-template-columns: 180px 1.2fr 1.8fr 160px;">
           <div class="compare-cell name" style="padding-top: 18px;">
-            <div><span style="color: var(--blue); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">starting Aug '26</span> <span style="color: var(--white); font-weight: 600;">Compliance</span></div>
+            <div style="color: var(--blue); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">starting Aug '26</div>
+            <div style="color: var(--white); font-weight: 600; margin-top: 4px;">Compliance</div>
           </div>
           <div class="compare-cell">CISOs &amp; procurement join the buying table. Same playbook cybersecurity ran.</div>
-          <div class="compare-cell">EU AI Act enforcement lands <strong class="white">Aug 2, 2026</strong>.<br>Luthien addresses <span style="font-family: var(--sans); font-weight: 800; font-size: 1.3rem; color: var(--white);">7 of 8</span> mandatory requirements.</div>
+          <div class="compare-cell">EU AI Act enforcement lands <strong class="white">Aug 2, 2026</strong>.<sup class="blue" style="font-size: 0.7em; font-weight: 700;">1</sup><br>Luthien addresses <span style="font-family: var(--sans); font-weight: 800; font-size: 1.3rem; color: var(--white);">7 of 8</span> mandatory requirements.<sup class="blue" style="font-size: 0.7em; font-weight: 700;">2</sup></div>
           <div class="compare-cell" style="color: var(--white); font-family: var(--sans); font-weight: 800; font-size: 1.5rem;">$5M+</div>
         </div>
 
       </div>
       <div class="slide-footnotes">
         <div class="citation">
-          EU AI Act enforcement date: <a href="https://artificialintelligenceact.eu/ai-act-implementation-timeline/" target="_blank" rel="noopener noreferrer">EU AI Act implementation timeline</a>; general-purpose AI model obligations apply from Aug 2, 2026.
-          "7 of 8" mandatory requirements: Luthien internal mapping of Art. 53 obligations against proxy-level capabilities (Apr 2026).
+          <sup>1</sup> EU AI Act enforcement date: <a href="https://artificialintelligenceact.eu/ai-act-implementation-timeline/" target="_blank" rel="noopener noreferrer">EU AI Act implementation timeline</a>; general-purpose AI model obligations apply from Aug 2, 2026.
+          <sup>2</sup> "7 of 8" mandatory requirements: Luthien internal mapping of Art. 53 obligations against proxy-level capabilities (Apr 2026).
           User quotes: from Luthien discovery interviews, used with permission.
         </div>
       </div>
