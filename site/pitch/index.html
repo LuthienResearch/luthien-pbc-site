@@ -643,6 +643,7 @@
       bottom: calc(100% + 14px);
       transform: translateX(-50%) translateY(6px) scale(0.96);
       width: min(720px, 80vw);
+      max-width: calc(100vw - 40px);
       padding: 12px;
       background: var(--bg-elevated);
       border: 1px solid var(--blue);
@@ -1695,6 +1696,36 @@
       .memo-card .card-title { font-size: 1.1rem; }
     }
 
+    /* ============ ULTRA-NARROW (Galaxy Fold closed, split-screen thirds) ============ */
+    @media (max-width: 360px) {
+      /* Prevent any horizontal overflow from leaking */
+      .slide { overflow-x: hidden; }
+      /* Arch boxes - allow wrapping, shrink for narrow diagrams */
+      .arch-box { white-space: normal !important; width: auto !important; min-width: 0 !important; font-size: 0.75rem !important; padding: 8px 10px !important; }
+      .arch-connector { width: 20px !important; margin: 0 2px !important; }
+      /* Market - single column stats instead of 2x2 */
+      .grid-4 { grid-template-columns: 1fr !important; }
+      .stat-huge { font-size: clamp(1.8rem, 10vw, 2.5rem) !important; }
+      /* Team - force grid children to shrink, break long text */
+      .grid-2 > * { min-width: 0; }
+      .founder-card { min-width: 0; overflow-x: hidden; }
+      .bio-title { font-size: 1.1rem !important; overflow-wrap: break-word; }
+      .bio-achievement { overflow-wrap: break-word; }
+      .bio-achievement .big { font-size: 1.5rem !important; }
+      .bio-detail { overflow-wrap: break-word; }
+      .bio-dollars { overflow-wrap: break-word; }
+      .bio-dollars .big { font-size: 1.4rem !important; }
+      .chart-hover { display: inline; }
+      .chart-hover-thumb { display: none; }
+      .chart-hover-preview { display: none !important; }
+      .logo-row { gap: 12px !important; flex-wrap: wrap; justify-content: center; }
+      .logo-row img { height: 18px !important; max-width: 70px !important; }
+      /* Close - prevent memo card overflow */
+      .memo-card { padding: 12px 14px !important; gap: 10px !important; }
+      .memo-card .card-title { font-size: 0.95rem !important; }
+      .cta-card { padding: 14px 20px !important; }
+    }
+
     /* ========== QUOTE CARDS (imported from landing page for slide 2 variants) ========== */
     .quote-card {
       background: var(--surface);
@@ -2603,7 +2634,6 @@
                 <img src="../assets/images/logos/ycombinator-orange.svg" alt="Y Combinator" class="ask-f3-yc-mark">
                 <span>YC W21</span>
               </a>
-              <a href="https://www.businesswire.com/news/home/20251029918704/en/R2-Joins-Ant-International-to-Expand-Credit-Access-for-SMEs-in-LATAM" target="_blank" rel="noopener noreferrer" class="ask-f3-spotlight-meta-link">Oct 2025: Ant Int'l strategic investment</a>
               <span class="ask-f3-spotlight-prior">
                 <img class="ask-f3-spotlight-prior-logo invert" src="../assets/images/logos/amazon-light.svg" alt="Amazon">
                 <img class="ask-f3-spotlight-prior-logo invert" src="../assets/images/logos/jpmorgan-brown.svg" alt="J.P. Morgan">
@@ -2633,14 +2663,16 @@
             </a>
             <a class="ask-f3-face" href="https://www.linkedin.com/in/chris-porter-25ab068b/" target="_blank" rel="noopener noreferrer">
               <img src="../assets/images/photo-chris-porter.png" alt="Chris Porter">
-              <div class="ask-f3-face-logos">
-                <img class="ask-f3-face-logo invert" src="../assets/images/logos/amazon-light.svg" alt="Amazon">
+              <div class="ask-f3-face-logos ask-f3-face-logos-stacked">
+                <span class="ask-f3-face-cred">Sr Mgr, PMT</span>
+                <span class="ask-f3-face-cred-row">@ <img class="ask-f3-face-logo invert" src="../assets/images/logos/amazon-light.svg" alt="Amazon"></span>
               </div>
             </a>
             <a class="ask-f3-face" href="https://www.linkedin.com/in/beth-anne-porter-5a491132/" target="_blank" rel="noopener noreferrer">
               <img src="../assets/images/photo-beth-anne-porter.jpeg" alt="Beth Anne Porter">
-              <div class="ask-f3-face-logos">
-                <img class="ask-f3-face-logo invert" src="../assets/images/logos/amazon-light.svg" alt="Amazon">
+              <div class="ask-f3-face-logos ask-f3-face-logos-stacked">
+                <span class="ask-f3-face-cred">Principal PMT</span>
+                <span class="ask-f3-face-cred-row">@ <img class="ask-f3-face-logo invert" src="../assets/images/logos/amazon-light.svg" alt="Amazon"></span>
               </div>
             </a>
             <a class="ask-f3-face" href="https://www.linkedin.com/in/will-reuter-86741415/" target="_blank" rel="noopener noreferrer">
@@ -2652,8 +2684,9 @@
             </a>
             <a class="ask-f3-face" href="https://www.linkedin.com/in/arjunmishra0491/" target="_blank" rel="noopener noreferrer">
               <img src="../assets/images/photo-arjun-mishra.png" alt="Arjun Mishra">
-              <div class="ask-f3-face-logos">
-                <img class="ask-f3-face-logo invert" src="../assets/images/logos/amazon-light.svg" alt="Amazon">
+              <div class="ask-f3-face-logos ask-f3-face-logos-stacked">
+                <span class="ask-f3-face-cred">Applied Sci Mgr</span>
+                <span class="ask-f3-face-cred-row">@ <img class="ask-f3-face-logo invert" src="../assets/images/logos/amazon-light.svg" alt="Amazon"></span>
               </div>
             </a>
             <a class="ask-f3-face" href="https://www.linkedin.com/in/luisalbertocaballero/" target="_blank" rel="noopener noreferrer">
