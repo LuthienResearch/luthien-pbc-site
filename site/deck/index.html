@@ -23,6 +23,7 @@
       --text-dim: #9A92AE;
       --blue: #3B9494;
       --blue-glow: rgba(59, 148, 148, 0.15);
+      --red: #C45050;
       --sans: 'Raleway', -apple-system, BlinkMacSystemFont, sans-serif;
       --body: 'Lora', Georgia, serif;
       --mono: 'JetBrains Mono', monospace;
@@ -38,14 +39,10 @@
 
     body {
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 32px;
-    }
-
-    .gate {
-      text-align: center;
-      max-width: 480px;
     }
 
     .logo {
@@ -69,50 +66,83 @@
       background: linear-gradient(90deg, transparent, var(--blue), transparent);
     }
 
-    .subtitle {
+    .tagline {
       font-family: var(--body);
-      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-size: clamp(1rem, 2vw, 1.35rem);
       color: var(--text-dim);
-      margin-top: 24px;
-      line-height: 1.5;
+      margin-top: 20px;
     }
 
-    .request-btn {
-      display: inline-block;
-      margin-top: 40px;
-      padding: 16px 32px;
+    .gate {
+      text-align: center;
+      margin-top: 48px;
+      max-width: 360px;
+      width: 100%;
+    }
+
+    .pw-form {
+      display: flex;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .pw-input {
+      flex: 1;
+      padding: 12px 16px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .pw-input::placeholder { color: var(--text-dim); }
+    .pw-input:focus { border-color: var(--blue); }
+
+    .pw-input.error {
+      border-color: var(--red);
+      animation: shake 0.4s;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+
+    .pw-btn {
+      padding: 12px 20px;
       background: var(--blue-glow);
       border: 1px solid var(--blue);
-      border-radius: 8px;
+      border-radius: 6px;
       color: var(--text);
       font-family: var(--sans);
       font-weight: 700;
-      font-size: 1.1rem;
-      text-decoration: none;
+      font-size: 0.9rem;
+      cursor: pointer;
       transition: all 0.2s;
+      white-space: nowrap;
     }
 
-    .request-btn:hover {
+    .pw-btn:hover {
       background: rgba(59, 148, 148, 0.28);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 20px rgba(59, 148, 148, 0.22);
     }
 
-    .contact {
-      margin-top: 32px;
+    .request-link {
+      display: inline-block;
+      margin-top: 24px;
       font-family: var(--mono);
       font-size: 0.75rem;
-      color: var(--text-dim);
-    }
-
-    .contact a {
       color: var(--text-dim);
       text-decoration: none;
       border-bottom: 1px solid rgba(154, 146, 174, 0.3);
       transition: color 0.2s, border-color 0.2s;
     }
 
-    .contact a:hover {
+    .request-link:hover {
       color: var(--blue);
       border-bottom-color: var(--blue);
     }
@@ -129,14 +159,42 @@
   </style>
 </head>
 <body>
+  <div class="logo">Luthien</div>
+  <p class="tagline">Making it safe to run AI at full speed</p>
+
   <div class="gate">
-    <div class="logo">Luthien</div>
-    <p class="subtitle">Investor deck access is by request.</p>
-    <a class="request-btn" href="mailto:scott@luthienresearch.org?subject=Deck%20access%20request&body=Hi%20Scott%2C%0A%0AI'm%20%5BName%5D%20from%20%5BOrganization%5D%2C%20and%20I'd%20like%20access%20to%20your%20deck%20please.%0A%0A%5BPlease%20provide%20relevant%20context%5D">Request access</a>
-    <div class="contact">
-      <a href="mailto:scott@luthienresearch.org">scott@luthienresearch.org</a>
-    </div>
+    <form class="pw-form" onsubmit="return checkPassword(event)">
+      <input type="password" class="pw-input" id="pw" placeholder="Password" autocomplete="off" autofocus>
+      <button type="submit" class="pw-btn">Enter</button>
+    </form>
+    <a class="request-link" href="mailto:scott@luthienresearch.org?subject=Deck%20access%20request&body=Hi%20Scott%2C%0A%0AI'm%20%5BName%5D%20from%20%5BOrganization%5D%2C%20and%20I'd%20like%20access%20to%20your%20deck%20please.%0A%0A%5BPlease%20provide%20relevant%20context%5D">Request access</a>
   </div>
+
+<script>
+// SHA-256 hash of the password. To change the password, run in browser console:
+// crypto.subtle.digest('SHA-256', new TextEncoder().encode('yourpassword')).then(b => console.log(Array.from(new Uint8Array(b)).map(x => x.toString(16).padStart(2,'0')).join('')))
+const HASH = 'a0db84e71a3ff459e45c5e051e6b8f4f8b2a8ef tried897f6d2ff1fd68c3ec3dfe';
+
+async function sha256(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(x => x.toString(16).padStart(2, '0')).join('');
+}
+
+async function checkPassword(e) {
+  e.preventDefault();
+  const input = document.getElementById('pw');
+  const hash = await sha256(input.value);
+  if (hash === HASH) {
+    window.location.href = '/pitch/';
+  } else {
+    input.classList.add('error');
+    input.value = '';
+    input.placeholder = 'Try again';
+    setTimeout(() => input.classList.remove('error'), 400);
+  }
+  return false;
+}
+</script>
 
 <script data-goatcounter="https://luthien.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
