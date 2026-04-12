@@ -1031,29 +1031,10 @@
       margin-bottom: 16px;
     }
     .ask-f3-faces {
-      display: grid;
-      grid-template-columns: repeat(9, minmax(64px, 1fr));
-      gap: 14px;
-      align-items: start;
-    }
-    .ask-f3-face-logos.ask-f3-face-logos-nowrap {
-      flex-wrap: nowrap;
-      white-space: nowrap;
-      justify-content: center;
-    }
-    .ask-f3-face-logos.ask-f3-face-logos-stacked {
-      flex-direction: column;
-      gap: 4px;
-      align-items: center;
-    }
-    .ask-f3-face-cred-row {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-family: var(--sans);
-      font-size: 0.58rem;
-      font-weight: 600;
-      color: var(--text-muted);
+      display: flex;
+      justify-content: space-evenly;
+      align-items: flex-start;
+      gap: 8px;
     }
     .ask-f3-face {
       display: flex;
@@ -1062,7 +1043,7 @@
       gap: 6px;
       text-decoration: none;
       transition: transform 0.2s;
-      min-width: 0;
+      flex: 0 0 auto;
     }
     .ask-f3-face:hover { transform: translateY(-2px); }
     .ask-f3-face > img:first-child {
@@ -1078,9 +1059,8 @@
       gap: 4px;
       align-items: center;
       justify-content: center;
-      flex-wrap: wrap;
+      white-space: nowrap;
       min-height: 14px;
-      max-width: 100%;
       text-align: center;
     }
     .ask-f3-face-logo {
@@ -1579,7 +1559,7 @@
       .ask-f3 { grid-template-columns: 1fr; gap: 24px; }
       .ask-f3-divider { display: none; }
       .ask-f3-spotlight { justify-content: flex-start; }
-      .ask-f3-faces { grid-template-columns: repeat(5, 1fr); }
+      .ask-f3-faces { display: grid; grid-template-columns: repeat(5, 1fr); }
       /* Feature matrix - card layout (inline styles override class rules without !important) */
       .feature-matrix .compare-row { grid-template-columns: 1fr !important; padding: 12px 0; }
       .feature-matrix .compare-row.header { display: none !important; }
@@ -1689,7 +1669,7 @@
       [data-slide-name="distribution"] .slide-inner > .anim-up.delay-2 > div { font-size: clamp(2.5rem, 12vw, 4rem) !important; }
       [data-slide-name="distribution"] .body-text span[style*="2.2em"] { font-size: 1.4em !important; }
       /* Ask slide - simplify faces grid */
-      .ask-f3-faces { grid-template-columns: repeat(3, 1fr) !important; gap: 12px !important; }
+      .ask-f3-faces { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 12px !important; }
       .ask-f3-face > img:first-child { width: 36px !important; height: 36px !important; }
       .ask-f3-face-logos { display: none !important; }
       .ask-f3-face-funding { display: none !important; }
@@ -2143,7 +2123,7 @@
         <div class="feeling-kicker">CTOs</div>
         <div class="feeling-voice">
           <span class="feeling-beat feeling-beat-1">"How can I unlock the speed of AI,</span>
-          <span class="feeling-beat feeling-beat-2">while mitigating the risks?"</span>
+          <span class="feeling-beat feeling-beat-2" style="color: var(--amber);">while mitigating the risks?"</span>
         </div>
       </div>
     </div>
@@ -2634,7 +2614,7 @@
         <div class="ask-f3-divider"></div>
 
         <div class="ask-f3-also">
-          <div class="ask-f3-also-label">plus 9 more <span id="askWindow">in the last 48 hours</span></div>
+          <div class="ask-f3-also-label">9 more angels <span id="askWindow">in the last 48 hours</span></div>
           <div class="ask-f3-faces">
             <a class="ask-f3-face" href="https://www.linkedin.com/in/tom-divinnie-07964323/" target="_blank" rel="noopener noreferrer">
               <img src="../assets/images/photo-tom-divinnie.png" alt="Tom DiVinnie">
@@ -2647,7 +2627,7 @@
             <a class="ask-f3-face" href="https://www.linkedin.com/in/borja-rivero-5a24442/" target="_blank" rel="noopener noreferrer">
               <img src="../assets/images/photo-borja-rivero.png" alt="Borja Rivero">
               <div class="ask-f3-face-logos">
-                <span class="ask-f3-face-cred">Sr. Product Mgr</span>
+                <span class="ask-f3-face-cred">Sr Prod Mgr</span>
                 <img class="ask-f3-face-logo" src="../assets/images/logos/google-light.svg" alt="Google">
               </div>
             </a>
@@ -2667,14 +2647,14 @@
             </a>
             <a class="ask-f3-face" href="https://www.linkedin.com/in/will-reuter-86741415/" target="_blank" rel="noopener noreferrer">
               <img src="../assets/images/photo-will-reuter.png" alt="Will Reuter">
-              <div class="ask-f3-face-logos ask-f3-face-logos-stacked">
+              <div class="ask-f3-face-logos ask-f3-face-logos-nowrap">
                 <span class="ask-f3-face-cred">Dir of Acct Mgmt</span>
-                <span class="ask-f3-face-cred-row">@ <img class="ask-f3-face-logo" src="../assets/images/logos/life-in-the-air.png" alt="LIFE In The Air"></span>
+                <img class="ask-f3-face-logo" src="../assets/images/logos/life-in-the-air.png" alt="LIFE In The Air">
               </div>
             </a>
             <a class="ask-f3-face" href="https://www.linkedin.com/in/arjunmishra0491/" target="_blank" rel="noopener noreferrer">
               <img src="../assets/images/photo-arjun-mishra.png" alt="Arjun Mishra">
-              <div class="ask-f3-face-logos">
+              <div class="ask-f3-face-logos ask-f3-face-logos-nowrap">
                 <span class="ask-f3-face-cred">Applied Sci Mgr</span>
                 <img class="ask-f3-face-logo invert" src="../assets/images/logos/amazon-light.svg" alt="Amazon">
               </div>
@@ -2688,16 +2668,16 @@
             </a>
             <a class="ask-f3-face" href="https://www.linkedin.com/in/saranya-selvamani/" target="_blank" rel="noopener noreferrer">
               <img src="../assets/images/photo-saranya-selvamani.png" alt="Saranya Selvamani">
-              <div class="ask-f3-face-logos ask-f3-face-logos-stacked">
+              <div class="ask-f3-face-logos ask-f3-face-logos-nowrap">
                 <span class="ask-f3-face-cred">Founder</span>
-                <span class="ask-f3-face-cred-row">@ <img class="ask-f3-face-logo" src="../assets/images/logos/sproutron-ai.png" alt="Sproutron AI"></span>
+                <img class="ask-f3-face-logo" src="../assets/images/logos/sproutron-ai.png" alt="Sproutron AI">
               </div>
             </a>
             <a class="ask-f3-face" href="https://www.linkedin.com/in/espinlaura/" target="_blank" rel="noopener noreferrer">
               <img src="../assets/images/photo-laura-espin.png" alt="Laura Espin">
-              <div class="ask-f3-face-logos ask-f3-face-logos-stacked">
+              <div class="ask-f3-face-logos ask-f3-face-logos-nowrap">
                 <span class="ask-f3-face-cred">Sr Dir Growth</span>
-                <span class="ask-f3-face-cred-row">@ <img class="ask-f3-face-logo" src="../assets/images/logos/eventbrite.png" alt="Eventbrite"></span>
+                <img class="ask-f3-face-logo" src="../assets/images/logos/eventbrite.png" alt="Eventbrite">
               </div>
             </a>
           </div>
