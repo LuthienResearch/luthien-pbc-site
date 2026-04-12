@@ -184,7 +184,7 @@ function copyRequest() {
   const text = 'To: scott@luthienresearch.org\nSubject: Deck access request\n\nHi Scott,\n\nI\'m [Name] from [Organization], and I\'d like access to your deck please.\n\n[Please provide relevant context]';
   navigator.clipboard.writeText(text).then(function() {
     var btn = document.getElementById('requestBtn');
-    btn.textContent = 'Copied to clipboard';
+    btn.textContent = 'Email draft copied to your clipboard';
     btn.style.color = 'var(--blue)';
     btn.style.borderBottomColor = 'var(--blue)';
     setTimeout(function() {
