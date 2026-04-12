@@ -205,7 +205,7 @@ async function checkPassword(e) {
   const input = document.getElementById('pw');
   const hash = await sha256(input.value);
   if (hash === HASH) {
-    window.location.href = '/pitch/';
+    window.location.href = '/pitch/#team';
   } else {
     input.classList.add('error');
     input.value = '';
