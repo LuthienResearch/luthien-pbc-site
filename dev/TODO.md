@@ -7,7 +7,7 @@
 - [ ] Add og:image/og:title/og:description meta tags for social sharing
 
 ## Analytics & SEO
-- [ ] Add GoatCounter analytics (privacy-friendly, matches personal-site)
+- [x] Add GoatCounter analytics (privacy-friendly, matches personal-site)
 - [ ] Add sitemap.xml
 
 ## Domain & Hosting
