@@ -1597,12 +1597,14 @@
       .top-controls { right: 16px; top: 14px; }
       .fs-btn { display: none; }
       iframe { height: 420px !important; }
-      /* How It Works - hide desktop diagram, show mobile version */
-      [data-slide="3"] .anim-up.delay-2,
-      [data-slide="3"] .anim-up.delay-3,
-      [data-slide="3"] .spacer-lg { display: none; }
-      [data-slide="3"] .arch-mobile { display: block !important; }
-      [data-slide="3"] .slide-inner > div[style*="border-top"] { display: none; }
+      /* How It Works - hide desktop diagram, show mobile version
+         Use data-slide-name (not data-slide="3") because problem-cto
+         shares the same data-slide number and its body-split was getting hidden. */
+      [data-slide-name="how-it-works"] .anim-up.delay-2,
+      [data-slide-name="how-it-works"] .anim-up.delay-3,
+      [data-slide-name="how-it-works"] .spacer-lg { display: none; }
+      [data-slide-name="how-it-works"] .arch-mobile { display: block !important; }
+      [data-slide-name="how-it-works"] .slide-inner > div[style*="border-top"] { display: none; }
       .nav-arrow { display: none !important; }
       /* GTM table - card layout on mobile */
       .compare-row[style*="180px"] {
