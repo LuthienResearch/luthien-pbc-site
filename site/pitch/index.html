@@ -1031,10 +1031,10 @@
       margin-bottom: 16px;
     }
     .ask-f3-faces {
-      display: flex;
-      justify-content: space-evenly;
-      align-items: flex-start;
-      gap: 8px;
+      display: grid;
+      grid-template-columns: repeat(9, 1fr);
+      gap: 6px;
+      align-items: start;
     }
     .ask-f3-face {
       display: flex;
@@ -1043,7 +1043,7 @@
       gap: 6px;
       text-decoration: none;
       transition: transform 0.2s;
-      flex: 0 0 auto;
+      overflow: visible;
     }
     .ask-f3-face:hover { transform: translateY(-2px); }
     .ask-f3-face > img:first-child {
@@ -1056,12 +1056,17 @@
     }
     .ask-f3-face-logos {
       display: flex;
+      flex-direction: column;
       gap: 4px;
       align-items: center;
       justify-content: center;
       white-space: nowrap;
       min-height: 14px;
       text-align: center;
+      overflow: visible;
+    }
+    .ask-f3-face-logos.ask-f3-face-logos-inline {
+      flex-direction: row;
     }
     .ask-f3-face-logo {
       height: 14px;
@@ -1559,7 +1564,7 @@
       .ask-f3 { grid-template-columns: 1fr; gap: 24px; }
       .ask-f3-divider { display: none; }
       .ask-f3-spotlight { justify-content: flex-start; }
-      .ask-f3-faces { display: grid; grid-template-columns: repeat(5, 1fr); }
+      .ask-f3-faces { grid-template-columns: repeat(5, 1fr); }
       /* Feature matrix - card layout (inline styles override class rules without !important) */
       .feature-matrix .compare-row { grid-template-columns: 1fr !important; padding: 12px 0; }
       .feature-matrix .compare-row.header { display: none !important; }
@@ -1669,7 +1674,7 @@
       [data-slide-name="distribution"] .slide-inner > .anim-up.delay-2 > div { font-size: clamp(2.5rem, 12vw, 4rem) !important; }
       [data-slide-name="distribution"] .body-text span[style*="2.2em"] { font-size: 1.4em !important; }
       /* Ask slide - simplify faces grid */
-      .ask-f3-faces { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 12px !important; }
+      .ask-f3-faces { grid-template-columns: repeat(3, 1fr) !important; gap: 12px !important; }
       .ask-f3-face > img:first-child { width: 36px !important; height: 36px !important; }
       .ask-f3-face-logos { display: none !important; }
       .ask-f3-face-funding { display: none !important; }
@@ -2618,7 +2623,7 @@
           <div class="ask-f3-faces">
             <a class="ask-f3-face" href="https://www.linkedin.com/in/tom-divinnie-07964323/" target="_blank" rel="noopener noreferrer">
               <img src="../assets/images/photo-tom-divinnie.png" alt="Tom DiVinnie">
-              <div class="ask-f3-face-logos">
+              <div class="ask-f3-face-logos ask-f3-face-logos-inline">
                 <span class="ask-f3-face-cred">CDO @</span>
                 <img class="ask-f3-face-logo" src="../assets/images/logos/habitathealth-mark.png" alt="Habitat Health">
               </div>
@@ -2661,7 +2666,7 @@
             </a>
             <a class="ask-f3-face" href="https://www.linkedin.com/in/luisalbertocaballero/" target="_blank" rel="noopener noreferrer">
               <img src="../assets/images/photo-luis-caballero.png" alt="Luis Caballero">
-              <div class="ask-f3-face-logos">
+              <div class="ask-f3-face-logos ask-f3-face-logos-inline">
                 <span class="ask-f3-face-cred">VP</span>
                 <img class="ask-f3-face-logo" src="../assets/images/logos/hellofresh-light.svg" alt="HelloFresh">
               </div>
