@@ -552,8 +552,8 @@
       z-index: 10;
     }
 
-    .card-nav-btn.nav-prev { left: -4px; }
-    .card-nav-btn.nav-next { right: -4px; }
+    .card-nav-btn.nav-prev { left: -40px; }
+    .card-nav-btn.nav-next { right: -40px; }
 
     .card-nav-btn:hover:not(:disabled) {
       border-color: #3B9494;
@@ -937,8 +937,8 @@
       //   pillInterval  : ms between filter pill advances (default 5000)
       var hashParams = new URLSearchParams(location.hash.replace(/^#/, ""));
       var rotateMode = hashParams.get("mode") || "cards";
-      var cardInterval = parseInt(hashParams.get("cardInterval"), 10) || 5000;
-      var pillInterval = parseInt(hashParams.get("pillInterval"), 10) || 5000;
+      var cardInterval = parseInt(hashParams.get("cardInterval"), 10) || 4500;
+      var pillInterval = parseInt(hashParams.get("pillInterval"), 10) || 4500;
 
       function advanceCardPage() {
         var totalPages = Math.max(1, Math.ceil(getMatchingWrappers(currentFilter).length / VISIBLE_COUNT));
