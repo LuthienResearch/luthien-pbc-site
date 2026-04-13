@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Defensibility Slide Options</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Lora:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #141216; --bg-elevated: #1A1720; --surface: #201C2A; --border: #28243A;
+      --text: #EDE5D8; --text-muted: #B0A8BE; --text-dim: #7A7290; --white: #EDE5D8;
+      --blue: #3B9494; --blue-glow: rgba(59,148,148,0.15); --green: #3B9494;
+      --amber: #C47B42;
+      --sans: 'Raleway', sans-serif; --body: 'Lora', serif; --mono: 'JetBrains Mono', monospace;
+    }
+    html { font-size: 112%; }
+    body { background: var(--bg); color: var(--text); font-family: var(--body); padding: 40px 60px; max-width: 1200px; margin: 0 auto; }
+    h1 { font-family: var(--sans); color: var(--white); font-size: 1.8rem; margin-bottom: 8px; }
+    .page-sub { color: var(--text-dim); font-size: 0.85rem; margin-bottom: 48px; }
+    .option { margin-bottom: 64px; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+    .option-header { background: var(--bg-elevated); padding: 16px 24px; border-bottom: 1px solid var(--border); }
+    .option-label { font-family: var(--mono); font-size: 0.65rem; color: var(--blue); letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600; }
+    .option-name { font-family: var(--sans); font-size: 1.1rem; font-weight: 700; color: var(--white); margin-top: 2px; }
+    .option-desc { color: var(--text-dim); font-size: 0.8rem; margin-top: 2px; }
+    .option-rec { display: inline-block; margin-top: 6px; font-family: var(--mono); font-size: 0.65rem; color: var(--amber); background: rgba(196,123,66,0.1); border: 1px solid rgba(196,123,66,0.3); border-radius: 3px; padding: 2px 8px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }
+    .preview { padding: 48px 60px; }
+    .headline { font-family: var(--sans); font-weight: 700; color: var(--white); font-size: 2rem; margin-bottom: 24px; }
+    .label { font-family: var(--mono); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 3px; padding: 18px 22px; margin-bottom: 14px; }
+    .card:last-child { margin-bottom: 0; }
+    .card-title { font-family: var(--sans); font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .card-body { font-size: 0.88rem; line-height: 1.55; color: var(--text-muted); }
+    .blue { color: var(--blue); }
+    .white { color: var(--white); }
+    .citation { font-size: 0.72rem; color: var(--text-dim); margin-top: 20px; border-top: 1px solid var(--border); padding-top: 12px; line-height: 1.5; }
+    a { color: var(--blue); }
+    em { font-style: italic; }
+  </style>
+</head>
+<body>
+
+<h1>Defensibility Slide: 3 Options</h1>
+<p class="page-sub">For visual comparison. Joe Heitzeberg flagged point #3 as weakest. Current deck (PR #109) uses Option C. Options A and B are alternatives.</p>
+
+<!-- ============ OPTION A: 4 points (PR #109 rewrite) ============ -->
+<div class="option">
+  <div class="option-header">
+    <div class="option-label">Option A</div>
+    <div class="option-name">4 points &mdash; Keep DataDog as separate bullet</div>
+    <div class="option-desc">Pros: DataDog comp is a strong argument, distinct from the Anthropic-acknowledged framing. Cons: 4 points is a lot for a 5-min pitch; Joe was skeptical of the enterprise enterprise argument in isolation.</div>
+  </div>
+  <div class="preview">
+    <div class="label">Defensibility</div>
+    <div class="headline">Won't Anthropic build this?</div>
+    <div class="card">
+      <div class="card-title"><span class="blue">1.</span>&ensp;<strong>They acknowledged</strong> our approach is the long-term solution</div>
+      <div class="card-body"><em>"The long-term solution probably looks more like something <strong class="white">proxy-side</strong>"</em> and <em>"the space for <strong class="white">control protocols</strong> is quite big."</em> <span style="color: var(--text-dim);">(Fabien Roger, Anthropic, Apr 1 2026)</span></div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="blue">2.</span>&ensp;Doesn't make sense for labs to build <strong>provider-agnostic</strong> tooling</div>
+      <div class="card-body">85% of engineers already use 2+ AI tools simultaneously. Anthropic won't build management tooling for competitors' clients.</div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="blue">3.</span>&ensp;Enterprises need <strong>vendor-agnostic</strong> infrastructure</div>
+      <div class="card-body">Every cloud has its own observability stack. DataDog built a multi-billion-dollar company on vendor-neutral monitoring because enterprises won't bet their operations on one vendor. The same dynamic is playing out for AI.</div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="blue">4.</span>&ensp;If they do, great: <strong>defense in depth</strong></div>
+      <div class="card-body">More layers of safety is the goal. We'll focus on Codex, Cursor, OpenCode, OpenClaw, and everything else they won't build for.</div>
+    </div>
+    <div class="citation"><sup>1</sup> Fabien Roger quotes: private call, Apr 1 2026. <sup>2</sup> Gergely Orosz, "AI Tooling for Software Engineers in 2026," The Pragmatic Engineer, Feb 2026.</div>
+  </div>
+</div>
+
+<!-- ============ OPTION B: 3 points, remove old #3 entirely ============ -->
+<div class="option">
+  <div class="option-header">
+    <div class="option-label">Option B</div>
+    <div class="option-name">3 points &mdash; Remove old point #3 entirely</div>
+    <div class="option-desc">Pros: Tighter; every remaining point is strong. Cons: Loses the vendor-agnostic enterprise angle that Joe said is the DataDog comp.</div>
+  </div>
+  <div class="preview">
+    <div class="label">Defensibility</div>
+    <div class="headline">Won't Anthropic build this?</div>
+    <div class="card">
+      <div class="card-title"><span class="blue">1.</span>&ensp;<strong>They acknowledged</strong> our approach is the long-term solution</div>
+      <div class="card-body"><em>"The long-term solution probably looks more like something <strong class="white">proxy-side</strong>"</em> and <em>"the space for <strong class="white">control protocols</strong> is quite big."</em> <span style="color: var(--text-dim);">(Fabien Roger, Anthropic, Apr 1 2026)</span></div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="blue">2.</span>&ensp;Doesn't make sense for labs to build <strong>provider-agnostic</strong> tooling</div>
+      <div class="card-body">85% of engineers already use 2+ AI tools simultaneously. Anthropic won't build management tooling for competitors' clients.</div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="blue">3.</span>&ensp;If they do, great: <strong>defense in depth</strong></div>
+      <div class="card-body">More layers of safety is the goal. We'll focus on Codex, Cursor, OpenCode, OpenClaw, and everything else they won't build for.</div>
+    </div>
+    <div class="citation"><sup>1</sup> Fabien Roger quotes: private call, Apr 1 2026. <sup>2</sup> Gergely Orosz, "AI Tooling for Software Engineers in 2026," The Pragmatic Engineer, Feb 2026.</div>
+  </div>
+</div>
+
+<!-- ============ OPTION C: 3 points, DataDog merged into point 2 ============ -->
+<div class="option">
+  <div class="option-header">
+    <div class="option-label">Option C</div>
+    <div class="option-name">3 points &mdash; DataDog merged into point 2 (current deck)</div>
+    <div class="option-desc">Pros: Strengthens the provider-agnostic argument with the enterprise purchasing pattern; tighter. Cons: Point #2 gets denser.</div>
+    <div class="option-rec">Current deck</div>
+  </div>
+  <div class="preview">
+    <div class="label">Defensibility</div>
+    <div class="headline">Won't Anthropic build this?</div>
+    <div class="card">
+      <div class="card-title"><span class="blue">1.</span>&ensp;<strong>They acknowledged</strong> our approach is the long-term solution</div>
+      <div class="card-body"><em>"The long-term solution probably looks more like something <strong class="white">proxy-side</strong>"</em> and <em>"the space for <strong class="white">control protocols</strong> is quite big."</em> <span style="color: var(--text-dim);">(Fabien Roger, Anthropic, Apr 1 2026)</span></div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="blue">2.</span>&ensp;Doesn't make sense for labs to build <strong>provider-agnostic</strong> tooling</div>
+      <div class="card-body">85% of engineers already use 2+ AI tools simultaneously. Anthropic won't build management tooling for competitors' clients. The same dynamic that made DataDog a multi-billion-dollar company on top of AWS CloudWatch is now emerging for AI: enterprises need one control plane that no single lab owns.</div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="blue">3.</span>&ensp;If they do, great: <strong>defense in depth</strong></div>
+      <div class="card-body">More layers of safety is the goal. We'll focus on Codex, Cursor, OpenCode, OpenClaw, and everything else they won't build for.</div>
+    </div>
+    <div class="citation"><sup>1</sup> Fabien Roger quotes: private call, Apr 1 2026. <sup>2</sup> Gergely Orosz, "AI Tooling for Software Engineers in 2026," The Pragmatic Engineer, Feb 2026.</div>
+  </div>
+</div>
+
+</body>
+</html>

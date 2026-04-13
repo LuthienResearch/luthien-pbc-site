@@ -2170,7 +2170,7 @@
       <iframe class="anim-up delay-2" src="problem-widget.html#mode=pill&pillInterval=4500" scrolling="no" style="width: 100%; height: 400px; border: 1px solid var(--border); border-radius: 3px; background: #141216; overflow: hidden;"></iframe>
       <div class="spacer-sm"></div>
       <p class="anim-up delay-3" style="text-align: center; font-size: clamp(1rem, 1.5vw, 1.2rem); color: var(--text); line-height: 1.5; max-width: 900px; margin: 0 auto;">
-        Claude Code can run autonomously for <span style="color: var(--blue); font-weight: 700;">12 hours</span>.<sup class="blue" style="font-size: 0.7em; font-weight: 700;">1</sup> In practice, humans babysit in <span style="color: #C45050; font-weight: 700;">45-second</span><sup class="blue" style="font-size: 0.7em; font-weight: 700;">2</sup> increments because the risks of letting it run are too high: compliance violations, technical mistakes, security vulnerabilities, or simply failing to follow instructions.
+        Claude Code can run autonomously for <span style="color: var(--blue); font-weight: 700;">12 hours</span>.<sup class="blue" style="font-size: 0.7em; font-weight: 700;">1</sup> In practice, humans babysit in <span style="color: #C45050; font-weight: 700;">45-second</span><sup class="blue" style="font-size: 0.7em; font-weight: 700;">2</sup> increments because the risks of letting it run are too high: agents ignoring team conventions, no visibility into parallel workflows, secrets at risk of exfiltration, or no way to enforce policy across the team.
       </p>
       <div class="slide-footnotes">
         <div class="citation">
@@ -2409,20 +2409,21 @@
         </div>
         <div class="card">
           <div class="card-title"><span class="blue">2.</span>&ensp;Doesn't make sense for labs to build <strong>provider-agnostic</strong> tooling</div>
-          <div class="card-body">The coding agent market is <strong class="white">fragmenting fast</strong>: OpenCode, Codex, Cursor, OpenClaw. Anthropic won't build management tooling for competitors' clients.</div>
+          <div class="card-body">85% of engineers already use 2+ AI tools simultaneously.<sup class="blue" style="font-size: 0.7em; font-weight: 700;">2</sup> Anthropic won't build management tooling for competitors' clients.</div>
         </div>
         <div class="card">
-          <div class="card-title"><span class="blue">3.</span>&ensp;We help <strong>drive</strong> Claude Code enterprise adoption</div>
-          <div class="card-body">LLM gateways are already an enterprise infrastructure standard, and Claude Code is <a href="https://code.claude.com/docs/en/third-party-integrations#llm-gateway" target="_blank" style="color: var(--blue);">designed to work with them</a>. Anthropic benefits from what we're building: it <strong class="white">accelerates</strong> enterprise adoption of Claude Code.</div>
+          <div class="card-title"><span class="blue">3.</span>&ensp;Enterprises need <strong>vendor-agnostic</strong> infrastructure</div>
+          <div class="card-body">Every cloud has its own observability stack. DataDog built a multi-billion-dollar company on vendor-neutral monitoring because enterprises won't bet their operations on one vendor. The same dynamic is playing out for AI. LLM gateways are already an <a href="https://code.claude.com/docs/en/third-party-integrations#llm-gateway" target="_blank" style="color: var(--blue);">enterprise infrastructure standard</a>.</div>
         </div>
         <div class="card">
           <div class="card-title"><span class="blue">4.</span>&ensp;If they do, great: <strong>defense in depth</strong></div>
-          <div class="card-body">More layers of safety is the goal. And we'll focus on Codex, Cursor, OpenCode, OpenClaw, and everything else they won't build for.</div>
+          <div class="card-body">More layers of safety is the goal. We'll focus on Codex, Cursor, OpenCode, OpenClaw, and everything else they won't build for.</div>
         </div>
       </div>
       <div class="slide-footnotes">
         <div class="citation">
           <sup>1</sup> Fabien Roger quotes: from a private call with Anthropic's agent safety team, Apr 1, 2026. Shared with permission.
+          <sup>2</sup> Gergely Orosz, <a href="https://newsletter.pragmaticengineer.com/p/ai-tooling-2026" target="_blank" rel="noopener noreferrer">"AI Tooling for Software Engineers in 2026,"</a> The Pragmatic Engineer, Feb 2026. Among Staff+ engineers, multi-tool usage is higher still.
         </div>
       </div>
     </div>
@@ -2567,7 +2568,7 @@
   <div class="slide" data-slide="10" data-slide-name="traction">
     <div class="slide-inner">
       <div class="label anim-up">Traction</div>
-      <h1 class="headline headline-lg anim-up delay-1">Selling this is easy</h1>
+      <h1 class="headline headline-lg anim-up delay-1">100% inbound. We've never made a cold call.</h1>
       <div class="spacer-md"></div>
 
       <div class="funnel-layout anim-up delay-2">
@@ -2594,7 +2595,7 @@
         <div class="funnel-metrics">
           <!-- Sales & Outreach -->
           <div class="funnel-mrow">
-            <div class="f-desc" style="color: var(--text-dim); font-style: italic; font-size: 1.05rem;">No outbound or sales: orgs inbound based on the problem we're solving</div>
+            <div class="f-desc" style="color: var(--text-dim); font-style: italic; font-size: 1.05rem;">No outbound or sales. Sources: AI safety conferences, AI Tinkerers events, and word-of-mouth referrals from early users.</div>
           </div>
 
           <!-- Qualification -->
@@ -2630,8 +2631,37 @@
     </div>
   </div>
 
+  <!-- ======== SLIDE: CASE STUDY (Redwood Research) ======== -->
+  <div class="slide" data-slide="11" data-slide-name="case-study">
+    <div class="slide-inner">
+      <div class="label anim-up">Customer Story</div>
+      <h1 class="headline headline-lg anim-up delay-1">From pilot to $330K&ndash;$500K LOI: Redwood Research</h1>
+      <div class="spacer-md"></div>
+      <div class="grid-3 anim-up delay-2">
+        <div class="card">
+          <div class="card-title">The problem</div>
+          <div class="card-body">Agents ignoring CLAUDE.md conventions. Destructive git operations slipping through. False completion claims. No visibility into what 15 people's agents were doing across parallel workflows. The team was babysitting instead of building.<sup class="blue" style="font-size: 0.7em; font-weight: 700;">1</sup></div>
+        </div>
+        <div class="card">
+          <div class="card-title">The pilot</div>
+          <div class="card-body">Luthien deployed as a proxy layer. The pilot flagged the exact destructive git submodule scenario the team had been worried about. Convention violations surfaced before they reached review. The team got observability into agent activity across the org for the first time.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">The outcome</div>
+          <div class="card-body">"Cool, I'll tell my whole team to use this." Tyler Tracy, Member of Technical Staff, demoed the product and immediately committed the org. Redwood Research signed an LOI for <strong class="white">$330K&ndash;$500K</strong>, covering 15&ndash;20 individuals.<sup class="blue" style="font-size: 0.7em; font-weight: 700;">2</sup></div>
+        </div>
+      </div>
+      <div class="slide-footnotes">
+        <div class="citation">
+          <sup>1</sup> Problem description: Redwood Research office hours notes and LOI, Apr 2026.
+          <sup>2</sup> Tyler Tracy quote and LOI terms: Redwood Research LOI, signed Apr 2026. 15&ndash;20 individuals: 10 contractors, 5 Astra Fellows, 1&ndash;3 staff.
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ======== SLIDE 11b: USERS REALLY WANT THIS (QUOTES) ======== -->
-  <div class="slide" data-slide="10" data-slide-name="quotes">
+  <div class="slide" data-slide="12" data-slide-name="quotes">
     <div class="slide-inner">
       <div class="label anim-up">Feedback</div>
       <h1 class="headline headline-lg anim-up delay-1">Users really want this</h1>
@@ -2674,7 +2704,7 @@
   </div>
 
   <!-- ======== SLIDE 12: THE ASK (F3 V3 gradient divider, lowercase, logos pruned) ======== -->
-  <div class="slide" data-slide="11" data-slide-name="ask">
+  <div class="slide" data-slide="13" data-slide-name="ask">
     <div class="slide-inner" style="text-align: center;">
       <div class="label anim-up">The Ask</div>
       <h1 class="headline headline-xl anim-up delay-1" style="color: var(--blue);">$2M Pre-Seed</h1>
@@ -2791,7 +2821,7 @@
   </div>
 
   <!-- ======== SLIDE 13: CLOSE ======== -->
-  <div class="slide title-slide" data-slide="12" data-slide-name="close">
+  <div class="slide title-slide" data-slide="14" data-slide-name="close">
     <div class="slide-inner">
       <div class="logo-mark anim-up">Luthien</div>
       <div class="spacer-md"></div>
