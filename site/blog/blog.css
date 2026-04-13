@@ -8,6 +8,9 @@
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+.skip-link { position: absolute; top: -40px; left: 16px; background: #3B9494; color: #EDE5D8; padding: 8px 16px; z-index: 10000; font-family: 'Raleway', sans-serif; font-size: 0.9rem; border-radius: 0 0 3px 3px; text-decoration: none; transition: top 0.2s; }
+.skip-link:focus { top: 0; }
+
 html { font-size: 17.6px; scroll-behavior: smooth; overflow-y: scroll; }
 
 body {

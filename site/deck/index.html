@@ -152,6 +152,8 @@
       border-bottom-color: var(--blue);
     }
 
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
     /* Grain overlay */
     body::after {
       content: '';
@@ -165,16 +167,19 @@
 </head>
 <body>
   <a href="https://scottwofford.com/" target="_blank" style="position: fixed; top: 20px; left: 24px; font-family: var(--mono); font-size: 0.8rem; color: var(--text-dim); text-decoration: none; opacity: 0.6; transition: opacity 0.2s; z-index: 50; letter-spacing: 0.02em;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">scottwofford.com</a>
-  <div class="logo">Luthien</div>
-  <p class="tagline">Making it safe to run AI at full speed</p>
+  <main>
+    <h1 class="logo">Luthien</h1>
+    <p class="tagline">Making it safe to run AI at full speed</p>
 
-  <div class="gate">
-    <form class="pw-form" onsubmit="return checkPassword(event)">
-      <input type="text" class="pw-input" id="pw" placeholder="Password" autocomplete="off" data-1p-ignore data-lpignore="true" data-bwignore data-form-type="other" autofocus>
-      <button type="submit" class="pw-btn">&rarr;</button>
-    </form>
-    <button class="request-link" id="requestBtn" onclick="copyRequest()">Request access</button>
-  </div>
+    <div class="gate">
+      <form class="pw-form" onsubmit="return checkPassword(event)">
+        <label for="pw" class="sr-only">Deck password</label>
+        <input type="text" class="pw-input" id="pw" placeholder="Password" autocomplete="off" data-1p-ignore data-lpignore="true" data-bwignore data-form-type="other" autofocus>
+        <button type="submit" class="pw-btn" aria-label="Submit password">&rarr;</button>
+      </form>
+      <button class="request-link" id="requestBtn" onclick="copyRequest()">Request access</button>
+    </div>
+  </main>
 
 <script>
 // SHA-256 hash of the password. To change the password, run in browser console:

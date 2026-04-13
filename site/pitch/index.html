@@ -2816,7 +2816,7 @@
 <!-- Controls -->
 <div class="controls">
   <span class="slide-counter" id="slideCounter">1 / 14</span>
-  <div class="nav-dots" id="navDots"></div>
+  <nav aria-label="Slide navigation"><div class="nav-dots" id="navDots"></div></nav>
 </div>
 
 <!-- Nav arrows -->
@@ -2895,6 +2895,7 @@
   for (let i = 0; i < total; i++) {
     const dot = document.createElement('button');
     dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
     dot.addEventListener('click', () => goTo(i));
     dotsContainer.appendChild(dot);
   }
