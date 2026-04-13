@@ -274,6 +274,63 @@ done < <(cd "$REPO_ROOT" 2>/dev/null && git ls-files --others --exclude-standard
 
 # ─────────────────────────────────────────────────────────
 bold ""
+bold "== 10. Spanish pitch deck sync =="
+# ─────────────────────────────────────────────────────────
+# The Spanish deck (site/pitch/es/index.html) must stay structurally
+# in sync with the English deck (site/pitch/index.html). This check
+# compares CSS rules, image references, grid layouts, and slide count
+# so drift gets caught before deploy.
+EN="$SITE_DIR/pitch/index.html"
+ES="$SITE_DIR/pitch/es/index.html"
+sync_errors=0
+if [ -f "$EN" ] && [ -f "$ES" ]; then
+    # 10a. Image/logo references: every src= image in EN should appear in ES
+    en_imgs=$(grep -oE 'src="[^"]*\.(png|svg|jpeg|jpg|webp)"' "$EN" | sed 's|src="\.\.\/|src="|' | sort -u)
+    es_imgs=$(grep -oE 'src="[^"]*\.(png|svg|jpeg|jpg|webp)"' "$ES" | sed 's|src="\.\.\/\.\.\/|src="|; s|src="\.\.\/|src="|' | sort -u)
+    while IFS= read -r img; do
+        [ -z "$img" ] && continue
+        if ! echo "$es_imgs" | grep -qF "$img"; then
+            imgname=$(echo "$img" | sed 's/src="//' | sed 's/"//')
+            fail "Spanish deck missing image: $imgname"
+            sync_errors=$((sync_errors + 1))
+        fi
+    done <<< "$en_imgs"
+
+    # 10b. CSS class parity: key layout classes must match
+    for pattern in "grid-template-columns: repeat(" ".compare-logo" ".compare-logo-2x" "font-size: 1.6em"; do
+        en_count=$(grep -c "$pattern" "$EN" 2>/dev/null || echo 0)
+        es_count=$(grep -c "$pattern" "$ES" 2>/dev/null || echo 0)
+        if [ "$en_count" -gt 0 ] && [ "$es_count" -eq 0 ]; then
+            fail "Spanish deck missing CSS pattern: $pattern (EN has $en_count, ES has 0)"
+            sync_errors=$((sync_errors + 1))
+        fi
+    done
+
+    # 10c. Slide count: both decks should have the same number of slides
+    en_slides=$(grep -c 'data-slide=' "$EN" 2>/dev/null || echo 0)
+    es_slides=$(grep -c 'data-slide=' "$ES" 2>/dev/null || echo 0)
+    if [ "$en_slides" -ne "$es_slides" ]; then
+        fail "Slide count mismatch: EN has $en_slides, ES has $es_slides"
+        sync_errors=$((sync_errors + 1))
+    fi
+
+    # 10d. Angel investor count: both should list the same number
+    en_angels=$(grep -c 'ask-f3-face"' "$EN" 2>/dev/null || echo 0)
+    es_angels=$(grep -c 'ask-f3-face"' "$ES" 2>/dev/null || echo 0)
+    if [ "$en_angels" -ne "$es_angels" ]; then
+        fail "Angel count mismatch: EN has $en_angels, ES has $es_angels"
+        sync_errors=$((sync_errors + 1))
+    fi
+
+    [ "$sync_errors" -eq 0 ] && pass "Spanish deck is structurally in sync with English"
+else
+    if [ ! -f "$ES" ]; then
+        warn "No Spanish deck found at pitch/es/index.html"
+    fi
+fi
+
+# ─────────────────────────────────────────────────────────
+bold ""
 bold "=========================================="
 if [ "$ERRORS" -gt 0 ]; then
     red "FAILED: $ERRORS error(s), $WARNINGS warning(s)"
