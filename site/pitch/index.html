@@ -367,6 +367,15 @@
       color: var(--text-dim);
     }
 
+    .compare-logo {
+      height: 22px;
+      width: auto;
+      object-fit: contain;
+      filter: invert(1) hue-rotate(180deg);
+      vertical-align: middle;
+    }
+    .compare-logo-2x { height: 44px; }
+
     .compare-cell.name {
       font-weight: 600;
       color: var(--text);
@@ -382,8 +391,8 @@
       color: var(--blue);
     }
 
-    .check { color: var(--green); }
-    .cross { color: var(--text-dim); }
+    .check { color: var(--green); font-size: 1.6em; }
+    .cross { color: var(--text-dim); font-size: 1.6em; }
 
     /* ============ TIMELINE ============ */
     .timeline {
@@ -2323,49 +2332,49 @@
       <p class="subtitle anim-up delay-1">Luthien targets custom guardrails for the dev environment, not customer-facing chatbots.</p>
       <div class="spacer-md"></div>
       <div class="anim-up delay-2 feature-matrix" style="border: 1px solid var(--border); border-radius: 3px; overflow: hidden;">
-        <div class="compare-row header" style="grid-template-columns: 1.8fr 0.9fr 0.9fr 0.9fr 0.9fr;">
+        <div class="compare-row header" style="grid-template-columns: 1.6fr 1.1fr 1fr 1fr 0.8fr;">
           <div class="compare-cell"></div>
-          <div class="compare-cell">LiteLLM /<br>Helicone</div>
-          <div class="compare-cell">Guardrails<br>AI</div>
-          <div class="compare-cell">CodeRabbit</div>
-          <div class="compare-cell luthien">Luthien</div>
+          <div class="compare-cell"><img class="compare-logo" src="../assets/images/logos/litellm.png" alt="LiteLLM"> / <img class="compare-logo compare-logo-2x" src="../assets/images/logos/helicone.png" alt="Helicone"></div>
+          <div class="compare-cell"><img class="compare-logo" src="../assets/images/logos/guardrails-ai.png" alt="Guardrails AI"></div>
+          <div class="compare-cell"><img class="compare-logo" src="../assets/images/logos/coderabbit.png" alt="CodeRabbit"></div>
+          <div class="compare-cell luthien"><img class="compare-logo compare-logo-2x" src="../assets/images/logos/luthien-wordmark.png" alt="Luthien"></div>
         </div>
-        <div class="compare-row" style="grid-template-columns: 1.8fr 0.9fr 0.9fr 0.9fr 0.9fr;">
+        <div class="compare-row" style="grid-template-columns: 1.6fr 1.1fr 1fr 1fr 0.8fr;">
           <div class="compare-cell name">Full control over every AI agent in the org</div>
           <div class="compare-cell" style="text-align: center; color: var(--amber);">partial</div>
           <div class="compare-cell" style="text-align: center;"><span class="cross">&ndash;</span></div>
           <div class="compare-cell" style="text-align: center;"><span class="cross">&ndash;</span></div>
           <div class="compare-cell luthien" style="text-align: center;"><span class="check">&#10003;</span></div>
         </div>
-        <div class="compare-row" style="grid-template-columns: 1.8fr 0.9fr 0.9fr 0.9fr 0.9fr;">
+        <div class="compare-row" style="grid-template-columns: 1.6fr 1.1fr 1fr 1fr 0.8fr;">
           <div class="compare-cell name">Per-tool-call policy enforcement</div>
           <div class="compare-cell" style="text-align: center;"><span class="cross">&ndash;</span></div>
           <div class="compare-cell" style="text-align: center; color: var(--amber);">partial</div>
           <div class="compare-cell" style="text-align: center;"><span class="cross">&ndash;</span></div>
           <div class="compare-cell luthien" style="text-align: center;"><span class="check">&#10003;</span></div>
         </div>
-        <div class="compare-row" style="grid-template-columns: 1.8fr 0.9fr 0.9fr 0.9fr 0.9fr;">
+        <div class="compare-row" style="grid-template-columns: 1.6fr 1.1fr 1fr 1fr 0.8fr;">
           <div class="compare-cell name">Real-time interception (not post-hoc)</div>
           <div class="compare-cell" style="text-align: center;"><span class="check">&#10003;</span></div>
           <div class="compare-cell" style="text-align: center; color: var(--amber);">partial</div>
           <div class="compare-cell" style="text-align: center;"><span class="cross">&ndash;</span></div>
           <div class="compare-cell luthien" style="text-align: center;"><span class="check">&#10003;</span></div>
         </div>
-        <div class="compare-row" style="grid-template-columns: 1.8fr 0.9fr 0.9fr 0.9fr 0.9fr;">
+        <div class="compare-row" style="grid-template-columns: 1.6fr 1.1fr 1fr 1fr 0.8fr;">
           <div class="compare-cell name">Instant policy rollouts, even mid-workflow</div>
           <div class="compare-cell" style="text-align: center;"><span class="cross">&ndash;</span></div>
           <div class="compare-cell" style="text-align: center;"><span class="cross">&ndash;</span></div>
           <div class="compare-cell" style="text-align: center;"><span class="cross">&ndash;</span></div>
           <div class="compare-cell luthien" style="text-align: center;"><span class="check">&#10003;</span></div>
         </div>
-        <div class="compare-row" style="grid-template-columns: 1.8fr 0.9fr 0.9fr 0.9fr 0.9fr;">
+        <div class="compare-row" style="grid-template-columns: 1.6fr 1.1fr 1fr 1fr 0.8fr;">
           <div class="compare-cell name">Purpose-built for controlling coding agents at runtime</div>
           <div class="compare-cell" style="text-align: center;"><span class="cross">&ndash;</span></div>
           <div class="compare-cell" style="text-align: center;"><span class="cross">&ndash;</span></div>
           <div class="compare-cell" style="text-align: center;"><span class="cross">&ndash;</span></div>
           <div class="compare-cell luthien" style="text-align: center;"><span class="check">&#10003;</span></div>
         </div>
-        <div class="compare-row" style="grid-template-columns: 1.8fr 0.9fr 0.9fr 0.9fr 0.9fr;">
+        <div class="compare-row" style="grid-template-columns: 1.6fr 1.1fr 1fr 1fr 0.8fr;">
           <div class="compare-cell name">Org-wide observability of LLM calls</div>
           <div class="compare-cell" style="text-align: center;"><span class="check">&#10003;</span></div>
           <div class="compare-cell" style="text-align: center;"><span class="cross">&ndash;</span></div>
@@ -2701,7 +2710,7 @@
         <div class="ask-f3-divider"></div>
 
         <div class="ask-f3-also">
-          <div class="ask-f3-also-label">9 more angels <span id="askWindow">in the last 48 hours</span></div>
+          <div class="ask-f3-also-label">10 more angels <span id="askWindow">in the last 48 hours</span></div>
           <div class="ask-f3-faces">
             <a class="ask-f3-face" href="https://www.linkedin.com/in/tom-divinnie-07964323/" target="_blank" rel="noopener noreferrer">
               <img src="../assets/images/photo-tom-divinnie.png" alt="Tom DiVinnie">
@@ -2765,6 +2774,13 @@
               <div class="ask-f3-face-logos ask-f3-face-logos-nowrap">
                 <span class="ask-f3-face-cred">Sr Dir Growth</span>
                 <img class="ask-f3-face-logo" src="../assets/images/logos/eventbrite.png" alt="Eventbrite">
+              </div>
+            </a>
+            <a class="ask-f3-face" href="https://www.linkedin.com/in/afazoli/" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/images/photo-ana-fazoli.png" alt="Ana Fazoli">
+              <div class="ask-f3-face-logos ask-f3-face-logos-nowrap">
+                <span class="ask-f3-face-cred">Dep Dir Fin</span>
+                <img class="ask-f3-face-logo invert" src="../assets/images/logos/gates-foundation.png" alt="Gates Foundation">
               </div>
             </a>
           </div>
