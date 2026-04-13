@@ -3611,11 +3611,14 @@
   var lbImg = document.getElementById('lightbox-img');
   if (!lb || !lbImg) return;
 
-  document.getElementById('metr-chart-thumb').addEventListener('click', function() {
-    lbImg.src = this.src;
-    lbImg.alt = this.alt;
-    lb.classList.add('open');
-  });
+  var thumb = document.getElementById('metr-chart-thumb');
+  if (thumb) {
+    thumb.addEventListener('click', function() {
+      lbImg.src = this.src;
+      lbImg.alt = this.alt;
+      lb.classList.add('open');
+    });
+  }
 
   lb.addEventListener('click', function() {
     lb.classList.remove('open');
