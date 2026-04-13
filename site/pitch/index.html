@@ -69,6 +69,7 @@
       position: relative;
       width: 100%;
       height: 100%;
+      overflow: hidden;
     }
 
     /* ============ SLIDES ============ */
@@ -1603,19 +1604,33 @@
       .feature-matrix .compare-cell:nth-child(2)::before { content: 'LiteLLM / Helicone: '; font-weight: 700; color: var(--text-dim); }
       .feature-matrix .compare-cell:nth-child(3)::before { content: 'Guardrails AI: '; font-weight: 700; color: var(--text-dim); }
       .feature-matrix .compare-cell:nth-child(4)::before { content: 'CodeRabbit: '; font-weight: 700; color: var(--text-dim); }
+      /* Quotes grid - stack on tablets */
+      [data-slide-name="quotes"] div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
     }
 
     @media (max-width: 600px) {
+      html { font-size: 100%; }
       .slide { padding: 32px 20px; overflow-y: auto; justify-content: flex-start; padding-top: 60px; }
       .slide.title-slide { justify-content: center; padding-top: 32px; }
       .headline-lg { font-size: 1.5rem; margin-bottom: 8px; }
       .subtitle { margin-bottom: 8px; }
       .grid-2 { grid-template-columns: 1fr; }
       .card { padding: 20px; }
-      .founder-card { padding: 16px; }
-      .founder-photo { width: 80px; height: 80px; }
-      .spacer-md { height: 24px; }
-      .spacer-lg { height: 32px; }
+      .founder-card { padding: 12px; gap: 1px; }
+      .founder-photo { width: 64px; height: 64px; margin-bottom: 8px; }
+      .founder-name { font-size: 1.1rem; }
+      .founder-role { margin-bottom: 8px; }
+      .bio-title { font-size: 1.2rem; }
+      .bio-years { font-size: 1.2rem; margin-bottom: 4px; }
+      .bio-achievement .big { font-size: 1.5rem; }
+      .bio-detail { font-size: 0.8rem; }
+      .bio-dollars .big { font-size: 1.5rem; }
+      .logo-row { margin-top: 8px; gap: 14px; }
+      .logo-row img { height: 18px !important; }
+      [data-slide-name="team"] .spacer-md { height: 12px; }
+      .spacer-md { height: 16px; }
+      .spacer-lg { height: 24px; }
+      .spacer-sm { height: 12px; }
       .controls { right: 16px; bottom: 14px; }
       .top-controls { right: 16px; top: 14px; }
       .fs-btn { display: none; }
@@ -1679,13 +1694,14 @@
       /* Traction funnel - hide SVG, stack metrics */
       .funnel-layout { flex-direction: column; }
       .funnel-visual { display: none; }
-      .funnel-metrics { gap: 8px; }
-      .funnel-mrow { padding-left: 0 !important; min-height: auto !important; padding: 6px 0 !important; }
-      .funnel-mrow .f-count { font-size: 1.4rem !important; min-width: 36px !important; }
-      .funnel-mrow.f-highlight .f-count { font-size: 1.6rem !important; }
-      .funnel-mrow .f-desc { font-size: 0.78rem !important; }
-      .funnel-mrow .f-desc span[style*="font-size"] { font-size: 0.9rem !important; }
-      .funnel-mrow .f-dollar { font-size: 0.78rem !important; white-space: nowrap; }
+      .funnel-metrics { gap: 10px; }
+      .funnel-mrow { padding-left: 0 !important; min-height: auto !important; padding: 8px 0 !important; }
+      .funnel-mrow .f-count { font-size: 1.8rem !important; min-width: 40px !important; }
+      .funnel-mrow.f-highlight .f-count { font-size: 2rem !important; }
+      .funnel-mrow .f-desc { font-size: 0.85rem !important; }
+      .funnel-mrow .f-desc span[style*="font-size"] { font-size: 1rem !important; }
+      .funnel-mrow .f-dollar { font-size: 0.85rem !important; white-space: nowrap; }
+      [data-slide-name="traction"] .spacer-md { height: 16px; }
       /* Stack partners */
       [data-slide="10"] .delay-3[style*="display: flex"] { flex-direction: column; }
       /* Stack quotes */
@@ -1708,11 +1724,15 @@
       .ask-f3-face-logos { display: none !important; }
       .ask-f3-face-funding { display: none !important; }
       .ask-f3-also-label { font-size: 0.65rem; }
+      .ask-f3-face-cred { font-size: 0.75rem !important; }
       .ask-f3-spotlight-photo { width: 48px !important; height: 48px !important; }
       .ask-f3-spotlight-meta { flex-wrap: wrap; }
+      /* Nav dots - expand tap area for touch */
+      .nav-dots { gap: 4px; }
+      .nav-dot { padding: 16px; background-clip: content-box; width: 44px; height: 44px; }
       /* Close slide - wrap links and actions */
       .close-links { flex-direction: column; gap: 12px; align-items: center; }
-      .close-link { font-size: 0.75rem; word-break: break-all; }
+      .close-link { font-size: 0.75rem; word-break: break-all; min-height: 44px; display: flex; align-items: center; }
       .close-actions { flex-direction: column; gap: 12px; align-items: center; }
       .cta-card { margin-left: 0 !important; font-size: 1.1rem; }
       .memo-card .card-title { font-size: 1.1rem; }
@@ -2758,7 +2778,7 @@
     <div class="slide-inner">
       <div class="logo-mark anim-up">Luthien</div>
       <div class="spacer-md"></div>
-      <p class="anim-up delay-2" style="font-size: clamp(1.15rem, 2vw, 1.5rem); color: var(--white); text-align: center; line-height: 1.5; font-family: var(--body); white-space: nowrap;">
+      <p class="anim-up delay-2" style="font-size: clamp(1.15rem, 2vw, 1.5rem); color: var(--white); text-align: center; line-height: 1.5; font-family: var(--body);">
         Every org running AI agents will need a control layer.<br>We're building it.
       </p>
       <div class="spacer-lg"></div>
