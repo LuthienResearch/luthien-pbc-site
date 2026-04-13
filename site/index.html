@@ -1492,32 +1492,37 @@
         filterBar.appendChild(pill);
       });
 
-      // === ENGAGEMENT NUMBERS (varied per card) ===
-      function hashText(str) {
-        var h = 0;
-        for (var i = 0; i < str.length; i++) { h = ((h << 5) - h) + str.charCodeAt(i); h |= 0; }
-        return Math.abs(h);
-      }
+      // === REAL ENGAGEMENT DATA (fetched from public APIs, Apr 2026) ===
       function fmtNum(n) { return n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k' : String(n); }
-      function engagementFor(text) {
-        var h = hashText(text);
-        return {
-          tweetComments: 3 + (h % 89),
-          retweets: 12 + ((h >> 3) % 340),
-          likes: 80 + ((h >> 6) % 1800),
-          views: 8 + ((h >> 9) % 85),
-          hnPoints: 30 + ((h >> 3) % 700),
-          hnComments: 8 + ((h >> 6) % 280),
-          redditVotes: 40 + ((h >> 3) % 2400),
-          redditComments: 5 + ((h >> 6) % 120),
-          ghComments: 3 + (h % 38),
-        };
-      }
+      var realEngagement = {
+        "https://github.com/anthropics/claude-code/issues/10077": { ghComments: 15 },
+        "https://github.com/anthropics/claude-code/issues/7074": { ghComments: 3 },
+        "https://github.com/anthropics/claude-code/issues/1290": { ghComments: 6 },
+        "https://github.com/anthropics/claude-code/issues/22557": { ghComments: 4 },
+        "https://github.com/anthropics/claude-code/issues/10628": { ghComments: 4 },
+        "https://github.com/anthropics/claude-code/issues/27430": { ghComments: 4 },
+        "https://github.com/anthropics/claude-code/issues/19106": { ghComments: 8 },
+        "https://github.com/anthropics/claude-code/issues/11913": { ghComments: 4 },
+        "https://github.com/anthropics/claude-code/issues/3109": { ghComments: 5 },
+        "https://github.com/anthropics/claude-code/issues/7232": { ghComments: 7 },
+        "https://github.com/anthropics/claude-code/issues/15711": { ghComments: 7 },
+        "https://github.com/anthropics/claude-code/issues/25305": { ghComments: 3 },
+        "https://github.com/anthropics/claude-code/issues/18883": { ghComments: 5 },
+        "https://github.com/anthropics/claude-code/issues/26533": { ghComments: 14 },
+        "https://github.com/anthropics/claude-code/issues/10577": { ghComments: 5 },
+        "https://github.com/anthropics/claude-code/issues/8154": { ghComments: 3 },
+        "https://github.com/anthropics/claude-code/issues/9115": { ghComments: 6 },
+        "https://news.ycombinator.com/item?id=44908733": { hnPoints: 4, hnComments: 9, hnBy: "JSR_FDED" },
+        "https://news.ycombinator.com/item?id=44908875": { hnPoints: 724, hnComments: 309, hnBy: "embedding-shape" },
+        "https://news.ycombinator.com/item?id=46648851": { hnPoints: 724, hnComments: 309, hnBy: "embedding-shape" },
+        "https://news.ycombinator.com/item?id=46526088": { hnPoints: 30, hnComments: 15, hnBy: "bulba4aur" },
+        "https://www.reddit.com/r/dotnet/comments/1qd11od/dotnetslopwatch_a_net_tool_that_detects_llm/": { redditVotes: 144, redditComments: 28 }
+      };
 
       // === BUILD CARD HTML ===
       function buildCardHTML(q) {
         var plainText = q.text;
-        var eng = engagementFor(plainText);
+        var eng = q.sourceUrl ? (realEngagement[q.sourceUrl] || {}) : {};
 
         switch (q.format) {
           case "twitter":
@@ -1537,10 +1542,6 @@
               '</div>' +
               '<p class="quote-text">' + plainText + '</p>' +
               '<div class="tweet-actions">' +
-                '<span class="tweet-action"><span class="tweet-action-icon">\uD83D\uDCAC</span> ' + eng.tweetComments + '</span>' +
-                '<span class="tweet-action retweet"><span class="tweet-action-icon">\uD83D\uDD01</span> ' + fmtNum(eng.retweets) + '</span>' +
-                '<span class="tweet-action like"><span class="tweet-action-icon">\u2661</span> ' + fmtNum(eng.likes) + '</span>' +
-                '<span class="tweet-action"><span class="tweet-action-icon">\uD83D\uDCCA</span> ' + eng.views + 'K</span>' +
                 '<span class="tweet-action"><span class="tweet-action-icon">\u2197</span></span>' +
               '</div>' +
             '</div>';
@@ -1552,7 +1553,7 @@
                 '<span class="hn-upvote">\u25B2</span>' +
                 '<span class="hn-title">Claude Code incident report</span>' +
               '</div>' +
-              '<div class="hn-meta">' + eng.hnPoints + ' points by throwaway_dev 3 hours ago | <a href="#">hide</a> | <a href="#">' + eng.hnComments + ' comments</a></div>' +
+              '<div class="hn-meta">' + (eng.hnPoints || '') + (eng.hnPoints ? ' points' : '') + (eng.hnBy ? ' by ' + eng.hnBy : '') + (eng.hnComments ? ' | <a href="#">' + eng.hnComments + ' comments</a>' : '') + '</div>' +
               '<p class="quote-text">' + plainText + '</p>' +
             '</div>';
 
@@ -1567,10 +1568,10 @@
               '<div class="reddit-actions">' +
                 '<span class="reddit-vote-group">' +
                   '<span class="reddit-upvote-btn">\u25B2</span>' +
-                  '<span class="reddit-vote-count">' + fmtNum(eng.redditVotes) + '</span>' +
+                  '<span class="reddit-vote-count">' + (eng.redditVotes ? fmtNum(eng.redditVotes) : '') + '</span>' +
                   '<span class="reddit-downvote-btn">\u25BC</span>' +
                 '</span>' +
-                '<span class="reddit-action-btn">\uD83D\uDCAC ' + eng.redditComments + ' Comments</span>' +
+                '<span class="reddit-action-btn">\uD83D\uDCAC ' + (eng.redditComments || '') + ' Comments</span>' +
                 '<span class="reddit-action-btn">\u2197 Share</span>' +
               '</div>' +
             '</div>';
@@ -1587,7 +1588,7 @@
               '<p class="quote-text">' + plainText + '</p>' +
               '<div class="gh-footer">' +
                 '<span class="gh-label">bug</span>' +
-                '<span>\uD83D\uDCAC ' + eng.ghComments + ' comments</span>' +
+                '<span>\uD83D\uDCAC ' + (eng.ghComments || '') + ' comments</span>' +
               '</div>' +
             '</div>';
 
