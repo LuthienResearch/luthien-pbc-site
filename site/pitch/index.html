@@ -2100,6 +2100,56 @@
       color: #d2a04a;
       background: rgba(219,171,63,0.1);
     }
+
+    /* ============ PRINT / PDF EXPORT ============ */
+    /* Applied by browser print and by Playwright page.pdf() (print media). */
+    @media print {
+      @page { size: 1280px 720px; margin: 0; }
+      html, body {
+        width: 1280px;
+        height: auto;
+        background: var(--bg);
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        overflow: visible;
+      }
+      .deck {
+        position: static;
+        width: 1280px;
+        height: auto;
+        overflow: visible;
+      }
+      .slide {
+        position: relative !important;
+        inset: auto !important;
+        width: 1280px !important;
+        height: 720px !important;
+        opacity: 1 !important;
+        transform: none !important;
+        pointer-events: auto !important;
+        overflow: hidden !important;
+        page-break-after: always;
+        break-after: page;
+      }
+      .slide:last-child {
+        page-break-after: auto;
+        break-after: auto;
+      }
+      /* Hide interactive chrome that doesn't belong in the PDF. */
+      .controls,
+      .progress-bar,
+      .nav-arrow,
+      .top-controls,
+      .cite-btn,
+      .fs-btn,
+      .slide-counter,
+      .nav-dots,
+      #downloadPdfBtn {
+        display: none !important;
+      }
+      /* Reveal any animation-gated content. */
+      .anim-up { opacity: 1 !important; transform: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -2872,6 +2922,7 @@
 
 <!-- Top-right controls -->
 <div class="top-controls">
+  <a class="fs-btn" id="downloadPdfBtn" href="/pitch.pdf" title="Download PDF" style="text-decoration: none; margin-right: 8px;">Download PDF</a>
   <button class="fs-btn" id="fsBtn" title="Toggle fullscreen">F11 &middot; Fullscreen</button>
 </div>
 <!-- Bottom-left footnote toggle (hidden on slides without footnotes) -->

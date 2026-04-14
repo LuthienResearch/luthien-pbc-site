@@ -4,11 +4,16 @@
 
 | Version | Date | Summary |
 |---------|------|---------|
+| v11.5 | 2026-04-14 | Auto-generated pitch deck PDF: Playwright CI builds `luthien-deck.pdf` from `site/pitch/index.html` on every change, published as a rolling GitHub release and exposed at `/pitch.pdf` via Cloudflare Pages `_redirects`. Added "Download PDF" link on the deck. Dropped unused GitHub Pages fallback deploy. |
 | v11.4 | 2026-04-11 | Pitch deck CTO slide: replace card grid with McKinsey 4-5x hero stat + composite CTO voice split (PR #90) |
 | v11.3 | 2026-04-08 | Switch primary CTA from "View on GitHub" + curl install to "Apply for beta" (Tally form). Remove public curl install everywhere. Addresses investor concern about public GitHub star count. |
 | v10.6 | 2026-03-09 | Address Josh Levy's agentic feedback: add long-session and multi-session persistence language to hero + architecture section |
 | v10.5 | 2026-03-05 | Feedback synthesis from S14/S15 user interviews; footer tagline ("Power is nothing without control") |
 | v10 | 2026-02-26 | Initial repo migration from scottwofford.com/luthien/landing_v8/ |
+
+## 2026-04-14
+
+- v11.5: Auto-generated pitch deck PDF pipeline. New workflow `.github/workflows/deck-pdf.yml` runs Playwright against `site/pitch/index.html` on every push touching the deck, producing a 1280×720 text-searchable PDF. Output is published as a rolling GitHub release under tag `deck-latest`. Cloudflare Pages `site/_redirects` exposes a stable URL at `https://luthien.cc/pitch.pdf` (302 to the release asset). Added "Download PDF" link on the deck top-right controls. Added `@media print` rules so the slide stack flattens to one-slide-per-page for both the automated build and native browser print. Removed the GitHub Pages fallback job from `deploy.yml` (Cloudflare is the only deploy target now, which is what makes `_redirects` work).
 
 ## 2026-04-11
 
