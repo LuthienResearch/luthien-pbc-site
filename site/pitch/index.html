@@ -1723,11 +1723,31 @@
       .feature-matrix .compare-cell.name { padding-bottom: 10px !important; border-bottom: 1px solid var(--border); margin-bottom: 6px !important; }
       /* Body split - reduce stat size */
       .facts-hero-stat { font-size: clamp(3rem, 10vw, 5rem) !important; margin-bottom: 16px !important; }
-      /* Distribution - tame hero row and body text */
-      [data-slide-name="distribution"] .slide-inner > .anim-up.delay-2 { gap: 20px !important; flex-wrap: wrap; justify-content: center; }
-      [data-slide-name="distribution"] .slide-inner > .anim-up.delay-2 > img { height: 48px !important; }
-      [data-slide-name="distribution"] .slide-inner > .anim-up.delay-2 > div { font-size: clamp(2.5rem, 12vw, 4rem) !important; }
-      [data-slide-name="distribution"] .body-text span[style*="2.2em"] { font-size: 1.4em !important; }
+      /* Distribution-playbook - stack table on mobile */
+      [data-slide-name="distribution-playbook"] .compare-row[style*="200px"] {
+        grid-template-columns: 1fr !important;
+        padding: 14px 12px;
+        margin-bottom: 8px;
+        background: var(--bg-elevated);
+        border-radius: 3px;
+        border-bottom: none !important;
+      }
+      [data-slide-name="distribution-playbook"] .compare-row.header[style*="200px"] { display: none !important; }
+      [data-slide-name="distribution-playbook"] .compare-row[style*="200px"] .compare-cell { padding: 4px 0; }
+      /* Traction - stack table on mobile */
+      [data-slide-name="traction"] .compare-row[style*="200px"] {
+        grid-template-columns: 1fr !important;
+        padding: 14px 12px;
+        margin-bottom: 4px;
+        border-bottom: none !important;
+      }
+      [data-slide-name="traction"] .compare-row.header[style*="200px"] { display: none !important; }
+      [data-slide-name="traction"] .compare-row[style*="200px"] .compare-cell { padding: 4px 0; }
+      /* Problem-cto failure catalog - single column on mobile */
+      [data-slide-name="problem-cto"] .compare-row[style*="1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+      }
+      [data-slide-name="problem-cto"] .compare-row.header[style*="1fr 1fr"] { display: none !important; }
       /* Ask slide - simplify faces grid */
       .ask-f3-faces { grid-template-columns: repeat(3, 1fr) !important; gap: 12px !important; }
       .ask-f3-face > img:first-child { width: 36px !important; height: 36px !important; }
