@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luthien: Claude's Squandered Potential (METR)</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Lora:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #141216;
+      --surface: #201C2A;
+      --border: #28243A;
+      --text: #EDE5D8;
+      --text-dim: #9A92AE;
+      --blue: #3B9494;
+      --amber: #C47B42;
+      --red: #C45050;
+      --sans: 'Raleway', -apple-system, BlinkMacSystemFont, sans-serif;
+      --body: 'Lora', Georgia, serif;
+      --mono: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+
+    html { font-size: 112%; }
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body);
+      min-height: 100%;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 64px;
+      min-height: 100vh;
+    }
+
+    /* Film grain to match the rest of the deck */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .label {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 14px;
+    }
+
+    h1.headline {
+      font-family: var(--sans);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+    }
+
+    h1.headline .potential {
+      color: var(--red);
+      font-style: italic;
+      font-weight: 800;
+    }
+
+    .subtitle {
+      margin-top: 10px;
+      font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+      color: var(--text-dim);
+      font-family: var(--body);
+      max-width: 760px;
+      line-height: 1.55;
+    }
+
+    /* ============ COMPOSITION ============
+       The METR chart image defines the plot coordinate space.
+       The overlay SVG uses the same pixel grid as the image
+       (1155 wide by design) and extends downward to host the
+       "45 seconds" dot and the right-side bracket. */
+    .chart-wrap {
+      position: relative;
+      margin-top: 36px;
+      margin-bottom: 20px;
+      /* reserve room on the right for the vertical bracket + label */
+      padding-right: 170px;
+    }
+
+    .chart-wrap .metr-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 3px;
+      /* subtle lift; the METR chart is on a white ground and
+         we want it to feel integrated into the dark slide */
+      box-shadow: 0 1px 0 rgba(255,255,255,0.04),
+                  0 18px 60px rgba(0,0,0,0.45);
+    }
+
+    /* The extension sits directly below the image and continues
+       the same horizontal coordinate system. */
+    .chart-extension {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin-top: -1px; /* join cleanly to the image edge */
+    }
+
+    /* Right-side bracket + label lives in a separate absolute
+       layer so it can span from the top of the chart
+       (Opus 4.6) all the way down into the extension. */
+    .bracket {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 170px;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .footnote {
+      margin-top: 24px;
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+      max-width: 900px;
+    }
+
+    .footnote a { color: var(--blue); text-decoration: none; border-bottom: 1px solid rgba(59,148,148,0.35); }
+    .footnote a:hover { border-bottom-color: var(--blue); }
+
+    @media (max-width: 720px) {
+      body { padding: 28px 20px; }
+      .chart-wrap { padding-right: 0; }
+      .bracket { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="slide">
+    <div class="label">The Problem</div>
+    <h1 class="headline">
+      Claude Code can run for hours.<br>
+      We use it in 45-second bursts.
+    </h1>
+    <p class="subtitle">
+      METR measures how long a frontier model can work autonomously before a human has to step in.
+      Claude Opus 4.6 is at twelve hours. In practice, developers babysit in 45-second increments,
+      because the risk of a single wrong action is still too high.
+    </p>
+
+    <div class="chart-wrap">
+      <!--
+        The METR chart image. Native size 1155 x 627.
+        The y-axis of the plot (30 min to 12 hours) occupies roughly
+        y=70 (top, 12h) to y=498 (bottom, 30 min) in image pixels.
+        Claude Opus 4.6 is at approximately (1075, 78).
+        The 2026 column is at approximately x=1080.
+      -->
+      <img class="metr-img" src="../../assets/images/metr-the-chart.png"
+           alt="METR: time horizon of software tasks different LLMs can complete 50% of the time. Task duration doubles roughly every 4 to 6 months, from GPT-2 at 4 seconds to Claude Opus 4.6 at ~12 hours.">
+
+      <!--
+        Chart extension: continues the y-axis below the METR plot
+        to show where 45 seconds actually sits, and plants a red dot
+        at the 2026 column to mark "practice today."
+        viewBox width matches the image (1155). Height is 260px of extension.
+      -->
+      <svg class="chart-extension" viewBox="0 0 1155 260" preserveAspectRatio="none"
+           xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Continue the plot's left gutter so the y-axis visually extends -->
+        <line x1="95" y1="0" x2="95" y2="230"
+              stroke="#C9C2B5" stroke-width="1.2" stroke-dasharray="4 5" opacity="0.55"/>
+
+        <!-- Extended y-axis tick labels (task duration below 30 min) -->
+        <g font-family="Raleway, sans-serif" font-size="15" fill="#6B6577">
+          <text x="86" y="48" text-anchor="end">10 min</text>
+          <text x="86" y="118" text-anchor="end">2 min</text>
+          <text x="86" y="200" text-anchor="end" fill="#C45050" font-weight="700">45 sec</text>
+        </g>
+
+        <!-- Tick marks lining up with the left gutter -->
+        <g stroke="#C9C2B5" stroke-width="1" opacity="0.55">
+          <line x1="90" y1="48" x2="95" y2="48"/>
+          <line x1="90" y1="118" x2="95" y2="118"/>
+        </g>
+        <line x1="90" y1="200" x2="95" y2="200" stroke="#C45050" stroke-width="1.5"/>
+
+        <!-- Horizontal dashed guide from the 45 sec tick out to the 2026 column -->
+        <line x1="95" y1="200" x2="1075" y2="200"
+              stroke="#C45050" stroke-width="1.2" stroke-dasharray="5 6" opacity="0.55"/>
+
+        <!-- Faint vertical guide for the 2026 column, continuing the chart's column -->
+        <line x1="1075" y1="0" x2="1075" y2="200"
+              stroke="#6B6577" stroke-width="1" stroke-dasharray="3 6" opacity="0.35"/>
+
+        <!-- Practice-today dot: 45 seconds in 2026 -->
+        <circle cx="1075" cy="200" r="9" fill="#C45050" stroke="#141216" stroke-width="2"/>
+        <circle cx="1075" cy="200" r="18" fill="none" stroke="#C45050" stroke-width="1" opacity="0.45"/>
+
+        <!-- Label for the dot -->
+        <g font-family="Raleway, sans-serif" fill="#EDE5D8">
+          <text x="1060" y="236" text-anchor="end" font-size="15" font-weight="700" fill="#C45050">
+            45 seconds
+          </text>
+          <text x="1060" y="252" text-anchor="end" font-size="12"
+                font-family="JetBrains Mono, monospace" fill="#9A92AE">
+            median turn length in practice
+          </text>
+        </g>
+      </svg>
+
+      <!--
+        Right-side bracket connecting Opus 4.6 (top of chart) to the
+        45 sec dot (in the extension). Spans the full chart-wrap height.
+      -->
+      <svg class="bracket" viewBox="0 0 170 1000" preserveAspectRatio="none"
+           xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!--
+          Bracket geometry (in viewBox units):
+          The chart-wrap is roughly image-height + 260 extension.
+          Opus 4.6 lands at ~8% down from the top of the image;
+          the 45 sec dot lands in the extension.
+          We express positions as percentages of the full height via
+          preserveAspectRatio="none", using a 0-1000 y scale so the
+          arithmetic is readable. Tuned visually against the image.
+        -->
+        <!--
+          Coordinate math: wrap height = image(627/1155 of width)
+          + extension(260/1155 of width). Opus 4.6 sits at image y~70
+          of 627 = 11% of image height = ~8% of wrap. The 45 sec dot sits
+          at extension y=200 of 260 = 77% of extension = ~93% of wrap.
+        -->
+        <!-- Top tick (aligned with Claude Opus 4.6) -->
+        <line x1="10" y1="78" x2="40" y2="78" stroke="#C47B42" stroke-width="3"/>
+        <!-- Bottom tick (aligned with 45 sec dot) -->
+        <line x1="10" y1="930" x2="40" y2="930" stroke="#C47B42" stroke-width="3"/>
+        <!-- Vertical spine -->
+        <line x1="25" y1="78" x2="25" y2="930" stroke="#C47B42" stroke-width="3"/>
+
+        <!-- Mid-span chevron notch to read as a bracket, not a fence -->
+        <polyline points="18,500 25,512 32,500" fill="none" stroke="#C47B42" stroke-width="2" opacity="0.55"/>
+      </svg>
+
+      <!-- Bracket label, styled as HTML so the text is readable
+           at slide scale (SVG text warps with preserveAspectRatio=none). -->
+      <div style="position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+                  width: 140px; padding-left: 18px;">
+        <div style="font-family: var(--sans); font-weight: 800;
+                    font-size: clamp(1.2rem, 2vw, 1.6rem);
+                    color: var(--amber); line-height: 1.1;
+                    letter-spacing: -0.01em;">
+          Claude's<br>squandered<br>potential.
+        </div>
+        <div style="margin-top: 10px;
+                    font-family: var(--mono); font-size: 0.7rem;
+                    color: var(--text-dim); letter-spacing: 0.08em;
+                    text-transform: uppercase;">
+          12 hr&nbsp;&rarr;&nbsp;45 sec
+        </div>
+      </div>
+    </div>
+
+    <div class="footnote">
+      Chart: METR, <a href="https://metr.org/blog/2025-03-19-measuring-ai-ability-to-complete-long-tasks/" target="_blank" rel="noopener noreferrer">"Measuring AI ability to complete long tasks,"</a>
+      Horizon v1.1. &nbsp;
+      Twelve-hour autonomy figure: <a href="https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview" target="_blank" rel="noopener noreferrer">Claude Code documentation, Anthropic</a>. &nbsp;
+      45-second babysitting cadence: <a href="https://www.anthropic.com/research/measuring-agent-autonomy" target="_blank" rel="noopener noreferrer">Anthropic, "Measuring Agent Autonomy."</a>
+    </div>
+  </section>
+
+</body>
+</html>

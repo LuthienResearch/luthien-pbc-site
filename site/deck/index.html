@@ -217,9 +217,17 @@ async function checkPassword(e) {
     var slide = window.location.hash || '#team';
     document.body.style.padding = '0';
     document.body.style.overflow = 'hidden';
-    document.body.innerHTML = '<iframe id="deckFrame" src="/pitch/' + slide + '" style="width:100%;height:100%;border:none;position:fixed;inset:0;"></iframe>';
+    document.body.innerHTML = '';
+    var frame = document.createElement('iframe');
+    frame.id = 'deckFrame';
+    frame.style.width = '100%';
+    frame.style.height = '100%';
+    frame.style.border = 'none';
+    frame.style.position = 'fixed';
+    frame.style.inset = '0';
+    frame.src = '/pitch/' + slide;
+    document.body.appendChild(frame);
     // Sync hash changes from iframe back to parent URL
-    var frame = document.getElementById('deckFrame');
     frame.addEventListener('load', function() {
       try {
         var iw = frame.contentWindow;

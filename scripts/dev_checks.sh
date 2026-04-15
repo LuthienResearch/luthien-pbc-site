@@ -36,6 +36,8 @@ extract_all_refs() {
         case "$ref" in
             https://*|http://*|mailto:*|data:*|javascript:*|//*) continue ;;
             \#*) continue ;;
+            # Cloudflare _redirects targets (resolved post-deploy, not local files)
+            /pitch.pdf|/luthien-deck.pdf) continue ;;
             *) echo "$ref" ;;
         esac
     done
