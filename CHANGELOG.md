@@ -4,11 +4,16 @@
 
 | Version | Date | Summary |
 |---------|------|---------|
+| v12 | 2026-04-15 | Simplified pitch for Seldon Demo Day: distribution-playbook table, failure catalog, static ratio bar, autobiographical team, Trajectory-led traction (PR #116) |
 | v11.4 | 2026-04-11 | Pitch deck CTO slide: replace card grid with McKinsey 4-5x hero stat + composite CTO voice split (PR #90) |
 | v11.3 | 2026-04-08 | Switch primary CTA from "View on GitHub" + curl install to "Apply for beta" (Tally form). Remove public curl install everywhere. Addresses investor concern about public GitHub star count. |
 | v10.6 | 2026-03-09 | Address Josh Levy's agentic feedback: add long-session and multi-session persistence language to hero + architecture section |
 | v10.5 | 2026-03-05 | Feedback synthesis from S14/S15 user interviews; footer tagline ("Power is nothing without control") |
 | v10 | 2026-02-26 | Initial repo migration from scottwofford.com/luthien/landing_v8/ |
+
+## 2026-04-15
+
+- v12: Simplified pitch deck for Seldon Demo Day (Thu Apr 16). Rewrote 7 slides and deleted 2 per Scott and Jai's Apr 14 redesign session. Key changes: (1) Replaced Auth0 distribution slide with "Do things that don't scale" comparison table (Supabase, HashiCorp, Luthien). (2) Replaced McKinsey/CTO-voice problem-cto with 2x3 failure catalog grid (deleted code, hallucinated APIs, shipped security holes, etc.). (3) Replaced problem-widget iframe with static 12h-vs-45s ratio bar. (4) Rewrote team slide with autobiographical framing. (5) Rewrote traction from funnel to Trajectory Labs lead + Redwood LOI table. (6) Refreshed GTM with "do things that don't scale" framing. (7) Collapsed competitive matrix rows 5-6. (8) Added pricing sub-line to ask slide. (9) Deleted Redwood case-study slide (folded into traction). Narrative arc: title, team, problem-dev, problem-cto, how-it-works, competitive, defensibility, market, distribution-playbook, gtm, traction, quotes, ask, close (14 slides). (PR #116)
 
 ## 2026-04-11
 
