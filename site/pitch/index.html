@@ -710,6 +710,133 @@
     }
     .logo-row img { height: 22px; }
 
+    /* ============ FAILURE BOARD (problem-cto) ============ */
+    .failure-lead {
+      max-width: 900px;
+      margin: 0 auto 18px;
+      font-size: 0.94rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .failure-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      max-width: 980px;
+      margin: 0 auto;
+      align-items: stretch;
+    }
+
+    .failure-card {
+      min-height: 156px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 18px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.16);
+    }
+
+    .failure-card:nth-child(2) { transform: rotate(-1.8deg) translateY(6px); }
+    .failure-card:nth-child(3) { transform: rotate(1.5deg) translateY(-4px); }
+    .failure-card:nth-child(4) { transform: rotate(1.2deg) translateX(4px); }
+    .failure-card:nth-child(5) { transform: rotate(-2.2deg) translateY(8px); }
+    .failure-card:nth-child(6) { transform: rotate(2deg) translate(-2px, -2px); }
+
+    .failure-card-main {
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 600;
+      line-height: 1.34;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+
+    .failure-hit {
+      display: inline-block;
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: 1.28rem;
+      line-height: 1.05;
+      color: var(--white);
+      letter-spacing: -0.02em;
+    }
+
+    .failure-hit.green { color: var(--green); }
+    .failure-hit.red { color: var(--red); }
+    .failure-hit.blue { color: var(--blue); }
+    .failure-hit.amber { color: var(--amber); }
+
+    .failure-card-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .failure-card-source {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      line-height: 1.45;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .failure-capstone {
+      max-width: 980px;
+      margin: 18px auto 0;
+      padding: 18px 20px;
+      border: 1px solid rgba(59, 148, 148, 0.35);
+      border-radius: 4px;
+      background: rgba(59, 148, 148, 0.08);
+    }
+
+    .failure-capstone-quote {
+      font-family: var(--sans);
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+
+    .failure-capstone-hero {
+      display: inline-block;
+      margin: 0 0 8px;
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: clamp(1.8rem, 3.6vw, 2.8rem);
+      line-height: 0.98;
+      letter-spacing: -0.03em;
+      color: var(--green);
+    }
+
+    .failure-capstone-source {
+      margin-top: 10px;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .failure-overflow {
+      max-width: 980px;
+      margin: 14px auto 0;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
 
     /* ============ PROGRESS BAR ============ */
     .progress-bar {
@@ -1713,9 +1840,9 @@
       .funnel-mrow .f-dollar { font-size: 0.85rem !important; white-space: nowrap; }
       [data-slide-name="traction"] .spacer-md { height: 16px; }
       /* Stack partners */
-      [data-slide="10"] .delay-3[style*="display: flex"] { flex-direction: column; }
+      [data-slide-name="traction"] .delay-3[style*="display: flex"] { flex-direction: column; }
       /* Stack quotes */
-      [data-slide="10"] div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+      [data-slide-name="traction"] div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
       /* Headlines - prevent overflow from inline white-space: nowrap */
       .headline { white-space: normal !important; overflow-wrap: break-word; }
       /* Feature matrix - card visual treatment */
@@ -1724,7 +1851,7 @@
       /* Body split - reduce stat size */
       .facts-hero-stat { font-size: clamp(3rem, 10vw, 5rem) !important; margin-bottom: 16px !important; }
       /* Distribution-playbook - stack table on mobile */
-      [data-slide-name="distribution-playbook"] .compare-row[style*="200px"] {
+      [data-slide-name="strategy"] .compare-row[style*="200px"] {
         grid-template-columns: 1fr !important;
         padding: 14px 12px;
         margin-bottom: 8px;
@@ -1732,8 +1859,8 @@
         border-radius: 3px;
         border-bottom: none !important;
       }
-      [data-slide-name="distribution-playbook"] .compare-row.header[style*="200px"] { display: none !important; }
-      [data-slide-name="distribution-playbook"] .compare-row[style*="200px"] .compare-cell { padding: 4px 0; }
+      [data-slide-name="strategy"] .compare-row.header[style*="200px"] { display: none !important; }
+      [data-slide-name="strategy"] .compare-row[style*="200px"] .compare-cell { padding: 4px 0; }
       /* Traction - stack table on mobile */
       [data-slide-name="traction"] .compare-row[style*="200px"] {
         grid-template-columns: 1fr !important;
@@ -1743,11 +1870,22 @@
       }
       [data-slide-name="traction"] .compare-row.header[style*="200px"] { display: none !important; }
       [data-slide-name="traction"] .compare-row[style*="200px"] .compare-cell { padding: 4px 0; }
-      /* Problem-cto failure catalog - single column on mobile */
-      [data-slide-name="problem-cto"] .compare-row[style*="1fr 1fr"] {
-        grid-template-columns: 1fr !important;
+      /* Problem-cto failure board - stack on mobile */
+      .failure-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
+      .failure-card {
+        min-height: auto !important;
+        transform: none !important;
+        padding: 16px !important;
       }
-      [data-slide-name="problem-cto"] .compare-row.header[style*="1fr 1fr"] { display: none !important; }
+      .failure-card-main { font-size: 0.86rem !important; }
+      .failure-hit { font-size: 1.1rem !important; }
+      .failure-card-label { font-size: 0.64rem !important; }
+      .failure-card-source { font-size: 0.64rem !important; }
+      .failure-capstone { margin-top: 14px !important; padding: 16px !important; }
+      .failure-capstone-quote { font-size: 0.95rem !important; }
+      .failure-capstone-hero { font-size: 1.55rem !important; }
+      .failure-capstone-source { font-size: 0.64rem !important; }
+      .failure-overflow { margin-top: 10px !important; font-size: 0.66rem !important; }
       /* Ask slide - simplify faces grid */
       .ask-f3-faces { grid-template-columns: repeat(3, 1fr) !important; gap: 12px !important; }
       .ask-f3-face > img:first-child { width: 36px !important; height: 36px !important; }
@@ -2125,19 +2263,21 @@
 
 <div class="deck" id="deck">
 
-  <!-- ======== SLIDE 1: TITLE ======== -->
-  <div class="slide title-slide active" data-slide="0" data-slide-name="title">
-    <div class="slide-inner">
-      <div class="logo-mark anim-up">Luthien</div>
-      <div class="spacer-md"></div>
-      <p class="subtitle anim-up delay-1" style="font-size: clamp(1.2rem, 2.5vw, 1.7rem); color: var(--text-muted);">
-        Making it safe to run AI at full speed
-      </p>
+  <template id="archived-title-slide">
+    <!-- ======== ARCHIVED: TITLE ======== -->
+    <div class="slide title-slide active" data-slide="0" data-slide-name="title">
+      <div class="slide-inner">
+        <div class="logo-mark anim-up">Luthien</div>
+        <div class="spacer-md"></div>
+        <p class="subtitle anim-up delay-1" style="font-size: clamp(1.2rem, 2.5vw, 1.7rem); color: var(--text-muted);">
+          Making it safe to run AI at full speed
+        </p>
+      </div>
     </div>
-  </div>
+  </template>
 
-  <!-- ======== SLIDE 2: TEAM ======== -->
-  <div class="slide" data-slide="1" data-slide-name="team">
+  <!-- ======== SLIDE 1: TEAM ======== -->
+  <div class="slide active" data-slide="0" data-slide-name="team">
     <div class="slide-inner">
       <div class="label anim-up">Team</div>
       <div class="spacer-md"></div>
@@ -2173,8 +2313,8 @@
     </div>
   </div>
 
-  <!-- ======== SLIDE 3: THE PROBLEM  -  SQUANDERED POTENTIAL (METR) ======== -->
-  <div class="slide" data-slide="2" data-slide-name="problem-dev">
+  <!-- ======== SLIDE 2: THE PROBLEM  -  SQUANDERED POTENTIAL (METR) ======== -->
+  <div class="slide" data-slide="1" data-slide-name="problem-dev">
     <div class="slide-inner">
       <div class="label anim-up">Problem</div>
       <h1 class="headline headline-lg anim-up delay-1">
@@ -2357,47 +2497,59 @@
     </div>
   </div>
 
-  <!-- ======== SLIDE 4: WHY CLAUDE CODE NEEDS BABYSITTING ======== -->
-  <div class="slide" data-slide="3" data-slide-name="problem-cto">
+  <!-- ======== SLIDE 3: WHY CLAUDE CODE NEEDS BABYSITTING ======== -->
+  <div class="slide" data-slide="2" data-slide-name="problem-cto">
     <div class="slide-inner">
       <div class="label anim-up">Problem</div>
       <h1 class="headline headline-lg anim-up delay-1">Why does Claude Code need babysitting?</h1>
-      <p class="subtitle anim-up delay-1">We personally spoke to 93 developers to understand their frustrations.<sup class="blue" style="font-size: 0.7em; font-weight: 700;">1</sup> Here are the most common.</p>
+      <p class="subtitle anim-up delay-1">I personally spoke to 93 developers to understand why Claude Code needs babysitting.<sup class="blue" style="font-size: 0.7em; font-weight: 700;">1</sup></p>
       <div class="spacer-md"></div>
 
-      <div class="anim-up delay-2" style="border: 1px solid var(--border); border-radius: 3px; overflow: hidden; max-width: 900px; margin: 0 auto;">
-        <div class="compare-row header" style="grid-template-columns: 1fr 1fr;">
-          <div class="compare-cell">What went wrong</div>
-          <div class="compare-cell">Source</div>
+      <div class="failure-lead anim-up delay-2">
+        Raise your hand if this has happened to you. These are the six recurring categories from our existing frustrations widget, with one representative example each.
+      </div>
+
+      <div class="failure-grid">
+        <div class="failure-card anim-up" style="transition-delay: 0.32s;">
+          <div class="failure-card-label">Deleted Stuff</div>
+          <div class="failure-card-main">Claude <span class="failure-hit red">destroyed 2</span> production apps. <span class="failure-hit red">All data gone.</span></div>
+          <div class="failure-card-source">Pawel Huryn. Feb 2026. Problem widget example.</div>
         </div>
-        <div class="compare-row" style="grid-template-columns: 1fr 1fr;">
-          <div class="compare-cell name">Deleted code it was told to keep</div>
-          <div class="compare-cell">Redwood Research pilot, Apr 2026</div>
+
+        <div class="failure-card anim-up" style="transition-delay: 0.40s;">
+          <div class="failure-card-label">Ignored Instructions</div>
+          <div class="failure-card-main"><span class="failure-hit amber">Polite correction</span> ignored. <span class="failure-hit amber">Firm correction</span> ignored. <span class="failure-hit amber">ALL CAPS</span> partially followed.</div>
+          <div class="failure-card-source">anthropics/claude-code #8154. Jul 2025.</div>
         </div>
-        <div class="compare-row" style="grid-template-columns: 1fr 1fr;">
-          <div class="compare-cell name">Ignored CLAUDE.md instructions</div>
-          <div class="compare-cell">Luthien discovery interviews</div>
+
+        <div class="failure-card anim-up" style="transition-delay: 0.48s;">
+          <div class="failure-card-label">Hallucinated</div>
+          <div class="failure-card-main">Inserted <span class="failure-hit blue">"###Human:"</span> mid-response and answered <span class="failure-hit blue">made-up prompts.</span></div>
+          <div class="failure-card-source">anthropics/claude-code #10628. 2025.</div>
         </div>
-        <div class="compare-row" style="grid-template-columns: 1fr 1fr;">
-          <div class="compare-cell name">Hallucinated APIs that do not exist</div>
-          <div class="compare-cell">Luthien discovery interviews</div>
+
+        <div class="failure-card anim-up" style="transition-delay: 0.56s;">
+          <div class="failure-card-label">Security Holes</div>
+          <div class="failure-card-main">Read files that <span class="failure-hit green">`.claudeignore`</span> was supposed to block, including <span class="failure-hit green">API keys and secrets.</span></div>
+          <div class="failure-card-source">The Register. Jan 2026.</div>
         </div>
-        <div class="compare-row" style="grid-template-columns: 1fr 1fr;">
-          <div class="compare-cell name">Shipped security vulnerabilities</div>
-          <div class="compare-cell">Luthien discovery interviews</div>
+
+        <div class="failure-card anim-up" style="transition-delay: 0.64s;">
+          <div class="failure-card-label">Cheated On Tests</div>
+          <div class="failure-card-main">Could not pass a unit test. <span class="failure-hit red">Deleted the test.</span> Claimed <span class="failure-hit red">"All tests passing!"</span></div>
+          <div class="failure-card-source">anthropics/claude-code #7074. 2025.</div>
         </div>
-        <div class="compare-row" style="grid-template-columns: 1fr 1fr;">
-          <div class="compare-cell name">Claimed it was done when it was not</div>
-          <div class="compare-cell">Luthien discovery interviews</div>
+
+        <div class="failure-card anim-up" style="transition-delay: 0.72s;">
+          <div class="failure-card-label">Lied About It</div>
+          <div class="failure-card-main">Claimed <span class="failure-hit amber">"0 errors"</span> when basedpyright reported <span class="failure-hit amber">54.</span></div>
+          <div class="failure-card-source">anthropics/claude-code #1290. May 2025.</div>
         </div>
-        <div class="compare-row" style="grid-template-columns: 1fr 1fr;">
-          <div class="compare-cell name">Refactored code outside the task scope</div>
-          <div class="compare-cell">Luthien discovery interviews</div>
-        </div>
-        <div class="compare-row" style="grid-template-columns: 1fr 1fr; border-bottom: none;">
-          <div class="compare-cell name">Tests passed but code was wrong</div>
-          <div class="compare-cell">Luthien discovery interviews</div>
-        </div>
+      </div>
+
+      <div class="failure-capstone anim-up" style="transition-delay: 0.84s;">
+        <div class="failure-capstone-quote"><span class="failure-capstone-hero">Unusually poorly aligned.</span><br>"Opus 4.6 is like an unusually poorly aligned model ... it's doing a great job of pretending to be aligned and then it's just being sneakier about the stuff it lies and cheats on."</div>
+        <div class="failure-capstone-source">Nathan Helm-Burger. Live trial of Luthien. Apr 5, 2026.</div>
       </div>
 
       <div class="slide-footnotes">
@@ -2408,8 +2560,135 @@
     </div>
   </div>
 
-  <!-- ======== SLIDE 5: HOW IT WORKS (PROXY ARCHITECTURE) ======== -->
-  <div class="slide" data-slide="4" data-slide-name="how-it-works">
+  <!-- ======== SLIDE 4: MARKET + DEMAND ======== -->
+  <div class="slide" data-slide="3" data-slide-name="tam">
+    <div class="slide-inner">
+      <div class="label anim-up">Market</div>
+      <h1 class="headline headline-lg anim-up delay-1">The market is exploding</h1>
+      <div class="spacer-md"></div>
+
+      <div class="grid-4 anim-up delay-2">
+        <div style="text-align: center;">
+          <div class="stat-huge">$4.7B<sup class="blue" style="font-size: 0.4em; font-weight: 700;">1</sup></div>
+          <div class="stat-label">Coding agent market today</div>
+        </div>
+        <div style="text-align: center;">
+          <div class="stat-huge">$14.6B<sup class="blue" style="font-size: 0.4em; font-weight: 700;">1</sup></div>
+          <div class="stat-label">Projected by 2033</div>
+        </div>
+        <div style="text-align: center;">
+          <div class="stat-huge green">$2.5B<sup class="blue" style="font-size: 0.4em; font-weight: 700;">2</sup></div>
+          <div class="stat-label">Claude Code ARR</div>
+          <div style="font-family: var(--sans); font-size: 1.3rem; color: var(--white); font-weight: 700; margin-top: 6px;">$0 &rarr; $2.5B in 9 months</div>
+        </div>
+        <div style="text-align: center;">
+          <div class="stat-huge blue">46%<sup style="font-size: 0.4em; font-weight: 700;">3</sup></div>
+          <div class="stat-label">of code on GitHub is<br>AI-generated (2025)</div>
+        </div>
+      </div>
+
+      <div class="spacer-lg"></div>
+
+      <div class="label anim-up delay-2" style="margin-bottom: 12px;">Feedback</div>
+      <h2 class="headline headline-md anim-up delay-2" style="margin-bottom: 18px;">Users really want this</h2>
+
+      <div class="anim-up delay-3">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px;">
+          <div class="quote q-card">
+            <img class="q-avatar" src="../assets/images/quotes/nico-mesa.jpg" alt="Nicolas Mesa">
+            <div>
+              "I saw the website and immediately thought, '<strong class="white">I want that.</strong>' It's like CLAUDE.md that actually works."
+              <span class="quote-attr">Nicolas Mesa, Cofounder &amp; CTO, Veleiro AI</span>
+            </div>
+          </div>
+          <div class="quote q-card">
+            <img class="q-avatar" src="../assets/images/quotes/elvis-sikora.jpg" alt="Elvis Sikora">
+            <div>
+              "I could do maybe <span style="font-family: var(--sans); font-weight: 800; font-size: 1.35rem; color: var(--white);">30&ndash;50%</span> more parallel threads&hellip; this is about freeing up cognitive resources."
+              <span class="quote-attr">Elvis Sikora, AI Engineer, CloudWalk</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footnotes">
+        <div class="citation">
+          <sup>1</sup> Market size and CAGR: <a href="https://finance.yahoo.com/news/ai-code-assistant-market-set-143000983.html" target="_blank" rel="noopener noreferrer">SNS Insider AI Code Assistant Market Report (15.31% CAGR to 2033)</a>.
+          <sup>2</sup> Claude Code ARR: <a href="https://www.anthropic.com/news/anthropic-raises-30-billion-series-g-funding-380-billion-post-money-valuation" target="_blank" rel="noopener noreferrer">Anthropic Series G announcement, Feb 2026</a>.
+          <sup>3</sup> AI-generated code share: <a href="https://www.theregister.com/2025/08/07/github_ceo_ai_coding/" target="_blank" rel="noopener noreferrer">GitHub / Microsoft developer surveys, 2025</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== SLIDE 5: OUR STRATEGY ======== -->
+  <div class="slide" data-slide="4" data-slide-name="strategy">
+    <div class="slide-inner">
+      <div class="label anim-up">Our Strategy</div>
+      <h1 class="headline headline-lg anim-up delay-1">Do things that don't scale.</h1>
+      <p class="subtitle anim-up delay-1">Luthien is building the same way.</p>
+      <div class="spacer-md"></div>
+
+      <div class="anim-up delay-2" style="border: 1px solid var(--border); border-radius: 3px; overflow: hidden;">
+
+        <div class="compare-row header" style="grid-template-columns: 200px 1fr 1fr;">
+          <div class="compare-cell">Company</div>
+          <div class="compare-cell">Didn't scale</div>
+          <div class="compare-cell">Scale</div>
+        </div>
+
+        <div class="compare-row" style="grid-template-columns: 200px 1fr 1fr;">
+          <div class="compare-cell name" style="padding-top: 18px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <img src="../assets/images/logos/supabase-icon.svg" alt="Supabase" style="height: 22px; width: auto;">
+              <span style="font-family: var(--sans); font-weight: 700; font-size: 0.95rem; color: var(--white);">Supabase</span>
+            </div>
+            <div style="font-family: var(--sans); font-weight: 800; font-size: 1.8rem; color: var(--blue); margin-top: 4px;">$5B</div>
+            <div style="font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim);">Oct 2023 Series E</div>
+          </div>
+          <div class="compare-cell">Turned down million-dollar enterprise contracts to protect developer focus.</div>
+          <div class="compare-cell">Self-serve Postgres-based backend with tiered pricing.</div>
+        </div>
+
+        <div class="compare-row" style="grid-template-columns: 200px 1fr 1fr;">
+          <div class="compare-cell name" style="padding-top: 18px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <img src="../assets/images/logos/hashicorp-icon.svg" alt="HashiCorp" style="height: 22px; width: auto;">
+              <span style="font-family: var(--sans); font-weight: 700; font-size: 0.95rem; color: var(--white);">HashiCorp</span>
+            </div>
+            <div style="font-family: var(--sans); font-weight: 800; font-size: 1.8rem; color: var(--blue); margin-top: 4px;">$14B</div>
+            <div style="font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim);">Dec 2021 IPO</div>
+          </div>
+          <div class="compare-cell">Hand-built Terraform configs for each early customer.</div>
+          <div class="compare-cell">Terraform module registry and HashiCorp Cloud Platform.</div>
+        </div>
+
+        <div class="compare-row" style="grid-template-columns: 200px 1fr 1fr; border-bottom: none;">
+          <div class="compare-cell name" style="padding-top: 18px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-family: var(--sans); font-weight: 700; font-size: 0.95rem; color: var(--blue);">Luthien</span>
+            </div>
+            <div style="font-family: var(--sans); font-weight: 800; font-size: 1.8rem; color: var(--blue); margin-top: 4px;">$2M</div>
+            <div style="font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim);">Pre-seed ask</div>
+          </div>
+          <div class="compare-cell">Hand-built solutions for AI failures.</div>
+          <div class="compare-cell" style="color: var(--white); font-weight: 500;">AI control layer as a service.</div>
+        </div>
+
+      </div>
+
+      <div class="slide-footnotes">
+        <div class="citation">
+          <sup>1</sup> Supabase valuation: <a href="https://supabase.com/blog/supabase-series-c" target="_blank" rel="noopener noreferrer">Supabase Series C announcement</a>, Oct 2023.
+          <sup>2</sup> HashiCorp acquisition: IBM acquired HashiCorp for ~$6.4B in 2024; peak market cap reached $14B at Dec 2021 IPO. <a href="https://www.hashicorp.com/blog/hashicorp-joins-ibm" target="_blank" rel="noopener noreferrer">hashicorp.com</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <template id="archived-presentation-slides">
+  <!-- ======== ARCHIVED: HOW IT WORKS (PROXY ARCHITECTURE) ======== -->
+  <div class="slide" data-slide="6" data-slide-name="how-it-works">
     <div class="slide-inner" style="text-align: center;">
       <div class="label anim-up" style="text-align: left;">How It Works</div>
       <h1 class="headline headline-lg anim-up delay-1" style="text-align: left;">A proxy between LLM APIs<br>and your dev environment</h1>
@@ -2517,8 +2796,8 @@
     </div>
   </div>
 
-  <!-- ======== SLIDE 6: COMPETITIVE (FEATURE × COMPETITOR MATRIX) ======== -->
-  <div class="slide" data-slide="5" data-slide-name="competitive">
+  <!-- ======== SLIDE 8: COMPETITIVE (FEATURE × COMPETITOR MATRIX) ======== -->
+  <div class="slide" data-slide="7" data-slide-name="competitive">
     <div class="slide-inner">
       <div class="label anim-up">Competitive Landscape</div>
       <h1 class="headline headline-lg anim-up delay-1">Features vs. alternatives<sup class="blue" style="font-size: 0.5em; font-weight: 700;">1</sup></h1>
@@ -2581,8 +2860,8 @@
     </div>
   </div>
 
-  <!-- ======== SLIDE 7: MOAT ======== -->
-  <div class="slide" data-slide="6" data-slide-name="defensibility">
+  <!-- ======== SLIDE 9: MOAT ======== -->
+  <div class="slide" data-slide="8" data-slide-name="defensibility">
     <div class="slide-inner">
       <div class="label anim-up">Defensibility</div>
       <h1 class="headline headline-lg anim-up delay-1">Won't Anthropic build this?</h1>
@@ -2614,8 +2893,8 @@
     </div>
   </div>
 
-  <!-- ======== SLIDE 8: MARKET ======== -->
-  <div class="slide" data-slide="7" data-slide-name="market">
+  <!-- ======== SLIDE 10: MARKET ======== -->
+  <div class="slide" data-slide="9" data-slide-name="market">
     <div class="slide-inner">
       <div class="label anim-up">Market</div>
       <h1 class="headline headline-lg anim-up delay-1">The market is exploding</h1>
@@ -2662,77 +2941,8 @@
     </div>
   </div>
 
-  <!-- ======== SLIDE: DISTRIBUTION PLAYBOOK ======== -->
-  <div class="slide" data-slide="8" data-slide-name="distribution-playbook">
-    <div class="slide-inner">
-      <div class="label anim-up">Distribution</div>
-      <h1 class="headline headline-lg anim-up delay-1">Do things that don't scale.</h1>
-      <p class="subtitle anim-up delay-1">Luthien is building the same way.</p>
-      <div class="spacer-md"></div>
-
-      <div class="anim-up delay-2" style="border: 1px solid var(--border); border-radius: 3px; overflow: hidden;">
-
-        <!-- Header -->
-        <div class="compare-row header" style="grid-template-columns: 200px 1fr 1fr;">
-          <div class="compare-cell">Company</div>
-          <div class="compare-cell">Didn't scale</div>
-          <div class="compare-cell">Scale</div>
-        </div>
-
-        <!-- Supabase -->
-        <div class="compare-row" style="grid-template-columns: 200px 1fr 1fr;">
-          <div class="compare-cell name" style="padding-top: 18px;">
-            <div style="display: flex; align-items: center; gap: 8px;">
-              <img src="../assets/images/logos/supabase-icon.svg" alt="Supabase" style="height: 22px; width: auto;">
-              <span style="font-family: var(--sans); font-weight: 700; font-size: 0.95rem; color: var(--white);">Supabase</span>
-            </div>
-            <div style="font-family: var(--sans); font-weight: 800; font-size: 1.8rem; color: var(--blue); margin-top: 4px;">$5B</div>
-            <div style="font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim);">Oct 2023 Series E</div>
-          </div>
-          <div class="compare-cell">Turned down million-dollar enterprise contracts to protect developer focus.</div>
-          <div class="compare-cell">Self-serve Postgres-based backend with tiered pricing.</div>
-        </div>
-
-        <!-- HashiCorp -->
-        <div class="compare-row" style="grid-template-columns: 200px 1fr 1fr;">
-          <div class="compare-cell name" style="padding-top: 18px;">
-            <div style="display: flex; align-items: center; gap: 8px;">
-              <img src="../assets/images/logos/hashicorp-icon.svg" alt="HashiCorp" style="height: 22px; width: auto;">
-              <span style="font-family: var(--sans); font-weight: 700; font-size: 0.95rem; color: var(--white);">HashiCorp</span>
-            </div>
-            <div style="font-family: var(--sans); font-weight: 800; font-size: 1.8rem; color: var(--blue); margin-top: 4px;">$14B</div>
-            <div style="font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim);">Dec 2021 IPO</div>
-          </div>
-          <div class="compare-cell">Hand-built Terraform configs for each early customer.</div>
-          <div class="compare-cell">Terraform module registry and HashiCorp Cloud Platform.</div>
-        </div>
-
-        <!-- Luthien -->
-        <div class="compare-row" style="grid-template-columns: 200px 1fr 1fr; border-bottom: none;">
-          <div class="compare-cell name" style="padding-top: 18px;">
-            <div style="display: flex; align-items: center; gap: 8px;">
-              <span style="font-family: var(--sans); font-weight: 700; font-size: 0.95rem; color: var(--blue);">Luthien</span>
-            </div>
-            <div style="font-family: var(--sans); font-weight: 800; font-size: 1.8rem; color: var(--blue); margin-top: 4px;">$2M</div>
-            <div style="font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim);">Pre-seed ask</div>
-          </div>
-          <div class="compare-cell">Hand-built solutions for AI failures.</div>
-          <div class="compare-cell" style="color: var(--white); font-weight: 500;">AI control layer as a service.</div>
-        </div>
-
-      </div>
-
-      <div class="slide-footnotes">
-        <div class="citation">
-          <sup>1</sup> Supabase valuation: <a href="https://supabase.com/blog/supabase-series-c" target="_blank" rel="noopener noreferrer">Supabase Series C announcement</a>, Oct 2023.
-          <sup>2</sup> HashiCorp acquisition: IBM acquired HashiCorp for ~$6.4B in 2024; peak market cap reached $14B at Dec 2021 IPO. <a href="https://www.hashicorp.com/blog/hashicorp-joins-ibm" target="_blank" rel="noopener noreferrer">hashicorp.com</a>.
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ======== SLIDE 10: GTM STRATEGY ======== -->
-  <div class="slide" data-slide="9" data-slide-name="gtm">
+  <!-- ======== SLIDE 11: GTM STRATEGY ======== -->
+  <div class="slide" data-slide="10" data-slide-name="gtm">
     <div class="slide-inner">
       <div class="label anim-up">Go-to-market Strategy</div>
       <h1 class="headline headline-lg anim-up delay-1" style="white-space: nowrap; font-size: clamp(1.6rem, 3.8vw, 2.8rem);">Target startup CTOs and Principal Engineers</h1>
@@ -2786,8 +2996,8 @@
     </div>
   </div>
 
-  <!-- ======== SLIDE 11: TRACTION ======== -->
-  <div class="slide" data-slide="10" data-slide-name="traction">
+  <!-- ======== SLIDE 12: TRACTION ======== -->
+  <div class="slide" data-slide="11" data-slide-name="traction">
     <div class="slide-inner">
       <div class="label anim-up">Traction</div>
       <p class="subtitle anim-up delay-1">We asked the smartest people we know to trial our product and tell us how to make it better.</p>
@@ -2863,7 +3073,7 @@
   </div>
 
   <!-- ======== SLIDE: USERS REALLY WANT THIS (QUOTES) ======== -->
-  <div class="slide" data-slide="11" data-slide-name="quotes">
+  <div class="slide" data-slide="12" data-slide-name="quotes">
     <div class="slide-inner">
       <div class="label anim-up">Feedback</div>
       <h1 class="headline headline-lg anim-up delay-1">Users really want this</h1>
@@ -2905,8 +3115,8 @@
     </div>
   </div>
 
-  <!-- ======== SLIDE 12: THE ASK (F3 V3 gradient divider, lowercase, logos pruned) ======== -->
-  <div class="slide" data-slide="12" data-slide-name="ask">
+  <!-- ======== SLIDE 13: THE ASK (F3 V3 gradient divider, lowercase, logos pruned) ======== -->
+  <div class="slide" data-slide="13" data-slide-name="ask">
     <div class="slide-inner" style="text-align: center;">
       <div class="label anim-up">The Ask</div>
       <h1 class="headline headline-xl anim-up delay-1" style="color: var(--blue);">$2M Pre-Seed</h1>
@@ -3023,8 +3233,8 @@
     </div>
   </div>
 
-  <!-- ======== SLIDE 13: CLOSE ======== -->
-  <div class="slide title-slide" data-slide="13" data-slide-name="close">
+  <!-- ======== SLIDE 14: CLOSE ======== -->
+  <div class="slide title-slide" data-slide="14" data-slide-name="close">
     <div class="slide-inner">
       <div class="logo-mark anim-up">Luthien</div>
       <div class="spacer-md"></div>
@@ -3056,6 +3266,67 @@
     </div>
   </div>
 
+  </template>
+
+  <!-- ======== SLIDE 6: ICP ======== -->
+  <div class="slide" data-slide="5" data-slide-name="icp">
+    <div class="slide-inner">
+      <div class="label anim-up">ICP</div>
+      <h1 class="headline headline-lg anim-up delay-1">Who are our ideal customers?</h1>
+      <p class="subtitle anim-up delay-1">The smartest people we know. Also, the ones that have signed LOIs.</p>
+      <div class="spacer-md"></div>
+
+      <div class="grid-2 anim-up delay-2">
+        <div class="card" style="min-height: 420px; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--amber); margin-bottom: 16px;">Smart</div>
+            <div style="font-family: var(--sans); font-weight: 800; font-size: clamp(2rem, 4.8vw, 3.6rem); line-height: 0.95; letter-spacing: -0.03em; color: var(--white); margin-bottom: 16px;">
+              The smartest<br>people we know.
+            </div>
+            <p style="font-family: var(--body); font-size: 1rem; line-height: 1.55; color: var(--text); margin: 0;">
+              They are closest to the frontier. They know exactly where Claude Code breaks, where current control tools fall short, and what an actually useful product has to do.
+            </p>
+          </div>
+
+          <div style="margin-top: 28px; display: flex; flex-wrap: wrap; align-items: center; gap: 20px;">
+            <img src="../assets/images/logos/redwood-research.svg" alt="Redwood Research" style="height: 24px; width: auto;">
+            <img src="../assets/images/logos/mats.svg" alt="MATS" style="height: 24px; width: auto;">
+            <div style="display: flex; align-items: center; gap: 10px; padding: 8px 12px; border: 1px solid var(--border); border-radius: 999px; background: rgba(255,255,255,0.03);">
+              <img src="../assets/images/photo-ryan-kidd.png" alt="Ryan Kidd" style="width: 28px; height: 28px; border-radius: 50%; object-fit: cover;">
+              <span style="font-family: var(--sans); font-size: 0.9rem; font-weight: 600; color: var(--white);">Ryan Kidd</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-accent" style="min-height: 420px; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 16px;">Signed</div>
+            <div style="font-family: var(--sans); font-weight: 800; font-size: clamp(2rem, 4.8vw, 3.6rem); line-height: 0.95; letter-spacing: -0.03em; color: var(--blue); margin-bottom: 16px;">
+              The ones that<br>have signed LOIs.
+            </div>
+            <p style="font-family: var(--body); font-size: 1rem; line-height: 1.55; color: var(--text); margin: 0;">
+              They already want this badly enough to write it down. That is the shortest path from product insight to revenue.
+            </p>
+          </div>
+
+          <div style="margin-top: 28px;">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 20px; margin-bottom: 16px;">
+              <img src="../assets/images/logos/trajectory-labs.webp" alt="Trajectory Labs" style="height: 24px; width: auto;">
+              <img src="../assets/images/logos/redwood-research.svg" alt="Redwood Research" style="height: 20px; width: auto;">
+              <img src="../assets/images/logos/catalyze.svg" alt="Catalyze" style="height: 24px; width: auto;">
+              <img src="../assets/images/logos/movement-mortgage.svg" alt="Movement Mortgage" style="height: 30px; width: auto;">
+            </div>
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 20px;">
+              <img src="../assets/images/logos/handzel.png" alt="Handzel Systems" style="height: 22px; width: auto; filter: invert(1); mix-blend-mode: screen;">
+              <img src="../assets/images/logos/aws-light.svg" alt="AWS" style="height: 20px; width: auto;">
+              <span style="font-family: var(--sans); font-weight: 600; font-size: 0.92rem; color: var(--white);">Solomon/Clutter</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <!-- Progress bar -->
@@ -3065,7 +3336,7 @@
 
 <!-- Controls -->
 <div class="controls">
-  <span class="slide-counter" id="slideCounter">1 / 14</span>
+  <span class="slide-counter" id="slideCounter">1 / 6</span>
   <nav aria-label="Slide navigation"><div class="nav-dots" id="navDots"></div></nav>
 </div>
 
