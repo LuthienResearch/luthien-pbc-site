@@ -1282,6 +1282,57 @@
       display: block;
     }
 
+    /* ============ SOLUTION MATRIX (what we need) ============ */
+    /* Each column is a vertical flex-stack so cells align across columns
+       regardless of which columns are visible. Unrevealed columns collapse
+       to zero width via flex-grow animation so the visible columns fill
+       the row smoothly. */
+    .matrix .mtx-cell {
+      padding: 18px;
+      border-bottom: 1px solid var(--border);
+      box-sizing: border-box;
+      color: var(--text);
+    }
+    .matrix .mtx-col:last-child .mtx-cell:last-child,
+    .matrix .mtx-col .mtx-cell:last-child { border-bottom: none; }
+    .matrix .mtx-head {
+      padding: 16px 18px;
+      background: var(--bg-elevated);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .matrix .mtx-row {
+      background: var(--bg-elevated);
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--white);
+    }
+    .matrix .mtx-center { text-align: center; }
+    .matrix .mtx-dim { color: var(--text-muted); }
+    .matrix .mtx-luthien-cell {
+      background: rgba(59,148,148,0.08);
+      color: var(--white);
+      font-weight: 600;
+    }
+    /* Make matrix columns animate width when their reveal state flips. */
+    .matrix .mtx-col {
+      transition: flex-grow 0.5s cubic-bezier(0.4,0,0.2,1),
+                  opacity 0.35s ease;
+      overflow: hidden;
+    }
+    .matrix .mtx-col[data-reveal]:not(.revealed) {
+      flex-grow: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+    /* Override the generic [data-reveal] base so matrix columns keep
+       display:flex while collapsed (needed to animate width). */
+    .matrix .mtx-col[data-reveal] { opacity: 0; }
+    .matrix .mtx-col[data-reveal].revealed { opacity: 1; pointer-events: auto; }
+
     /* ============ STAGED REVEALS (click/arrow to progress) ============ */
     /* Elements tagged [data-reveal="N"] are hidden until the slide's
        data-stage attr has reached at least N. JS sets .revealed on the
@@ -2778,53 +2829,61 @@
   </div>
 
   <!-- ======== SLIDE: WHAT WE NEED (solution matrix) ======== -->
-  <div class="slide" data-slide="2" data-slide-name="solution-matrix">
+  <div class="slide" data-slide="2" data-slide-name="solution-matrix" data-stages="3">
     <div class="slide-inner">
       <div class="label anim-up">What we need</div>
       <h1 class="headline headline-lg anim-up delay-1">Control plane for dev-environment agents</h1>
       <div class="spacer-md"></div>
 
       <div class="anim-up delay-2" style="max-width: 1080px; margin: 0 auto;">
-        <div style="display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 0; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; font-family: var(--sans);">
+        <div class="matrix" style="display: flex; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; font-family: var(--sans);">
 
-          <!-- Header row -->
-          <div style="padding: 16px 18px; background: var(--bg-elevated); font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); border-bottom: 1px solid var(--border);"></div>
-          <div style="padding: 16px 18px; background: var(--bg-elevated); font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); border-bottom: 1px solid var(--border); text-align: center;">Default</div>
-          <div style="padding: 16px 18px; background: var(--bg-elevated); font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); border-bottom: 1px solid var(--border); text-align: center;">Good</div>
-          <div style="padding: 16px 18px; background: rgba(59,148,148,0.18); font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); border-bottom: 1px solid var(--border); text-align: center; font-weight: 700;">Better &middot; Luthien</div>
+          <!-- Row labels column (always visible) -->
+          <div class="mtx-col mtx-labels" style="order: 0; flex: 1.3 1 0; min-width: 0; display: flex; flex-direction: column;">
+            <div class="mtx-cell mtx-head"></div>
+            <div class="mtx-cell mtx-row">Oversight</div>
+            <div class="mtx-cell mtx-row">Do what you want<br><span style="font-weight: 400; font-size: 0.85rem; color: var(--text-dim);">(across models)</span></div>
+            <div class="mtx-cell mtx-row">Mitigating harms</div>
+          </div>
 
-          <!-- Row 1: Oversight -->
-          <div style="padding: 18px; background: var(--bg-elevated); font-weight: 700; font-size: 1.05rem; color: var(--white); border-bottom: 1px solid var(--border);">Oversight</div>
-          <div style="padding: 18px; color: var(--text-muted); border-bottom: 1px solid var(--border); text-align: center;">No observability</div>
-          <div style="padding: 18px; color: var(--text); border-bottom: 1px solid var(--border); text-align: center;">
-            Observability
-            <div style="margin-top: 10px; display: flex; justify-content: center;">
-              <img src="../assets/images/logos/helicone.png" alt="Helicone" style="height: 26px; filter: brightness(0) invert(1); opacity: 0.9;">
+          <!-- Default column (stage 0) -->
+          <div class="mtx-col" data-reveal="0" style="order: 2; flex: 1 1 0; min-width: 0; display: flex; flex-direction: column;">
+            <div class="mtx-cell mtx-head mtx-center">Default</div>
+            <div class="mtx-cell mtx-center mtx-dim">No observability</div>
+            <div class="mtx-cell mtx-center mtx-dim">Sometimes</div>
+            <div class="mtx-cell mtx-center mtx-dim">No protection</div>
+          </div>
+
+          <!-- Good column (stage 1) -->
+          <div class="mtx-col" data-reveal="1" style="order: 3; flex: 1 1 0; min-width: 0; display: flex; flex-direction: column;">
+            <div class="mtx-cell mtx-head mtx-center">Good</div>
+            <div class="mtx-cell mtx-center">
+              Observability
+              <div style="margin-top: 10px; display: flex; justify-content: center;">
+                <img src="../assets/images/logos/helicone.png" alt="Helicone" style="height: 26px; filter: brightness(0) invert(1); opacity: 0.9;">
+              </div>
+            </div>
+            <div class="mtx-cell mtx-center">
+              Gateways<br><span style="color: var(--text-dim); font-size: 0.85rem;">(partial solution)</span>
+              <div style="margin-top: 10px; display: flex; justify-content: center;">
+                <img src="../assets/images/logos/litellm.png" alt="LiteLLM" style="height: 22px; opacity: 0.9;">
+              </div>
+            </div>
+            <div class="mtx-cell mtx-center">
+              Guardrails<br><span style="color: var(--text-dim); font-size: 0.85rem;">(simple rules)</span>
+              <div style="margin-top: 10px; display: flex; justify-content: center;">
+                <img src="../assets/images/logos/guardrails-ai.png" alt="Guardrails AI" style="height: 22px; opacity: 0.9;">
+              </div>
             </div>
           </div>
-          <div style="padding: 18px; background: rgba(59,148,148,0.08); color: var(--white); font-weight: 600; border-bottom: 1px solid var(--border); text-align: center;">Active 24/7 org-wide analysis and improvement</div>
 
-          <!-- Row 2: Do What You Want (Across Models) -->
-          <div style="padding: 18px; background: var(--bg-elevated); font-weight: 700; font-size: 1.05rem; color: var(--white); border-bottom: 1px solid var(--border);">Do what you want<br><span style="font-weight: 400; font-size: 0.85rem; color: var(--text-dim);">(across models)</span></div>
-          <div style="padding: 18px; color: var(--text-muted); border-bottom: 1px solid var(--border); text-align: center;">Sometimes</div>
-          <div style="padding: 18px; color: var(--text); border-bottom: 1px solid var(--border); text-align: center;">
-            Gateways<br><span style="color: var(--text-dim); font-size: 0.85rem;">(partial solution)</span>
-            <div style="margin-top: 10px; display: flex; justify-content: center;">
-              <img src="../assets/images/logos/litellm.png" alt="LiteLLM" style="height: 22px; opacity: 0.9;">
-            </div>
+          <!-- Luthien column (stage 2) - inserted as leftmost data column -->
+          <div class="mtx-col mtx-col-luthien" data-reveal="2" style="order: 1; flex: 1.2 1 0; min-width: 0; display: flex; flex-direction: column;">
+            <div class="mtx-cell mtx-head mtx-center" style="background: rgba(59,148,148,0.18); color: var(--blue); font-weight: 700;">Better &middot; Luthien</div>
+            <div class="mtx-cell mtx-center mtx-luthien-cell">Active 24/7 org-wide analysis and improvement</div>
+            <div class="mtx-cell mtx-center mtx-luthien-cell">Implement intent with org-wide context</div>
+            <div class="mtx-cell mtx-center mtx-luthien-cell">Safely accomplish the objective</div>
           </div>
-          <div style="padding: 18px; background: rgba(59,148,148,0.08); color: var(--white); font-weight: 600; border-bottom: 1px solid var(--border); text-align: center;">Implement intent with org-wide context</div>
-
-          <!-- Row 3: Mitigating Harms -->
-          <div style="padding: 18px; background: var(--bg-elevated); font-weight: 700; font-size: 1.05rem; color: var(--white);">Mitigating harms</div>
-          <div style="padding: 18px; color: var(--text-muted); text-align: center;">No protection</div>
-          <div style="padding: 18px; color: var(--text); text-align: center;">
-            Guardrails<br><span style="color: var(--text-dim); font-size: 0.85rem;">(simple rules)</span>
-            <div style="margin-top: 10px; display: flex; justify-content: center;">
-              <img src="../assets/images/logos/guardrails-ai.png" alt="Guardrails AI" style="height: 22px; opacity: 0.9;">
-            </div>
-          </div>
-          <div style="padding: 18px; background: rgba(59,148,148,0.08); color: var(--white); font-weight: 600; text-align: center;">Safely accomplish the objective</div>
 
         </div>
       </div>
