@@ -2342,12 +2342,12 @@
              aria-label="METR time horizon chart: frontier models' autonomous task duration grows exponentially from GPT-2 at 4 seconds to Claude Opus 4.6 at 12 hours, while real-world usage of Claude Code is 45 seconds per turn.">
 
           <!-- ===== Header: chart title + METR wordmark ===== -->
-          <text x="100" y="42" font-family="Raleway, sans-serif" font-weight="700"
-                font-size="19" fill="#EDE5D8">
+          <text x="100" y="44" font-family="Raleway, sans-serif" font-weight="700"
+                font-size="23" fill="#F5EEE3">
             Time horizon of software tasks different LLMs can complete 50% of the time
           </text>
-          <text x="100" y="66" font-family="JetBrains Mono, monospace"
-                font-size="11" fill="#9A92AE" letter-spacing="1">
+          <text x="100" y="72" font-family="JetBrains Mono, monospace"
+                font-size="14" fill="#C8BFD4" letter-spacing="1">
             Source: METR Horizon v1.1 &#183; metr.org
           </text>
 
@@ -2383,90 +2383,87 @@
           </g>
 
           <!-- Y-axis tick labels -->
-          <g font-family="JetBrains Mono, monospace" font-size="12" fill="#9A92AE" text-anchor="end">
-            <text x="92" y="526">4 sec</text>
-            <text x="92" y="412">1 min</text>
-            <text x="92" y="354">4 min</text>
-            <text x="92" y="299">15 min</text>
-            <text x="92" y="241">1 hour</text>
-            <text x="92" y="182">4 hours</text>
-            <text x="92" y="136">12 hours</text>
+          <g font-family="JetBrains Mono, monospace" font-size="15" fill="#D8D1E2" text-anchor="end">
+            <text x="92" y="527">4 sec</text>
+            <text x="92" y="413">1 min</text>
+            <text x="92" y="355">4 min</text>
+            <text x="92" y="300">15 min</text>
+            <text x="92" y="242">1 hour</text>
+            <text x="92" y="183">4 hours</text>
+            <text x="92" y="137">12 hours</text>
           </g>
 
-          <!-- Y-axis title -->
-          <text x="36" y="350" font-family="JetBrains Mono, monospace" font-size="11"
-                fill="#9A92AE" text-anchor="middle" transform="rotate(-90 36 350)"
-                letter-spacing="1.2">
-            Task duration (50% success)
+          <!-- Y-axis title (LOG SCALE explicit) -->
+          <text x="18" y="350" font-family="JetBrains Mono, monospace" font-size="14"
+                fill="#D8D1E2" text-anchor="middle" transform="rotate(-90 18 350)"
+                letter-spacing="1.2" font-weight="600">
+            Task duration (50% success) &#183; LOG SCALE
           </text>
 
           <!-- X-axis tick labels -->
-          <g font-family="JetBrains Mono, monospace" font-size="12" fill="#9A92AE" text-anchor="middle">
-            <text x="100"   y="600">2020</text>
-            <text x="230.8" y="600">2021</text>
-            <text x="361.5" y="600">2022</text>
-            <text x="492.3" y="600">2023</text>
-            <text x="623.1" y="600">2024</text>
-            <text x="753.8" y="600">2025</text>
-            <text x="884.6" y="600">2026</text>
+          <g font-family="JetBrains Mono, monospace" font-size="15" fill="#D8D1E2" text-anchor="middle">
+            <text x="100"   y="602">2020</text>
+            <text x="230.8" y="602">2021</text>
+            <text x="361.5" y="602">2022</text>
+            <text x="492.3" y="602">2023</text>
+            <text x="623.1" y="602">2024</text>
+            <text x="753.8" y="602">2025</text>
+            <text x="884.6" y="602">2026</text>
           </g>
 
-          <!-- Footer: legend (left) + analysis note (right) -->
-          <text x="100" y="630" font-family="JetBrains Mono, monospace"
-                font-size="10" fill="#6B6577" letter-spacing="1.2">
-            TIME HORIZON v1.1 &#183; LOG SCALE &#183; 50% SUCCESS
+          <!-- X-axis title (LINEAR years, explicit) -->
+          <text x="525" y="630" font-family="JetBrains Mono, monospace" font-size="13"
+                fill="#D8D1E2" text-anchor="middle" letter-spacing="1.2" font-weight="600">
+            Year (LINEAR)
           </text>
-          <text x="950" y="630" font-family="JetBrains Mono, monospace"
-                font-size="10" fill="#6B6577" text-anchor="end" letter-spacing="1.2">
-            Analysis code: github.com/METR/eval-analysis-public
-          </text>
+
 
           <!-- ===== Exponential trend line (straight on log-y). ===== -->
           <line x1="100" y1="522" x2="917.3" y2="132" stroke="#3B9494"
-                stroke-width="1.5" stroke-dasharray="6 5" opacity="0.6"/>
-          <text x="455" y="330" font-family="JetBrains Mono, monospace" font-size="11"
-                fill="#3B9494" opacity="0.9" transform="rotate(-26 455 330)">
+                stroke-width="1.5" stroke-dasharray="6 5" opacity="0.7"/>
+          <text x="455" y="330" font-family="JetBrains Mono, monospace" font-size="14"
+                fill="#5FC5C5" opacity="1" transform="rotate(-26 455 330)" font-weight="600">
             doubling every ~4 to 6 months
           </text>
 
           <!-- ===== Frontier model data points ===== -->
-          <g fill="#EDE5D8">
+          <g fill="#F5EEE3">
             <circle cx="100" cy="522" r="5" fill="#3B9494"/>
-            <text x="110" y="526" font-size="12">GPT-2</text>
+            <text x="110" y="527" font-size="14">GPT-2</text>
 
             <circle cx="461.5" cy="437" r="5" fill="#3B9494"/>
-            <text x="471.5" y="441" font-size="12">GPT-3.5</text>
+            <text x="471.5" y="442" font-size="14">GPT-3.5</text>
 
             <circle cx="531.5" cy="341" r="5" fill="#3B9494"/>
-            <text x="541.5" y="345" font-size="12">GPT-4</text>
+            <text x="541.5" y="346" font-size="14">GPT-4</text>
 
             <circle cx="688.5" cy="289" r="5" fill="#3B9494"/>
-            <text x="698.5" y="293" font-size="12">Claude 3.5 Sonnet</text>
+            <text x="698.5" y="294" font-size="14">Claude 3.5 Sonnet</text>
 
             <circle cx="793.1" cy="219" r="5" fill="#3B9494"/>
-            <text x="803.1" y="223" font-size="12">Claude Sonnet 4</text>
+            <text x="803.1" y="224" font-size="14">Claude Sonnet 4</text>
 
             <circle cx="858.5" cy="161" r="5" fill="#3B9494"/>
-            <text x="852" y="152" font-size="12" text-anchor="end">Claude Opus 4.5</text>
+            <text x="852" y="150" font-size="14" text-anchor="end">Claude Opus 4.5</text>
 
-            <circle cx="917.3" cy="132" r="7" fill="#3B9494" stroke="#EDE5D8" stroke-width="1.5"/>
-            <text x="911" y="124" font-size="13" font-weight="700" text-anchor="end">Claude Opus 4.6</text>
+            <circle cx="917.3" cy="132" r="7" fill="#3B9494" stroke="#F5EEE3" stroke-width="1.5"/>
+            <text x="911" y="120" font-size="15" font-weight="700" text-anchor="end">Claude Opus 4.6</text>
           </g>
 
           <!-- ===== 45-second dot: practice today. ===== -->
           <line x1="100" y1="421" x2="917.3" y2="421" stroke="#C45050"
-                stroke-width="1.2" stroke-dasharray="5 6" opacity="0.6"/>
-          <text x="92" y="425" font-family="JetBrains Mono, monospace" font-size="12"
-                fill="#C45050" font-weight="700" text-anchor="end">45 sec</text>
+                stroke-width="1.2" stroke-dasharray="5 6" opacity="0.7"/>
+          <text x="92" y="426" font-family="JetBrains Mono, monospace" font-size="15"
+                fill="#E07777" font-weight="700" text-anchor="end">45 sec</text>
 
           <circle cx="917.3" cy="421" r="24" fill="none" stroke="#C45050" stroke-width="1" opacity="0.35"/>
           <circle cx="917.3" cy="421" r="8"  fill="#C45050" stroke="#141216" stroke-width="2"/>
-          <text x="907" y="442" font-family="Raleway, sans-serif" font-size="13"
-                font-weight="700" fill="#C45050" text-anchor="end">
+          <text x="907" y="444" font-family="Raleway, sans-serif" font-size="15"
+                font-weight="700" fill="#E07777" text-anchor="end">
             Practice today
           </text>
-          <text x="907" y="458" font-family="JetBrains Mono, monospace" font-size="11"
-                fill="#9A92AE" text-anchor="end">
+          <text x="907" y="462" font-family="JetBrains Mono, monospace" font-size="13"
+                fill="#C8BFD4" text-anchor="end">
             Claude Code, median turn
           </text>
 
@@ -2483,8 +2480,8 @@
             <text x="998" y="278" font-size="16" font-weight="800">squandered</text>
             <text x="998" y="298" font-size="16" font-weight="800">potential.</text>
           </g>
-          <text x="998" y="318" font-family="JetBrains Mono, monospace"
-                font-size="10" fill="#9A92AE" letter-spacing="1.2">
+          <text x="998" y="320" font-family="JetBrains Mono, monospace"
+                font-size="13" fill="#D8D1E2" letter-spacing="1.2" font-weight="600">
             12 HR &#8594; 45 SEC
           </text>
         </svg>
