@@ -1757,9 +1757,8 @@
       .ask-f3-face-cred { font-size: 0.75rem !important; }
       .ask-f3-spotlight-photo { width: 48px !important; height: 48px !important; }
       .ask-f3-spotlight-meta { flex-wrap: wrap; }
-      /* Nav dots - expand tap area for touch */
-      .nav-dots { gap: 2px; flex-wrap: wrap; justify-content: center; max-width: 90vw; }
-      .nav-dot { padding: 8px; background-clip: content-box; width: 28px; height: 28px; }
+      /* Nav dots - hide on mobile, use counter + swipe instead */
+      .nav-dots { display: none !important; }
       /* Close slide - wrap links and actions */
       .close-links { flex-direction: column; gap: 12px; align-items: center; }
       .close-link { font-size: 0.75rem; word-break: break-all; min-height: 44px; display: flex; align-items: center; }
