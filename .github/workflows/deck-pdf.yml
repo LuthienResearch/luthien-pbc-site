@@ -4,7 +4,8 @@ on:
   push:
     branches: [main]
     paths:
-      - 'site/pitch/index.html'
+      - 'site/pitch/**'
+      - 'site/assets/**'
       - 'scripts/build_deck_pdf.mjs'
       - '.github/workflows/deck-pdf.yml'
   workflow_dispatch:
@@ -12,9 +13,11 @@ on:
 permissions:
   contents: write
 
+# Do NOT cancel in-progress runs: a half-finished upload would still win.
+# Let runs queue so the latest commit's PDF is always what ends up live.
 concurrency:
   group: "deck-pdf"
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -41,10 +44,15 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           TAG="deck-latest"
-          # Delete previous release + tag (ignore if missing), then recreate.
-          gh release delete "$TAG" --cleanup-tag --yes 2>/dev/null || true
-          gh release create "$TAG" \
-            --title "Latest pitch deck PDF" \
-            --notes "Auto-generated from site/pitch/index.html at commit ${{ github.sha }}." \
-            --target "${{ github.sha }}" \
-            luthien-deck.pdf
+          # Create release once (idempotent — ignore "already exists" failure).
+          # The tag stays stable forever so the asset URL never 404s.
+          gh release view "$TAG" >/dev/null 2>&1 || \
+            gh release create "$TAG" \
+              --title "Latest pitch deck PDF" \
+              --notes "Auto-generated from site/pitch/. Asset is overwritten in place on every deck change." \
+              --target main
+          # Overwrite the asset atomically. No delete-then-create race.
+          gh release upload "$TAG" luthien-deck.pdf --clobber
+          # Update release notes with the source commit for traceability.
+          gh release edit "$TAG" \
+            --notes "Auto-generated from site/pitch/. Last updated from commit ${{ github.sha }}."
