@@ -2477,33 +2477,68 @@
     </div>
   </div>
 
-  <!-- ======== SLIDE 10a: DISTRIBUTION (Auth0 playbook) ======== -->
-  <div class="slide" data-slide="8" data-slide-name="distribution">
+  <!-- ======== SLIDE: DISTRIBUTION PLAYBOOK ======== -->
+  <div class="slide" data-slide="8" data-slide-name="distribution-playbook">
     <div class="slide-inner">
       <div class="label anim-up">Distribution</div>
-      <h1 class="headline headline-lg anim-up delay-1">The same playbook built Auth0.</h1>
-      <p class="subtitle anim-up delay-1">We're building AI control and compliance that developers love.</p>
+      <h1 class="headline headline-lg anim-up delay-1">Do things that don't scale.</h1>
+      <p class="subtitle anim-up delay-1">Luthien is building the same way.</p>
       <div class="spacer-md"></div>
 
-      <!-- Hero row: Auth0 wordmark + $6.5B -->
-      <div class="anim-up delay-2" style="display: flex; align-items: center; justify-content: center; gap: 48px; margin: 28px 0;">
-        <img src="../assets/images/logos/auth0-wordmark.png" alt="Auth0" style="height: clamp(64px, 9vw, 100px); width: auto; filter: brightness(0) invert(1);">
-        <div style="font-family: var(--sans); font-weight: 800; font-size: clamp(4rem, 10vw, 7.5rem); color: var(--blue); line-height: 0.95; letter-spacing: -0.02em;">$6.5B</div>
+      <div class="anim-up delay-2" style="border: 1px solid var(--border); border-radius: 3px; overflow: hidden;">
+
+        <!-- Header -->
+        <div class="compare-row header" style="grid-template-columns: 200px 1fr 1fr;">
+          <div class="compare-cell">Company</div>
+          <div class="compare-cell">Didn't scale</div>
+          <div class="compare-cell">Scale</div>
+        </div>
+
+        <!-- Supabase -->
+        <div class="compare-row" style="grid-template-columns: 200px 1fr 1fr;">
+          <div class="compare-cell name" style="padding-top: 18px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-family: var(--sans); font-weight: 700; font-size: 0.95rem; color: var(--white);">Supabase</span>
+            </div>
+            <div style="font-family: var(--sans); font-weight: 800; font-size: 1.8rem; color: var(--blue); margin-top: 4px;">$5B</div>
+            <div style="font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim);">Oct 2023 Series E</div>
+          </div>
+          <div class="compare-cell">Turned down million-dollar enterprise contracts to protect developer focus.</div>
+          <div class="compare-cell">Self-serve Postgres-based backend with tiered pricing.</div>
+        </div>
+
+        <!-- HashiCorp -->
+        <div class="compare-row" style="grid-template-columns: 200px 1fr 1fr;">
+          <div class="compare-cell name" style="padding-top: 18px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-family: var(--sans); font-weight: 700; font-size: 0.95rem; color: var(--white);">HashiCorp</span>
+            </div>
+            <div style="font-family: var(--sans); font-weight: 800; font-size: 1.8rem; color: var(--blue); margin-top: 4px;">$14B</div>
+            <div style="font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim);">Dec 2021 IPO</div>
+          </div>
+          <div class="compare-cell">Hand-built Terraform configs for each early customer.</div>
+          <div class="compare-cell">Terraform module registry and HashiCorp Cloud Platform.</div>
+        </div>
+
+        <!-- Luthien -->
+        <div class="compare-row" style="grid-template-columns: 200px 1fr 1fr; border-bottom: none;">
+          <div class="compare-cell name" style="padding-top: 18px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-family: var(--sans); font-weight: 700; font-size: 0.95rem; color: var(--blue);">Luthien</span>
+            </div>
+            <div style="font-family: var(--sans); font-weight: 800; font-size: 1.8rem; color: var(--blue); margin-top: 4px;">$2M</div>
+            <div style="font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim);">Pre-seed ask</div>
+          </div>
+          <div class="compare-cell">Hand-built solutions for AI failures.</div>
+          <div class="compare-cell" style="color: var(--white); font-weight: 500;">AI control layer as a service.</div>
+        </div>
+
       </div>
 
-      <div class="spacer-md"></div>
-
-      <!-- Substantiating body: complete sentences, straight quotes, named source. -->
-      <div class="anim-up delay-3" style="max-width: 920px; margin: 0 auto;">
-        <p class="body-text" style="color: var(--white); line-height: 1.75;">
-          Auth0 was founded in 2013 as a <span style="font-family: var(--sans); font-weight: 800; font-size: 2.2em; color: var(--white); line-height: 1;">developer-first</span> identity SDK. In May 2021, Okta acquired it for $6.5B, even though Okta already sold its own customer identity product. Auth0 had built "a developer first <span style="font-family: var(--sans); font-weight: 800; font-size: 2.2em; color: var(--white); line-height: 1;">bottoms up acquisition strategy</span>."<sup class="blue" style="font-size: 0.7em; font-weight: 700;">1</sup>
-        </p>
-      </div>
-
-      <!-- Slide-level footnotes (pinned bottom-left, revealed by Footnotes toggle) -->
       <div class="slide-footnotes">
         <div class="citation">
-          <sup>1</sup> Advait Ruia, <a href="https://supertokens.com/blog/the-real-reason-okta-spent-on-auth0" target="_blank" rel="noopener noreferrer">"The Real Reason Okta Spent $6.5B on Auth0,"</a> SuperTokens, March 5, 2021. Auth0's prior valuation was $1.9B at its July 2020 Series F, so the acquisition was roughly 3.5x that price. The deal also doubled Okta's total addressable market from approximately $30B (workforce identity) to $55B (workforce plus customer identity).
+          <sup>1</sup> Supabase valuation: <a href="https://supabase.com/blog/supabase-series-c" target="_blank" rel="noopener noreferrer">Supabase Series C announcement</a>, Oct 2023.
+          <sup>2</sup> HashiCorp acquisition: IBM acquired HashiCorp for ~$6.4B in 2024; peak market cap reached $14B at Dec 2021 IPO. <a href="https://www.hashicorp.com/blog/hashicorp-joins-ibm" target="_blank" rel="noopener noreferrer">hashicorp.com</a>.
         </div>
       </div>
     </div>
