@@ -2161,23 +2161,24 @@
       <h1 class="headline headline-lg anim-up delay-1" style="white-space: nowrap;">Claude Code's Squandered Potential</h1>
       <div class="spacer-md"></div>
 
-      <!-- Static ratio visual: 12 hours potential vs 45 seconds reality -->
+      <!-- Static ratio visual: full-width bar showing 12h vs 45s -->
       <div class="anim-up delay-2" style="max-width: 900px; margin: 0 auto;">
-        <!-- Big number: 12 hours -->
-        <div style="text-align: center; margin-bottom: 12px;">
-          <div style="font-family: var(--sans); font-weight: 800; font-size: clamp(3rem, 8vw, 5.5rem); color: var(--blue); line-height: 1;">12 hours</div>
-          <div style="font-family: var(--mono); font-size: 0.82rem; color: var(--text-dim); margin-top: 8px;">autonomous capacity<sup style="font-size: 0.85em; font-weight: 700;">1</sup></div>
+        <!-- Full bar with proportional segments -->
+        <div style="display: flex; width: 100%; height: 120px; border-radius: 3px; overflow: hidden;">
+          <div style="flex: 959; background: rgba(59,148,148,0.12); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(59,148,148,0.25); border-right: none; border-radius: 3px 0 0 3px;">
+            <div style="text-align: center; padding: 0 16px;">
+              <div style="font-family: var(--sans); font-weight: 800; font-size: clamp(2.5rem, 6vw, 4rem); color: var(--blue); line-height: 1;">12 hours</div>
+              <div style="font-family: var(--mono); font-size: 0.78rem; color: var(--text-dim); margin-top: 6px;">autonomous capacity<sup style="font-weight: 700;">1</sup></div>
+            </div>
+          </div>
+          <div style="flex: 1; min-width: 6px; background: var(--red); display: flex; align-items: center; justify-content: center; border-radius: 0 3px 3px 0;"></div>
         </div>
-
-        <!-- Ratio bar -->
-        <div style="width: 100%; height: 8px; border-radius: 4px; background: rgba(59,148,148,0.2); position: relative; margin: 24px 0;">
-          <div style="position: absolute; left: 0; top: 0; width: 0.1%; min-width: 4px; height: 100%; background: var(--red); border-radius: 4px;"></div>
-        </div>
-
-        <!-- Small number: 45 seconds -->
-        <div style="text-align: center;">
-          <div style="font-family: var(--sans); font-weight: 800; font-size: clamp(2rem, 5vw, 3.5rem); color: var(--red); line-height: 1;">45 seconds</div>
-          <div style="font-family: var(--mono); font-size: 0.82rem; color: var(--text-dim); margin-top: 8px;">median turn length in practice<sup style="font-size: 0.85em; font-weight: 700;">2</sup></div>
+        <!-- Label for the red sliver, positioned below right -->
+        <div style="display: flex; justify-content: flex-end; margin-top: 10px; padding-right: 4px;">
+          <div style="text-align: right; max-width: 300px;">
+            <div style="font-family: var(--sans); font-weight: 800; font-size: clamp(1.3rem, 3vw, 1.8rem); color: var(--red); line-height: 1;">45 seconds</div>
+            <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); margin-top: 4px;">median turn length in practice<sup style="font-weight: 700;">2</sup></div>
+          </div>
         </div>
       </div>
 
