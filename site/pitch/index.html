@@ -2257,6 +2257,102 @@
       color: #d2a04a;
       background: rgba(219,171,63,0.1);
     }
+
+    /* ============ PRINT / PDF EXPORT ============ */
+    /* Applied by browser print and by Playwright page.pdf() (print media). */
+    @media print {
+      @page { size: 1280px 720px; margin: 0; }
+      html, body {
+        width: 1280px;
+        height: auto;
+        background: var(--bg);
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        overflow: visible;
+      }
+      .deck {
+        position: static;
+        width: 1280px;
+        height: auto;
+        overflow: visible;
+      }
+      .slide {
+        position: relative !important;
+        inset: auto !important;
+        width: 1280px !important;
+        height: 720px !important;
+        opacity: 1 !important;
+        transform: none !important;
+        pointer-events: auto !important;
+        overflow: hidden !important;
+        page-break-after: always;
+        break-after: page;
+      }
+      .slide:last-child {
+        page-break-after: auto;
+        break-after: auto;
+      }
+      /* Hide interactive chrome that doesn't belong in the PDF. */
+      .controls,
+      .progress-bar,
+      .nav-arrow,
+      .top-controls,
+      .cite-btn,
+      .fs-btn,
+      .slide-counter,
+      .nav-dots,
+      #downloadPdfBtn {
+        display: none !important;
+      }
+      /* Hide live/animated widgets that render non-deterministic frames. */
+      iframe { display: none !important; }
+      /* Force desktop layout. Chromium's print rendering triggers responsive
+         breakpoints differently than the on-screen viewport — without these
+         overrides the two-column founder grid, competitive matrix, and
+         how-it-works diagram collapse to their mobile variants in the PDF. */
+      .grid-2 { grid-template-columns: 1fr 1fr !important; }
+      .grid-3 { grid-template-columns: 1fr 1fr 1fr !important; }
+      .grid-4 { grid-template-columns: repeat(4, 1fr) !important; }
+      .flex-row { flex-direction: row !important; }
+      .api-diagram { flex-direction: row !important; }
+      .feature-matrix .compare-row {
+        grid-template-columns: 1.6fr 1.1fr 1fr 1fr 0.8fr !important;
+        padding: 0 !important;
+        margin-bottom: 0 !important;
+        background: transparent !important;
+        border-radius: 0 !important;
+        border-bottom: 1px solid var(--text-dim) !important;
+      }
+      .feature-matrix .compare-row.header { display: grid !important; }
+      .feature-matrix .compare-cell { padding: 14px 16px !important; }
+      .feature-matrix .compare-cell.name {
+        padding-bottom: 14px !important;
+        margin-bottom: 0 !important;
+        border-bottom: none !important;
+      }
+      .feature-matrix .compare-cell::before { content: none !important; }
+      .compare-row[style*="180px"] {
+        grid-template-columns: 180px 1fr 1fr 1fr 1fr !important;
+        padding: 0 !important;
+        margin-bottom: 0 !important;
+        background: transparent !important;
+        border-radius: 0 !important;
+      }
+      .compare-row.header[style*="180px"] { display: grid !important; }
+      [data-slide-name="quotes"] div[style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr 1fr !important;
+      }
+      [data-slide-name="how-it-works"] .arch-mobile { display: none !important; }
+      /* Reveal animation-gated content on every slide, not just .active. */
+      .anim-up,
+      .slide .anim-up,
+      [class*="delay-"] {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -3346,6 +3442,7 @@
 
 <!-- Top-right controls -->
 <div class="top-controls">
+  <a class="fs-btn" id="downloadPdfBtn" href="/pitch.pdf" target="_blank" rel="noopener" title="Download PDF" style="text-decoration: none; margin-right: 8px;">Download PDF</a>
   <button class="fs-btn" id="fsBtn" title="Toggle fullscreen">F11 &middot; Fullscreen</button>
 </div>
 <!-- Bottom-left footnote toggle (hidden on slides without footnotes) -->

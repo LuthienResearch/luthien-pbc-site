@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Deploy to Cloudflare Pages (luthien.cc)
+  # Primary: Cloudflare Pages (luthien.cc, honors site/_redirects for /pitch.pdf).
   cloudflare:
     runs-on: ubuntu-latest
     steps:
@@ -29,7 +29,8 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy site/ --project-name=luthien-pbc-site --branch=main
 
-  # Keep GitHub Pages deployment as fallback
+  # Fallback origin: GitHub Pages. Ignores _redirects (that's Cloudflare-only),
+  # but gives us a second HTTPS origin if Cloudflare is down.
   github-pages:
     environment:
       name: github-pages

@@ -1,0 +1,58 @@
+name: Build Deck PDF
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/pitch/**'
+      - 'site/assets/**'
+      - 'scripts/build_deck_pdf.mjs'
+      - '.github/workflows/deck-pdf.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Do NOT cancel in-progress runs: a half-finished upload would still win.
+# Let runs queue so the latest commit's PDF is always what ends up live.
+concurrency:
+  group: "deck-pdf"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.48.0
+          npx playwright install --with-deps chromium
+
+      - name: Render deck to PDF
+        run: node scripts/build_deck_pdf.mjs
+
+      - name: Publish PDF to rolling release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="deck-latest"
+          # Create release once (idempotent — ignore "already exists" failure).
+          # The tag stays stable forever so the asset URL never 404s.
+          gh release view "$TAG" >/dev/null 2>&1 || \
+            gh release create "$TAG" \
+              --title "Latest pitch deck PDF" \
+              --notes "Auto-generated from site/pitch/. Asset is overwritten in place on every deck change." \
+              --target main
+          # Overwrite the asset atomically. No delete-then-create race.
+          gh release upload "$TAG" luthien-deck.pdf --clobber
+          # Update release notes with the source commit for traceability.
+          gh release edit "$TAG" \
+            --notes "Auto-generated from site/pitch/. Last updated from commit ${{ github.sha }}."
