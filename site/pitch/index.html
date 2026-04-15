@@ -2173,42 +2173,183 @@
     </div>
   </div>
 
-  <!-- ======== SLIDE 3: THE PROBLEM  -  SQUANDERED POTENTIAL ======== -->
+  <!-- ======== SLIDE 3: THE PROBLEM  -  SQUANDERED POTENTIAL (METR) ======== -->
   <div class="slide" data-slide="2" data-slide-name="problem-dev">
     <div class="slide-inner">
       <div class="label anim-up">Problem</div>
-      <h1 class="headline headline-lg anim-up delay-1" style="white-space: nowrap;">Claude Code's Squandered Potential</h1>
-      <div class="spacer-md"></div>
+      <h1 class="headline headline-lg anim-up delay-1">
+        Claude Code can run for hours.<br>We use it in 45-second bursts.
+      </h1>
+      <div class="spacer-sm"></div>
 
-      <!-- Static ratio visual: full-width bar showing 12h vs 45s -->
-      <div class="anim-up delay-2" style="max-width: 900px; margin: 0 auto;">
-        <!-- Full bar with proportional segments -->
-        <div style="display: flex; width: 100%; height: 120px; border-radius: 3px; overflow: hidden;">
-          <div style="flex: 959; background: rgba(59,148,148,0.12); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(59,148,148,0.25); border-right: none; border-radius: 3px 0 0 3px;">
-            <div style="text-align: center; padding: 0 16px;">
-              <div style="font-family: var(--sans); font-weight: 800; font-size: clamp(2.5rem, 6vw, 4rem); color: var(--blue); line-height: 1;">12 hours</div>
-              <div style="font-family: var(--mono); font-size: 0.78rem; color: var(--text-dim); margin-top: 6px;">autonomous capacity<sup style="font-weight: 700;">1</sup></div>
-            </div>
-          </div>
-          <div style="flex: 1; min-width: 6px; background: var(--red); display: flex; align-items: center; justify-content: center; border-radius: 0 3px 3px 0;"></div>
-        </div>
-        <!-- Label for the red sliver, positioned below right -->
-        <div style="display: flex; justify-content: flex-end; margin-top: 10px; padding-right: 4px;">
-          <div style="text-align: right; max-width: 300px;">
-            <div style="font-family: var(--sans); font-weight: 800; font-size: clamp(1.3rem, 3vw, 1.8rem); color: var(--red); line-height: 1;">45 seconds</div>
-            <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); margin-top: 4px;">median turn length in practice<sup style="font-weight: 700;">2</sup></div>
-          </div>
-        </div>
+      <!--
+        METR chart, rebuilt in SVG.
+        viewBox: 0 0 1120 640.
+        Plot area: x 100-950, y 120-580 (height 460). Log-y 4s (y=522) to 12h (y=132).
+        Linear x-axis: 2020 (x=100) to 2026.5 (x=950).
+        Right gutter x 950-1120 hosts the "squandered potential" bracket.
+        Header y 0-100 carries the chart title + METR wordmark; footer y 600-640
+        carries x-axis labels and the METR legend + source line.
+        Model positions are approximated from METR Horizon v1.1.
+      -->
+      <div class="anim-up delay-2" style="position: relative; max-width: 1060px; margin: 0 auto;">
+        <svg viewBox="0 0 1120 640" xmlns="http://www.w3.org/2000/svg"
+             style="display: block; width: 100%; height: auto; font-family: var(--sans);"
+             role="img"
+             aria-label="METR time horizon chart: frontier models' autonomous task duration grows exponentially from GPT-2 at 4 seconds to Claude Opus 4.6 at 12 hours, while real-world usage of Claude Code is 45 seconds per turn.">
+
+          <!-- ===== Header: chart title + METR wordmark ===== -->
+          <text x="100" y="42" font-family="Raleway, sans-serif" font-weight="700"
+                font-size="19" fill="#EDE5D8">
+            Time horizon of software tasks different LLMs can complete 50% of the time
+          </text>
+          <text x="100" y="66" font-family="JetBrains Mono, monospace"
+                font-size="11" fill="#9A92AE" letter-spacing="1">
+            Source: METR Horizon v1.1 &#183; metr.org
+          </text>
+
+          <!-- METR wordmark (approximation): geometric sans + filled dot -->
+          <g transform="translate(1035, 38)">
+            <text x="0" y="0" font-family="Raleway, sans-serif" font-weight="800"
+                  font-size="24" fill="#EDE5D8" letter-spacing="1.5">METR</text>
+            <circle cx="78" cy="-7" r="4" fill="#3B9494"/>
+          </g>
+
+          <!-- ===== Plot frame ===== -->
+          <rect x="100" y="120" width="850" height="460" fill="none" stroke="#28243A" stroke-width="1"/>
+
+          <!-- Horizontal gridlines at each y-tick -->
+          <g stroke="#28243A" stroke-width="1" opacity="0.7">
+            <line x1="100" y1="522" x2="950" y2="522"/> <!-- 4 sec -->
+            <line x1="100" y1="408" x2="950" y2="408"/> <!-- 1 min -->
+            <line x1="100" y1="350" x2="950" y2="350"/> <!-- 4 min -->
+            <line x1="100" y1="295" x2="950" y2="295"/> <!-- 15 min -->
+            <line x1="100" y1="237" x2="950" y2="237"/> <!-- 1 hr -->
+            <line x1="100" y1="178" x2="950" y2="178"/> <!-- 4 hr -->
+            <line x1="100" y1="132" x2="950" y2="132"/> <!-- 12 hr -->
+          </g>
+
+          <!-- Vertical gridlines at each year -->
+          <g stroke="#28243A" stroke-width="1" opacity="0.5">
+            <line x1="230.8" y1="120" x2="230.8" y2="580"/>
+            <line x1="361.5" y1="120" x2="361.5" y2="580"/>
+            <line x1="492.3" y1="120" x2="492.3" y2="580"/>
+            <line x1="623.1" y1="120" x2="623.1" y2="580"/>
+            <line x1="753.8" y1="120" x2="753.8" y2="580"/>
+            <line x1="884.6" y1="120" x2="884.6" y2="580"/>
+          </g>
+
+          <!-- Y-axis tick labels -->
+          <g font-family="JetBrains Mono, monospace" font-size="12" fill="#9A92AE" text-anchor="end">
+            <text x="92" y="526">4 sec</text>
+            <text x="92" y="412">1 min</text>
+            <text x="92" y="354">4 min</text>
+            <text x="92" y="299">15 min</text>
+            <text x="92" y="241">1 hour</text>
+            <text x="92" y="182">4 hours</text>
+            <text x="92" y="136">12 hours</text>
+          </g>
+
+          <!-- Y-axis title -->
+          <text x="36" y="350" font-family="JetBrains Mono, monospace" font-size="11"
+                fill="#9A92AE" text-anchor="middle" transform="rotate(-90 36 350)"
+                letter-spacing="1.2">
+            Task duration (50% success)
+          </text>
+
+          <!-- X-axis tick labels -->
+          <g font-family="JetBrains Mono, monospace" font-size="12" fill="#9A92AE" text-anchor="middle">
+            <text x="100"   y="600">2020</text>
+            <text x="230.8" y="600">2021</text>
+            <text x="361.5" y="600">2022</text>
+            <text x="492.3" y="600">2023</text>
+            <text x="623.1" y="600">2024</text>
+            <text x="753.8" y="600">2025</text>
+            <text x="884.6" y="600">2026</text>
+          </g>
+
+          <!-- Footer: legend (left) + analysis note (right) -->
+          <text x="100" y="630" font-family="JetBrains Mono, monospace"
+                font-size="10" fill="#6B6577" letter-spacing="1.2">
+            TIME HORIZON v1.1 &#183; LOG SCALE &#183; 50% SUCCESS
+          </text>
+          <text x="950" y="630" font-family="JetBrains Mono, monospace"
+                font-size="10" fill="#6B6577" text-anchor="end" letter-spacing="1.2">
+            Analysis code: github.com/METR/eval-analysis-public
+          </text>
+
+          <!-- ===== Exponential trend line (straight on log-y). ===== -->
+          <line x1="100" y1="522" x2="917.3" y2="132" stroke="#3B9494"
+                stroke-width="1.5" stroke-dasharray="6 5" opacity="0.6"/>
+          <text x="455" y="330" font-family="JetBrains Mono, monospace" font-size="11"
+                fill="#3B9494" opacity="0.9" transform="rotate(-26 455 330)">
+            doubling every ~4 to 6 months
+          </text>
+
+          <!-- ===== Frontier model data points ===== -->
+          <g fill="#EDE5D8">
+            <circle cx="100" cy="522" r="5" fill="#3B9494"/>
+            <text x="110" y="526" font-size="12">GPT-2</text>
+
+            <circle cx="461.5" cy="437" r="5" fill="#3B9494"/>
+            <text x="471.5" y="441" font-size="12">GPT-3.5</text>
+
+            <circle cx="531.5" cy="341" r="5" fill="#3B9494"/>
+            <text x="541.5" y="345" font-size="12">GPT-4</text>
+
+            <circle cx="688.5" cy="289" r="5" fill="#3B9494"/>
+            <text x="698.5" y="293" font-size="12">Claude 3.5 Sonnet</text>
+
+            <circle cx="793.1" cy="219" r="5" fill="#3B9494"/>
+            <text x="803.1" y="223" font-size="12">Claude Sonnet 4</text>
+
+            <circle cx="858.5" cy="161" r="5" fill="#3B9494"/>
+            <text x="852" y="152" font-size="12" text-anchor="end">Claude Opus 4.5</text>
+
+            <circle cx="917.3" cy="132" r="7" fill="#3B9494" stroke="#EDE5D8" stroke-width="1.5"/>
+            <text x="911" y="124" font-size="13" font-weight="700" text-anchor="end">Claude Opus 4.6</text>
+          </g>
+
+          <!-- ===== 45-second dot: practice today. ===== -->
+          <line x1="100" y1="421" x2="917.3" y2="421" stroke="#C45050"
+                stroke-width="1.2" stroke-dasharray="5 6" opacity="0.6"/>
+          <text x="92" y="425" font-family="JetBrains Mono, monospace" font-size="12"
+                fill="#C45050" font-weight="700" text-anchor="end">45 sec</text>
+
+          <circle cx="917.3" cy="421" r="24" fill="none" stroke="#C45050" stroke-width="1" opacity="0.35"/>
+          <circle cx="917.3" cy="421" r="8"  fill="#C45050" stroke="#141216" stroke-width="2"/>
+          <text x="907" y="442" font-family="Raleway, sans-serif" font-size="13"
+                font-weight="700" fill="#C45050" text-anchor="end">
+            Practice today
+          </text>
+          <text x="907" y="458" font-family="JetBrains Mono, monospace" font-size="11"
+                fill="#9A92AE" text-anchor="end">
+            Claude Code, median turn
+          </text>
+
+          <!-- ===== Right-gutter bracket: Opus 4.6 (y=132) to 45 sec dot (y=421). ===== -->
+          <g stroke="#C47B42" stroke-width="2.5" fill="none">
+            <line x1="968" y1="132" x2="988" y2="132"/>
+            <line x1="968" y1="421" x2="988" y2="421"/>
+            <line x1="978" y1="132" x2="978" y2="421"/>
+          </g>
+
+          <!-- Bracket label (lives in x 998-1118) -->
+          <g font-family="Raleway, sans-serif" fill="#C47B42">
+            <text x="998" y="258" font-size="16" font-weight="800">Claude's</text>
+            <text x="998" y="278" font-size="16" font-weight="800">squandered</text>
+            <text x="998" y="298" font-size="16" font-weight="800">potential.</text>
+          </g>
+          <text x="998" y="318" font-family="JetBrains Mono, monospace"
+                font-size="10" fill="#9A92AE" letter-spacing="1.2">
+            12 HR &#8594; 45 SEC
+          </text>
+        </svg>
       </div>
-
-      <div class="spacer-md"></div>
-
-      <p class="anim-up delay-3" style="text-align: center; font-size: clamp(1rem, 1.5vw, 1.2rem); color: var(--text); line-height: 1.5; max-width: 900px; margin: 0 auto;">
-        Claude Code can run autonomously for 12 hours. In practice, humans babysit in 45-second increments because the risks are too high: agents ignoring team conventions, no visibility into parallel workflows, secrets at risk of exfiltration, or no way to enforce policy across the team.
-      </p>
 
       <div class="slide-footnotes">
         <div class="citation">
+          Chart reconstructed from METR, <a href="https://metr.org/blog/2025-03-19-measuring-ai-ability-to-complete-long-tasks/" target="_blank" rel="noopener noreferrer">"Measuring AI ability to complete long tasks"</a> (Horizon v1.1). Model positions are approximate.
           <sup>1</sup> 12-hour autonomy: <a href="https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview" target="_blank" rel="noopener noreferrer">Claude Code documentation, Anthropic</a>.
           <sup>2</sup> 45-second babysitting cadence: <a href="https://www.anthropic.com/research/measuring-agent-autonomy" target="_blank" rel="noopener noreferrer">Anthropic, "Measuring Agent Autonomy"</a>.
         </div>
