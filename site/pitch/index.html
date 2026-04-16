@@ -157,6 +157,63 @@
       margin-top: 6px;
     }
 
+    /* ============ TAM SLIDE: 2x2 QUADRANT GRID ============ */
+    .tam-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 28px;
+      width: 100%;
+    }
+    .tam-quad {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: clamp(20px, 3vw, 40px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: clamp(180px, 26vh, 260px);
+      position: relative;
+    }
+    .tam-label {
+      font-family: var(--mono);
+      font-size: clamp(0.8rem, 1.3vw, 1rem);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+    .tam-figure {
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: clamp(3.5rem, 9vw, 7rem);
+      color: var(--white);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-top: 18px;
+    }
+    .tam-sublabel {
+      font-family: var(--mono);
+      font-size: clamp(0.75rem, 1.1vw, 0.9rem);
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+    .tam-source-logo {
+      position: absolute;
+      bottom: clamp(14px, 2vw, 22px);
+      right: clamp(14px, 2vw, 22px);
+      width: clamp(130px, 16vw, 200px);
+      height: auto;
+      background: #F5EEE3;
+      padding: 6px 10px;
+      border-radius: 3px;
+      box-sizing: border-box;
+    }
+
     .emphasis {
       color: var(--blue);
       font-style: italic;
@@ -2385,6 +2442,10 @@
       /* Market - single column stats instead of 2x2 */
       .grid-4 { grid-template-columns: 1fr !important; }
       .stat-huge { font-size: clamp(1.8rem, 10vw, 2.5rem) !important; }
+      /* TAM slide quadrants: stack vertically on mobile */
+      .tam-grid { grid-template-columns: 1fr !important; grid-template-rows: none !important; gap: 14px !important; }
+      .tam-quad { min-height: auto !important; padding: 18px !important; }
+      .tam-figure { font-size: clamp(2.6rem, 12vw, 4rem) !important; margin-top: 10px !important; }
       /* Team - force grid children to shrink, break long text */
       .grid-2 > * { min-width: 0; }
       .founder-card { min-width: 0; overflow-x: hidden; }
@@ -2907,7 +2968,6 @@
              aria-label="METR time horizon chart (linear scale): frontier model autonomous task duration from 4 seconds (GPT-2, 2020) to 12 hours (Claude Opus 4.6, 2026).">
           <text x="100" y="44" font-family="Raleway, sans-serif" font-weight="700" font-size="23" fill="#F5EEE3">Time horizon of software tasks different LLMs can complete 50% of the time</text>
           <text x="100" y="72" font-family="JetBrains Mono, monospace" font-size="14" fill="#C8BFD4" letter-spacing="1">Source: METR Horizon v1.1 &#183; metr.org</text>
-          <g transform="translate(1035, 38)"><text x="0" y="0" font-family="Raleway, sans-serif" font-weight="800" font-size="24" fill="#EDE5D8" letter-spacing="1.5">METR</text><circle cx="78" cy="-7" r="4" fill="#3B9494"/></g>
           <rect x="100" y="120" width="850" height="460" fill="none" stroke="#28243A" stroke-width="1"/>
           <g stroke="#28243A" stroke-width="1" opacity="0.7">
             <line x1="100" y1="580" x2="950" y2="580"/>
@@ -2945,7 +3005,7 @@
             <text x="753.8" y="602">2025</text>
             <text x="884.6" y="602">2026</text>
           </g>
-          <text x="525" y="630" font-family="JetBrains Mono, monospace" font-size="13" fill="#D8D1E2" text-anchor="middle" letter-spacing="1.2" font-weight="600">Year (LOG)</text>
+          <text x="525" y="630" font-family="JetBrains Mono, monospace" font-size="13" fill="#D8D1E2" text-anchor="middle" letter-spacing="1.2" font-weight="600">Year</text>
           <!-- Hockey-stick trend through model points -->
           <polyline points="100,579.96 461.5,579.36 531.5,577.44 688.5,570.42 793.1,541.67 858.5,426.67 917.3,120" fill="none" stroke="#3B9494" stroke-width="1.8" opacity="0.65"/>
           <!-- Frontier model data points (linear y) -->
@@ -2979,10 +3039,6 @@
           <text x="20" y="32" font-family="Raleway, sans-serif" font-weight="700" font-size="17" fill="#F5EEE3">Time horizon of software tasks</text>
           <text x="20" y="54" font-family="Raleway, sans-serif" font-weight="700" font-size="17" fill="#F5EEE3">LLMs can complete 50% of the time</text>
           <text x="20" y="78" font-family="JetBrains Mono, monospace" font-size="11" fill="#C8BFD4" letter-spacing="0.8">Source: METR Horizon v1.1 &#183; metr.org</text>
-          <g transform="translate(480, 32)" font-family="Raleway, sans-serif">
-            <text x="0" y="0" font-weight="800" font-size="15" fill="#EDE5D8" letter-spacing="1" text-anchor="end">METR</text>
-            <circle cx="6" cy="-4" r="3" fill="#3B9494"/>
-          </g>
           <rect x="70" y="120" width="400" height="820" fill="none" stroke="#28243A" stroke-width="1"/>
           <g stroke="#28243A" stroke-width="1" opacity="0.5">
             <line x1="136.67" y1="120" x2="136.67" y2="940"/>
@@ -3009,7 +3065,7 @@
             <text x="62" y="769">2025</text>
             <text x="62" y="894">2026</text>
           </g>
-          <text x="22" y="530" font-family="JetBrains Mono, monospace" font-size="11" fill="#D8D1E2" text-anchor="middle" transform="rotate(-90 22 530)" letter-spacing="1.2" font-weight="600">Year (LOG)</text>
+          <text x="22" y="530" font-family="JetBrains Mono, monospace" font-size="11" fill="#D8D1E2" text-anchor="middle" transform="rotate(-90 22 530)" letter-spacing="1.2" font-weight="600">Year</text>
           <g font-family="JetBrains Mono, monospace" font-size="12" fill="#D8D1E2" text-anchor="middle">
             <text x="70" y="960">0</text>
             <text x="136.67" y="960">2 hr</text>
@@ -3057,7 +3113,6 @@
              aria-label="METR time horizon chart highlighting today's 12-hour frontier.">
           <text x="100" y="44" font-family="Raleway, sans-serif" font-weight="700" font-size="23" fill="#F5EEE3">Time horizon of software tasks different LLMs can complete 50% of the time</text>
           <text x="100" y="72" font-family="JetBrains Mono, monospace" font-size="14" fill="#C8BFD4" letter-spacing="1">Source: METR Horizon v1.1 &#183; metr.org</text>
-          <g transform="translate(1035, 38)"><text x="0" y="0" font-family="Raleway, sans-serif" font-weight="800" font-size="24" fill="#EDE5D8" letter-spacing="1.5">METR</text><circle cx="78" cy="-7" r="4" fill="#3B9494"/></g>
           <rect x="100" y="120" width="850" height="460" fill="none" stroke="#28243A" stroke-width="1"/>
           <g stroke="#28243A" stroke-width="1" opacity="0.7">
             <line x1="100" y1="580" x2="950" y2="580"/>
@@ -3095,7 +3150,7 @@
             <text x="753.8" y="602">2025</text>
             <text x="884.6" y="602">2026</text>
           </g>
-          <text x="525" y="630" font-family="JetBrains Mono, monospace" font-size="13" fill="#D8D1E2" text-anchor="middle" letter-spacing="1.2" font-weight="600">Year (LOG)</text>
+          <text x="525" y="630" font-family="JetBrains Mono, monospace" font-size="13" fill="#D8D1E2" text-anchor="middle" letter-spacing="1.2" font-weight="600">Year</text>
           <polyline points="100,579.96 461.5,579.36 531.5,577.44 688.5,570.42 793.1,541.67 858.5,426.67 917.3,120" fill="none" stroke="#3B9494" stroke-width="1.8" opacity="0.65"/>
           <g fill="#F5EEE3">
             <circle cx="100" cy="579.96" r="5" fill="#3B9494"/>
@@ -3129,10 +3184,6 @@
           <text x="20" y="32" font-family="Raleway, sans-serif" font-weight="700" font-size="17" fill="#F5EEE3">Time horizon of software tasks</text>
           <text x="20" y="54" font-family="Raleway, sans-serif" font-weight="700" font-size="17" fill="#F5EEE3">LLMs can complete 50% of the time</text>
           <text x="20" y="78" font-family="JetBrains Mono, monospace" font-size="11" fill="#C8BFD4" letter-spacing="0.8">Source: METR Horizon v1.1 &#183; metr.org</text>
-          <g transform="translate(480, 32)" font-family="Raleway, sans-serif">
-            <text x="0" y="0" font-weight="800" font-size="15" fill="#EDE5D8" letter-spacing="1" text-anchor="end">METR</text>
-            <circle cx="6" cy="-4" r="3" fill="#3B9494"/>
-          </g>
           <rect x="70" y="120" width="400" height="820" fill="none" stroke="#28243A" stroke-width="1"/>
           <g stroke="#28243A" stroke-width="1" opacity="0.5">
             <line x1="136.67" y1="120" x2="136.67" y2="940"/>
@@ -3159,7 +3210,7 @@
             <text x="62" y="769">2025</text>
             <text x="62" y="894">2026</text>
           </g>
-          <text x="22" y="530" font-family="JetBrains Mono, monospace" font-size="11" fill="#D8D1E2" text-anchor="middle" transform="rotate(-90 22 530)" letter-spacing="1.2" font-weight="600">Year (LOG)</text>
+          <text x="22" y="530" font-family="JetBrains Mono, monospace" font-size="11" fill="#D8D1E2" text-anchor="middle" transform="rotate(-90 22 530)" letter-spacing="1.2" font-weight="600">Year</text>
           <g font-family="JetBrains Mono, monospace" font-size="12" fill="#D8D1E2" text-anchor="middle">
             <text x="70" y="960">0</text>
             <text x="136.67" y="960">2 hr</text>
@@ -3227,7 +3278,6 @@
              aria-label="METR chart with 45-second Claude Code usage line: squandered potential gap between 12-hour model capability and 45-second real-world usage.">
           <text x="100" y="44" font-family="Raleway, sans-serif" font-weight="700" font-size="23" fill="#F5EEE3">Time horizon of software tasks different LLMs can complete 50% of the time</text>
           <text x="100" y="72" font-family="JetBrains Mono, monospace" font-size="14" fill="#C8BFD4" letter-spacing="1">Source: METR Horizon v1.1 &#183; metr.org</text>
-          <g transform="translate(1035, 38)"><text x="0" y="0" font-family="Raleway, sans-serif" font-weight="800" font-size="24" fill="#EDE5D8" letter-spacing="1.5">METR</text><circle cx="78" cy="-7" r="4" fill="#3B9494"/></g>
           <rect x="100" y="120" width="850" height="460" fill="none" stroke="#28243A" stroke-width="1"/>
           <g stroke="#28243A" stroke-width="1" opacity="0.7">
             <line x1="100" y1="580" x2="950" y2="580"/>
@@ -3265,7 +3315,7 @@
             <text x="753.8" y="602">2025</text>
             <text x="884.6" y="602">2026</text>
           </g>
-          <text x="525" y="630" font-family="JetBrains Mono, monospace" font-size="13" fill="#D8D1E2" text-anchor="middle" letter-spacing="1.2" font-weight="600">Year (LOG)</text>
+          <text x="525" y="630" font-family="JetBrains Mono, monospace" font-size="13" fill="#D8D1E2" text-anchor="middle" letter-spacing="1.2" font-weight="600">Year</text>
           <polyline points="100,579.96 461.5,579.36 531.5,577.44 688.5,570.42 793.1,541.67 858.5,426.67 917.3,120" fill="none" stroke="#3B9494" stroke-width="1.8" opacity="0.65"/>
           <!-- Squandered-potential gap: shaded region between 45-sec line and the frontier curve -->
           <path d="M 100,579.52 L 461.5,579.52 L 531.5,579.52 L 688.5,579.52 L 793.1,579.52 L 858.5,579.52 L 917.3,579.52 L 917.3,120 L 858.5,426.67 L 793.1,541.67 L 688.5,570.42 L 531.5,577.44 L 461.5,579.36 L 100,579.96 Z"
@@ -3316,10 +3366,6 @@
           <text x="20" y="32" font-family="Raleway, sans-serif" font-weight="700" font-size="17" fill="#F5EEE3">Time horizon of software tasks</text>
           <text x="20" y="54" font-family="Raleway, sans-serif" font-weight="700" font-size="17" fill="#F5EEE3">LLMs can complete 50% of the time</text>
           <text x="20" y="78" font-family="JetBrains Mono, monospace" font-size="11" fill="#C8BFD4" letter-spacing="0.8">Source: METR Horizon v1.1 &#183; metr.org</text>
-          <g transform="translate(480, 32)" font-family="Raleway, sans-serif">
-            <text x="0" y="0" font-weight="800" font-size="15" fill="#EDE5D8" letter-spacing="1" text-anchor="end">METR</text>
-            <circle cx="6" cy="-4" r="3" fill="#3B9494"/>
-          </g>
           <rect x="70" y="120" width="400" height="820" fill="none" stroke="#28243A" stroke-width="1"/>
           <g stroke="#28243A" stroke-width="1" opacity="0.5">
             <line x1="136.67" y1="120" x2="136.67" y2="940"/>
@@ -3346,7 +3392,7 @@
             <text x="62" y="769">2025</text>
             <text x="62" y="894">2026</text>
           </g>
-          <text x="22" y="530" font-family="JetBrains Mono, monospace" font-size="11" fill="#D8D1E2" text-anchor="middle" transform="rotate(-90 22 530)" letter-spacing="1.2" font-weight="600">Year (LOG)</text>
+          <text x="22" y="530" font-family="JetBrains Mono, monospace" font-size="11" fill="#D8D1E2" text-anchor="middle" transform="rotate(-90 22 530)" letter-spacing="1.2" font-weight="600">Year</text>
           <g font-family="JetBrains Mono, monospace" font-size="12" fill="#D8D1E2" text-anchor="middle">
             <text x="70" y="960">0</text>
             <text x="136.67" y="960">2 hr</text>
@@ -3507,7 +3553,8 @@
   <!-- ======== SLIDE: LUTHIEN ONE-LINER (answer) ======== -->
   <div class="slide title-slide" data-slide="5" data-slide-name="luthien-oneliner">
     <div class="slide-inner" style="text-align: center;">
-      <h1 class="headline headline-md anim-up" style="color: var(--white);">Luthien is a Fully Customizable Real-Time Manager for Every AI in Your Org</h1>
+      <img class="anim-up" src="../assets/images/luthien-new.svg" alt="Luthien" style="display: block; margin: 0 auto 48px; width: clamp(220px, 34vw, 420px); height: auto;">
+      <h1 class="headline headline-md anim-up delay-1" style="color: var(--white);">A Fully Customizable Real-Time Manager for Every AI in Your Org</h1>
     </div>
   </div>
 
@@ -3786,15 +3833,37 @@ Key invariants:
   </div>
 
   <!-- ======== SLIDE 4: MARKET + DEMAND ======== -->
-  <div class="slide title-slide" data-slide="3" data-slide-name="tam">
-    <div class="slide-inner" style="text-align: center;">
+  <div class="slide" data-slide="3" data-slide-name="tam">
+    <div class="slide-inner">
       <div class="label anim-up">Market</div>
       <div class="spacer-md"></div>
-      <div class="anim-up delay-1" style="font-family: var(--sans); font-weight: 800; font-size: clamp(5rem, 14vw, 11rem); color: var(--blue); line-height: 0.95; letter-spacing: -0.02em;">$155B</div>
-      <div class="anim-up delay-2" style="margin-top: 20px; color: var(--text-muted); font-family: var(--mono); font-size: clamp(0.95rem, 1.6vw, 1.25rem); letter-spacing: 0.12em; text-transform: uppercase;">TAM by 2030<sup class="blue" style="font-size: 0.7em; font-weight: 700;">1</sup></div>
+
+      <div class="tam-grid anim-up delay-1">
+        <div class="tam-quad">
+          <div class="tam-label">AI Coding Agents Today<sup class="blue" style="font-size: 0.7em; font-weight: 700;">1</sup></div>
+          <div class="tam-figure">$4.7B</div>
+        </div>
+        <div class="tam-quad">
+          <div class="tam-label">Projected Growth of AI Coding Agents<sup class="blue" style="font-size: 0.7em; font-weight: 700;">1</sup></div>
+          <div class="tam-figure">$14.6B</div>
+          <div class="tam-sublabel">by 2033</div>
+        </div>
+        <div class="tam-quad">
+          <div class="tam-label">Claude Code revenue, 0&ndash;9 months<sup class="blue" style="font-size: 0.7em; font-weight: 700;">2</sup></div>
+          <div class="tam-figure green">$2.5B</div>
+        </div>
+        <div class="tam-quad">
+          <div class="tam-label">Agentic AI TAM by 2030<sup class="blue" style="font-size: 0.7em; font-weight: 700;">3</sup></div>
+          <div class="tam-figure blue">$155B</div>
+          <img class="tam-source-logo" src="../assets/images/logos/bank-of-america.svg" alt="Bank of America Institute">
+        </div>
+      </div>
+
       <div class="slide-footnotes">
         <div class="citation">
-          <sup>1</sup> Bank of America Institute, <a href="https://institute.bankofamerica.com/content/dam/transformation/agentic-ai-in-the-workplace.pdf" target="_blank" rel="noopener noreferrer">"Agentic AI in the Workplace"</a> (2025).
+          <sup>1</sup> AI code assistant market: <a href="https://finance.yahoo.com/news/ai-code-assistant-market-set-143000983.html" target="_blank" rel="noopener noreferrer">SNS Insider AI Code Assistant Market Report (15.31% CAGR to 2033)</a>.
+          <sup>2</sup> Claude Code ARR: <a href="https://www.anthropic.com/news/anthropic-raises-30-billion-series-g-funding-380-billion-post-money-valuation" target="_blank" rel="noopener noreferrer">Anthropic Series G announcement, Feb 2026</a>.
+          <sup>3</sup> Bank of America Institute, <a href="https://institute.bankofamerica.com/content/dam/transformation/agentic-ai-in-the-workplace.pdf" target="_blank" rel="noopener noreferrer">"Agentic AI in the Workplace"</a> (2025).
         </div>
       </div>
     </div>
@@ -3971,7 +4040,7 @@ Key invariants:
         <div class="compare-row" style="grid-template-columns: 200px 1fr 1fr 140px; border-bottom: none;">
           <div class="compare-cell name" style="padding-top: 18px;">
             <div style="display: flex; align-items: center; gap: 8px;">
-              <span style="font-family: var(--sans); font-weight: 700; font-size: 0.95rem; color: var(--blue);">Luthien</span>
+              <img src="../assets/images/luthien-new.svg" alt="Luthien" style="height: 28px; width: auto;">
             </div>
           </div>
           <div class="compare-cell">Hand-built solutions for AI failures.</div>
