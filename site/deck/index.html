@@ -175,9 +175,9 @@ function submitEmail(e) {
   iframe.style.display = 'none';
   iframe.src = 'https://tally.so/r/J9kdlK?email=' + encodeURIComponent(email);
   document.body.appendChild(iframe);
-  // Navigate to deck
+  // Navigate to deck (relative path works on both file:// and https://)
   var slide = window.location.hash || '#team';
-  window.location.href = '/pitch/' + slide;
+  window.location.href = '../pitch/' + slide;
   return false;
 }
 </script>
