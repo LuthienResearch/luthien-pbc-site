@@ -4000,40 +4000,33 @@ Key invariants:
       <p class="subtitle anim-up delay-1">We asked the smartest people we know to trial our product.<br>They're proactively proposing improvements.</p>
       <div class="spacer-md"></div>
 
-      <div class="anim-up delay-2" style="display: flex; flex-direction: column; gap: 24px;">
+      <div class="anim-up delay-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1060px; margin: 0 auto;">
 
         <!-- Trajectory Labs card -->
-        <div style="border: 1px solid var(--blue); border-radius: 6px; padding: clamp(20px, 3vw, 32px); background: rgba(59,148,148,0.04);">
-          <div style="display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 16px;">
-            <a href="https://www.trajectorylabs.com/" target="_blank" rel="noopener noreferrer" style="color: var(--blue); font-family: var(--sans); font-weight: 700; font-size: 1.1rem; text-decoration: none;">Trajectory Labs</a>
-            <div style="display: flex; align-items: baseline; gap: 12px;">
-              <span style="font-family: var(--sans); font-weight: 800; font-size: 1.4rem; color: var(--blue);">$60K ARR</span>
-              <span style="font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim);">signed on Tuesday</span>
-            </div>
+        <div style="border: 1px solid var(--blue); border-radius: 8px; padding: clamp(24px, 3vw, 36px); background: rgba(59,148,148,0.05); display: flex; flex-direction: column; gap: 16px;">
+          <div>
+            <a href="https://www.trajectorylabs.com/" target="_blank" rel="noopener noreferrer" style="color: var(--blue); font-family: var(--sans); font-weight: 700; font-size: 1.05rem; text-decoration: none; letter-spacing: 0.02em;">Trajectory Labs</a>
+            <span style="font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim); margin-left: 10px;">signed on Tuesday</span>
           </div>
-          <div style="color: var(--white); line-height: 1.7; font-size: 0.95rem;">
+          <div style="font-family: var(--sans); font-weight: 800; font-size: clamp(2.4rem, 5vw, 3.6rem); color: var(--blue); line-height: 1;">$60K <span style="font-size: 0.5em; font-weight: 700; color: var(--text-dim);">ARR</span></div>
+          <div style="color: var(--text); line-height: 1.65; font-size: 0.9rem;">
             Building RL environments for frontier labs.<br>
-            Sami built <a href="https://github.com/sjawhar/legion" target="_blank" rel="noopener noreferrer" style="color: var(--blue); font-weight: 700; text-decoration: none;">Legion</a>, an autonomous dev swarm coordinating OpenCode agents.<br>
-            <span style="color: var(--blue); font-weight: 700;">10 Luthien PRs on Sunday.</span> <span style="color: var(--blue);">8 ready for review.</span>
+            Sami built <a href="https://github.com/sjawhar/legion" target="_blank" rel="noopener noreferrer" style="color: var(--blue); font-weight: 700; text-decoration: none;">Legion</a>, an autonomous dev swarm.<br>
+            <span style="color: var(--blue); font-weight: 700;">10 Luthien PRs on Sunday.</span>
           </div>
         </div>
 
         <!-- Redwood Research card -->
-        <div style="border: 1px solid var(--amber); border-radius: 6px; padding: clamp(20px, 3vw, 32px); background: rgba(196,123,66,0.04);">
-          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 16px;">
-            <div style="display: flex; align-items: center; gap: 10px;">
-              <img src="../assets/images/logos/redwood-research.svg" alt="Redwood Research" style="height: 24px; width: auto;">
-              <span style="font-family: var(--mono); font-size: 0.7rem; color: var(--amber);">Signed LOI</span>
-            </div>
-            <div style="display: flex; align-items: baseline; gap: 12px;">
-              <span style="font-family: var(--sans); font-weight: 800; font-size: 1.4rem; color: var(--white);">$330K&ndash;$500K</span>
-              <span style="font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim);">signed on Friday</span>
-            </div>
+        <div style="border: 1px solid var(--amber); border-radius: 8px; padding: clamp(24px, 3vw, 36px); background: rgba(196,123,66,0.05); display: flex; flex-direction: column; gap: 16px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <img src="../assets/images/logos/redwood-research.svg" alt="Redwood Research" style="height: 22px; width: auto;">
+            <span style="font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim);">signed on Friday</span>
           </div>
-          <div style="color: var(--white); line-height: 1.7; font-size: 0.95rem;">
-            <span style="color: var(--amber); font-weight: 700;">Pioneered</span> the AI control research.<br>
-            Buck (CEO) has <span style="color: var(--amber); font-weight: 700;">2,935</span> Google Scholar citations.<br>
-            Co-discovered <span style="color: var(--amber); font-weight: 700;">alignment faking</span> with Anthropic (Dec 2024).
+          <div style="font-family: var(--sans); font-weight: 800; font-size: clamp(2.4rem, 5vw, 3.6rem); color: var(--white); line-height: 1;">$330K&ndash;$500K <span style="font-size: 0.5em; font-weight: 700; color: var(--text-dim);">LOI</span></div>
+          <div style="color: var(--text); line-height: 1.65; font-size: 0.9rem;">
+            <span style="color: var(--amber); font-weight: 700;">Pioneered</span> AI control research.<br>
+            Buck (CEO): <span style="color: var(--amber); font-weight: 700;">2,935</span> Google Scholar citations.<br>
+            Co-discovered <span style="color: var(--amber); font-weight: 700;">alignment faking</span> with Anthropic.
           </div>
         </div>
 
