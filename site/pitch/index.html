@@ -1983,14 +1983,20 @@
       }
       [data-slide-name="strategy"] .compare-row.header[style*="200px"] { display: none !important; }
       [data-slide-name="strategy"] .compare-row[style*="200px"] .compare-cell { padding: 4px 0; }
-      /* Traction - stack table on mobile */
+      /* Traction - stack table on mobile. Header rows now contain the
+         Trajectory Labs / Redwood Research name + section label, so we
+         keep them visible and just stack their cells vertically. */
       [data-slide-name="traction"] .compare-row[style*="200px"] {
         grid-template-columns: 1fr !important;
         padding: 14px 12px;
         margin-bottom: 4px;
         border-bottom: none !important;
       }
-      [data-slide-name="traction"] .compare-row.header[style*="200px"] { display: none !important; }
+      [data-slide-name="traction"] .compare-row.header[style*="200px"] {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        padding: 12px 12px 6px;
+      }
       [data-slide-name="traction"] .compare-row[style*="200px"] .compare-cell { padding: 4px 0; }
       /* Problem-cto failure board - stack on mobile */
       .failure-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
