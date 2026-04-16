@@ -1290,14 +1290,13 @@
        overflow:hidden, and its max-width animates per stage to expose
        additional columns from left to right. */
     .matrix-wrap {
-      max-width: 420px;
-      overflow: hidden;
+      width: 920px;
       border-radius: 4px;
-      transition: max-width 0.55s cubic-bezier(0.4,0,0.2,1);
+      transition: clip-path 0.55s cubic-bezier(0.4,0,0.2,1);
     }
-    [data-slide-name="solution-matrix"][data-stage="0"] .matrix-wrap { max-width: 420px; }
-    [data-slide-name="solution-matrix"][data-stage="1"] .matrix-wrap { max-width: 660px; }
-    [data-slide-name="solution-matrix"][data-stage="2"] .matrix-wrap { max-width: 920px; }
+    [data-slide-name="solution-matrix"][data-stage="0"] .matrix-wrap { clip-path: inset(0 54.35% 0 0 round 4px); }
+    [data-slide-name="solution-matrix"][data-stage="1"] .matrix-wrap { clip-path: inset(0 28.26% 0 0 round 4px); }
+    [data-slide-name="solution-matrix"][data-stage="2"] .matrix-wrap { clip-path: inset(0 0 0 0 round 4px); }
     .matrix {
       display: grid;
       grid-template-columns: 180px 240px 240px 260px;
@@ -1347,7 +1346,7 @@
       opacity: 0;
     }
     @media print {
-      .matrix-wrap { max-width: 920px !important; }
+      .matrix-wrap { clip-path: none !important; }
       .matrix .mtx-cell { opacity: 1 !important; }
     }
 
