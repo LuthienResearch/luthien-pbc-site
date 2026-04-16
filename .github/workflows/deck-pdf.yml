@@ -39,20 +39,25 @@ jobs:
       - name: Render deck to PDF
         run: node scripts/build_deck_pdf.mjs
 
-      - name: Publish PDF to rolling release
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit PDF to site/pitch.pdf
+        # Serve the PDF as a same-origin static file from Cloudflare Pages.
+        # Previously we uploaded to a GitHub release and redirected, but Chrome
+        # blocks cross-origin download redirects as "potentially insecure" —
+        # even when every hop is HTTPS. Committing the PDF into the deployed
+        # directory makes /pitch.pdf a plain static file on luthien.cc.
+        #
+        # The workflow path filter excludes site/pitch.pdf, so this commit does
+        # not retrigger this workflow (no loop).
         run: |
-          TAG="deck-latest"
-          # Create release once (idempotent — ignore "already exists" failure).
-          # The tag stays stable forever so the asset URL never 404s.
-          gh release view "$TAG" >/dev/null 2>&1 || \
-            gh release create "$TAG" \
-              --title "Latest pitch deck PDF" \
-              --notes "Auto-generated from site/pitch/. Asset is overwritten in place on every deck change." \
-              --target main
-          # Overwrite the asset atomically. No delete-then-create race.
-          gh release upload "$TAG" luthien-deck.pdf --clobber
-          # Update release notes with the source commit for traceability.
-          gh release edit "$TAG" \
-            --notes "Auto-generated from site/pitch/. Last updated from commit ${{ github.sha }}."
+          mv luthien-deck.pdf site/pitch.pdf
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet site/pitch.pdf; then
+            echo "PDF unchanged; nothing to commit."
+            exit 0
+          fi
+          git add site/pitch.pdf
+          git commit -m "Regenerate pitch deck PDF [skip ci]
+
+Auto-generated from commit ${{ github.sha }}."
+          git push origin HEAD:main
