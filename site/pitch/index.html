@@ -1283,18 +1283,36 @@
     }
 
     /* ============ SOLUTION MATRIX (what we need) ============ */
-    /* Each column is a vertical flex-stack so cells align across columns
-       regardless of which columns are visible. Unrevealed columns collapse
-       to zero width via flex-grow animation so the visible columns fill
-       the row smoothly. */
+    /* CSS grid with fixed per-column widths. Unrevealed columns animate
+       from 0 to their full width so previously-shown columns don't resize
+       when new ones append. Cells use overflow:hidden so collapsed columns
+       don't leak content sideways. */
+    .matrix {
+      display: grid;
+      grid-template-columns: 180px 240px 0px 0px;
+      transition: grid-template-columns 0.55s cubic-bezier(0.4,0,0.2,1);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      font-family: var(--sans);
+    }
+    [data-slide-name="solution-matrix"][data-stage="0"] .matrix { grid-template-columns: 180px 240px 0px 0px; }
+    [data-slide-name="solution-matrix"][data-stage="1"] .matrix { grid-template-columns: 180px 240px 240px 0px; }
+    [data-slide-name="solution-matrix"][data-stage="2"] .matrix { grid-template-columns: 180px 240px 240px 260px; }
+
     .matrix .mtx-cell {
       padding: 18px;
       border-bottom: 1px solid var(--border);
+      border-right: 1px solid var(--border);
       box-sizing: border-box;
       color: var(--text);
+      overflow: hidden;
+      transition: opacity 0.35s ease 0.15s;
+      min-width: 0;
     }
-    .matrix .mtx-col:last-child .mtx-cell:last-child,
-    .matrix .mtx-col .mtx-cell:last-child { border-bottom: none; }
+    /* Remove bottom border from last row, right border from last column */
+    .matrix .mtx-cell.mtx-last-row { border-bottom: none; }
+    .matrix .mtx-cell.col-better { border-right: none; }
     .matrix .mtx-head {
       padding: 16px 18px;
       background: var(--bg-elevated);
@@ -1312,26 +1330,20 @@
     }
     .matrix .mtx-center { text-align: center; }
     .matrix .mtx-dim { color: var(--text-muted); }
-    .matrix .mtx-luthien-cell {
-      background: rgba(59,148,148,0.08);
-      color: var(--white);
-      font-weight: 600;
-    }
-    /* Make matrix columns animate width when their reveal state flips. */
-    .matrix .mtx-col {
-      transition: flex-grow 0.5s cubic-bezier(0.4,0,0.2,1),
-                  opacity 0.35s ease;
-      overflow: hidden;
-    }
-    .matrix .mtx-col[data-reveal]:not(.revealed) {
-      flex-grow: 0;
+    .matrix .col-better.mtx-head { background: rgba(59,148,148,0.18); color: var(--blue); font-weight: 700; }
+    .matrix .col-better:not(.mtx-head) { background: rgba(59,148,148,0.08); color: var(--white); font-weight: 600; }
+
+    /* Fade out cells in columns that haven't been revealed yet. */
+    [data-slide-name="solution-matrix"][data-stage="0"] .matrix .col-good,
+    [data-slide-name="solution-matrix"][data-stage="0"] .matrix .col-better,
+    [data-slide-name="solution-matrix"][data-stage="1"] .matrix .col-better {
       opacity: 0;
-      pointer-events: none;
     }
-    /* Override the generic [data-reveal] base so matrix columns keep
-       display:flex while collapsed (needed to animate width). */
-    .matrix .mtx-col[data-reveal] { opacity: 0; }
-    .matrix .mtx-col[data-reveal].revealed { opacity: 1; pointer-events: auto; }
+    /* In print/PDF always show every column at full width. */
+    @media print {
+      .matrix { grid-template-columns: 180px 240px 240px 260px !important; }
+      .matrix .mtx-cell { opacity: 1 !important; }
+    }
 
     /* ============ STAGED REVEALS (click/arrow to progress) ============ */
     /* Elements tagged [data-reveal="N"] are hidden until the slide's
@@ -2835,56 +2847,46 @@
       <h1 class="headline headline-lg anim-up delay-1">Control plane for dev-environment agents</h1>
       <div class="spacer-md"></div>
 
-      <div class="anim-up delay-2" style="max-width: 1080px; margin: 0 auto;">
-        <div class="matrix" style="display: flex; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; font-family: var(--sans);">
+      <div class="anim-up delay-2" style="display: flex; justify-content: center;">
+        <div class="matrix">
+          <!-- Row 0: column headers -->
+          <div class="mtx-cell mtx-head"></div>
+          <div class="mtx-cell mtx-head mtx-center col-default">Default</div>
+          <div class="mtx-cell mtx-head mtx-center col-good">Good</div>
+          <div class="mtx-cell mtx-head mtx-center col-better">Better &middot; Luthien</div>
 
-          <!-- Row labels column (always visible) -->
-          <div class="mtx-col mtx-labels" style="order: 0; flex: 1.3 1 0; min-width: 0; display: flex; flex-direction: column;">
-            <div class="mtx-cell mtx-head"></div>
-            <div class="mtx-cell mtx-row">Oversight</div>
-            <div class="mtx-cell mtx-row">Do what you want<br><span style="font-weight: 400; font-size: 0.85rem; color: var(--text-dim);">(across models)</span></div>
-            <div class="mtx-cell mtx-row">Mitigating harms</div>
-          </div>
-
-          <!-- Default column (stage 0) -->
-          <div class="mtx-col" data-reveal="0" style="order: 2; flex: 1 1 0; min-width: 0; display: flex; flex-direction: column;">
-            <div class="mtx-cell mtx-head mtx-center">Default</div>
-            <div class="mtx-cell mtx-center mtx-dim">No observability</div>
-            <div class="mtx-cell mtx-center mtx-dim">Sometimes</div>
-            <div class="mtx-cell mtx-center mtx-dim">No protection</div>
-          </div>
-
-          <!-- Good column (stage 1) -->
-          <div class="mtx-col" data-reveal="1" style="order: 3; flex: 1 1 0; min-width: 0; display: flex; flex-direction: column;">
-            <div class="mtx-cell mtx-head mtx-center">Good</div>
-            <div class="mtx-cell mtx-center">
-              Observability
-              <div style="margin-top: 10px; display: flex; justify-content: center;">
-                <img src="../assets/images/logos/helicone.png" alt="Helicone" style="height: 26px; filter: brightness(0) invert(1); opacity: 0.9;">
-              </div>
-            </div>
-            <div class="mtx-cell mtx-center">
-              Gateways<br><span style="color: var(--text-dim); font-size: 0.85rem;">(partial solution)</span>
-              <div style="margin-top: 10px; display: flex; justify-content: center;">
-                <img src="../assets/images/logos/litellm.png" alt="LiteLLM" style="height: 22px; opacity: 0.9;">
-              </div>
-            </div>
-            <div class="mtx-cell mtx-center">
-              Guardrails<br><span style="color: var(--text-dim); font-size: 0.85rem;">(simple rules)</span>
-              <div style="margin-top: 10px; display: flex; justify-content: center;">
-                <img src="../assets/images/logos/guardrails-ai.png" alt="Guardrails AI" style="height: 22px; opacity: 0.9;">
-              </div>
+          <!-- Row 1: See -->
+          <div class="mtx-cell mtx-row">See</div>
+          <div class="mtx-cell mtx-center mtx-dim col-default">No observability</div>
+          <div class="mtx-cell mtx-center col-good">
+            Observability
+            <div style="margin-top: 10px; display: flex; justify-content: center;">
+              <img src="../assets/images/logos/helicone.png" alt="Helicone" style="height: 26px; filter: brightness(0) invert(1); opacity: 0.9;">
             </div>
           </div>
+          <div class="mtx-cell mtx-center col-better">Analyze for continuous improvement</div>
 
-          <!-- Luthien column (stage 2) - inserted as leftmost data column -->
-          <div class="mtx-col mtx-col-luthien" data-reveal="2" style="order: 1; flex: 1.2 1 0; min-width: 0; display: flex; flex-direction: column;">
-            <div class="mtx-cell mtx-head mtx-center" style="background: rgba(59,148,148,0.18); color: var(--blue); font-weight: 700;">Better &middot; Luthien</div>
-            <div class="mtx-cell mtx-center mtx-luthien-cell">Active 24/7 org-wide analysis and improvement</div>
-            <div class="mtx-cell mtx-center mtx-luthien-cell">Implement intent with org-wide context</div>
-            <div class="mtx-cell mtx-center mtx-luthien-cell">Safely accomplish the objective</div>
+          <!-- Row 2: Do what you ask -->
+          <div class="mtx-cell mtx-row">Do what you ask</div>
+          <div class="mtx-cell mtx-center mtx-dim col-default">Sometimes</div>
+          <div class="mtx-cell mtx-center col-good">
+            Gateways<br><span style="color: var(--text-dim); font-size: 0.85rem;">(partial solution)</span>
+            <div style="margin-top: 10px; display: flex; justify-content: center;">
+              <img src="../assets/images/logos/litellm.png" alt="LiteLLM" style="height: 22px; opacity: 0.9;">
+            </div>
           </div>
+          <div class="mtx-cell mtx-center col-better">Make the best business decision given full context</div>
 
+          <!-- Row 3: Block harmful action -->
+          <div class="mtx-cell mtx-row mtx-last-row">Block harmful action</div>
+          <div class="mtx-cell mtx-center mtx-dim mtx-last-row col-default">No protection</div>
+          <div class="mtx-cell mtx-center mtx-last-row col-good">
+            Guardrails<br><span style="color: var(--text-dim); font-size: 0.85rem;">(simple rules)</span>
+            <div style="margin-top: 10px; display: flex; justify-content: center;">
+              <img src="../assets/images/logos/guardrails-ai.png" alt="Guardrails AI" style="height: 22px; opacity: 0.9;">
+            </div>
+          </div>
+          <div class="mtx-cell mtx-center mtx-last-row col-better">Safely accomplish the objective</div>
         </div>
       </div>
     </div>
