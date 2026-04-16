@@ -1290,17 +1290,16 @@
        overflow:hidden, and its max-width animates per stage to expose
        additional columns from left to right. */
     .matrix-wrap {
-      width: 920px;
+      width: 680px;
       border-radius: 4px;
       transition: clip-path 0.55s cubic-bezier(0.4,0,0.2,1);
     }
-    [data-slide-name="solution-matrix"][data-stage="0"] .matrix-wrap { clip-path: inset(0 54.35% 0 0 round 4px); }
-    [data-slide-name="solution-matrix"][data-stage="1"] .matrix-wrap { clip-path: inset(0 28.26% 0 0 round 4px); }
-    [data-slide-name="solution-matrix"][data-stage="2"] .matrix-wrap { clip-path: inset(0 0 0 0 round 4px); }
+    [data-slide-name="solution-matrix"][data-stage="0"] .matrix-wrap { clip-path: inset(0 38.24% 0 0 round 4px); }
+    [data-slide-name="solution-matrix"][data-stage="1"] .matrix-wrap { clip-path: inset(0 0 0 0 round 4px); }
     .matrix {
       display: grid;
-      grid-template-columns: 180px 240px 240px 260px;
-      width: 920px;
+      grid-template-columns: 180px 240px 260px;
+      width: 680px;
       border: 1px solid var(--border);
       border-radius: 4px;
       font-family: var(--sans);
@@ -1340,13 +1339,11 @@
     .matrix .col-better:not(.mtx-head) { background: rgba(59,148,148,0.08); color: var(--white); font-weight: 600; }
 
     /* Fade out cells in columns that haven't been revealed yet. */
-    [data-slide-name="solution-matrix"][data-stage="0"] .matrix .col-good,
-    [data-slide-name="solution-matrix"][data-stage="0"] .matrix .col-better,
-    [data-slide-name="solution-matrix"][data-stage="1"] .matrix .col-better {
+    [data-slide-name="solution-matrix"][data-stage="0"] .matrix .col-better {
       opacity: 0;
     }
     @media print {
-      .matrix-wrap { clip-path: none !important; }
+      .matrix-wrap { clip-path: none !important; width: 680px !important; }
       .matrix .mtx-cell { opacity: 1 !important; }
     }
 
@@ -2846,7 +2843,7 @@
   </div>
 
   <!-- ======== SLIDE: WHAT WE NEED (solution matrix) ======== -->
-  <div class="slide" data-slide="2" data-slide-name="solution-matrix" data-stages="3">
+  <div class="slide" data-slide="2" data-slide-name="solution-matrix" data-stages="2">
     <div class="slide-inner">
       <div class="label anim-up">What we need</div>
       <div class="spacer-md"></div>
@@ -2856,13 +2853,11 @@
         <div class="matrix">
           <!-- Row 0: column headers -->
           <div class="mtx-cell mtx-head"></div>
-          <div class="mtx-cell mtx-head mtx-center col-default">Default</div>
           <div class="mtx-cell mtx-head mtx-center col-good">Good</div>
           <div class="mtx-cell mtx-head mtx-center col-better">Better &middot; Luthien</div>
 
           <!-- Row 1: See -->
           <div class="mtx-cell mtx-row">See</div>
-          <div class="mtx-cell mtx-center mtx-dim col-default">No observability</div>
           <div class="mtx-cell mtx-center col-good">
             Observability
             <div style="margin-top: 10px; display: flex; justify-content: center;">
@@ -2873,7 +2868,6 @@
 
           <!-- Row 2: Do what you ask -->
           <div class="mtx-cell mtx-row">Do what you ask</div>
-          <div class="mtx-cell mtx-center mtx-dim col-default">Sometimes</div>
           <div class="mtx-cell mtx-center col-good">
             Gateways<br><span style="color: var(--text-dim); font-size: 0.85rem;">(partial solution)</span>
             <div style="margin-top: 10px; display: flex; justify-content: center;">
@@ -2884,7 +2878,6 @@
 
           <!-- Row 3: Block harmful action -->
           <div class="mtx-cell mtx-row mtx-last-row">Block harmful action</div>
-          <div class="mtx-cell mtx-center mtx-dim mtx-last-row col-default">No protection</div>
           <div class="mtx-cell mtx-center mtx-last-row col-good">
             Guardrails<br><span style="color: var(--text-dim); font-size: 0.85rem;">(simple rules)</span>
             <div style="margin-top: 10px; display: flex; justify-content: center;">
