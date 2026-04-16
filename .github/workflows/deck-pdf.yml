@@ -57,7 +57,5 @@ jobs:
             exit 0
           fi
           git add site/pitch.pdf
-          git commit -m "Regenerate pitch deck PDF [skip ci]
-
-Auto-generated from commit ${{ github.sha }}."
+          git commit -m "Regenerate pitch deck PDF [skip ci]" -m "Auto-generated from commit ${{ github.sha }}."
           git push origin HEAD:main
