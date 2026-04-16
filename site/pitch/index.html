@@ -2167,14 +2167,53 @@
       .feature-matrix .compare-cell:nth-child(2)::before { content: 'LiteLLM / Helicone: '; font-weight: 700; color: var(--text-dim); }
       .feature-matrix .compare-cell:nth-child(3)::before { content: 'Guardrails AI: '; font-weight: 700; color: var(--text-dim); }
       .feature-matrix .compare-cell:nth-child(4)::before { content: 'CodeRabbit: '; font-weight: 700; color: var(--text-dim); }
-      /* Quotes grid - stack on tablets */
-      [data-slide-name="quotes"] div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+      /* Quotes grid - stack on tablets. The user-quotes slide uses the
+         same 2-column inline grid as the press-quotes slide. */
+      [data-slide-name="quotes"] div[style*="grid-template-columns: 1fr 1fr"],
+      [data-slide-name="user-quotes"] div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
     }
+
+    /* METR chart: landscape on desktop, portrait variant on mobile.
+       Both SVGs live in the DOM; CSS swaps which one is visible.
+       !important is required because the landscape SVG carries an
+       inline display:block in its style attribute. */
+    .metr-portrait { display: none !important; }
 
     @media (max-width: 600px) {
       html { font-size: 100%; }
       .slide { padding: 32px 20px; overflow-y: auto; justify-content: flex-start; padding-top: 60px; }
       .slide.title-slide { justify-content: center; padding-top: 32px; }
+      .metr-landscape { display: none !important; }
+      .metr-portrait { display: block !important; }
+      /* Solution matrix: drop the desktop clip-path staging and the
+         fixed 680px width. Restructure to a 2-column grid where
+         row labels (See / Do what you ask / Block harmful action)
+         span both columns and act as section headers. */
+      [data-slide-name="solution-matrix"] .matrix-wrap {
+        width: 100% !important;
+        clip-path: none !important;
+      }
+      [data-slide-name="solution-matrix"] .matrix {
+        width: 100% !important;
+        grid-template-columns: 1fr 1fr;
+        font-size: 0.85rem;
+      }
+      [data-slide-name="solution-matrix"] .matrix .mtx-cell { padding: 12px 10px; }
+      [data-slide-name="solution-matrix"] .matrix .mtx-head {
+        padding: 10px 8px;
+        font-size: 0.7rem;
+        letter-spacing: 0.1em;
+      }
+      [data-slide-name="solution-matrix"] .matrix .mtx-row {
+        grid-column: 1 / -1;
+        font-size: 0.95rem;
+        padding: 12px 14px;
+        border-right: none;
+      }
+      /* Hide the empty top-left header cell on mobile. */
+      [data-slide-name="solution-matrix"] .matrix > .mtx-cell:first-child { display: none; }
+      /* Keep logos contained within their cells (Guardrails AI was overflowing). */
+      [data-slide-name="solution-matrix"] .matrix img { max-width: 100%; height: auto !important; }
       .headline-lg { font-size: 1.5rem; margin-bottom: 8px; }
       .subtitle { margin-bottom: 8px; }
       .grid-2 { grid-template-columns: 1fr; }
@@ -2198,13 +2237,12 @@
       .top-controls { right: 16px; top: 14px; }
       .fs-btn { display: none; }
       iframe { height: 460px !important; }
-      /* How It Works - hide desktop diagram, show mobile version
-         Use data-slide-name (not data-slide="3") because problem-cto
-         shares the same data-slide number and its body-split was getting hidden. */
-      [data-slide-name="how-it-works"] .anim-up.delay-2,
+      /* How It Works - keep both Without/With Luthien diagrams stacked
+         on mobile. The .arch-mobile branch was for a never-shipped
+         mobile-only graphic; without it, hiding .delay-2 left the bottom
+         of the slide blank. */
       [data-slide-name="how-it-works"] .anim-up.delay-3,
       [data-slide-name="how-it-works"] .spacer-lg { display: none; }
-      [data-slide-name="how-it-works"] .arch-mobile { display: block !important; }
       [data-slide-name="how-it-works"] .slide-inner > div[style*="border-top"] { display: none; }
       .nav-arrow { display: none !important; }
       /* GTM table - card layout on mobile */
@@ -2287,14 +2325,20 @@
       }
       [data-slide-name="strategy"] .compare-row.header[style*="200px"] { display: none !important; }
       [data-slide-name="strategy"] .compare-row[style*="200px"] .compare-cell { padding: 4px 0; }
-      /* Traction - stack table on mobile */
+      /* Traction - stack table on mobile. Header rows now contain the
+         Trajectory Labs / Redwood Research name + section label, so we
+         keep them visible and just stack their cells vertically. */
       [data-slide-name="traction"] .compare-row[style*="200px"] {
         grid-template-columns: 1fr !important;
         padding: 14px 12px;
         margin-bottom: 4px;
         border-bottom: none !important;
       }
-      [data-slide-name="traction"] .compare-row.header[style*="200px"] { display: none !important; }
+      [data-slide-name="traction"] .compare-row.header[style*="200px"] {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        padding: 12px 12px 6px;
+      }
       [data-slide-name="traction"] .compare-row[style*="200px"] .compare-cell { padding: 4px 0; }
       /* Problem-cto failure board - stack on mobile */
       .failure-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
@@ -2858,7 +2902,7 @@
   <div class="slide" data-slide="1" data-slide-name="problem-dev">
     <div class="slide-inner">
       <div class="anim-up" style="position: relative; max-width: 1100px; margin: 0 auto;">
-        <svg viewBox="0 0 1120 640" xmlns="http://www.w3.org/2000/svg"
+        <svg class="metr-landscape" viewBox="0 0 1120 640" xmlns="http://www.w3.org/2000/svg"
              style="display: block; width: 100%; height: auto; font-family: var(--sans);"
              role="img"
              aria-label="METR time horizon chart (linear scale): frontier model autonomous task duration from 4 seconds (GPT-2, 2020) to 12 hours (Claude Opus 4.6, 2026).">
@@ -2923,6 +2967,78 @@
             <text x="911" y="108" font-size="15" font-weight="700" text-anchor="end">Claude Opus 4.6</text>
           </g>
         </svg>
+        <!--
+          PORTRAIT variant of the METR chart for mobile (<=600px).
+          viewBox 500x1000. X = time horizon (0 at x=70, 12hr at x=470).
+          Y = year (top->bottom): 2020 at y=140, 2026 at y=890.
+          Frame extends past 2026 to y=940 to host Claude Opus 4.6 dot.
+        -->
+        <svg class="metr-portrait" viewBox="0 0 500 1000" xmlns="http://www.w3.org/2000/svg"
+             style="width: 100%; height: auto; font-family: var(--sans);"
+             role="img"
+             aria-label="METR time horizon chart (portrait, linear scale): frontier model autonomous task duration from 4 seconds (GPT-2, 2020) to 12 hours (Claude Opus 4.6, 2026).">
+          <text x="20" y="32" font-family="Raleway, sans-serif" font-weight="700" font-size="17" fill="#F5EEE3">Time horizon of software tasks</text>
+          <text x="20" y="54" font-family="Raleway, sans-serif" font-weight="700" font-size="17" fill="#F5EEE3">LLMs can complete 50% of the time</text>
+          <text x="20" y="78" font-family="JetBrains Mono, monospace" font-size="11" fill="#C8BFD4" letter-spacing="0.8">Source: METR Horizon v1.1 &#183; metr.org</text>
+          <g transform="translate(480, 32)" font-family="Raleway, sans-serif">
+            <text x="0" y="0" font-weight="800" font-size="15" fill="#EDE5D8" letter-spacing="1" text-anchor="end">METR</text>
+            <circle cx="6" cy="-4" r="3" fill="#3B9494"/>
+          </g>
+          <rect x="70" y="120" width="400" height="820" fill="none" stroke="#28243A" stroke-width="1"/>
+          <g stroke="#28243A" stroke-width="1" opacity="0.5">
+            <line x1="136.67" y1="120" x2="136.67" y2="940"/>
+            <line x1="203.33" y1="120" x2="203.33" y2="940"/>
+            <line x1="270" y1="120" x2="270" y2="940"/>
+            <line x1="336.67" y1="120" x2="336.67" y2="940"/>
+            <line x1="403.33" y1="120" x2="403.33" y2="940"/>
+          </g>
+          <g stroke="#28243A" stroke-width="1" opacity="0.7">
+            <line x1="70" y1="140" x2="470" y2="140"/>
+            <line x1="70" y1="265" x2="470" y2="265"/>
+            <line x1="70" y1="390" x2="470" y2="390"/>
+            <line x1="70" y1="515" x2="470" y2="515"/>
+            <line x1="70" y1="640" x2="470" y2="640"/>
+            <line x1="70" y1="765" x2="470" y2="765"/>
+            <line x1="70" y1="890" x2="470" y2="890"/>
+          </g>
+          <g font-family="JetBrains Mono, monospace" font-size="12" fill="#D8D1E2" text-anchor="end">
+            <text x="62" y="144">2020</text>
+            <text x="62" y="269">2021</text>
+            <text x="62" y="394">2022</text>
+            <text x="62" y="519">2023</text>
+            <text x="62" y="644">2024</text>
+            <text x="62" y="769">2025</text>
+            <text x="62" y="894">2026</text>
+          </g>
+          <text x="22" y="530" font-family="JetBrains Mono, monospace" font-size="11" fill="#D8D1E2" text-anchor="middle" transform="rotate(-90 22 530)" letter-spacing="1.2" font-weight="600">Year (LINEAR)</text>
+          <g font-family="JetBrains Mono, monospace" font-size="12" fill="#D8D1E2" text-anchor="middle">
+            <text x="70" y="960">0</text>
+            <text x="136.67" y="960">2 hr</text>
+            <text x="203.33" y="960">4 hr</text>
+            <text x="270" y="960">6 hr</text>
+            <text x="336.67" y="960">8 hr</text>
+            <text x="403.33" y="960">10 hr</text>
+            <text x="470" y="960">12 hr</text>
+          </g>
+          <text x="270" y="985" font-family="JetBrains Mono, monospace" font-size="11" fill="#D8D1E2" text-anchor="middle" letter-spacing="1.2" font-weight="600">Task duration (50% success) &#183; LINEAR</text>
+          <polyline points="70.04,140 70.54,485.5 72.22,552.5 78.33,702.5 103.33,802.5 203.33,865 470,921.25" fill="none" stroke="#3B9494" stroke-width="1.8" opacity="0.65"/>
+          <g fill="#F5EEE3">
+            <circle cx="70" cy="140" r="4" fill="#3B9494"/>
+            <text x="80" y="138" font-size="12">GPT-2</text>
+            <circle cx="70.5" cy="485.5" r="4" fill="#3B9494"/>
+            <text x="80" y="483" font-size="12">GPT-3.5</text>
+            <circle cx="72.22" cy="552.5" r="4" fill="#3B9494"/>
+            <text x="82" y="550" font-size="12">GPT-4</text>
+            <circle cx="78.33" cy="702.5" r="4" fill="#3B9494"/>
+            <text x="88" y="700" font-size="12">Claude 3.5 Sonnet</text>
+            <circle cx="103.33" cy="802.5" r="4" fill="#3B9494"/>
+            <text x="113" y="800" font-size="12">Claude Sonnet 4</text>
+            <circle cx="203.33" cy="865" r="4" fill="#3B9494"/>
+            <text x="213" y="863" font-size="12">Claude Opus 4.5</text>
+            <circle cx="470" cy="921.25" r="6" fill="#3B9494" stroke="#F5EEE3" stroke-width="1.5"/>
+            <text x="460" y="909" font-size="13" font-weight="700" text-anchor="end">Claude Opus 4.6</text>
+          </g>
+        </svg>
       </div>
       <div class="slide-footnotes">
         <div class="citation">
@@ -2936,7 +3052,7 @@
   <div class="slide" data-slide="1" data-slide-name="problem-metr-12h">
     <div class="slide-inner">
       <div class="anim-up" style="position: relative; max-width: 1100px; margin: 0 auto;">
-        <svg viewBox="0 0 1120 640" xmlns="http://www.w3.org/2000/svg"
+        <svg class="metr-landscape" viewBox="0 0 1120 640" xmlns="http://www.w3.org/2000/svg"
              style="display: block; width: 100%; height: auto; font-family: var(--sans);"
              role="img"
              aria-label="METR time horizon chart highlighting today's 12-hour frontier.">
@@ -3004,6 +3120,80 @@
           <text x="870" y="240" font-family="Raleway, sans-serif" font-size="56" font-weight="800" fill="#E07777" text-anchor="end">12 hours</text>
           <text x="870" y="268" font-family="JetBrains Mono, monospace" font-size="15" fill="#D8D1E2" text-anchor="end" letter-spacing="1.2">autonomous task horizon, today</text>
         </svg>
+        <!-- PORTRAIT variant for mobile (<=600px). Same base chart as
+             problem-dev plus the 12-hour highlight at Opus 4.6 (470, 921.25)
+             and a "12 hours" callout in the empty upper-middle area. -->
+        <svg class="metr-portrait" viewBox="0 0 500 1000" xmlns="http://www.w3.org/2000/svg"
+             style="width: 100%; height: auto; font-family: var(--sans);"
+             role="img"
+             aria-label="METR time horizon chart (portrait) highlighting today's 12-hour frontier.">
+          <text x="20" y="32" font-family="Raleway, sans-serif" font-weight="700" font-size="17" fill="#F5EEE3">Time horizon of software tasks</text>
+          <text x="20" y="54" font-family="Raleway, sans-serif" font-weight="700" font-size="17" fill="#F5EEE3">LLMs can complete 50% of the time</text>
+          <text x="20" y="78" font-family="JetBrains Mono, monospace" font-size="11" fill="#C8BFD4" letter-spacing="0.8">Source: METR Horizon v1.1 &#183; metr.org</text>
+          <g transform="translate(480, 32)" font-family="Raleway, sans-serif">
+            <text x="0" y="0" font-weight="800" font-size="15" fill="#EDE5D8" letter-spacing="1" text-anchor="end">METR</text>
+            <circle cx="6" cy="-4" r="3" fill="#3B9494"/>
+          </g>
+          <rect x="70" y="120" width="400" height="820" fill="none" stroke="#28243A" stroke-width="1"/>
+          <g stroke="#28243A" stroke-width="1" opacity="0.5">
+            <line x1="136.67" y1="120" x2="136.67" y2="940"/>
+            <line x1="203.33" y1="120" x2="203.33" y2="940"/>
+            <line x1="270" y1="120" x2="270" y2="940"/>
+            <line x1="336.67" y1="120" x2="336.67" y2="940"/>
+            <line x1="403.33" y1="120" x2="403.33" y2="940"/>
+          </g>
+          <g stroke="#28243A" stroke-width="1" opacity="0.7">
+            <line x1="70" y1="140" x2="470" y2="140"/>
+            <line x1="70" y1="265" x2="470" y2="265"/>
+            <line x1="70" y1="390" x2="470" y2="390"/>
+            <line x1="70" y1="515" x2="470" y2="515"/>
+            <line x1="70" y1="640" x2="470" y2="640"/>
+            <line x1="70" y1="765" x2="470" y2="765"/>
+            <line x1="70" y1="890" x2="470" y2="890"/>
+          </g>
+          <g font-family="JetBrains Mono, monospace" font-size="12" fill="#D8D1E2" text-anchor="end">
+            <text x="62" y="144">2020</text>
+            <text x="62" y="269">2021</text>
+            <text x="62" y="394">2022</text>
+            <text x="62" y="519">2023</text>
+            <text x="62" y="644">2024</text>
+            <text x="62" y="769">2025</text>
+            <text x="62" y="894">2026</text>
+          </g>
+          <text x="22" y="530" font-family="JetBrains Mono, monospace" font-size="11" fill="#D8D1E2" text-anchor="middle" transform="rotate(-90 22 530)" letter-spacing="1.2" font-weight="600">Year (LINEAR)</text>
+          <g font-family="JetBrains Mono, monospace" font-size="12" fill="#D8D1E2" text-anchor="middle">
+            <text x="70" y="960">0</text>
+            <text x="136.67" y="960">2 hr</text>
+            <text x="203.33" y="960">4 hr</text>
+            <text x="270" y="960">6 hr</text>
+            <text x="336.67" y="960">8 hr</text>
+            <text x="403.33" y="960">10 hr</text>
+            <text x="470" y="960">12 hr</text>
+          </g>
+          <text x="270" y="985" font-family="JetBrains Mono, monospace" font-size="11" fill="#D8D1E2" text-anchor="middle" letter-spacing="1.2" font-weight="600">Task duration (50% success) &#183; LINEAR</text>
+          <polyline points="70.04,140 70.54,485.5 72.22,552.5 78.33,702.5 103.33,802.5 203.33,865 470,921.25" fill="none" stroke="#3B9494" stroke-width="1.8" opacity="0.65"/>
+          <g fill="#F5EEE3">
+            <circle cx="70" cy="140" r="4" fill="#3B9494"/>
+            <text x="80" y="138" font-size="12">GPT-2</text>
+            <circle cx="70.5" cy="485.5" r="4" fill="#3B9494"/>
+            <text x="80" y="483" font-size="12">GPT-3.5</text>
+            <circle cx="72.22" cy="552.5" r="4" fill="#3B9494"/>
+            <text x="82" y="550" font-size="12">GPT-4</text>
+            <circle cx="78.33" cy="702.5" r="4" fill="#3B9494"/>
+            <text x="88" y="700" font-size="12">Claude 3.5 Sonnet</text>
+            <circle cx="103.33" cy="802.5" r="4" fill="#3B9494"/>
+            <text x="113" y="800" font-size="12">Claude Sonnet 4</text>
+            <circle cx="203.33" cy="865" r="4" fill="#3B9494"/>
+            <text x="213" y="863" font-size="12">Claude Opus 4.5</text>
+            <circle cx="470" cy="921.25" r="6" fill="#3B9494" stroke="#F5EEE3" stroke-width="1.5"/>
+          </g>
+          <!-- Highlight rings around today's frontier (Opus 4.6) -->
+          <circle cx="470" cy="921.25" r="36" fill="none" stroke="#C45050" stroke-width="1.5" opacity="0.4"/>
+          <circle cx="470" cy="921.25" r="24" fill="none" stroke="#C45050" stroke-width="3.5" opacity="0.95"/>
+          <!-- "12 hours" callout in the empty upper-middle of the plot -->
+          <text x="270" y="380" font-family="Raleway, sans-serif" font-size="46" font-weight="800" fill="#E07777" text-anchor="middle">12 hours</text>
+          <text x="270" y="408" font-family="JetBrains Mono, monospace" font-size="11" fill="#D8D1E2" text-anchor="middle" letter-spacing="1.2">autonomous task horizon, today</text>
+        </svg>
       </div>
       <div class="slide-footnotes">
         <div class="citation">
@@ -3032,7 +3222,7 @@
   <div class="slide" data-slide="1" data-slide-name="problem-gap">
     <div class="slide-inner">
       <div class="anim-up" style="position: relative; max-width: 1100px; margin: 0 auto;">
-        <svg viewBox="0 0 1120 640" xmlns="http://www.w3.org/2000/svg"
+        <svg class="metr-landscape" viewBox="0 0 1120 640" xmlns="http://www.w3.org/2000/svg"
              style="display: block; width: 100%; height: auto; font-family: var(--sans);"
              role="img"
              aria-label="METR chart with 45-second Claude Code usage line: squandered potential gap between 12-hour model capability and 45-second real-world usage.">
@@ -3114,6 +3304,92 @@
             <text x="998" y="362" font-size="18" font-weight="800">potential.</text>
           </g>
           <text x="998" y="384" font-family="JetBrains Mono, monospace" font-size="13" fill="#D8D1E2" letter-spacing="1.2" font-weight="600">12 HR &#8594; 45 SEC</text>
+        </svg>
+        <!-- PORTRAIT variant for mobile (<=600px). Same base chart as
+             problem-dev plus the 45-second vertical line at x=70.42
+             (just inside the y-axis), the shaded gap polygon between
+             that line and the trend curve, the "practice today" dot
+             at (70.42, 921.25) and the squandered-potential callout. -->
+        <svg class="metr-portrait" viewBox="0 0 500 1000" xmlns="http://www.w3.org/2000/svg"
+             style="width: 100%; height: auto; font-family: var(--sans);"
+             role="img"
+             aria-label="METR chart (portrait) with 45-second Claude Code usage line and squandered potential gap.">
+          <text x="20" y="32" font-family="Raleway, sans-serif" font-weight="700" font-size="17" fill="#F5EEE3">Time horizon of software tasks</text>
+          <text x="20" y="54" font-family="Raleway, sans-serif" font-weight="700" font-size="17" fill="#F5EEE3">LLMs can complete 50% of the time</text>
+          <text x="20" y="78" font-family="JetBrains Mono, monospace" font-size="11" fill="#C8BFD4" letter-spacing="0.8">Source: METR Horizon v1.1 &#183; metr.org</text>
+          <g transform="translate(480, 32)" font-family="Raleway, sans-serif">
+            <text x="0" y="0" font-weight="800" font-size="15" fill="#EDE5D8" letter-spacing="1" text-anchor="end">METR</text>
+            <circle cx="6" cy="-4" r="3" fill="#3B9494"/>
+          </g>
+          <rect x="70" y="120" width="400" height="820" fill="none" stroke="#28243A" stroke-width="1"/>
+          <g stroke="#28243A" stroke-width="1" opacity="0.5">
+            <line x1="136.67" y1="120" x2="136.67" y2="940"/>
+            <line x1="203.33" y1="120" x2="203.33" y2="940"/>
+            <line x1="270" y1="120" x2="270" y2="940"/>
+            <line x1="336.67" y1="120" x2="336.67" y2="940"/>
+            <line x1="403.33" y1="120" x2="403.33" y2="940"/>
+          </g>
+          <g stroke="#28243A" stroke-width="1" opacity="0.7">
+            <line x1="70" y1="140" x2="470" y2="140"/>
+            <line x1="70" y1="265" x2="470" y2="265"/>
+            <line x1="70" y1="390" x2="470" y2="390"/>
+            <line x1="70" y1="515" x2="470" y2="515"/>
+            <line x1="70" y1="640" x2="470" y2="640"/>
+            <line x1="70" y1="765" x2="470" y2="765"/>
+            <line x1="70" y1="890" x2="470" y2="890"/>
+          </g>
+          <g font-family="JetBrains Mono, monospace" font-size="12" fill="#D8D1E2" text-anchor="end">
+            <text x="62" y="144">2020</text>
+            <text x="62" y="269">2021</text>
+            <text x="62" y="394">2022</text>
+            <text x="62" y="519">2023</text>
+            <text x="62" y="644">2024</text>
+            <text x="62" y="769">2025</text>
+            <text x="62" y="894">2026</text>
+          </g>
+          <text x="22" y="530" font-family="JetBrains Mono, monospace" font-size="11" fill="#D8D1E2" text-anchor="middle" transform="rotate(-90 22 530)" letter-spacing="1.2" font-weight="600">Year (LINEAR)</text>
+          <g font-family="JetBrains Mono, monospace" font-size="12" fill="#D8D1E2" text-anchor="middle">
+            <text x="70" y="960">0</text>
+            <text x="136.67" y="960">2 hr</text>
+            <text x="203.33" y="960">4 hr</text>
+            <text x="270" y="960">6 hr</text>
+            <text x="336.67" y="960">8 hr</text>
+            <text x="403.33" y="960">10 hr</text>
+            <text x="470" y="960">12 hr</text>
+          </g>
+          <text x="270" y="985" font-family="JetBrains Mono, monospace" font-size="11" fill="#D8D1E2" text-anchor="middle" letter-spacing="1.2" font-weight="600">Task duration (50% success) &#183; LINEAR</text>
+          <!-- Squandered-potential gap: area between trend curve and the 45-sec vertical line at x=70.42 -->
+          <path d="M 70.04,140 L 70.54,485.5 L 72.22,552.5 L 78.33,702.5 L 103.33,802.5 L 203.33,865 L 470,921.25 L 70.42,921.25 L 70.42,140 Z" fill="#C47B42" opacity="0.15"/>
+          <polyline points="70.04,140 70.54,485.5 72.22,552.5 78.33,702.5 103.33,802.5 203.33,865 470,921.25" fill="none" stroke="#3B9494" stroke-width="1.8" opacity="0.65"/>
+          <g fill="#F5EEE3">
+            <circle cx="70" cy="140" r="4" fill="#3B9494"/>
+            <text x="80" y="138" font-size="12">GPT-2</text>
+            <circle cx="70.5" cy="485.5" r="4" fill="#3B9494"/>
+            <text x="80" y="483" font-size="12">GPT-3.5</text>
+            <circle cx="72.22" cy="552.5" r="4" fill="#3B9494"/>
+            <text x="82" y="550" font-size="12">GPT-4</text>
+            <circle cx="78.33" cy="702.5" r="4" fill="#3B9494"/>
+            <text x="88" y="700" font-size="12">Claude 3.5 Sonnet</text>
+            <circle cx="103.33" cy="802.5" r="4" fill="#3B9494"/>
+            <text x="113" y="800" font-size="12">Claude Sonnet 4</text>
+            <circle cx="203.33" cy="865" r="4" fill="#3B9494"/>
+            <text x="213" y="863" font-size="12">Claude Opus 4.5</text>
+            <circle cx="470" cy="921.25" r="6" fill="#3B9494" stroke="#F5EEE3" stroke-width="1.5"/>
+            <text x="460" y="909" font-size="13" font-weight="700" text-anchor="end">Claude Opus 4.6</text>
+          </g>
+          <!-- 45-second constant line (just inside the y-axis at x=70.42) -->
+          <line x1="70.42" y1="140" x2="70.42" y2="921.25" stroke="#C45050" stroke-width="2" stroke-dasharray="6 5" opacity="0.95"/>
+          <!-- "practice today" dot at the 45-sec line, year 2026.25 -->
+          <circle cx="70.42" cy="921.25" r="7" fill="#C45050" stroke="#141216" stroke-width="2"/>
+          <text x="84" y="940" font-family="Raleway, sans-serif" font-size="12" font-weight="700" fill="#E07777">practice today</text>
+          <text x="84" y="954" font-family="JetBrains Mono, monospace" font-size="10" fill="#E07777" letter-spacing="0.8">45 sec</text>
+          <!-- Squandered-potential callout in upper empty area -->
+          <g font-family="Raleway, sans-serif" fill="#C47B42" text-anchor="middle">
+            <text x="280" y="290" font-size="22" font-weight="800">Claude's</text>
+            <text x="280" y="316" font-size="22" font-weight="800">squandered</text>
+            <text x="280" y="342" font-size="22" font-weight="800">potential.</text>
+          </g>
+          <text x="280" y="368" font-family="JetBrains Mono, monospace" font-size="11" fill="#D8D1E2" text-anchor="middle" letter-spacing="1.2" font-weight="600">12 HR &#8596; 45 SEC</text>
         </svg>
       </div>
       <div class="slide-footnotes">
