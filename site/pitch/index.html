@@ -1283,22 +1283,29 @@
     }
 
     /* ============ SOLUTION MATRIX (what we need) ============ */
-    /* CSS grid with fixed per-column widths. Unrevealed columns animate
-       from 0 to their full width so previously-shown columns don't resize
-       when new ones append. Cells use overflow:hidden so collapsed columns
-       don't leak content sideways. */
+    /* The matrix is always rendered at its full final width (all 4 columns).
+       Row heights are therefore computed from the wrapped text in every
+       column — including columns not yet revealed — so nothing reflows
+       vertically when new columns appear. The outer wrap clips with
+       overflow:hidden, and its max-width animates per stage to expose
+       additional columns from left to right. */
+    .matrix-wrap {
+      max-width: 420px;
+      overflow: hidden;
+      border-radius: 4px;
+      transition: max-width 0.55s cubic-bezier(0.4,0,0.2,1);
+    }
+    [data-slide-name="solution-matrix"][data-stage="0"] .matrix-wrap { max-width: 420px; }
+    [data-slide-name="solution-matrix"][data-stage="1"] .matrix-wrap { max-width: 660px; }
+    [data-slide-name="solution-matrix"][data-stage="2"] .matrix-wrap { max-width: 920px; }
     .matrix {
       display: grid;
-      grid-template-columns: 180px 240px 0px 0px;
-      transition: grid-template-columns 0.55s cubic-bezier(0.4,0,0.2,1);
+      grid-template-columns: 180px 240px 240px 260px;
+      width: 920px;
       border: 1px solid var(--border);
       border-radius: 4px;
-      overflow: hidden;
       font-family: var(--sans);
     }
-    [data-slide-name="solution-matrix"][data-stage="0"] .matrix { grid-template-columns: 180px 240px 0px 0px; }
-    [data-slide-name="solution-matrix"][data-stage="1"] .matrix { grid-template-columns: 180px 240px 240px 0px; }
-    [data-slide-name="solution-matrix"][data-stage="2"] .matrix { grid-template-columns: 180px 240px 240px 260px; }
 
     .matrix .mtx-cell {
       padding: 18px;
@@ -1339,9 +1346,8 @@
     [data-slide-name="solution-matrix"][data-stage="1"] .matrix .col-better {
       opacity: 0;
     }
-    /* In print/PDF always show every column at full width. */
     @media print {
-      .matrix { grid-template-columns: 180px 240px 240px 260px !important; }
+      .matrix-wrap { max-width: 920px !important; }
       .matrix .mtx-cell { opacity: 1 !important; }
     }
 
@@ -2844,10 +2850,10 @@
   <div class="slide" data-slide="2" data-slide-name="solution-matrix" data-stages="3">
     <div class="slide-inner">
       <div class="label anim-up">What we need</div>
-      <h1 class="headline headline-lg anim-up delay-1">Control plane for dev-environment agents</h1>
       <div class="spacer-md"></div>
 
-      <div class="anim-up delay-2" style="display: flex; justify-content: center;">
+      <div class="anim-up delay-1" style="display: flex; justify-content: center;">
+        <div class="matrix-wrap">
         <div class="matrix">
           <!-- Row 0: column headers -->
           <div class="mtx-cell mtx-head"></div>
@@ -2887,6 +2893,7 @@
             </div>
           </div>
           <div class="mtx-cell mtx-center mtx-last-row col-better">Safely accomplish the objective</div>
+        </div>
         </div>
       </div>
     </div>
