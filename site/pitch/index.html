@@ -2898,111 +2898,24 @@
     </div>
   </div>
 
-  <!-- ======== SLIDE: HOW IT WORKS (proxy architecture) ======== -->
+  <!-- ======== SLIDE: HOW IT WORKS (without / with Luthien diagrams) ======== -->
   <div class="slide" data-slide="6" data-slide-name="how-it-works">
     <div class="slide-inner" style="text-align: center;">
       <div class="label anim-up" style="text-align: left;">How It Works</div>
-      <h1 class="headline headline-lg anim-up delay-1" style="text-align: left;">A proxy between LLM APIs<br>and your dev environment</h1>
       <div class="spacer-sm"></div>
-      <p class="subtitle anim-up delay-1" style="text-align: left;">Log every request &amp; response. Enforce custom rules.</p>
 
-      <!-- Mobile architecture diagram (hidden on desktop) -->
-      <div class="arch-mobile" style="display: none; margin-top: 24px;">
-        <!-- Single User flow -->
-        <div style="font-family: var(--mono); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 8px;">Single User</div>
-        <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 6px;">
-          <div class="arch-box" style="width: auto;">&#x1F9D1;&#x200D;&#x1F4BB;</div>
-          <div style="color: var(--blue); font-size: 1.2rem;">⇄</div>
-          <div class="arch-box" style="width: auto;">Claude Code</div>
-        </div>
-        <div style="text-align: right; color: var(--blue); font-size: 1.2rem; padding-right: 25%;">↓</div>
-        <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: start; gap: 6px;">
-          <div class="arch-box" style="width: auto;">Anthropic API</div>
-          <div style="color: var(--blue); font-size: 1.2rem; margin-top: 10px;">⇄</div>
-          <div>
-            <div class="arch-box" style="width: auto; border-color: var(--blue); background: linear-gradient(135deg, rgba(59,148,148,0.15), transparent); color: var(--blue); font-weight: 700;">Luthien</div>
-            <div style="font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); margin-top: 4px; text-align: center;">did it do what I asked?</div>
-          </div>
-        </div>
-
-        <!-- Divider -->
-        <div style="border-top: 1px solid var(--border); margin: 16px 0;"></div>
-
-        <!-- Multiple Users flow -->
-        <div style="font-family: var(--mono); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--amber); margin-bottom: 8px;">Multiple Users</div>
-        <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 6px;">
-          <div class="arch-box" style="width: auto;">&#x1F465;</div>
-          <div style="color: var(--amber); font-size: 1.2rem;">⇄</div>
-          <div class="arch-box" style="width: auto;">Any AI Client</div>
-        </div>
-        <div style="text-align: right; color: var(--amber); font-size: 1.2rem; padding-right: 25%;">↓</div>
-        <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: start; gap: 6px;">
-          <div class="arch-box" style="width: auto;">Any AI Provider</div>
-          <div style="color: var(--amber); font-size: 1.2rem; margin-top: 10px;">⇄</div>
-          <div>
-            <div class="arch-box" style="width: auto; border-color: var(--blue); background: linear-gradient(135deg, rgba(59,148,148,0.15), transparent); color: var(--blue); font-weight: 700;">Luthien</div>
-            <div style="font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); margin-top: 4px; text-align: center;">follow company/team policy</div>
-          </div>
-        </div>
-
-        <div style="text-align: center; margin-top: 16px;">
-          <span style="font-size: 0.68rem; color: var(--blue); background: rgba(59,148,148,0.1); border: 1px solid rgba(59,148,148,0.25); padding: 0.15rem 0.55rem; border-radius: 20px; font-family: var(--mono);">adds ~5-15ms<sup style="font-size: 0.85em; font-weight: 700;">1</sup></span>
-        </div>
+      <!-- Top half: without Luthien (chaotic) -->
+      <div class="anim-up delay-1" style="max-width: 820px; margin: 0 auto;">
+        <div style="font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 12px;">Without Luthien</div>
+        <img src="../assets/images/how-it-works-without.png" alt="Without Luthien: chaotic connections between developers and AI providers" style="width: 100%; height: auto; border-radius: 6px;">
       </div>
 
-      <div class="spacer-lg"></div>
+      <div class="spacer-md"></div>
 
-      <!-- Single User row -->
-      <div class="anim-up delay-2" style="margin-bottom: 20px;">
-        <div style="display: flex; align-items: flex-start; justify-content: center; gap: 0;">
-          <div style="font-family: var(--mono); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); width: 96px; flex-shrink: 0; text-align: right; padding-right: 16px; padding-top: 14px; line-height: 1.2;">Single<br>User</div>
-          <div class="arch-box">&#x1F9D1;&#x200D;&#x1F4BB;</div>
-          <div class="arch-connector accent" style="margin-top: 18px;"></div>
-          <div class="arch-box">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><g stroke="#D97757" stroke-width="1.6" stroke-linecap="round"><line x1="12" y1="12" x2="12" y2="2"/><line x1="12" y1="12" x2="19.1" y2="4.9"/><line x1="12" y1="12" x2="22" y2="12"/><line x1="12" y1="12" x2="17.5" y2="19.5"/><line x1="12" y1="12" x2="12" y2="22"/><line x1="12" y1="12" x2="4.9" y2="19.1"/><line x1="12" y1="12" x2="2" y2="12"/><line x1="12" y1="12" x2="4.9" y2="4.9"/><line x1="12" y1="12" x2="7" y2="3"/><line x1="12" y1="12" x2="21" y2="7"/><line x1="12" y1="12" x2="17" y2="21"/><line x1="12" y1="12" x2="3" y2="17"/></g></svg>
-            Claude Code
-          </div>
-          <div class="arch-connector accent" style="margin-top: 18px; width: 48px;"></div>
-          <div style="display: flex; flex-direction: column; align-items: center; width: 160px;">
-            <div class="arch-box" style="border-color: var(--blue); background: linear-gradient(135deg, rgba(59,148,148,0.15), transparent); color: var(--blue); font-weight: 700; width: 100%;">Luthien</div>
-            <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); margin-top: 8px;">did it do what I asked?</div>
-          </div>
-          <div class="arch-connector accent" style="margin-top: 18px; width: 48px;"></div>
-          <div class="arch-box">
-            <svg width="16" height="16" viewBox="0 7 46 32" fill="none"><path d="M32.73 7h-6.945L38.45 39h6.945L32.73 7ZM12.665 7 0 39h7.082l2.59-6.72h13.25l2.59 6.72h7.082L19.929 7h-7.264Zm-.702 19.337 4.334-11.246 4.334 11.246h-8.668Z" fill="#D4A574"/></svg>
-            Anthropic API
-          </div>
-        </div>
-      </div>
-
-      <!-- Divider -->
-      <div style="border-top: 1px solid var(--border); margin: 0 80px;"></div>
-
-      <!-- Multiple Users row -->
-      <div class="anim-up delay-3" style="margin-top: 40px;">
-        <div style="display: flex; align-items: flex-start; justify-content: center; gap: 0;">
-          <div style="font-family: var(--mono); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--amber); width: 96px; flex-shrink: 0; text-align: right; padding-right: 16px; padding-top: 14px; line-height: 1.2;">Multiple<br>Users</div>
-          <div class="arch-box">&#x1F465;</div>
-          <div class="arch-connector accent-amber" style="margin-top: 18px;"></div>
-          <div class="arch-box">Any AI Client</div>
-          <div class="arch-connector accent-amber" style="margin-top: 18px; width: 48px;"></div>
-          <div style="display: flex; flex-direction: column; align-items: center; width: 160px;">
-            <div class="arch-box" style="border-color: var(--blue); background: linear-gradient(135deg, rgba(59,148,148,0.15), transparent); color: var(--blue); font-weight: 700; width: 100%;">Luthien</div>
-            <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); margin-top: 8px;">follow company/team policy</div>
-          </div>
-          <div class="arch-connector accent-amber" style="margin-top: 18px; width: 48px;"></div>
-          <div class="arch-box">Any AI Provider</div>
-        </div>
-      </div>
-
-      <div class="spacer-lg"></div>
-      <div class="anim-up delay-3" style="text-align: center;">
-        <span style="font-size: 0.68rem; color: var(--blue); background: rgba(59,148,148,0.1); border: 1px solid rgba(59,148,148,0.25); padding: 0.15rem 0.55rem; border-radius: 20px; font-family: var(--mono);">adds ~5-15ms<sup style="font-size: 0.85em; font-weight: 700;">1</sup></span>
-      </div>
-      <div class="slide-footnotes">
-        <div class="citation">
-          <sup>1</sup> 5-15ms latency: measured on Luthien internal benchmarks, proxy-side rule evaluation on typical Claude Code requests (Apr 2026).
-        </div>
+      <!-- Bottom half: with Luthien (organized) -->
+      <div class="anim-up delay-2" style="max-width: 820px; margin: 0 auto;">
+        <div style="font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); margin-bottom: 12px;">With Luthien</div>
+        <img src="../assets/images/how-it-works-with.png" alt="With Luthien: organized proxy between developers and AI providers" style="width: 100%; height: auto; border-radius: 6px;">
       </div>
     </div>
   </div>
