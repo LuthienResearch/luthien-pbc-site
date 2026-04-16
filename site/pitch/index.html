@@ -3138,41 +3138,46 @@
        8 stages (0-7). Stages 0-2 read as a clean, finished three-item list.
        Stage 3 onward breaks the frame: items appear at increasingly frenzied
        angles, overlapping, larger — conveying overwhelm. -->
-  <div class="slide" data-slide="2" data-slide-name="problem-cto" data-stages="8">
+  <div class="slide" data-slide="2" data-slide-name="problem-cto" data-stages="9">
     <div class="slide-inner" style="position: relative; height: 100%; overflow: hidden;">
       <div class="label anim-up" style="position: absolute; top: 48px; left: 80px;">What Claude Code does</div>
 
-      <!-- Clean list (stages 0-2) -->
-      <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; gap: 28px; align-items: flex-start;">
-        <div data-reveal="0" class="revealed" style="font-family: var(--sans); font-weight: 700; font-size: clamp(2rem, 4.5vw, 3.2rem); color: var(--white); line-height: 1.1;">
+      <!-- Opening question (stage 0): persists as a header through all stages -->
+      <div data-reveal="0" class="revealed" style="position: absolute; top: 28%; left: 50%; transform: translate(-50%, -50%); width: max-content; font-family: var(--sans); font-weight: 700; font-size: clamp(2.4rem, 5.2vw, 4rem); color: var(--white); line-height: 1.1; letter-spacing: -0.01em;">
+        Has your AI ever...
+      </div>
+
+      <!-- Clean list (stages 1-3) -->
+      <div style="position: absolute; top: 58%; left: 50%; transform: translate(-50%, -50%); width: max-content; display: flex; flex-direction: column; gap: 24px; align-items: flex-start;">
+        <div data-reveal="1" style="font-family: var(--sans); font-weight: 700; font-size: clamp(1.7rem, 3.4vw, 2.6rem); color: var(--white); line-height: 1.1;">
           Deletes important code
         </div>
-        <div data-reveal="1" style="font-family: var(--sans); font-weight: 700; font-size: clamp(2rem, 4.5vw, 3.2rem); color: var(--white); line-height: 1.1;">
+        <div data-reveal="2" style="font-family: var(--sans); font-weight: 700; font-size: clamp(1.7rem, 3.4vw, 2.6rem); color: var(--white); line-height: 1.1;">
           Ignores instructions
         </div>
-        <div data-reveal="2" style="font-family: var(--sans); font-weight: 700; font-size: clamp(2rem, 4.5vw, 3.2rem); color: var(--white); line-height: 1.1;">
+        <div data-reveal="3" style="font-family: var(--sans); font-weight: 700; font-size: clamp(1.7rem, 3.4vw, 2.6rem); color: var(--white); line-height: 1.1;">
           Impersonates user to answer its own questions
         </div>
       </div>
 
-      <!-- Chaos items (stages 3-7): absolutely positioned, rotated, overlapping -->
-      <div data-reveal="3" style="position: absolute; top: 18%; right: 8%; font-family: var(--sans); font-weight: 800; font-size: clamp(1.8rem, 3.8vw, 2.8rem); color: #E07777; transform: rotate(-6deg); text-shadow: 0 0 30px rgba(196,80,80,0.3);">
+      <!-- Chaos items (stages 4-8): absolutely positioned, rotated, overlapping -->
+      <div data-reveal="4" style="position: absolute; top: 18%; right: 8%; font-family: var(--sans); font-weight: 800; font-size: clamp(1.8rem, 3.8vw, 2.8rem); color: #E07777; transform: rotate(-6deg); text-shadow: 0 0 30px rgba(196,80,80,0.3);">
         Leaks secrets
       </div>
 
-      <div data-reveal="4" style="position: absolute; top: 72%; left: 6%; font-family: var(--sans); font-weight: 800; font-size: clamp(2rem, 4.2vw, 3.2rem); color: #E5B66B; transform: rotate(4deg);">
+      <div data-reveal="5" style="position: absolute; top: 72%; left: 6%; font-family: var(--sans); font-weight: 800; font-size: clamp(2rem, 4.2vw, 3.2rem); color: #E5B66B; transform: rotate(4deg);">
         Cheats on tests
       </div>
 
-      <div data-reveal="5" style="position: absolute; top: 12%; left: 12%; font-family: var(--sans); font-weight: 900; font-size: clamp(2.6rem, 5.5vw, 4.2rem); color: #E07777; transform: rotate(-12deg); text-shadow: 0 0 40px rgba(196,80,80,0.45);">
+      <div data-reveal="6" style="position: absolute; top: 12%; left: 12%; font-family: var(--sans); font-weight: 900; font-size: clamp(2.6rem, 5.5vw, 4.2rem); color: #E07777; transform: rotate(-12deg); text-shadow: 0 0 40px rgba(196,80,80,0.45);">
         Hides errors
       </div>
 
-      <div data-reveal="6" style="position: absolute; top: 58%; right: 4%; font-family: var(--sans); font-weight: 800; font-size: clamp(1.6rem, 3.4vw, 2.4rem); color: var(--text-muted); transform: rotate(-16deg); max-width: 340px;">
+      <div data-reveal="7" style="position: absolute; top: 58%; right: 4%; font-family: var(--sans); font-weight: 800; font-size: clamp(1.6rem, 3.4vw, 2.4rem); color: var(--text-muted); transform: rotate(-16deg); max-width: 340px;">
         Fails to read documentation
       </div>
 
-      <div data-reveal="7" style="position: absolute; bottom: 8%; left: 28%; font-family: var(--sans); font-weight: 900; font-size: clamp(3rem, 6.5vw, 5rem); color: #E5B66B; transform: rotate(8deg); text-shadow: 0 0 50px rgba(196,123,66,0.35);">
+      <div data-reveal="8" style="position: absolute; bottom: 8%; left: 28%; font-family: var(--sans); font-weight: 900; font-size: clamp(3rem, 6.5vw, 5rem); color: #E5B66B; transform: rotate(8deg); text-shadow: 0 0 50px rgba(196,123,66,0.35);">
         Only partially completes tasks
       </div>
 
