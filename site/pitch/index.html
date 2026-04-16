@@ -1290,17 +1290,16 @@
        overflow:hidden, and its max-width animates per stage to expose
        additional columns from left to right. */
     .matrix-wrap {
-      width: 920px;
+      width: 680px;
       border-radius: 4px;
       transition: clip-path 0.55s cubic-bezier(0.4,0,0.2,1);
     }
-    [data-slide-name="solution-matrix"][data-stage="0"] .matrix-wrap { clip-path: inset(0 54.35% 0 0 round 4px); }
-    [data-slide-name="solution-matrix"][data-stage="1"] .matrix-wrap { clip-path: inset(0 28.26% 0 0 round 4px); }
-    [data-slide-name="solution-matrix"][data-stage="2"] .matrix-wrap { clip-path: inset(0 0 0 0 round 4px); }
+    [data-slide-name="solution-matrix"][data-stage="0"] .matrix-wrap { clip-path: inset(0 38.24% 0 0 round 4px); }
+    [data-slide-name="solution-matrix"][data-stage="1"] .matrix-wrap { clip-path: inset(0 0 0 0 round 4px); }
     .matrix {
       display: grid;
-      grid-template-columns: 180px 240px 240px 260px;
-      width: 920px;
+      grid-template-columns: 180px 240px 260px;
+      width: 680px;
       border: 1px solid var(--border);
       border-radius: 4px;
       font-family: var(--sans);
@@ -1340,13 +1339,11 @@
     .matrix .col-better:not(.mtx-head) { background: rgba(59,148,148,0.08); color: var(--white); font-weight: 600; }
 
     /* Fade out cells in columns that haven't been revealed yet. */
-    [data-slide-name="solution-matrix"][data-stage="0"] .matrix .col-good,
-    [data-slide-name="solution-matrix"][data-stage="0"] .matrix .col-better,
-    [data-slide-name="solution-matrix"][data-stage="1"] .matrix .col-better {
+    [data-slide-name="solution-matrix"][data-stage="0"] .matrix .col-better {
       opacity: 0;
     }
     @media print {
-      .matrix-wrap { clip-path: none !important; }
+      .matrix-wrap { clip-path: none !important; width: 680px !important; }
       .matrix .mtx-cell { opacity: 1 !important; }
     }
 
@@ -2846,7 +2843,7 @@
   </div>
 
   <!-- ======== SLIDE: WHAT WE NEED (solution matrix) ======== -->
-  <div class="slide" data-slide="2" data-slide-name="solution-matrix" data-stages="3">
+  <div class="slide" data-slide="2" data-slide-name="solution-matrix" data-stages="2">
     <div class="slide-inner">
       <div class="label anim-up">What we need</div>
       <div class="spacer-md"></div>
@@ -2856,13 +2853,11 @@
         <div class="matrix">
           <!-- Row 0: column headers -->
           <div class="mtx-cell mtx-head"></div>
-          <div class="mtx-cell mtx-head mtx-center col-default">Default</div>
           <div class="mtx-cell mtx-head mtx-center col-good">Good</div>
           <div class="mtx-cell mtx-head mtx-center col-better">Better &middot; Luthien</div>
 
           <!-- Row 1: See -->
           <div class="mtx-cell mtx-row">See</div>
-          <div class="mtx-cell mtx-center mtx-dim col-default">No observability</div>
           <div class="mtx-cell mtx-center col-good">
             Observability
             <div style="margin-top: 10px; display: flex; justify-content: center;">
@@ -2873,7 +2868,6 @@
 
           <!-- Row 2: Do what you ask -->
           <div class="mtx-cell mtx-row">Do what you ask</div>
-          <div class="mtx-cell mtx-center mtx-dim col-default">Sometimes</div>
           <div class="mtx-cell mtx-center col-good">
             Gateways<br><span style="color: var(--text-dim); font-size: 0.85rem;">(partial solution)</span>
             <div style="margin-top: 10px; display: flex; justify-content: center;">
@@ -2884,7 +2878,6 @@
 
           <!-- Row 3: Block harmful action -->
           <div class="mtx-cell mtx-row mtx-last-row">Block harmful action</div>
-          <div class="mtx-cell mtx-center mtx-dim mtx-last-row col-default">No protection</div>
           <div class="mtx-cell mtx-center mtx-last-row col-good">
             Guardrails<br><span style="color: var(--text-dim); font-size: 0.85rem;">(simple rules)</span>
             <div style="margin-top: 10px; display: flex; justify-content: center;">
@@ -2898,148 +2891,51 @@
     </div>
   </div>
 
-  <!-- ======== SLIDE: HOW IT WORKS (proxy architecture) ======== -->
+  <!-- ======== SLIDE: HOW IT WORKS (without / with Luthien diagrams) ======== -->
   <div class="slide" data-slide="6" data-slide-name="how-it-works">
     <div class="slide-inner" style="text-align: center;">
       <div class="label anim-up" style="text-align: left;">How It Works</div>
-      <h1 class="headline headline-lg anim-up delay-1" style="text-align: left;">A proxy between LLM APIs<br>and your dev environment</h1>
       <div class="spacer-sm"></div>
-      <p class="subtitle anim-up delay-1" style="text-align: left;">Log every request &amp; response. Enforce custom rules.</p>
 
-      <!-- Mobile architecture diagram (hidden on desktop) -->
-      <div class="arch-mobile" style="display: none; margin-top: 24px;">
-        <!-- Single User flow -->
-        <div style="font-family: var(--mono); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 8px;">Single User</div>
-        <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 6px;">
-          <div class="arch-box" style="width: auto;">&#x1F9D1;&#x200D;&#x1F4BB;</div>
-          <div style="color: var(--blue); font-size: 1.2rem;">⇄</div>
-          <div class="arch-box" style="width: auto;">Claude Code</div>
-        </div>
-        <div style="text-align: right; color: var(--blue); font-size: 1.2rem; padding-right: 25%;">↓</div>
-        <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: start; gap: 6px;">
-          <div class="arch-box" style="width: auto;">Anthropic API</div>
-          <div style="color: var(--blue); font-size: 1.2rem; margin-top: 10px;">⇄</div>
-          <div>
-            <div class="arch-box" style="width: auto; border-color: var(--blue); background: linear-gradient(135deg, rgba(59,148,148,0.15), transparent); color: var(--blue); font-weight: 700;">Luthien</div>
-            <div style="font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); margin-top: 4px; text-align: center;">did it do what I asked?</div>
-          </div>
-        </div>
-
-        <!-- Divider -->
-        <div style="border-top: 1px solid var(--border); margin: 16px 0;"></div>
-
-        <!-- Multiple Users flow -->
-        <div style="font-family: var(--mono); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--amber); margin-bottom: 8px;">Multiple Users</div>
-        <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 6px;">
-          <div class="arch-box" style="width: auto;">&#x1F465;</div>
-          <div style="color: var(--amber); font-size: 1.2rem;">⇄</div>
-          <div class="arch-box" style="width: auto;">Any AI Client</div>
-        </div>
-        <div style="text-align: right; color: var(--amber); font-size: 1.2rem; padding-right: 25%;">↓</div>
-        <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: start; gap: 6px;">
-          <div class="arch-box" style="width: auto;">Any AI Provider</div>
-          <div style="color: var(--amber); font-size: 1.2rem; margin-top: 10px;">⇄</div>
-          <div>
-            <div class="arch-box" style="width: auto; border-color: var(--blue); background: linear-gradient(135deg, rgba(59,148,148,0.15), transparent); color: var(--blue); font-weight: 700;">Luthien</div>
-            <div style="font-family: var(--mono); font-size: 0.68rem; color: var(--text-dim); margin-top: 4px; text-align: center;">follow company/team policy</div>
-          </div>
-        </div>
-
-        <div style="text-align: center; margin-top: 16px;">
-          <span style="font-size: 0.68rem; color: var(--blue); background: rgba(59,148,148,0.1); border: 1px solid rgba(59,148,148,0.25); padding: 0.15rem 0.55rem; border-radius: 20px; font-family: var(--mono);">adds ~5-15ms<sup style="font-size: 0.85em; font-weight: 700;">1</sup></span>
-        </div>
+      <!-- Top half: without Luthien (chaotic) -->
+      <div class="anim-up delay-1" style="max-width: 820px; margin: 0 auto;">
+        <div style="font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 12px;">Without Luthien</div>
+        <img src="../assets/images/how-it-works-without.png" alt="Without Luthien: chaotic connections between developers and AI providers" style="width: 100%; height: auto; border-radius: 6px;">
       </div>
 
-      <div class="spacer-lg"></div>
+      <div class="spacer-md"></div>
 
-      <!-- Single User row -->
-      <div class="anim-up delay-2" style="margin-bottom: 20px;">
-        <div style="display: flex; align-items: flex-start; justify-content: center; gap: 0;">
-          <div style="font-family: var(--mono); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); width: 96px; flex-shrink: 0; text-align: right; padding-right: 16px; padding-top: 14px; line-height: 1.2;">Single<br>User</div>
-          <div class="arch-box">&#x1F9D1;&#x200D;&#x1F4BB;</div>
-          <div class="arch-connector accent" style="margin-top: 18px;"></div>
-          <div class="arch-box">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><g stroke="#D97757" stroke-width="1.6" stroke-linecap="round"><line x1="12" y1="12" x2="12" y2="2"/><line x1="12" y1="12" x2="19.1" y2="4.9"/><line x1="12" y1="12" x2="22" y2="12"/><line x1="12" y1="12" x2="17.5" y2="19.5"/><line x1="12" y1="12" x2="12" y2="22"/><line x1="12" y1="12" x2="4.9" y2="19.1"/><line x1="12" y1="12" x2="2" y2="12"/><line x1="12" y1="12" x2="4.9" y2="4.9"/><line x1="12" y1="12" x2="7" y2="3"/><line x1="12" y1="12" x2="21" y2="7"/><line x1="12" y1="12" x2="17" y2="21"/><line x1="12" y1="12" x2="3" y2="17"/></g></svg>
-            Claude Code
-          </div>
-          <div class="arch-connector accent" style="margin-top: 18px; width: 48px;"></div>
-          <div style="display: flex; flex-direction: column; align-items: center; width: 160px;">
-            <div class="arch-box" style="border-color: var(--blue); background: linear-gradient(135deg, rgba(59,148,148,0.15), transparent); color: var(--blue); font-weight: 700; width: 100%;">Luthien</div>
-            <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); margin-top: 8px;">did it do what I asked?</div>
-          </div>
-          <div class="arch-connector accent" style="margin-top: 18px; width: 48px;"></div>
-          <div class="arch-box">
-            <svg width="16" height="16" viewBox="0 7 46 32" fill="none"><path d="M32.73 7h-6.945L38.45 39h6.945L32.73 7ZM12.665 7 0 39h7.082l2.59-6.72h13.25l2.59 6.72h7.082L19.929 7h-7.264Zm-.702 19.337 4.334-11.246 4.334 11.246h-8.668Z" fill="#D4A574"/></svg>
-            Anthropic API
-          </div>
-        </div>
-      </div>
-
-      <!-- Divider -->
-      <div style="border-top: 1px solid var(--border); margin: 0 80px;"></div>
-
-      <!-- Multiple Users row -->
-      <div class="anim-up delay-3" style="margin-top: 40px;">
-        <div style="display: flex; align-items: flex-start; justify-content: center; gap: 0;">
-          <div style="font-family: var(--mono); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--amber); width: 96px; flex-shrink: 0; text-align: right; padding-right: 16px; padding-top: 14px; line-height: 1.2;">Multiple<br>Users</div>
-          <div class="arch-box">&#x1F465;</div>
-          <div class="arch-connector accent-amber" style="margin-top: 18px;"></div>
-          <div class="arch-box">Any AI Client</div>
-          <div class="arch-connector accent-amber" style="margin-top: 18px; width: 48px;"></div>
-          <div style="display: flex; flex-direction: column; align-items: center; width: 160px;">
-            <div class="arch-box" style="border-color: var(--blue); background: linear-gradient(135deg, rgba(59,148,148,0.15), transparent); color: var(--blue); font-weight: 700; width: 100%;">Luthien</div>
-            <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); margin-top: 8px;">follow company/team policy</div>
-          </div>
-          <div class="arch-connector accent-amber" style="margin-top: 18px; width: 48px;"></div>
-          <div class="arch-box">Any AI Provider</div>
-        </div>
-      </div>
-
-      <div class="spacer-lg"></div>
-      <div class="anim-up delay-3" style="text-align: center;">
-        <span style="font-size: 0.68rem; color: var(--blue); background: rgba(59,148,148,0.1); border: 1px solid rgba(59,148,148,0.25); padding: 0.15rem 0.55rem; border-radius: 20px; font-family: var(--mono);">adds ~5-15ms<sup style="font-size: 0.85em; font-weight: 700;">1</sup></span>
-      </div>
-      <div class="slide-footnotes">
-        <div class="citation">
-          <sup>1</sup> 5-15ms latency: measured on Luthien internal benchmarks, proxy-side rule evaluation on typical Claude Code requests (Apr 2026).
-        </div>
+      <!-- Bottom half: with Luthien (organized) -->
+      <div class="anim-up delay-2" style="max-width: 820px; margin: 0 auto;">
+        <div style="font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); margin-bottom: 12px;">With Luthien</div>
+        <img src="../assets/images/how-it-works-with.png" alt="With Luthien: organized proxy between developers and AI providers" style="width: 100%; height: auto; border-radius: 6px;">
       </div>
     </div>
   </div>
 
   <!-- ======== SLIDE 4: MARKET + DEMAND ======== -->
-  <div class="slide" data-slide="3" data-slide-name="tam">
-    <div class="slide-inner">
+  <div class="slide title-slide" data-slide="3" data-slide-name="tam">
+    <div class="slide-inner" style="text-align: center;">
       <div class="label anim-up">Market</div>
-      <h1 class="headline headline-lg anim-up delay-1">The market is exploding</h1>
       <div class="spacer-md"></div>
-
-      <div class="grid-4 anim-up delay-2">
-        <div style="text-align: center;">
-          <div class="stat-huge">$4.7B<sup class="blue" style="font-size: 0.4em; font-weight: 700;">1</sup></div>
-          <div class="stat-label">Coding agent market today</div>
-        </div>
-        <div style="text-align: center;">
-          <div class="stat-huge">$14.6B<sup class="blue" style="font-size: 0.4em; font-weight: 700;">1</sup></div>
-          <div class="stat-label">Projected by 2033</div>
-        </div>
-        <div style="text-align: center;">
-          <div class="stat-huge green">$2.5B<sup class="blue" style="font-size: 0.4em; font-weight: 700;">2</sup></div>
-          <div class="stat-label">Claude Code ARR</div>
-          <div style="font-family: var(--sans); font-size: 1.3rem; color: var(--white); font-weight: 700; margin-top: 6px;">$0 &rarr; $2.5B in 9 months</div>
-        </div>
-        <div style="text-align: center;">
-          <div class="stat-huge blue">46%<sup style="font-size: 0.4em; font-weight: 700;">3</sup></div>
-          <div class="stat-label">of code on GitHub is<br>AI-generated (2025)</div>
+      <div class="anim-up delay-1" style="font-family: var(--sans); font-weight: 800; font-size: clamp(5rem, 14vw, 11rem); color: var(--blue); line-height: 0.95; letter-spacing: -0.02em;">$155B</div>
+      <div class="anim-up delay-2" style="margin-top: 20px; color: var(--text-muted); font-family: var(--mono); font-size: clamp(0.95rem, 1.6vw, 1.25rem); letter-spacing: 0.12em; text-transform: uppercase;">TAM by 2030<sup class="blue" style="font-size: 0.7em; font-weight: 700;">1</sup></div>
+      <div class="slide-footnotes">
+        <div class="citation">
+          <sup>1</sup> Bank of America Institute, <a href="https://institute.bankofamerica.com/content/dam/transformation/agentic-ai-in-the-workplace.pdf" target="_blank" rel="noopener noreferrer">"Agentic AI in the Workplace"</a> (2025).
         </div>
       </div>
+    </div>
+  </div>
 
-      <div class="spacer-lg"></div>
+  <!-- ======== SLIDE: USERS HIGHLY MOTIVATED (4 quotes) ======== -->
+  <div class="slide" data-slide="3" data-slide-name="user-quotes">
+    <div class="slide-inner">
+      <div class="label anim-up">Demand</div>
+      <h1 class="headline headline-lg anim-up delay-1">Users are highly motivated</h1>
+      <div class="spacer-md"></div>
 
-      <div class="label anim-up delay-2" style="margin-bottom: 12px;">Feedback</div>
-      <h2 class="headline headline-md anim-up delay-2" style="margin-bottom: 18px;">Users really want this</h2>
-
-      <div class="anim-up delay-3">
+      <div class="anim-up delay-2">
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px;">
           <div class="quote q-card">
             <img class="q-avatar" src="../assets/images/quotes/nico-mesa.jpg" alt="Nicolas Mesa">
@@ -3055,24 +2951,63 @@
               <span class="quote-attr">Elvis Sikora, AI Engineer, CloudWalk</span>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div class="slide-footnotes">
-        <div class="citation">
-          <sup>1</sup> Market size and CAGR: <a href="https://finance.yahoo.com/news/ai-code-assistant-market-set-143000983.html" target="_blank" rel="noopener noreferrer">SNS Insider AI Code Assistant Market Report (15.31% CAGR to 2033)</a>.
-          <sup>2</sup> Claude Code ARR: <a href="https://www.anthropic.com/news/anthropic-raises-30-billion-series-g-funding-380-billion-post-money-valuation" target="_blank" rel="noopener noreferrer">Anthropic Series G announcement, Feb 2026</a>.
-          <sup>3</sup> AI-generated code share: <a href="https://www.theregister.com/2025/08/07/github_ceo_ai_coding/" target="_blank" rel="noopener noreferrer">GitHub / Microsoft developer surveys, 2025</a>.
+          <div class="quote q-card">
+            <img class="q-avatar" src="../assets/images/quotes/sami-jawhar.jpg" alt="Sami Jawhar">
+            <div>
+              "At least as valuable as <strong class="white">Datadog</strong> ($20K/yr)&hellip; on the order of <span style="font-family: var(--sans); font-weight: 800; font-size: 1.35rem; color: var(--white);">$10K&ndash;$100K</span>/yr, depending on the customer."
+              <span class="quote-attr">Sami Jawhar, Agent Wrangler, Trajectory Labs</span>
+            </div>
+          </div>
+          <div class="quote q-card">
+            <img class="q-avatar" src="../assets/images/quotes/matt-handzel.jpg" alt="Matthew Handzel">
+            <div>
+              "If this problem were solved, it would <span style="font-family: var(--sans); font-weight: 800; font-size: 1.35rem; color: var(--white);">2x</span> my task completion efficiency."
+              <span class="quote-attr">Matthew Handzel, Stealth AI Safety Startup</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ======== SLIDE 5: OUR STRATEGY ======== -->
-  <div class="slide" data-slide="4" data-slide-name="strategy">
+  <!-- ======== SLIDE: DEFENSIBILITY ======== -->
+  <div class="slide" data-slide="5" data-slide-name="defensibility">
     <div class="slide-inner">
-      <div class="label anim-up">Our Strategy</div>
-      <h1 class="headline headline-lg anim-up delay-1">Do things that don't scale.</h1>
+      <div class="label anim-up">Defensibility</div>
+      <h1 class="headline headline-lg anim-up delay-1">Won't Anthropic build this?</h1>
+      <div class="spacer-md"></div>
+      <div class="flex-col gap-md anim-up delay-2">
+        <div class="card">
+          <div class="card-title"><span class="blue">1.</span>&ensp;<strong>They acknowledged</strong> our approach is the long-term solution</div>
+          <div class="card-body"><em>"The long-term solution probably looks more like something <strong class="white">proxy-side</strong>"</em> and <em>"the space for <strong class="white">control protocols</strong> is quite big."</em> <span style="color: var(--text-dim); font-size: 0.85em;">(Fabien Roger, Anthropic, Apr 1 2026)</span><sup class="blue" style="font-size: 0.7em; font-weight: 700;">1</sup></div>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="blue">2.</span>&ensp;Doesn't make sense for labs to build <strong>provider-agnostic</strong> tooling</div>
+          <div class="card-body">85% of engineers already use 2+ AI tools simultaneously.<sup class="blue" style="font-size: 0.7em; font-weight: 700;">2</sup> Anthropic won't build management tooling for competitors' clients.</div>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="blue">3.</span>&ensp;Enterprises need <strong>vendor-agnostic</strong> infrastructure</div>
+          <div class="card-body">Every cloud has its own observability stack. DataDog built a multi-billion-dollar company on vendor-neutral monitoring because enterprises won't bet their operations on one vendor. The same dynamic is playing out for AI.</div>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="blue">4.</span>&ensp;If they do, great: <strong>defense in depth</strong></div>
+          <div class="card-body">More layers of safety is the goal. We'll focus on Codex, Cursor, OpenCode, OpenClaw, and everything else they won't build for.</div>
+        </div>
+      </div>
+      <div class="slide-footnotes">
+        <div class="citation">
+          <sup>1</sup> Fabien Roger quotes: from a private call with Anthropic's agent safety team, Apr 1, 2026. Shared with permission.
+          <sup>2</sup> Gergely Orosz, <a href="https://newsletter.pragmaticengineer.com/p/ai-tooling-2026" target="_blank" rel="noopener noreferrer">"AI Tooling for Software Engineers in 2026,"</a> The Pragmatic Engineer, Feb 2026.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== SLIDE: THE PLAYBOOK ======== -->
+  <div class="slide" data-slide="6" data-slide-name="strategy">
+    <div class="slide-inner">
+      <div class="label anim-up">The Playbook</div>
+      <h1 class="headline headline-lg anim-up delay-1">Build things that don't scale.</h1>
       <p class="subtitle anim-up delay-1">Luthien is building the same way.</p>
       <div class="spacer-md"></div>
 
@@ -3129,6 +3064,310 @@
           <sup>1</sup> Supabase valuation: <a href="https://supabase.com/blog/supabase-series-c" target="_blank" rel="noopener noreferrer">Supabase Series C announcement</a>, Oct 2023.
           <sup>2</sup> HashiCorp acquisition: IBM acquired HashiCorp for ~$6.4B in 2024; peak market cap reached $14B at Dec 2021 IPO. <a href="https://www.hashicorp.com/blog/hashicorp-joins-ibm" target="_blank" rel="noopener noreferrer">hashicorp.com</a>.
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== SLIDE: SALES FUNNEL ======== -->
+  <div class="slide" data-slide="7" data-slide-name="funnel">
+    <div class="slide-inner">
+      <div class="label anim-up">Traction</div>
+      <h1 class="headline headline-lg anim-up delay-1">Sales pipeline</h1>
+      <div class="spacer-md"></div>
+
+      <div class="anim-up delay-2" style="display: flex; align-items: center; justify-content: center; gap: clamp(30px, 6vw, 80px);">
+        <!-- SVG funnel -->
+        <svg viewBox="0 0 300 310" width="260" height="270" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="0,0 300,0 278,58 22,58" fill="rgba(59,148,148,0.04)" stroke="rgba(59,148,148,0.12)" stroke-width="1"/>
+          <text x="150" y="26" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">SALES &amp;</text>
+          <text x="150" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">OUTREACH</text>
+
+          <polygon points="22,62 278,62 252,120 48,120" fill="rgba(59,148,148,0.06)" stroke="rgba(59,148,148,0.15)" stroke-width="1"/>
+          <text x="150" y="97" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">QUALIFICATION</text>
+
+          <polygon points="48,124 252,124 222,182 78,182" fill="rgba(59,148,148,0.08)" stroke="rgba(59,148,148,0.18)" stroke-width="1"/>
+          <text x="150" y="150" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">COLLECT</text>
+          <text x="150" y="166" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">REQUIREMENTS</text>
+
+          <polygon points="78,186 222,186 196,244 104,244" fill="rgba(59,148,148,0.11)" stroke="rgba(59,148,148,0.22)" stroke-width="1"/>
+          <text x="150" y="221" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#B0A8BE" font-weight="600" letter-spacing="1.2">TRIAL</text>
+
+          <polygon points="104,248 196,248 178,306 122,306" fill="rgba(59,148,148,0.18)" stroke="rgba(59,148,148,0.45)" stroke-width="1.5"/>
+          <text x="150" y="274" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#3B9494" font-weight="700" letter-spacing="1.2">PILOT /</text>
+          <text x="150" y="290" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#3B9494" font-weight="700" letter-spacing="1.2">CONVERSION</text>
+        </svg>
+
+        <!-- Funnel metrics -->
+        <div style="display: flex; flex-direction: column; gap: 16px; font-family: var(--sans);">
+          <div style="color: var(--text-dim); font-style: italic; font-size: 0.9rem;">No outbound or sales needed yet</div>
+          <div style="display: flex; align-items: baseline; gap: 12px;">
+            <span style="font-weight: 800; font-size: 2.2rem; color: var(--white);">93</span>
+            <span style="color: var(--text-muted); font-size: 0.95rem;">orgs qualified</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 12px;">
+            <span style="font-weight: 800; font-size: 2.2rem; color: var(--white);">20</span>
+            <span style="color: var(--text-muted); font-size: 0.95rem;">problem discoveries</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 12px;">
+            <span style="font-weight: 800; font-size: 2.2rem; color: var(--white);">14</span>
+            <span style="color: var(--text-muted); font-size: 0.95rem;">live trials</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 12px;">
+            <span style="font-weight: 800; font-size: 2.2rem; color: var(--blue);">7</span>
+            <span style="color: var(--blue); font-size: 0.95rem; font-weight: 600;">LOIs signed</span>
+            <span style="color: var(--green); font-weight: 700; font-size: 1.1rem;">$330K-$500K</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== SLIDE: LOIs / TRACTION ======== -->
+  <div class="slide" data-slide="8" data-slide-name="traction">
+    <div class="slide-inner">
+      <div class="label anim-up">Traction</div>
+      <p class="subtitle anim-up delay-1">We asked the smartest people we know to trial our product and tell us how to make it better.</p>
+      <div class="spacer-md"></div>
+
+      <div class="anim-up delay-2" style="border: 1px solid var(--border); border-radius: 3px; overflow: hidden;">
+
+        <!-- Group header: Revenue -->
+        <div class="compare-row header" style="grid-template-columns: 1fr;">
+          <div class="compare-cell" style="color: var(--blue);">Revenue &middot; <span style="font-weight: 400; color: var(--green); text-transform: none; letter-spacing: 0;">first paying customer</span></div>
+        </div>
+
+        <!-- Trajectory Labs -->
+        <div class="compare-row" style="grid-template-columns: 200px 120px 1fr; background: var(--blue-glow);">
+          <div class="compare-cell name" style="padding-top: 14px;">
+            <div style="display: flex; align-items: center; gap: 8px;"><img src="../assets/images/logos/trajectory-labs.webp" alt="Trajectory Labs" style="height: 22px; width: auto;"><span style="font-family: var(--sans); font-weight: 700; font-size: 0.9rem; color: var(--white);">Trajectory Labs</span></div>
+            <div style="font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim); margin-top: 2px;">Signed Tue Apr 14</div>
+          </div>
+          <div class="compare-cell" style="padding-top: 14px;">
+            <div style="font-family: var(--sans); font-weight: 800; font-size: 1.3rem; color: var(--blue);">$5K MRR</div>
+            <div style="font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim);">+ LOI $10K&ndash;$100K/yr</div>
+          </div>
+          <div class="compare-cell">Building RL environments for frontier labs. <span style="color: var(--blue); font-weight: 700;">9 product improvements</span> implemented this week. Paying customer.</div>
+        </div>
+
+        <!-- Group header: Signed LOIs -->
+        <div class="compare-row header" style="grid-template-columns: 1fr; border-top: 2px solid var(--border);">
+          <div class="compare-cell" style="color: var(--amber);">Signed LOI &middot; <span style="font-weight: 400; color: var(--text-dim); text-transform: none; letter-spacing: 0;">non-binding, conditional on pilot</span></div>
+        </div>
+
+        <!-- Redwood Research -->
+        <div class="compare-row" style="grid-template-columns: 200px 120px 1fr;">
+          <div class="compare-cell name" style="padding-top: 14px;">
+            <div style="display: flex; align-items: center; gap: 8px;"><img src="../assets/images/logos/redwood-research.svg" alt="Redwood Research" style="height: 18px; width: auto;"><span style="font-family: var(--sans); font-weight: 700; font-size: 0.9rem; color: var(--white);">Redwood Research</span></div>
+            <div style="font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim); margin-top: 2px;">Signed Apr 2026</div>
+          </div>
+          <div class="compare-cell" style="padding-top: 14px;">
+            <div style="font-family: var(--sans); font-weight: 800; font-size: 1.3rem; color: var(--white);">$330K&ndash;$500K</div>
+            <div style="font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim);">15&ndash;20 individuals</div>
+          </div>
+          <div class="compare-cell">World experts in AI control. Invented the field. Give us feedback from the best minds in the industry.</div>
+        </div>
+
+        <!-- Pipeline LOIs -->
+        <div class="compare-row header" style="grid-template-columns: 1fr; border-top: 2px solid var(--border);">
+          <div class="compare-cell" style="color: var(--amber);">Pipeline</div>
+        </div>
+        <div class="compare-row" style="grid-template-columns: 1fr; border-bottom: none;">
+          <div class="compare-cell" style="padding: 18px 16px;">
+            <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); margin-bottom: 12px;">9 LOIs in pipeline, 14 live trials, 50&ndash;150 seats</div>
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 20px;">
+              <img src="../assets/images/logos/catalyze.svg" alt="Catalyze" style="height: 22px; width: auto;">
+              <img src="../assets/images/logos/handzel.png" alt="Handzel Systems" style="height: 22px; width: auto; filter: invert(1); mix-blend-mode: screen;">
+              <img src="../assets/images/logos/movement-mortgage.svg" alt="Movement Mortgage" style="height: 28px; width: auto;">
+              <img src="../assets/images/logos/aws-light.svg" alt="AWS" style="height: 20px; width: auto;">
+              <span style="font-family: var(--sans); font-weight: 600; font-size: 0.85rem; color: var(--text-dim);">Solomon/Clutter</span>
+              <span style="font-family: var(--sans); font-weight: 600; font-size: 0.85rem; color: var(--text-dim);">+ others</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footnotes">
+        <div class="citation">
+          <sup>1</sup> Trajectory Labs: LOI signed Tue Apr 14, 2026. $5K MRR. 9 product improvements (PRs) implemented during pilot week.
+          <sup>2</sup> Redwood Research: LOI signed Apr 2026, $330K&ndash;$500K, 15&ndash;20 individuals.
+          <sup>3</sup> 93 developers: Scott Wofford's discovery interview pipeline, Jan&ndash;Apr 2026.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== SLIDE: WORLD EXPERTS AS PILOT USERS ======== -->
+  <div class="slide" data-slide="9" data-slide-name="pilot-users">
+    <div class="slide-inner" style="text-align: center;">
+      <div class="label anim-up">Why these users</div>
+      <h1 class="headline headline-lg anim-up delay-1">We choose world experts as our pilot users</h1>
+      <p class="subtitle anim-up delay-1">They help us make Luthien its best version.</p>
+      <div class="spacer-md"></div>
+
+      <div class="anim-up delay-2" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; max-width: 960px; margin: 0 auto; text-align: left;">
+        <div class="card" style="padding: 24px;">
+          <div class="card-title" style="color: var(--blue); margin-bottom: 12px;">AI safety researchers</div>
+          <div class="card-body">Redwood Research invented the field of AI control. They stress-test Luthien against failure modes no one else would find.</div>
+        </div>
+        <div class="card" style="padding: 24px;">
+          <div class="card-title" style="color: var(--blue); margin-bottom: 12px;">Power users of coding agents</div>
+          <div class="card-body">Every pilot user runs Claude Code 30+ hours per week. They find edge cases in days that typical users would take months to encounter.</div>
+        </div>
+        <div class="card" style="padding: 24px;">
+          <div class="card-title" style="color: var(--blue); margin-bottom: 12px;">Building with us, not just for us</div>
+          <div class="card-body">Trajectory Labs contributed 9 product improvements in their first week. Our users are co-developers, not just customers.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== SLIDE: THE ASK ======== -->
+  <div class="slide" data-slide="10" data-slide-name="ask">
+    <div class="slide-inner" style="text-align: center;">
+      <div class="label anim-up">The Ask</div>
+      <h1 class="headline headline-xl anim-up delay-1" style="color: var(--blue);">$2M Pre-Seed</h1>
+      <p class="subtitle anim-up delay-1" style="font-size: clamp(0.95rem, 1.5vw, 1.15rem); color: var(--text-muted);">Usage-based pricing. Scales with adoption.</p>
+      <div class="spacer-md"></div>
+
+      <div class="ask-f3 anim-up delay-2">
+        <div class="ask-f3-spotlight">
+          <a class="ask-f3-spotlight-photo-link" href="https://www.linkedin.com/in/gbravo11/" target="_blank" rel="noopener noreferrer">
+            <img class="ask-f3-spotlight-photo" src="../assets/images/photo-gbravo11.png" alt="Guillermo Bravo">
+          </a>
+          <div class="ask-f3-spotlight-text">
+            <div class="ask-f3-spotlight-label">first angel</div>
+            <div class="ask-f3-spotlight-name">
+              <a href="https://www.linkedin.com/in/gbravo11/" target="_blank" rel="noopener noreferrer" class="ask-f3-spotlight-name-link">Guillermo Bravo</a>
+            </div>
+            <div class="ask-f3-spotlight-title">CPO at
+              <a href="https://r2.co/" target="_blank" rel="noopener noreferrer" class="ask-f3-r2-link">
+                <img src="../assets/images/logos/r2-light.svg" alt="R2" class="ask-f3-inline-logo">
+              </a>
+            </div>
+            <div class="ask-f3-spotlight-meta">
+              <a href="https://www.ycombinator.com/companies/r2" target="_blank" rel="noopener noreferrer" class="ask-f3-yc-badge">
+                <img src="../assets/images/logos/ycombinator-orange.svg" alt="Y Combinator" class="ask-f3-yc-mark">
+                <span>YC W21</span>
+              </a>
+              <span class="ask-f3-spotlight-prior">
+                <img class="ask-f3-spotlight-prior-logo invert" src="../assets/images/logos/amazon-light.svg" alt="Amazon">
+                <img class="ask-f3-spotlight-prior-logo invert" src="../assets/images/logos/jpmorgan-brown.svg" alt="J.P. Morgan">
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ask-f3-divider"></div>
+
+        <div class="ask-f3-also">
+          <div class="ask-f3-also-label">10 more angels <span id="askWindow">this past weekend</span></div>
+          <div class="ask-f3-faces">
+            <a class="ask-f3-face" href="https://www.linkedin.com/in/tom-divinnie-07964323/" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/images/photo-tom-divinnie.png" alt="Tom DiVinnie">
+              <div class="ask-f3-face-logos ask-f3-face-logos-inline">
+                <span class="ask-f3-face-cred">CDO @</span>
+                <img class="ask-f3-face-logo" src="../assets/images/logos/habitathealth-mark.png" alt="Habitat Health">
+              </div>
+              <div class="ask-f3-face-funding">raised $50M</div>
+            </a>
+            <a class="ask-f3-face" href="https://www.linkedin.com/in/borja-rivero-5a24442/" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/images/photo-borja-rivero.png" alt="Borja Rivero">
+              <div class="ask-f3-face-logos">
+                <span class="ask-f3-face-cred">Sr Prod Mgr</span>
+                <img class="ask-f3-face-logo" src="../assets/images/logos/google-light.svg" alt="Google">
+              </div>
+            </a>
+            <a class="ask-f3-face" href="https://www.linkedin.com/in/chris-porter-25ab068b/" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/images/photo-chris-porter.png" alt="Chris Porter">
+              <div class="ask-f3-face-logos">
+                <span class="ask-f3-face-cred">Sr Mgr, PMT</span>
+                <img class="ask-f3-face-logo invert" src="../assets/images/logos/amazon-light.svg" alt="Amazon">
+              </div>
+            </a>
+            <a class="ask-f3-face" href="https://www.linkedin.com/in/beth-anne-porter-5a491132/" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/images/photo-beth-anne-porter.jpeg" alt="Beth Anne Porter">
+              <div class="ask-f3-face-logos">
+                <span class="ask-f3-face-cred">Sr Mgr, PMT</span>
+                <img class="ask-f3-face-logo invert" src="../assets/images/logos/amazon-light.svg" alt="Amazon">
+              </div>
+            </a>
+            <a class="ask-f3-face" href="https://www.linkedin.com/in/will-reuter-86741415/" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/images/photo-will-reuter.png" alt="Will Reuter">
+              <div class="ask-f3-face-logos ask-f3-face-logos-nowrap">
+                <span class="ask-f3-face-cred">Dir of Acct Mgmt</span>
+                <img class="ask-f3-face-logo" src="../assets/images/logos/life-in-the-air.png" alt="LIFE In The Air">
+              </div>
+            </a>
+            <a class="ask-f3-face" href="https://www.linkedin.com/in/arjunmishra0491/" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/images/photo-arjun-mishra.png" alt="Arjun Mishra">
+              <div class="ask-f3-face-logos ask-f3-face-logos-nowrap">
+                <span class="ask-f3-face-cred">Applied Sci Mgr</span>
+                <img class="ask-f3-face-logo invert" src="../assets/images/logos/amazon-light.svg" alt="Amazon">
+              </div>
+            </a>
+            <a class="ask-f3-face" href="https://www.linkedin.com/in/luisalbertocaballero/" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/images/photo-luis-caballero.png" alt="Luis Caballero">
+              <div class="ask-f3-face-logos ask-f3-face-logos-inline">
+                <span class="ask-f3-face-cred">VP</span>
+                <img class="ask-f3-face-logo" src="../assets/images/logos/hellofresh-light.svg" alt="HelloFresh">
+              </div>
+            </a>
+            <a class="ask-f3-face" href="https://www.linkedin.com/in/saranya-selvamani/" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/images/photo-saranya-selvamani.png" alt="Saranya Selvamani">
+              <div class="ask-f3-face-logos ask-f3-face-logos-nowrap">
+                <span class="ask-f3-face-cred">Founder</span>
+                <img class="ask-f3-face-logo" src="../assets/images/logos/sproutron-ai.png" alt="Sproutron AI">
+              </div>
+            </a>
+            <a class="ask-f3-face" href="https://www.linkedin.com/in/espinlaura/" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/images/photo-laura-espin.png" alt="Laura Espin">
+              <div class="ask-f3-face-logos ask-f3-face-logos-nowrap">
+                <span class="ask-f3-face-cred">Sr Dir Growth</span>
+                <img class="ask-f3-face-logo" src="../assets/images/logos/eventbrite.png" alt="Eventbrite">
+              </div>
+            </a>
+            <a class="ask-f3-face" href="https://www.linkedin.com/in/afazoli/" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/images/photo-ana-fazoli.png" alt="Ana Fazoli">
+              <div class="ask-f3-face-logos ask-f3-face-logos-nowrap">
+                <span class="ask-f3-face-cred">Dep Dir Fin</span>
+                <img class="ask-f3-face-logo invert" src="../assets/images/logos/gates-foundation.png" alt="Gates Foundation">
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== SLIDE: CLOSE ======== -->
+  <div class="slide title-slide" data-slide="11" data-slide-name="close">
+    <div class="slide-inner">
+      <div class="logo-mark anim-up">Luthien</div>
+      <div class="spacer-md"></div>
+      <p class="anim-up delay-2" style="font-size: clamp(1.15rem, 2vw, 1.5rem); color: var(--white); text-align: center; line-height: 1.5; font-family: var(--body);">
+        Every org running AI agents will need a control layer.<br>We're building it.
+      </p>
+      <div class="spacer-lg"></div>
+
+      <div class="close-actions anim-up delay-3">
+        <a href="https://docsend.com/view/hpf4szbc5u2cqu4v/d/f9my3hig8mn9qfwu" class="memo-card" target="_blank">
+          <div class="mini-cover">
+            <div class="mini-cover-title">Luthien Research</div>
+            <div class="mini-cover-line"></div>
+            <div class="mini-cover-sub">Investment Memo</div>
+          </div>
+          <div class="card-text">
+            <div class="card-title">Investment Memo</div>
+            <div class="card-sub">April 2026 &middot; PDF</div>
+          </div>
+          <div class="card-arrow">&rsaquo;</div>
+        </a>
+      </div>
+
+      <div class="close-links anim-up delay-3">
+        <a href="https://luthien.cc" class="close-link" target="_blank">luthien.cc</a>
+        <a href="mailto:jai@luthienresearch.org" class="close-link">jai@luthienresearch.org</a>
+        <a href="mailto:scott@luthienresearch.org" class="close-link">scott@luthienresearch.org</a>
       </div>
     </div>
   </div>
@@ -3581,41 +3820,7 @@
 
   </template>
 
-  <!-- ======== SLIDE: CLOSE (with investment memo) ======== -->
-  <div class="slide title-slide" data-slide="14" data-slide-name="close">
-    <div class="slide-inner">
-      <div class="logo-mark anim-up">Luthien</div>
-      <div class="spacer-md"></div>
-      <p class="anim-up delay-2" style="font-size: clamp(1.15rem, 2vw, 1.5rem); color: var(--white); text-align: center; line-height: 1.5; font-family: var(--body);">
-        Every org running AI agents will need a control layer.<br>We're building it.
-      </p>
-      <div class="spacer-lg"></div>
-
-      <div class="close-actions anim-up delay-3">
-        <a href="https://docsend.com/view/hpf4szbc5u2cqu4v/d/f9my3hig8mn9qfwu" class="memo-card" target="_blank">
-          <div class="mini-cover">
-            <div class="mini-cover-title">Luthien Research</div>
-            <div class="mini-cover-line"></div>
-            <div class="mini-cover-sub">Investment Memo</div>
-          </div>
-          <div class="card-text">
-            <div class="card-title">Investment Memo</div>
-            <div class="card-sub">April 2026 &middot; PDF</div>
-          </div>
-          <div class="card-arrow">&rsaquo;</div>
-        </a>
-      </div>
-
-      <div class="close-links anim-up delay-3">
-        <a href="https://luthien.cc" class="close-link" target="_blank">luthien.cc</a>
-        <a href="mailto:jai@luthienresearch.org" class="close-link">jai@luthienresearch.org</a>
-        <a href="mailto:scott@luthienresearch.org" class="close-link">scott@luthienresearch.org</a>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- ======== SLIDE 6: ICP ======== -->
+  <!-- Old close/ICP slides removed; live close is above the template now. -->
 </div>
 
 <!-- Progress bar -->
