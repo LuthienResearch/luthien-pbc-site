@@ -1987,6 +1987,47 @@
       align-items: center;
     }
 
+    .nav-hint {
+      position: absolute;
+      left: 50%;
+      bottom: clamp(24px, 5vh, 56px);
+      transform: translateX(-50%);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      opacity: 0;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .nav-hint .key {
+      display: inline-block;
+      padding: 1px 6px;
+      margin: 0 2px;
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 3px;
+      font-size: 0.72rem;
+      line-height: 1;
+    }
+    .title-slide.active .nav-hint {
+      animation: nav-hint-in 1.4s ease 3.2s forwards;
+    }
+    body.user-interacted .nav-hint,
+    body.user-interacted.title-slide .nav-hint {
+      animation: none !important;
+      opacity: 0 !important;
+    }
+    @keyframes nav-hint-in {
+      from { opacity: 0; transform: translate(-50%, 4px); }
+      to   { opacity: 0.5; transform: translate(-50%, 0); }
+    }
+    @media print {
+      .nav-hint { display: none !important; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .title-slide.active .nav-hint { animation: none; opacity: 0.5; }
+    }
+
     .logo-mark {
       font-family: var(--sans);
       font-weight: 800;
@@ -2899,6 +2940,7 @@
       <div class="spacer-md"></div>
       <h1 class="headline headline-lg anim-up delay-1" style="color: var(--white);">Safety = Trust = Power</h1>
     </div>
+    <div class="nav-hint" aria-hidden="true">click, swipe, or press <span class="key">&rarr;</span> to advance</div>
   </div>
 
   <!-- ======== SLIDE 2: TEAM (minimalist, two circles, no headline) ======== -->
@@ -4969,6 +5011,19 @@ Key invariants:
   // Nav arrow buttons
   navLeft.addEventListener('click', prev);
   navRight.addEventListener('click', next);
+
+  // Dismiss the title-slide navigation hint on first user interaction.
+  const markInteracted = () => {
+    document.body.classList.add('user-interacted');
+    document.removeEventListener('keydown', markInteracted, true);
+    document.removeEventListener('pointerdown', markInteracted, true);
+    document.removeEventListener('touchstart', markInteracted, true);
+    document.removeEventListener('wheel', markInteracted, true);
+  };
+  document.addEventListener('keydown', markInteracted, true);
+  document.addEventListener('pointerdown', markInteracted, true);
+  document.addEventListener('touchstart', markInteracted, true);
+  document.addEventListener('wheel', markInteracted, true);
 
   // Click-to-advance disabled  -  use arrow keys, swipe, or nav arrows instead
 
