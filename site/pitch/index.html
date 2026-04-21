@@ -1254,7 +1254,7 @@
     }
     .ask-f3-faces {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 6px 6px;
       row-gap: 20px;
       align-items: start;
@@ -2255,7 +2255,7 @@
       .ask-f3 { grid-template-columns: 1fr; gap: 24px; }
       .ask-f3-divider { display: none; }
       .ask-f3-spotlight { justify-content: flex-start; }
-      .ask-f3-faces { grid-template-columns: repeat(5, 1fr); }
+      .ask-f3-faces { grid-template-columns: repeat(4, 1fr); }
       /* Feature matrix - card layout (inline styles override class rules without !important) */
       .feature-matrix .compare-row { grid-template-columns: 1fr !important; padding: 12px 0; }
       .feature-matrix .compare-row.header { display: none !important; }
@@ -4280,8 +4280,22 @@ Key invariants:
         <div class="ask-f3-divider"></div>
 
         <div class="ask-f3-also">
-          <div class="ask-f3-also-label">10 more angels <span id="askWindow">this past weekend</span></div>
+          <div class="ask-f3-also-label">12 more angels Fri Apr 10 &ndash; Tue Apr 14</div>
           <div class="ask-f3-faces">
+            <a class="ask-f3-face" href="https://www.linkedin.com/in/swante/" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/images/photo-swante.png" alt="Swante">
+              <div class="ask-f3-face-logos">
+                <span class="ask-f3-face-cred">SWE</span>
+                <img class="ask-f3-face-logo" src="../assets/images/logos/google-light.svg" alt="Google">
+              </div>
+            </a>
+            <a class="ask-f3-face" href="https://www.linkedin.com/in/jeremy/" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/images/photo-jeremy.png" alt="Jeremy">
+              <div class="ask-f3-face-logos">
+                <span class="ask-f3-face-cred">Product</span>
+                <img class="ask-f3-face-logo" src="../assets/images/logos/polygon.png" alt="Polygon">
+              </div>
+            </a>
             <a class="ask-f3-face" href="https://www.linkedin.com/in/tom-divinnie-07964323/" target="_blank" rel="noopener noreferrer">
               <img src="../assets/images/photo-tom-divinnie.png" alt="Tom DiVinnie">
               <div class="ask-f3-face-logos ask-f3-face-logos-inline">
@@ -4443,13 +4457,6 @@ Key invariants:
   const days = Math.max(1, Math.round((today - firstLOI) / 86400000));
   const el = document.getElementById('loiDays');
   if (el) el.textContent = 'in ' + days + ' day' + (days !== 1 ? 's' : '');
-})();
-
-/* Angel window label - static, update manually if needed */
-(function() {
-  const el = document.getElementById('askWindow');
-  if (!el) return;
-  el.textContent = 'this past weekend';
 })();
 
 (function() {
