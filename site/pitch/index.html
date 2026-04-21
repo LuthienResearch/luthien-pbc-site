@@ -1139,7 +1139,7 @@
     .ask-f3-spotlight-text { min-width: 0; text-align: left; }
     .ask-f3-spotlight-label {
       font-family: var(--mono);
-      font-size: 0.72rem;
+      font-size: 1.26rem;
       color: var(--blue);
       letter-spacing: 0.03em;
       font-weight: 600;
@@ -1246,17 +1246,26 @@
     .ask-f3-also { text-align: left; padding-left: 4px; }
     .ask-f3-also-label {
       font-family: var(--mono);
-      font-size: 0.72rem;
+      font-size: 1.26rem;
       color: var(--text-dim);
       letter-spacing: 0.03em;
       font-weight: 600;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
+      line-height: 1.3;
+    }
+    .ask-f3-also-label-sub {
+      display: block;
+      margin-top: 6px;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      font-weight: 500;
+      letter-spacing: 0.02em;
     }
     .ask-f3-faces {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 6px 6px;
-      row-gap: 20px;
+      row-gap: 36px;
       align-items: start;
     }
     .ask-f3-face {
@@ -4245,7 +4254,7 @@ Key invariants:
   <!-- ======== SLIDE: THE ASK ======== -->
   <div class="slide" data-slide="10" data-slide-name="ask">
     <div class="slide-inner" style="text-align: center;">
-      <div class="label anim-up">The Ask</div>
+      <div class="label anim-up" style="text-align: left;">The Ask</div>
       <h1 class="headline headline-xl anim-up delay-1" style="color: var(--blue);">$2M Pre-Seed</h1>
       <div class="spacer-md"></div>
 
@@ -4280,7 +4289,7 @@ Key invariants:
         <div class="ask-f3-divider"></div>
 
         <div class="ask-f3-also">
-          <div class="ask-f3-also-label">12 more angels Fri Apr 10 &ndash; Tue Apr 14</div>
+          <div class="ask-f3-also-label">12 more recent angels (no longer accepting)<span class="ask-f3-also-label-sub">Fri Apr 10 &ndash; Wed Apr 15</span></div>
           <div class="ask-f3-faces">
             <a class="ask-f3-face" href="https://www.linkedin.com/in/swante-scholz-34519312a/" target="_blank" rel="noopener noreferrer">
               <img src="../assets/images/photo-swante.png" alt="Swante Scholz">
