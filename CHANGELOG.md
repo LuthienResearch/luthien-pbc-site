@@ -4,6 +4,7 @@
 
 | Version | Date | Summary |
 |---------|------|---------|
+| v12.1 | 2026-04-20 | Pitch deck date refresh: replace relative day-of-week language on traction slide with absolute dates; reconcile Trajectory PR count (9 since pilot started Sun Apr 12); remove 416 lines of dead archived-presentation-slides template (PR #144) |
 | v12 | 2026-04-15 | Simplified pitch for Seldon Demo Day: distribution-playbook table, failure catalog, static ratio bar, autobiographical team, Trajectory-led traction (PR #116) |
 | v11.5 | 2026-04-14 | Auto-generated pitch deck PDF: Playwright CI builds `luthien-deck.pdf` from `site/pitch/index.html` on every change, published as a rolling GitHub release and exposed at `/pitch.pdf` via Cloudflare Pages `_redirects`. Added "Download PDF" link on the deck. Dropped unused GitHub Pages fallback deploy. |
 | v11.4 | 2026-04-11 | Pitch deck CTO slide: replace card grid with McKinsey 4-5x hero stat + composite CTO voice split (PR #90) |
@@ -11,6 +12,10 @@
 | v10.6 | 2026-03-09 | Address Josh Levy's agentic feedback: add long-session and multi-session persistence language to hero + architecture section |
 | v10.5 | 2026-03-05 | Feedback synthesis from S14/S15 user interviews; footer tagline ("Power is nothing without control") |
 | v10 | 2026-02-26 | Initial repo migration from scottwofford.com/luthien/landing_v8/ |
+
+## 2026-04-20
+
+- v12.1: Pitch deck date refresh. An investor flagged stale relative-date language on the traction slide ("signed on Tuesday", "signed on Friday", "10 Luthien PRs on Sunday"). Replaced with absolute dates matching the footnote convention already in use: "signed Tue Apr 14" (Trajectory), "signed Fri Apr 10" (Redwood). Reconciled the Trajectory PR count: card said "10", footnote said "9". Queried luthien-proxy (author sjawhar): 12 submitted, 9 currently open, 0 merged. Copy now reads "9 Luthien PRs since pilot started on Sun Apr 12" (pilot start = date of Sami's first PR). Also deleted 416 lines of dead HTML in `<template id="archived-presentation-slides">` which held 6 inert slides (competitive, traction-table, market, gtm, quotes, second ask) that the browser never rendered. (PR #144)
 
 ## 2026-04-15
 
