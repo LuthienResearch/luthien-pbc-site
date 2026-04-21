@@ -1129,8 +1129,8 @@
       background: rgba(59, 148, 148, 0.12);
     }
     .ask-f3-spotlight-photo {
-      width: 64px;
-      height: 64px;
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid var(--border);
@@ -1139,7 +1139,7 @@
     .ask-f3-spotlight-text { min-width: 0; text-align: left; }
     .ask-f3-spotlight-label {
       font-family: var(--mono);
-      font-size: 0.72rem;
+      font-size: 1.26rem;
       color: var(--blue);
       letter-spacing: 0.03em;
       font-weight: 600;
@@ -1175,8 +1175,9 @@
       letter-spacing: 0.02em;
       margin-top: 4px;
       display: flex;
-      align-items: center;
-      gap: 5px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
       flex-wrap: wrap;
     }
     .ask-f3-yc-badge {
@@ -1246,17 +1247,26 @@
     .ask-f3-also { text-align: left; padding-left: 4px; }
     .ask-f3-also-label {
       font-family: var(--mono);
-      font-size: 0.72rem;
+      font-size: 1.26rem;
       color: var(--text-dim);
       letter-spacing: 0.03em;
       font-weight: 600;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
+      line-height: 1.3;
+    }
+    .ask-f3-also-label-sub {
+      display: block;
+      margin-top: 6px;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      font-weight: 500;
+      letter-spacing: 0.02em;
     }
     .ask-f3-faces {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 6px 6px;
-      row-gap: 20px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px 10px;
+      row-gap: 52px;
       align-items: start;
     }
     .ask-f3-face {
@@ -1270,8 +1280,8 @@
     }
     .ask-f3-face:hover { transform: translateY(-2px); }
     .ask-f3-face > img:first-child {
-      width: 44px;
-      height: 44px;
+      width: 68px;
+      height: 68px;
       border-radius: 50%;
       object-fit: cover;
       border: 1px solid var(--border);
@@ -2255,7 +2265,7 @@
       .ask-f3 { grid-template-columns: 1fr; gap: 24px; }
       .ask-f3-divider { display: none; }
       .ask-f3-spotlight { justify-content: flex-start; }
-      .ask-f3-faces { grid-template-columns: repeat(5, 1fr); }
+      .ask-f3-faces { grid-template-columns: repeat(4, 1fr); }
       /* Feature matrix - card layout (inline styles override class rules without !important) */
       .feature-matrix .compare-row { grid-template-columns: 1fr !important; padding: 12px 0; }
       .feature-matrix .compare-row.header { display: none !important; }
@@ -2950,10 +2960,10 @@
 
         <!-- Scott -->
         <div class="anim-up delay-1" style="text-align: center;">
-          <div style="width: clamp(140px, 16vw, 190px); height: clamp(140px, 16vw, 190px); border: 2px solid var(--white); border-radius: 50%; margin: 0 auto; overflow: hidden;">
+          <a href="https://www.linkedin.com/in/scottwofford/" target="_blank" rel="noopener noreferrer" style="display: block; width: clamp(140px, 16vw, 190px); height: clamp(140px, 16vw, 190px); border: 2px solid var(--white); border-radius: 50%; margin: 0 auto; overflow: hidden;">
             <img src="https://avatars.githubusercontent.com/scottwofford?s=480" alt="Scott Wofford" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-          </div>
-          <div style="margin-top: 14px; color: var(--text-dim); font-family: var(--mono); font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase;">CEO &middot; Scott Wofford</div>
+          </a>
+          <div style="margin-top: 14px; color: var(--text-dim); font-family: var(--mono); font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase;">CEO &middot; <a href="https://www.linkedin.com/in/scottwofford/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">Scott Wofford</a></div>
           <div style="margin-top: 22px; font-family: var(--sans); font-weight: 800; font-size: clamp(2.6rem, 6vw, 4.4rem); color: var(--blue); line-height: 1;">
             <a href="#team-footnote-profit" class="team-stat-link" style="color: inherit; text-decoration: none;">$4.5B<sup class="blue" style="font-size: 0.4em; font-weight: 700; text-decoration: underline; text-decoration-style: dotted;">1</sup></a>
           </div>
@@ -4245,7 +4255,7 @@ Key invariants:
   <!-- ======== SLIDE: THE ASK ======== -->
   <div class="slide" data-slide="10" data-slide-name="ask">
     <div class="slide-inner" style="text-align: center;">
-      <div class="label anim-up">The Ask</div>
+      <div class="label anim-up" style="text-align: left;">The Ask</div>
       <h1 class="headline headline-xl anim-up delay-1" style="color: var(--blue);">$2M Pre-Seed</h1>
       <div class="spacer-md"></div>
 
@@ -4280,8 +4290,22 @@ Key invariants:
         <div class="ask-f3-divider"></div>
 
         <div class="ask-f3-also">
-          <div class="ask-f3-also-label">10 more angels <span id="askWindow">this past weekend</span></div>
+          <div class="ask-f3-also-label">12 recent angels (closed)<span class="ask-f3-also-label-sub">Fri Apr 10 &ndash; Wed Apr 15</span></div>
           <div class="ask-f3-faces">
+            <a class="ask-f3-face" href="https://www.linkedin.com/in/swante-scholz-34519312a/" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/images/photo-swante.png" alt="Swante Scholz">
+              <div class="ask-f3-face-logos">
+                <span class="ask-f3-face-cred">SWE</span>
+                <img class="ask-f3-face-logo" src="../assets/images/logos/google-light.svg" alt="Google">
+              </div>
+            </a>
+            <a class="ask-f3-face" href="https://www.linkedin.com/in/jeremybrenner1/" target="_blank" rel="noopener noreferrer">
+              <img src="../assets/images/photo-jeremy.png" alt="Jeremy Brenner">
+              <div class="ask-f3-face-logos">
+                <span class="ask-f3-face-cred">Product</span>
+                <img class="ask-f3-face-logo" src="../assets/images/logos/polygon.png" alt="Polygon">
+              </div>
+            </a>
             <a class="ask-f3-face" href="https://www.linkedin.com/in/tom-divinnie-07964323/" target="_blank" rel="noopener noreferrer">
               <img src="../assets/images/photo-tom-divinnie.png" alt="Tom DiVinnie">
               <div class="ask-f3-face-logos ask-f3-face-logos-inline">
@@ -4293,7 +4317,7 @@ Key invariants:
             <a class="ask-f3-face" href="https://www.linkedin.com/in/borja-rivero-5a24442/" target="_blank" rel="noopener noreferrer">
               <img src="../assets/images/photo-borja-rivero.png" alt="Borja Rivero">
               <div class="ask-f3-face-logos">
-                <span class="ask-f3-face-cred">Sr Prod Mgr</span>
+                <span class="ask-f3-face-cred">Product</span>
                 <img class="ask-f3-face-logo" src="../assets/images/logos/google-light.svg" alt="Google">
               </div>
             </a>
@@ -4443,13 +4467,6 @@ Key invariants:
   const days = Math.max(1, Math.round((today - firstLOI) / 86400000));
   const el = document.getElementById('loiDays');
   if (el) el.textContent = 'in ' + days + ' day' + (days !== 1 ? 's' : '');
-})();
-
-/* Angel window label - static, update manually if needed */
-(function() {
-  const el = document.getElementById('askWindow');
-  if (!el) return;
-  el.textContent = 'this past weekend';
 })();
 
 (function() {
