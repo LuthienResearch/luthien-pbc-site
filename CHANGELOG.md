@@ -4,6 +4,7 @@
 
 | Version | Date | Summary |
 |---------|------|---------|
+| (docs)  | 2026-04-22 | Meta-COE on `/coe` process adherence: the first two attempts at running `/coe` on the luthien.cc reachability incident degraded (chat-only, then TODO.md-written). This PR documents both failures and lands the documentation updates (mark `TODO.md` deprecated in CLAUDE.md; update `/coe` skill step 7 to use Trello; two feedback memories) that should prevent recurrence. Sibling PR #150 has the luthien.cc reachability COE. |
 | v12.1 | 2026-04-20 | Pitch deck date refresh: replace relative day-of-week language on traction slide with absolute dates; reconcile Trajectory PR count (9 since pilot started Sun Apr 12); remove 416 lines of dead archived-presentation-slides template (PR #144) |
 | v12 | 2026-04-15 | Simplified pitch for Seldon Demo Day: distribution-playbook table, failure catalog, static ratio bar, autobiographical team, Trajectory-led traction (PR #116) |
 | v11.5 | 2026-04-14 | Auto-generated pitch deck PDF: Playwright CI builds `luthien-deck.pdf` from `site/pitch/index.html` on every change, published as a rolling GitHub release and exposed at `/pitch.pdf` via Cloudflare Pages `_redirects`. Added "Download PDF" link on the deck. Dropped unused GitHub Pages fallback deploy. |

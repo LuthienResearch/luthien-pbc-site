@@ -33,7 +33,7 @@ site/                        # Deployed to GitHub Pages (this is the root)
 dev/                         # Development tracking (not deployed)
 ├── OBJECTIVE.md             # Current objective
 ├── NOTES.md                 # Scratchpad
-├── TODO.md                  # Backlog
+├── TODO.md                  # DEPRECATED — task tracking is in Trello now
 └── context/
     ├── decisions.md          # Why we chose X over Y
     └── gotchas.md            # Non-obvious things
