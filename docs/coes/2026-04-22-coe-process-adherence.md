@@ -113,33 +113,38 @@ After-state (this PR):
 
 **Action items:**
 
-All tracked as Trello cards on the Luthien board. `TODO.md` is deprecated. Table below gives full traceability from action item → Trello card → delivering PR → status.
+All tracked as Trello cards on the Luthien board. `TODO.md` is deprecated. Table below gives full traceability from action item → Trello card → delivering PR/artifact → success criteria → status.
 
 *Claude-automatable (mostly completed in-session):*
 
-| Action | Trello card | Delivering PR / artifact | Status |
-|--------|-------------|--------------------------|--------|
-| Write feedback memory: execute every step of named-process skills | *(no card — one-shot)* | `~/.claude/projects/-Users-scottwofford-build/memory/feedback_named_process_skills_execute_fully.md` (indexed in `MEMORY.md`) | **DONE in-session** |
-| Write feedback memory: `TODO.md` deprecated, Trello is system of record | *(no card — one-shot)* | `~/.claude/projects/-Users-scottwofford-build/memory/feedback_task_tracking_in_trello.md` (indexed in `MEMORY.md`) | **DONE in-session** |
-| Update `/coe` skill step 7 (TODO.md → Trello) | *(no card — one-shot)* | `~/.claude/commands/coe.md` edited (local file, not version-controlled) | **DONE in-session** |
-| Replace "Rules for Editing TODO.md Files" section with "Task Tracking: Trello Only" in global `CLAUDE.md`, and expand with MCP tool specifics | [tEevz1x8](https://trello.com/c/tEevz1x8) | [private-claude-code-docs #6](https://github.com/scottwofford/private-claude-code-docs/pull/6) | PR open |
-| Update global `CLAUDE.md` proactive-reminders table (`dev/TODO.md` → Trello card) | same as above | same as above | PR open |
-| Append PRs #150 and #151 to global `CLAUDE.md` COE examples list | same as above | same as above | PR open |
-| Add Task Tracking section with MCP specifics to this repo's `CLAUDE.md` | *(no separate card; part of this PR)* | This PR (#151) | PR open |
-| Perform a documented-steps self-check at the end of every named-process skill invocation going forward | *(behavioral; no card)* | Enforced via `feedback_named_process_skills_execute_fully.md` memory | **Ongoing behavior change** |
+| Action | Trello card | Delivering PR / artifact | Success criteria | Status |
+|--------|-------------|--------------------------|------------------|--------|
+| Write feedback memory: execute every step of named-process skills | *(no card — one-shot)* | `feedback_named_process_skills_execute_fully.md` + indexed in `MEMORY.md` | File exists at memory path; indexed in `MEMORY.md`; next `/coe` session on a non-code incident runs end-to-end without prompting Scott | **DONE in-session** |
+| Write feedback memory: `TODO.md` deprecated, Trello is system of record | *(no card — one-shot)* | `feedback_task_tracking_in_trello.md` + indexed in `MEMORY.md` | File exists + indexed; next session that would otherwise add to `dev/TODO.md` files a Trello card instead | **DONE in-session** |
+| Add feedback memory: verify premise (dig/whois/curl) before declaring blocked | *(no card — one-shot)* | `feedback_verify_premise_before_blocking.md` + indexed in `MEMORY.md` | File exists + indexed; next time an action looks blocked on a credential, a 5-second verification step runs first | **DONE in-session (2026-04-23)** |
+| Rewrite `/coe` skill template to handle Type A (code PR) and Type B (infra/process) explicitly; require Success criteria column on every action-item row; include verify-premise guidance | *(covers concern of j1uLjzRR; that card archived as delivered by this rewrite)* | `~/.claude/commands/coe.md` (local file, not version-controlled) | Template at that path has the two-type framing up front, a "verify premise" step, and a Success criteria column in the action-items format | **DONE in-session (2026-04-23)** |
+| Replace "Rules for Editing TODO.md Files" section in global `CLAUDE.md`; expand with MCP tool specifics | [tEevz1x8](https://trello.com/c/tEevz1x8) | [private-claude-code-docs #6](https://github.com/scottwofford/private-claude-code-docs/pull/6) | PR #6 merges; global CLAUDE.md no longer mentions `TODO.md` as a destination; "Task Tracking: Trello Only" section is present | PR open |
+| Update global `CLAUDE.md` proactive-reminders table (`dev/TODO.md` → Trello card) | same as above | same as above | same PR; reminder table entry no longer says `TODO.md` | PR open |
+| Append PRs #150 and #151 to global `CLAUDE.md` COE examples list | same as above | same as above | same PR; both URLs appear in the list | PR open |
+| Add Task Tracking section with MCP specifics to this repo's `CLAUDE.md` | *(no separate card; part of this PR)* | This PR (#151) | This PR merges; repo CLAUDE.md has a Task Tracking section pointing at the global CLAUDE.md as full reference | PR open |
+| Perform a documented-steps self-check at the end of every named-process skill invocation going forward | *(behavioral; no card)* | Enforced via `feedback_named_process_skills_execute_fully.md` memory | No future correction-turn is required on a `/coe` run because steps were skipped | **Ongoing behavior change** |
 
 *Requires human decision/design:*
 
-| Action | Trello card | Delivering PR / artifact | Status |
-|--------|-------------|--------------------------|--------|
-| Review this COE's root-cause diagnosis ("over-applied caution about writing files in new repos"); replace if wrong | *(this PR's review itself)* | This PR (#151) | Pending review |
-| Decide whether to split `/coe` into a PR-centric variant and a lightweight process-incident variant | [j1uLjzRR](https://trello.com/c/j1uLjzRR) | *(none — it's a decision)* | Human decision |
+| Action | Trello card | Delivering PR / artifact | Success criteria | Status |
+|--------|-------------|--------------------------|------------------|--------|
+| Review this COE's root-cause diagnosis ("over-applied caution about writing files in new repos"); replace if wrong | *(this PR's review itself)* | This PR (#151) | PR review comments address the framing OR PR merges as-is | Pending review |
 
 **Columns defined:**
-- **Delivering PR / artifact** = where the deliverable for this action actually lives. For in-session one-shots (feedback memories, local skill edits) there's no PR because the artifact is outside version-controlled repos. For behavioral changes there's no PR by design.
-- **Status** values: `PR open` / `DONE in-session` / `Ongoing behavior change` / `Human decision` / `Pending review`.
+- **Delivering PR / artifact** = where the deliverable lives. In-session one-shots (memories, local skill edits) live outside version-controlled repos.
+- **Success criteria** = a concrete "how we know this is done" test, checkable without asking the owner.
+- **Status** values: `PR open` / `DONE in-session` / `Ongoing behavior change` / `Pending review` / `Blocked on <specific>` / `Archived (premise invalid)`.
 
 This meta-COE (PR #151) and the originating COE (PR #150) are records themselves — they don't appear as "delivering PRs" for action items, they ARE the action records.
+
+**Note on archived cards:**
+- [dM4Xwxeh](https://trello.com/c/dM4Xwxeh) (email deliverability for `@luthien.cc`) was archived 2026-04-23 after `dig MX luthien.cc` returned no records — the domain doesn't send email, so the card's premise was invalid. Filed as the motivating example for the new `feedback_verify_premise_before_blocking.md` memory.
+- [j1uLjzRR](https://trello.com/c/j1uLjzRR) (decide `/coe` skill variants) was archived 2026-04-23 after the `/coe` template was rewritten in-session to handle both incident types — the decision the card captured has been made and delivered.
 
 **Remaining Risk:**
 
