@@ -1,0 +1,125 @@
+name: Reachability Monitor
+
+# Scheduled reachability probe for customer-facing Luthien domains.
+#
+# Purpose: catch regressions like the luthien.cc ISP-filtering incident
+# (see docs/coes/2026-04-22-luthien-cc-unreachable.md) before a human
+# stumbles into them. Runs every 6 hours against each configured domain,
+# executes scripts/reachability-check.sh, and opens a GitHub issue if a
+# probe fails.
+#
+# Depends on scripts/reachability-check.sh (added in PR #153). If that
+# script is missing the workflow fails loud rather than silent.
+#
+# To add or remove monitored domains: edit the DOMAINS env var below.
+# To change cadence: edit the cron expression.
+
+on:
+  schedule:
+    # Every 6 hours, offset 17 past the hour to avoid the stampede at :00.
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+    inputs:
+      domain:
+        description: 'Single domain to probe (overrides the configured list)'
+        required: false
+
+permissions:
+  issues: write    # Needed to open an issue on failure
+  contents: read
+
+concurrency:
+  group: reachability-monitor
+  cancel-in-progress: false
+
+env:
+  # Space-separated list of domains to probe on scheduled runs.
+  DOMAINS: "luthien.cc luthienresearch.org"
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install jq
+        run: sudo apt-get update -qq && sudo apt-get install -y jq
+
+      - name: Verify probe script exists
+        run: |
+          if [[ ! -x scripts/reachability-check.sh ]]; then
+            echo "::error::scripts/reachability-check.sh missing or not executable (depends on PR #153)"
+            exit 1
+          fi
+
+      - name: Probe each domain
+        id: probe
+        shell: bash
+        run: |
+          DOMAINS_TO_CHECK="${{ github.event.inputs.domain }}"
+          if [[ -z "$DOMAINS_TO_CHECK" ]]; then
+            DOMAINS_TO_CHECK="$DOMAINS"
+          fi
+
+          FAILURES=()
+          for d in $DOMAINS_TO_CHECK; do
+            echo "::group::Probe $d"
+            if ./scripts/reachability-check.sh "$d"; then
+              echo "pass: $d"
+            else
+              echo "::warning::probe FAILED for $d"
+              FAILURES+=("$d")
+            fi
+            echo "::endgroup::"
+          done
+
+          printf '%s\n' "${FAILURES[@]}" > /tmp/failures.txt
+          echo "failure_count=${#FAILURES[@]}" >> "$GITHUB_OUTPUT"
+
+      - name: Open issue on failure
+        if: steps.probe.outputs.failure_count != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          while IFS= read -r domain; do
+            [[ -z "$domain" ]] && continue
+
+            TITLE="Reachability probe FAILED: $domain"
+
+            # Avoid duplicate issues: bail if one is already open for this domain
+            existing=$(gh issue list \
+              --state open \
+              --label reachability \
+              --search "in:title \"$domain\"" \
+              --json number --jq '.[0].number // ""')
+
+            if [[ -n "$existing" ]]; then
+              echo "existing issue #$existing for $domain, skipping"
+              gh issue comment "$existing" --body "Probe still failing as of $(date -u +%Y-%m-%dT%H:%M:%SZ) (run $GITHUB_RUN_ID)."
+              continue
+            fi
+
+            gh label create reachability --color B60205 --description "Automated reachability-probe failures" 2>/dev/null || true
+            gh label create automated     --color EDEDED --description "Opened by a scheduled workflow"        2>/dev/null || true
+
+            gh issue create \
+              --title "$TITLE" \
+              --label reachability,automated \
+              --body "Automated reachability probe failed for \`$domain\` on run $GITHUB_RUN_ID ($GITHUB_RUN_URL).
+
+          **What this means:** either the domain stopped reaching visitors (TLS error, ISP filter, DNS issue) or the probe itself regressed.
+
+          **Triage steps:**
+          1. Click through to the run and read the job log for the exact failure signature.
+          2. Run \`scripts/reachability-check.sh $domain --full\` locally to reproduce and see the SSL Labs output.
+          3. If this is a real regression, cross-reference \`docs/coes/2026-04-22-luthien-cc-unreachable.md\` — that's a worked example of the same failure mode on this very domain.
+
+          **How to silence the alert:** close this issue. The workflow will open a new one only if the probe fails again on a future run."
+          done < /tmp/failures.txt
+
+      - name: Fail the job if any probe failed
+        if: steps.probe.outputs.failure_count != '0'
+        run: |
+          echo "::error::$(cat /tmp/failures.txt | tr '\n' ' ' | sed 's/ $//') failed"
+          exit 1
