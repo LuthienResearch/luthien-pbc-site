@@ -19,7 +19,7 @@
 
 Control reproductions on the same network (all succeed):
 - `curl -sI https://cloudflare.com` returns 301
-- `curl -sI https://luthien.ai` returns 302
+- `curl -sI https://luthien.ai` returns 302 (**note:** this 302 redirects to `www.atom.com/name/luthien.ai` — Atom.com's domain marketplace listing. Luthien does not own luthien.ai; it was a casual reachability control, not a "we can fall back to this" signal. See the domain-selection checklist PR #154 for the WHOIS check that catches this.)
 - `curl -sI https://luthienresearch.org` returns 301
 - Same Cloudflare IP with SNI=cloudflare.com completes TLS and returns the cloudflare.com cert
 
@@ -81,7 +81,7 @@ Neither exists. The only "detection" today is that Scott, Jai, or another founde
 
 **What else could break? (actual search, documented):**
 
-- **Other Luthien domains on the same filter paths.** I tested, from the network where luthien.cc fails: `luthien.ai` → 302 ✓, `luthienresearch.org` → 301 ✓, `cloudflare.com` → 301 ✓. So the failure is specific to luthien.cc, not our whole footprint. Cloudflare-in-general is fine on this network.
+- **Other Luthien domains on the same filter paths.** I tested, from the network where luthien.cc fails: `luthien.ai` → 302 (redirect lands on atom.com marketplace — we do not actually own this domain, found via WHOIS in PR #154); `luthienresearch.org` → 301 (owned at Squarespace Domains, created 2025-02-17, ~14 months aged) ✓; `cloudflare.com` → 301 ✓. So the failure is specific to luthien.cc, not our whole footprint. Cloudflare-in-general is fine on this network.
 - **Email deliverability from any `@luthien.cc` or `@luthienresearch.org` address.** Not tested in this session. TLD-reputation effects also impact spam scoring. Anything sent from `@luthien.cc` is plausibly being soft-filtered to spam for the same reasons ISPs block the domain. **Needs verification.** Listed as a Claude action item below.
 - **Every marketing artifact that embeds a link to luthien.cc.** Not audited in this session. Plausible locations: pitch deck (this repo's `docs/requirements/pitch-deck/`), the personal-site and luthien_site landing pages, LinkedIn bios, email signatures, Trello cards, the LOI tracking sheet, cold-email templates, any cached Google Analytics or Search Console entries. Every one of these is a broken-link landmine until the domain is cut over. **Needs sweep.** Listed as a Claude action item below.
 - **Codebase self-references to `luthien.cc`.** `grep -rn "luthien\.cc" site/` on the current tree (run 2026-04-22) returned 14 matches, including:
@@ -114,9 +114,9 @@ $ echo | openssl s_client -connect 104.21.3.57:443 -servername luthien.cc
 $ echo | openssl s_client -connect 172.67.130.71:443 -servername cloudflare.com
   subject=CN=cloudflare.com      # same IP, different SNI → succeeds cleanly
 
-$ curl -sI https://luthien.ai           # control, same network
+$ curl -sI https://luthien.ai           # control, same network — 302 lands on atom.com marketplace (NOT owned by Luthien)
   HTTP/2 302
-$ curl -sI https://luthienresearch.org   # control, same network
+$ curl -sI https://luthienresearch.org   # control, same network — Luthien-owned, Squarespace, 14mo aged
   HTTP/2 301
 
 $ curl -sI http://luthien.cc
