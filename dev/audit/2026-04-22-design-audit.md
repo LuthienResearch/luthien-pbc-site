@@ -204,7 +204,7 @@ Reviewed slide-by-slide with an investor lens (clarity, credibility, ask). Scree
 
 - **P0** — **Number conflicts across slides** (covered in QW-3 above):
   - Slide 6 says **"93 USER INTERVIEWS"**; slide 7 footer says **"36 recorded interviews"**.
-  - Slide 24 says **"4 LOIs signed $340K-$500K"**; slide 25 visually highlights **2 LOI cards** ($60K Trajectory Labs + $330K-$500K). The other 2 LOIs aren't shown — investor will ask.
+  - Slide 24 says **"4 LOIs signed $340K-$600K"**; slide 25 visually highlights **2 LOI cards** ($60K Trajectory Labs + $330K-$500K Redwood Research). The other 2 LOIs aren't shown — investor will ask.
   - Per memory, the LOI tracking sheet is source-of-truth — reconcile against it before next investor send.
 - **P0** — **EN/ES decks have inconsistent numbers for the same metric.** Notably ES slide 9 says **"3 LOIs firmadas en 21 días"**; EN slide 24 says **"4 LOIs signed"**. Same metric, two decks, two numbers. Whichever is right, the other is wrong.
 - **P1** — **Slide counter mismatch on desktop**: bottom-right counter reads `1 / 16` while the dot indicator shows ~28 dots. Either the counter denominator is hardcoded wrong or it counts a subset (main slides). Mobile counter shows `1 / 28` — agreement matters.
@@ -236,7 +236,7 @@ Reviewed slide-by-slide with an investor lens (clarity, credibility, ask). Scree
 - **Slide 21 (risk-equation / "Mistake Rate × Tokens = Risk")**: Clever but the color coding is muddled. ↓10X (mistakes ↓ = good) and ↑100X (tokens ↑ = neutral) are *both* Verdigris; ↑10X (risk ↑ = bad) is Red. Suggest: ↓10X Verdigris (good), ↑100X Linen (neutral input), ↑10X Signal Red (bad output).
 - **Slide 22 (defensibility / "Won't Anthropic build this?")**: Fabian Roger quote. Clean. Bottom faded text "Doesn't make sense for labs to build provider-agnostic tooling" — looks like a stage that didn't fully reveal in capture; verify it's intended visual (faded as past tense / grayed-out by design).
 - **Slide 23 (strategy / "Do things that don't scale.")**: Strong analogy with Supabase, HashiCorp. "TBD" for Luthien is honest. Date stamps under $5B (oct 2025 series E?) and $14B (dec 2024 IPO) are tiny — make them readable.
-- **Slide 24 (funnel)**: Clean funnel. Top-right text "No outbound or sales reps yet" — strong. (See P0 about LOI count.)
+- **Slide 24 (funnel)**: Clean funnel. Top-right text "No outbound or sales reps yet" — strong. Funnel total is "$340K-$600K" (I previously misread as $500K — corrected). See P0 about LOI count.
 - **Slide 25 (traction)**: 2 LOI cards (see P0). Ryan Krzeminski testimonial below feels disconnected from the 2 LOIs above — what's his role on this slide? Is he LOI #3? Add an explicit framing, e.g., "Plus an inbound from..."
 - **Slide 26 (ask / $2M Pre-Seed)**: 12-angel grid. Names under photos are small. "Fri Apr 10 - Wed Apr 15" date format — drop the weekday, use "Apr 10–15" for compactness.
 - **Slide 27 (close)**: Reprise of title. The "Investment Memo" link below is in a faded state — looks broken. Either show it clearly or remove.
@@ -254,7 +254,7 @@ Screenshots: `pitch_es_##_<name>.png`. Reviewed for visual + Spanish-copy qualit
   - EN slide 1 (team): Scott LEFT, Jai RIGHT. ES slide 1: Jai LEFT, Scott RIGHT. **Order swap.**
   - EN Scott credential: "$4.5B¹ Profit generated at amazon". ES Scott: "Generó $6.8B en Ventas, $4.5B en ganancias" (revenue + profit, two numbers). **Different financial framing.**
   - EN Sami Jawhar testimonial: "$10K-$100K/yr". ES: "~$100K/año" (top-of-range only). **Different number.**
-  - EN slide 24: "4 LOIs signed $340K-$500K". ES slide 9: "3 LOIs firmadas... $330-500K". **Count, range both differ.**
+  - EN slide 24: "4 LOIs signed $340K-$600K". ES slide 9: "3 LOIs firmadas... $330-500K, 26-37 puestos". **Count differs (4 vs 3); EN range goes higher; ES range matches the single Redwood Research LOI shown on EN slide 25 — suggests ES is conflating the total with one individual LOI.**
   - EN competitive slides (13/14/15): attack-flow narrative. ES slide 5: feature-by-feature comparison matrix. **Different competitive argument.**
   - EN close: "Safety = Trust = Power". ES close: "Toda organización que use agentes de IA necesitará una capa de control. Nosotros la estamos construyendo." **Different closing message.**
   - **Recommend:** treat ES as a *first-class* deck, not a translation. Either bring them into structural parity (same slides, same arguments, same numbers) or document explicitly that ES is a separate, audience-tailored variant. Right now it reads as "translation that drifted."
@@ -314,6 +314,57 @@ These are ready to file as cards on the Luthien board. Suggested format: title i
 21. **Add slide-number watermark to EN deck OR remove from ES (consistency)** — see Pitch ES P1.
 22. **Audit pitch deck color coding on slide 21 (risk equation)** — see Pitch EN per-slide.
 23. **Replace cramped Theory of Change diagram with high-res / SVG** — see Hackathon + Blog P1.
+
+---
+
+## Responsive sweep (added 2026-04-23)
+
+After the main audit shipped, ran a targeted second pass to specifically test responsive behavior at extreme viewports + on a different browser engine. Scope: 4 highest-stakes pages × 6 viewport configs = 36 captures.
+
+**Configs:**
+- **Chromium @ 320w / 768w / 1024w / 1920w** — bracket the breakpoints (smallest phone, iPad portrait, iPad landscape, large monitor)
+- **WebKit @ 375w / 414w** — actual Safari engine on iPhone-class viewports; catches iOS-Safari-only rendering quirks
+
+**Pages:** Home, Frustrations, Hackathon (full-page captures), Pitch deck (sampled at title + TAM 4-quadrant + funnel — content density representatives).
+
+**Output:** `/tmp/luthien-audit-2026-04-22/responsive/*.png`.
+
+### Top responsive findings
+
+#### R-1 — P1 — Filter pills overflow horizontally at narrow widths (Home + Frustrations)
+At 320w (Chromium) and 375w (WebKit), only the first 2 of 6 filter pills fit; the rest scroll horizontally because the bar uses `overflow-x: auto`. There's no visual indicator that more options exist. A user at 320w sees only "All" and "Deleted stuff" and may never discover the other categories.
+
+**Fix:** Add a fade-edge gradient (`mask-image`) on the right edge of `.filter-bar` at narrow widths so users see content is cut off, OR collapse to a `<select>` dropdown below 480px.
+**Files:** `site/index.html` `.filter-bar`, `site/frustrations.html` `.filter-bar`.
+
+#### R-2 — P1 — Pitch TAM slide @ WebKit 375w: bottom-right quadrant overflows
+The 2x2 TAM grid stays 2-column down to 375w, but the bottom-right quadrant ("AGENTIC AI TAM BY 2030 $155B BANK OF AMERICA") overflows: `$155B` truncates to `$155` (the "B" gets clipped), and "Bank of America" truncates to "Bank of Am...". This is specifically visible on WebKit at 375w; Chromium 320w handles it better because the grid collapses to single-column at very narrow widths.
+
+**Fix options:** (a) Force single-column stack at `<414px` so each quadrant gets full width. (b) Tighten font-size with `clamp()` so the largest number scales down before overflowing. (c) Shrink the BoA logo and label.
+**File:** `site/pitch/index.html` slide with `data-slide-name="tam"`.
+**Screenshot:** `responsive/pitch_tam_webkit_375w.png` vs `responsive/pitch_tam_chromium_320w.png` (compare).
+
+#### R-3 — P2 — At 1920w, page containers leave huge empty margins
+Marketing pages use `.container { max-width: 960px }`. At 1920w, the content occupies the middle 50% and ~480px of empty space sits on each side. Not broken — just under-utilized. Pitch deck uses `max-width: 1100px` with similar effect.
+
+**Fix:** Add a wider tier (`max-width: 1200px` at `min-width: 1440px`, or `1400px` at `1920px`). Or accept the margins as intentional minimalism.
+
+#### R-4 — P2 — Pitch deck handles portrait mobile better than expected
+I had this flagged as a likely P0 in the original audit ("16:9 deck format fundamentally not designed for portrait mobile"). The actual sweep shows it holds up surprisingly well: TAM grid collapses to single-column at 320w (chromium), funnel collapses to mostly text + tiny diagram, title slide is clean. **Downgrade from P0 to P2.** Caveat: there are other slides I didn't sample at responsive sizes (slide 14 competitive flow, slide 17 code block, slide 19 testimonial 2x2) that may break — sample them if mobile pitch traffic becomes meaningful.
+
+#### R-5 — P2 — WebKit ≈ Chromium for these pages (good news)
+Across all 6 WebKit captures (375w/414w on Home, Frustrations, Hackathon, and 3 pitch slides), I see no rendering differences from Chromium at the same width. This means the original audit findings (which used Chromium only) generalize to Safari/iOS users too. **Caveat:** WebKit-specific bugs tend to live in narrow CSS features — backdrop-filter, mask-image, complex gradients, scroll-snap, custom properties in animations. If you ever add any of those, retest in WebKit specifically.
+
+#### R-6 — P2 — Frustrations card grid stays 2-col even at 1920w
+Could go 3-col on very wide displays for better information density. Minor.
+
+### What this sweep did NOT cover
+- Real iOS/Android device testing (Playwright WebKit ≈ Safari but isn't 1:1 — touch behavior, viewport quirks, address-bar height changes aren't simulated).
+- Slow networks / slow CPU.
+- High-contrast mode, prefers-reduced-motion, screen reader navigation.
+- The other 8 pages from the main audit (5 blog posts, About, Blog index, Deck, Feedback) — they were less likely to have responsive breaks based on the main audit's findings.
+
+If you want fuller coverage on any of these, that's a separate scoped pass.
 
 ---
 
