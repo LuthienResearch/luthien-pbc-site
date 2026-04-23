@@ -76,6 +76,29 @@ Same objective workflow as luthien-proxy:
 
 Same rule as luthien-proxy: keep PRs focused. Bug fix? Separate PR. New page? Separate PR.
 
+## Task Tracking (Trello, not TODO.md)
+
+All action items live in Trello (board: "Luthien"). The repo's `dev/TODO.md` is historical — don't add to it.
+
+Add a card via MCP:
+
+```
+mcp__trello__get_lists                # discover list IDs on the active board
+mcp__trello__add_card_to_list
+    listId: "<list id from above>"
+    name:   "[COE] Short, action-shaped title"
+    description: "Context + linked PR/COE path. Markdown OK."
+```
+
+**Routing defaults** (pick without asking):
+- Human decision that blocks something → `Top Priority`
+- Claude-automatable from a COE or PR → `This Sprint`
+- Future / Scott-triage → `uncategorized`
+
+**Gotcha:** the `labels` parameter wants label IDs, not color strings. Omit unless you already have real IDs.
+
+Full reference (board ID, all list IDs, other tools, error patterns) is in the global `~/build/CLAUDE.md` "Task Tracking: Trello Only" section.
+
 ## Writing Voice (READ THIS BEFORE YOU WRITE ANY COPY)
 
 The full voice/tone source of truth lives in `luthien-org/ui-fb-dev/design-system.md` (section: "Content credibility / No AI slop irony" and "Anti-Patterns"). Read it before writing any user-facing copy. The rules below are the non-negotiables Scott has called out most often:
