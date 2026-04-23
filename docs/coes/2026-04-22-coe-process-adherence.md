@@ -2,7 +2,7 @@
 
 **Date:** 2026-04-22
 **Author:** Claude (self-COE, authorized by Scott)
-**Status:** Process fix in flight — the sibling luthien.cc COE is being filed as the corrective action that should have happened the first time.
+**Status:** Process fix in flight — the sibling luthien.cc COE is being filed as [PR #150](https://github.com/LuthienResearch/luthien-pbc-site/pull/150), which is the corrective action that should have happened the first time `/coe` was run on this incident.
 
 ## Repro Steps (before this fix)
 
