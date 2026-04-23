@@ -113,27 +113,33 @@ After-state (this PR):
 
 **Action items:**
 
-All tracked as Trello cards on the Luthien board. `TODO.md` is deprecated.
+All tracked as Trello cards on the Luthien board. `TODO.md` is deprecated. Table below gives full traceability from action item → Trello card → delivering PR → status.
 
 *Claude-automatable (mostly completed in-session):*
 
-| Action | Card | Status |
-|--------|------|--------|
-| Write feedback memory: execute every step of named-process skills | in `MEMORY.md` as `feedback_named_process_skills_execute_fully.md` | **DONE in-session** |
-| Write feedback memory: `TODO.md` is deprecated, Trello is the system of record | in `MEMORY.md` as `feedback_task_tracking_in_trello.md` | **DONE in-session** |
-| Update `/coe` skill step 7 to name Trello, not `TODO.md` | `~/.claude/commands/coe.md` edited | **DONE in-session** |
-| Update global `CLAUDE.md`: replace "Rules for Editing TODO.md Files" section with "Task Tracking: Trello Only (TODO.md is Deprecated)" | `~/build/CLAUDE.md` edited locally | **DONE in-session; commit pending** — see card below |
-| Update global `CLAUDE.md` proactive-reminders table entry from `dev/TODO.md` → Trello | edited in same file | **DONE in-session; commit pending** |
-| Commit `private-claude-code-docs/CLAUDE.md` changes once Scott resolves the in-flight `ops-excellence/scott-workflow-audit` branch that has other unrelated edits | [Commit CLAUDE.md updates to private-claude-code-docs](https://trello.com/c/tEevz1x8) | **BLOCKED** on Scott's in-flight branch |
-| Append PR URLs for the luthien.cc COE (PR #150) and this COE to the global CLAUDE.md COE examples list | same CLAUDE.md edit above | **DONE in-session; commit pending** |
-| Perform a documented-steps self-check at the end of every named-process skill invocation going forward | (behavioral; enforced via the feedback memory) | **Ongoing behavior change** |
+| Action | Trello card | Delivering PR / artifact | Status |
+|--------|-------------|--------------------------|--------|
+| Write feedback memory: execute every step of named-process skills | *(no card — one-shot)* | `~/.claude/projects/-Users-scottwofford-build/memory/feedback_named_process_skills_execute_fully.md` (indexed in `MEMORY.md`) | **DONE in-session** |
+| Write feedback memory: `TODO.md` deprecated, Trello is system of record | *(no card — one-shot)* | `~/.claude/projects/-Users-scottwofford-build/memory/feedback_task_tracking_in_trello.md` (indexed in `MEMORY.md`) | **DONE in-session** |
+| Update `/coe` skill step 7 (TODO.md → Trello) | *(no card — one-shot)* | `~/.claude/commands/coe.md` edited (local file, not version-controlled) | **DONE in-session** |
+| Replace "Rules for Editing TODO.md Files" section with "Task Tracking: Trello Only" in global `CLAUDE.md`, and expand with MCP tool specifics | [tEevz1x8](https://trello.com/c/tEevz1x8) | [private-claude-code-docs #6](https://github.com/scottwofford/private-claude-code-docs/pull/6) | PR open |
+| Update global `CLAUDE.md` proactive-reminders table (`dev/TODO.md` → Trello card) | same as above | same as above | PR open |
+| Append PRs #150 and #151 to global `CLAUDE.md` COE examples list | same as above | same as above | PR open |
+| Add Task Tracking section with MCP specifics to this repo's `CLAUDE.md` | *(no separate card; part of this PR)* | This PR (#151) | PR open |
+| Perform a documented-steps self-check at the end of every named-process skill invocation going forward | *(behavioral; no card)* | Enforced via `feedback_named_process_skills_execute_fully.md` memory | **Ongoing behavior change** |
 
 *Requires human decision/design:*
 
-| Action | Card | Status |
-|--------|------|--------|
-| Review this COE's root-cause diagnosis. If the "over-applied caution about writing files in new repos" framing is wrong, replace it — the diagnosis shapes future behavior. | (this PR's review) | Pending review |
-| Decide whether to split `/coe` into a PR-centric variant and a lightweight process-incident variant | [Decide on /coe skill variants](https://trello.com/c/j1uLjzRR) | Pending |
+| Action | Trello card | Delivering PR / artifact | Status |
+|--------|-------------|--------------------------|--------|
+| Review this COE's root-cause diagnosis ("over-applied caution about writing files in new repos"); replace if wrong | *(this PR's review itself)* | This PR (#151) | Pending review |
+| Decide whether to split `/coe` into a PR-centric variant and a lightweight process-incident variant | [j1uLjzRR](https://trello.com/c/j1uLjzRR) | *(none — it's a decision)* | Human decision |
+
+**Columns defined:**
+- **Delivering PR / artifact** = where the deliverable for this action actually lives. For in-session one-shots (feedback memories, local skill edits) there's no PR because the artifact is outside version-controlled repos. For behavioral changes there's no PR by design.
+- **Status** values: `PR open` / `DONE in-session` / `Ongoing behavior change` / `Human decision` / `Pending review`.
+
+This meta-COE (PR #151) and the originating COE (PR #150) are records themselves — they don't appear as "delivering PRs" for action items, they ARE the action records.
 
 **Remaining Risk:**
 
