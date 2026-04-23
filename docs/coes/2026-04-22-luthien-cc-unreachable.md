@@ -139,25 +139,31 @@ No code fix. No domain change. The remediation for the underlying reachability p
 
 **Action items:**
 
-All action items are tracked as Trello cards on the Luthien board (the source of truth for tasks). `TODO.md` files are deprecated. Cards below:
+All action items are tracked as Trello cards on the Luthien board (the source of truth for tasks). `TODO.md` files are deprecated. The table below gives full traceability from action item → Trello card → delivering PR → status.
 
 *Claude-automatable (do first):*
 
-| Card | Trello list | Type |
-|------|-------------|------|
-| [Audit all luthien.cc references across repos; produce swap-list](https://trello.com/c/5mTdBda5) | This Sprint | **Point fix + Detection** |
-| [Build reachability probe at `scripts/reachability-check.sh`](https://trello.com/c/7oZ6W99d) | This Sprint | **Architectural (prevents the class)** |
-| [Spot-check email deliverability from @luthien.cc vs @luthienresearch.org](https://trello.com/c/dM4Xwxeh) | This Sprint | **Detection (shortens exposure window)** |
-| Edit in-repo self-references once canonical domain is picked (to be opened as a separate PR after the decision lands; not pre-created because the target domain is an input) | (filed after decision) | **Point fix** |
+| Action item | Trello card | List | Delivering PR | Type | Status |
+|-------------|-------------|------|---------------|------|--------|
+| Audit all luthien.cc references across repos; produce swap-list | [5mTdBda5](https://trello.com/c/5mTdBda5) | This Sprint | [luthien-pbc-site #152](https://github.com/LuthienResearch/luthien-pbc-site/pull/152) | Point fix + Detection | PR open |
+| Build reachability probe at `scripts/reachability-check.sh` | [7oZ6W99d](https://trello.com/c/7oZ6W99d) | This Sprint | [luthien-pbc-site #153](https://github.com/LuthienResearch/luthien-pbc-site/pull/153) | Architectural | PR open |
+| Spot-check email deliverability from `@luthien.cc` vs `@luthienresearch.org` | [dM4Xwxeh](https://trello.com/c/dM4Xwxeh) | This Sprint | *(none — blocked on SMTP creds)* | Detection | Blocked |
+| Edit in-repo self-references once canonical domain is picked | *(card filed after canonical decision lands)* | — | *(PR filed after decision)* | Point fix | Blocked on canonical decision |
 
 *Requires human decision/design:*
 
-| Card | Trello list | Type |
-|------|-------------|------|
-| [Decide canonical Luthien domain](https://trello.com/c/XaSM8C8L) (owner: Jai + Scott; due 2026-04-29) | Top Priority | **Architectural** |
-| [Write domain-selection checklist to prevent next .cc-style incident](https://trello.com/c/kHs0XHhn) (owner: Jai or Scott; due before next domain purchase) | uncategorized | **Architectural (prevents the class)** |
-| [Decide on ongoing synthetic reachability monitoring for customer domains](https://trello.com/c/vbhEJVoW) (owner: Jai; due next sprint) | uncategorized | **Detection** |
-| Set up `luthien.cc` → canonical 301 redirect (same day as decision). Not pre-created as a Trello card because it is the mechanical follow-on to the decision card; will be filed when the decision lands. | (filed after decision) | **Point fix** |
+| Action item | Trello card | List | Delivering PR | Type | Status |
+|-------------|-------------|------|---------------|------|--------|
+| Decide canonical Luthien domain (Jai + Scott; due 2026-04-29) | [XaSM8C8L](https://trello.com/c/XaSM8C8L) | Top Priority | [luthien-pbc-site #155](https://github.com/LuthienResearch/luthien-pbc-site/pull/155) (decision *support*, not the decision itself) | Architectural | Evidence ready; decision pending |
+| Write domain-selection checklist (Jai or Scott; before next domain purchase) | [kHs0XHhn](https://trello.com/c/kHs0XHhn) | uncategorized | [luthien-pbc-site #154](https://github.com/LuthienResearch/luthien-pbc-site/pull/154) | Architectural | PR open |
+| Decide on ongoing synthetic reachability monitoring (Jai; next sprint) | [vbhEJVoW](https://trello.com/c/vbhEJVoW) | uncategorized | *(none — it's a decision, not a build item)* | Detection | Human decision |
+| Set up `luthien.cc` → canonical 301 redirect (same day as decision; needs Jai's Cloudflare dashboard access) | *(card filed after canonical decision lands)* | — | *(PR / dashboard change filed after decision)* | Point fix | Blocked on canonical decision |
+
+**Columns defined:**
+- **Delivering PR** = the pull request that ships the deliverable for the Trello card. For decision-class items (canonical domain, synthetic monitoring) there may be no PR by design — the decision lives on the Trello card, and any implementation PR comes afterward.
+- **Status** values: `PR open` / `Blocked` / `Human decision` / `Evidence ready`.
+
+This COE (PR #150) and its sibling meta-COE (PR #151) are the records themselves — they don't appear as "delivering PRs" in the table above.
 
 **Remaining Risk:**
 
