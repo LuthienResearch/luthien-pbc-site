@@ -4513,14 +4513,10 @@ Key invariants:
     // the browser back button isn't flooded with per-slide history
     // entries.
     try {
-      if (current === 0) {
-        if (location.hash) history.replaceState(null, '', location.pathname);
-      } else {
-        const name = slides[current].getAttribute('data-slide-name');
-        const targetHash = name ? '#' + name : '#slide=' + (current + 1);
-        if (location.hash !== targetHash) {
-          history.replaceState(null, '', targetHash);
-        }
+      const name = slides[current].getAttribute('data-slide-name');
+      const targetHash = name ? '#' + name : '#slide=' + (current + 1);
+      if (location.hash !== targetHash) {
+        history.replaceState(null, '', targetHash);
       }
     } catch (_e) { /* no-op on file:// URLs that disallow replaceState */ }
   }
