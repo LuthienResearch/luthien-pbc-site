@@ -333,6 +333,41 @@ fi
 
 # ─────────────────────────────────────────────────────────
 bold ""
+bold "== 11. Deck tagline sync (/deck matches /pitch title slide) =="
+# ─────────────────────────────────────────────────────────
+# The /deck email-gate page has its own <title> and visible tagline,
+# separate from /pitch. They drift every time we re-theme the deck
+# (e.g. "AI's power is nothing without control" lingered on /deck
+# after the pitch slide changed to "Safety = Trust = Power"). This
+# check pins /deck to whatever headline is on the pitch title slide.
+PITCH="$SITE_DIR/pitch/index.html"
+DECK="$SITE_DIR/deck/index.html"
+tagline_errors=0
+if [ -f "$PITCH" ] && [ -f "$DECK" ]; then
+    # Canonical tagline = first H1 after the title slide marker.
+    # Grabs the next 20 lines so we catch the H1 regardless of nested divs.
+    canonical=$(grep -A 20 'data-slide-name="title"' "$PITCH" \
+        | grep -oE '<h1[^>]*>[^<]+</h1>' \
+        | sed -E 's|<h1[^>]*>||; s|</h1>||' \
+        | head -1)
+    if [ -z "$canonical" ]; then
+        fail "Could not extract canonical tagline from pitch title slide H1"
+        tagline_errors=$((tagline_errors + 1))
+    else
+        if ! grep -qF "<title>Luthien: ${canonical}</title>" "$DECK"; then
+            fail "deck/index.html <title> does not match: expected 'Luthien: ${canonical}'"
+            tagline_errors=$((tagline_errors + 1))
+        fi
+        if ! grep -qF "<p class=\"tagline\">${canonical}</p>" "$DECK"; then
+            fail "deck/index.html .tagline does not match: expected '${canonical}'"
+            tagline_errors=$((tagline_errors + 1))
+        fi
+    fi
+    [ "$tagline_errors" -eq 0 ] && pass "/deck title + tagline match pitch title slide ('${canonical}')"
+fi
+
+# ─────────────────────────────────────────────────────────
+bold ""
 bold "=========================================="
 if [ "$ERRORS" -gt 0 ]; then
     red "FAILED: $ERRORS error(s), $WARNINGS warning(s)"
