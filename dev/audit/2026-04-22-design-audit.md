@@ -362,9 +362,88 @@ Could go 3-col on very wide displays for better information density. Minor.
 - Real iOS/Android device testing (Playwright WebKit ≈ Safari but isn't 1:1 — touch behavior, viewport quirks, address-bar height changes aren't simulated).
 - Slow networks / slow CPU.
 - High-contrast mode, prefers-reduced-motion, screen reader navigation.
-- The other 8 pages from the main audit (5 blog posts, About, Blog index, Deck, Feedback) — they were less likely to have responsive breaks based on the main audit's findings.
+- 7 remaining pages (5 blog posts, About, Blog index, Deck) — they were less likely to have responsive breaks based on the main audit's findings.
 
 If you want fuller coverage on any of these, that's a separate scoped pass.
+
+### `/feedback/` responsive sweep (added 2026-04-23)
+
+Per follow-up request, ran the same 6 viewports against `/feedback/`. 6 captures, all in `/tmp/luthien-audit-2026-04-22/responsive/feedback_*.png`.
+
+**Findings:**
+- **No new responsive breaks.** Layout holds at 320w through 1920w.
+- WebKit ≈ Chromium at 375w / 414w (same as the rest of the sweep).
+- **Container max-width is 720px** vs. the rest of the site's 960px — at 1920w this leaves a *lot* of empty space, but it's appropriate for a long-form documentation page (line-length readability matters more than space utilization).
+- Secondary section-tab nav (warm up / workflow / landing page / quick start / report) is centered under the active tab via JS. At 320w it likely overflows the viewport edge but is positionally clamped — verify by clicking through tabs on a real iPhone.
+- All structural P0s on `/feedback/` are still the original brand-mismatch ones (Inter / off-Lumen palette) tracked in card #1221.
+
+---
+
+## Tailwind palette: options + recommendation (added 2026-04-23)
+
+Scott asked: for the homepage filter pills (`/` and `/frustrations`), what are the options, what's the recommendation, why?
+
+### The constraint
+6 distinct filter categories: `deleted`, `ignored`, `hallucinated`, `security`, `cheated`, `coverup`. Lumen has 3 accent hues (Verdigris #3B9494, Amber #C47B42, Signal Red #C45050) + 2 neutrals (Linen, Plum Dark). 6 categories → 3 accents = need to either collapse, share, or extend.
+
+### Options
+
+#### Option A — Collapse to 4–5 categories using only existing Lumen hues
+- Merge `deleted` + `coverup` → "destructive" (Signal Red)
+- Merge `ignored` + `cheated` → "evasive" (Amber)
+- `hallucinated` → "fabricated" (Verdigris)
+- `security` → its own bucket (Linen as neutral, or merge into one of the above)
+- **Pros:** pure Lumen, no new tokens, simpler scan-taxonomy
+- **Cons:** loses category granularity; "coverup" merged into "destructive" loses the deception-vs-destruction nuance, which is a real product distinction; the merge is a content-team call, not a designer call
+
+#### Option B — Keep all 6 categories, extend Lumen with 2 new accent hues
+- Add **Lumen Sage** (~`#6B9485`, muted teal-green; sits between Verdigris and a calmer green) — for `security` (security wins read as "good catches")
+- Add **Lumen Indigo** (~`#7B6B95`, muted purple in the Plum family; harmonizes with Plum Dark bg and Divider `#28243A`) — for `cheated` (deception lives visually in the plum family)
+- Map: `deleted`→Signal Red, `ignored`→Amber, `hallucinated`→Verdigris, `security`→Sage, `cheated`→Indigo, `coverup`→Signal Red dim variant
+- Document the 2 new tokens in `dev/lumentheme-branding-guideline.md`
+- **Pros:** all 6 categories preserved; brand expansion is intentional + documented; Lumen palette stays internally coherent (muted, harmonized)
+- **Cons:** 2 new tokens to maintain; needs your design approval; one category (`coverup`) still shares a hue with `deleted` via dim variant
+
+#### Option C — Keep 6 categories, share Lumen hues via saturation variants
+- 3 hues × 2 saturations = 6 treatments
+- Pros: pure Lumen, no new tokens
+- Cons: muted variants are hard to distinguish at small pill size (~12-14px text); risk of visual confusion that defeats the purpose of color coding
+
+#### Option D — Group by failure-type semantics, share hues
+- Technical errors (`deleted`, `hallucinated`) → Verdigris family (full + dim)
+- Intent failures (`ignored`, `cheated`) → Amber family
+- Trust failures (`security`, `coverup`) → Signal Red family
+- **Pros:** pure Lumen; the hue-sharing reinforces a taxonomy you can explain to viewers
+- **Cons:** pairs that share a hue lose distinction; users have to learn the meta-taxonomy
+
+### Recommendation: **Option B** (extend Lumen with 2 new accent hues)
+
+**Why:**
+1. The 6 categories are *real and useful* taxonomic distinctions on a page whose whole job is "show the variety of ways AI fails." Collapsing them flattens the page's argument.
+2. The original designer reached for Tailwind defaults because they needed 6 distinct colors — the answer isn't to abandon the differentiation, it's to bring it into Lumen.
+3. Lumen currently has 3 accent hues; going to 5 (adding Sage + Indigo, both muted) stays well within "small disciplined palette" range — Tailwind has 22 named hues, Material has ~20, you'd be at 5.
+4. Both proposed hues are *muted, low-saturation, and chosen to harmonize with the Plum/Divider neutrals* — they don't add chromatic noise, they extend the existing brand mood.
+5. **Net cost:** ~1 hour of palette + docs work + a brief Lumen guideline update. Lower cost than Option A's content/taxonomy decision, lower visual risk than Option C's muted variants.
+
+If you don't want to extend Lumen at all, fall back to **Option A** — it's a content-team call but it's a clean ship. Avoid C and D — they look clever but trade visual clarity for purity.
+
+**Next step if B is accepted:** I can mock up the exact hex values for Sage and Indigo (with WCAG contrast checks against Plum Dark bg), update `dev/lumentheme-branding-guideline.md` with the new tokens, and update the filter-pill CSS in `site/index.html` and `site/frustrations.html` in one PR. ~1 hour, autonomous.
+
+---
+
+## Audit doc transcription error log (added 2026-04-23)
+
+While doing follow-up work I caught **3 transcription errors** in the original audit doc — all from misreading numbers/dates in compressed PNG screenshots. Source-verified corrections:
+
+| Field | I logged | Actual source | File |
+|---|---|---|---|
+| EN funnel total | $340K-$500K | **$340K-$600K** | `site/pitch/index.html:4184` |
+| Slide 7 footer counts | "36 recorded · 26k data points" | **"34 recorded · 204 data points"** | `site/pitch/index.html` (now updated to "93 user interviews (34 recorded)") |
+| ES slide 6 date | "1 dic 2026" (future-dated, my P0!) | **"1 abr 2026"** (April, NOT December) | `site/pitch/es/index.html:2430` |
+
+The future-date "P0" was based on misreading "abr" as "dic" — two short Spanish month abbreviations. There is no future-dated citation in the source.
+
+**Lesson for future audits of text-heavy content:** screenshots compress to fuzz at small text sizes. Always grep the source HTML for the exact quoted text before logging a finding as P0. I've updated the relevant Trello cards.
 
 ---
 
