@@ -4,6 +4,7 @@
 
 | Version | Date | Summary |
 |---------|------|---------|
+| v12.2 | 2026-04-27 | Short URL: `/toc` 301-redirects to `/blog/theory-of-change/` via Cloudflare Pages `_redirects`. For sharing the theory-of-change post in conversations and decks. |
 | (docs)  | 2026-04-22 | Meta-COE on `/coe` process adherence (PR #151): the first two attempts at running `/coe` on the luthien.cc reachability incident degraded (chat-only, then TODO.md-written). This PR documents both failures and lands the documentation updates (mark `TODO.md` deprecated in CLAUDE.md; update `/coe` skill step 7 to use Trello; two feedback memories) that should prevent recurrence. Companion: PR #150 (luthien.cc reachability COE). |
 | (docs)  | 2026-04-22 | RCA filed for luthien.cc reachability (PR #150): domain fails TLS on T-Mobile Home Internet and at least one other consumer ISP due to `.cc` TLD reputation / ISP middlebox SNI filtering. SSL Labs verified Cloudflare edge config clean. Added `docs/coes/` directory with COE + index, TLD-reputation gotcha, and 6 Trello action-item cards. No site content changed. |
 | v12.1 | 2026-04-20 | Pitch deck date refresh: replace relative day-of-week language on traction slide with absolute dates; reconcile Trajectory PR count (9 since pilot started Sun Apr 12); remove 416 lines of dead archived-presentation-slides template (PR #144) |
