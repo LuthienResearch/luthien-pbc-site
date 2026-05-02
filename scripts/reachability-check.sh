@@ -129,6 +129,17 @@ bold "[2/3] check-host.net distributed probes (~5 geographic nodes)"
 ch_submit=$(curl -s -m 10 -H 'Accept: application/json' \
     "https://check-host.net/check-http?host=https://$DOMAIN&max_nodes=5" || true)
 
+# check-host.net occasionally returns non-JSON (rate-limit HTML, error
+# page, etc.). Without this guard, the bare `jq` calls below crash the
+# whole script under `set -euo pipefail` — failing the probe even when
+# the local-baseline checks all passed.
+if [[ -n "$ch_submit" ]] && ! echo "$ch_submit" | jq -e . >/dev/null 2>&1; then
+    record_warn "check-host.net returned non-JSON (likely rate-limited); skipping distributed probes"
+    echo "  first 200 bytes of response: $(echo "$ch_submit" | head -c 200)"
+    printf '\n'
+    ch_submit=""
+fi
+
 if [[ -z "$ch_submit" ]]; then
     record_warn "check-host.net submission failed; skipping distributed probes"
 else
@@ -146,6 +157,11 @@ else
             results=$(curl -s -m 10 -H 'Accept: application/json' \
                 "https://check-host.net/check-result/$request_id" || true)
             if [[ -z "$results" ]] || [[ "$results" == "null" ]]; then
+                continue
+            fi
+            # Guard against non-JSON poll response too
+            if ! echo "$results" | jq -e . >/dev/null 2>&1; then
+                results=""
                 continue
             fi
             # Count completed nodes (non-null entries)
