@@ -2971,8 +2971,8 @@
     }
     .memo-modal p.memo-modal-lead {
       font-family: var(--body);
-      font-size: 0.95rem;
-      color: var(--text-muted);
+      font-size: 1.05rem;
+      color: var(--white);
       margin: 0 0 20px;
       line-height: 1.5;
     }
@@ -4521,14 +4521,13 @@ Key invariants:
 </div>
 
 <!-- Memo email-gate modal -->
-<div class="memo-modal-backdrop" id="memoModalBackdrop" role="dialog" aria-modal="true" aria-labelledby="memoModalTitle">
+<div class="memo-modal-backdrop" id="memoModalBackdrop" role="dialog" aria-modal="true" aria-labelledby="memoModalLead">
   <div class="memo-modal">
     <button type="button" class="memo-modal-close" id="memoModalClose" aria-label="Close">&times;</button>
-    <h2 id="memoModalTitle">Investment Memo</h2>
-    <p class="memo-modal-lead">Enter your email to download the memo.</p>
+    <p class="memo-modal-lead" id="memoModalLead">Enter your email to download the memo.</p>
     <form class="memo-modal-form" id="memoModalForm" novalidate>
       <input type="email" class="memo-modal-input" id="memoModalEmail" required placeholder="you@firm.com" autocomplete="email" inputmode="email" />
-      <button type="submit" class="memo-modal-submit" id="memoModalSubmit">Download memo</button>
+      <button type="submit" class="memo-modal-submit" id="memoModalSubmit">Download</button>
       <p class="memo-modal-error" id="memoModalError" hidden></p>
     </form>
   </div>
@@ -4608,7 +4607,7 @@ Key invariants:
     backdrop.dataset.open = 'true';
     errorEl.hidden = true;
     submit.disabled = false;
-    submit.textContent = 'Download memo';
+    submit.textContent = 'Download';
     setTimeout(() => emailInput.focus(), 50);
   }
 
@@ -4813,6 +4812,11 @@ Key invariants:
 
   // Keyboard
   document.addEventListener('keydown', (e) => {
+    // Don't hijack typing inside form fields (memo email-gate modal etc).
+    // Without this, the 'f' shortcut below toggles fullscreen mid-email.
+    const t = e.target;
+    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') {
       e.preventDefault();
       next();
