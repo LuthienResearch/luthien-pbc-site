@@ -4496,7 +4496,7 @@ Key invariants:
       <div class="spacer-lg"></div>
 
       <div class="close-actions anim-up delay-3">
-        <a href="Luthien_Investment_Memo.pdf" class="memo-card" id="memoCard" download target="_blank" rel="noopener">
+        <a href="https://www.dropbox.com/scl/fi/qcbyqp86m5i1k1852fu1b/Luthien-memo.pdf?rlkey=gntue9j287qrgdeo1pwq92hpb&amp;st=yqtgenod&amp;dl=0" class="memo-card" id="memoCard" target="_blank" rel="noopener">
           <div class="mini-cover">
             <div class="mini-cover-title">Luthien Research</div>
             <div class="mini-cover-line"></div>
@@ -4617,13 +4617,10 @@ Key invariants:
   }
 
   function downloadPdf() {
-    const a = document.createElement('a');
-    a.href = PDF_HREF;
-    a.download = '';
-    a.rel = 'noopener';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    // Cross-origin (Dropbox) URLs ignore the `download` attribute, so we
+    // open in a new tab via window.open instead. noopener prevents the
+    // opened page from accessing window.opener.
+    window.open(PDF_HREF, '_blank', 'noopener');
   }
 
   card.addEventListener('click', function(e) {
