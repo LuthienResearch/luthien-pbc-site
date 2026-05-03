@@ -4436,7 +4436,7 @@ Key invariants:
 <!-- Top-right controls -->
 <div class="top-controls">
   <a class="fs-btn" id="downloadPdfBtn" href="/pitch.pdf" target="_blank" rel="noopener" title="Download PDF" style="text-decoration: none; margin-right: 8px;">Download PDF</a>
-  <button class="fs-btn" id="fsBtn" title="Toggle fullscreen">F11 &middot; Fullscreen</button>
+  <button class="fs-btn" id="fsBtn" title="Press F or click to toggle fullscreen">F &middot; Fullscreen</button>
 </div>
 <!-- Bottom-left footnote toggle (hidden on slides without footnotes) -->
 <button class="cite-btn" id="citeBtn" title="Toggle footnotes">Footnotes</button>
@@ -4680,7 +4680,7 @@ Key invariants:
   });
 
   document.addEventListener('fullscreenchange', () => {
-    fsBtn.textContent = document.fullscreenElement ? 'ESC · Exit' : 'F11 · Fullscreen';
+    fsBtn.textContent = document.fullscreenElement ? 'ESC · Exit' : 'F · Fullscreen';
   });
 
   // Deep-link: accepts three formats
