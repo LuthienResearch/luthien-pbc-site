@@ -2937,6 +2937,108 @@
         animation: none !important;
       }
     }
+
+    /* Memo email-gate modal */
+    .memo-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.72);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+    .memo-modal-backdrop[data-open="true"] {
+      display: flex;
+    }
+    .memo-modal {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px 32px 28px;
+      max-width: 440px;
+      width: 100%;
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
+    }
+    .memo-modal h2 {
+      font-family: var(--sans);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--white);
+      margin: 0 0 8px;
+    }
+    .memo-modal p.memo-modal-lead {
+      font-family: var(--body);
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin: 0 0 20px;
+      line-height: 1.5;
+    }
+    .memo-modal-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .memo-modal-input {
+      width: 100%;
+      padding: 12px 14px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--white);
+      font-family: var(--body);
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    .memo-modal-input:focus {
+      outline: none;
+      border-color: var(--blue);
+    }
+    .memo-modal-submit {
+      padding: 12px 20px;
+      background: var(--blue-glow);
+      border: 1px solid var(--blue);
+      border-radius: 8px;
+      color: var(--white);
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .memo-modal-submit:hover:not(:disabled) {
+      background: rgba(59, 148, 148, 0.32);
+    }
+    .memo-modal-submit:disabled {
+      opacity: 0.6;
+      cursor: progress;
+    }
+    .memo-modal-close {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+      padding: 4px 8px;
+    }
+    .memo-modal-close:hover {
+      color: var(--white);
+    }
+    .memo-modal-error {
+      color: #f0a0a0;
+      font-family: var(--body);
+      font-size: 0.85rem;
+      margin: 0;
+    }
+    .memo-modal-error[hidden] {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -4394,7 +4496,7 @@ Key invariants:
       <div class="spacer-lg"></div>
 
       <div class="close-actions anim-up delay-3">
-        <a href="Luthien_Investment_Memo.pdf" class="memo-card" target="_blank">
+        <a href="Luthien_Investment_Memo.pdf" class="memo-card" id="memoCard" download target="_blank" rel="noopener">
           <div class="mini-cover">
             <div class="mini-cover-title">Luthien Research</div>
             <div class="mini-cover-line"></div>
@@ -4416,6 +4518,20 @@ Key invariants:
     </div>
   </div>
 
+</div>
+
+<!-- Memo email-gate modal -->
+<div class="memo-modal-backdrop" id="memoModalBackdrop" role="dialog" aria-modal="true" aria-labelledby="memoModalTitle">
+  <div class="memo-modal">
+    <button type="button" class="memo-modal-close" id="memoModalClose" aria-label="Close">&times;</button>
+    <h2 id="memoModalTitle">Investment Memo</h2>
+    <p class="memo-modal-lead">Enter your email to download the memo.</p>
+    <form class="memo-modal-form" id="memoModalForm" novalidate>
+      <input type="email" class="memo-modal-input" id="memoModalEmail" required placeholder="you@firm.com" autocomplete="email" inputmode="email" />
+      <button type="submit" class="memo-modal-submit" id="memoModalSubmit">Download memo</button>
+      <p class="memo-modal-error" id="memoModalError" hidden></p>
+    </form>
+  </div>
 </div>
 
 <!-- Progress bar -->
@@ -4467,6 +4583,94 @@ Key invariants:
   const days = Math.max(1, Math.round((today - firstLOI) / 86400000));
   const el = document.getElementById('loiDays');
   if (el) el.textContent = 'in ' + days + ' day' + (days !== 1 ? 's' : '');
+})();
+
+/* Investment-memo email gate (close slide).
+   Intercepts the memo card click, prompts for email, posts to /memo-log,
+   then triggers the PDF download. Falls back to plain link behavior if
+   any JS hook fails. */
+(function() {
+  const card = document.getElementById('memoCard');
+  const backdrop = document.getElementById('memoModalBackdrop');
+  const form = document.getElementById('memoModalForm');
+  const emailInput = document.getElementById('memoModalEmail');
+  const submit = document.getElementById('memoModalSubmit');
+  const errorEl = document.getElementById('memoModalError');
+  const closeBtn = document.getElementById('memoModalClose');
+
+  if (!card || !backdrop || !form || !emailInput || !submit || !errorEl || !closeBtn) return;
+
+  const PDF_HREF = card.getAttribute('href');
+  let lastFocus = null;
+
+  function open() {
+    lastFocus = document.activeElement;
+    backdrop.dataset.open = 'true';
+    errorEl.hidden = true;
+    submit.disabled = false;
+    submit.textContent = 'Download memo';
+    setTimeout(() => emailInput.focus(), 50);
+  }
+
+  function close() {
+    backdrop.dataset.open = 'false';
+    if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+  }
+
+  function downloadPdf() {
+    const a = document.createElement('a');
+    a.href = PDF_HREF;
+    a.download = '';
+    a.rel = 'noopener';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  card.addEventListener('click', function(e) {
+    e.preventDefault();
+    open();
+  });
+
+  closeBtn.addEventListener('click', close);
+  backdrop.addEventListener('click', function(e) {
+    if (e.target === backdrop) close();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && backdrop.dataset.open === 'true') close();
+  });
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const email = emailInput.value.trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errorEl.textContent = 'Please enter a valid email.';
+      errorEl.hidden = false;
+      return;
+    }
+    errorEl.hidden = true;
+    submit.disabled = true;
+    submit.textContent = 'Sending...';
+    try {
+      const res = await fetch('/memo-log', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      // Treat any 2xx as success; if logging is misconfigured server-side
+      // we still want the visitor to get the memo (graceful degradation).
+      if (!res.ok && res.status !== 204) {
+        // Server rejected the email shape; show the message but don't block.
+        errorEl.textContent = "Hmm, that email didn't look right. Sending you the memo anyway.";
+        errorEl.hidden = false;
+      }
+    } catch (err) {
+      // Network error: don't block the download, the visitor came here for the memo.
+      console.warn('memo-log post failed', err);
+    }
+    downloadPdf();
+    setTimeout(close, 600);
+  });
 })();
 
 (function() {
