@@ -60,19 +60,7 @@ Same objective workflow as luthien-proxy:
 - No build step — edit HTML directly, push, it's live
 - Test locally by opening `site/index.html` in a browser
 
-### Browser opens for visual iteration: always deep-link, always cache-bust
-
-When iterating with Scott on a specific slide / section / component, always open the file with both a cache-buster query string AND the slide-name hash so Scott lands directly on the artifact under discussion. The pitch deck deep-links by `data-slide-name` (e.g. `#competitors-table`, `#advantage-incident`).
-
-Format:
-
-```
-open "file:///Users/scottwofford/build/luthien-pbc-site/site/pitch/index.html?_=$(date +%s)#<slide-name>"
-```
-
-The cache-buster is load-bearing. macOS `open` otherwise just brings the existing browser tab to front, and the deck's hash-navigation handlers don't always re-run when the URL hasn't changed (Chrome in particular sometimes skips both `hashchange` and the `focus` listener). The `?_=<timestamp>` makes every URL unique, forcing a fresh page load and a clean hash navigation on init.
-
-Applies every time you tell Scott to "open in browser" — single-slide tweaks, prototype comparisons, before/after demos. Compounds with the global "iterate one change at a time, deep-linked" rule (in `~/build/CLAUDE.md` memory). *(Added 2026-05-05 after Scott twice told me "always open directly to the slide" mid-Manoj-prep when reload-without-cache-bust left him on slide 1.)*
+**Pitch deck (`site/pitch/`) has its own scoped CLAUDE.md** with deck-specific patterns: `data-slide-name` hash convention, `data-slide-abbr` letter-chip system, `data-stages` staged-build mechanism, `?mode=<playlist>` URL routing for deck variations (e.g. `/pitch?mode=story`), and the deep-link + cache-bust rule for iteration. See `site/pitch/CLAUDE.md`.
 
 ## Adding New Pages
 
