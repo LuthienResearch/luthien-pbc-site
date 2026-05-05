@@ -975,27 +975,66 @@
 
     .nav-dots {
       display: flex;
-      gap: 8px;
+      gap: 6px;
+      align-items: center;
     }
 
     .nav-dot {
+      position: relative;
+      min-width: 28px;
+      height: 22px;
+      padding: 0 4px;
+      border-radius: 4px;
+      background: var(--border);
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: all 0.18s;
+      border: none;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+    .nav-dot.is-blank {
+      min-width: 12px;
       width: 12px;
       height: 12px;
       border-radius: 50%;
-      background: var(--border);
-      cursor: pointer;
-      transition: all 0.3s;
-      border: none;
       padding: 0;
     }
 
     .nav-dot.active {
       background: var(--blue);
+      color: var(--text);
       box-shadow: 0 0 8px rgba(59, 148, 148, 0.4);
     }
 
     .nav-dot:hover {
       background: var(--text-dim);
+      color: var(--bg);
+    }
+
+    .nav-dot[data-tip]:hover::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-elevated);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 100;
     }
 
     /* ============ FULLSCREEN BUTTON ============ */
@@ -3056,7 +3095,7 @@
   </div>
 
   <!-- ======== SLIDE 2: TEAM (minimalist, two circles, no headline) ======== -->
-  <div class="slide" data-slide="1" data-slide-name="team">
+  <div class="slide" data-slide="1" data-slide-name="team" data-slide-abbr="S&amp;J">
     <div class="slide-inner">
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 8vw, 120px); max-width: 960px; margin: 0 auto; align-items: start;">
 
@@ -3113,7 +3152,7 @@
     Right gutter x 950-1120 hosts the "squandered potential" bracket on stage 4.
     Model time-horizon values are approximated from METR Horizon v1.1.
   -->
-  <div class="slide" data-slide="1" data-slide-name="problem-dev">
+  <div class="slide" data-slide="1" data-slide-name="problem-dev" data-slide-abbr="M&uarr;">
     <div class="slide-inner">
       <div class="anim-up" style="position: relative; max-width: 1100px; margin: 0 auto;">
         <svg class="metr-landscape" viewBox="0 0 1120 640" xmlns="http://www.w3.org/2000/svg"
@@ -3258,7 +3297,7 @@
   </div>
 
   <!-- ======== SLIDE 2b: METR CHART + 12-HOUR HIGHLIGHT ======== -->
-  <div class="slide" data-slide="1" data-slide-name="problem-metr-12h">
+  <div class="slide" data-slide="1" data-slide-name="problem-metr-12h" data-slide-abbr="12h">
     <div class="slide-inner">
       <div class="anim-up" style="position: relative; max-width: 1100px; margin: 0 auto;">
         <svg class="metr-landscape" viewBox="0 0 1120 640" xmlns="http://www.w3.org/2000/svg"
@@ -3408,7 +3447,7 @@
   </div>
 
   <!-- ======== SLIDE 2c: 45 SECONDS FULL-SLIDE ======== -->
-  <div class="slide title-slide" data-slide="1" data-slide-name="problem-45s">
+  <div class="slide title-slide" data-slide="1" data-slide-name="problem-45s" data-slide-abbr="45s">
     <div class="slide-inner" style="text-align: center;">
       <div class="anim-up" style="font-family: var(--sans); font-weight: 800; font-size: clamp(6rem, 18vw, 14rem); color: #E07777; line-height: 0.95; letter-spacing: -0.02em;">45 seconds</div>
       <div class="anim-up delay-1" style="margin-top: 28px; color: var(--text-muted); font-family: var(--mono); font-size: clamp(0.95rem, 1.6vw, 1.25rem); letter-spacing: 0.12em; text-transform: uppercase;">
@@ -3423,7 +3462,7 @@
   </div>
 
   <!-- ======== SLIDE 2d: METR CHART + 45-SEC LINE + SQUANDERED POTENTIAL GAP ======== -->
-  <div class="slide" data-slide="1" data-slide-name="problem-gap">
+  <div class="slide" data-slide="1" data-slide-name="problem-gap" data-slide-abbr="GAP">
     <div class="slide-inner">
       <div class="anim-up" style="position: relative; max-width: 1100px; margin: 0 auto;">
         <svg class="metr-landscape" viewBox="0 0 1120 640" xmlns="http://www.w3.org/2000/svg"
@@ -3602,7 +3641,7 @@
   </div>
 
   <!-- ======== SLIDE 3a: 93 USER INTERVIEWS ======== -->
-  <div class="slide title-slide" data-slide="2" data-slide-name="problem-interviews">
+  <div class="slide title-slide" data-slide="2" data-slide-name="problem-interviews" data-slide-abbr="93">
     <div class="slide-inner" style="text-align: center;">
       <div class="anim-up" style="font-family: var(--sans); font-weight: 800; font-size: clamp(5rem, 15vw, 12rem); color: var(--white); line-height: 0.95; letter-spacing: -0.02em;">93</div>
       <div class="anim-up delay-1" style="margin-top: 16px; color: var(--text-muted); font-family: var(--mono); font-size: clamp(0.95rem, 1.6vw, 1.3rem); letter-spacing: 0.16em; text-transform: uppercase;">user interviews</div>
@@ -3613,7 +3652,7 @@
        8 stages (0-7). Stages 0-2 read as a clean, finished three-item list.
        Stage 3 onward breaks the frame: items appear at increasingly frenzied
        angles, overlapping, larger — conveying overwhelm. -->
-  <div class="slide" data-slide="2" data-slide-name="problem-cto" data-stages="15">
+  <div class="slide" data-slide="2" data-slide-name="problem-cto" data-slide-abbr="15" data-stages="15">
     <div class="slide-inner" style="position: relative; height: 100%; overflow: hidden;">
       <div class="label anim-up" style="position: absolute; top: 48px; left: 80px;">What Claude Code does</div>
 
@@ -3691,36 +3730,123 @@
   </div>
 
   <!-- ======== SLIDE: LUTHIEN SOLVES THIS (section intro) ======== -->
-  <div class="slide title-slide" data-slide="3" data-slide-name="luthien-solves-this">
+  <!-- ======== SLIDE: LUTHIEN INTRO (combined: solves-this + what-is + one-liner) ======== -->
+  <div class="slide title-slide" data-slide="3" data-slide-name="luthien-intro" data-slide-abbr="L">
     <div class="slide-inner" style="text-align: center;">
-      <h1 class="headline headline-lg anim-up" style="color: var(--white);">Luthien Solves This.</h1>
+      <div class="label anim-up">Luthien solves this.</div>
+      <div class="spacer-md"></div>
+      <img class="anim-up delay-1" src="../assets/images/luthien-new.svg" alt="Luthien" style="display: block; margin: 0 auto 48px; width: clamp(220px, 34vw, 420px); height: auto;">
+      <h1 class="headline headline-md anim-up delay-2" style="color: var(--white);">A Fully Customizable Real-Time<br>Manager for Every AI in Your Org</h1>
     </div>
   </div>
 
-  <!-- ======== SLIDE: WHAT IS LUTHIEN? (question) ======== -->
-  <div class="slide title-slide" data-slide="4" data-slide-name="what-is-luthien">
-    <div class="slide-inner" style="text-align: center;">
-      <h1 class="headline headline-lg anim-up" style="color: var(--white);">What is Luthien?</h1>
+  <!-- ======== SLIDE: DIFFERENTIATION QUESTION + CAPABILITIES (combined, placed BEFORE litellm walkthrough) ======== -->
+  <div class="slide" data-slide="4" data-slide-name="differentiation-capabilities" data-slide-abbr="vs">
+    <div class="slide-inner">
+      <h1 class="headline headline-md anim-up" style="color: var(--white); text-align: center;">What makes Luthien different from existing Gateways, Guardrails, and Observability Platforms?</h1>
+      <div class="spacer-lg"></div>
+      <div class="anim-up delay-1 capability-grid">
+        <div class="capability">
+          <div class="capability-title">Deep interventions</div>
+          <div class="capability-sub">Not just accept, block, or replace.</div>
+        </div>
+        <div class="capability">
+          <div class="capability-title">Live stream modification</div>
+          <div class="capability-sub">Not just response replacement.</div>
+        </div>
+        <div class="capability">
+          <div class="capability-title">Org-wide context</div>
+          <div class="capability-sub">Not just single-turn rules.</div>
+        </div>
+        <div class="capability">
+          <div class="capability-title">Seamless API integration</div>
+          <div class="capability-sub">Not just lossy wrappers.</div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- ======== SLIDE: LUTHIEN ONE-LINER (answer) ======== -->
-  <div class="slide title-slide" data-slide="5" data-slide-name="luthien-oneliner">
-    <div class="slide-inner" style="text-align: center;">
-      <img class="anim-up" src="../assets/images/luthien-new.svg" alt="Luthien" style="display: block; margin: 0 auto 48px; width: clamp(220px, 34vw, 420px); height: auto;">
-      <h1 class="headline headline-md anim-up delay-1" style="color: var(--white);">A Fully Customizable Real-Time<br>Manager for Every AI in Your Org</h1>
-    </div>
-  </div>
+  <!-- ======== SLIDE: COMPETITORS FEATURE-COMPARISON TABLE (transcribed from Scott's handwritten matrix) ======== -->
+  <div class="slide" data-slide="5" data-slide-name="competitors-table" data-slide-abbr="cmp">
+    <div class="slide-inner">
+      <div class="label anim-up">What Makes Luthien Different?</div>
+      <h1 class="headline headline-md anim-up delay-1" style="color: var(--white); margin: 8px 0 28px 0;">Feature comparison</h1>
 
-  <!-- ======== SLIDE: DIFFERENTIATION QUESTION (replaces existing-solutions) ======== -->
-  <div class="slide title-slide" data-slide="6" data-slide-name="differentiation-question">
-    <div class="slide-inner" style="text-align: center;">
-      <h1 class="headline headline-md anim-up" style="color: var(--white);">What makes Luthien different from all of the existing Gateways, Guardrails, and Observability Platforms on the market?</h1>
+      <div class="anim-up delay-2" style="width: 100%; margin: 0 auto;">
+        <table style="width: 100%; border-collapse: collapse; font-family: var(--sans); font-size: clamp(0.85rem, 1.15vw, 1rem); table-layout: auto; white-space: nowrap;">
+          <thead>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <th style="padding: 16px 12px;"></th>
+              <th style="text-align: center; padding: 16px 12px;">
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                  <div style="color: var(--text-dim); font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase;">Gateways</div>
+                  <img src="../assets/images/logos/litellm.png" alt="LiteLLM" style="height: 28px; width: auto; max-width: 120px; object-fit: contain;">
+                </div>
+              </th>
+              <th style="text-align: center; padding: 16px 12px;">
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                  <div style="color: var(--text-dim); font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase;">Guardrails</div>
+                  <img src="../assets/images/logos/guardrails-ai.png" alt="Guardrails AI" style="height: 28px; width: auto; max-width: 130px; object-fit: contain;">
+                </div>
+              </th>
+              <th style="text-align: center; padding: 16px 12px;">
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                  <div style="color: var(--text-dim); font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.2;">Post-hoc<br>Code Review</div>
+                  <img src="../assets/images/logos/coderabbit.png" alt="CodeRabbit" style="max-height: 24px; max-width: 130px; width: auto; height: auto; object-fit: contain; display: block;">
+                </div>
+              </th>
+              <th style="text-align: center; padding: 16px 12px; background: rgba(59, 148, 148, 0.08);">
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                  <div style="color: var(--blue); font-family: var(--mono); font-weight: 700; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase;">Luthien</div>
+                  <img src="../assets/images/logos/luthien-wordmark.png" alt="Luthien" style="height: 28px; width: auto; max-width: 130px; object-fit: contain;">
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 14px 12px; color: var(--text); font-weight: 600;">1. See full conversation</td>
+              <td style="text-align: center; padding: 14px 12px; color: var(--blue); font-weight: 700;">Yes</td>
+              <td style="text-align: center; padding: 14px 12px; color: var(--red); font-weight: 700;">No</td>
+              <td style="text-align: center; padding: 14px 12px; color: var(--red); font-weight: 700;">No</td>
+              <td style="text-align: center; padding: 14px 12px; background: rgba(59, 148, 148, 0.08); color: var(--blue); font-weight: 700; font-size: 1.2rem;">&#10003;</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 14px 12px; color: var(--text); font-weight: 600;">2. Does what you asked <span style="color: var(--text-dim); font-weight: 400; font-size: 0.85em;">(not lazy)</span>, and nothing else <span style="color: var(--text-dim); font-weight: 400; font-size: 0.85em;">(over-ambitious)</span></td>
+              <td style="text-align: center; padding: 14px 12px; color: var(--red); font-weight: 700;">No</td>
+              <td style="text-align: center; padding: 14px 12px; color: #C8A050; font-weight: 600;">Simple rules</td>
+              <td style="text-align: center; padding: 14px 12px; color: var(--red); font-weight: 700;">No</td>
+              <td style="text-align: center; padding: 14px 12px; background: rgba(59, 148, 148, 0.08); color: var(--blue); font-weight: 700; font-size: 1.2rem;">&#10003;</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 14px 12px; color: var(--text); font-weight: 600;">3. Fully customizable to your business</td>
+              <td style="text-align: center; padding: 14px 12px; color: #C8A050; font-weight: 600;">Partial / basic</td>
+              <td style="text-align: center; padding: 14px 12px; color: #C8A050; font-weight: 600;">Partial</td>
+              <td style="text-align: center; padding: 14px 12px; color: #C8A050; font-weight: 600;">Partial</td>
+              <td style="text-align: center; padding: 14px 12px; background: rgba(59, 148, 148, 0.08); color: var(--blue); font-weight: 700; font-size: 1.2rem;">&#10003;</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 14px 12px; color: var(--text); font-weight: 600;">4. Compatible with Claude Code, Codex, Cursor, OpenCode</td>
+              <td style="text-align: center; padding: 14px 12px; color: var(--blue); font-weight: 700;">Yes</td>
+              <td style="text-align: center; padding: 14px 12px; color: var(--red); font-weight: 700;">No</td>
+              <td style="text-align: center; padding: 14px 12px; color: var(--blue); font-weight: 700;">Yes</td>
+              <td style="text-align: center; padding: 14px 12px; background: rgba(59, 148, 148, 0.08); color: var(--blue); font-weight: 700; font-size: 1.2rem;">&#10003;</td>
+            </tr>
+            <tr>
+              <td style="padding: 14px 12px; color: var(--text); font-weight: 600;">5. Scales with your company</td>
+              <td style="text-align: center; padding: 14px 12px; color: var(--red); font-weight: 700;">No</td>
+              <td style="text-align: center; padding: 14px 12px; color: var(--red); font-weight: 700;">No</td>
+              <td style="text-align: center; padding: 14px 12px; color: var(--red); font-weight: 700;">No</td>
+              <td style="text-align: center; padding: 14px 12px; background: rgba(59, 148, 148, 0.08); color: var(--blue); font-weight: 700; font-size: 1.2rem;">&#10003;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 
   <!-- ======== SLIDE: WHAT MAKES LUTHIEN DIFFERENT? — 1. THE INCIDENT ======== -->
-  <div class="slide" data-slide="9" data-slide-name="advantage-incident">
+  <div class="slide" data-slide="9" data-slide-name="advantage-incident" data-slide-abbr="LL">
     <div class="slide-inner" style="text-align: center;">
       <div class="label anim-up" style="text-align: left;">What Makes Luthien Different?</div>
       <div style="display: flex; flex-direction: column; justify-content: center; min-height: 58vh; gap: clamp(20px, 3.5vh, 36px);">
@@ -3743,7 +3869,7 @@
   </div>
 
   <!-- ======== SLIDE: THE LUTHIEN ADVANTAGE — 2. NO INFRA ======== -->
-  <div class="slide" data-slide="10" data-slide-name="advantage-no-infra">
+  <div class="slide" data-slide="10" data-slide-name="advantage-no-infra" data-slide-abbr="NO">
     <div class="slide-inner">
       <div class="label anim-up">What Makes Luthien Different?</div>
       <div class="adv-sublabel anim-up">No safety infrastructure</div>
@@ -3775,7 +3901,7 @@
   </div>
 
   <!-- ======== SLIDE: THE LUTHIEN ADVANTAGE — 3. EXISTING INFRA ======== -->
-  <div class="slide" data-slide="11" data-slide-name="advantage-existing-infra">
+  <div class="slide" data-slide="11" data-slide-name="advantage-existing-infra" data-slide-abbr="OG">
     <div class="slide-inner">
       <div class="label anim-up">What Makes Luthien Different?</div>
       <div class="adv-sublabel anim-up">Helicone + Portkey + Guardrails</div>
@@ -3855,7 +3981,7 @@
   </div>
 
   <!-- ======== SLIDE: THE LUTHIEN ADVANTAGE — 4. WITH LUTHIEN ======== -->
-  <div class="slide" data-slide="12" data-slide-name="advantage-luthien">
+  <div class="slide" data-slide="12" data-slide-name="advantage-luthien" data-slide-abbr="LU">
     <div class="slide-inner">
       <div class="label anim-up">What Makes Luthien Different?</div>
       <div class="adv-sublabel anim-up">With Luthien</div>
@@ -3914,34 +4040,8 @@
   </div>
 
   <!-- ======== SLIDE: WHAT MAKES LUTHIEN DIFFERENT? — 5. CAPABILITIES ======== -->
-  <div class="slide" data-slide="13" data-slide-name="advantage-capabilities">
-    <div class="slide-inner">
-      <div class="label anim-up">What Makes Luthien Different?</div>
-      <div class="adv-sublabel anim-up">Luthien-exclusive capabilities</div>
-
-      <div class="anim-up delay-1 capability-grid">
-        <div class="capability">
-          <div class="capability-title">Deep interventions</div>
-          <div class="capability-sub">Not just accept, block, or replace.</div>
-        </div>
-        <div class="capability">
-          <div class="capability-title">Live stream modification</div>
-          <div class="capability-sub">Not just response replacement.</div>
-        </div>
-        <div class="capability">
-          <div class="capability-title">Org-wide context</div>
-          <div class="capability-sub">Not just single-turn rules.</div>
-        </div>
-        <div class="capability">
-          <div class="capability-title">Seamless API integration</div>
-          <div class="capability-sub">Not just lossy wrappers.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- ======== SLIDE: WHAT MAKES LUTHIEN DIFFERENT? — 6. HOW? ======== -->
-  <div class="slide" data-slide="14" data-slide-name="advantage-how">
+  <div class="slide" data-slide="14" data-slide-name="advantage-how" data-slide-abbr="HOW">
     <div class="slide-inner">
       <div class="label anim-up">What Makes Luthien Different?</div>
       <div class="adv-sublabel anim-up">How?</div>
@@ -3987,7 +4087,7 @@ Key invariants:
   </div>
 
   <!-- ======== SLIDE 4: MARKET + DEMAND ======== -->
-  <div class="slide" data-slide="3" data-slide-name="tam">
+  <div class="slide" data-slide="3" data-slide-name="tam" data-slide-abbr="TAM">
     <div class="slide-inner">
       <div class="label anim-up">Market</div>
       <div class="spacer-md"></div>
@@ -4024,7 +4124,7 @@ Key invariants:
   </div>
 
   <!-- ======== SLIDE: USERS HIGHLY MOTIVATED (4 quotes) ======== -->
-  <div class="slide" data-slide="3" data-slide-name="user-quotes">
+  <div class="slide" data-slide="3" data-slide-name="user-quotes" data-slide-abbr="&quot;&quot;">
     <div class="slide-inner">
       <div class="label anim-up">Developer Feedback</div>
       <h1 class="headline headline-lg anim-up delay-1">Users are highly motivated</h1>
@@ -4067,7 +4167,7 @@ Key invariants:
 
 
   <!-- ======== SLIDE: ENTERPRISE VALIDATION (Relativity VP) ======== -->
-  <div class="slide" data-slide="3" data-slide-name="enterprise-validation">
+  <div class="slide" data-slide="3" data-slide-name="enterprise-validation" data-slide-abbr="&quot;VP&quot;">
     <div class="slide-inner" style="display: flex; flex-direction: column; justify-content: center; min-height: 100%;">
       <div class="label anim-up">Executive Feedback</div>
       <div class="spacer-md"></div>
@@ -4088,7 +4188,7 @@ Key invariants:
   </div>
 
   <!-- ======== SLIDE: RISK SCALES WITH CAPABILITY ======== -->
-  <div class="slide" data-slide="3" data-slide-name="risk-equation">
+  <div class="slide" data-slide="3" data-slide-name="risk-equation" data-slide-abbr="x=">
     <div class="slide-inner" style="text-align: center;">
       <div class="label anim-up">Why this market grows</div>
       <div class="spacer-md"></div>
@@ -4129,7 +4229,7 @@ Key invariants:
   </div>
 
   <!-- ======== SLIDE: DEFENSIBILITY (Fabian Roger quote) ======== -->
-  <div class="slide" data-slide="5" data-slide-name="defensibility">
+  <div class="slide" data-slide="5" data-slide-name="defensibility" data-slide-abbr="?">
     <div class="slide-inner">
       <div class="label anim-up">Defensibility</div>
       <h1 class="headline headline-lg anim-up delay-1">Won't Anthropic build this?</h1>
@@ -4166,7 +4266,7 @@ Key invariants:
   </div>
 
   <!-- ======== SLIDE: THE PLAYBOOK ======== -->
-  <div class="slide" data-slide="6" data-slide-name="strategy">
+  <div class="slide" data-slide="6" data-slide-name="strategy" data-slide-abbr="DO">
     <div class="slide-inner">
       <div class="label anim-up">The Playbook</div>
       <h1 class="headline headline-lg anim-up delay-1">Do things that don't scale.</h1>
@@ -4237,7 +4337,7 @@ Key invariants:
   </div>
 
   <!-- ======== SLIDE: SALES FUNNEL ======== -->
-  <div class="slide" data-slide="7" data-slide-name="funnel">
+  <div class="slide" data-slide="7" data-slide-name="funnel" data-slide-abbr="||">
     <div class="slide-inner">
       <div class="label anim-up">Traction</div>
       <h1 class="headline headline-lg anim-up delay-1">Sales pipeline</h1>
@@ -4291,7 +4391,7 @@ Key invariants:
   </div>
 
   <!-- ======== SLIDE: LOIs / TRACTION ======== -->
-  <div class="slide" data-slide="8" data-slide-name="traction">
+  <div class="slide" data-slide="8" data-slide-name="traction" data-slide-abbr="TRC">
     <div class="slide-inner">
       <div class="label anim-up">Traction</div>
       <p class="subtitle anim-up delay-1">We asked the smartest people we know to trial our product.<br>They're proactively proposing improvements.</p>
@@ -4355,7 +4455,7 @@ Key invariants:
   </div>
 
   <!-- ======== SLIDE: THE ASK ======== -->
-  <div class="slide" data-slide="10" data-slide-name="ask">
+  <div class="slide" data-slide="10" data-slide-name="ask" data-slide-abbr="$2M">
     <div class="slide-inner" style="text-align: center;">
       <div class="label anim-up" style="text-align: left;">The Ask</div>
       <h1 class="headline headline-xl anim-up delay-1" style="color: var(--blue);">$2M Pre-Seed</h1>
@@ -4683,11 +4783,15 @@ Key invariants:
   const navLeft = document.getElementById('navLeft');
   const navRight = document.getElementById('navRight');
 
-  // Build dots
+  // Build dots: letter chip per slide if data-slide-abbr is set, otherwise blank dot
   for (let i = 0; i < total; i++) {
     const dot = document.createElement('button');
-    dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
-    dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+    const abbr = slides[i].getAttribute('data-slide-abbr');
+    const name = slides[i].getAttribute('data-slide-name');
+    dot.className = 'nav-dot' + (i === 0 ? ' active' : '') + (abbr ? '' : ' is-blank');
+    if (abbr) dot.innerHTML = abbr;
+    if (name) dot.setAttribute('data-tip', name);
+    dot.setAttribute('aria-label', name ? ('Go to ' + name) : ('Go to slide ' + (i + 1)));
     dot.addEventListener('click', () => goTo(i));
     dotsContainer.appendChild(dot);
   }
