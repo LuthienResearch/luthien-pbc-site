@@ -3085,6 +3085,48 @@
 <div class="deck" id="deck">
 
   <!-- ======== SLIDE 1: TITLE ======== -->
+  <!-- ======== STORY-MODE ONLY: FUTURE-OF-WORK OPENER (Ivan's framing) ======== -->
+  <!-- This slide is hidden in default ?mode (the canonical /pitch deck) and surfaced -->
+  <!-- only in /pitch?mode=story (i.e. /story). See MODES playlist in the JS. -->
+  <div class="slide title-slide" data-slide-name="future-of-work" data-slide-abbr="3-4y">
+    <div class="slide-inner" style="text-align: center;">
+      <div class="label anim-up">In three to four years</div>
+      <div class="spacer-md"></div>
+      <h1 class="headline headline-md anim-up delay-1" style="color: var(--white);">Every knowledge worker uses Claude Code for their entire job.</h1>
+      <div class="spacer-md"></div>
+      <div class="anim-up delay-2" style="font-family: var(--sans); font-size: clamp(1.1rem, 1.7vw, 1.4rem); color: var(--text); max-width: 780px; margin: 0 auto; line-height: 1.5;">
+        And no one in the org will know what their AI is doing.
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== STORY-MODE ONLY: DARK-MATTER ENTERPRISE RISK ======== -->
+  <div class="slide" data-slide-name="dark-matter" data-slide-abbr="DM">
+    <div class="slide-inner">
+      <div class="label anim-up">Dark matter</div>
+      <h1 class="headline headline-md anim-up delay-1" style="color: var(--white); margin-top: 8px;">AI is already organizational dark matter.</h1>
+      <div class="spacer-lg"></div>
+      <div class="anim-up delay-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px clamp(32px, 4vw, 64px); max-width: 1100px; margin: 0 auto;">
+        <div>
+          <div style="color: var(--blue); font-family: var(--mono); font-weight: 700; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px;">What's wrong is contextual</div>
+          <div style="color: var(--text); font-size: clamp(0.95rem, 1.3vw, 1.1rem); line-height: 1.5;">Jurisdiction, company policy, legal risk, and culture all decide what counts as wrong. The model has none of that context, so the org has to enforce it.</div>
+        </div>
+        <div>
+          <div style="color: var(--blue); font-family: var(--mono); font-weight: 700; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px;">Coding has guardrails. The rest doesn't.</div>
+          <div style="color: var(--text); font-size: clamp(0.95rem, 1.3vw, 1.1rem); line-height: 1.5;">Engineers ship through pull requests, code review, and pre-commit hooks. Accountants, lawyers, and marketing teams running an AI all day have none of that scaffolding.</div>
+        </div>
+        <div>
+          <div style="color: var(--blue); font-family: var(--mono); font-weight: 700; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px;">Employees route around your stack</div>
+          <div style="color: var(--text); font-size: clamp(0.95rem, 1.3vw, 1.1rem); line-height: 1.5;">Even when Claude Code is sanctioned, the team also uses ChatGPT, Gemini, and Claude.ai in browser tabs. Millions of tokens flow in and out and none of it is logged.</div>
+        </div>
+        <div>
+          <div style="color: var(--blue); font-family: var(--mono); font-weight: 700; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px;">Discovery is impossible after the fact</div>
+          <div style="color: var(--text); font-size: clamp(0.95rem, 1.3vw, 1.1rem); line-height: 1.5;">Reconstructing what happened across a million-token AI session is intractable. Legal discovery, compliance review, and incident response all start from zero.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="slide title-slide active" data-slide="0" data-slide-name="title">
     <div class="slide-inner">
       <div class="logo-mark anim-up">Luthien</div>
@@ -4770,6 +4812,75 @@ Key invariants:
 })();
 
 (function() {
+  // ===== Mode-aware slide playlists =====
+  // Each mode is an ordered list of data-slide-name values. Slides
+  // present in the DOM but absent from the active playlist are removed
+  // before the deck initializes; slides in the playlist are reordered
+  // to match. See site/pitch/CLAUDE.md for the convention.
+  const MODES = {
+    'default': [
+      'title', 'team',
+      'problem-dev', 'problem-metr-12h', 'problem-45s', 'problem-gap',
+      'problem-interviews', 'problem-cto',
+      'luthien-intro', 'differentiation-capabilities', 'competitors-table',
+      'advantage-incident', 'advantage-no-infra', 'advantage-existing-infra',
+      'advantage-luthien', 'advantage-how',
+      'tam', 'user-quotes', 'enterprise-validation', 'risk-equation',
+      'defensibility', 'strategy', 'funnel', 'traction',
+      'ask', 'close'
+    ],
+    'story': [
+      'title',
+      'future-of-work', 'dark-matter',
+      'problem-dev', 'problem-metr-12h', 'problem-45s', 'problem-gap',
+      'problem-interviews', 'problem-cto',
+      'luthien-intro', 'differentiation-capabilities', 'competitors-table',
+      'advantage-incident', 'advantage-no-infra', 'advantage-existing-infra',
+      'advantage-luthien', 'advantage-how',
+      'team',
+      'tam', 'user-quotes', 'enterprise-validation', 'risk-equation',
+      'defensibility', 'strategy', 'funnel', 'traction',
+      'ask', 'close'
+    ]
+  };
+
+  (function applyMode() {
+    const params = new URLSearchParams(location.search);
+    const requested = params.get('mode');
+    const mode = (requested && MODES[requested]) ? requested : 'default';
+    const playlist = MODES[mode];
+
+    const slidesByName = {};
+    document.querySelectorAll('.slide').forEach(el => {
+      const n = el.getAttribute('data-slide-name');
+      if (n) slidesByName[n] = el;
+    });
+
+    const firstSlide = document.querySelector('.slide');
+    if (!firstSlide) return;
+    const parent = firstSlide.parentNode;
+
+    // Remove slides not in the playlist (e.g. story-only slides hidden
+    // in default mode; default-only slides hidden in story mode if the
+    // playlists ever diverge that way).
+    Object.keys(slidesByName).forEach(name => {
+      if (!playlist.includes(name)) slidesByName[name].remove();
+    });
+
+    // Re-append in playlist order so the DOM matches the deck order.
+    playlist.forEach(name => {
+      const el = slidesByName[name];
+      if (el) parent.appendChild(el);
+    });
+
+    // Reset .active to the first slide of the playlist.
+    document.querySelectorAll('.slide.active').forEach(el => el.classList.remove('active'));
+    const firstInPlaylist = slidesByName[playlist[0]];
+    if (firstInPlaylist) firstInPlaylist.classList.add('active');
+
+    document.body.dataset.deckMode = mode;
+  })();
+
   const slides = document.querySelectorAll('.slide');
   const total = slides.length;
   let current = 0;
