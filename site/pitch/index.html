@@ -973,39 +973,50 @@
       letter-spacing: 0.05em;
     }
 
+    /* Nav dots: default plain 12x12 circles. Hovering anywhere in the
+       padded nav-dots region (extends ~20px around the strip, roughly
+       1cm trigger zone) expands every dot that has an abbreviation
+       into a labeled chip. Dots without abbreviations (title, close)
+       stay as plain dots even on hover. */
     .nav-dots {
       display: flex;
       gap: 6px;
       align-items: center;
+      padding: 18px 12px;
+      margin: -18px -12px;
     }
 
     .nav-dot {
       position: relative;
-      min-width: 28px;
-      height: 22px;
-      padding: 0 4px;
-      border-radius: 4px;
+      width: 12px;
+      height: 12px;
+      min-width: 12px;
+      padding: 0;
+      border-radius: 50%;
       background: var(--border);
       color: var(--text-dim);
       cursor: pointer;
-      transition: all 0.18s;
+      transition: width 0.18s, min-width 0.18s, height 0.18s, padding 0.18s, border-radius 0.18s, font-size 0.18s, background 0.18s, color 0.18s, box-shadow 0.18s;
       border: none;
       font-family: var(--mono);
-      font-size: 0.7rem;
+      font-size: 0;
       font-weight: 600;
       letter-spacing: 0.04em;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       line-height: 1;
+      overflow: hidden;
+      white-space: nowrap;
     }
 
-    .nav-dot.is-blank {
-      min-width: 12px;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      padding: 0;
+    .nav-dots:hover .nav-dot[data-slide-abbr]:not([data-slide-abbr=""]) {
+      width: auto;
+      min-width: 28px;
+      height: 22px;
+      padding: 0 4px;
+      border-radius: 4px;
+      font-size: 0.7rem;
     }
 
     .nav-dot.active {
@@ -4988,55 +4999,24 @@ Key invariants:
   const navLeft = document.getElementById('navLeft');
   const navRight = document.getElementById('navRight');
 
-  // ===== Presenter mode =====
-  // When ON: nav shows letter chips with content-derived abbreviations
-  //   (S&J, 12h, 45s, ...) so Scott can jump slides quickly under
-  //   investor Q&A.
-  // When OFF (default): nav shows plain dots, just like every other deck.
-  //   Investors don't see the letter abbreviations.
-  // Enable via URL ?presenter=1 (sticky), keyboard 'P' (toggles persistently),
-  // or by setting localStorage.luthienDeckPresenterMode = '1'.
-  function isPresenterMode() {
-    try {
-      const params = new URLSearchParams(location.search);
-      const param = params.get('presenter');
-      if (param === '1' || param === 'true') return true;
-      if (param === '0' || param === 'false') return false;
-      return localStorage.getItem('luthienDeckPresenterMode') === '1';
-    } catch (_e) { return false; }
-  }
-  let presenterMode = isPresenterMode();
-
-  function renderDots() {
-    dotsContainer.innerHTML = '';
-    for (let i = 0; i < total; i++) {
-      const dot = document.createElement('button');
-      const abbr = slides[i].getAttribute('data-slide-abbr');
-      const name = slides[i].getAttribute('data-slide-name');
-      const showAbbr = presenterMode && abbr;
-      dot.className = 'nav-dot' + (i === current ? ' active' : '') + (showAbbr ? '' : ' is-blank');
-      if (showAbbr) dot.innerHTML = abbr;
-      if (name) dot.setAttribute('data-tip', name);
-      dot.setAttribute('aria-label', name ? ('Go to ' + name) : ('Go to slide ' + (i + 1)));
-      dot.addEventListener('click', () => goTo(i));
-      dotsContainer.appendChild(dot);
+  // Build dots. Every dot is a plain 12x12 circle by default; hovering
+  // anywhere in the padded .nav-dots region expands dots-with-abbreviations
+  // into labeled chips (CSS handles the transition). Dots for slides
+  // without an abbr (title, close) stay as plain circles even on hover.
+  for (let i = 0; i < total; i++) {
+    const dot = document.createElement('button');
+    const abbr = slides[i].getAttribute('data-slide-abbr');
+    const name = slides[i].getAttribute('data-slide-name');
+    dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+    if (abbr) {
+      dot.setAttribute('data-slide-abbr', abbr);
+      dot.innerHTML = abbr;
     }
-    document.body.dataset.presenterMode = presenterMode ? '1' : '0';
+    if (name) dot.setAttribute('data-tip', name);
+    dot.setAttribute('aria-label', name ? ('Go to ' + name) : ('Go to slide ' + (i + 1)));
+    dot.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(dot);
   }
-  renderDots();
-
-  // Keyboard 'P' toggles presenter mode persistently. Capture-phase so the
-  // global slide nav (left/right/home/end) doesn't intercept it.
-  document.addEventListener('keydown', (e) => {
-    if ((e.key === 'p' || e.key === 'P') && !e.ctrlKey && !e.metaKey && !e.altKey) {
-      // Only react if no input/textarea is focused.
-      const tag = (document.activeElement && document.activeElement.tagName) || '';
-      if (tag === 'INPUT' || tag === 'TEXTAREA') return;
-      presenterMode = !presenterMode;
-      try { localStorage.setItem('luthienDeckPresenterMode', presenterMode ? '1' : '0'); } catch (_e) {}
-      renderDots();
-    }
-  });
 
   function updateUI() {
     counter.textContent = (current + 1) + ' / ' + total;
