@@ -4,10 +4,10 @@
   "compatibility_date": "2026-04-01",
   "workers_dev": false,
   "routes": [
-    // Single wildcard pattern matches /pitch, /pitch/, /pitch/anything, /pitch.pdf,
-    // and any of those with a query string. Cloudflare patterns without `*` only
-    // match a literal URL with no query string.
-    { "pattern": "luthien.cc/pitch*", "zone_name": "luthien.cc" }
+    // Track-anywhere: any luthien.cc URL with ?ref=<token> logs a hit. Without
+    // ?ref=, the worker is a transparent passthrough. The dashboard worker
+    // on luthien.cc/_t* is a more specific pattern and wins for those URLs.
+    { "pattern": "luthien.cc/*", "zone_name": "luthien.cc" }
   ],
   "analytics_engine_datasets": [
     {
