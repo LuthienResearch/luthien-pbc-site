@@ -20,10 +20,18 @@ No build step. No dependencies. Edit HTML, push, it's live.
 - `site/` — Everything that gets deployed (GitHub Pages root)
 - `dev/` — Development tracking (objectives, notes, TODO)
 - `scripts/` — Developer helpers
+- `tracker-worker/` — Cloudflare Worker that logs `?ref=` clicks to Analytics Engine
+- `tracker-dashboard/` — Cloudflare Worker serving `luthien.cc/_t`, the tracking dashboard
 
 ## Deployment
 
 GitHub Pages auto-deploys from `site/` on push to main.
+
+## Tracking links
+
+Append `?ref=<token>` to any `luthien.cc` URL to log a hit. View hits at
+[`luthien.cc/_t`](https://luthien.cc/_t). Full guide:
+[TRACKING.md](TRACKING.md).
 
 ## Related Repos
 

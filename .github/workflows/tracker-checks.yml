@@ -1,0 +1,86 @@
+name: Tracker Checks
+
+# Vitest on every PR/push that touches the workers; live smoke daily and
+# on manual dispatch. The smoke hits the deployed dashboard's API and
+# asserts each AE SQL query shape returns 200 + parseable JSON — the
+# closest we can get to a "lint" since AE has no offline parser.
+#
+# Setup: in the repo's GitHub Actions secrets, add DASH_USER and DASH_PASS
+# (the same values used by `wrangler secret put` on luthien-tracker-dashboard).
+# Without these, the smoke job is skipped — never failed — so a missing
+# secret doesn't page anyone.
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "tracker-worker/**"
+      - "tracker-dashboard/**"
+      - ".github/workflows/tracker-checks.yml"
+  push:
+    branches: [main]
+    paths:
+      - "tracker-worker/**"
+      - "tracker-dashboard/**"
+      - ".github/workflows/tracker-checks.yml"
+  workflow_dispatch:
+  schedule:
+    # 14:30 UTC = 07:30 PT — early-morning heartbeat catches overnight drift
+    - cron: "30 14 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: vitest
+    runs-on: ubuntu-latest
+    if: github.event_name != 'schedule'
+    strategy:
+      fail-fast: false
+      matrix:
+        worker: [tracker-worker, tracker-dashboard]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: ${{ matrix.worker }}/package.json
+      - name: Install
+        working-directory: ${{ matrix.worker }}
+        run: npm install --no-audit --no-fund
+      - name: Typecheck
+        working-directory: ${{ matrix.worker }}
+        run: npx tsc --noEmit
+      - name: Test
+        working-directory: ${{ matrix.worker }}
+        run: npx vitest run
+
+  smoke:
+    name: live smoke
+    runs-on: ubuntu-latest
+    # Skip on PRs from forks (no secrets) and only run on push/dispatch/schedule.
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check secrets present
+        id: have_secrets
+        env:
+          DASH_USER: ${{ secrets.DASH_USER }}
+          DASH_PASS: ${{ secrets.DASH_PASS }}
+        run: |
+          if [[ -n "$DASH_USER" && -n "$DASH_PASS" ]]; then
+            echo "ok=1" >> "$GITHUB_OUTPUT"
+          else
+            echo "ok=0" >> "$GITHUB_OUTPUT"
+            echo "::warning::DASH_USER/DASH_PASS not configured in repo secrets — skipping smoke"
+          fi
+      - name: Smoke against luthien.cc/_t
+        if: steps.have_secrets.outputs.ok == '1'
+        working-directory: tracker-dashboard
+        env:
+          DASH_USER: ${{ secrets.DASH_USER }}
+          DASH_PASS: ${{ secrets.DASH_PASS }}
+          DASH_URL: https://luthien.cc/_t
+        run: ./scripts/smoke.sh

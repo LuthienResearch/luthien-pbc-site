@@ -1,0 +1,14 @@
+{
+  "name": "luthien-tracker-dashboard",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-04-01",
+  "workers_dev": false,
+  "routes": [
+    { "pattern": "luthien.cc/_t", "zone_name": "luthien.cc" },
+    { "pattern": "luthien.cc/_t/*", "zone_name": "luthien.cc" }
+  ],
+  "vars": {
+    "AE_ACCOUNT_ID": "3b64ed6e5367ead1f221c01a17592b19",
+    "AE_DATASET": "luthien_tracker_hits"
+  }
+}

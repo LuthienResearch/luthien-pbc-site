@@ -1,0 +1,18 @@
+{
+  "name": "luthien-tracker",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-04-01",
+  "workers_dev": false,
+  "routes": [
+    // Track-anywhere: any luthien.cc URL with ?ref=<token> logs a hit. Without
+    // ?ref=, the worker is a transparent passthrough. The dashboard worker
+    // on luthien.cc/_t* is a more specific pattern and wins for those URLs.
+    { "pattern": "luthien.cc/*", "zone_name": "luthien.cc" }
+  ],
+  "analytics_engine_datasets": [
+    {
+      "binding": "TRACKER_HITS",
+      "dataset": "luthien_tracker_hits"
+    }
+  ]
+}
