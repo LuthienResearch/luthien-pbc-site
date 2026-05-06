@@ -20,21 +20,36 @@ Every `<div class="slide">` must have:
 
 Three back-to-back single-headline slides (e.g. the original `luthien-solves-this` → `what-is-luthien` → `luthien-oneliner`) collapse cleanly into one slide with sequenced reveals. **Prefer combining over splitting.** Today's deck went 28 → 26 slides via two combines (intro trio; differentiation question + capabilities matrix), and the result reads tighter without losing content.
 
-## Browser opens for iteration: always deep-link, always cache-bust
+## Browser opens for iteration: drive Chrome via AppleScript, NOT `open`
 
-When iterating with Scott on a specific slide, always open the file with both a cache-buster query string AND the slide-name hash so he lands directly on the artifact under discussion:
+When iterating with Scott on a specific slide, you must force-navigate the active Chrome tab to the slide. **Do NOT use macOS `open file://...`** — `open` brings the existing tab to front but does not reliably re-navigate when the URL differs only by hash + cache-buster, which is the common case in this loop. Verified failure mode: 2026-05-06 traction-slide iteration where four consecutive `open` calls left Scott on the previously-active slide while Playwright (which loads in a fresh process) confirmed the URL itself works.
 
+Use this AppleScript form instead. Wrap in a Bash heredoc so the shell expands `$(date +%s)` and the slide name:
+
+```bash
+URL="file:///Users/scottwofford/build/luthien-pbc-site/site/pitch/index.html?_=$(date +%s)#<slide-name>"
+osascript <<EOF
+tell application "Google Chrome"
+  activate
+  if (count of windows) = 0 then
+    make new window
+  end if
+  set URL of active tab of front window to "$URL"
+end tell
+EOF
 ```
-open "file:///Users/scottwofford/build/luthien-pbc-site/site/pitch/index.html?_=$(date +%s)#<slide-name>"
-```
 
-The cache-buster is load-bearing. macOS `open` otherwise just brings the existing browser tab to front, and the deck's hash-navigation handlers (`hashchange`, `focus`, `pageshow`, `visibilitychange` — see the JS init around line 5040) don't always re-run when the URL hasn't changed. The `?_=<timestamp>` makes every URL unique, forcing a fresh page load + clean hash navigation on init.
+`set URL of active tab` forces Chrome to navigate even when the URL string is identical to what's loaded, which is what we want for iteration.
+
+The cache-buster is still load-bearing as a belt-and-suspenders: it forces a true page reload (not just hash navigation) so JS re-runs the mode-routing + hash handlers on init. The `?_=<timestamp>` makes every URL unique. The slide-name hash anchors the deck's `slideIndexFromHash` JS to the right slide on init.
 
 For story-mode previews: `?mode=story&_=$(date +%s)#<slide-name>` (the `&` between mode and cache-buster is critical — `&` not `?`, since both are query params).
 
 This rule applies every time you tell Scott to "open in browser" — single-slide tweaks, prototype comparisons, before/after demos. Compounds with the global "iterate one change at a time, deep-linked, wait for sign-off" rule.
 
-*(Browser-open rule added 2026-05-05 after Scott twice told me "always open directly to the slide" mid-Manoj-prep when reload-without-cache-bust left him on slide 1. File scoped to `site/pitch/` 2026-05-05 to keep deck-specific patterns near the deck.)*
+If Scott uses a different default browser later, swap `Google Chrome` for the relevant app name (Safari uses `set current tab's URL`, not `URL of active tab`).
+
+*(Initial rule added 2026-05-05 after Scott twice said "always open directly to the slide" mid-Manoj-prep when reload-without-cache-bust left him on slide 1. Hardened 2026-05-06 after `open` was verified insufficient: switching to AppleScript-driven navigation is the only reliable mechanism observed.)*
 
 ## Voice and content (pointer)
 
