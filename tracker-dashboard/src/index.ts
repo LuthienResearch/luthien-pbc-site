@@ -50,6 +50,13 @@ export async function handleRequest(
   }
 
   if (path === "/_t/logout") {
+    // POST-only so a stray <img src="/_t/logout"> can't drop a user's session.
+    if (request.method !== "POST") {
+      return new Response("method not allowed", {
+        status: 405,
+        headers: { allow: "POST" },
+      });
+    }
     return new Response(null, {
       status: 302,
       headers: { location: "/_t/login", "set-cookie": clearSessionCookie() },
@@ -205,9 +212,19 @@ function clampInt(raw: string | null, lo: number, hi: number, dflt: number): num
   return Math.max(lo, Math.min(hi, n));
 }
 
-export function escapeSqlLiteral(value: string): string {
-  return value.replace(/[^A-Za-z0-9._@:+\-]/g, "");
+// Allow only safe characters in ref values forwarded into AE SQL. AE has no
+// parameterised query API, so we whitelist instead of escape. The set is
+// intentionally narrow: alphanumerics, `.`, `_`, and `-`. We additionally
+// collapse runs of `-` so a token can't smuggle in a `--` line-comment if
+// the surrounding SQL ever changes shape (defense-in-depth — single-quoted
+// literals make this benign today). The same canonical form is enforced
+// when writing in the tracker worker, so logs and queries agree.
+export function canonicalizeRef(value: string): string {
+  return value.replace(/[^A-Za-z0-9._-]/g, "").replace(/-{2,}/g, "-");
 }
+
+// Back-compat alias; older callers used this name.
+export const escapeSqlLiteral = canonicalizeRef;
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {

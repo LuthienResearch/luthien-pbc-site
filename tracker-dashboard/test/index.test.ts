@@ -36,11 +36,27 @@ async function validSessionCookie(env: Env, exp?: number): Promise<string> {
   return `luthien_dash=${session}`;
 }
 
-describe("escapeSqlLiteral", () => {
-  it("strips characters outside the safe set", () => {
-    expect(escapeSqlLiteral("alice'; DROP TABLE--")).toBe("aliceDROPTABLE--");
+describe("canonicalizeRef", () => {
+  it("strips characters outside [A-Za-z0-9._-]", () => {
+    // Quotes, semicolons, and spaces must die — these are the SQL-literal
+    // escape characters. Whatever is left is benign inside a single-quoted
+    // ClickHouse literal.
+    expect(escapeSqlLiteral("alice'; DROP TABLE--")).toBe("aliceDROPTABLE-");
+    expect(escapeSqlLiteral("scott@example.com")).toBe("scottexample.com");
+    expect(escapeSqlLiteral("foo bar baz")).toBe("foobarbaz");
+    expect(escapeSqlLiteral("foo+bar")).toBe("foobar");
+  });
+
+  it("collapses runs of dashes so `--` (line comment) cannot survive", () => {
+    expect(escapeSqlLiteral("foo--bar")).toBe("foo-bar");
+    expect(escapeSqlLiteral("foo----bar")).toBe("foo-bar");
+    expect(escapeSqlLiteral("a-b-c--d---e")).toBe("a-b-c-d-e");
+  });
+
+  it("preserves the canonical token shape Jai actually uses", () => {
     expect(escapeSqlLiteral("anthropic-2026-05")).toBe("anthropic-2026-05");
-    expect(escapeSqlLiteral("scott@example.com")).toBe("scott@example.com");
+    expect(escapeSqlLiteral("scott_vc_intro")).toBe("scott_vc_intro");
+    expect(escapeSqlLiteral("v1.2.3")).toBe("v1.2.3");
   });
 });
 
@@ -246,8 +262,12 @@ describe("/_t/api/hits", () => {
       f,
     );
     const sentSql = (f as any).mock.calls[0][1].body as string;
+    // Quote, semicolon, space all stripped. The two remaining hyphens were
+    // adjacent in the input and get collapsed to a single hyphen so we don't
+    // end up with `--` (SQL line comment) inside the literal.
     expect(sentSql).not.toMatch(/DROP TABLE/);
-    expect(sentSql).toMatch(/blob1 = 'evilDROPTABLE--'/);
+    expect(sentSql).not.toMatch(/--/);
+    expect(sentSql).toMatch(/blob1 = 'evilDROPTABLE-'/);
   });
 
   it("clamps days to a reasonable range", async () => {

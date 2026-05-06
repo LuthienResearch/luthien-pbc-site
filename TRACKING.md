@@ -74,6 +74,16 @@ the SQL API and a sample query script.
 
 ## Onboarding a new admin
 
+> **Known security debt.** The dashboard currently uses *one shared
+> username/password* for everyone. There is no audit trail, no
+> per-person revocation, and the password has to be transmitted out of
+> band (Slack, 1Password share, etc.). The data behind it — who clicked
+> our pitch and when — is commercially sensitive (fundraising signals,
+> partnership intelligence). The right fix is Cloudflare Access (Zero
+> Trust), which gives per-person identity, audit, and SSO; that's
+> tracked as a follow-up. For now, treat the dashboard credential like
+> a high-trust shared secret, not like a personal login.
+
 A new person who needs to view the dashboard:
 
 1. Get their username and password from whoever set up the dashboard
@@ -81,11 +91,6 @@ A new person who needs to view the dashboard:
    `wrangler secret put DASH_USER` / `DASH_PASS`).
 2. Send them https://luthien.cc/_t. They sign in once and the browser
    prompts to save the password.
-
-There's currently only one shared `DASH_USER` / `DASH_PASS`. If you need
-per-person logins, switch to Cloudflare Access (Zero Trust) instead.
-That's a bigger lift; do it when there's a real reason (audit trail,
-revocation, SSO).
 
 ## Maintenance
 
@@ -207,6 +212,30 @@ Analytics Engine tier:
   dashboard makes 1-2 reads per page load.
 - **AE retention:** ~3 months on the free tier. If you need longer,
   export to D1 or another store on a schedule.
+
+## Known follow-ups
+
+Tracked as security/maintenance debt to address when there's a reason:
+
+- **Cloudflare Access for the dashboard.** Replace the shared
+  `DASH_USER`/`DASH_PASS` with per-person SSO via Zero Trust. Adds
+  audit, revocation, no shared-secret distribution problem.
+- **HMAC-signed `?ref=` tokens.** The current free-form token model
+  means anyone who guesses we use `?ref=` can spam the dataset (no
+  row-level deletes on AE free tier; cleanup is "wait 3 months for
+  retention to roll over"). Mitigation: signed tokens (`?ref=value.sig`,
+  signature verified at write-time). Requires a token-mint CLI, which
+  is a small lift but is real friction.
+- **CI hook for `npm run smoke`.** Today the smoke runs by hand.
+  Should run automatically post-deploy via a GitHub Action.
+- **Refresh-on-use sessions.** Cookie TTL is 30 days fixed; an active
+  daily user gets silently logged out on day 31 instead of staying
+  logged in.
+- **Edge cache for the PDF.** The `/pitch.pdf` (21 MB) used to be
+  cached at the CF edge; now every view goes to GitHub Pages origin
+  because the worker doesn't opt back into `caches.default`. Volumes
+  don't matter today, but the previously-documented `cache-control`
+  header is now misleading.
 
 ## Privacy
 

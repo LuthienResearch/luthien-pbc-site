@@ -50,9 +50,27 @@ describe("sanitizeRef", () => {
     expect(sanitizeRef(long)?.length).toBe(128);
   });
 
-  it("preserves arbitrary tokens (free-form)", () => {
+  it("preserves canonical token shapes", () => {
     expect(sanitizeRef("anthropic-2026-05")).toBe("anthropic-2026-05");
-    expect(sanitizeRef("scott@example.com")).toBe("scott@example.com");
+    expect(sanitizeRef("scott_vc_intro")).toBe("scott_vc_intro");
+    expect(sanitizeRef("v1.2.3")).toBe("v1.2.3");
+  });
+
+  it("strips characters outside [A-Za-z0-9._-] so logs match the dashboard's read whitelist", () => {
+    expect(sanitizeRef("scott@example.com")).toBe("scottexample.com");
+    expect(sanitizeRef("foo bar")).toBe("foobar");
+    expect(sanitizeRef("foo+bar")).toBe("foobar");
+    expect(sanitizeRef("alice'; DROP TABLE--")).toBe("aliceDROPTABLE-");
+  });
+
+  it("collapses runs of dashes (defense-in-depth against SQL line comments)", () => {
+    expect(sanitizeRef("foo--bar")).toBe("foo-bar");
+    expect(sanitizeRef("a----b")).toBe("a-b");
+  });
+
+  it("returns null when sanitisation strips everything", () => {
+    expect(sanitizeRef("@@@")).toBeNull();
+    expect(sanitizeRef("   '   ")).toBeNull();
   });
 });
 

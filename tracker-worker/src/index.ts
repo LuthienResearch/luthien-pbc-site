@@ -47,10 +47,15 @@ export async function handleRequest(
 
 export function sanitizeRef(value: string | null): string | null {
   if (!value) return null;
-  const trimmed = value.trim();
-  if (!trimmed) return null;
-  if (trimmed.length > MAX_REF_LEN) return trimmed.slice(0, MAX_REF_LEN);
-  return trimmed;
+  // Canonicalise to the same character set the dashboard's SQL whitelist
+  // accepts. Anything outside [A-Za-z0-9._-] is stripped, and runs of `-`
+  // are collapsed (so a hostile `?ref=foo--bar` can't later smuggle a SQL
+  // line-comment if the dashboard's query shape changes). Keeps logs and
+  // queries on the same alphabet.
+  const canonical = value.trim().replace(/[^A-Za-z0-9._-]/g, "").replace(/-{2,}/g, "-");
+  if (!canonical) return null;
+  if (canonical.length > MAX_REF_LEN) return canonical.slice(0, MAX_REF_LEN);
+  return canonical;
 }
 
 function logHit(
@@ -80,6 +85,12 @@ function logHit(
 
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+    // Last-resort safety net: if the worker isolate panics before our own
+    // try/catch can run, Cloudflare will silently forward the request to
+    // origin instead of returning a 5xx. This worker now sits on the
+    // critical path of every luthien.cc URL; without this, any uncaught
+    // bug here takes the whole site dark.
+    ctx.passThroughOnException();
     return handleRequest(request, env, ctx);
   },
 } satisfies ExportedHandler<Env>;
