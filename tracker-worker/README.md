@@ -33,12 +33,14 @@ Add a route to `wrangler.jsonc` and redeploy:
 
 ```jsonc
 "routes": [
-  { "pattern": "luthien.cc/pitch",     "zone_name": "luthien.cc" },
-  { "pattern": "luthien.cc/pitch/*",   "zone_name": "luthien.cc" },
-  { "pattern": "luthien.cc/pitch.pdf", "zone_name": "luthien.cc" },
-  { "pattern": "luthien.cc/feedback",  "zone_name": "luthien.cc" }  // new
+  { "pattern": "luthien.cc/pitch*",    "zone_name": "luthien.cc" },
+  { "pattern": "luthien.cc/feedback*", "zone_name": "luthien.cc" }  // new
 ]
 ```
+
+Always end the pattern with `*`. A pattern without a wildcard only matches
+literal URLs with no query string, so `?ref=...` requests would slip past
+the worker.
 
 ## Local dev
 
@@ -59,8 +61,17 @@ write; no separate provisioning step.
 
 ## Querying hits
 
-Analytics Engine is queried via Cloudflare's SQL API. Set up an API token
-with `Account Analytics: Read` and run, e.g.:
+Analytics Engine is queried via Cloudflare's SQL API. Create a token with
+`Account Analytics: Read` at https://dash.cloudflare.com/profile/api-tokens
+and run:
+
+```bash
+CLOUDFLARE_API_TOKEN=... ./scripts/query.sh
+# or with a custom query:
+CLOUDFLARE_API_TOKEN=... ./scripts/query.sh "SELECT ... FORMAT JSON"
+```
+
+Sample query:
 
 ```sql
 SELECT
@@ -72,7 +83,11 @@ FROM luthien_tracker_hits
 WHERE timestamp > NOW() - INTERVAL '30' DAY
 GROUP BY blob1
 ORDER BY hits DESC
+FORMAT JSON
 ```
+
+Note: Analytics Engine writes are eventually consistent. New hits typically
+show up in queries within ~60 seconds.
 
 Schema:
 

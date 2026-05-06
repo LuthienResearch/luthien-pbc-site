@@ -29,7 +29,13 @@ export async function handleRequest(
 
     if (ref && env.TRACKER_HITS) {
       ctx.waitUntil(
-        Promise.resolve().then(() => logHit(env.TRACKER_HITS, request, url, ref)),
+        (async () => {
+          try {
+            logHit(env.TRACKER_HITS, request, url, ref);
+          } catch (err) {
+            console.error("tracker logHit error", err);
+          }
+        })(),
       );
     }
   } catch (err) {
