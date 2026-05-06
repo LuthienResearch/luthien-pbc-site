@@ -4513,67 +4513,78 @@ Key invariants:
     </div>
   </div>
 
-  <!-- ======== SLIDE: LOIs / TRACTION ======== -->
+  <!-- ======== SLIDE: LOIs / TRACTION (zoom-in of the funnel slide) ======== -->
   <div class="slide" data-slide="8" data-slide-name="traction" data-slide-abbr="TRC">
     <div class="slide-inner">
-      <div class="label anim-up">Traction</div>
-      <p class="subtitle anim-up delay-1">We asked the smartest people we know to trial our product.<br>They're proactively proposing improvements.</p>
+      <div class="label anim-up">Traction <span style="color: var(--text-dim); font-weight: 400; margin-left: 12px; font-size: 0.85em;">&larr; zoom in on the funnel</span></div>
+      <p class="subtitle anim-up delay-1">Three organizations across the funnel, top to bottom.</p>
       <div class="spacer-md"></div>
 
-      <div class="anim-up delay-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1060px; margin: 0 auto;">
+      <!-- 3-row vertical stack, descending: scoping -> LOI -> paying. -->
+      <div class="anim-up delay-2" style="display: flex; flex-direction: column; gap: 14px; max-width: 1060px; margin: 0 auto;">
 
-        <!-- Trajectory Labs card -->
-        <div style="border: 1px solid var(--blue); border-radius: 8px; padding: clamp(24px, 3vw, 36px); background: rgba(59,148,148,0.05); display: flex; flex-direction: column; gap: 16px;">
+        <!-- Stage 1: RealPage (pilot in scoping) -->
+        <div style="border: 1px solid var(--amber); border-radius: 8px; padding: clamp(16px, 2.2vw, 24px) clamp(20px, 2.6vw, 32px); background: rgba(196,123,66,0.05); display: grid; grid-template-columns: 200px 1fr auto; align-items: center; gap: clamp(16px, 2vw, 28px);">
           <div>
-            <a href="https://www.trajectorylabs.com/" target="_blank" rel="noopener noreferrer" style="color: var(--blue); font-family: var(--sans); font-weight: 700; font-size: 1.05rem; text-decoration: none; letter-spacing: 0.02em;">Trajectory Labs</a>
-            <span style="font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim); margin-left: 10px;">signed Tue Apr 14</span>
+            <div style="font-family: var(--mono); font-size: 0.62rem; color: var(--amber); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">Stage 1 &middot; Pilot in scoping</div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <img src="../assets/images/logos/realpage.svg" alt="RealPage" style="height: 18px; width: auto; filter: brightness(0) invert(1); opacity: 0.92;">
+            </div>
           </div>
-          <div style="font-family: var(--sans); font-weight: 800; font-size: clamp(2.4rem, 5vw, 3.6rem); color: var(--blue); line-height: 1;">$60K <span style="font-size: 0.5em; font-weight: 700; color: var(--text-dim);">ARR</span></div>
-          <div style="color: var(--text); line-height: 1.65; font-size: 0.9rem;">
-            Building RL environments for frontier labs.<br>
-            Sami built <a href="https://github.com/sjawhar/legion" target="_blank" rel="noopener noreferrer" style="color: var(--blue); font-weight: 700; text-decoration: none;">Legion</a>, an autonomous dev swarm.<br>
-            <span style="color: var(--blue); font-weight: 700;">9 Luthien PRs since pilot started on Sun Apr 12.</span>
+          <div style="color: var(--text); line-height: 1.55; font-size: 0.9rem;">
+            <a href="https://www.linkedin.com/in/kriskimmerle/" target="_blank" rel="noopener noreferrer" style="color: var(--amber); font-weight: 700; text-decoration: none;">Kris Kimmerle</a> (VP, AI Risk &amp; Governance) and Yashwanth (Principal AI Engineer) ran the proxy live on May 6.<br>
+            <span style="color: var(--amber); font-weight: 700;">Yash is RealPage's "front door"</span> for follow-up.
           </div>
+          <a class="ask-f3-spotlight-photo-link" href="https://www.linkedin.com/in/kriskimmerle/" target="_blank" rel="noopener noreferrer" style="flex-shrink: 0;">
+            <img class="ask-f3-spotlight-photo" src="../assets/images/quotes/kris-kimmerle.png" alt="Kris Kimmerle" style="width: 64px; height: 64px;">
+          </a>
         </div>
 
-        <!-- Redwood Research card -->
-        <div style="border: 1px solid var(--amber); border-radius: 8px; padding: clamp(24px, 3vw, 36px); background: rgba(196,123,66,0.05); display: flex; flex-direction: column; gap: 16px;">
-          <div style="display: flex; align-items: center; gap: 10px;">
-            <img src="../assets/images/logos/redwood-research.svg" alt="Redwood Research" style="height: 22px; width: auto;">
-            <span style="font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim);">signed Fri Apr 10</span>
+        <!-- Funnel connector -->
+        <div style="text-align: center; color: var(--text-dim); font-family: var(--mono); font-size: 0.85rem; opacity: 0.55; line-height: 1; margin: -2px 0;">&darr;</div>
+
+        <!-- Stage 2: Redwood Research (LOI signed, pilot in progress) -->
+        <div style="border: 1px solid var(--amber); border-radius: 8px; padding: clamp(16px, 2.2vw, 24px) clamp(20px, 2.6vw, 32px); background: rgba(196,123,66,0.05); display: grid; grid-template-columns: 200px 1fr auto; align-items: center; gap: clamp(16px, 2vw, 28px);">
+          <div>
+            <div style="font-family: var(--mono); font-size: 0.62rem; color: var(--amber); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">Stage 2 &middot; LOI &middot; Pilot in progress</div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <img src="../assets/images/logos/redwood-research.svg" alt="Redwood Research" style="height: 22px; width: auto;">
+            </div>
+            <div style="font-family: var(--mono); font-size: 0.6rem; color: var(--text-dim); margin-top: 4px;">signed Fri Apr 10</div>
           </div>
-          <div style="font-family: var(--sans); font-weight: 800; font-size: clamp(2.4rem, 5vw, 3.6rem); color: var(--white); line-height: 1;">$330K&ndash;$500K <span style="font-size: 0.5em; font-weight: 700; color: var(--text-dim);">LOI</span></div>
-          <div style="color: var(--text); line-height: 1.65; font-size: 0.9rem;">
-            <span style="color: var(--amber); font-weight: 700;">Pioneered</span> AI control research.<br>
-            Buck (CEO): <span style="color: var(--amber); font-weight: 700;">2,935</span> Google Scholar citations.<br>
+          <div style="color: var(--text); line-height: 1.55; font-size: 0.9rem;">
+            <span style="color: var(--amber); font-weight: 700;">Pioneered</span> AI control research.
+            Buck (CEO): <span style="color: var(--amber); font-weight: 700;">2,935</span> Google Scholar citations.
             Co-discovered <span style="color: var(--amber); font-weight: 700;">alignment faking</span> with Anthropic.
           </div>
+          <div style="font-family: var(--sans); font-weight: 800; font-size: clamp(1.6rem, 2.6vw, 2.2rem); color: var(--white); line-height: 1; text-align: right; flex-shrink: 0;">$330K&ndash;$500K<br><span style="font-size: 0.5em; font-weight: 700; color: var(--text-dim);">LOI</span></div>
         </div>
 
-      </div>
+        <!-- Funnel connector -->
+        <div style="text-align: center; color: var(--text-dim); font-family: var(--mono); font-size: 0.85rem; opacity: 0.55; line-height: 1; margin: -2px 0;">&darr;</div>
 
-      <div class="spacer-md"></div>
-
-      <div class="anim-up delay-3" style="display: flex; align-items: center; justify-content: center; gap: 16px; max-width: 540px; margin: 0 auto;">
-        <a class="ask-f3-spotlight-photo-link" href="https://www.linkedin.com/in/kriskimmerle/" target="_blank" rel="noopener noreferrer">
-          <img class="ask-f3-spotlight-photo" src="../assets/images/quotes/kris-kimmerle.png" alt="Kris Kimmerle">
-        </a>
-        <div style="text-align: left;">
-          <div class="ask-f3-spotlight-name" style="font-size: 0.95rem;"><a href="https://www.linkedin.com/in/kriskimmerle/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">Kris Kimmerle</a></div>
-          <div class="ask-f3-spotlight-title" style="margin-top: 2px;">VP, AI Risk &amp; Governance</div>
-          <div class="ask-f3-spotlight-meta" style="margin-top: 6px;">
-            <span class="ask-f3-spotlight-prior">
-              <img class="ask-f3-spotlight-prior-logo invert" src="../assets/images/logos/realpage.svg" alt="RealPage" style="height: 16px;">
-            </span>
-            <span style="display: inline-block; margin-left: 10px; padding: 2px 8px; border: 1px solid var(--amber); border-radius: 999px; font-family: var(--mono); font-size: 0.65rem; color: var(--amber); letter-spacing: 0.04em; text-transform: uppercase;">Pilot in scoping</span>
+        <!-- Stage 3: Trajectory Labs (paying + active pilot) -->
+        <div style="border: 1px solid var(--blue); border-radius: 8px; padding: clamp(16px, 2.2vw, 24px) clamp(20px, 2.6vw, 32px); background: rgba(59,148,148,0.05); display: grid; grid-template-columns: 200px 1fr auto; align-items: center; gap: clamp(16px, 2vw, 28px);">
+          <div>
+            <div style="font-family: var(--mono); font-size: 0.62rem; color: var(--blue); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">Stage 3 &middot; Paying &middot; Pilot in progress</div>
+            <a href="https://www.trajectorylabs.com/" target="_blank" rel="noopener noreferrer" style="color: var(--blue); font-family: var(--sans); font-weight: 700; font-size: 1.05rem; text-decoration: none; letter-spacing: 0.02em;">Trajectory Labs</a>
+            <div style="font-family: var(--mono); font-size: 0.6rem; color: var(--text-dim); margin-top: 4px;">signed Tue Apr 14</div>
           </div>
+          <div style="color: var(--text); line-height: 1.55; font-size: 0.9rem;">
+            Building RL environments for frontier labs.
+            Sami built <a href="https://github.com/sjawhar/legion" target="_blank" rel="noopener noreferrer" style="color: var(--blue); font-weight: 700; text-decoration: none;">Legion</a>, an autonomous dev swarm.
+            <span style="color: var(--blue); font-weight: 700;">9 Luthien PRs since pilot started Sun Apr 12.</span>
+          </div>
+          <div style="font-family: var(--sans); font-weight: 800; font-size: clamp(1.6rem, 2.6vw, 2.2rem); color: var(--blue); line-height: 1; text-align: right; flex-shrink: 0;">$60K<br><span style="font-size: 0.5em; font-weight: 700; color: var(--text-dim);">ARR</span></div>
         </div>
+
       </div>
 
       <div class="slide-footnotes">
         <div class="citation">
-          <sup>1</sup> Trajectory Labs: LOI signed Tue Apr 14, 2026. $60K ARR. 9 Luthien PRs submitted since pilot started Sun Apr 12, 2026.
-          <sup>2</sup> Redwood Research: LOI signed Fri Apr 10, 2026, $330K&ndash;$500K, 15&ndash;20 individuals.
+          <sup>1</sup> RealPage: live demo Tue May 6, 2026 with Kris Kimmerle (VP, AI Risk &amp; Governance) and Yashwanth (Principal AI Engineer). Pilot SOW being scoped at RealPage. No LOI yet.
+          <sup>2</sup> Redwood Research: LOI signed Fri Apr 10, 2026, $330K&ndash;$500K, 15&ndash;20 individuals. Pilot in progress.
+          <sup>3</sup> Trajectory Labs: contract signed Tue Apr 14, 2026, $60K ARR. 9 Luthien PRs submitted since pilot started Sun Apr 12, 2026.
         </div>
       </div>
     </div>
@@ -4977,18 +4988,55 @@ Key invariants:
   const navLeft = document.getElementById('navLeft');
   const navRight = document.getElementById('navRight');
 
-  // Build dots: letter chip per slide if data-slide-abbr is set, otherwise blank dot
-  for (let i = 0; i < total; i++) {
-    const dot = document.createElement('button');
-    const abbr = slides[i].getAttribute('data-slide-abbr');
-    const name = slides[i].getAttribute('data-slide-name');
-    dot.className = 'nav-dot' + (i === 0 ? ' active' : '') + (abbr ? '' : ' is-blank');
-    if (abbr) dot.innerHTML = abbr;
-    if (name) dot.setAttribute('data-tip', name);
-    dot.setAttribute('aria-label', name ? ('Go to ' + name) : ('Go to slide ' + (i + 1)));
-    dot.addEventListener('click', () => goTo(i));
-    dotsContainer.appendChild(dot);
+  // ===== Presenter mode =====
+  // When ON: nav shows letter chips with content-derived abbreviations
+  //   (S&J, 12h, 45s, ...) so Scott can jump slides quickly under
+  //   investor Q&A.
+  // When OFF (default): nav shows plain dots, just like every other deck.
+  //   Investors don't see the letter abbreviations.
+  // Enable via URL ?presenter=1 (sticky), keyboard 'P' (toggles persistently),
+  // or by setting localStorage.luthienDeckPresenterMode = '1'.
+  function isPresenterMode() {
+    try {
+      const params = new URLSearchParams(location.search);
+      const param = params.get('presenter');
+      if (param === '1' || param === 'true') return true;
+      if (param === '0' || param === 'false') return false;
+      return localStorage.getItem('luthienDeckPresenterMode') === '1';
+    } catch (_e) { return false; }
   }
+  let presenterMode = isPresenterMode();
+
+  function renderDots() {
+    dotsContainer.innerHTML = '';
+    for (let i = 0; i < total; i++) {
+      const dot = document.createElement('button');
+      const abbr = slides[i].getAttribute('data-slide-abbr');
+      const name = slides[i].getAttribute('data-slide-name');
+      const showAbbr = presenterMode && abbr;
+      dot.className = 'nav-dot' + (i === current ? ' active' : '') + (showAbbr ? '' : ' is-blank');
+      if (showAbbr) dot.innerHTML = abbr;
+      if (name) dot.setAttribute('data-tip', name);
+      dot.setAttribute('aria-label', name ? ('Go to ' + name) : ('Go to slide ' + (i + 1)));
+      dot.addEventListener('click', () => goTo(i));
+      dotsContainer.appendChild(dot);
+    }
+    document.body.dataset.presenterMode = presenterMode ? '1' : '0';
+  }
+  renderDots();
+
+  // Keyboard 'P' toggles presenter mode persistently. Capture-phase so the
+  // global slide nav (left/right/home/end) doesn't intercept it.
+  document.addEventListener('keydown', (e) => {
+    if ((e.key === 'p' || e.key === 'P') && !e.ctrlKey && !e.metaKey && !e.altKey) {
+      // Only react if no input/textarea is focused.
+      const tag = (document.activeElement && document.activeElement.tagName) || '';
+      if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+      presenterMode = !presenterMode;
+      try { localStorage.setItem('luthienDeckPresenterMode', presenterMode ? '1' : '0'); } catch (_e) {}
+      renderDots();
+    }
+  });
 
   function updateUI() {
     counter.textContent = (current + 1) + ' / ' + total;
