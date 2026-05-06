@@ -72,7 +72,12 @@ AE_API_TOKEN=...
 
 ```bash
 npm run deploy
+DASH_USER=... DASH_PASS=... npm run smoke   # post-deploy verification
 ```
+
+`npm run smoke` hits the live API endpoints and asserts each query shape
+returns 200 + parseable JSON. AE has no offline SQL parser, so this is the
+practical "did I just break a query" check. Run it after every deploy.
 
 ## Rotating credentials
 

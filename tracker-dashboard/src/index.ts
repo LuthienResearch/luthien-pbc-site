@@ -94,7 +94,7 @@ async function handleHits(url: URL, env: Env, fetchFn: typeof fetch): Promise<Re
   if (ref) {
     sql = `
       SELECT
-        toString(timestamp) AS ts,
+        timestamp AS hit_time,
         blob2 AS path,
         blob3 AS ua,
         blob4 AS referrer,
@@ -113,10 +113,10 @@ async function handleHits(url: URL, env: Env, fetchFn: typeof fetch): Promise<Re
       SELECT
         blob1 AS ref,
         count() AS hits,
-        toString(min(timestamp)) AS first_seen,
-        toString(max(timestamp)) AS last_seen,
-        groupUniqArray(blob5) AS countries,
-        groupUniqArray(blob2) AS paths
+        min(timestamp) AS first_seen,
+        max(timestamp) AS last_seen,
+        count(DISTINCT blob5) AS country_count,
+        count(DISTINCT blob2) AS path_count
       FROM ${env.AE_DATASET}
       WHERE timestamp > NOW() - INTERVAL '${days}' DAY
       GROUP BY blob1

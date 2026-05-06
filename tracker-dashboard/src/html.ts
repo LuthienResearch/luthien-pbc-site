@@ -170,20 +170,18 @@ export const DASHBOARD_HTML = `<!doctype html>
       '<th data-sort="hits" class="num">hits' + arrow("hits") + '</th>' +
       '<th data-sort="first_seen">first seen' + arrow("first_seen") + '</th>' +
       '<th data-sort="last_seen">last seen' + arrow("last_seen") + '</th>' +
-      '<th>countries</th>' +
-      '<th>paths</th>' +
+      '<th data-sort="country_count" class="num">countries' + arrow("country_count") + '</th>' +
+      '<th data-sort="path_count" class="num">paths' + arrow("path_count") + '</th>' +
       '</tr></thead><tbody>';
     for (const r of rows) {
       const refSafe = r.ref.replace(/[<>&]/g, c => ({ "<":"&lt;", ">":"&gt;", "&":"&amp;" }[c]));
-      const countries = (r.countries || []).filter(Boolean).join(" ");
-      const paths = (r.paths || []).join(" ");
       html += '<tr class="summary-row" data-ref="' + refSafe + '">' +
         '<td class="ref">' + refSafe + '</td>' +
         '<td class="num">' + r.hits + '</td>' +
         '<td>' + fmtTs(r.first_seen) + '</td>' +
         '<td>' + fmtTs(r.last_seen) + '</td>' +
-        '<td class="countries">' + countries + '</td>' +
-        '<td class="small">' + paths + '</td>' +
+        '<td class="num">' + (r.country_count || 0) + '</td>' +
+        '<td class="num">' + (r.path_count || 0) + '</td>' +
         '</tr>';
     }
     html += '</tbody></table>';
@@ -228,9 +226,9 @@ export const DASHBOARD_HTML = `<!doctype html>
       }
       const lines = hits.map(h => {
         const ua = (h.ua || "").slice(0, 80);
-        const country = h.country || "—";
-        const path = h.path || "—";
-        return fmtTs(h.ts) + "  " + country.padEnd(3) + "  " + path.padEnd(12) + "  " + ua;
+        const country = h.country || "?";
+        const path = h.path || "?";
+        return fmtTs(h.hit_time) + "  " + country.padEnd(3) + "  " + path.padEnd(12) + "  " + ua;
       });
       drill.querySelector(".drill").textContent = lines.join("\\n");
     } catch (err) {
