@@ -1,0 +1,17 @@
+{
+  "name": "luthien-tracker",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-04-01",
+  "workers_dev": false,
+  "routes": [
+    { "pattern": "luthien.cc/pitch", "zone_name": "luthien.cc" },
+    { "pattern": "luthien.cc/pitch/*", "zone_name": "luthien.cc" },
+    { "pattern": "luthien.cc/pitch.pdf", "zone_name": "luthien.cc" }
+  ],
+  "analytics_engine_datasets": [
+    {
+      "binding": "TRACKER_HITS",
+      "dataset": "luthien_tracker_hits"
+    }
+  ]
+}
