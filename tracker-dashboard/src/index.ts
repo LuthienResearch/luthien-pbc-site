@@ -1,12 +1,25 @@
 // Tracking-link dashboard for luthien.cc.
 //
 // Routes:
-//   GET /_t            → HTML dashboard
-//   GET /_t/api/hits   → JSON summary of hits, queried from Analytics Engine
+//   GET  /_t              → HTML dashboard (requires session)
+//   GET  /_t/login        → login form
+//   POST /_t/login        → validates creds, sets session cookie, 302 to /_t
+//   POST /_t/logout       → clears cookie, 302 to /_t/login
+//   GET  /_t/api/hits     → JSON summary, queried from Analytics Engine
 //
-// Auth: HTTP Basic Auth via DASH_USER + DASH_PASS secrets. AE access via
-// the AE_API_TOKEN secret (a CF token with `Account Analytics: Read`).
+// Session cookies are HMAC-SHA256-signed with SESSION_SECRET (no DB).
+// Basic Auth is also accepted as a fallback for scripts/curl.
 import { DASHBOARD_HTML } from "./html";
+import { loginHtml } from "./login";
+import {
+  buildSessionCookie,
+  clearSessionCookie,
+  readSessionCookie,
+  signSession,
+  timingSafeEqual,
+  verifySession,
+  SESSION_TTL_SECONDS,
+} from "./auth";
 
 export interface Env {
   AE_ACCOUNT_ID: string;
@@ -14,27 +27,47 @@ export interface Env {
   AE_API_TOKEN: string;
   DASH_USER: string;
   DASH_PASS: string;
+  SESSION_SECRET: string;
 }
-
-const REALM = "luthien-tracker-dashboard";
 
 export async function handleRequest(
   request: Request,
   env: Env,
   fetchFn: typeof fetch = fetch,
 ): Promise<Response> {
-  const auth = checkBasicAuth(request, env);
-  if (auth) return auth;
+  if (!env.DASH_USER || !env.DASH_PASS || !env.SESSION_SECRET) {
+    return new Response("dashboard auth not configured", { status: 503 });
+  }
 
   const url = new URL(request.url);
   const path = url.pathname.replace(/\/$/, "") || "/_t";
 
+  if (path === "/_t/login") {
+    if (request.method === "POST") return handleLoginPost(request, env);
+    return new Response(loginHtml(url.searchParams.get("error") === "1"), {
+      headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store" },
+    });
+  }
+
+  if (path === "/_t/logout") {
+    return new Response(null, {
+      status: 302,
+      headers: { location: "/_t/login", "set-cookie": clearSessionCookie() },
+    });
+  }
+
+  const authed = await isAuthed(request, env);
+
+  if (!authed) {
+    if (path === "/_t/api/hits") {
+      return Response.json({ error: "unauthorized" }, { status: 401 });
+    }
+    return new Response(null, { status: 302, headers: { location: "/_t/login" } });
+  }
+
   if (path === "/_t") {
     return new Response(DASHBOARD_HTML, {
-      headers: {
-        "content-type": "text/html; charset=utf-8",
-        "cache-control": "no-store",
-      },
+      headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store" },
     });
   }
 
@@ -45,45 +78,55 @@ export async function handleRequest(
   return new Response("not found", { status: 404 });
 }
 
-function checkBasicAuth(request: Request, env: Env): Response | null {
-  const expectedUser = env.DASH_USER;
-  const expectedPass = env.DASH_PASS;
-  if (!expectedUser || !expectedPass) {
-    return new Response("dashboard auth not configured", { status: 503 });
+async function isAuthed(request: Request, env: Env): Promise<boolean> {
+  const cookie = readSessionCookie(request);
+  if (cookie) {
+    const session = await verifySession(cookie, env.SESSION_SECRET);
+    if (session && timingSafeEqual(session.u, env.DASH_USER)) return true;
   }
-
-  const header = request.headers.get("authorization") ?? "";
-  const match = /^Basic (.+)$/.exec(header);
-  if (match) {
-    let decoded: string;
-    try {
-      decoded = atob(match[1]);
-    } catch {
-      decoded = "";
-    }
-    const sep = decoded.indexOf(":");
-    if (sep >= 0) {
-      const user = decoded.slice(0, sep);
-      const pass = decoded.slice(sep + 1);
-      if (timingSafeEqual(user, expectedUser) && timingSafeEqual(pass, expectedPass)) {
-        return null;
-      }
-    }
-  }
-
-  return new Response("authentication required", {
-    status: 401,
-    headers: {
-      "www-authenticate": `Basic realm="${REALM}", charset="UTF-8"`,
-    },
-  });
+  return checkBasicAuth(request, env);
 }
 
-function timingSafeEqual(a: string, b: string): boolean {
-  if (a.length !== b.length) return false;
-  let mismatch = 0;
-  for (let i = 0; i < a.length; i++) mismatch |= a.charCodeAt(i) ^ b.charCodeAt(i);
-  return mismatch === 0;
+function checkBasicAuth(request: Request, env: Env): boolean {
+  const header = request.headers.get("authorization") ?? "";
+  const match = /^Basic (.+)$/.exec(header);
+  if (!match) return false;
+  let decoded: string;
+  try {
+    decoded = atob(match[1]);
+  } catch {
+    return false;
+  }
+  const sep = decoded.indexOf(":");
+  if (sep < 0) return false;
+  const user = decoded.slice(0, sep);
+  const pass = decoded.slice(sep + 1);
+  return timingSafeEqual(user, env.DASH_USER) && timingSafeEqual(pass, env.DASH_PASS);
+}
+
+async function handleLoginPost(request: Request, env: Env): Promise<Response> {
+  const contentType = request.headers.get("content-type") ?? "";
+  if (!contentType.includes("application/x-www-form-urlencoded")) {
+    return new Response("expected form post", { status: 400 });
+  }
+  const body = await request.text();
+  const params = new URLSearchParams(body);
+  const user = params.get("username") ?? "";
+  const pass = params.get("password") ?? "";
+
+  if (!timingSafeEqual(user, env.DASH_USER) || !timingSafeEqual(pass, env.DASH_PASS)) {
+    return new Response(null, { status: 302, headers: { location: "/_t/login?error=1" } });
+  }
+
+  const exp = Math.floor(Date.now() / 1000) + SESSION_TTL_SECONDS;
+  const session = await signSession({ u: user, exp }, env.SESSION_SECRET);
+  return new Response(null, {
+    status: 302,
+    headers: {
+      location: "/_t",
+      "set-cookie": buildSessionCookie(session),
+    },
+  });
 }
 
 async function handleHits(url: URL, env: Env, fetchFn: typeof fetch): Promise<Response> {
@@ -104,7 +147,7 @@ async function handleHits(url: URL, env: Env, fetchFn: typeof fetch): Promise<Re
       FROM ${env.AE_DATASET}
       WHERE timestamp > NOW() - INTERVAL '${days}' DAY
         AND blob1 = '${escapeSqlLiteral(ref)}'
-      ORDER BY timestamp DESC
+      ORDER BY hit_time DESC
       LIMIT 500
       FORMAT JSON
     `;
@@ -151,9 +194,7 @@ async function handleHits(url: URL, env: Env, fetchFn: typeof fetch): Promise<Re
       data: json.data ?? [],
       params: { days, ref: ref ?? null },
     },
-    {
-      headers: { "cache-control": "no-store" },
-    },
+    { headers: { "cache-control": "no-store" } },
   );
 }
 
@@ -164,9 +205,6 @@ function clampInt(raw: string | null, lo: number, hi: number, dflt: number): num
   return Math.max(lo, Math.min(hi, n));
 }
 
-// Allow only safe characters in ref values forwarded into AE SQL. AE's SQL
-// dialect doesn't support parameterised queries, so we whitelist instead of
-// escape. This matches the sanitiseRef rules in the tracker worker.
 export function escapeSqlLiteral(value: string): string {
   return value.replace(/[^A-Za-z0-9._@:+\-]/g, "");
 }

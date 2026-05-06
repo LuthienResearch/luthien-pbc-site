@@ -7,21 +7,32 @@ populated by the sibling `tracker-worker/`. Lives at
 Single-page HTML + vanilla JS, served from a Cloudflare Worker. The worker
 also proxies a small JSON API at `/_t/api/hits` that runs SQL against AE.
 
+## Auth model
+
+Cookie-based sessions. The login form at `/_t/login` is a real HTML form
+with proper `autocomplete` attributes, so password managers can save and
+refill cleanly. Submitting the form sets an HMAC-signed session cookie
+(`HttpOnly`, `Secure`, `SameSite=Strict`, `Path=/_t`, 30-day TTL).
+
+HTTP Basic Auth still works as a fallback for scripts and curl, so the
+smoke script and any automation continue to work without going through
+the form.
+
 ## First-time setup
 
-The worker is deployed but needs three secrets before it does anything
+The worker is deployed but needs four secrets before it does anything
 useful.
 
 ### 1. Create a Cloudflare API token
 
-At https://dash.cloudflare.com/profile/api-tokens, create a custom token
-with this single permission:
+At https://dash.cloudflare.com/3b64ed6e5367ead1f221c01a17592b19/api-tokens
+(account-owned, preferred) create a custom token with this permission:
 
 - **Account → Account Analytics → Read**
 
 Scope it to the Luthien account. Copy the token.
 
-### 2. Set the three worker secrets
+### 2. Set the four worker secrets
 
 ```bash
 cd tracker-dashboard
@@ -33,14 +44,19 @@ echo "your-password"   | npx wrangler secret put DASH_PASS
 
 # Paste the API token from step 1 when prompted.
 npx wrangler secret put AE_API_TOKEN
+
+# Random 32+ byte secret used to sign session cookies.
+openssl rand -hex 32 | npx wrangler secret put SESSION_SECRET
 ```
+
+Rotating `SESSION_SECRET` invalidates every existing session.
 
 ### 3. Open the dashboard
 
-Visit https://luthien.cc/_t. Browser will prompt for the username and
-password. After authing, you'll see one row per `ref` token with hits,
-first/last seen, countries, and paths. Click a row to drill down into
-individual hits (timestamp, path, country, UA).
+Visit https://luthien.cc/_t. You'll be redirected to a login form. After
+signing in you'll see one row per `ref` token with hits, first/last seen,
+country count, path count. Click a row to drill down into individual hits
+(timestamp, path, country, UA).
 
 ## URLs
 

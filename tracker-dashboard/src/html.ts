@@ -54,6 +54,8 @@ export const DASHBOARD_HTML = `<!doctype html>
   }
   button { cursor: pointer; }
   button:hover { background: var(--row-hover); }
+  button.logout { font-size: 12px; padding: 3px 8px; background: transparent; color: var(--muted); }
+  button.logout:hover { color: var(--fg); background: var(--row-hover); }
   table { width: 100%; border-collapse: collapse; }
   th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); }
   th {
@@ -92,7 +94,12 @@ export const DASHBOARD_HTML = `<!doctype html>
 <body>
 <header>
   <h1>luthien.cc tracker</h1>
-  <span class="meta">Share <code>?ref=&lt;token&gt;</code> on tracked URLs to log a hit.</span>
+  <div>
+    <span class="meta">Share <code>?ref=&lt;token&gt;</code> on tracked URLs to log a hit.</span>
+    <form method="POST" action="/_t/logout" style="display:inline; margin-left: 12px;">
+      <button type="submit" class="logout">Sign out</button>
+    </form>
+  </div>
 </header>
 
 <div class="controls">
