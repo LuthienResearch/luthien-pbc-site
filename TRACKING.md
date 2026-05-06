@@ -144,6 +144,24 @@ Hits each API endpoint shape and asserts 200 + parseable JSON. Catches
 AE SQL regressions that the unit tests can't (AE has no offline
 parser).
 
+CI runs this automatically:
+
+- On every push to `main` that touches `tracker-worker/` or
+  `tracker-dashboard/`.
+- On a daily cron (07:30 PT) — heartbeat that catches AE/CF drift even
+  when no one's deploying.
+- On manual `workflow_dispatch` from the Actions tab.
+
+The workflow needs two GitHub Actions secrets, set once at
+https://github.com/LuthienResearch/luthien-pbc-site/settings/secrets/actions:
+
+- `DASH_USER` — same value as the `wrangler secret put DASH_USER` on the
+  dashboard worker.
+- `DASH_PASS` — same value as the `wrangler secret put DASH_PASS`.
+
+If those aren't set, the smoke job logs a warning and skips (won't
+fail). Workflow file: `.github/workflows/tracker-checks.yml`.
+
 ## Debugging
 
 ### "I shared a link and it doesn't show in the dashboard"
@@ -226,8 +244,6 @@ Tracked as security/maintenance debt to address when there's a reason:
   retention to roll over"). Mitigation: signed tokens (`?ref=value.sig`,
   signature verified at write-time). Requires a token-mint CLI, which
   is a small lift but is real friction.
-- **CI hook for `npm run smoke`.** Today the smoke runs by hand.
-  Should run automatically post-deploy via a GitHub Action.
 - **Refresh-on-use sessions.** Cookie TTL is 30 days fixed; an active
   daily user gets silently logged out on day 31 instead of staying
   logged in.
