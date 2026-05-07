@@ -35,6 +35,7 @@
       --red: #C45050;            /* Signal Red  -  errors only */
       --red-dim: rgba(196, 80, 80, 0.12);
       --amber: #C47B42;          /* Amber  -  warmth / secondary accent */
+      --teal-bright: #4FC3A8;    /* Brighter verdigris  -  used for "paying customer" emphasis on traction slide */
       --code-bg: #0E0C16;        /* Code Block BG */
       --sans: 'Raleway', -apple-system, BlinkMacSystemFont, sans-serif;
       --body: 'Lora', Georgia, 'Times New Roman', serif;
@@ -1114,6 +1115,71 @@
       background: var(--blue);
       color: var(--text);
     }
+
+    /* ============ TRACTION SLIDE: pyramid layout (W3) ============ */
+    [data-slide-name="traction"] .tr-stack {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 14px; flex: 1; justify-content: center; margin-top: 8px;
+    }
+    [data-slide-name="traction"] .tr-row {
+      border-radius: 8px;
+      padding: clamp(18px, 2.4vw, 26px) clamp(22px, 2.8vw, 32px);
+      display: grid;
+      grid-template-columns: 180px 1fr auto;
+      align-items: center;
+      gap: clamp(16px, 2vw, 24px);
+    }
+    [data-slide-name="traction"] .tr-row.scoping { width: 100%; max-width: 1100px; border: 1px solid rgba(154,146,174,0.4); background: rgba(154,146,174,0.04); }
+    [data-slide-name="traction"] .tr-row.loi     { width: 88%;  max-width: 980px;  border: 1px solid var(--amber);          background: rgba(196,123,66,0.05); }
+    [data-slide-name="traction"] .tr-row.paying  {
+      width: 76%; max-width: 840px;
+      border: 1px solid var(--teal-bright); background: rgba(79, 195, 168, 0.10);
+      box-shadow: 0 0 0 1px rgba(79, 195, 168, 0.30);
+      padding: clamp(22px, 2.8vw, 32px) clamp(24px, 3vw, 34px);
+      grid-template-columns: 170px 1fr auto;
+    }
+    [data-slide-name="traction"] .tr-org-logo { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+    [data-slide-name="traction"] .tr-org-logo img.tr-logo {
+      display: block; max-height: 56px; width: auto; max-width: 220px;
+      object-fit: contain; filter: brightness(0) invert(1); opacity: 0.92;
+    }
+    [data-slide-name="traction"] .tr-row.loi .tr-org-logo img.tr-logo { filter: none; opacity: 1; }
+    [data-slide-name="traction"] .tr-org-logo img.tr-logo.realpage-logo { max-height: 32px; min-width: 140px; max-width: 170px; }
+    [data-slide-name="traction"] .tr-org-logo img.tr-logo.trajectory-logo { max-height: 36px; max-width: 170px; }
+    [data-slide-name="traction"] .tr-row.paying .tr-org-logo img.tr-logo.trajectory-logo { max-height: 42px; opacity: 1; }
+    [data-slide-name="traction"] .tr-content { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+    [data-slide-name="traction"] .tr-quote {
+      color: var(--text); font-style: italic; font-size: clamp(1.05rem, 1.55vw, 1.3rem);
+      line-height: 1.4; font-weight: 500;
+    }
+    [data-slide-name="traction"] .tr-quote::before { content: '\201C'; color: var(--text-dim); margin-right: 2px; }
+    [data-slide-name="traction"] .tr-quote::after  { content: '\201D'; color: var(--text-dim); margin-left: 2px; }
+    [data-slide-name="traction"] .tr-kris { display: flex; align-items: center; gap: 14px; }
+    [data-slide-name="traction"] .tr-kris img.tr-photo {
+      width: 64px; height: 64px; border-radius: 50%; flex-shrink: 0; border: 1px solid var(--border);
+    }
+    [data-slide-name="traction"] .tr-kris-who { color: var(--text); font-weight: 600; font-size: 0.92rem; }
+    [data-slide-name="traction"] .tr-thoughts { display: flex; flex-direction: column; }
+    [data-slide-name="traction"] .tr-thoughts .tr-thought {
+      color: var(--text); line-height: 1.55; font-size: 0.92rem;
+      padding: 8px 0; border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    [data-slide-name="traction"] .tr-thoughts .tr-thought:first-child { border-top: none; padding-top: 0; }
+    [data-slide-name="traction"] .tr-thoughts .tr-thought:last-child { padding-bottom: 0; }
+    [data-slide-name="traction"] .tr-row.loi .tr-thoughts .tr-thought { border-top-color: rgba(196,123,66,0.22); }
+    [data-slide-name="traction"] .tr-row.paying .tr-thoughts .tr-thought { border-top-color: rgba(79, 195, 168, 0.28); font-size: 1rem; }
+    [data-slide-name="traction"] .tr-stat-cell { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; max-width: 320px; }
+    [data-slide-name="traction"] .tr-stat { font-family: var(--sans); font-weight: 800; line-height: 1; text-align: right; white-space: nowrap; }
+    [data-slide-name="traction"] .tr-row.scoping .tr-stat { color: var(--text); font-size: clamp(1.6rem, 2.6vw, 2.2rem); }
+    [data-slide-name="traction"] .tr-row.loi .tr-stat { color: var(--white); font-size: clamp(1.6rem, 2.6vw, 2.2rem); }
+    [data-slide-name="traction"] .tr-row.paying .tr-stat { color: var(--teal-bright); font-size: clamp(2.6rem, 4.6vw, 3.8rem); }
+    [data-slide-name="traction"] .tr-stat-unit { font-size: 0.42em; font-weight: 700; color: var(--text-dim); margin-left: 6px; }
+    [data-slide-name="traction"] .tr-stat-caption {
+      color: var(--text-dim); font-family: var(--mono); font-size: 0.65rem;
+      letter-spacing: 0.04em; line-height: 1.5; text-align: right;
+    }
+    [data-slide-name="traction"] .tr-accent-amber { color: var(--amber); font-weight: 700; }
+    [data-slide-name="traction"] .tr-accent-bright { color: var(--teal-bright); font-weight: 700; text-decoration: none; }
 
     /* ============ FULLSCREEN BUTTON ============ */
     .top-controls {
@@ -4524,67 +4590,77 @@ Key invariants:
     </div>
   </div>
 
-  <!-- ======== SLIDE: LOIs / TRACTION ======== -->
+  <!-- ======== SLIDE: LOIs / TRACTION (pyramid layout) ======== -->
   <div class="slide" data-slide="8" data-slide-name="traction" data-slide-abbr="TRC">
     <div class="slide-inner">
-      <div class="label anim-up">Traction</div>
-      <p class="subtitle anim-up delay-1">We asked the smartest people we know to trial our product.<br>They're proactively proposing improvements.</p>
-      <div class="spacer-md"></div>
+      <div class="label anim-up">Traction <span style="color: var(--text-dim); font-weight: 400; margin-left: 14px; font-size: 0.85em;">&larr; zoom in on the funnel</span></div>
+      <p class="subtitle anim-up delay-1">From scoping at the top of the funnel to one paying customer at the bottom.</p>
 
-      <div class="anim-up delay-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1060px; margin: 0 auto;">
-
-        <!-- Trajectory Labs card -->
-        <div style="border: 1px solid var(--blue); border-radius: 8px; padding: clamp(24px, 3vw, 36px); background: rgba(59,148,148,0.05); display: flex; flex-direction: column; gap: 16px;">
-          <div>
-            <a href="https://www.trajectorylabs.com/" target="_blank" rel="noopener noreferrer" style="color: var(--blue); font-family: var(--sans); font-weight: 700; font-size: 1.05rem; text-decoration: none; letter-spacing: 0.02em;">Trajectory Labs</a>
-            <span style="font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim); margin-left: 10px;">signed Tue Apr 14</span>
+      <div class="anim-up delay-2 tr-stack">
+        <!-- RealPage (scoping, top of funnel) -->
+        <div class="tr-row scoping">
+          <div class="tr-org-logo">
+            <img class="tr-logo realpage-logo" src="../assets/images/logos/realpage.svg" alt="RealPage">
           </div>
-          <div style="font-family: var(--sans); font-weight: 800; font-size: clamp(2.4rem, 5vw, 3.6rem); color: var(--blue); line-height: 1;">$60K <span style="font-size: 0.5em; font-weight: 700; color: var(--text-dim);">ARR</span></div>
-          <div style="color: var(--text); line-height: 1.65; font-size: 0.9rem;">
-            Building RL environments for frontier labs.<br>
-            Sami built <a href="https://github.com/sjawhar/legion" target="_blank" rel="noopener noreferrer" style="color: var(--blue); font-weight: 700; text-decoration: none;">Legion</a>, an autonomous dev swarm.<br>
-            <span style="color: var(--blue); font-weight: 700;">9 Luthien PRs since pilot started on Sun Apr 12.</span>
+          <div class="tr-content">
+            <div class="tr-quote">We absolutely need this.</div>
+            <div class="tr-kris">
+              <img class="tr-photo" src="../assets/images/quotes/kris-kimmerle.png" alt="Kris Kimmerle">
+              <div>
+                <div class="tr-kris-who"><a href="https://www.linkedin.com/in/kriskimmerle/" target="_blank" rel="noopener noreferrer" style="color: var(--text); text-decoration: none;">Kris Kimmerle</a> &middot; VP, AI Risk &amp; Governance</div>
+              </div>
+            </div>
           </div>
-        </div>
-
-        <!-- Redwood Research card -->
-        <div style="border: 1px solid var(--amber); border-radius: 8px; padding: clamp(24px, 3vw, 36px); background: rgba(196,123,66,0.05); display: flex; flex-direction: column; gap: 16px;">
-          <div style="display: flex; align-items: center; gap: 10px;">
-            <img src="../assets/images/logos/redwood-research.svg" alt="Redwood Research" style="height: 22px; width: auto;">
-            <span style="font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim);">signed Fri Apr 10</span>
-          </div>
-          <div style="font-family: var(--sans); font-weight: 800; font-size: clamp(2.4rem, 5vw, 3.6rem); color: var(--white); line-height: 1;">$330K&ndash;$500K <span style="font-size: 0.5em; font-weight: 700; color: var(--text-dim);">LOI</span></div>
-          <div style="color: var(--text); line-height: 1.65; font-size: 0.9rem;">
-            <span style="color: var(--amber); font-weight: 700;">Pioneered</span> AI control research.<br>
-            Buck (CEO): <span style="color: var(--amber); font-weight: 700;">2,935</span> Google Scholar citations.<br>
-            Co-discovered <span style="color: var(--amber); font-weight: 700;">alignment faking</span> with Anthropic.
+          <div class="tr-stat-cell">
+            <div class="tr-stat-caption">Live trial Tue May 6.<br>Pilot planned. Target deployment:</div>
+            <div class="tr-stat">2,000<span class="tr-stat-unit">devs</span></div>
           </div>
         </div>
 
-      </div>
+        <!-- Redwood Research (LOI, mid) -->
+        <div class="tr-row loi">
+          <div class="tr-org-logo">
+            <img class="tr-logo" src="../assets/images/logos/redwood-research.svg" alt="Redwood Research">
+          </div>
+          <div class="tr-content">
+            <div class="tr-thoughts">
+              <div class="tr-thought"><a href="https://www.redwoodresearch.org/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;"><span class="tr-accent-amber">Pioneered</span> AI control research.</a></div>
+              <div class="tr-thought">Buck (CEO): <span class="tr-accent-amber">2,935</span> Google Scholar citations.</div>
+              <div class="tr-thought">Co-discovered <span class="tr-accent-amber">alignment faking</span> with Anthropic.</div>
+            </div>
+          </div>
+          <div class="tr-stat-cell">
+            <div class="tr-stat">$330K&ndash;$500K<span class="tr-stat-unit">LOI</span></div>
+            <div class="tr-stat-caption">Signed Fri Apr 10.<br>15&ndash;20 individuals.</div>
+          </div>
+        </div>
 
-      <div class="spacer-md"></div>
-
-      <div class="anim-up delay-3" style="display: flex; align-items: center; justify-content: center; gap: 16px; max-width: 540px; margin: 0 auto;">
-        <a class="ask-f3-spotlight-photo-link" href="https://www.linkedin.com/in/kriskimmerle/" target="_blank" rel="noopener noreferrer">
-          <img class="ask-f3-spotlight-photo" src="../assets/images/quotes/kris-kimmerle.png" alt="Kris Kimmerle">
-        </a>
-        <div style="text-align: left;">
-          <div class="ask-f3-spotlight-name" style="font-size: 0.95rem;"><a href="https://www.linkedin.com/in/kriskimmerle/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">Kris Kimmerle</a></div>
-          <div class="ask-f3-spotlight-title" style="margin-top: 2px;">VP, AI Risk &amp; Governance</div>
-          <div class="ask-f3-spotlight-meta" style="margin-top: 6px;">
-            <span class="ask-f3-spotlight-prior">
-              <img class="ask-f3-spotlight-prior-logo invert" src="../assets/images/logos/realpage.svg" alt="RealPage" style="height: 16px;">
-            </span>
-            <span style="display: inline-block; margin-left: 10px; padding: 2px 8px; border: 1px solid var(--amber); border-radius: 999px; font-family: var(--mono); font-size: 0.65rem; color: var(--amber); letter-spacing: 0.04em; text-transform: uppercase;">Pilot in scoping</span>
+        <!-- Trajectory Labs (paying customer, bottom apex) -->
+        <div class="tr-row paying">
+          <div class="tr-org-logo">
+            <a href="https://www.trajectorylabs.com/" target="_blank" rel="noopener noreferrer" style="display: block;">
+              <img class="tr-logo trajectory-logo" src="../assets/images/logos/trajectory-labs-v2.png" alt="Trajectory Labs">
+            </a>
+          </div>
+          <div class="tr-content">
+            <div class="tr-thoughts">
+              <div class="tr-thought">Building RL environments for frontier labs.</div>
+              <div class="tr-thought">Sami built <a href="https://github.com/sjawhar/legion" target="_blank" rel="noopener noreferrer" class="tr-accent-bright">Legion</a>, an autonomous dev swarm.</div>
+              <div class="tr-thought"><span class="tr-accent-bright">12 Luthien PRs since pilot started Sun Apr 12.</span></div>
+            </div>
+          </div>
+          <div class="tr-stat-cell">
+            <div class="tr-stat">$60K<span class="tr-stat-unit">ARR</span></div>
+            <div class="tr-stat-caption">Signed Tue Apr 14.</div>
           </div>
         </div>
       </div>
 
       <div class="slide-footnotes">
         <div class="citation">
-          <sup>1</sup> Trajectory Labs: LOI signed Tue Apr 14, 2026. $60K ARR. 9 Luthien PRs submitted since pilot started Sun Apr 12, 2026.
-          <sup>2</sup> Redwood Research: LOI signed Fri Apr 10, 2026, $330K&ndash;$500K, 15&ndash;20 individuals.
+          <sup>1</sup> RealPage: live trial Tue May 6, 2026 with Kris Kimmerle (VP, AI Risk &amp; Governance) and Yashwanth (Principal AI Engineer). Pilot SOW being scoped at RealPage, ~2,000 devs targeted.
+          <sup>2</sup> Redwood Research: LOI signed Fri Apr 10, 2026, $330K&ndash;$500K, 15&ndash;20 individuals. Pilot in progress.
+          <sup>3</sup> Trajectory Labs: contract signed Tue Apr 14, 2026, $60K ARR. 12 Luthien PRs submitted by Sami Jawhar since pilot started Sun Apr 12, 2026 (<a href="https://github.com/LuthienResearch/luthien-proxy/pulls?q=is%3Apr+author%3Asjawhar" target="_blank" rel="noopener noreferrer">verify on GitHub</a>).
         </div>
       </div>
     </div>
