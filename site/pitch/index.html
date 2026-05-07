@@ -1140,7 +1140,7 @@
     }
     [data-slide-name="traction"] .tr-org-logo { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
     [data-slide-name="traction"] .tr-org-logo img.tr-logo {
-      display: block; max-height: 56px; width: auto; max-width: 220px;
+      display: block; max-height: 56px; width: auto; max-width: 100%;
       object-fit: contain; filter: brightness(0) invert(1); opacity: 0.92;
     }
     [data-slide-name="traction"] .tr-row.loi .tr-org-logo img.tr-logo { filter: none; opacity: 1; }
@@ -1180,6 +1180,16 @@
     }
     [data-slide-name="traction"] .tr-accent-amber { color: var(--amber); font-weight: 700; }
     [data-slide-name="traction"] .tr-accent-bright { color: var(--teal-bright); font-weight: 700; text-decoration: none; }
+
+    /* ============ FUNNEL → TRACTION ZOOM (Z.3 spotlight + camera dolly) ============ */
+    [data-slide-name="funnel"] .funnel-tier-top,
+    [data-slide-name="funnel"] .funnel-tier-trial,
+    [data-slide-name="funnel"] .funnel-tier-pilot { transition: opacity 0.45s ease-out; }
+    [data-slide-name="funnel"] .funnel-svg { transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1); transform-origin: 50% 80%; }
+    [data-slide-name="funnel"].zoom-spotlight .funnel-tier-top { opacity: 0.08; }
+    [data-slide-name="funnel"].zoom-spotlight .funnel-tier-trial polygon { stroke: var(--blue); stroke-width: 2.5; }
+    [data-slide-name="funnel"].zoom-spotlight .funnel-tier-pilot polygon { stroke: var(--blue); stroke-width: 3.5; }
+    [data-slide-name="funnel"].zoom-dolly .funnel-svg { transform: scale(2.6) translateY(-12%); }
 
     /* ============ FULLSCREEN BUTTON ============ */
     .top-controls {
@@ -4544,25 +4554,31 @@ Key invariants:
       <div class="spacer-md"></div>
 
       <div class="anim-up delay-2" style="display: flex; align-items: center; justify-content: center; gap: clamp(30px, 6vw, 80px);">
-        <!-- SVG funnel -->
-        <svg viewBox="0 0 300 310" width="260" height="270" xmlns="http://www.w3.org/2000/svg">
-          <polygon points="0,0 300,0 278,58 22,58" fill="rgba(59,148,148,0.04)" stroke="rgba(59,148,148,0.12)" stroke-width="1"/>
-          <text x="150" y="26" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">SALES &amp;</text>
-          <text x="150" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">OUTREACH</text>
+        <!-- SVG funnel: tiers grouped for the funnel→traction zoom transition -->
+        <svg class="funnel-svg" viewBox="0 0 300 310" width="260" height="270" xmlns="http://www.w3.org/2000/svg">
+          <g class="funnel-tier-top">
+            <polygon points="0,0 300,0 278,58 22,58" fill="rgba(59,148,148,0.04)" stroke="rgba(59,148,148,0.12)" stroke-width="1"/>
+            <text x="150" y="26" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">SALES &amp;</text>
+            <text x="150" y="42" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">OUTREACH</text>
 
-          <polygon points="22,62 278,62 252,120 48,120" fill="rgba(59,148,148,0.06)" stroke="rgba(59,148,148,0.15)" stroke-width="1"/>
-          <text x="150" y="97" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">QUALIFICATION</text>
+            <polygon points="22,62 278,62 252,120 48,120" fill="rgba(59,148,148,0.06)" stroke="rgba(59,148,148,0.15)" stroke-width="1"/>
+            <text x="150" y="97" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">QUALIFICATION</text>
 
-          <polygon points="48,124 252,124 222,182 78,182" fill="rgba(59,148,148,0.08)" stroke="rgba(59,148,148,0.18)" stroke-width="1"/>
-          <text x="150" y="150" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">COLLECT</text>
-          <text x="150" y="166" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">REQUIREMENTS</text>
+            <polygon points="48,124 252,124 222,182 78,182" fill="rgba(59,148,148,0.08)" stroke="rgba(59,148,148,0.18)" stroke-width="1"/>
+            <text x="150" y="150" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">COLLECT</text>
+            <text x="150" y="166" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A7290" font-weight="600" letter-spacing="1.2">REQUIREMENTS</text>
+          </g>
 
-          <polygon points="78,186 222,186 196,244 104,244" fill="rgba(59,148,148,0.11)" stroke="rgba(59,148,148,0.22)" stroke-width="1"/>
-          <text x="150" y="221" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#B0A8BE" font-weight="600" letter-spacing="1.2">TRIAL</text>
+          <g class="funnel-tier-trial">
+            <polygon points="78,186 222,186 196,244 104,244" fill="rgba(59,148,148,0.11)" stroke="rgba(59,148,148,0.22)" stroke-width="1"/>
+            <text x="150" y="221" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#B0A8BE" font-weight="600" letter-spacing="1.2">TRIAL</text>
+          </g>
 
-          <polygon points="104,248 196,248 178,306 122,306" fill="rgba(59,148,148,0.18)" stroke="rgba(59,148,148,0.45)" stroke-width="1.5"/>
-          <text x="150" y="274" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#3B9494" font-weight="700" letter-spacing="1.2">PILOT /</text>
-          <text x="150" y="290" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#3B9494" font-weight="700" letter-spacing="1.2">CONVERSION</text>
+          <g class="funnel-tier-pilot">
+            <polygon points="104,248 196,248 178,306 122,306" fill="rgba(59,148,148,0.18)" stroke="rgba(59,148,148,0.45)" stroke-width="1.5"/>
+            <text x="150" y="274" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#3B9494" font-weight="700" letter-spacing="1.2">PILOT /</text>
+            <text x="150" y="290" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#3B9494" font-weight="700" letter-spacing="1.2">CONVERSION</text>
+          </g>
         </svg>
 
         <!-- Funnel metrics -->
@@ -5120,34 +5136,55 @@ Key invariants:
     const prev = slides[current];
     const next = slides[index];
 
+    // Special case: funnel → traction = "zoom into the bottom of the funnel."
+    // Two-phase animation: spotlight the bottom 2 tiers (300ms), then dolly the
+    // SVG forward + fade out (700ms), then crossfade in traction. Reverse on
+    // back-nav (just reset the classes; standard slide-out handles the rest).
+    const prevName = prev.getAttribute('data-slide-name');
+    const nextName = next.getAttribute('data-slide-name');
+    const isZoomForward = prevName === 'funnel' && nextName === 'traction';
+    const isZoomBack    = prevName === 'traction' && nextName === 'funnel';
+
+    if (isZoomForward) {
+      prev.classList.add('zoom-spotlight');
+      setTimeout(() => prev.classList.add('zoom-dolly'), 300);
+    } else if (isZoomBack) {
+      // Coming back: snap funnel back to its non-zoomed state instantly.
+      prev.classList.remove('zoom-spotlight', 'zoom-dolly');
+      next.classList.remove('zoom-spotlight', 'zoom-dolly');
+    }
+
     // Position incoming slide off-screen without transition
     next.style.transition = 'none';
     next.style.opacity = '0';
     next.style.transform = 'translateX(' + (dir * 40) + 'px)';
     next.offsetHeight; // force reflow
 
-    // Hide previous slide
-    prev.classList.remove('active');
-
-    // Animate incoming slide in
-    next.style.transition = 'opacity 0.5s cubic-bezier(0.4,0,0.2,1), transform 0.5s cubic-bezier(0.4,0,0.2,1)';
-    next.style.opacity = '1';
-    next.style.transform = 'translateX(0)';
-    next.classList.add('active');
+    // Hide previous slide (extra delay if zooming so the funnel-zoom animation completes first)
+    const enterDelay = isZoomForward ? 700 : 0;
+    setTimeout(() => {
+      prev.classList.remove('active');
+      next.style.transition = 'opacity 0.5s cubic-bezier(0.4,0,0.2,1), transform 0.5s cubic-bezier(0.4,0,0.2,1)';
+      next.style.opacity = '1';
+      next.style.transform = 'translateX(0)';
+      next.classList.add('active');
+    }, enterDelay);
 
     current = index;
     updateUI();
 
+    const totalDuration = isZoomForward ? 1300 : 550;
     setTimeout(() => {
-      // Clean up inline styles so CSS classes take over
       next.style.transition = '';
       next.style.opacity = '';
       next.style.transform = '';
       prev.style.transform = '';
       prev.style.opacity = '';
       prev.style.transition = '';
+      // After the zoom forward, reset the funnel slide so revisiting it later starts clean.
+      if (isZoomForward) prev.classList.remove('zoom-spotlight', 'zoom-dolly');
       transitioning = false;
-    }, 550);
+    }, totalDuration);
   }
 
   function setStage(slide, stage) {
