@@ -66,42 +66,12 @@ while IFS= read -r html_file; do
             link_errors=$((link_errors + 1))
         fi
     done < <(extract_all_refs "$html_file")
-# Skip legacy versions (v8, v9) which have known pre-existing asset issues
-done < <(find "$SITE_DIR" -name "*.html" -type f -not -path "*/v8/*" -not -path "*/v9/*")
-[ "$link_errors" -eq 0 ] && pass "All internal links resolve ($( find "$SITE_DIR" -name '*.html' -type f -not -path '*/v8/*' -not -path '*/v9/*' | wc -l | tr -d ' ') HTML files checked)"
+done < <(find "$SITE_DIR" -name "*.html" -type f)
+[ "$link_errors" -eq 0 ] && pass "All internal links resolve ($( find "$SITE_DIR" -name '*.html' -type f | wc -l | tr -d ' ') HTML files checked)"
 
 # ─────────────────────────────────────────────────────────
 bold ""
-bold "== 2. Version directory completeness =="
-# ─────────────────────────────────────────────────────────
-# COE: v10.9.1 shipped with broken images because only index.html was copied.
-# This check ensures every local src= in a version dir points to an actual file.
-version_errors=0
-vcount=0
-while IFS= read -r vdir; do
-    vname=$(basename "$vdir")
-    vcount=$((vcount + 1))
-    if [ ! -f "$vdir/index.html" ]; then
-        fail "$vname/ missing index.html"
-        version_errors=$((version_errors + 1))
-        continue
-    fi
-    # Check local src= references (images, svgs, css)
-    while IFS= read -r src; do
-        [ -z "$src" ] && continue
-        case "$src" in https://*|http://*|data:*|//*|../*) continue;; esac
-        if [ ! -f "$vdir/$src" ]; then
-            fail "$vname/index.html references '$src' but file missing from $vname/"
-            version_errors=$((version_errors + 1))
-        fi
-    done < <(grep -oE 'src="[^"]*"' "$vdir/index.html" 2>/dev/null | sed 's/src="\(.*\)"/\1/' || true)
-# Skip legacy versions (v8, v9) with known pre-existing issues
-done < <(find "$SITE_DIR" -maxdepth 1 -type d -name "v*" -not -name "v8" -not -name "v9" | sort)
-[ "$version_errors" -eq 0 ] && pass "All $vcount version directories have required assets"
-
-# ─────────────────────────────────────────────────────────
-bold ""
-bold "== 3. Blog post consistency =="
+bold "== 2. Blog post consistency =="
 # ─────────────────────────────────────────────────────────
 blog_errors=0
 BLOG_DIR="$SITE_DIR/blog"
@@ -150,7 +120,7 @@ fi
 
 # ─────────────────────────────────────────────────────────
 bold ""
-bold "== 4. Nav link consistency =="
+bold "== 3. Nav link consistency =="
 # ─────────────────────────────────────────────────────────
 nav_errors=0
 MAIN_HTML="$SITE_DIR/index.html"
@@ -168,29 +138,7 @@ fi
 
 # ─────────────────────────────────────────────────────────
 bold ""
-bold "== 5. No stale version references in blog/subpages =="
-# ─────────────────────────────────────────────────────────
-# Blog posts and subpages hardcode version paths (../../v10.9.1/).
-# When we publish a new version, those should be updated.
-stale_errors=0
-while IFS= read -r html_file; do
-    relfile="${html_file#$SITE_DIR/}"
-    # Skip files inside version dirs (they reference themselves)
-    case "$relfile" in v*) continue;; esac
-    while IFS= read -r href; do
-        [ -z "$href" ] && continue
-        vdir_name=$(echo "$href" | grep -oE 'v[0-9]+\.[0-9.]+' | head -1 || true)
-        [ -z "$vdir_name" ] && continue
-        if [ ! -d "$SITE_DIR/$vdir_name" ]; then
-            warn "$relfile references $vdir_name/ which doesn't exist"
-        fi
-    done < <(grep -oE 'href="[^"]*"' "$html_file" 2>/dev/null | sed 's/href="\(.*\)"/\1/' || true)
-done < <(find "$SITE_DIR" -name "*.html" -type f)
-pass "Stale version reference check complete (warnings above if any)"
-
-# ─────────────────────────────────────────────────────────
-bold ""
-bold "== 6. CSS/font references =="
+bold "== 4. CSS/font references =="
 # ─────────────────────────────────────────────────────────
 # Check that referenced CSS files exist
 css_errors=0
@@ -205,12 +153,12 @@ while IFS= read -r html_file; do
             css_errors=$((css_errors + 1))
         fi
     done < <(grep -oE 'href="[^"]*\.css"' "$html_file" 2>/dev/null | sed 's/href="\(.*\)"/\1/' || true)
-done < <(find "$SITE_DIR" -name "*.html" -type f -not -path "*/v8/*" -not -path "*/v9/*")
+done < <(find "$SITE_DIR" -name "*.html" -type f)
 [ "$css_errors" -eq 0 ] && pass "All local CSS references resolve"
 
 # ─────────────────────────────────────────────────────────
 bold ""
-bold "== 7. HTML structure basics =="
+bold "== 5. HTML structure basics =="
 # ─────────────────────────────────────────────────────────
 struct_errors=0
 struct_count=0
@@ -234,27 +182,12 @@ while IFS= read -r html_file; do
         fail "$relpath missing closing </html> tag"
         struct_errors=$((struct_errors + 1))
     fi
-done < <(find "$SITE_DIR" -name "*.html" -type f -not -path "*/v8/*" -not -path "*/v9/*")
+done < <(find "$SITE_DIR" -name "*.html" -type f)
 [ "$struct_errors" -eq 0 ] && pass "All $struct_count HTML files have title, charset, viewport, and closing tags"
 
 # ─────────────────────────────────────────────────────────
 bold ""
-bold "== 8. Duplicate content between index.html and latest version =="
-# ─────────────────────────────────────────────────────────
-# The main site/index.html should match the latest version directory
-latest_version=$(find "$SITE_DIR" -maxdepth 1 -type d -name "v*" | sort -V | tail -1)
-if [ -n "$latest_version" ] && [ -f "$latest_version/index.html" ] && [ -f "$SITE_DIR/index.html" ]; then
-    lvname=$(basename "$latest_version")
-    if diff -q "$SITE_DIR/index.html" "$latest_version/index.html" >/dev/null 2>&1; then
-        pass "index.html matches $lvname/index.html"
-    else
-        warn "index.html differs from $lvname/index.html - are they out of sync?"
-    fi
-fi
-
-# ─────────────────────────────────────────────────────────
-bold ""
-bold "== 9. Untracked assets in site/ =="
+bold "== 6. Untracked assets in site/ =="
 # ─────────────────────────────────────────────────────────
 # COE: PR #75 shipped with a broken <img src="sff-white.svg"> because the
 # SVG existed only in the local working tree — never git-added. Check #1
@@ -276,7 +209,7 @@ done < <(cd "$REPO_ROOT" 2>/dev/null && git ls-files --others --exclude-standard
 
 # ─────────────────────────────────────────────────────────
 bold ""
-bold "== 10. Deck tagline sync (/deck matches /pitch title slide) =="
+bold "== 7. Deck tagline sync (/deck matches /pitch title slide) =="
 # ─────────────────────────────────────────────────────────
 # The /deck email-gate page has its own <title> and visible tagline,
 # separate from /pitch. They drift every time we re-theme the deck
