@@ -52,6 +52,8 @@ Same objective workflow as luthien-proxy:
 4. Push to origin, open draft PR
 5. When done: update `CHANGELOG.md`, clear `dev/OBJECTIVE.md` and `dev/NOTES.md`, mark PR ready
 
+**Before merging to main:** run `bash scripts/dev_checks.sh` locally and confirm it passes. CI runs the same script on every push but is not enforced as a merge gate, so a manual check catches drift before it lands. (Past lapse: Dev Checks failed on 74 consecutive pushes to main between 2026-04-15 and 2026-05-08 because the Spanish pitch deck silently drifted and no one was running the script. See PR #176.)
+
 ## Editing Pages
 
 - All pages are self-contained HTML with inline CSS/JS
