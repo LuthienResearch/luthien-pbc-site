@@ -1554,6 +1554,9 @@
       margin-bottom: 22px;
       line-height: 1.15;
     }
+    /* Reveal `.story-only` elements only when body has mode-story (set by applyMode JS). */
+    .story-only { display: none; }
+    body.mode-story .story-only { display: inline; }
     .adv-big-row {
       display: flex;
       justify-content: center;
@@ -3703,6 +3706,17 @@
             <text x="998" y="362" font-size="18" font-weight="800">potential.</text>
           </g>
           <text x="998" y="384" font-family="JetBrains Mono, monospace" font-size="13" fill="#D8D1E2" letter-spacing="1.2" font-weight="600">12 HR &#8594; 45 SEC</text>
+          <!-- Central callout: 45-sec average Claude Code turn length, with arrow to practice-today dot -->
+          <defs>
+            <marker id="gap-arrowhead-landscape" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#E07777"/>
+            </marker>
+          </defs>
+          <g class="gap-center-callout">
+            <text x="525" y="335" font-family="Raleway, sans-serif" font-size="22" font-weight="700" fill="#F5EEE3" text-anchor="middle">Average Claude Code turn length</text>
+            <text x="525" y="388" font-family="Raleway, sans-serif" font-size="48" font-weight="900" fill="#E07777" text-anchor="middle">45 sec</text>
+            <path d="M 625 410 Q 780 510 905 572" fill="none" stroke="#E07777" stroke-width="2.8" marker-end="url(#gap-arrowhead-landscape)"/>
+          </g>
         </svg>
         <!-- PORTRAIT variant for mobile (<=600px). Same base chart as
              problem-dev plus the 45-second vertical line at x=70.42
@@ -3811,7 +3825,7 @@
        angles, overlapping, larger — conveying overwhelm. -->
   <div class="slide" data-slide="2" data-slide-name="problem-cto" data-slide-abbr="15" data-stages="15">
     <div class="slide-inner" style="position: relative; height: 100%; overflow: hidden;">
-      <div class="label anim-up" style="position: absolute; top: 48px; left: 80px;">What Claude Code does</div>
+      <div class="label anim-up" style="position: absolute; top: 48px; left: 80px;">Developer problems</div>
 
       <!-- Opening question (stage 0): persists as a header through all stages -->
       <div data-reveal="0" class="revealed" style="position: absolute; top: 28%; left: 50%; transform: translate(-50%, -50%); width: max-content; font-family: var(--sans); font-weight: 700; font-size: clamp(2.4rem, 5.2vw, 4rem); color: var(--white); line-height: 1.1; letter-spacing: -0.01em;">
@@ -3879,9 +3893,34 @@
       <!-- Sources (visible from stage 0) -->
       <div style="position: absolute; bottom: 48px; left: 80px; right: 80px;">
         <div style="font-family: var(--mono); font-size: 0.78rem; color: var(--text-dim); line-height: 1.8;">
-          Sources: Luthien's 93 user interviews (<a href="https://drive.google.com/drive/folders/1B4gpHFJDLWNZuxLsM4S3pO0GqLEikmnD" target="_blank" rel="noopener noreferrer" style="color: var(--text-dim);">34 recorded</a>, plus brief event conversations) &middot; Twitter &middot; Reddit &middot; Hacker News &middot; GitHub Issues &middot; Cursor Forum &middot; 204 passive data points
+          Sources: Luthien's 93 user interviews (<a href="https://drive.google.com/drive/folders/1B4gpHFJDLWNZuxLsM4S3pO0GqLEikmnD" target="_blank" rel="noopener noreferrer" style="color: var(--text-dim);">34 recorded</a>, plus brief event conversations) &middot; Twitter &middot; Reddit &middot; Hacker News &middot; GitHub Issues &middot; Cursor Forum &middot; 204 data points
         </div>
-        <a href="https://luthien.cc/frustrations/" target="_blank" rel="noopener noreferrer" style="display: inline-block; margin-top: 8px; font-family: var(--sans); font-weight: 800; font-size: clamp(1.1rem, 2.2vw, 1.5rem); color: #C45050; text-decoration: none;">summary at luthien.cc/frustrations</a>
+        <a href="https://luthien.cc/frustrations/" target="_blank" rel="noopener noreferrer" style="display: inline-block; margin-top: 8px; font-family: var(--sans); font-weight: 800; font-size: clamp(1.1rem, 2.2vw, 1.5rem); color: #C45050; text-decoration: none;">luthien.cc/frustrations</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== SLIDE: KRIS CITIZEN-DEVELOPER QUOTE (Apr 24 call) ======== -->
+  <div class="slide" data-slide-name="kris-citizen-dev" data-slide-abbr="5K">
+    <div class="slide-inner" style="display: flex; flex-direction: column; justify-content: center; min-height: 100%;">
+      <div class="label anim-up">Leadership problem</div>
+      <div class="spacer-md"></div>
+      <div class="anim-up delay-1" style="max-width: 1100px; margin: 0 auto; padding: 0 24px;">
+        <p class="body-text" style="color: var(--white); font-size: clamp(1.4rem, 2.6vw, 2rem); line-height: 1.55; font-style: italic; margin: 0;">
+          "We have a citizen developer issue right now: giving <span style="color: var(--blue); font-weight: 700; font-style: normal;">[all 5,000 employees]</span> access to Claude Code or Codex. How do we ensure that we have the minimum right things in place?"
+        </p>
+      </div>
+      <div class="anim-up delay-2" style="margin-top: 44px; display: flex; align-items: center; justify-content: center; gap: 28px; flex-wrap: wrap;">
+        <a href="https://www.linkedin.com/in/kriskimmerle/" target="_blank" rel="noopener noreferrer" style="display: block; line-height: 0;">
+          <img src="../assets/images/quotes/kris-kimmerle.png" alt="Kris Kimmerle" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border);">
+        </a>
+        <div style="display: flex; flex-direction: column;">
+          <a href="https://www.linkedin.com/in/kriskimmerle/" target="_blank" rel="noopener noreferrer" style="font-family: var(--sans); font-weight: 700; color: var(--white); font-size: clamp(1rem, 1.6vw, 1.2rem); text-decoration: none;">Kris Kimmerle</a>
+          <div style="font-family: var(--sans); color: var(--text); font-size: clamp(0.9rem, 1.3vw, 1rem);">VP, AI Risk &amp; Governance</div>
+        </div>
+        <a href="https://www.realpage.com/" target="_blank" rel="noopener noreferrer" style="display: block; line-height: 0; margin-left: 8px;">
+          <img src="../assets/images/logos/realpage-light.svg" alt="RealPage" style="height: 36px;">
+        </a>
       </div>
     </div>
   </div>
@@ -3892,7 +3931,6 @@
     <div class="slide-inner" style="text-align: center;">
       <div class="label anim-up">Luthien solves this.</div>
       <h1 class="headline headline-md anim-up delay-1" style="color: var(--white); margin: 14px 0 26px 0;">A Fully Customizable Real-Time<br>Manager for Every AI in Your Org</h1>
-      <video class="anim-up delay-2" src="../assets/videos/contrast-hstack.mp4" autoplay loop muted playsinline preload="auto" style="display: block; margin: 0 auto; width: min(94%, 1180px); height: auto; border-radius: 6px; box-shadow: 0 0 40px rgba(0,0,0,0.45);"></video>
     </div>
   </div>
 
@@ -4214,7 +4252,7 @@
   <div class="slide" data-slide="14" data-slide-name="advantage-how" data-slide-abbr="HOW">
     <div class="slide-inner">
       <div class="label anim-up">What Makes Luthien Different?</div>
-      <div class="adv-sublabel anim-up">How?</div>
+      <div class="adv-sublabel anim-up">How?<span class="story-only" style="color: var(--blue); margin-left: 0.4em;">LIVE DEMO</span></div>
 
       <div class="anim-up delay-1 code-excerpt">
 <pre><span class="c-str">"""Validator for Anthropic streaming protocol compliance.
@@ -4259,35 +4297,30 @@ Key invariants:
   <!-- ======== SLIDE 4: MARKET + DEMAND ======== -->
   <div class="slide" data-slide="3" data-slide-name="tam" data-slide-abbr="TAM">
     <div class="slide-inner">
-      <div class="label anim-up">Market</div>
-      <div class="spacer-md"></div>
+      <h1 class="headline headline-md anim-up" style="color: var(--white); margin: 0 0 28px 0; max-width: 1100px;">In a few years, all knowledge workers will be using Claude Code-like tools.<sup class="blue" style="font-size: 0.45em; font-weight: 700; vertical-align: super;">3</sup></h1>
 
-      <div class="tam-grid anim-up delay-1">
+      <div class="tam-grid anim-up delay-1" style="grid-template-rows: auto auto;">
         <div class="tam-quad">
-          <div class="tam-label">AI Coding Agents Today<sup class="blue" style="font-size: 0.7em; font-weight: 700;">1</sup></div>
-          <div class="tam-figure">$4.7B</div>
-        </div>
-        <div class="tam-quad">
-          <div class="tam-label">Projected Growth of AI Coding Agents<sup class="blue" style="font-size: 0.7em; font-weight: 700;">1</sup></div>
-          <div class="tam-figure">$14.6B</div>
-          <div class="tam-sublabel">by 2033</div>
-        </div>
-        <div class="tam-quad">
-          <div class="tam-label">Claude Code revenue, 0&ndash;9 months<sup class="blue" style="font-size: 0.7em; font-weight: 700;">2</sup></div>
+          <div class="tam-label">Claude Code revenue, 0&ndash;9 months<sup class="blue" style="font-size: 0.7em; font-weight: 700;">1</sup></div>
           <div class="tam-figure green">$2.5B</div>
         </div>
         <div class="tam-quad">
-          <div class="tam-label">Agentic AI TAM by 2030<sup class="blue" style="font-size: 0.7em; font-weight: 700;">3</sup></div>
-          <div class="tam-figure blue">$155B</div>
-          <img class="tam-source-logo" src="../assets/images/logos/bank-of-america.svg" alt="Bank of America Institute">
+          <div class="tam-label">Projected Growth of AI Coding Agents<sup class="blue" style="font-size: 0.7em; font-weight: 700;">2</sup></div>
+          <div class="tam-figure">$14.6B</div>
+          <div class="tam-sublabel">by 2033</div>
+        </div>
+        <div class="tam-quad" style="grid-column: 1 / -1; min-height: clamp(220px, 32vh, 320px); align-items: center; text-align: center; justify-content: center;">
+          <div class="tam-label" style="font-size: clamp(0.9rem, 1.5vw, 1.15rem);">Agentic AI TAM by 2030<sup class="blue" style="font-size: 0.7em; font-weight: 700;">3</sup></div>
+          <div class="tam-figure blue" style="font-size: clamp(5rem, 13vw, 10rem); margin-top: 10px;">$155B</div>
+          <img class="tam-source-logo" src="../assets/images/logos/bank-of-america.svg" alt="Bank of America Institute" style="position: static; margin-top: 14px;">
         </div>
       </div>
 
       <div class="slide-footnotes">
         <div class="citation">
-          <sup>1</sup> AI code assistant market: <a href="https://finance.yahoo.com/news/ai-code-assistant-market-set-143000983.html" target="_blank" rel="noopener noreferrer">SNS Insider AI Code Assistant Market Report (15.31% CAGR to 2033)</a>.
-          <sup>2</sup> Claude Code ARR: <a href="https://www.anthropic.com/news/anthropic-raises-30-billion-series-g-funding-380-billion-post-money-valuation" target="_blank" rel="noopener noreferrer">Anthropic Series G announcement, Feb 2026</a>.
-          <sup>3</sup> Bank of America Institute, <a href="https://institute.bankofamerica.com/content/dam/transformation/agentic-ai-in-the-workplace.pdf" target="_blank" rel="noopener noreferrer">"Agentic AI in the Workplace"</a> (2025).
+          <sup>1</sup> Claude Code ARR: <a href="https://www.anthropic.com/news/anthropic-raises-30-billion-series-g-funding-380-billion-post-money-valuation" target="_blank" rel="noopener noreferrer">Anthropic Series G announcement, Feb 2026</a>.
+          <sup>2</sup> AI code assistant market: <a href="https://finance.yahoo.com/news/ai-code-assistant-market-set-143000983.html" target="_blank" rel="noopener noreferrer">SNS Insider AI Code Assistant Market Report (15.31% CAGR to 2033)</a>.
+          <sup>3</sup> Bank of America Institute, <a href="https://institute.bankofamerica.com/content/dam/transformation/agentic-ai-in-the-workplace.pdf" target="_blank" rel="noopener noreferrer">"On the clock: Agentic AI in the workplace"</a> (Sept 2025).
         </div>
       </div>
     </div>
@@ -4343,11 +4376,11 @@ Key invariants:
       <div class="spacer-md"></div>
       <div class="anim-up delay-1" style="max-width: 860px; margin: 0 auto; padding: 0 24px;">
         <p class="body-text" style="color: var(--white); font-size: clamp(1.2rem, 2.4vw, 1.7rem); line-height: 1.65; font-style: italic; margin: 0;">
-          "You guys are solving a very important problem. It's a <span style="color: var(--blue); font-weight: 700;">no-brainer</span> that companies would want a proxy that monitors and restricts Claude Code traffic. I heard from higher-ups at Capital One that they're considering such tooling."
+          "You guys are solving a very important problem. It's a<br><span style="color: var(--blue); font-weight: 700;">no-brainer</span> that companies would want a proxy that monitors and restricts Claude Code traffic. I heard from higher-ups at Capital One that they're considering such tooling."
         </p>
         <div style="margin-top: 16px;">
-          <p class="body-text" style="color: var(--text); font-size: clamp(1rem, 2vw, 1.3rem); line-height: 1.55; font-style: italic; margin: 0;">
-            "Enterprise AI usage monitoring is going to be <span style="color: var(--blue); font-weight: 700;">very important</span> in the near future."
+          <p class="body-text" style="color: var(--white); font-size: clamp(1.2rem, 2.4vw, 1.7rem); line-height: 1.65; font-style: italic; margin: 0;">
+            "Enterprise AI usage monitoring is going to be<br><span style="color: var(--blue); font-weight: 700;">very important</span> in the near future."
           </p>
         </div>
         <div style="margin-top: 24px; font-family: var(--sans); font-weight: 700; font-size: 1rem; color: var(--text-dim);">
@@ -4977,13 +5010,15 @@ Key invariants:
     ],
     'story': [
       'title',
-      'problem-dev', 'problem-metr-12h', 'problem-45s', 'problem-gap',
-      'problem-interviews', 'problem-cto',
+      'tam',
+      'problem-cto',
+      'kris-citizen-dev',
       'luthien-intro', 'differentiation-capabilities', 'competitors-table',
-      'advantage-incident', 'advantage-no-infra', 'advantage-existing-infra',
-      'advantage-luthien', 'advantage-how',
+      'advantage-how',
       'team',
-      'tam', 'user-quotes', 'enterprise-validation', 'risk-equation',
+      'user-quotes', 'enterprise-validation',
+      'problem-gap',
+      'risk-equation',
       'defensibility', 'strategy', 'funnel', 'traction',
       'ask', 'close'
     ]
@@ -4994,6 +5029,9 @@ Key invariants:
     const requested = params.get('mode');
     const mode = (requested && MODES[requested]) ? requested : 'default';
     const playlist = MODES[mode];
+
+    // Tag the body so CSS can reveal mode-specific bits (e.g. .story-only).
+    document.body.classList.add('mode-' + mode);
 
     const slidesByName = {};
     document.querySelectorAll('.slide').forEach(el => {
