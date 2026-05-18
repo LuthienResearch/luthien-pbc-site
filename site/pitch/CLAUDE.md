@@ -22,12 +22,24 @@ Three back-to-back single-headline slides (e.g. the original `luthien-solves-thi
 
 ## Browser opens for iteration: drive Chrome via AppleScript, NOT `open`
 
-When iterating with Scott on a specific slide, you must force-navigate the active Chrome tab to the slide. **Do NOT use macOS `open file://...`** — `open` brings the existing tab to front but does not reliably re-navigate when the URL differs only by hash + cache-buster, which is the common case in this loop. Verified failure mode: 2026-05-06 traction-slide iteration where four consecutive `open` calls left Scott on the previously-active slide while Playwright (which loads in a fresh process) confirmed the URL itself works.
-
-Use this AppleScript form instead. Wrap in a Bash heredoc so the shell expands `$(date +%s)` and the slide name:
+**Default: open in a NEW tab.** Stomping Scott's active tab is destructive — he may be mid-edit in a Google Doc, mid-review in another tab, mid-anything. Always make a new tab unless the explicit goal is to reload the same URL Scott is currently watching.
 
 ```bash
 URL="file:///Users/scottwofford/build/luthien-pbc-site/site/pitch/index.html?_=$(date +%s)#<slide-name>"
+osascript <<EOF
+tell application "Google Chrome"
+  activate
+  if (count of windows) = 0 then
+    make new window
+  end if
+  tell front window to make new tab with properties {URL:"$URL"}
+end tell
+EOF
+```
+
+**Exception: iterate-in-place.** When you and Scott are actively iterating on the same URL (Scott is watching one tab as you change the file, and the URL stays identical or differs only by hash + cache-buster), force-navigate the active tab instead of opening a new one — otherwise every rebuild opens a new tab and clutters his window. **Do NOT use macOS `open file://...`** for this; `open` brings the existing tab to front but does not reliably re-navigate when the URL differs only by hash + cache-buster, the common case in this loop. Verified failure mode 2026-05-06: four consecutive `open` calls during traction-slide iteration left Scott on the previously-active slide. Use:
+
+```bash
 osascript <<EOF
 tell application "Google Chrome"
   activate
@@ -39,17 +51,24 @@ end tell
 EOF
 ```
 
-`set URL of active tab` forces Chrome to navigate even when the URL string is identical to what's loaded, which is what we want for iteration.
+`set URL of active tab` forces Chrome to navigate even when the URL string is identical to what's loaded.
 
-The cache-buster is still load-bearing as a belt-and-suspenders: it forces a true page reload (not just hash navigation) so JS re-runs the mode-routing + hash handlers on init. The `?_=<timestamp>` makes every URL unique. The slide-name hash anchors the deck's `slideIndexFromHash` JS to the right slide on init.
+**When to pick which:**
+
+| Scenario | Tab strategy |
+|---|---|
+| First time opening a mockup / preview / new URL | **New tab** |
+| Showing Scott a different slide or file than he's currently watching | **New tab** |
+| Same URL, you just rebuilt the file and want Scott to see the new render | Active tab (set URL) |
+| Same URL with a different `#hash` anchor for deep-linking during deck iteration | Active tab (set URL) |
+
+The cache-buster is still load-bearing as belt-and-suspenders: it forces a true page reload (not just hash navigation) so JS re-runs the mode-routing + hash handlers on init. The `?_=<timestamp>` makes every URL unique. The slide-name hash anchors the deck's `slideIndexFromHash` JS to the right slide on init.
 
 For story-mode previews: `?mode=story&_=$(date +%s)#<slide-name>` (the `&` between mode and cache-buster is critical — `&` not `?`, since both are query params).
 
-This rule applies every time you tell Scott to "open in browser" — single-slide tweaks, prototype comparisons, before/after demos. Compounds with the global "iterate one change at a time, deep-linked, wait for sign-off" rule.
-
 If Scott uses a different default browser later, swap `Google Chrome` for the relevant app name (Safari uses `set current tab's URL`, not `URL of active tab`).
 
-*(Initial rule added 2026-05-05 after Scott twice said "always open directly to the slide" mid-Manoj-prep when reload-without-cache-bust left him on slide 1. Hardened 2026-05-06 after `open` was verified insufficient: switching to AppleScript-driven navigation is the only reliable mechanism observed.)*
+*(Initial rule added 2026-05-05 after Scott twice said "always open directly to the slide" mid-Manoj-prep when reload-without-cache-bust left him on slide 1. Hardened 2026-05-06 after `open` was verified insufficient: switching to AppleScript-driven navigation is the only reliable mechanism observed. Hardened again 2026-05-18 after the default-to-active-tab behavior stomped Scott's working Google Doc tab mid-session: new-tab is now the default; active-tab is the iterate-in-place exception.)*
 
 ## Voice and content (pointer)
 
