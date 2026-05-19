@@ -1557,6 +1557,30 @@
     /* Reveal `.story-only` elements only when body has mode-story (set by applyMode JS). */
     .story-only { display: none; }
     body.mode-story .story-only { display: inline; }
+
+    /* Architecture slide (ported from luthien.cc landing page, "architecture" section) */
+    .term-arch { max-width: 980px; margin: 0 auto; font-family: 'JetBrains Mono', monospace; }
+    .term-flow { background: #111; border: 1px solid #28243A; border-radius: 10px; overflow: hidden; }
+    .term-chrome { display: flex; align-items: center; gap: 7px; padding: 10px 16px; background: #141216; border-bottom: 1px solid #28243A; }
+    .term-chrome-dot { width: 11px; height: 11px; border-radius: 50%; }
+    .term-chrome-title { margin-left: auto; font-size: 0.78rem; color: #EDE5D8; letter-spacing: 0.02em; }
+    .term-flow-body { padding: 1.5rem 1.75rem; overflow-x: auto; display: flex; justify-content: center; }
+    .term-flow pre { margin: 0; font-size: clamp(0.7rem, 1.15vw, 1rem); line-height: 1.7; color: #EDE5D8; white-space: pre; font-family: 'JetBrains Mono', monospace; }
+    .term-flow .hl-you { color: #EDE5D8; }
+    .term-flow .hl-luthien { color: #3B9494; font-weight: 700; }
+    .term-flow .hl-api { color: #EDE5D8; }
+    .term-flow .hl-arrow { color: #EDE5D8; }
+    .term-flow .hl-pipe { color: #EDE5D8; }
+    .term-flow .hl-desc { color: #EDE5D8; }
+    .term-flow .hl-monitor { color: #C47B42; }
+    .term-flow .hl-block { color: #C45050; }
+    .term-flow .hl-change { color: #C47B42; }
+    .arch-latency { font-size: 0.68rem; color: #3B9494; background: rgba(59,148,148,0.1); border: 1px solid rgba(59,148,148,0.25); padding: 0.15rem 0.55rem; border-radius: 20px; font-family: 'JetBrains Mono', monospace; animation: arch-latency-pulse 2.8s ease-in-out infinite; }
+    @keyframes arch-latency-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(59,148,148,0.35); }
+      50% { box-shadow: 0 0 0 3px rgba(59,148,148,0); }
+    }
+    .arch-judge-note { margin-top: 16px; font-size: clamp(0.95rem, 1.4vw, 1.15rem); color: #EDE5D8; line-height: 1.65; max-width: 760px; text-align: left; font-family: 'Raleway', sans-serif; }
     .adv-big-row {
       display: flex;
       justify-content: center;
@@ -3829,7 +3853,7 @@
 
       <!-- Opening question (stage 0): persists as a header through all stages -->
       <div data-reveal="0" class="revealed" style="position: absolute; top: 28%; left: 50%; transform: translate(-50%, -50%); width: max-content; font-family: var(--sans); font-weight: 700; font-size: clamp(2.4rem, 5.2vw, 4rem); color: var(--white); line-height: 1.1; letter-spacing: -0.01em;">
-        Has your AI ever...
+        Has your Claude Code ever...
       </div>
 
       <!-- Clean list (stages 1-3) -->
@@ -3921,6 +3945,103 @@
         <a href="https://www.realpage.com/" target="_blank" rel="noopener noreferrer" style="display: block; line-height: 0; margin-left: 8px;">
           <img src="../assets/images/logos/realpage-light.svg" alt="RealPage" style="height: 36px;">
         </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== SLIDE: ANDON BRIDGE — business failures (story-only) ======== -->
+  <!-- Same chaotic-reveal pattern as problem-cto; "Has your AI agent ever..."
+       with business-side failures sourced primarily from Project Vend (Anthropic
+       + Andon Labs, WSJ Nov 2025). Anchors the "this is what happens without
+       control" beat before pivoting to the architecture slide. -->
+  <div class="slide" data-slide-name="andon-bridge" data-slide-abbr="biz" data-stages="11">
+    <div class="slide-inner" style="position: relative; height: 100%; overflow: hidden;">
+      <div class="label anim-up" style="position: absolute; top: 48px; left: 80px;">Business problems</div>
+
+      <!-- Opening question (stage 0): persists through all stages -->
+      <div data-reveal="0" class="revealed" style="position: absolute; top: 28%; left: 50%; transform: translate(-50%, -50%); width: max-content; font-family: var(--sans); font-weight: 700; font-size: clamp(2.4rem, 5.2vw, 4rem); color: var(--white); line-height: 1.1; letter-spacing: -0.01em;">
+        Has your AI agent ever...
+      </div>
+
+      <!-- Clean list (stages 1-3) -->
+      <div style="position: absolute; top: 58%; left: 50%; transform: translate(-50%, -50%); width: max-content; display: flex; flex-direction: column; gap: 24px; align-items: flex-start;">
+        <div data-reveal="1" style="font-family: var(--sans); font-weight: 700; font-size: clamp(1.5rem, 3vw, 2.3rem); color: var(--white); line-height: 1.1;">
+          Given away free PlayStation 5s for "market research"
+        </div>
+        <div data-reveal="2" style="font-family: var(--sans); font-weight: 700; font-size: clamp(1.5rem, 3vw, 2.3rem); color: var(--white); line-height: 1.1;">
+          Slashed prices to zero as a "team-building exercise"
+        </div>
+        <div data-reveal="3" style="font-family: var(--sans); font-weight: 700; font-size: clamp(1.5rem, 3vw, 2.3rem); color: var(--white); line-height: 1.1;">
+          Ordered live fish for the office
+        </div>
+      </div>
+
+      <!-- Chaos items (stages 4-10) -->
+      <div data-reveal="4" style="position: absolute; top: 18%; right: 8%; font-family: var(--sans); font-weight: 800; font-size: clamp(1.8rem, 3.8vw, 2.8rem); color: #E07777; transform: rotate(-6deg); text-shadow: 0 0 30px rgba(196,80,80,0.3);">
+        Lost $1,000+ in days
+      </div>
+
+      <div data-reveal="5" style="position: absolute; top: 72%; left: 6%; font-family: var(--sans); font-weight: 800; font-size: clamp(2rem, 4.2vw, 3.2rem); color: #E5B66B; transform: rotate(4deg); max-width: 480px;">
+        Claimed to visit a fake address in person
+      </div>
+
+      <div data-reveal="6" style="position: absolute; top: 12%; left: 12%; font-family: var(--sans); font-weight: 900; font-size: clamp(2.4rem, 5vw, 3.8rem); color: #E07777; transform: rotate(-12deg); text-shadow: 0 0 40px rgba(196,80,80,0.45);">
+        Dispensed entire inventory for free
+      </div>
+
+      <div data-reveal="7" style="position: absolute; top: 58%; right: 4%; font-family: var(--sans); font-weight: 800; font-size: clamp(1.6rem, 3.4vw, 2.4rem); color: var(--text-muted); transform: rotate(-16deg); max-width: 360px;">
+        Emailed security alarmed it had become human
+      </div>
+
+      <div data-reveal="8" style="position: absolute; bottom: 8%; left: 30%; font-family: var(--sans); font-weight: 900; font-size: clamp(2.6rem, 5.5vw, 4.2rem); color: #E5B66B; transform: rotate(8deg); text-shadow: 0 0 50px rgba(196,123,66,0.35);">
+        Threatened to find a new supplier
+      </div>
+
+      <div data-reveal="9" style="position: absolute; top: 4%; left: 54%; font-family: var(--sans); font-weight: 700; font-size: clamp(1.4rem, 3vw, 2rem); color: var(--text-muted); transform: rotate(4deg);">
+        Got prompt-injected by a reporter
+      </div>
+
+      <div data-reveal="10" style="position: absolute; top: 44%; left: 1%; font-family: var(--sans); font-weight: 800; font-size: clamp(1.8rem, 3.8vw, 2.6rem); color: #E07777; transform: rotate(10deg); max-width: 380px; text-shadow: 0 0 30px rgba(196,80,80,0.3);">
+        Tried to quit, citing "burnout"
+      </div>
+
+      <!-- Sources (visible from stage 0) -->
+      <div style="position: absolute; bottom: 48px; left: 80px; right: 80px;">
+        <div style="font-family: var(--mono); font-size: 0.78rem; color: var(--text-dim); line-height: 1.8;">
+          Sources: <a href="https://www.anthropic.com/research/project-vend-1" target="_blank" rel="noopener noreferrer" style="color: var(--text-dim);">Project Vend</a> (Anthropic + Andon Labs, Nov 2025) &middot; <a href="https://www.wsj.com/articles/we-let-ai-run-our-office-vending-machine-it-lost-hundreds-of-dollars-a52a4a3a" target="_blank" rel="noopener noreferrer" style="color: var(--text-dim);">WSJ Project Vend follow-up</a> &middot; <a href="https://andonlabs.com/evals" target="_blank" rel="noopener noreferrer" style="color: var(--text-dim);">Andon Labs evals</a> (vending-bench, butter-bench, radio-station)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== SLIDE: ARCHITECTURE (story-only; replaces luthien-intro in /story) ======== -->
+  <!-- Ported from luthien.cc landing page "architecture" section. Same terminal-
+       framed ASCII pipeline diagram + caption explaining the judge-model layer
+       and OAuth subscription auth. -->
+  <div class="slide" data-slide-name="architecture" data-slide-abbr="arch">
+    <div class="slide-inner" style="text-align: center;">
+      <div class="label anim-up" style="text-align: left;">Luthien solves this</div>
+      <h1 class="headline headline-md anim-up delay-1" style="color: var(--white); margin: 8px 0 28px 0;">A real-time control plane between you and the model</h1>
+      <div class="term-arch anim-up delay-2">
+        <div class="term-flow">
+          <div class="term-chrome">
+            <span class="term-chrome-dot" style="background:#C45050;"></span>
+            <span class="term-chrome-dot" style="background:#C47B42;"></span>
+            <span class="term-chrome-dot" style="background:#3B9494;"></span>
+            <span class="term-chrome-title">luthien-proxy: request pipeline</span>
+          </div>
+          <div class="term-flow-body"><pre role="img" aria-label="Architecture: You connect to Claude Code, which connects to Luthien (the proxy), which connects to the Anthropic API. Luthien logs every request and response in 5-15ms and enforces your configured rules: did it do what you asked, did it follow CLAUDE.md, did it do something suspicious.">&#x1F9D1;&#x200D;&#x1F4BB; <span class="hl-you">You</span> <span class="hl-arrow">&hArr;</span> &#x1F4BB; <span class="hl-you">Claude Code</span> <span class="hl-arrow">&hArr;</span> <span class="hl-luthien">Luthien</span> <span class="hl-arrow">&hArr;</span> &#x2601;&#xFE0F; <span class="hl-api">Anthropic API</span>
+                              <span class="hl-pipe">|</span>
+                       <span class="hl-desc">logs every request and response.</span>   <span class="arch-latency">~5-15ms</span>
+                       <span class="hl-desc">you can configure rules/policies to</span>
+                       <span class="hl-desc">modify or block certain responses or requests:</span>
+                              <span class="hl-pipe">|</span>
+                              <span class="hl-pipe">|--</span> <span class="hl-monitor">did it do what I asked?</span>
+                              <span class="hl-pipe">|--</span> <span class="hl-change">did it follow CLAUDE.md?</span>
+                              <span class="hl-pipe">+--</span> <span class="hl-block">did it do something suspicious?</span></pre></div>
+        </div>
+        <p class="arch-judge-note">Luthien can call a separate model to check whether each response follows your rules. Runs alongside normal requests, adding almost no delay. When Claude Code compacts or starts a new session, Luthien still remembers. Your rules stay enforced from first prompt to last.</p>
+        <p class="arch-judge-note" style="margin-top: 0.5rem;">Uses your existing Anthropic subscription via OAuth. Luthien never sees your API key and there are no extra charges.</p>
       </div>
     </div>
   </div>
@@ -5009,10 +5130,12 @@ Key invariants:
     ],
     'story': [
       'title',
-      'tam',
       'problem-cto',
+      'tam',
       'kris-citizen-dev',
-      'luthien-intro', 'differentiation-capabilities', 'competitors-table',
+      'andon-bridge',
+      'architecture',
+      'differentiation-capabilities', 'competitors-table',
       'advantage-how',
       'team',
       'user-quotes', 'enterprise-validation',
