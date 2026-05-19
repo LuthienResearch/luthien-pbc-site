@@ -3971,11 +3971,15 @@
   </div>
 
   <!-- ======== SLIDE: TRUST — opener pair to lack-of-trust (story-only) ========
-       Video asset TBD — initial YouTube pick (A_Vt1MPCcXE) returned embed error
-       153 + yt-dlp "not available." Holding as text-on-color until a working
-       video is selected. -->
-  <div class="slide" data-slide-name="trust" data-slide-abbr="✓" style="background: radial-gradient(ellipse at center, #1a2730 0%, #08080c 70%);">
-    <div class="slide-inner" style="position: relative; text-align: center; display: flex; flex-direction: column; justify-content: center; min-height: 100%;">
+       Full-bleed local MP4 (downloaded from YouTube RuFeGxkbkjQ via yt-dlp;
+       7-sec loop). Dark overlay + mirrored headline. -->
+  <div class="slide" data-slide-name="trust" data-slide-abbr="✓">
+    <video autoplay loop muted playsinline preload="auto"
+      style="position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto; transform: translate(-50%, -50%); object-fit: cover; z-index: 0;">
+      <source src="../assets/videos/trust-yt-RuFeGxkbkjQ.mp4" type="video/mp4">
+    </video>
+    <div style="position: absolute; inset: 0; background: rgba(8, 8, 12, 0.52); z-index: 1;"></div>
+    <div class="slide-inner" style="position: relative; z-index: 2; text-align: center; display: flex; flex-direction: column; justify-content: center; min-height: 100%;">
       <h1 class="headline headline-lg anim-up" style="color: var(--white); max-width: 1280px; margin: 0 auto; line-height: 1.1; text-shadow: 0 2px 30px rgba(0, 0, 0, 0.6);">The future of work,<br><br>if you can trust your AIs</h1>
     </div>
   </div>
