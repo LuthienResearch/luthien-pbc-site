@@ -1558,6 +1558,15 @@
     .story-only { display: none; }
     body.mode-story .story-only { display: inline; }
 
+    /* Chaos slides (problem-cto, andon-bridge): black stroke around each text
+       item so overlapping reveals stay readable. paint-order keeps the stroke
+       behind the fill so colored items keep their color. */
+    .slide[data-slide-name="problem-cto"] [data-reveal],
+    .slide[data-slide-name="andon-bridge"] [data-reveal] {
+      -webkit-text-stroke: 2px #000;
+      paint-order: stroke fill;
+    }
+
     /* Architecture slide (ported from luthien.cc landing page, "architecture" section) */
     .term-arch { max-width: 980px; margin: 0 auto; font-family: 'JetBrains Mono', monospace; }
     .term-flow { background: #111; border: 1px solid #28243A; border-radius: 10px; overflow: hidden; }
