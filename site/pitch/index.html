@@ -4180,8 +4180,15 @@
               <td style="text-align: center; padding: 14px 12px; background: rgba(59, 148, 148, 0.08); color: var(--blue); font-weight: 700; font-size: 1.2rem;">&#10003;<sup style="font-size: 0.45em; font-weight: 700; vertical-align: super; margin-left: 2px;">1</sup></td>
             </tr>
             <tr style="border-bottom: 1px solid var(--border);">
-              <td style="padding: 14px 12px; color: var(--text); font-weight: 600;">Fully customizable <span style="color: var(--text-dim); font-weight: 400; font-size: 0.85em;">(block / modify / insert / mid-stream / arbitrary logic)</span></td>
+              <td style="padding: 14px 12px; color: var(--text); font-weight: 600;">Block</td>
               <td style="text-align: center; padding: 14px 12px; color: #C8A050; font-weight: 600;">Partial<sup style="font-size: 0.55em; font-weight: 700; vertical-align: super; margin-left: 2px;">2</sup></td>
+              <td style="text-align: center; padding: 14px 12px; color: var(--blue); font-weight: 700; font-size: 1.2rem;">&#10003;</td>
+              <td style="text-align: center; padding: 14px 12px; color: var(--red); font-weight: 700; font-size: 1.2rem;">&#10007;</td>
+              <td style="text-align: center; padding: 14px 12px; background: rgba(59, 148, 148, 0.08); color: var(--blue); font-weight: 700; font-size: 1.2rem;">&#10003;</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 14px 12px; color: var(--text); font-weight: 600;">Fully customizable <span style="color: var(--text-dim); font-weight: 400; font-size: 0.85em;">(modify, insert, mid-stream, arbitrary logic)</span></td>
+              <td style="text-align: center; padding: 14px 12px; color: var(--red); font-weight: 700; font-size: 1.2rem;">&#10007;</td>
               <td style="text-align: center; padding: 14px 12px; color: var(--red); font-weight: 700; font-size: 1.2rem;">&#10007;</td>
               <td style="text-align: center; padding: 14px 12px; color: var(--red); font-weight: 700; font-size: 1.2rem;">&#10007;</td>
               <td style="text-align: center; padding: 14px 12px; background: rgba(59, 148, 148, 0.08); color: var(--blue); font-weight: 700; font-size: 1.2rem;">&#10003;<sup style="font-size: 0.45em; font-weight: 700; vertical-align: super; margin-left: 2px;">3</sup></td>
@@ -4208,10 +4215,10 @@
           <sup>1</sup> Luthien sees the full multi-turn conversation in real time as it streams; competitors operate per-request, on the prompt-or-final-response boundary, or post-hoc.
         </div>
         <div class="citation">
-          <sup>2</sup> LiteLLM exposes <a href="https://docs.litellm.ai/docs/proxy/guardrails/custom_guardrail" target="_blank" rel="noopener noreferrer">custom guardrails</a> as Python pre/post hooks — can block, but cannot modify, insert, or apply mid-stream policies.
+          <sup>2</sup> LiteLLM exposes <a href="https://docs.litellm.ai/docs/proxy/guardrails/custom_guardrail" target="_blank" rel="noopener noreferrer">custom guardrails</a> as Python pre/post hooks — limited blocking only; cannot modify, insert, or apply mid-stream policies.
         </div>
         <div class="citation">
-          <sup>3</sup> Luthien can block, modify, or insert into agent activity; apply policies mid-stream; and run arbitrary logic against live conversation context.
+          <sup>3</sup> Luthien can modify, insert into, and apply mid-stream policies against agent activity, and run arbitrary logic against live conversation context.
         </div>
         <div class="citation">
           <sup>4</sup> LiteLLM <a href="https://github.com/BerriAI/litellm" target="_blank" rel="noopener noreferrer">core proxy</a> is open source; the enterprise control plane is closed.
