@@ -3974,10 +3974,42 @@
        Full-bleed local MP4 (downloaded from YouTube RuFeGxkbkjQ via yt-dlp;
        7-sec loop). Dark overlay + mirrored headline. -->
   <div class="slide" data-slide-name="trust" data-slide-abbr="✓">
-    <video autoplay loop muted playsinline preload="auto"
+    <video id="trust-video" muted playsinline preload="auto"
       style="position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto; transform: translate(-50%, -50%); object-fit: cover; z-index: 0;">
       <source src="../assets/videos/trust-yt-RuFeGxkbkjQ.mp4" type="video/mp4">
     </video>
+    <script>
+      // Trust slide video: play once from the top each time the slide becomes
+      // active; pause when it leaves. No loop. Set up once on DOMContentLoaded.
+      (function () {
+        function setup() {
+          const slide = document.querySelector('.slide[data-slide-name="trust"]');
+          const video = document.getElementById('trust-video');
+          if (!slide || !video) return;
+          const obs = new MutationObserver(function (muts) {
+            for (var i = 0; i < muts.length; i++) {
+              if (muts[i].attributeName === 'class') {
+                if (slide.classList.contains('active')) {
+                  try { video.currentTime = 0; video.play(); } catch (e) {}
+                } else {
+                  try { video.pause(); } catch (e) {}
+                }
+              }
+            }
+          });
+          obs.observe(slide, { attributes: true, attributeFilter: ['class'] });
+          // If the slide is already active on load (deep-link to #trust), kick it.
+          if (slide.classList.contains('active')) {
+            try { video.currentTime = 0; video.play(); } catch (e) {}
+          }
+        }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', setup);
+        } else {
+          setup();
+        }
+      })();
+    </script>
     <div style="position: absolute; inset: 0; background: rgba(8, 8, 12, 0.52); z-index: 1;"></div>
     <div class="slide-inner" style="position: relative; z-index: 2; text-align: center; display: flex; flex-direction: column; justify-content: center; min-height: 100%;">
       <h1 class="headline headline-lg anim-up" style="color: var(--white); max-width: 1280px; margin: 0 auto; line-height: 1.1; text-shadow: 0 2px 30px rgba(0, 0, 0, 0.6);">The future of work,<br><br>if you can trust your AIs</h1>
