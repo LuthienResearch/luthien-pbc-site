@@ -4020,7 +4020,7 @@
        judge-note paragraphs. No chip-label, no separate headline. -->
   <div class="slide" data-slide-name="architecture" data-slide-abbr="arch">
     <div class="slide-inner" style="padding: 60px 80px;">
-      <div class="anim-up" style="font-family: 'JetBrains Mono', monospace; font-size: clamp(2rem, 4.2vw, 3.6rem); font-weight: 600; letter-spacing: -0.02em; color: #EDE5D8; text-align: left; margin-bottom: 28px;">architecture</div>
+      <div class="anim-up" style="font-family: 'JetBrains Mono', monospace; font-size: clamp(2rem, 4.2vw, 3.6rem); font-weight: 600; letter-spacing: -0.02em; color: #EDE5D8; text-align: left; margin-bottom: 28px;">Luthien's architecture</div>
       <div class="term-arch anim-up delay-1">
         <div class="term-flow">
           <div class="term-chrome">
@@ -4374,30 +4374,23 @@
       <div class="adv-sublabel anim-up">How?<span class="story-only" style="color: var(--blue); margin-left: 0.4em;">LIVE DEMO</span></div>
 
       <div class="anim-up delay-1 code-excerpt">
-<pre><span class="c-str">"""Validator for Anthropic streaming protocol compliance.
+<pre><span class="c-str">"""Anthropic-native request processing pipeline.
 
-Enforces the event ordering invariants documented in
-Anthropic's streaming API:
+This module provides a dedicated processing pipeline for Anthropic API
+requests, using the native Anthropic types throughout without converting
+to OpenAI format. This preserves Anthropic-specific features like
+extended thinking, tool use patterns, and prompt caching.
 
-    message_start
-    &#9500;&#9472;&#9472; content_block_start(0)
-    &#9474;   &#9500;&#9472;&#9472; content_block_delta(0) ...
-    &#9474;   &#9492;&#9472;&#9472; content_block_stop(0)
-    &#9500;&#9472;&#9472; content_block_start(1)
-    &#9474;   &#9500;&#9472;&#9472; content_block_delta(1) ...
-    &#9474;   &#9492;&#9472;&#9472; content_block_stop(1)
-    &#9500;&#9472;&#9472; ...
-    message_delta   (stop_reason, usage)
-    message_stop
+Span Hierarchy
+--------------
+The pipeline creates a structured span hierarchy for observability:
 
-Key invariants:
-  1. message_start is the first event
-  2. message_stop is the last event
-  3. All content_block_* events precede message_delta
-  4. Each content block has start &rarr; delta(s) &rarr; stop lifecycle
-  5. Block indices are non-negative and start events use
-     monotonically increasing indices
-  6. No content_block_delta/stop without a preceding start
+    anthropic_transaction_processing (root)
+    &#9500;&#9472;&#9472; process_request
+    &#9500;&#9472;&#9472; process_response
+    &#9474;   &#9500;&#9472;&#9472; policy_execute
+    &#9474;   &#9492;&#9472;&#9472; send_upstream (zero or more backend calls)
+    &#9492;&#9472;&#9472; send_to_client (non-streaming)
 """</span></pre>
       </div>
 
@@ -4407,7 +4400,7 @@ Key invariants:
 
       <div class="slide-footnotes">
         <div class="citation">
-          <a href="https://github.com/LuthienResearch/luthien-proxy/blob/e24cb50f1ed16c6a1adcde76ba6b40b84c27eaa7/src/luthien_proxy/pipeline/stream_protocol_validator.py" target="_blank" rel="noopener noreferrer">luthien-proxy/src/luthien_proxy/pipeline/stream_protocol_validator.py</a>
+          <a href="https://github.com/LuthienResearch/luthien-proxy/blob/main/src/luthien_proxy/pipeline/anthropic_processor.py" target="_blank" rel="noopener noreferrer">luthien-proxy/src/luthien_proxy/pipeline/anthropic_processor.py</a>
         </div>
       </div>
     </div>
