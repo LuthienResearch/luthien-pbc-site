@@ -1558,6 +1558,12 @@
     .story-only { display: none; }
     body.mode-story .story-only { display: inline; }
 
+    /* Hide `.hide-in-story` elements in /story (kept visible in default mode).
+       Use this to remove a component from the Ivan / ScOp-audience deck while
+       preserving it for the default deck. To restore in /story, just remove
+       the `hide-in-story` class from the element. */
+    body.mode-story .hide-in-story { display: none; }
+
     /* Chaos slides (problem-cto, andon-bridge): black stroke around each text
        item so overlapping reveals stay readable. paint-order keeps the stroke
        behind the fill so colored items keep their color. */
@@ -3739,13 +3745,16 @@
             <text x="998" y="362" font-size="18" font-weight="800">potential.</text>
           </g>
           <text x="998" y="384" font-family="JetBrains Mono, monospace" font-size="13" fill="#D8D1E2" letter-spacing="1.2" font-weight="600">12 HR &#8594; 45 SEC</text>
-          <!-- Central callout: 45-sec average Claude Code turn length, with arrow to practice-today dot -->
+          <!-- Central callout: 45-sec average Claude Code turn length, with arrow to practice-today dot.
+               Hidden in /story per Ivan's "logically ambiguous" critique (May 19 2026 call).
+               Squandered-potential framing + METR curve stay; Ivan kept those.
+               To restore in /story: remove `hide-in-story` from the <g> below. -->
           <defs>
             <marker id="gap-arrowhead-landscape" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
               <path d="M 0 0 L 10 5 L 0 10 z" fill="#E07777"/>
             </marker>
           </defs>
-          <g class="gap-center-callout">
+          <g class="gap-center-callout hide-in-story">
             <text x="525" y="335" font-family="Raleway, sans-serif" font-size="22" font-weight="700" fill="#F5EEE3" text-anchor="middle">Average Claude Code turn length</text>
             <text x="525" y="388" font-family="Raleway, sans-serif" font-size="48" font-weight="900" fill="#E07777" text-anchor="middle">45 sec</text>
             <path d="M 625 410 Q 780 510 905 572" fill="none" stroke="#E07777" stroke-width="2.8" marker-end="url(#gap-arrowhead-landscape)"/>
