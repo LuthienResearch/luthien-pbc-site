@@ -108,11 +108,11 @@ Each item is either done by Claude (linked to its PR) or tracked on a Trello car
 - Blog content cleanup: TL;DR blocks removed, Redwood citation restored on 21-points, controlconf reverted to its original pre-event announcement, self-loop footer links removed ([PR #180](https://github.com/LuthienResearch/luthien-pbc-site/pull/180)).
 - The three migrated old pages 301 to their new homes ([luthien_site PR #4](https://github.com/LuthienResearch/luthien_site/pull/4), gated until cutover): `/about` -> `https://luthien.cc/about`, `/updates/2025-03-redteam-as-upsampling` -> `https://luthien.cc/blog/21-points/`, `/updates/2025-03-controlconf` -> `https://luthien.cc/blog/controlconf-london-2025/`.
 
-**Tracked on Trello (human):**
-- [Add Cloudflare credentials to Bitwarden](https://trello.com/c/NNQuBxWS) (Jai + Scott) — the cutover blocker. Once Scott has Cloudflare access he does the dashboard cutover (point `luthien.cc` at the Cloudflare Pages project, stop Netlify answering for it), verifies `luthien.cc` serves the site from a non-T-Mobile network, and merges the gated [PR #4](https://github.com/LuthienResearch/luthien_site/pull/4).
+**Tracked on Trello (human):** two cards, cross-linked via attachments (Trello has no native dependency type).
+- [Add Cloudflare credentials to Bitwarden](https://trello.com/c/NNQuBxWS) (Jai + Scott) — the blocker.
+- [Finish luthien.cc redirect cutover once Cloudflare access is available](https://trello.com/c/SEgPHlcM) (Scott, w/ Claude) — blocked by the card above. Covers the dashboard cutover (point `luthien.cc` at the Cloudflare Pages project, stop Netlify answering for it), verifying `luthien.cc` from a non-T-Mobile network, merging the gated [PR #4](https://github.com/LuthienResearch/luthien_site/pull/4), and (Claude) building the correctness monitor.
 
-**Claude follow-up (after cutover):**
-- Build the correctness monitor: assert each canonical domain returns 200 from the expected origin plus a content fingerprint, and alert on any redirect that leaves the canonical host. This is the class-level fix (a reachable 301 passes the current reachability monitor); best written after cutover so it encodes the expected origin. Not yet built; the single most important remaining item.
+The correctness monitor (assert each canonical domain returns 200 from the expected origin + a content fingerprint; alert on any redirect that leaves the canonical host) is the class-level fix and the single most important remaining item. A reachable 301 passes the current reachability monitor, which is why this regression went unseen. It is step 4 of the execution card above, to be built after cutover so it encodes the expected origin.
 
 ### Completeness checklist
 
