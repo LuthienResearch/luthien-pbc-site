@@ -2,7 +2,7 @@
 
 **Date:** 2026-05-27
 **Author:** Scott (w/ Claude)
-**Status:** Diagnosis complete; canonical-domain decision made (luthien.cc). Code stopgap in [luthien_site PR (netlify.toml)](https://github.com/LuthienResearch/luthien_site/pulls). Production fix requires a Cloudflare/Netlify dashboard cutover (runbook below); no code change can repoint the domain.
+**Status:** Diagnosis complete; canonical-domain decision made (luthien.cc). Code stopgap in [luthien_site PR #4 (netlify.toml)](https://github.com/LuthienResearch/luthien_site/pull/4). Production fix requires a Cloudflare/Netlify dashboard cutover (runbook below); no code change can repoint the domain.
 
 ## Summary
 
@@ -97,7 +97,7 @@ No code change can repoint a domain. The fix is a sequenced cutover. **Order mat
 1. **Cloudflare Pages:** add `luthien.cc` as a custom domain on the `luthien-pbc-site` project; let Cloudflare provision the cert.
 2. **DNS:** point `luthien.cc` at the Cloudflare Pages project (per Cloudflare's custom-domain instructions).
 3. **Netlify:** remove `luthien.cc` (and, if not needed for the org redirect, `luthienresearch.org`) from the `luthien_site` site's custom domains so Netlify stops answering for `luthien.cc`.
-4. **`luthienresearch.org` → `luthien.cc` 301:** merge the [luthien_site netlify.toml PR](https://github.com/LuthienResearch/luthien_site/pulls) (catch-all retargeted github.io → `https://luthien.cc/`). This is safe only after `luthien.cc` has left the Netlify site (step 3); otherwise `luthien.cc` 301s to itself on the same Netlify site and loops. Alternatively, implement the org→luthien.cc 301 at the Cloudflare/DNS layer and retire the Netlify site entirely.
+4. **`luthienresearch.org` → `luthien.cc` 301:** merge the [luthien_site PR #4](https://github.com/LuthienResearch/luthien_site/pull/4) (catch-all retargeted github.io → `https://luthien.cc/`). This is safe only after `luthien.cc` has left the Netlify site (step 3); otherwise `luthien.cc` 301s to itself on the same Netlify site and loops. Alternatively, implement the org→luthien.cc 301 at the Cloudflare/DNS layer and retire the Netlify site entirely.
 5. **Verify:** `curl -sI https://luthien.cc/` returns 200 from Cloudflare; `curl -sI https://luthienresearch.org/` returns 301 → `https://luthien.cc/`; `scripts/reachability-check.sh luthien.cc` runs.
 
 ## Action items
@@ -106,7 +106,7 @@ Tracked as Trello cards on the Luthien board (source of truth for tasks). This C
 
 | Action item | Delivering PR / artifact | Success criteria | Type | Owner |
 |-------------|--------------------------|------------------|------|-------|
-| Retarget `luthien_site` catch-all redirect github.io → `luthien.cc` | luthien_site netlify.toml PR | PR merges *after* DNS cutover; `curl -sI https://luthienresearch.org/` → 301 → `https://luthien.cc/` | Point fix | Claude |
+| Retarget `luthien_site` catch-all redirect github.io → `luthien.cc` | [luthien_site PR #4](https://github.com/LuthienResearch/luthien_site/pull/4) | PR merges *after* DNS cutover; `curl -sI https://luthienresearch.org/` → 301 → `https://luthien.cc/` | Point fix | Claude |
 | Cloudflare/Netlify/DNS cutover (steps 1-3, 5 above) | dashboard change | `curl -sI https://luthien.cc/` → 200 from Cloudflare | Architectural | Scott / Jai (dashboard access) |
 | Upgrade synthetic monitor: assert 200-from-expected-origin + content fingerprint, alert on canonical-host-leaving 3xx | follow-up PR to the monitor workflow | Monitor fails on a 301-to-github.io even though it is reachable | Detection | Claude |
 | Record domain → authoritative-platform mapping in-repo; add migration-"done" gotcha | follow-up PR (`dev/context/gotchas.md`) | A written expectation exists to audit drift against | Architectural | Claude |
