@@ -2,11 +2,11 @@
 
 **Date:** 2026-05-27
 **Author:** Scott (w/ Claude)
-**Status:** Diagnosis partial (see Evidence caveat). Code stopgap in [luthien_site PR #4](https://github.com/LuthienResearch/luthien_site/pull/4) (gated). Production fix is a Cloudflare/Netlify dashboard cutover; no code can repoint a domain.
+**Status:** Diagnosis partial (see Evidence caveat). Code and content fixes are open and unmerged: [PR #178](https://github.com/LuthienResearch/luthien-pbc-site/pull/178) (this COE), [PR #179](https://github.com/LuthienResearch/luthien-pbc-site/pull/179) (deploy-docs cleanup), [PR #180](https://github.com/LuthienResearch/luthien-pbc-site/pull/180) (blog content cleanup), and [luthien_site PR #4](https://github.com/LuthienResearch/luthien_site/pull/4) (redirects, gated). The production fix is a Cloudflare/Netlify dashboard cutover, which no code can do; as of 2026-05-27 it is **blocked on Cloudflare access** (Scott requested credentials from Jai, see Slack link below).
 
 ## Summary
 
-`luthienresearch.org` 301-redirects every request to `https://luthienresearch.github.io/luthien-pbc-site/`, an unbranded GitHub Pages sub-path, served by a retired Netlify deployment of the old `luthien_site` repo. `luthien.cc` was observed doing the same once this session. The live site is healthy on Cloudflare Pages (`luthien-pbc-site.pages.dev` returns 200); the canonical domains were never cut over to serve it. Surfaced when Jennifer Baik asked in Slack (2026-05-20) which public link was safe to share.
+`luthienresearch.org` 301-redirects every request to `https://luthienresearch.github.io/luthien-pbc-site/`, an unbranded GitHub Pages sub-path, served by a retired Netlify deployment of the old `luthien_site` repo. `luthien.cc` was observed doing the same once this session. The live site is healthy on Cloudflare Pages (`luthien-pbc-site.pages.dev` returns 200); the canonical domains were never cut over to serve it. Surfaced when Jennifer Baik [asked in Slack](https://seattleaisafety.slack.com/archives/C08ETDW6P99/p1779330610050429?thread_ts=1779330610.050429) (2026-05-20, #general) which public link was safe to share.
 
 ## Evidence caveat
 
@@ -49,8 +49,8 @@ $ curl -sI https://luthien-pbc-site.pages.dev/    # HTTP/2 200, server: cloudfla
 | 2026-03-19 | `luthien_site/netlify.toml` catch-all set to `/* -> https://luthienresearch.github.io/luthien-pbc-site/ 301` (commit `de96792`), a stopgap before Cloudflare Pages existed. Unchanged since. |
 | ~2026-04 | Cloudflare Pages stood up for `luthien-pbc-site`; `deploy.yml` intends it as primary for `luthien.cc`. Whether `luthien.cc` ever served from it is unverified. |
 | 2026-04-22 | April reachability COE: `.cc` filtered by some consumer ISPs. |
-| 2026-05-20 | Symptom flagged in Slack. |
-| 2026-05-27 | Reported; this COE; canonical domain decided: `luthien.cc`. |
+| 2026-05-20 | Symptom flagged in [Slack](https://seattleaisafety.slack.com/archives/C08ETDW6P99/p1779330610050429?thread_ts=1779330610.050429) (Jennifer Baik, #general). |
+| 2026-05-27 | Scott reports it; this COE; canonical domain decided (`luthien.cc`); code/content PRs opened. In the [same Slack thread](https://seattleaisafety.slack.com/archives/C08ETDW6P99/p1779330610050429?thread_ts=1779330610.050429) Scott asks Jai for Cloudflare credentials (Bitwarden) so he can do the cutover; cutover blocked on that access. |
 
 **5 Whys.**
 
@@ -82,7 +82,7 @@ The April reachability monitor exists and passed this broken state, because a re
 
 ### What else could break? (sweep)
 
-Grepped both site repos for stale redirects, version-pinned paths, and github.io destinations. Found only: the repo-root `index.html` meta-refresh to `site/v10.9.1/` (not served, since the deploy root is `site/`; already being removed on Scott's parallel branch) and a stale `site/v12/...` path in a CSS comment. The two `github.io` hits in served content are legitimate external links. Redirect configs are `luthien_site/netlify.toml` (the bug) and `site/_redirects` (`/toc`, `/story`, both correct). No additional user-facing stale redirects.
+Grepped both site repos for stale redirects, version-pinned paths, and github.io destinations. Found only: the repo-root `index.html` meta-refresh to `site/v10.9.1/` (not served, since the deploy root is `site/`; removed in [PR #179](https://github.com/LuthienResearch/luthien-pbc-site/pull/179)) and a stale `site/v12/...` path in a CSS comment. The two `github.io` hits in served content are legitimate external links. Redirect configs are `luthien_site/netlify.toml` (the bug) and `site/_redirects` (`/toc`, `/story`, both correct). No additional user-facing stale redirects.
 
 ### Incident Detail (evidence)
 
@@ -92,18 +92,20 @@ DNS at discovery (via `dig`): `luthien.cc` is on Cloudflare nameservers (`*.ns.c
 
 | Issue | Fix | Location |
 |-------|-----|----------|
-| Old Netlify site 301s the canonical domain(s) to github.io | Stopgap: retarget the catch-all github.io -> `luthien.cc` (gated; merge only after the cutover, or it self-redirect-loops) | `luthien_site/netlify.toml` ([PR #4](https://github.com/LuthienResearch/luthien_site/pull/4)) |
+| Old Netlify site 301s the canonical domain(s) to github.io | Stopgap: retarget the catch-all github.io -> `luthien.cc`, plus 301 the three migrated old pages to their new homes (`/about`, redteam->`/blog/21-points/`, controlconf->`/blog/controlconf-london-2025/`) (gated; merge only after the cutover) | `luthien_site/netlify.toml` ([PR #4](https://github.com/LuthienResearch/luthien_site/pull/4)) |
 | No durable record of the incident | This COE + index entry | `docs/coes/2026-05-27-canonical-domains-redirect-to-github-io.md`, `docs/coes/README.md` |
 | Root cause non-obvious (reachable but wrong) | Gotcha: dig/curl signal + migration-"done" definition | `dev/context/gotchas.md` |
+| Deploy docs claimed GitHub Pages as the deploy target; stale root-redirect | Corrected to Cloudflare-primary; removed the `site/v10.9.1/` root meta-refresh | `CLAUDE.md`, `index.html` ([PR #179](https://github.com/LuthienResearch/luthien-pbc-site/pull/179), Scott) |
+| Claude-added slop in migrated blog posts | Removed TL;DR blocks; restored the Redwood citation on 21-points; reverted controlconf to its original pre-event announcement; removed self-loop footer links | `site/blog/*` ([PR #180](https://github.com/LuthienResearch/luthien-pbc-site/pull/180)) |
 
 ### Action items
 
 These live in this doc, not Trello: a Trello card needs a real owner and a due date, and none of these has a firm due date yet.
 
-1. **Check what `luthien.cc` actually does for a normal visitor, before changing anything.** This whole diagnosis ran from a T-Mobile connection, which blocks `.cc` domains, so we do not actually know whether `luthien.cc` is already broken or fine for a typical user. Someone should open `luthien.cc` from a phone on cell data or another network. Owner: Scott/Jai.
-2. **The actual fix, in the Cloudflare and Netlify dashboards:** tell Cloudflare to serve `luthien.cc` from the new-site project, tell Netlify to stop answering for `luthien.cc`, then merge [PR #4](https://github.com/LuthienResearch/luthien_site/pull/4) (which points `luthienresearch.org` at `luthien.cc`). Needs whoever holds the Cloudflare/Netlify logins. Done when typing `luthien.cc` shows the real site. Owner: Jai/Scott.
-3. **Add an automated check so this cannot silently break again.** Today's checker only asks "does `luthien.cc` respond?", and a broken redirect still responds, so nothing alerted us. The new check would verify `luthien.cc` shows our actual site instead of quietly bouncing somewhere else. Not built yet; its own future task, best written after the fix above. No owner yet. This is the fix that would prevent the whole class of bug, so it is the most important open item.
-4. **Old pages that exist only on the old site (decided, in [PR #4](https://github.com/LuthienResearch/luthien_site/pull/4)):** `/about` now 301s to `https://luthien.cc/about` and `/updates/2025-03-redteam-as-upsampling` 301s to `https://luthien.cc/blog/21-points/` (its migrated home); the old serve-in-place carve-outs were removed. The boxed TL;DR on the 21-points post was also removed ([PR #180](https://github.com/LuthienResearch/luthien-pbc-site/pull/180)). Still open: `/updates/2025-03-controlconf` currently falls through to the catch-all (the `luthien.cc` homepage); its migrated home is `/blog/controlconf-london-2025/`, so it could get the same treatment if desired.
+1. **[OPEN] Check what `luthien.cc` actually does for a normal visitor, before changing anything.** This whole diagnosis ran from a T-Mobile connection, which blocks `.cc` domains, so we do not actually know whether `luthien.cc` is already broken or fine for a typical user. Someone should open `luthien.cc` from a phone on cell data or another network. Owner: Scott/Jai.
+2. **[OPEN, BLOCKED ON ACCESS] The actual fix, in the Cloudflare and Netlify dashboards:** tell Cloudflare to serve `luthien.cc` from the new-site project, tell Netlify to stop answering for `luthien.cc`, then merge [PR #4](https://github.com/LuthienResearch/luthien_site/pull/4) (which points `luthienresearch.org` at `luthien.cc`). Done when typing `luthien.cc` shows the real site. Scott has made his side of the fixes but does not have Cloudflare access; on 2026-05-27 he asked Jai (in the [Slack thread](https://seattleaisafety.slack.com/archives/C08ETDW6P99/p1779330610050429?thread_ts=1779330610.050429)) to add the Cloudflare credentials to Bitwarden so he can complete it. Owner: Scott (once he has access), or Jai.
+3. **[OPEN, NOT SHIPPED] Add an automated check so this cannot silently break again.** Today's checker only asks "does `luthien.cc` respond?", and a broken redirect still responds, so nothing alerted us. The new check would verify `luthien.cc` shows our actual site instead of quietly bouncing somewhere else. Its own future task, best written after the cutover. No owner yet. This is the fix that would prevent the whole class of bug, so it is the most important open item.
+4. **[DONE, pending merge + cutover] Old pages that exist only on the old site.** All three now 301 to their migrated homes in [PR #4](https://github.com/LuthienResearch/luthien_site/pull/4): `/about` -> `https://luthien.cc/about`, `/updates/2025-03-redteam-as-upsampling` -> `https://luthien.cc/blog/21-points/`, `/updates/2025-03-controlconf` -> `https://luthien.cc/blog/controlconf-london-2025/`; the old serve-in-place carve-outs were removed. The migrated posts themselves were cleaned up in [PR #180](https://github.com/LuthienResearch/luthien-pbc-site/pull/180): TL;DR blocks removed, the Redwood citation restored on 21-points, and controlconf reverted to its original pre-event announcement. These redirects only take effect after the cutover (item 2).
 
 ### Completeness checklist
 
