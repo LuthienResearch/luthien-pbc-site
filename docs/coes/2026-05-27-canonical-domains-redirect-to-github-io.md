@@ -2,7 +2,7 @@
 
 **Date:** 2026-05-27
 **Author:** Scott (w/ Claude)
-**Status:** Diagnosis partial (see Evidence caveat). Code and content fixes are open and unmerged: [PR #178](https://github.com/LuthienResearch/luthien-pbc-site/pull/178) (this COE), [PR #179](https://github.com/LuthienResearch/luthien-pbc-site/pull/179) (deploy-docs cleanup), [PR #180](https://github.com/LuthienResearch/luthien-pbc-site/pull/180) (blog content cleanup), and [luthien_site PR #4](https://github.com/LuthienResearch/luthien_site/pull/4) (redirects, gated). The production fix is a Cloudflare/Netlify dashboard cutover, which no code can do; as of 2026-05-27 it is **blocked on Cloudflare access** (Scott requested credentials from Jai, see Slack link below).
+**Status:** Diagnosis partial (see Evidence caveat). Code and content fixes are open and unmerged: [PR #178](https://github.com/LuthienResearch/luthien-pbc-site/pull/178) (this COE), [PR #179](https://github.com/LuthienResearch/luthien-pbc-site/pull/179) (deploy-docs cleanup), [PR #180](https://github.com/LuthienResearch/luthien-pbc-site/pull/180) (blog content cleanup), and [luthien_site PR #4](https://github.com/LuthienResearch/luthien_site/pull/4) (redirects, gated). The production fix is a Cloudflare/Netlify dashboard cutover, which no code can do; as of 2026-05-27 it is **blocked on Cloudflare access**, tracked on Trello: [Add Cloudflare credentials to Bitwarden](https://trello.com/c/NNQuBxWS) (Jai + Scott).
 
 ## Summary
 
@@ -100,12 +100,19 @@ DNS at discovery (via `dig`): `luthien.cc` is on Cloudflare nameservers (`*.ns.c
 
 ### Action items
 
-These live in this doc, not Trello: a Trello card needs a real owner and a due date, and none of these has a firm due date yet.
+Each item is either done by Claude (linked to its PR) or tracked on a Trello card for the human who owns it.
 
-1. **[OPEN] Check what `luthien.cc` actually does for a normal visitor, before changing anything.** This whole diagnosis ran from a T-Mobile connection, which blocks `.cc` domains, so we do not actually know whether `luthien.cc` is already broken or fine for a typical user. Someone should open `luthien.cc` from a phone on cell data or another network. Owner: Scott/Jai.
-2. **[OPEN, BLOCKED ON ACCESS] The actual fix, in the Cloudflare and Netlify dashboards:** tell Cloudflare to serve `luthien.cc` from the new-site project, tell Netlify to stop answering for `luthien.cc`, then merge [PR #4](https://github.com/LuthienResearch/luthien_site/pull/4) (which points `luthienresearch.org` at `luthien.cc`). Done when typing `luthien.cc` shows the real site. Scott has made his side of the fixes but does not have Cloudflare access; on 2026-05-27 he asked Jai (in the [Slack thread](https://seattleaisafety.slack.com/archives/C08ETDW6P99/p1779330610050429?thread_ts=1779330610.050429)) to add the Cloudflare credentials to Bitwarden so he can complete it. Owner: Scott (once he has access), or Jai.
-3. **[OPEN, NOT SHIPPED] Add an automated check so this cannot silently break again.** Today's checker only asks "does `luthien.cc` respond?", and a broken redirect still responds, so nothing alerted us. The new check would verify `luthien.cc` shows our actual site instead of quietly bouncing somewhere else. Its own future task, best written after the cutover. No owner yet. This is the fix that would prevent the whole class of bug, so it is the most important open item.
-4. **[DONE, pending merge + cutover] Old pages that exist only on the old site.** All three now 301 to their migrated homes in [PR #4](https://github.com/LuthienResearch/luthien_site/pull/4): `/about` -> `https://luthien.cc/about`, `/updates/2025-03-redteam-as-upsampling` -> `https://luthien.cc/blog/21-points/`, `/updates/2025-03-controlconf` -> `https://luthien.cc/blog/controlconf-london-2025/`; the old serve-in-place carve-outs were removed. The migrated posts themselves were cleaned up in [PR #180](https://github.com/LuthienResearch/luthien-pbc-site/pull/180): TL;DR blocks removed, the Redwood citation restored on 21-points, and controlconf reverted to its original pre-event announcement. These redirects only take effect after the cutover (item 2).
+**Done (Claude):**
+- This COE + gotcha + index entry ([PR #178](https://github.com/LuthienResearch/luthien-pbc-site/pull/178)).
+- Deploy-docs corrected to Cloudflare-primary + stale root-redirect removed ([PR #179](https://github.com/LuthienResearch/luthien-pbc-site/pull/179), Scott).
+- Blog content cleanup: TL;DR blocks removed, Redwood citation restored on 21-points, controlconf reverted to its original pre-event announcement, self-loop footer links removed ([PR #180](https://github.com/LuthienResearch/luthien-pbc-site/pull/180)).
+- The three migrated old pages 301 to their new homes ([luthien_site PR #4](https://github.com/LuthienResearch/luthien_site/pull/4), gated until cutover): `/about` -> `https://luthien.cc/about`, `/updates/2025-03-redteam-as-upsampling` -> `https://luthien.cc/blog/21-points/`, `/updates/2025-03-controlconf` -> `https://luthien.cc/blog/controlconf-london-2025/`.
+
+**Tracked on Trello (human):**
+- [Add Cloudflare credentials to Bitwarden](https://trello.com/c/NNQuBxWS) (Jai + Scott) — the cutover blocker. Once Scott has Cloudflare access he does the dashboard cutover (point `luthien.cc` at the Cloudflare Pages project, stop Netlify answering for it), verifies `luthien.cc` serves the site from a non-T-Mobile network, and merges the gated [PR #4](https://github.com/LuthienResearch/luthien_site/pull/4).
+
+**Claude follow-up (after cutover):**
+- Build the correctness monitor: assert each canonical domain returns 200 from the expected origin plus a content fingerprint, and alert on any redirect that leaves the canonical host. This is the class-level fix (a reachable 301 passes the current reachability monitor); best written after cutover so it encodes the expected origin. Not yet built; the single most important remaining item.
 
 ### Completeness checklist
 
