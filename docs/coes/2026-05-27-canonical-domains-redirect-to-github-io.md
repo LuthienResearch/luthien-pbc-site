@@ -98,12 +98,12 @@ DNS at discovery (via `dig`): `luthien.cc` is on Cloudflare nameservers (`*.ns.c
 
 ### Action items
 
-Recorded inline; Trello only for an item with a human owner and an ETA (none below has a committed ETA, so none is filed).
+These live in this doc, not Trello: a Trello card needs a real owner and a due date, and none of these has a firm due date yet.
 
-- **Verify `luthien.cc` from a non-T-Mobile network** before touching dashboards. Success: a clean reading of its actual serving state. Detection. Owner: Scott/Jai.
-- **Dashboard cutover:** point `luthien.cc` at the Cloudflare Pages project, detach it from the Netlify site, then merge [PR #4](https://github.com/LuthienResearch/luthien_site/pull/4). Success: `curl -sI https://luthien.cc/` returns 200 from Cloudflare on a clean network. Point fix. Owner: Jai/Scott (dashboard access).
-- **Correctness monitor** (the class-level fix): assert 200-from-expected-origin + content fingerprint; alert on any canonical-host-leaving 3xx. **Not shipped**; recommended as a separate PR, best written after the cutover so it encodes the expected origin. Architectural/Detection. No owner committed.
-- **Orphaned content** (Scott decision): `luthienresearch.org/updates/2025-03-redteam-as-upsampling` and `/about` are not on the new site; the Netlify carve-outs preserve them for now. Migrate or 301, then drop the carve-outs. Point fix.
+1. **Check what `luthien.cc` actually does for a normal visitor, before changing anything.** This whole diagnosis ran from a T-Mobile connection, which blocks `.cc` domains, so we do not actually know whether `luthien.cc` is already broken or fine for a typical user. Someone should open `luthien.cc` from a phone on cell data or another network. Owner: Scott/Jai.
+2. **The actual fix, in the Cloudflare and Netlify dashboards:** tell Cloudflare to serve `luthien.cc` from the new-site project, tell Netlify to stop answering for `luthien.cc`, then merge [PR #4](https://github.com/LuthienResearch/luthien_site/pull/4) (which points `luthienresearch.org` at `luthien.cc`). Needs whoever holds the Cloudflare/Netlify logins. Done when typing `luthien.cc` shows the real site. Owner: Jai/Scott.
+3. **Add an automated check so this cannot silently break again.** Today's checker only asks "does `luthien.cc` respond?", and a broken redirect still responds, so nothing alerted us. The new check would verify `luthien.cc` shows our actual site instead of quietly bouncing somewhere else. Not built yet; its own future task, best written after the fix above. No owner yet. This is the fix that would prevent the whole class of bug, so it is the most important open item.
+4. **Decide what to do with two old pages** that exist only on the old site and were never copied over: `/about` and the 2025 post `/updates/2025-03-redteam-as-upsampling`. Either move them to the new site or redirect them away, then remove the special exceptions in `netlify.toml` that currently keep them alive. Year-old content, low stakes. Your call.
 
 ### Completeness checklist
 
