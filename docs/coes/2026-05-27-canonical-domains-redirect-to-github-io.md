@@ -2,7 +2,6 @@
 
 **Date:** 2026-05-27
 **Author:** Scott (w/ Claude)
-**Type:** B (infra / config; the production fix is a dashboard cutover, not a code diff)
 **Status:** Diagnosis partial (see Evidence caveat). Code stopgap in [luthien_site PR #4](https://github.com/LuthienResearch/luthien_site/pull/4) (gated). Production fix is a Cloudflare/Netlify dashboard cutover; no code can repoint a domain.
 
 ## Summary
