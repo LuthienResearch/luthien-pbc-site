@@ -36,20 +36,11 @@
     </div>
 
     <article>
-      <div class="tldr">
-        <div class="tldr-label">TL;DR</div>
-        <ul>
-          <li><strong>AI Control works now.</strong> Not just against hypothetical scheming AIs, but against the prosaic failures already happening in production: jailbreaking, data poisoning, alignment-faking, and stochastic misbehavior.</li>
-          <li><strong>Classification is easier than generation.</strong> AI systems paired with adversarial screening can effectively judge whether other AI outputs are dangerous, and strategies exist to reduce the attack surface without hurting usefulness.</li>
-          <li><strong>Production deployment is the path to stronger safety.</strong> Lessons from real-world control systems build toward handling high-stakes scenarios, including potential future scheming risks.</li>
-        </ul>
-      </div>
-
       <h2>Introduction</h2>
       <p>AI Control was originally developed to mitigate risks from &ldquo;scheming&rdquo; AIs: systems acting as highly capable adversaries optimizing for harmful outcomes. However, as of early 2025, scheming does not represent an immediate practical threat from frontier models.</p>
       <p>This raises an important question: <strong>why should Luthien develop and deploy practical AI Control mechanisms now?</strong></p>
       <p>The distinction matters: AI Control focuses on mitigating risks from misaligned AI rather than aligning it. Control mechanisms assume the AI is misaligned and will cause harm unless prevented. While scheming represents the most dangerous form of misalignment, negative outcomes can result from <em>any</em> form of misalignment. Therefore, control systems can significantly reduce harms across diverse deployment scenarios regardless of scheming risk.</p>
-      <p>Redwood Research's January publication explored how scenarios like jailbreaking, data poisoning, alignment-faking, and low-frequency stochastic misbehavior could result in model failure modes that emerge only in production. These constitute immediate, practical threats that AI Control can address.</p>
+      <p>Redwood Research's January publication, <a href="https://redwoodresearch.substack.com/p/extending-control-evaluations-to" target="_blank" rel="noopener noreferrer">Extending control evaluations to non-scheming threats</a>, explored how scenarios like jailbreaking, data poisoning, alignment-faking, and low-frequency stochastic misbehavior could result in model failure modes that emerge only in production. These constitute immediate, practical threats that AI Control can address.</p>
 
       <h2>The 21 Points</h2>
 
@@ -76,13 +67,6 @@
         <li>Standardization supports developing AI Security best practices, particularly for control systems.</li>
         <li>Production deployment lessons enable developing more effective control systems for high-stakes scenarios, including potential future frontier model scheming risks.</li>
       </ol>
-
-      <h2>What This Means for Practitioners</h2>
-      <p>The key insight is that you don't need to wait for scheming AIs to benefit from AI Control. The same mechanisms that would detect a scheming model (monitoring outputs in context, applying classification-based screening, and iterating on policies) also catch the prosaic failures that are already costing developers time and money today.</p>
-      <p>Points 9&ndash;14 are especially relevant: classification is easier than generation, and practical strategies exist to reduce the adversarial attack surface. This means a &ldquo;judge&rdquo; model reviewing another model's outputs can be effective even against sophisticated failure modes, and the attack surface can be narrowed enough to make adversarial evasion impractical.</p>
-      <p>Point 21 ties it all together: <strong>the path to handling future, more dangerous AI risks runs through deploying control systems today.</strong> Every production incident caught, every policy refined, every red/blue teaming cycle completed builds institutional knowledge that compounds over time.</p>
-
-      <p style="margin-top: 32px;">Originally published on <a href="https://luthienresearch.org/updates/2025-03-redteam-as-upsampling/">luthienresearch.org</a>.</p>
 
       <a href="../../blog.html" class="back-link">&larr; Back to blog</a>
     </article>
