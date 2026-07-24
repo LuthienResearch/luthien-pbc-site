@@ -34,4 +34,20 @@ Full rationale: `docs/coes/2026-04-22-coe-process-adherence.md`.
 
 ---
 
+## A platform migration is not "done" until the old platform stops answering for the production domains (2026-05-27)
+
+The site moved from Netlify (`luthien_site`, Eleventy) to Cloudflare Pages (`luthien-pbc-site`). Each migration stage looked locally complete, but the production domains were never cut over: a retired Netlify deployment of `luthien_site` kept claiming both `luthien.cc` and `luthienresearch.org` and 301-redirected every request to the unbranded GitHub Pages fallback (`luthienresearch.github.io/luthien-pbc-site/`) for weeks.
+
+DNS topology at discovery (verified via `dig`):
+- `luthien.cc`: Cloudflare nameservers (`*.ns.cloudflare.com`) + Cloudflare anycast A records, yet `curl -sI` returns `server: Netlify` and `cache-status: "Netlify Edge"`. So Cloudflare was proxying `luthien.cc` to a Netlify origin. Fix lives in the Cloudflare dashboard for this zone (repoint to the Cloudflare Pages project) plus removing the domain from the Netlify site.
+- `luthienresearch.org`: NS1 nameservers (`*.nsone.net` = Netlify DNS) + AWS IPs = served directly by the same Netlify deployment.
+
+Debugging signal: when a canonical domain "works" but shows an off-brand URL in the address bar, `curl -sI` the apex and read the `server` header and any `location:`. A 200-after-redirect still passes a naive reachability check, so reachability monitoring will not catch "reachable but serving the wrong thing." Assert HTTP 200 from the *expected* origin plus a content fingerprint instead.
+
+Migration "done" definition: `curl -sI` every production domain and confirm the expected `server` header and no stale redirect, AND confirm the old platform no longer has the domain attached, before calling a hosting migration complete.
+
+Full diagnosis: `docs/coes/2026-05-27-canonical-domains-redirect-to-github-io.md`.
+
+---
+
 (Add gotchas as discovered with timestamps: YYYY-MM-DD)
