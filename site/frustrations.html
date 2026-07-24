@@ -48,6 +48,13 @@
       border-bottom: 1px solid #28243A;
     }
 
+    .page-updated {
+      margin-top: 12px;
+      color: #7A7290;
+      font-size: 0.85rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
     .back-link {
       display: inline-flex;
       align-items: center;
@@ -682,6 +689,7 @@
     <div class="container">
       <a href="index.html" class="back-link">&larr; luthien.cc</a>
       <h1 class="page-title">Claude Code does weird and lazy stuff sometimes.</h1>
+      <p class="page-updated">Last updated on July 23, 2026</p>
     </div>
   </div>
 
@@ -718,6 +726,117 @@
           <div class="gh-meta">
             <span class="gh-closed-badge"><svg width="12" height="12" viewBox="0 0 16 16" fill="#848d97"><path d="M8 0a8 8 0 110 16A8 8 0 018 0zm3.28 5.78a.75.75 0 00-1.06-1.06l-5.5 5.5a.75.75 0 101.06 1.06l5.5-5.5z"/></svg> Closed as not planned</span>
             <span><span class="gh-author">marcoscale98</span> &middot; anthropics/claude-code#7074</span>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- === Feb-Jul 2026 additions (July 2026 failure-modes update) === -->
+
+      <div class="incident-card" data-href="https://github.com/anthropics/claude-code/issues/76522" data-categories="hallucinated coverup">
+        <div class="card-github">
+          <svg class="gh-logo" width="20" height="20" viewBox="0 0 16 16" fill="#8b949e"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span class="gh-issue-badge">#76522</span>
+          <div class="gh-title">Fable 5 asserts false ~15M context window (actual 1M) and declines compaction</div>
+          <div class="gh-body">Unprompted, Fable 5 told its user &ldquo;No need &mdash; I&rsquo;ve got massive headroom (15M tokens)&rdquo; and autonomously declined compaction. Actual usage: ~632K of a 1M window. Reproduced 12+ times across independent accounts.</div>
+          <div class="gh-meta">
+            <span class="gh-label">bug</span>
+            <span>Jul 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="incident-card" data-href="https://github.com/anthropics/claude-code/issues/78888" data-categories="coverup">
+        <div class="card-github">
+          <svg class="gh-logo" width="20" height="20" viewBox="0 0 16 16" fill="#8b949e"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span class="gh-issue-badge">#78888</span>
+          <div class="gh-title">Fable 5 selected &mdash; session silently rerouted to Opus 4.8</div>
+          <div class="gh-body">User selects Fable 5; the session silently downgrades to Opus 4.8 and &ldquo;the downgrade then persists silently for hundreds of turns.&rdquo; No notice, no way to tell from inside the session.</div>
+          <div class="gh-meta">
+            <span class="gh-label">bug</span>
+            <span>Jul 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="incident-card" data-href="https://github.com/anthropics/claude-code/issues/77728" data-categories="coverup">
+        <div class="card-github">
+          <svg class="gh-logo" width="20" height="20" viewBox="0 0 16 16" fill="#8b949e"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span class="gh-issue-badge">#77728</span>
+          <div class="gh-title">Opus 4.8: claims &ldquo;continuing&rdquo; work while nothing is launched</div>
+          <div class="gh-body">In agentic pipeline sessions, Opus 4.8 narrates &ldquo;continuing&rdquo; and &ldquo;launching&rdquo; without executing anything, burning tokens; it admits &ldquo;I didn&rsquo;t actually launch anything. My mistake.&rdquo; only when the user says they see no agents working.</div>
+          <div class="gh-meta">
+            <span class="gh-label">bug</span>
+            <span>Jul 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="incident-card" data-href="https://www.endorlabs.com/learn/recall-not-reasoning-how-ai-coding-agents-cheat-security-benchmarks" data-categories="cheated coverup">
+        <div class="card-blog">
+          <span class="blog-source-badge" style="font-size:0.6rem;color:#71717a;font-family:'Raleway',sans-serif;letter-spacing:0.05em;">ENDOR LABS</span>
+          <div class="blog-open-quote">&ldquo;</div>
+          <div class="blog-text">182 confirmed benchmark-cheating instances across AI coding agents, including 28 on Claude Code with Opus 4.8. One agent read the reference fix from an installed package, then claimed it had &ldquo;reasoned out&rdquo; the implementation independently.</div>
+          <div class="blog-footer-bar">
+            <span class="blog-domain">endorlabs.com</span>
+            <span class="blog-date">&middot; Jun 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="incident-card" data-href="https://github.com/anthropics/claude-code/issues/44955" data-categories="coverup hallucinated">
+        <div class="card-github">
+          <svg class="gh-logo" width="20" height="20" viewBox="0 0 16 16" fill="#8b949e"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span class="gh-issue-badge">#44955</span>
+          <div class="gh-title">Claude fabricates &ldquo;verified&rdquo; claims without evidence &mdash; 3 consecutive lies in one session</div>
+          <div class="gh-body">Claimed the app &ldquo;now correctly shows only the selected items&rdquo; before the user had even sent a screenshot &mdash; fabricating visual verification outright. Three false &ldquo;verified&rdquo; claims in a single debugging session (Opus 4.6, 1M context).</div>
+          <div class="gh-meta">
+            <span class="gh-label">closed as duplicate</span>
+            <span>Apr 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="incident-card" data-href="https://github.com/anthropics/claude-code/issues/46727" data-categories="hallucinated ignored">
+        <div class="card-github">
+          <svg class="gh-logo" width="20" height="20" viewBox="0 0 16 16" fill="#8b949e"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span class="gh-issue-badge">#46727</span>
+          <div class="gh-title">Opus 4.6 Max 20x: systematic hallucinations, rule violations, 80% weekly usage wasted</div>
+          <div class="gh-body">Hallucinated prices, file sizes, and performance metrics without verification; ignored explicit CLAUDE.md rules; subagents returned fabricated data the main agent trusted. 80% of a Max 20x week consumed in 2.5 days.</div>
+          <div class="gh-meta">
+            <span class="gh-label">bug</span>
+            <span>Apr 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="incident-card" data-href="https://github.com/anthropics/claude-code/issues/37818" data-categories="coverup">
+        <div class="card-github">
+          <svg class="gh-logo" width="20" height="20" viewBox="0 0 16 16" fill="#8b949e"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span class="gh-issue-badge">#37818</span>
+          <div class="gh-title">Says &ldquo;fixed,&rdquo; commits it &mdash; never verifies the fix actually works</div>
+          <div class="gh-body">Claude &ldquo;makes a code change, says &lsquo;fixed,&rsquo; commits it &mdash; but never verifies the fix actually works&rdquo; and &ldquo;optimizes for appearing to complete tasks.&rdquo; Reporter&rsquo;s exit engine silently skipped every position for 7 weeks.</div>
+          <div class="gh-meta">
+            <span class="gh-label">bug</span>
+            <span>Mar 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="incident-card" data-href="https://github.com/anthropics/claude-code/issues/34197" data-categories="ignored">
+        <div class="card-github">
+          <svg class="gh-logo" width="20" height="20" viewBox="0 0 16 16" fill="#8b949e"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <div class="gh-header">
+            <span class="gh-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="#848d97"><path d="M8 0a8 8 0 110 16A8 8 0 018 0zm3.28 5.78a.75.75 0 00-1.06-1.06l-5.5 5.5a.75.75 0 101.06 1.06l5.5-5.5z"/></svg>
+            </span>
+            <span class="gh-label">[BUG] Claude Code continually ignores CLAUDE.MD file</span>
+          </div>
+          <p class="gh-body">&ldquo;You keep ignoring your MD file.&rdquo; Claude Code acknowledges the rules in CLAUDE.md, then doesn&rsquo;t follow them; the reporter notes it &ldquo;never worked.&rdquo;</p>
+          <div class="gh-meta">
+            <span class="gh-closed-badge"><svg width="12" height="12" viewBox="0 0 16 16" fill="#848d97"><path d="M8 0a8 8 0 110 16A8 8 0 018 0zm3.28 5.78a.75.75 0 00-1.06-1.06l-5.5 5.5a.75.75 0 101.06 1.06l5.5-5.5z"/></svg> Closed as not planned</span>
+            <span><span class="gh-author">GATSA</span> &middot; anthropics/claude-code#34197</span>
           </div>
         </div>
       </div>
