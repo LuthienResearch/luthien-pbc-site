@@ -4,7 +4,7 @@
 
 Public website for Luthien (Public Benefit Corporation). Marketing landing page, QA trial instructions, and future pages.
 
-**Tech stack:** Plain HTML/CSS/JS. No build system. Push to main = live via GitHub Pages.
+**Tech stack:** Plain HTML/CSS/JS. No build system. Push to main = live: deployed to Cloudflare Pages (primary; serves luthien.cc) and GitHub Pages (fallback origin) via `.github/workflows/deploy.yml`.
 
 ## Sibling Repos
 
@@ -16,7 +16,7 @@ Public website for Luthien (Public Benefit Corporation). Marketing landing page,
 ## Project Structure
 
 ```
-site/                        # Deployed to GitHub Pages (this is the root)
+site/                        # Deployed to Cloudflare Pages + GitHub Pages (this is the root)
 ├── index.html               # Main landing page
 ├── about.html               # About / team page
 ├── blog.html                # Blog index
@@ -72,9 +72,10 @@ Same objective workflow as luthien-proxy:
 
 ## Deployment
 
-- **GitHub Pages** deploys from `site/` directory on the `main` branch
-- Push to main = live (via `.github/workflows/deploy.yml`)
-- Custom domain can be added later via `site/CNAME`
+- `.github/workflows/deploy.yml` deploys `site/` on push to `main` to two origins:
+  - **Cloudflare Pages** (primary): serves `luthien.cc`, honors `site/_redirects`.
+  - **GitHub Pages** (fallback origin): `luthienresearch.github.io/luthien-pbc-site/`.
+- The `luthien.cc` custom domain lives in the **Cloudflare Pages dashboard**, not a repo `CNAME`. Do not add `site/CNAME`: it would make GitHub Pages also claim `luthien.cc` and conflict with Cloudflare.
 
 ## One PR = One Concern
 
