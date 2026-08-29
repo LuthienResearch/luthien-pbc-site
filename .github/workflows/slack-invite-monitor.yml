@@ -1,0 +1,66 @@
+name: Slack Invite Monitor
+
+on:
+  schedule:
+    - cron: "37 16 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: slack-invite-monitor
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check Slack invitation
+        id: invite
+        shell: bash
+        run: |
+          set +e
+          output=$(bash scripts/check-slack-invite.sh 2>&1)
+          status=$?
+          set -e
+
+          printf '%s\n' "$output"
+          printf '%s\n' "$output" > /tmp/slack-invite-check.txt
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+
+      - name: Open or update expiry issue
+        if: steps.invite.outputs.status != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          title="Refresh the Seattle AI Safety Slack invitation"
+          details=$(cat /tmp/slack-invite-check.txt)
+          existing=$(gh issue list \
+            --state open \
+            --search "in:title \"$title\"" \
+            --json number \
+            --jq '.[0].number // ""')
+
+          body="The automated check for https://luthien.cc/slack failed on $(date -u +%Y-%m-%dT%H:%M:%SZ).
+
+          Result: \`$details\`
+
+          Create a new Slack invitation, update \`site/slack/invite.json\`, run \`bash scripts/check-slack-invite.sh\`, and close this issue after the new link is deployed."
+
+          gh label create slack-invite --color C47B42 --description "Seattle AI Safety Slack invitation" 2>/dev/null || true
+          gh label create automated --color EDEDED --description "Opened by scheduled automation" 2>/dev/null || true
+
+          if [[ -n "$existing" ]]; then
+            echo "Issue #$existing already tracks the invitation refresh"
+          else
+            gh issue create --title "$title" --label slack-invite,automated --body "$body"
+          fi
+
+      - name: Fail when the invitation needs attention
+        if: steps.invite.outputs.status != '0'
+        run: exit 1

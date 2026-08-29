@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://luthien.cc/slack/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Lora:wght@400;500&amp;family=Raleway:wght@600&amp;display=swap" rel="stylesheet">
+  <title>Join Seattle AI Safety Slack | Luthien</title>
+  <style>
+    :root {
+      --plum-dark: #141216;
+      --surface: #201C2A;
+      --divider: #28243A;
+      --linen: #EDE5D8;
+      --soft-label: #B0A8BE;
+      --muted-label: #7A7290;
+      --verdigris: #3B9494;
+      --signal-red: #C45050;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      align-items: center;
+      background: var(--plum-dark);
+      color: var(--linen);
+      display: flex;
+      font-family: "Lora", Georgia, serif;
+      justify-content: center;
+      margin: 0;
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    main {
+      background: var(--surface);
+      border: 1px solid var(--divider);
+      border-radius: 3px;
+      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+      max-width: 620px;
+      padding: clamp(28px, 7vw, 52px);
+      text-align: center;
+      width: 100%;
+    }
+
+    .label {
+      color: var(--muted-label);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      margin: 0 0 18px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-family: "Raleway", sans-serif;
+      font-size: clamp(1.9rem, 7vw, 3rem);
+      letter-spacing: -0.02em;
+      line-height: 1.12;
+      margin: 0 0 20px;
+    }
+
+    p {
+      color: var(--soft-label);
+      line-height: 1.6;
+      margin: 0 auto 24px;
+      max-width: 480px;
+    }
+
+    .button {
+      background: var(--verdigris);
+      border: 1px solid var(--verdigris);
+      border-radius: 3px;
+      color: var(--plum-dark);
+      display: inline-block;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 13px 20px;
+      text-decoration: none;
+    }
+
+    .button:focus-visible,
+    .button:hover {
+      background: var(--linen);
+      border-color: var(--linen);
+    }
+
+    .fallback {
+      border-top: 1px solid var(--divider);
+      margin-top: 28px;
+      padding-top: 24px;
+    }
+
+    .fallback p {
+      margin-bottom: 0;
+    }
+
+    a {
+      color: var(--verdigris);
+    }
+
+    .error {
+      color: var(--signal-red);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="label">Seattle AI Safety</p>
+    <h1>Join the Seattle AI Safety Slack</h1>
+    <p id="status" aria-live="polite">Checking the current invitation.</p>
+    <a id="join-link" class="button" href="mailto:scottwofford3@gmail.com?subject=Seattle%20AI%20Safety%20Slack%20invitation" hidden>Open Slack</a>
+    <div class="fallback">
+      <p>If the invitation has expired, email <a href="mailto:scottwofford3@gmail.com?subject=Seattle%20AI%20Safety%20Slack%20invitation">Scott Wofford</a> for a fresh link.</p>
+    </div>
+    <noscript>
+      <p class="error">JavaScript is required to load the current Slack invitation.</p>
+    </noscript>
+  </main>
+  <script src="slack.js"></script>
+</body>
+</html>
