@@ -2,7 +2,7 @@ name: Slack Invite Monitor
 
 on:
   schedule:
-    - cron: "37 16 * * *"
+    - cron: "47 */6 * * *"
   workflow_dispatch:
 
 permissions:
@@ -24,7 +24,7 @@ jobs:
         shell: bash
         run: |
           set +e
-          output=$(bash scripts/check-slack-invite.sh 2>&1)
+          output=$(bash scripts/check-slack-page.sh 2>&1 && bash scripts/check-slack-invite.sh 2>&1)
           status=$?
           set -e
 
@@ -38,7 +38,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: bash
         run: |
-          title="Refresh the Seattle AI Safety Slack invitation"
+          title="Check the Seattle AI Safety Slack link"
           details=$(cat /tmp/slack-invite-check.txt)
           existing=$(gh issue list \
             --state open \
@@ -50,7 +50,7 @@ jobs:
 
           Result: \`$details\`
 
-          Create a new Slack invitation, update \`site/slack/invite.json\`, run \`bash scripts/check-slack-invite.sh\`, and close this issue after the new link is deployed."
+          If the invitation is expiring or invalid, create a new invitation and update \`site/slack/invite.json\`. If the deployed page is stale or unreachable, inspect the Cloudflare deployment. Run both check scripts and close this issue after the link is healthy."
 
           gh label create slack-invite --color C47B42 --description "Seattle AI Safety Slack invitation" 2>/dev/null || true
           gh label create automated --color EDEDED --description "Opened by scheduled automation" 2>/dev/null || true
@@ -58,7 +58,7 @@ jobs:
           if [[ -n "$existing" ]]; then
             echo "Issue #$existing already tracks the invitation refresh"
           else
-            gh issue create --title "$title" --label slack-invite,automated --body "$body"
+            gh issue create --title "$title" --assignee scottwofford --label slack-invite,automated --body "$body"
           fi
 
       - name: Fail when the invitation needs attention

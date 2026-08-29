@@ -5,7 +5,7 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 CONFIG="$REPO_ROOT/site/slack/invite.json"
-WARNING_DAYS="${SLACK_INVITE_WARNING_DAYS:-3}"
+WARNING_DAYS="${SLACK_INVITE_WARNING_DAYS:-7}"
 
 if ! command -v node >/dev/null 2>&1; then
   echo "node is required to parse $CONFIG" >&2
@@ -27,6 +27,7 @@ body=$(mktemp)
 trap 'rm -f "$body"' EXIT
 
 curl --fail --location --silent --show-error \
+  --connect-timeout 10 --max-time 30 --retry 2 \
   --user-agent 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/138 Safari/537.36' \
   "$invite_url" > "$body"
 
@@ -46,7 +47,7 @@ live_expiry=$(grep -oE 'InviteExpirationTs(&quot;|")[^0-9]*[0-9]+' "$body" \
   | tail -1)
 
 if [[ -z "$live_expiry" ]]; then
-  echo "Could not read the invitation expiry from Slack" >&2
+  echo "Slack invite monitor could not parse Slack's expiry metadata" >&2
   exit 1
 fi
 
