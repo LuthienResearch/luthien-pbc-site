@@ -4,6 +4,7 @@
 
 | Version | Date | Summary |
 |---------|------|---------|
+| v12.11 | 2026-08-29 | Show "Last updated today" on the invitation's Seattle calendar date, with an absolute-date fallback afterward. Make "Broken?" reveal the 30-day Slack expiry, automatic monitoring, manual refresh boundary, and obfuscated Scott email path. |
 | v12.10 | 2026-08-29 | Cut `/slack` to the minimum reader-facing copy and display the invitation's last-updated date from its checked-in configuration. |
 | v12.9 | 2026-08-29 | Add `/slack` as a stable Seattle AI Safety Slack webpage. Visitors explicitly open the current invitation; the page explains 30-day renewal monitoring and reveals Scott's fallback email only after a click. A six-hour workflow validates the deployed page and Slack invitation, then opens one assigned issue when the link fails or reaches seven days before expiry. |
 | v12.8 | 2026-07-06 | Add `rel=canonical` tags (pointing at luthien.cc) to all 14 public pages. Supports the same-day Cloudflare-side mirror cutover: luthienresearch.org + www now serve the site directly from the luthien-pbc-site Pages project instead of 301-redirecting into luthien.cc (which is TLS-blocked on some consumer ISPs per the 2026-04-22 COE). Canonical tags keep luthien.cc the sole indexed domain. |
