@@ -91,6 +91,21 @@
       border-color: var(--linen);
     }
 
+    .email-button {
+      background: transparent;
+      border: 0;
+      color: var(--verdigris);
+      cursor: pointer;
+      font: inherit;
+      padding: 0;
+      text-decoration: underline;
+    }
+
+    .email-button:focus-visible,
+    .email-button:hover {
+      color: var(--linen);
+    }
+
     .fallback {
       border-top: 1px solid var(--divider);
       margin-top: 28px;
@@ -114,10 +129,13 @@
   <main>
     <p class="label">Seattle AI Safety</p>
     <h1>Join the Seattle AI Safety Slack</h1>
-    <p id="status" aria-live="polite">Checking the current invitation.</p>
-    <a id="join-link" class="button" href="mailto:scottwofford3@gmail.com?subject=Seattle%20AI%20Safety%20Slack%20invitation" hidden>Open Slack</a>
+    <p id="status" aria-live="polite">Loading the current invitation.</p>
+    <a id="join-link" class="button" href="#" hidden>Join Slack</a>
     <div class="fallback">
-      <p>If the invitation has expired, email <a href="mailto:scottwofford3@gmail.com?subject=Seattle%20AI%20Safety%20Slack%20invitation">Scott Wofford</a> for a fresh link.</p>
+      <p>Slack links expire every 30 days. This page is checked automatically, and Scott replaces the invitation when needed.</p>
+      <p>If the button is broken, contact Scott for a fresh invitation.</p>
+      <button id="show-email" class="email-button" type="button">Show Scott’s email</button>
+      <a id="email-link" hidden></a>
     </div>
     <noscript>
       <p class="error">JavaScript is required to load the current Slack invitation.</p>

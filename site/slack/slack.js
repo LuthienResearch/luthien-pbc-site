@@ -3,6 +3,18 @@
 
   const status = document.getElementById("status");
   const joinLink = document.getElementById("join-link");
+  const showEmailButton = document.getElementById("show-email");
+  const emailLink = document.getElementById("email-link");
+
+  showEmailButton.addEventListener("click", () => {
+    const emailCodes = [115, 99, 111, 116, 116, 119, 111, 102, 102, 111, 114, 100, 51, 64, 103, 109, 97, 105, 108, 46, 99, 111, 109];
+    const email = String.fromCharCode(...emailCodes);
+
+    emailLink.href = `mailto:${email}?subject=Seattle%20AI%20Safety%20Slack%20invitation`;
+    emailLink.textContent = email;
+    emailLink.hidden = false;
+    showEmailButton.hidden = true;
+  });
 
   function showFailure(message) {
     status.textContent = message;
@@ -33,11 +45,7 @@
 
       joinLink.href = invite.url;
       joinLink.hidden = false;
-      status.textContent = "Opening Slack.";
-
-      window.setTimeout(() => {
-        window.location.replace(invite.url);
-      }, 700);
+      status.textContent = "The current invitation is ready.";
     })
     .catch(() => {
       showFailure("The Slack invitation could not be loaded.");

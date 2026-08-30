@@ -267,11 +267,11 @@ elif ! node --check "$SLACK_DIR/slack.js" >/dev/null; then
     slack_errors=$((slack_errors + 1))
 fi
 if ! node "$REPO_ROOT/scripts/test-slack-page.mjs" >/dev/null; then
-    fail "Slack page redirect or failure-path test failed"
+    fail "Slack page interaction or failure-path test failed"
     slack_errors=$((slack_errors + 1))
 fi
 if [ "$slack_errors" -eq 0 ]; then
-    pass "Slack page, invite configuration, and redirect script are valid"
+    pass "Slack page, invite configuration, and interaction script are valid"
 fi
 
 # ─────────────────────────────────────────────────────────

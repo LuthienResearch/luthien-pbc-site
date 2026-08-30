@@ -27,8 +27,13 @@ if ! grep -q '<h1>Join the Seattle AI Safety Slack</h1>' "$page"; then
   exit 1
 fi
 
-if ! grep -q 'window.location.replace(invite.url)' "$script"; then
-  echo "$BASE_URL/slack/slack.js did not serve the redirect logic" >&2
+if ! grep -q 'joinLink.href = invite.url' "$script"; then
+  echo "$BASE_URL/slack/slack.js did not serve the join-link logic" >&2
+  exit 1
+fi
+
+if grep -q 'window.location.replace' "$script"; then
+  echo "$BASE_URL/slack/slack.js still redirects visitors automatically" >&2
   exit 1
 fi
 
