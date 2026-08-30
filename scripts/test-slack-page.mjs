@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import vm from "node:vm";
@@ -9,6 +10,7 @@ const repositoryRoot = path.resolve(scriptDirectory, "..");
 const pageScript = fs.readFileSync(path.join(repositoryRoot, "site/slack/slack.js"), "utf8");
 const pageHtml = fs.readFileSync(path.join(repositoryRoot, "site/slack/index.html"), "utf8");
 const currentInvite = JSON.parse(fs.readFileSync(path.join(repositoryRoot, "site/slack/invite.json"), "utf8"));
+const pageScriptHash = crypto.createHash("sha256").update(pageScript).digest("hex").slice(0, 12);
 
 class FixedDate extends Date {
   constructor(value = "2026-08-30T00:00:00Z") {
@@ -138,6 +140,7 @@ assert.equal(unavailable.elements.status.textContent, "Invitation unavailable.")
 
 assert.equal(pageHtml.includes("scottwofford3@gmail.com"), false);
 assert.equal(pageHtml.includes('<span id="updated-at">...</span>'), false);
+assert.equal(pageHtml.includes(`<script src="slack.js?v=${pageScriptHash}"></script>`), true);
 assert.equal(pageScript.includes("scottwofford3@gmail.com"), false);
 
 console.log("Slack page interaction, email-obfuscation, and failure-path tests passed");
