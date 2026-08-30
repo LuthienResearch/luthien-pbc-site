@@ -4,8 +4,9 @@
 
 | Version | Date | Summary |
 |---------|------|---------|
-| v12.14 | 2026-08-29 | Match versioned `slack.js` query URLs in Cloudflare Pages `_headers`, so the no-cache rule applies to the content-addressed script request rather than only its unversioned path. |
-| v12.13 | 2026-08-29 | Prevent mixed-version `/slack` failures by keying `slack.js` to its content hash and setting Cloudflare Pages no-cache headers for the page, script, and invite configuration. Development and production checks now reject an HTML cache key that does not match the script content. |
+| v12.15 | 2026-08-29 | Remove the ineffective `slack.js` `_headers` rule after live verification showed the domain's four-hour JavaScript cache policy still overrides it. The content-hash URL remains the enforced mixed-version prevention; page revalidation and invite-config `no-store` remain active. |
+| v12.14 | 2026-08-29 | Attempt to match versioned `slack.js` query URLs in Cloudflare Pages `_headers`. Post-deployment verification showed the live domain still returned its four-hour JavaScript cache header, so v12.15 removes this ineffective defense. |
+| v12.13 | 2026-08-29 | Prevent mixed-version `/slack` failures by keying `slack.js` to its content hash and setting Cloudflare Pages cache headers for the page and invite configuration. Development and production checks reject an HTML cache key that does not match the script content. |
 | v12.12 | 2026-08-29 | Replace the Slack page's absolute updated date with relative age (`today`, `1 day ago`, then `X days ago`) and make `today` the static fallback so the pre-load placeholder can never remain visible. |
 | v12.11 | 2026-08-29 | Show "Last updated today" on the invitation's Seattle calendar date, with an absolute-date fallback afterward. Make "Broken?" reveal the 30-day Slack expiry, automatic monitoring, manual refresh boundary, and obfuscated Scott email path. |
 | v12.10 | 2026-08-29 | Cut `/slack` to the minimum reader-facing copy and display the invitation's last-updated date from its checked-in configuration. |
