@@ -273,7 +273,7 @@ if [ -f "$SLACK_DIR/index.html" ] && [ -f "$SLACK_DIR/slack.js" ]; then
         slack_errors=$((slack_errors + 1))
     fi
 fi
-if [ ! -f "$SITE_DIR/_headers" ] || ! grep -qF '/slack/slack.js' "$SITE_DIR/_headers"; then
+if [ ! -f "$SITE_DIR/_headers" ] || ! grep -qF '/slack/slack.js*' "$SITE_DIR/_headers"; then
     fail "site/_headers does not disable stale Slack script caching"
     slack_errors=$((slack_errors + 1))
 fi
