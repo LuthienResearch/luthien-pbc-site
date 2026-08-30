@@ -10,6 +10,16 @@ const pageScript = fs.readFileSync(path.join(repositoryRoot, "site/slack/slack.j
 const pageHtml = fs.readFileSync(path.join(repositoryRoot, "site/slack/index.html"), "utf8");
 const currentInvite = JSON.parse(fs.readFileSync(path.join(repositoryRoot, "site/slack/invite.json"), "utf8"));
 
+class FixedDate extends Date {
+  constructor(value = "2026-08-30T00:00:00Z") {
+    super(value);
+  }
+
+  static now() {
+    return Date.parse("2026-08-30T00:00:00Z");
+  }
+}
+
 async function runScenario({ invite, fetchError = null }) {
   const elements = {
     status: {
@@ -22,6 +32,15 @@ async function runScenario({ invite, fetchError = null }) {
     },
     "updated-at": {
       textContent: "..."
+    },
+    "show-help": {
+      addEventListener(eventName, callback) {
+        this[eventName] = callback;
+      },
+      hidden: false
+    },
+    "broken-help": {
+      hidden: true
     },
     "show-email": {
       addEventListener(eventName, callback) {
@@ -37,7 +56,7 @@ async function runScenario({ invite, fetchError = null }) {
   };
 
   const context = {
-    Date,
+    Date: FixedDate,
     Error,
     Number,
     document: {
@@ -68,7 +87,11 @@ const active = await runScenario({ invite: currentInvite });
 assert.equal(active.elements["join-link"].hidden, false);
 assert.equal(active.elements["join-link"].href, currentInvite.url);
 assert.equal(active.elements.status.hidden, true);
-assert.equal(active.elements["updated-at"].textContent, "Aug 29, 2026");
+assert.equal(active.elements["updated-at"].textContent, "today");
+
+active.elements["show-help"].click();
+assert.equal(active.elements["show-help"].hidden, true);
+assert.equal(active.elements["broken-help"].hidden, false);
 
 active.elements["show-email"].click();
 assert.equal(active.elements["show-email"].hidden, true);
@@ -78,6 +101,14 @@ assert.equal(
   active.elements["email-link"].href,
   "mailto:scottwofford3@gmail.com?subject=Seattle%20AI%20Safety%20Slack%20invitation"
 );
+
+const older = await runScenario({
+  invite: {
+    ...currentInvite,
+    updatedAt: "2026-08-28"
+  }
+});
+assert.equal(older.elements["updated-at"].textContent, "Aug 28, 2026");
 
 const expired = await runScenario({
   invite: {

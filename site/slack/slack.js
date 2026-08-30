@@ -4,8 +4,15 @@
   const status = document.getElementById("status");
   const joinLink = document.getElementById("join-link");
   const updatedAtElement = document.getElementById("updated-at");
+  const showHelpButton = document.getElementById("show-help");
+  const brokenHelp = document.getElementById("broken-help");
   const showEmailButton = document.getElementById("show-email");
   const emailLink = document.getElementById("email-link");
+
+  showHelpButton.addEventListener("click", () => {
+    brokenHelp.hidden = false;
+    showHelpButton.hidden = true;
+  });
 
   showEmailButton.addEventListener("click", () => {
     const emailCodes = [115, 99, 111, 116, 116, 119, 111, 102, 102, 111, 114, 100, 51, 64, 103, 109, 97, 105, 108, 46, 99, 111, 109];
@@ -21,6 +28,18 @@
     status.textContent = message;
     status.hidden = false;
     joinLink.hidden = true;
+  }
+
+  function getSeattleDate() {
+    const parts = new Intl.DateTimeFormat("en-US", {
+      day: "2-digit",
+      month: "2-digit",
+      timeZone: "America/Los_Angeles",
+      year: "numeric"
+    }).formatToParts(new Date());
+    const dateParts = Object.fromEntries(parts.map(({ type, value }) => [type, value]));
+
+    return `${dateParts.year}-${dateParts.month}-${dateParts.day}`;
   }
 
   fetch("invite.json", { cache: "no-store" })
@@ -47,12 +66,14 @@
 
       joinLink.href = invite.url;
       joinLink.hidden = false;
-      updatedAtElement.textContent = new Date(updatedAt).toLocaleDateString("en-US", {
-        day: "numeric",
-        month: "short",
-        timeZone: "UTC",
-        year: "numeric"
-      });
+      updatedAtElement.textContent = invite.updatedAt === getSeattleDate()
+        ? "today"
+        : new Date(updatedAt).toLocaleDateString("en-US", {
+          day: "numeric",
+          month: "short",
+          timeZone: "UTC",
+          year: "numeric"
+        });
     })
     .catch(() => {
       showFailure("Invitation unavailable.");
