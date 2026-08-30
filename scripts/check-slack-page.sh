@@ -6,6 +6,8 @@ REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 BASE_URL="${1:-https://luthien.cc}"
 BASE_URL="${BASE_URL%/}"
 LOCAL_CONFIG="$REPO_ROOT/site/slack/invite.json"
+LOCAL_SCRIPT="$REPO_ROOT/site/slack/slack.js"
+SCRIPT_HASH=$(node -e 'const fs=require("node:fs"),c=require("node:crypto"); process.stdout.write(c.createHash("sha256").update(fs.readFileSync(process.argv[1])).digest("hex").slice(0,12))' "$LOCAL_SCRIPT")
 
 page=$(mktemp)
 deployed_config=$(mktemp)
@@ -20,10 +22,15 @@ curl --fail --location --silent --show-error \
   "$BASE_URL/slack/invite.json" > "$deployed_config"
 curl --fail --location --silent --show-error \
   --connect-timeout 10 --max-time 30 --retry 2 \
-  "$BASE_URL/slack/slack.js" > "$script"
+  "$BASE_URL/slack/slack.js?v=$SCRIPT_HASH" > "$script"
 
 if ! grep -q '<h1>Seattle AI Safety</h1>' "$page"; then
   echo "$BASE_URL/slack/ did not serve the expected page" >&2
+  exit 1
+fi
+
+if ! grep -qF "<script src=\"slack.js?v=$SCRIPT_HASH\"></script>" "$page"; then
+  echo "$BASE_URL/slack/ did not reference the current Slack script cache key" >&2
   exit 1
 fi
 

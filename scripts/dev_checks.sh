@@ -266,6 +266,17 @@ elif ! node --check "$SLACK_DIR/slack.js" >/dev/null; then
     fail "slack/slack.js has invalid JavaScript"
     slack_errors=$((slack_errors + 1))
 fi
+if [ -f "$SLACK_DIR/index.html" ] && [ -f "$SLACK_DIR/slack.js" ]; then
+    slack_script_hash=$(node -e 'const fs=require("node:fs"),c=require("node:crypto"); process.stdout.write(c.createHash("sha256").update(fs.readFileSync(process.argv[1])).digest("hex").slice(0,12))' "$SLACK_DIR/slack.js")
+    if ! grep -qF "<script src=\"slack.js?v=${slack_script_hash}\"></script>" "$SLACK_DIR/index.html"; then
+        fail "slack/index.html cache key does not match slack.js content"
+        slack_errors=$((slack_errors + 1))
+    fi
+fi
+if [ ! -f "$SITE_DIR/_headers" ] || ! grep -qF '/slack/slack.js' "$SITE_DIR/_headers"; then
+    fail "site/_headers does not disable stale Slack script caching"
+    slack_errors=$((slack_errors + 1))
+fi
 if ! node "$REPO_ROOT/scripts/test-slack-page.mjs" >/dev/null; then
     fail "Slack page interaction or failure-path test failed"
     slack_errors=$((slack_errors + 1))

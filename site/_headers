@@ -1,0 +1,8 @@
+/slack/
+  Cache-Control: no-cache, must-revalidate
+
+/slack/slack.js
+  Cache-Control: no-cache, must-revalidate
+
+/slack/invite.json
+  Cache-Control: no-store
