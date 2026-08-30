@@ -31,7 +31,7 @@ async function runScenario({ invite, fetchError = null }) {
       href: "#"
     },
     "updated-at": {
-      textContent: "..."
+      textContent: "today"
     },
     "show-help": {
       addEventListener(eventName, callback) {
@@ -108,7 +108,15 @@ const older = await runScenario({
     updatedAt: "2026-08-28"
   }
 });
-assert.equal(older.elements["updated-at"].textContent, "Aug 28, 2026");
+assert.equal(older.elements["updated-at"].textContent, "1 day ago");
+
+const oldest = await runScenario({
+  invite: {
+    ...currentInvite,
+    updatedAt: "2026-08-27"
+  }
+});
+assert.equal(oldest.elements["updated-at"].textContent, "2 days ago");
 
 const expired = await runScenario({
   invite: {
@@ -129,6 +137,7 @@ assert.equal(unavailable.elements.status.hidden, false);
 assert.equal(unavailable.elements.status.textContent, "Invitation unavailable.");
 
 assert.equal(pageHtml.includes("scottwofford3@gmail.com"), false);
+assert.equal(pageHtml.includes('<span id="updated-at">...</span>'), false);
 assert.equal(pageScript.includes("scottwofford3@gmail.com"), false);
 
 console.log("Slack page interaction, email-obfuscation, and failure-path tests passed");

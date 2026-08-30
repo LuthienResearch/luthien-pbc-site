@@ -4,6 +4,7 @@
 
 | Version | Date | Summary |
 |---------|------|---------|
+| v12.12 | 2026-08-29 | Replace the Slack page's absolute updated date with relative age (`today`, `1 day ago`, then `X days ago`) and make `today` the static fallback so the pre-load placeholder can never remain visible. |
 | v12.11 | 2026-08-29 | Show "Last updated today" on the invitation's Seattle calendar date, with an absolute-date fallback afterward. Make "Broken?" reveal the 30-day Slack expiry, automatic monitoring, manual refresh boundary, and obfuscated Scott email path. |
 | v12.10 | 2026-08-29 | Cut `/slack` to the minimum reader-facing copy and display the invitation's last-updated date from its checked-in configuration. |
 | v12.9 | 2026-08-29 | Add `/slack` as a stable Seattle AI Safety Slack webpage. Visitors explicitly open the current invitation; the page explains 30-day renewal monitoring and reveals Scott's fallback email only after a click. A six-hour workflow validates the deployed page and Slack invitation, then opens one assigned issue when the link fails or reaches seven days before expiry. |
