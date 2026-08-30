@@ -140,6 +140,7 @@ assert.equal(unavailable.elements.status.textContent, "Invitation unavailable.")
 
 assert.equal(pageHtml.includes("scottwofford3@gmail.com"), false);
 assert.equal(pageHtml.includes('<span id="updated-at">...</span>'), false);
+assert.equal(pageHtml.includes("https://slack.com/help/articles/360060363633-Manage-pending-invitations-and-invite-links-for-your-workspace"), true);
 assert.equal(pageHtml.includes(`<script src="slack.js?v=${pageScriptHash}"></script>`), true);
 assert.equal(pageScript.includes("scottwofford3@gmail.com"), false);
 

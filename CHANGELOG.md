@@ -4,6 +4,7 @@
 
 | Version | Date | Summary |
 |---------|------|---------|
+| v12.16 | 2026-08-29 | Link Slack's official invite-management documentation from the expanded `/slack` broken-link explanation. |
 | v12.15 | 2026-08-29 | Remove the ineffective `slack.js` `_headers` rule after live verification showed the domain's four-hour JavaScript cache policy still overrides it. The content-hash URL remains the enforced mixed-version prevention; page revalidation and invite-config `no-store` remain active. |
 | v12.14 | 2026-08-29 | Attempt to match versioned `slack.js` query URLs in Cloudflare Pages `_headers`. Post-deployment verification showed the live domain still returned its four-hour JavaScript cache header, so v12.15 removes this ineffective defense. |
 | v12.13 | 2026-08-29 | Prevent mixed-version `/slack` failures by keying `slack.js` to its content hash and setting Cloudflare Pages cache headers for the page and invite configuration. Development and production checks reject an HTML cache key that does not match the script content. |
