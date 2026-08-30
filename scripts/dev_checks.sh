@@ -255,7 +255,7 @@ fi
 if [ ! -f "$SLACK_DIR/invite.json" ]; then
     fail "slack/invite.json missing"
     slack_errors=$((slack_errors + 1))
-elif ! node -e 'const c=require(process.argv[1]); if (!c.url || !c.expiresAt || !Number.isFinite(Date.parse(c.expiresAt))) process.exit(1)' "$SLACK_DIR/invite.json"; then
+elif ! node -e 'const c=require(process.argv[1]); if (!c.url || !c.expiresAt || !Number.isFinite(Date.parse(c.expiresAt)) || !c.updatedAt || !Number.isFinite(Date.parse(`${c.updatedAt}T00:00:00Z`))) process.exit(1)' "$SLACK_DIR/invite.json"; then
     fail "slack/invite.json is invalid"
     slack_errors=$((slack_errors + 1))
 fi

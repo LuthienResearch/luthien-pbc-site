@@ -3,6 +3,7 @@
 
   const status = document.getElementById("status");
   const joinLink = document.getElementById("join-link");
+  const updatedAtElement = document.getElementById("updated-at");
   const showEmailButton = document.getElementById("show-email");
   const emailLink = document.getElementById("email-link");
 
@@ -11,14 +12,14 @@
     const email = String.fromCharCode(...emailCodes);
 
     emailLink.href = `mailto:${email}?subject=Seattle%20AI%20Safety%20Slack%20invitation`;
-    emailLink.textContent = email;
+    emailLink.textContent = ` ${email}`;
     emailLink.hidden = false;
     showEmailButton.hidden = true;
   });
 
   function showFailure(message) {
     status.textContent = message;
-    status.classList.add("error");
+    status.hidden = false;
     joinLink.hidden = true;
   }
 
@@ -31,23 +32,29 @@
     })
     .then((invite) => {
       const expiresAt = Date.parse(invite.expiresAt);
+      const updatedAt = Date.parse(`${invite.updatedAt}T00:00:00Z`);
       const isSlackInvite = typeof invite.url === "string"
         && invite.url.startsWith("https://join.slack.com/t/seattleaisafety/shared_invite/");
 
-      if (!isSlackInvite || !Number.isFinite(expiresAt)) {
+      if (!isSlackInvite || !Number.isFinite(expiresAt) || !Number.isFinite(updatedAt)) {
         throw new Error("Invite configuration is invalid");
       }
 
       if (expiresAt <= Date.now()) {
-        showFailure("The Slack invitation needs to be refreshed.");
+        showFailure("Invitation expired.");
         return;
       }
 
       joinLink.href = invite.url;
       joinLink.hidden = false;
-      status.textContent = "The current invitation is ready.";
+      updatedAtElement.textContent = new Date(updatedAt).toLocaleDateString("en-US", {
+        day: "numeric",
+        month: "short",
+        timeZone: "UTC",
+        year: "numeric"
+      });
     })
     .catch(() => {
-      showFailure("The Slack invitation could not be loaded.");
+      showFailure("Invitation unavailable.");
     });
 })();
