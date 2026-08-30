@@ -22,7 +22,7 @@ curl --fail --location --silent --show-error \
   --connect-timeout 10 --max-time 30 --retry 2 \
   "$BASE_URL/slack/slack.js" > "$script"
 
-if ! grep -q '<h1>Join the Seattle AI Safety Slack</h1>' "$page"; then
+if ! grep -q '<h1>Seattle AI Safety Slack</h1>' "$page"; then
   echo "$BASE_URL/slack/ did not serve the expected page" >&2
   exit 1
 fi
@@ -41,7 +41,7 @@ node -e '
   const fs = require("node:fs");
   const expected = JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
   const deployed = JSON.parse(fs.readFileSync(process.argv[2], "utf8"));
-  if (expected.url !== deployed.url || expected.expiresAt !== deployed.expiresAt) {
+  if (expected.url !== deployed.url || expected.expiresAt !== deployed.expiresAt || expected.updatedAt !== deployed.updatedAt) {
     console.error("The deployed Slack invitation config does not match the repository");
     process.exit(1);
   }

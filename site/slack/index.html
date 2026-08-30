@@ -16,7 +16,6 @@
       --divider: #28243A;
       --linen: #EDE5D8;
       --soft-label: #B0A8BE;
-      --muted-label: #7A7290;
       --verdigris: #3B9494;
       --signal-red: #C45050;
     }
@@ -46,15 +45,6 @@
       padding: clamp(28px, 7vw, 52px);
       text-align: center;
       width: 100%;
-    }
-
-    .label {
-      color: var(--muted-label);
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.78rem;
-      letter-spacing: 0.18em;
-      margin: 0 0 18px;
-      text-transform: uppercase;
     }
 
     h1 {
@@ -116,6 +106,12 @@
       margin-bottom: 0;
     }
 
+    .meta {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.78rem;
+      margin: 24px auto 0;
+    }
+
     a {
       color: var(--verdigris);
     }
@@ -127,18 +123,15 @@
 </head>
 <body>
   <main>
-    <p class="label">Seattle AI Safety</p>
-    <h1>Join the Seattle AI Safety Slack</h1>
-    <p id="status" aria-live="polite">Loading the current invitation.</p>
+    <h1>Seattle AI Safety Slack</h1>
+    <p id="status" class="error" aria-live="polite" hidden></p>
     <a id="join-link" class="button" href="#" hidden>Join Slack</a>
+    <p class="meta">Checked automatically. Updated <span id="updated-at">...</span>.</p>
     <div class="fallback">
-      <p>Slack links expire every 30 days. This page is checked automatically, and Scott replaces the invitation when needed.</p>
-      <p>If the button is broken, contact Scott for a fresh invitation.</p>
-      <button id="show-email" class="email-button" type="button">Show Scott’s email</button>
-      <a id="email-link" hidden></a>
+      <p>Broken? <button id="show-email" class="email-button" type="button">Show Scott's email</button><a id="email-link" hidden></a></p>
     </div>
     <noscript>
-      <p class="error">JavaScript is required to load the current Slack invitation.</p>
+      <p class="error">JavaScript is required.</p>
     </noscript>
   </main>
   <script src="slack.js"></script>

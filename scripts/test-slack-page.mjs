@@ -13,12 +13,15 @@ const currentInvite = JSON.parse(fs.readFileSync(path.join(repositoryRoot, "site
 async function runScenario({ invite, fetchError = null }) {
   const elements = {
     status: {
-      classList: { add(className) { this.value = className; }, value: "" },
-      textContent: "Loading the current invitation."
+      hidden: true,
+      textContent: ""
     },
     "join-link": {
       hidden: true,
       href: "#"
+    },
+    "updated-at": {
+      textContent: "..."
     },
     "show-email": {
       addEventListener(eventName, callback) {
@@ -64,12 +67,13 @@ async function runScenario({ invite, fetchError = null }) {
 const active = await runScenario({ invite: currentInvite });
 assert.equal(active.elements["join-link"].hidden, false);
 assert.equal(active.elements["join-link"].href, currentInvite.url);
-assert.equal(active.elements.status.textContent, "The current invitation is ready.");
+assert.equal(active.elements.status.hidden, true);
+assert.equal(active.elements["updated-at"].textContent, "Aug 29, 2026");
 
 active.elements["show-email"].click();
 assert.equal(active.elements["show-email"].hidden, true);
 assert.equal(active.elements["email-link"].hidden, false);
-assert.equal(active.elements["email-link"].textContent, "scottwofford3@gmail.com");
+assert.equal(active.elements["email-link"].textContent, " scottwofford3@gmail.com");
 assert.equal(
   active.elements["email-link"].href,
   "mailto:scottwofford3@gmail.com?subject=Seattle%20AI%20Safety%20Slack%20invitation"
@@ -82,14 +86,16 @@ const expired = await runScenario({
   }
 });
 assert.equal(expired.elements["join-link"].hidden, true);
-assert.equal(expired.elements.status.textContent, "The Slack invitation needs to be refreshed.");
+assert.equal(expired.elements.status.hidden, false);
+assert.equal(expired.elements.status.textContent, "Invitation expired.");
 
 const unavailable = await runScenario({
   invite: currentInvite,
   fetchError: new Error("network unavailable")
 });
 assert.equal(unavailable.elements["join-link"].hidden, true);
-assert.equal(unavailable.elements.status.textContent, "The Slack invitation could not be loaded.");
+assert.equal(unavailable.elements.status.hidden, false);
+assert.equal(unavailable.elements.status.textContent, "Invitation unavailable.");
 
 assert.equal(pageHtml.includes("scottwofford3@gmail.com"), false);
 assert.equal(pageScript.includes("scottwofford3@gmail.com"), false);
