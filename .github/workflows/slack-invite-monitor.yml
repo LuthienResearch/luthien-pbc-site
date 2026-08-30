@@ -24,7 +24,7 @@ jobs:
         shell: bash
         run: |
           set +e
-          output=$(bash scripts/check-slack-page.sh 2>&1 && bash scripts/check-slack-invite.sh 2>&1)
+          output=$(bash scripts/check-slack-page.sh 2>&1 && SLACK_INVITE_WARNING_DAYS=0 bash scripts/check-slack-invite.sh 2>&1)
           status=$?
           set -e
 
@@ -50,7 +50,7 @@ jobs:
 
           Result: \`$details\`
 
-          If the invitation is expiring or invalid, create a new invitation and update \`site/slack/invite.json\`. If the deployed page is stale or unreachable, inspect the Cloudflare deployment. Run both check scripts and close this issue after the link is healthy."
+          If the invitation is invalid, check the local renewal automation and renew the same invitation. If the deployed page is stale or unreachable, inspect the Cloudflare deployment. Run both check scripts and close this issue after the link is healthy."
 
           gh label create slack-invite --color C47B42 --description "Seattle AI Safety Slack invitation" 2>/dev/null || true
           gh label create automated --color EDEDED --description "Opened by scheduled automation" 2>/dev/null || true
