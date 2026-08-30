@@ -30,16 +30,19 @@
     joinLink.hidden = true;
   }
 
-  function getSeattleDate() {
+  function getUpdateAge(updatedAt) {
     const parts = new Intl.DateTimeFormat("en-US", {
       day: "2-digit",
       month: "2-digit",
       timeZone: "America/Los_Angeles",
       year: "numeric"
     }).formatToParts(new Date());
-    const dateParts = Object.fromEntries(parts.map(({ type, value }) => [type, value]));
+    const getPart = (type) => Number(parts.find((part) => part.type === type).value);
+    const [updatedYear, updatedMonth, updatedDay] = updatedAt.split("-").map(Number);
+    const today = Date.UTC(getPart("year"), getPart("month") - 1, getPart("day"));
+    const updateDay = Date.UTC(updatedYear, updatedMonth - 1, updatedDay);
 
-    return `${dateParts.year}-${dateParts.month}-${dateParts.day}`;
+    return Math.round((today - updateDay) / 86_400_000);
   }
 
   fetch("invite.json", { cache: "no-store" })
@@ -52,10 +55,12 @@
     .then((invite) => {
       const expiresAt = Date.parse(invite.expiresAt);
       const updatedAt = Date.parse(`${invite.updatedAt}T00:00:00Z`);
+      const updateAge = getUpdateAge(invite.updatedAt);
       const isSlackInvite = typeof invite.url === "string"
         && invite.url.startsWith("https://join.slack.com/t/seattleaisafety/shared_invite/");
 
-      if (!isSlackInvite || !Number.isFinite(expiresAt) || !Number.isFinite(updatedAt)) {
+      if (!isSlackInvite || !Number.isFinite(expiresAt) || !Number.isFinite(updatedAt)
+        || !Number.isInteger(updateAge) || updateAge < 0) {
         throw new Error("Invite configuration is invalid");
       }
 
@@ -66,14 +71,9 @@
 
       joinLink.href = invite.url;
       joinLink.hidden = false;
-      updatedAtElement.textContent = invite.updatedAt === getSeattleDate()
+      updatedAtElement.textContent = updateAge === 0
         ? "today"
-        : new Date(updatedAt).toLocaleDateString("en-US", {
-          day: "numeric",
-          month: "short",
-          timeZone: "UTC",
-          year: "numeric"
-        });
+        : `${updateAge} day${updateAge === 1 ? "" : "s"} ago`;
     })
     .catch(() => {
       showFailure("Invitation unavailable.");
