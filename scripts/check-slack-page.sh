@@ -22,7 +22,7 @@ curl --fail --location --silent --show-error \
   --connect-timeout 10 --max-time 30 --retry 2 \
   "$BASE_URL/slack/slack.js" > "$script"
 
-if ! grep -q '<h1>Seattle AI Safety Slack</h1>' "$page"; then
+if ! grep -q '<h1>Seattle AI Safety</h1>' "$page"; then
   echo "$BASE_URL/slack/ did not serve the expected page" >&2
   exit 1
 fi
