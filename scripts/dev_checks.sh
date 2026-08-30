@@ -244,6 +244,38 @@ fi
 
 # ─────────────────────────────────────────────────────────
 bold ""
+bold "== 8. Seattle AI Safety Slack page =="
+# ─────────────────────────────────────────────────────────
+slack_errors=0
+SLACK_DIR="$SITE_DIR/slack"
+if [ ! -f "$SLACK_DIR/index.html" ]; then
+    fail "slack/index.html missing"
+    slack_errors=$((slack_errors + 1))
+fi
+if [ ! -f "$SLACK_DIR/invite.json" ]; then
+    fail "slack/invite.json missing"
+    slack_errors=$((slack_errors + 1))
+elif ! node -e 'const c=require(process.argv[1]); if (!c.url || !c.expiresAt || !Number.isFinite(Date.parse(c.expiresAt))) process.exit(1)' "$SLACK_DIR/invite.json"; then
+    fail "slack/invite.json is invalid"
+    slack_errors=$((slack_errors + 1))
+fi
+if [ ! -f "$SLACK_DIR/slack.js" ]; then
+    fail "slack/slack.js missing"
+    slack_errors=$((slack_errors + 1))
+elif ! node --check "$SLACK_DIR/slack.js" >/dev/null; then
+    fail "slack/slack.js has invalid JavaScript"
+    slack_errors=$((slack_errors + 1))
+fi
+if ! node "$REPO_ROOT/scripts/test-slack-page.mjs" >/dev/null; then
+    fail "Slack page interaction or failure-path test failed"
+    slack_errors=$((slack_errors + 1))
+fi
+if [ "$slack_errors" -eq 0 ]; then
+    pass "Slack page, invite configuration, and interaction script are valid"
+fi
+
+# ─────────────────────────────────────────────────────────
+bold ""
 bold "=========================================="
 if [ "$ERRORS" -gt 0 ]; then
     red "FAILED: $ERRORS error(s), $WARNINGS warning(s)"
