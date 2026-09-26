@@ -10,5 +10,6 @@ Scope note: this directory is for incidents that touch the public site, marketin
 
 | Date | Title | Status |
 |------|-------|--------|
-| 2026-04-22 | [luthien.cc unreachable on filtered ISPs](./2026-04-22-luthien-cc-unreachable.md) | Diagnosis complete, fix pending canonical-domain decision |
+| 2026-05-27 | [Canonical domains 301-redirect to the github.io fallback](./2026-05-27-canonical-domains-redirect-to-github-io.md) | Fixes PR'd (PRs #178/#179/#180, luthien_site #4; unmerged); canonical decided (luthien.cc); cutover blocked on Cloudflare access |
+| 2026-04-22 | [luthien.cc unreachable on filtered ISPs](./2026-04-22-luthien-cc-unreachable.md) | Canonical-domain decision resolved 2026-05-27 (luthien.cc); reachability risk knowingly accepted |
 | 2026-04-22 | [Declined to follow `/coe` process when the template didn't fit (meta-COE)](./2026-04-22-coe-process-adherence.md) | Process fix in flight — template and docs updated in this PR |
