@@ -17,7 +17,7 @@ No build step. No dependencies. Edit HTML, push, it's live.
 
 ## Structure
 
-- `site/` — Everything that gets deployed (GitHub Pages root)
+- `site/` — Everything that gets deployed (served as root by both Cloudflare Pages and GitHub Pages)
 - `dev/` — Development tracking (objectives, notes, TODO)
 - `scripts/` — Developer helpers
 - `tracker-worker/` — Cloudflare Worker that logs `?ref=` clicks to Analytics Engine
@@ -25,7 +25,10 @@ No build step. No dependencies. Edit HTML, push, it's live.
 
 ## Deployment
 
-GitHub Pages auto-deploys from `site/` on push to main.
+On push to main, `.github/workflows/deploy.yml` deploys `site/` to two origins:
+
+- **Cloudflare Pages** (primary): serves `luthien.cc` and honors `site/_redirects`. The `luthien.cc` custom domain is configured in the Cloudflare Pages dashboard, not via a repo CNAME.
+- **GitHub Pages** (fallback origin): a second HTTPS origin at `luthienresearch.github.io/luthien-pbc-site/` if Cloudflare is down.
 
 ## Tracking links
 
