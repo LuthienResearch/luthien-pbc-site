@@ -315,27 +315,6 @@ article pre code {
 
 hr.divider { border: none; border-top: 1px solid #28243A; margin: 32px 0; }
 
-/* ========== TLDR BOX ========== */
-.tldr {
-  background: #181520;
-  border: 1px solid #28243A;
-  border-left: 2px solid #C47B42;
-  border-radius: 0;
-  padding: 20px 24px;
-  margin-bottom: 32px;
-}
-.tldr-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #C47B42;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin-bottom: 12px;
-}
-.tldr ul { padding-left: 20px; color: #EDE5D8; }
-.tldr li { margin-bottom: 10px; font-size: 0.9rem; line-height: 1.6; }
-
 /* ========== CALLOUT ========== */
 .callout {
   background: #181520;
