@@ -4,6 +4,7 @@
 
 | Version | Date | Summary |
 |---------|------|---------|
+| v12.20 | 2026-10-15 | Add a Member of Technical Staff role page at `/mts/` (with a `/careers` 302 alias), modeled on Neolithic's role page and written from the Mission & Theory of Change doc. Add a careers link to the nav on every page and point the home page's Join us button at the role. |
 | v12.19 | 2026-10-15 | Publish "Luthien's 2026 Theory of Change" at `/blog/2026-theory-of-change/` (from the Mission & Theory of Change doc, without the CG-application-only sections) and repoint `/toc` to it. Retitle the original post "Luthien's 2025 Theory of Change" with a pointer to the 2026 version, list the new post in both blog indexes, and point the home page tile at it. |
 | v12.18 | 2026-10-15 | Replace the proxy landing home page with an organization home page: mission (verbatim from "Luthien's Mission & Theory of Change"), a "working with" line (Redwood Research, Trajectory Labs), what we build, team (two confidential members), advisors, investors (ported from the pitch `#ask` slide plus Seldon Lab) and join us. Nav becomes mission / team / tools / blog on every page; `about.html` becomes a redirect stub to `/#team`; old `/#apply` links forward to the Tools page. |
 | v12.17 | 2026-10-15 | Add a `/tools/` page (with `/proxy` 301 alias) that features Luthien Proxy and links to Control Tower's docs and leaderboard, noting Luthien builds Control Tower with Redwood Research and EquiStamp. Add a tools link to the home nav; `dev_checks.sh` now also checks in-page anchors on the Tools page. |
