@@ -59,6 +59,10 @@
     .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
     .hero .container {
       max-width: 1200px;
+      /* .hero is a flex row, so without these the container grows to fit
+         its widest nowrap child (the install command) and clips on phones */
+      width: 100%;
+      min-width: 0;
     }
 
     .section-label {
@@ -1175,7 +1179,7 @@
     .ct-logos { display: flex; gap: 28px; justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 14px; }
     .ct-logos img { height: 22px; width: auto; filter: brightness(0) invert(0.9); opacity: 0.85; transition: opacity 0.2s; }
     .ct-logos a:hover img { opacity: 1; }
-    @media (max-width: 640px) { .ct-card { padding: 32px 20px; } .ct-buttons .btn { width: 100%; justify-content: center; } }
+    @media (max-width: 640px) { .tool-switch { gap: 4px; } .tool-switch a { padding: 6px 10px; white-space: nowrap; font-size: 0.75rem; } .ct-card { padding: 32px 20px; } .ct-buttons .btn { width: 100%; justify-content: center; } }
   </style>
 
 <style id="group-opt">
@@ -1192,6 +1196,7 @@
   .apply-wrap{position:relative;display:inline-flex;flex-direction:column;align-items:center;}
   .apply-hint{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);white-space:nowrap;font-size:0.82rem;color:#B0A8BE;line-height:1.5;text-align:center;opacity:0;pointer-events:none;transition:opacity .18s;z-index:5;}
   .apply-wrap:hover .apply-hint,.apply-wrap:focus-within .apply-hint{opacity:1;}
+  @media (max-width:640px){.cli-install{font-size:0.72rem;padding:10px 12px;gap:8px;}}
 </style>
 </head>
 <body>
