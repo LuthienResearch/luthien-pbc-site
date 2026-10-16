@@ -64,10 +64,10 @@
       <p>We focus on cases where an AI agent, or a group of coordinating agents, is itself the threat actor. Its goal may come from reward hacking, from instructions injected by an outside attacker, or from emergent goals. The harms we are most concerned with are sabotage of assigned work, especially safety research, and major social disruption caused by rogue model manipulation of AI Lab, customer, or third-party systems. Agents can conceal these actions by splitting an attack across agents so monitors watching one agent at a time see nothing suspicious, by spreading small harms across a long trajectory, by obfuscating the harmful steps, and by deleting or rewriting their own logs. The AI Labs incidents disclosed in 2026 were largely low severity but we will focus on building tools that mitigate higher severity threats from rogue agent swarms.</p>
       <h3>Broad Applicability</h3>
       <p>Our work applies to both closed-source and open-source models. Organizations using open-source models need to be able to measure actual harm during deployment rather than relying only on evaluations done by the model provider. Our long-term vision is a much more comprehensive embedded evaluation regime covering dangerous capabilities, misuse areas, and the different stages of the model development life cycle.</p>
-      <h3>How We Will Measure Success</h3>
+      <h3 id="section-9">How We Will Measure Success</h3>
       <p>We will judge our work by whether auditors and control researchers use it and whether it makes their findings faster and more reliable. For investigation, we will measure how much faster and more accurately auditors can establish what happened in an incident when they use our tools, compared with today's baseline, in which METR's Hugging Face investigation took three people six days and about $400,000 in API credits. For testing, we will measure how often our tools catch attacks on benchmarks with known answers. We will also track how many auditor and research organizations use our tools in their own work.</p>
-      <h2>Arguments Against Our Approach</h2>
-      <h3>Ecosystem Risks</h3>
+      <h2 id="section-10">Arguments Against Our Approach</h2>
+      <h3 id="section-11">Ecosystem Risks</h3>
       <ol>
       <li><strong>Labs and auditors may build these tools themselves.</strong> Tools built internally may meet their needs better than ours, especially as coding agents make custom tooling easier to build.
       <ul>
@@ -82,7 +82,7 @@
       <li><em><strong>Mitigation:</strong></em> We agree, and see open-by-default tooling as a way to support exactly those mechanisms: it gives auditors and researchers a yardstick for evaluating a lab's safety claims. As Buck put it, "I don't do the reducing risk, I just do the measuring risk."
       </li></ul>
       </li></ol>
-      <h3>Organizational Risks</h3>
+      <h3 id="section-12">Organizational Risks</h3>
       <ol>
       <li><strong>Credibility</strong>. Broad impact requires our initial auditors' credibility to show the tools are effective and safe to run.
       <ul>
@@ -101,12 +101,12 @@
       <li><em>Mitigation</em>: Recruit mission-driven people, deliver meaningful impact to retain, monitor retention risk.
       </li></ul>
       </li></ol>
-      <h2>Work to Date</h2>
-      <h3>Phase 1: Jan 2025 to May 2026 (Luthien V1)</h3>
+      <h2 id="section-13">Work to Date</h2>
+      <h3 id="section-14">Phase 1: Jan 2025 to May 2026 (Luthien V1)</h3>
       <p>Luthien was founded by Jai Dhyani during Catalyze's Winter 2024/25 AI Safety Incubation Program to apply Redwood's AI Control research to real-world coding agents, and Scott joined as co-founder in May 2025.</p>
       <p>The initial focus was the Luthien proxy, and we built four iterations, spoke with developers from 93 organizations, conducted 74 in-depth conversations, and ran 14 live trials. We got one paying customer, Trajectory Labs, which maintains a <a href="https://github.com/trajectory-labs-pbc/luthien-proxy" target="_blank" rel="noopener noreferrer">public fork of our proxy</a>.</p>
       <p>The proxy development and user trials provided valuable lessons about the challenges of integrating with coding agents and what drives adoption. The work helped establish relationships with Redwood Research and others, leading us to shift our target users from general developers to AI control researchers and toward independent auditors.</p>
-      <h3>Phase 2: June 2026 to Current (Luthien V2)</h3>
+      <h3 id="section-15">Phase 2: June 2026 to Current (Luthien V2)</h3>
       <p>Since June, Scott has been working closely with Redwood Research, particularly Tyler Tracy, on control tooling to automate risk reports. This includes contributions to Control Tower, its leaderboard, onboarding, and documentation.</p>
       <p>We've also developed relationships with other researchers and third-party auditors such as Faculty.</p>
       <p>These engagements have given us concrete feedback on the problems auditors face and the limitations of current tools, especially as AI agents become more capable (e.g., agent swarms and small harms accumulating across longer trajectories).</p>
