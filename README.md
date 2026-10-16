@@ -27,12 +27,12 @@ No build step. No dependencies. Edit HTML, push, it's live.
 
 On push to main, `.github/workflows/deploy.yml` deploys `site/` to two origins:
 
-- **Cloudflare Pages** (primary): serves `luthien.cc` and honors `site/_redirects`. The `luthien.cc` custom domain is configured in the Cloudflare Pages dashboard, not via a repo CNAME.
+- **Cloudflare Pages** (primary): serves `luthienresearch.org` (canonical since v12.21) and `luthien.cc` (mirror), and honors `site/_redirects`. Both custom domains are configured in the Cloudflare Pages dashboard, not via a repo CNAME.
 - **GitHub Pages** (fallback origin): a second HTTPS origin at `luthienresearch.github.io/luthien-pbc-site/` if Cloudflare is down.
 
 ## Tracking links
 
-Append `?ref=<token>` to any `luthien.cc` URL to log a hit. View hits at
+Append `?ref=<token>` to any `luthienresearch.org` or `luthien.cc` URL to log a hit. View hits at
 [`luthien.cc/_t`](https://luthien.cc/_t). Full guide:
 [TRACKING.md](TRACKING.md).
 
@@ -42,7 +42,7 @@ Append `?ref=<token>` to any `luthien.cc` URL to log a hit. View hits at
 | ----------------------------------------------------------------- | ------------------------------------------------------------ |
 | [luthien-proxy](https://github.com/LuthienResearch/luthien-proxy) | Core product (Python proxy)                                  |
 | [luthien-org](https://github.com/LuthienResearch/luthien-org)     | Org docs, feedback synthesis, landing page iteration history |
-| [luthien_site](https://github.com/LuthienResearch/luthien_site)   | Eleventy site at luthienresearch.org                         |
+| [luthien_site](https://github.com/LuthienResearch/luthien_site)   | Jai's old Eleventy site; luthienresearch.org is now served by this repo |
 
 ## License
 

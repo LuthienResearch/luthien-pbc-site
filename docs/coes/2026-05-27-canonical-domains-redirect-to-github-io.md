@@ -124,6 +124,8 @@ The correctness monitor (assert each canonical domain returns 200 from the expec
 
 Canonical public domain = `luthien.cc`; `luthienresearch.org` 301-redirects to `luthien.cc` (Scott, 2026-05-27). This closes the April reachability COE's open "decide canonical domain" item.
 
+**Update 2026-10-15:** Scott reversed this: `luthienresearch.org` is now the canonical domain (v12.21), as Luthien's site becomes an organization site rather than a proxy landing page. Both domains already serve the same Cloudflare Pages project (since #184), so the change is canonical/OG tags plus tracker routes; `luthien.cc` stays a working mirror. This also addresses this COE's open tradeoff: `.org` is not subject to the `.cc` ISP blocking found in the April audit.
+
 Open tradeoff, stated plainly: `luthien.cc` is filtered on some consumer ISPs (April COE), and because `luthienresearch.org` will redirect to `luthien.cc`, it does not serve as a fallback for filtered users. The only real mitigation is making `luthien.cc` serve content directly (the cutover) plus re-measuring `.cc` reachability from a clean network afterward; revisit the canonical choice if filtering is material.
 
 ## Remaining Risk
