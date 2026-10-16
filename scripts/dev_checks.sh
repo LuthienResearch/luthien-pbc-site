@@ -123,17 +123,19 @@ bold ""
 bold "== 3. Nav link consistency =="
 # ─────────────────────────────────────────────────────────
 nav_errors=0
-MAIN_HTML="$SITE_DIR/index.html"
-if [ -f "$MAIN_HTML" ]; then
+# Pages whose in-page #anchor links must resolve (the home page and the Tools page)
+for MAIN_HTML in "$SITE_DIR/index.html" "$SITE_DIR/tools/index.html"; do
+    [ -f "$MAIN_HTML" ] || continue
+    relname="${MAIN_HTML#$SITE_DIR/}"
     # Extract anchor-only nav links (href="#something")
     while IFS= read -r anchor; do
         [ -z "$anchor" ] && continue
         if ! grep -q "id=\"$anchor\"" "$MAIN_HTML" 2>/dev/null; then
-            fail "index.html links to #$anchor but no id=\"$anchor\" found"
+            fail "$relname links to #$anchor but no id=\"$anchor\" found"
             nav_errors=$((nav_errors + 1))
         fi
     done < <(grep -oE 'href="#[a-zA-Z][a-zA-Z0-9_-]*"' "$MAIN_HTML" 2>/dev/null | sed 's/href="#\(.*\)"/\1/' | sort -u || true)
-fi
+done
 [ "$nav_errors" -eq 0 ] && pass "All nav links resolve"
 
 # ─────────────────────────────────────────────────────────

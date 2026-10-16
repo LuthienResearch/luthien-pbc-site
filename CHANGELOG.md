@@ -4,6 +4,7 @@
 
 | Version | Date | Summary |
 |---------|------|---------|
+| v12.17 | 2026-10-15 | Add a `/tools/` page (with `/proxy` 301 alias) that features Luthien Proxy and links to Control Tower's docs and leaderboard, noting Luthien builds Control Tower with Redwood Research and EquiStamp. Add a tools link to the home nav; `dev_checks.sh` now also checks in-page anchors on the Tools page. |
 | v12.16 | 2026-08-29 | Link Slack's official invite-management documentation from the expanded `/slack` broken-link explanation. |
 | v12.15 | 2026-08-29 | Remove the ineffective `slack.js` `_headers` rule after live verification showed the domain's four-hour JavaScript cache policy still overrides it. The content-hash URL remains the enforced mixed-version prevention; page revalidation and invite-config `no-store` remain active. |
 | v12.14 | 2026-08-29 | Attempt to match versioned `slack.js` query URLs in Cloudflare Pages `_headers`. Post-deployment verification showed the live domain still returned its four-hour JavaScript cache header, so v12.15 removes this ineffective defense. |
