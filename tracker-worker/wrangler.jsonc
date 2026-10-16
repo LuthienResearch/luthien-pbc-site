@@ -1,13 +1,16 @@
 {
   "name": "luthien-tracker",
   "main": "src/index.ts",
+  "account_id": "3b64ed6e5367ead1f221c01a17592b19",
   "compatibility_date": "2026-04-01",
   "workers_dev": false,
   "routes": [
-    // Track-anywhere: any luthien.cc URL with ?ref=<token> logs a hit. Without
+    // Track-anywhere: any luthien.cc or luthienresearch.org URL with ?ref=<token> logs a hit. Without
     // ?ref=, the worker is a transparent passthrough. The dashboard worker
     // on luthien.cc/_t* is a more specific pattern and wins for those URLs.
-    { "pattern": "luthien.cc/*", "zone_name": "luthien.cc" }
+    { "pattern": "luthien.cc/*", "zone_name": "luthien.cc" },
+    // luthienresearch.org is the canonical domain since v12.21; both serve the same Pages project.
+    { "pattern": "luthienresearch.org/*", "zone_name": "luthienresearch.org" }
   ],
   "analytics_engine_datasets": [
     {

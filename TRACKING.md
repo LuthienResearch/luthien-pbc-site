@@ -1,6 +1,6 @@
 # Tracking links
 
-End-to-end guide for the `?ref=` tracking system on `luthien.cc`. Read this
+End-to-end guide for the `?ref=` tracking system on `luthien.cc` and `luthienresearch.org` (the canonical domain since v12.21; both serve the same site and both are tracked). Read this
 first if you want to share a tracked link, view hits, onboard a teammate,
 or debug something.
 
@@ -38,8 +38,8 @@ Two Cloudflare Workers, one Analytics Engine dataset:
 
 | Worker                       | Source                  | Route               | Job                                         |
 | ---------------------------- | ----------------------- | ------------------- | ------------------------------------------- |
-| `luthien-tracker`            | `tracker-worker/`       | `luthien.cc/*`      | Log `?ref=` hits to AE; passthrough origin  |
-| `luthien-tracker-dashboard`  | `tracker-dashboard/`    | `luthien.cc/_t*`    | Cookie-auth UI to query AE                  |
+| `luthien-tracker`            | `tracker-worker/`       | `luthien.cc/*`, `luthienresearch.org/*` | Log `?ref=` hits to AE; passthrough origin  |
+| `luthien-tracker-dashboard`  | `tracker-dashboard/`    | `luthien.cc/_t*`, `luthienresearch.org/_t*` | Cookie-auth UI to query AE                  |
 
 AE dataset: `luthien_tracker_hits`. Schema in
 [`tracker-worker/README.md`](tracker-worker/README.md#querying-hits).
