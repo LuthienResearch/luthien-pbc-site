@@ -75,6 +75,7 @@ Same objective workflow as luthien-proxy:
 - `.github/workflows/deploy.yml` deploys `site/` on push to `main` to two origins:
   - **Cloudflare Pages** (primary): serves `luthienresearch.org` (canonical: `rel=canonical` and OG tags point here since v12.21) and `luthien.cc` (mirror), honors `site/_redirects`. New pages use `https://luthienresearch.org/...` canonicals.
   - **GitHub Pages** (fallback origin): `luthienresearch.github.io/luthien-pbc-site/`.
+- `main` is protected by the **`protect-main` ruleset**: no direct pushes, force-pushes or deletion; changes land through a PR with 1 approval. Repo admins can bypass. The deck PDF workflow (`deck-pdf.yml`) commits the regenerated `site/pitch.pdf` to the PR branch, not to `main`.
 - The `luthien.cc` custom domain lives in the **Cloudflare Pages dashboard**, not a repo `CNAME`. Do not add `site/CNAME`: it would make GitHub Pages also claim `luthien.cc` and conflict with Cloudflare.
 
 ## One PR = One Concern
