@@ -4,6 +4,7 @@
 
 | Version | Date | Summary |
 |---------|------|---------|
+| v12.22 | 2026-10-16 | Copy fixes from review: profit footnote uses the deck's "include" wording (no implied sum), drop the out-of-context "raised $50M" tile label, credit Control Tower as its README does, stop promising all code is published on `/mts`, retitle the Theory of Change risks section "Arguments Against Our Approach", and remove unsigned Faculty engagement details from the post. |
 | v12.21 | 2026-10-15 | Make luthienresearch.org the canonical domain: `rel=canonical`, `og:url`, `og:image` and `twitter:image` now point at luthienresearch.org on every page, and the `?ref=` tracker and its dashboard gain luthienresearch.org routes. luthien.cc remains a working mirror (install command and /slack unchanged). Docs and the 2026-05-27 COE decision line updated. |
 | v12.20 | 2026-10-15 | Add a Member of Technical Staff role page at `/mts/` (with a `/careers` 302 alias), modeled on Neolithic's role page and written from the Mission & Theory of Change doc. Add a careers link to the nav on every page and point the home page's Join us button at the role. |
 | v12.19 | 2026-10-15 | Publish "Luthien's 2026 Theory of Change" at `/blog/2026-theory-of-change/` (from the Mission & Theory of Change doc, without the CG-application-only sections) and repoint `/toc` to it. Retitle the original post "Luthien's 2025 Theory of Change" with a pointer to the 2026 version, list the new post in both blog indexes, and point the home page tile at it. |
