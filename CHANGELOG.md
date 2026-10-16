@@ -4,6 +4,7 @@
 
 | Version | Date | Summary |
 |---------|------|---------|
+| v12.18 | 2026-10-15 | Replace the proxy landing home page with an organization home page: mission (verbatim from "Luthien's Mission & Theory of Change"), a "working with" line (Redwood Research, Trajectory Labs), what we build, team (two confidential members), advisors, investors (ported from the pitch `#ask` slide plus Seldon Lab) and join us. Nav becomes mission / team / tools / blog on every page; `about.html` becomes a redirect stub to `/#team`; old `/#apply` links forward to the Tools page. |
 | v12.17 | 2026-10-15 | Add a `/tools/` page (with `/proxy` 301 alias) that features Luthien Proxy and links to Control Tower's docs and leaderboard, noting Luthien builds Control Tower with Redwood Research and EquiStamp. Add a tools link to the home nav; `dev_checks.sh` now also checks in-page anchors on the Tools page. |
 | v12.16 | 2026-08-29 | Link Slack's official invite-management documentation from the expanded `/slack` broken-link explanation. |
 | v12.15 | 2026-08-29 | Remove the ineffective `slack.js` `_headers` rule after live verification showed the domain's four-hour JavaScript cache policy still overrides it. The content-hash URL remains the enforced mixed-version prevention; page revalidation and invite-config `no-store` remain active. |
