@@ -10,7 +10,7 @@ Public website for Luthien (Public Benefit Corporation). Marketing landing page,
 
 - **luthien-proxy** (`LuthienResearch/luthien-proxy`): The core product. Backend Python proxy.
 - **luthien-org** (`LuthienResearch/luthien-org`): Private org docs, feedback synthesis, user interview notes. Landing page iteration history lives here.
-- **luthien_site** (`LuthienResearch/luthien_site`): Jai's Eleventy site at luthienresearch.org. Relationship TBD — this repo may eventually replace or coexist with it.
+- **luthien_site** (`LuthienResearch/luthien_site`): Jai's old Eleventy site. This repo now serves luthienresearch.org.
 - **personal-site** (`scottwofford/personal-site`): Scott's personal site. Previous home of the landing page (landing_v8).
 
 ## Project Structure
@@ -73,8 +73,9 @@ Same objective workflow as luthien-proxy:
 ## Deployment
 
 - `.github/workflows/deploy.yml` deploys `site/` on push to `main` to two origins:
-  - **Cloudflare Pages** (primary): serves `luthien.cc`, honors `site/_redirects`.
+  - **Cloudflare Pages** (primary): serves `luthienresearch.org` (canonical: `rel=canonical` and OG tags point here since v12.21) and `luthien.cc` (mirror), honors `site/_redirects`. New pages use `https://luthienresearch.org/...` canonicals.
   - **GitHub Pages** (fallback origin): `luthienresearch.github.io/luthien-pbc-site/`.
+- `main` is protected by the **`protect-main` ruleset**: no direct pushes, force-pushes or deletion; changes land through a PR with 1 approval. Repo admins can bypass. The deck PDF workflow (`deck-pdf.yml`) commits the regenerated `site/pitch.pdf` to the PR branch, not to `main`.
 - The `luthien.cc` custom domain lives in the **Cloudflare Pages dashboard**, not a repo `CNAME`. Do not add `site/CNAME`: it would make GitHub Pages also claim `luthien.cc` and conflict with Cloudflare.
 
 ## One PR = One Concern

@@ -1,8 +1,11 @@
 name: Build Deck PDF
 
+# Runs on pull requests (not on main) because main is protected by the
+# "protect-main" ruleset: changes reach main only through reviewed PRs.
+# The regenerated PDF is committed to the PR's own branch, so it is
+# reviewed and merged together with the deck change that produced it.
 on:
-  push:
-    branches: [main]
+  pull_request:
     paths:
       - 'site/pitch/**'
       - 'site/assets/**'
@@ -13,10 +16,10 @@ on:
 permissions:
   contents: write
 
-# Do NOT cancel in-progress runs: a half-finished upload would still win.
-# Let runs queue so the latest commit's PDF is always what ends up live.
+# Do NOT cancel in-progress runs: a half-finished commit would still win.
+# Let runs queue per PR so the latest commit's PDF is what gets merged.
 concurrency:
-  group: "deck-pdf"
+  group: "deck-pdf-${{ github.head_ref || github.ref }}"
   cancel-in-progress: false
 
 jobs:
@@ -25,6 +28,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # Check out the PR branch itself (not the merge commit) so the PDF can be pushed back to it.
+          ref: ${{ github.head_ref || github.ref_name }}
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -58,4 +64,4 @@ jobs:
           fi
           git add site/pitch.pdf
           git commit -m "Regenerate pitch deck PDF [skip ci]" -m "Auto-generated from commit ${{ github.sha }}."
-          git push origin HEAD:main
+          git push origin HEAD:${{ github.head_ref || github.ref_name }}
