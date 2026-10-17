@@ -12,13 +12,13 @@
   <meta property="og:description" content="Luthien Proxy, an open-source proxy that enforces rules on Claude Code, and Control Tower, the AI control evaluation framework Luthien builds with Redwood Research and EquiStamp.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://luthienresearch.org/tools/">
-  <meta property="og:image" content="https://luthienresearch.org/assets/images/og-image.svg">
+  <meta property="og:image" content="https://luthienresearch.org/assets/images/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Tools - Luthien">
   <meta name="twitter:description" content="Luthien Proxy, an open-source proxy that enforces rules on Claude Code, and Control Tower, the AI control evaluation framework Luthien builds with Redwood Research and EquiStamp.">
-  <meta name="twitter:image" content="https://luthienresearch.org/assets/images/og-image.svg">
+  <meta name="twitter:image" content="https://luthienresearch.org/assets/images/og-image.png">
 
   <meta name="theme-color" content="#141216">
 
@@ -1336,7 +1336,7 @@
       <div class="testimonial-card">
         <p class="testimonial-text">"I saw the website and immediately thought, 'I want that.' I have to correct the pip install thing multiple times per day. You see pip and you're like, I already gave you permissions for uv. But it blocks on that permission and you lose hours of work. Awesome job, guys, it's like CLAUDE.md that actually works."</p>
         <div class="testimonial-attribution">
-          <img src="https://avatars.githubusercontent.com/nicolasmesa" alt="Nicolás Mesa" class="testimonial-photo" loading="lazy">
+          <img src="../assets/images/photo-nicolas-mesa.png" alt="Nicolás Mesa" class="testimonial-photo" loading="lazy">
           <div>
             <div class="testimonial-name">Nicolás Mesa</div>
             <div class="testimonial-title">Cofounder &amp; CTO @ Veleiro AI | Ex-Amazon | Ex-Meta</div>
@@ -1399,7 +1399,7 @@
         <a href="https://docs.linuxarena.ai" class="btn btn-primary" target="_blank" rel="noopener">Read the docs</a>
         <a href="https://leaderboard.linuxarena.ai" class="btn btn-secondary" target="_blank" rel="noopener">See the leaderboard</a>
       </div>
-      <p class="ct-credit">Control Tower is developed by EquiStamp, Redwood Research and Luthien, as its <a href="https://github.com/linuxarena/control-tower#readme" target="_blank" rel="noopener">README</a> says.</p>
+      <p class="ct-credit">Control Tower is developed by EquiStamp, Redwood Research and Luthien (<a href="https://github.com/linuxarena/control-tower#readme" target="_blank" rel="noopener">GitHub</a>).</p>
       <div class="ct-logos">
         <a href="https://www.redwoodresearch.org/" target="_blank" rel="noopener"><img src="../assets/images/logos/redwood-research.svg" alt="Redwood Research"></a>
         <a href="https://equistamp.com/" target="_blank" rel="noopener"><img src="../assets/images/logos/equistamp.png" alt="EquiStamp"></a>
@@ -1587,7 +1587,7 @@
                   '<div>' +
                     '<div class="tweet-name-row">' +
                       '<span class="tweet-display">' + (q.twitterDisplay || "") + '</span>' +
-                      '<span class="tweet-handle">' + (q.twitterHandle || "") + ' \u00B7 2h</span>' +
+                      '<span class="tweet-handle">' + (q.twitterHandle || "") + (q.date ? ' \u00B7 ' + q.date : '') + '</span>' +
                     '</div>' +
                   '</div>' +
                 '</div>' +

@@ -6,6 +6,15 @@
   <title>Luthien's 2025 Theory of Change - Luthien</title>
   <link rel="canonical" href="https://luthienresearch.org/blog/theory-of-change/">
   <meta name="description" content="Luthien's theory of change for turning Redwood Research's AI control agenda into production-ready software. Why AI control is important, neglected, and tractable.">
+  <meta property="og:title" content="Luthien's 2025 Theory of Change">
+  <meta property="og:description" content="Luthien's theory of change for turning Redwood Research's AI control agenda into production-ready software. Why AI control is important, neglected, and tractable.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://luthienresearch.org/blog/theory-of-change/">
+  <meta property="og:image" content="https://luthienresearch.org/assets/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://luthienresearch.org/assets/images/og-image.png">
   <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,7 +54,7 @@
     <article>
       <p class="callout">This is our 2025 theory of change, kept for the record. Our current thinking is in <a href="../2026-theory-of-change/">Luthien's 2026 Theory of Change</a>.</p>
 
-      <p><em>My <a href="https://www.jai.one/" target="_blank" rel="noopener noreferrer">co-founder</a> (Jai) and I are building <a href="https://luthienresearch.org/" target="_blank" rel="noopener noreferrer">Luthien</a>, an AI safety startup (PBC) focused on turning Redwood's control agenda into production-ready software. We're currently in Seldon Lab's Batch #2 accelerator (Jan&ndash;Apr 2026). This post lays out our current thinking.</em></p>
+      <p><em>My <a href="https://www.jai.one/" target="_blank" rel="noopener noreferrer">co-founder</a> (Jai) and I are building <a href="https://luthienresearch.org/" target="_blank" rel="noopener noreferrer">Luthien</a>, an AI safety startup (PBC) focused on turning Redwood's control agenda into production-ready software. At the time of writing, we were in Seldon Lab's Batch #2 accelerator (Jan&ndash;Apr 2026). This post laid out our thinking at the time.</em></p>
 
       <img src="../../hackathon/luthien-theory-of-change.png" alt="Luthien Theory of Change: from building control software for developers, through adoption and feedback, to frontier AI labs deploying control systems" style="width: 100%; border: 1px solid #28243A; margin-bottom: 32px;">
 
@@ -136,7 +145,7 @@
 
       <p>Between June and August 2025, we conducted <a href="https://scottwofford.com/luthien/customer-discovery.html" target="_blank" rel="noopener noreferrer">9 problem validation interviews</a> with developers ranging from CTOs to staff engineers to developer advocates. Respondents consistently described the same frustrations: coding agents that delete tests to make broken code pass, hallucinate implementations, ignore explicit instructions, and claim false completion. These findings are catalogued in our <a href="https://docs.google.com/spreadsheets/d/1Ob_mgKqYZphRvli37X6DJQ-TdYtgBlXb5Y9TFxmEyec/edit" target="_blank" rel="noopener noreferrer">user frustrations database</a> with 28 documented examples.</p>
 
-      <p>Based on interview findings, we developed <a href="https://github.com/LuthienResearch/luthien-proxy/blob/main/dev/user-stories/README.md" target="_blank" rel="noopener noreferrer">6 user personas and prioritized features into 5 waves</a>. We&rsquo;ve completed 4 live demos and guided implementations, and have <a href="https://docs.google.com/spreadsheets/d/1lKNWdLRrkRu4VtxLsdWnKF_OFPBXAgG1aMioS9shHSM/edit?usp=sharing" target="_blank" rel="noopener noreferrer">65 potential users</a> who expressed interest in the pipeline. We are in early pilot conversations with Cornerstone Research (economic/financial consulting) via their CTIO Phil Leslie (ex-Amazon VP), whose need, letting teams experiment with AI while staying &ldquo;extremely risk averse around confidentiality of data and security,&rdquo; represents a category of enterprise user we expect to grow.</p>
+      <p>Based on interview findings, we developed 6 user personas and prioritized features into 5 waves. We&rsquo;ve completed 4 live demos and guided implementations, and have 65 potential users who expressed interest in the pipeline. We are in early pilot conversations with Cornerstone Research (economic/financial consulting) via their CTIO Phil Leslie (ex-Amazon VP), whose need, letting teams experiment with AI while staying &ldquo;extremely risk averse around confidentiality of data and security,&rdquo; represents a category of enterprise user we expect to grow.</p>
 
       <p>We don&rsquo;t yet have retention or efficacy data. The product is still in alpha and we&rsquo;re recruiting 5 design partners for recurring feedback sessions (calls every 1&ndash;2 weeks) to guide development. If you&rsquo;re interested, please reach out to <a href="mailto:scott@luthienresearch.org">scott@luthienresearch.org</a>.</p>
 
@@ -304,7 +313,7 @@
 
       <h3>Appendix C: Architecture Decisions and Debates</h3>
 
-      <p>Luthien&rsquo;s proxy-first architecture is a deliberate bet, not a default. In January 2026, we stress-tested this choice against feedback from Redwood Research (<a href="https://www.lesswrong.com/users/buck" target="_blank" rel="noopener noreferrer">Buck Shlegeris</a>, <a href="https://www.linkedin.com/in/tyler-tracy-a03642192/" target="_blank" rel="noopener noreferrer">Tyler Tracy</a>, <a href="https://awestover.github.io" target="_blank" rel="noopener noreferrer">Alek Westover</a>) and <a href="https://www.linkedin.com/in/ram-potham/" target="_blank" rel="noopener noreferrer">Ram Potham</a>. This appendix documents the core tensions and our reasoning. Full synthesis: <a href="https://github.com/LuthienResearch/luthien-org/blob/main/public-repo-internal-archive/architecture_synthesis_jan28_feb4_2026.md" target="_blank" rel="noopener noreferrer">Architecture Decisions in Github</a>.</p>
+      <p>Luthien&rsquo;s proxy-first architecture is a deliberate bet, not a default. In January 2026, we stress-tested this choice against feedback from Redwood Research (<a href="https://www.lesswrong.com/users/buck" target="_blank" rel="noopener noreferrer">Buck Shlegeris</a>, <a href="https://www.linkedin.com/in/tyler-tracy-a03642192/" target="_blank" rel="noopener noreferrer">Tyler Tracy</a>, <a href="https://awestover.github.io" target="_blank" rel="noopener noreferrer">Alek Westover</a>) and <a href="https://www.linkedin.com/in/ram-potham/" target="_blank" rel="noopener noreferrer">Ram Potham</a>. This appendix documents the core tensions and our reasoning. Full synthesis: Architecture Decisions in Github.</p>
 
       <p><strong>The decision space.</strong> Three conversations exposed a core tension. Proxy advantages: deployment simplicity (one env var), separation of concerns (security team doesn&rsquo;t touch inference/scaffold code), client heterogeneity, bottleneck control at the API layer. Scaffold advantages: richer orchestration context, easier multi-turn tracking, industry momentum, Buck&rsquo;s preference. What everyone agreed on: ship something, get users, get logs; architecture debate is premature without deployment data.</p>
 
