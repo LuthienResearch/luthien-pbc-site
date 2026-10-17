@@ -4,6 +4,7 @@
 
 | Version | Date | Summary |
 |---------|------|---------|
+| v12.25 | 2026-10-16 | Add Jai Dhyani (Co-founder & ex-CTO) and Katherine Cohen (Interim Board Chair) to the home page advisors section. (PR #209) |
 | v12.24 | 2026-10-16 | Address Matthew Broerman's review of PR #208: remove Project Tailwind and speculative third-party claims, simplify the first ecosystem risk and mitigation, remove unnecessary personal references, shorten the agile section, drop the proprietary-detection commitment, use neutral retention wording, and update the shared social preview for the organization mission. Preserve existing section anchors after removing the Tailwind heading. |
 | v12.23 | 2026-10-16 | Fix the Tools page hero being clipped on phones: `.hero` is a flex row, so its container grew to fit the nowrap `curl` install command (about 536px on a 390px screen). The container is now capped at the screen width, the install command is smaller on mobile, and the Proxy / Control Tower switcher stays on one line at 320px. (PR #211) |
 | v12.22 | 2026-10-16 | Copy fixes from review: profit footnote uses the deck's "include" wording (no implied sum), drop the out-of-context "raised $50M" tile label, credit Control Tower as its README does, stop promising all code is published on `/mts`, retitle the Theory of Change risks section "Arguments Against Our Approach", and remove unsigned Faculty engagement details from the post. |
