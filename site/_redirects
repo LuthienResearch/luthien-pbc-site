@@ -7,3 +7,4 @@
 /updates /blog.html 301
 /updates/* /blog.html 301
 /feed.xml /blog.html 301
+/gtm /fde/ 301
