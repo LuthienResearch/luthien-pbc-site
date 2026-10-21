@@ -622,6 +622,9 @@
     .team-name.confidential { color: #9891A8; font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 0.95rem; }
     .contrib-num a { font-family: 'JetBrains Mono', monospace; font-size: 1.35rem; font-weight: 600; color: #C47B42; line-height: 1.2; text-decoration: none; }
     .contrib-num a:hover { color: #EDE5D8; }
+    .advisor-grid.contrib-grid { grid-template-columns: repeat(4, 1fr); }
+    .contrib-grid .r { white-space: nowrap; }
+    @media (max-width: 900px) { .advisor-grid.contrib-grid { grid-template-columns: 1fr 1fr; } }
     h2.section-label { line-height: 1.2; }
     @media (max-width: 640px) { .br-wide { display: none; } }
     .hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 28px; opacity: 0; animation: heroFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.24s forwards; }
