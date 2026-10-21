@@ -4,6 +4,7 @@
 
 | Version | Date | Summary |
 |---------|------|---------|
+| v12.28 | 2026-10-21 | Add a Forward Deployed Engineer, Go-to-Market role page at `/gtm/` (client outreach plus 4-week client sprints), modeled on `/mts/`, and link it from the MTS page's "Not seeing a fit?" section. |
 | v12.27 | 2026-10-18 | Professional link icons (LinkedIn, GitHub, X, Substack, website, Google Scholar, email) under each named team member and advisor on the home page. Advisor cards become cards with their own icon row instead of single LinkedIn links. Footer links on every page become matching icons (GitHub, LinkedIn, YouTube, email to contact@), /blog/ and /frustrations.html get the standard footer, and site email links use contact@ instead of Scott's address. |
 | v12.26 | 2026-10-17 | QA pass on the live site: PNG social preview image on every page (SVG previews don't render) and OG tags on both Theory of Change posts; hero gets "Talk to us" and Theory of Change buttons; headline break only on wide screens; section labels are real h2 headings; footnotes numbered in reading order with higher contrast; angel photos shrunk (5.4 MB to 0.2 MB) and lazy-loaded; avatars served from the site; tweet cards show their real date instead of a hard-coded "2h"; cursor removed from the ToC diagram; 2025 ToC post in past tense with private/404 links unlinked; blog indexes describe current focus, newest first, one canonical. |
 | v12.25 | 2026-10-16 | Add Jai Dhyani (Co-founder & ex-CTO) and Katherine Cohen (Interim Board Chair) to the home page advisors section. (PR #209) |
