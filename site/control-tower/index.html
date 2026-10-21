@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Control Tower - AI control evaluations | Luthien</title>
+  <link rel="canonical" href="https://luthienresearch.org/control-tower/">
+  <meta name="description" content="Control Tower is a framework for AI control evaluations built on Inspect and developed by EquiStamp, Redwood Research, and Luthien.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Control Tower - AI control evaluations">
+  <meta property="og:description" content="Control Tower is a framework for AI control evaluations built on Inspect and developed by EquiStamp, Redwood Research, and Luthien.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://luthienresearch.org/control-tower/">
+  <meta property="og:image" content="https://luthienresearch.org/assets/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Control Tower - AI control evaluations">
+  <meta name="twitter:description" content="Control Tower is a framework for AI control evaluations built on Inspect and developed by EquiStamp, Redwood Research, and Luthien.">
+  <meta name="twitter:image" content="https://luthienresearch.org/assets/images/og-image.png">
+
+  <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Lora:wght@400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Base, nav, section labels, advisor cards and footer are copied from the home page (site/index.html) */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 17.6px; overflow-y: scroll; }
+    body { background: #141216; color: #EDE5D8; font-family: 'Lora', Georgia, serif; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    h1, h2, h3 { font-family: 'Raleway', sans-serif; color: #EDE5D8; line-height: 1.2; }
+    a { color: #3B9494; text-decoration: none; }
+    a:hover { color: #4AADAD; }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 40px 0; }
+    section[id] { scroll-margin-top: 72px; }
+    @media (max-width: 640px) { section { padding: 28px 0; } .container { padding: 0 16px; } }
+    hr.divider { border: none; border-top: 1px solid #28243A; margin: 0; }
+
+    /* NAV */
+    .top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(20, 18, 22, 1); border-bottom: 1px solid #28243A; padding: 0 3%; height: 58px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-left { display: flex; align-items: center; gap: 10px; text-decoration: none; transition: opacity 0.2s; }
+    .nav-left:hover { opacity: 0.8; }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .nav-link { font-family: 'Raleway', sans-serif; font-size: 0.9rem; font-weight: 500; color: #9891A8; text-decoration: none; transition: color 0.2s; }
+    .nav-link:hover, .nav-link.active { color: #EDE5D8; }
+    .nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 10px; margin: -10px; }
+    .nav-hamburger svg { fill: #9891A8; }
+    .nav-hamburger:hover svg { fill: #EDE5D8; }
+    @media (max-width: 640px) {
+      .nav-link { display: none; }
+      .nav-hamburger { display: flex; align-items: center; }
+      .nav-right.open { position: fixed; top: 58px; left: 0; right: 0; background: rgba(20, 18, 22, 1); border-bottom: 1px solid #28243A; flex-direction: column; padding: 16px 24px; gap: 0; z-index: 99; }
+      .nav-right.open .nav-link { display: block; padding: 12px 0; font-size: 1rem; width: 100%; border-bottom: 1px solid #28243A; }
+    }
+
+    /* SECTION LABEL (match home page) */
+    .section-label { font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 600; letter-spacing: -0.02em; color: #EDE5D8; margin: 0 auto 20px; max-width: 960px; padding: 0 24px; line-height: 1.2; }
+    @media (max-width: 640px) { .section-label { padding: 0 16px; } }
+    .section-legend { font-size: 0.85rem; color: #9891A8; margin: -8px 0 24px; }
+
+    /* HERO */
+    @keyframes heroFadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .ct-hero { padding-top: 150px; padding-bottom: 24px; text-align: center; }
+    .ct-hero h1 { font-size: clamp(2.4rem, 6vw, 3.8rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.08; margin: 0 auto 24px; opacity: 0; animation: heroFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.08s forwards; }
+    .ct-hero .lead { font-size: clamp(1.02rem, 2vw, 1.15rem); line-height: 1.7; color: #D8D0C4; max-width: 680px; margin: 0 auto; opacity: 0; animation: heroFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.18s forwards; }
+    .hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 28px; opacity: 0; animation: heroFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.24s forwards; }
+    .hero-cta a { font-family: 'Raleway', sans-serif; font-weight: 600; font-size: 0.95rem; padding: 11px 22px; border-radius: 4px; }
+    .cta-primary { background: #3B9494; color: #141216; }
+    .cta-primary:hover { background: #2A8080; color: #141216; }
+    .cta-ghost { border: 1px solid #3B9494; color: #EDE5D8; }
+    .cta-ghost:hover { border-color: #4AADAD; color: #4AADAD; }
+
+    /* WHAT IT'S FOR */
+    .for-list { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .for-list li { border: 1px solid #28243A; border-radius: 10px; padding: 22px 24px; background: #18151C; font-size: 0.95rem; color: #C9C1D6; line-height: 1.65; }
+    @media (max-width: 720px) { .for-list { grid-template-columns: 1fr; } }
+
+    /* BUILT BY */
+    .built-by { color: #C9C1D6; font-size: 1rem; line-height: 1.7; max-width: 820px; }
+    .org-logos { display: flex; gap: 36px; align-items: center; flex-wrap: wrap; margin-top: 22px; }
+    .org-logos a { display: inline-flex; align-items: center; padding: 4px 6px; border-radius: 3px; transition: background 0.2s; }
+    .org-logos a:hover { background: rgba(59, 148, 148, 0.12); }
+    .org-logos img { height: 24px; width: auto; filter: brightness(0) invert(0.92); }
+    .org-logos img.luthien { height: 30px; filter: none; }
+
+    /* CONTRIBUTORS (advisor-card format from the home page) */
+    .advisor-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px 24px; }
+    @media (max-width: 900px) { .advisor-grid { grid-template-columns: 1fr 1fr; } }
+    .advisor { display: flex; align-items: center; gap: 14px; color: #EDE5D8; padding: 8px; border-radius: 8px; }
+    .advisor-photo { display: block; flex-shrink: 0; }
+    .advisor img { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 1px solid #28243A; flex-shrink: 0; }
+    .advisor .n { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 0.98rem; line-height: 1.25; }
+    .advisor .n a { color: inherit; }
+    .advisor .n a:hover { color: #C47B42; }
+    .advisor .r { font-size: 0.8rem; color: #9891A8; line-height: 1.4; margin-top: 2px; white-space: nowrap; }
+    .advisor-links { display: flex; gap: 4px; margin: 2px 0 0 -5px; flex-wrap: wrap; }
+    .advisor-links a { color: #9891A8; display: flex; align-items: center; padding: 5px; transition: color 0.2s; }
+    .advisor-links a:hover { color: #C47B42; }
+    .advisor-links svg { width: 17px; height: 17px; }
+    .contrib-num a { font-family: 'JetBrains Mono', monospace; font-size: 1.35rem; font-weight: 600; color: #C47B42; line-height: 1.2; text-decoration: none; }
+    .contrib-num a:hover { color: #EDE5D8; }
+    .contrib-hl { color: #C47B42; }
+    @media (max-width: 520px) { .advisor { flex-direction: column; text-align: center; } .advisor-links { justify-content: center; margin-left: 0; } }
+
+    /* FOOTER */
+    footer { border-top: 1px solid #28243A; padding: 32px 0; margin-top: 58px; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; }
+    .footer-brand { display: flex; align-items: center; gap: 8px; }
+    .footer-year { color: #9891A8; font-size: 0.8rem; line-height: 1.7; }
+    .footer-tagline { font-family: 'Raleway', sans-serif; font-size: 0.75rem; font-style: italic; color: #B0A8BE; text-decoration: none; transition: color 0.2s; }
+    .footer-tagline:hover { color: #EDE5D8; }
+    .footer-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+    .footer-version { font-size: 0.7rem; color: #28243A; font-family: 'JetBrains Mono', monospace; }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { color: #9891A8; font-size: 0.85rem; line-height: 1.7; }
+    .footer-links a:hover { color: #C8C0B4; }
+    @media (max-width: 640px) {
+      .footer-inner { flex-direction: column; align-items: center; text-align: center; gap: 20px; }
+      .footer-right { align-items: center; }
+    }
+
+    /* SECTION FADE-IN ON SCROLL */
+    .section-reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .section-reveal.visible { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+      .section-reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <nav class="top-nav">
+    <a href="../index.html" class="nav-left" style="display: flex; align-items: center;">
+      <img src="../assets/images/luthien-new.svg" alt="Luthien" style="height: 38px; width: auto; display: block;">
+    </a>
+    <div class="nav-right" id="navRight">
+      <a href="../" class="nav-link">mission</a>
+      <a href="../index.html#team" class="nav-link">team</a>
+      <a href="../tools/" class="nav-link active">tools</a>
+      <a href="../blog.html" class="nav-link">blog</a>
+      <a href="../mts/" class="nav-link">careers</a>
+    </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect y="3" width="20" height="2" rx="1"/><rect y="9" width="20" height="2" rx="1"/><rect y="15" width="20" height="2" rx="1"/></svg></button>
+  </nav>
+
+  <main id="main">
+
+  <!-- HERO (lead sentence is verbatim from the Control Tower README: https://github.com/linuxarena/control-tower#readme) -->
+  <section class="ct-hero" id="top">
+    <div class="container">
+      <h1>Control Tower</h1>
+      <p class="lead">Control Tower is a framework for AI control evaluations built on <a href="https://inspect.aisi.org.uk/" target="_blank" rel="noopener noreferrer">Inspect</a> and developed by <a href="https://equistamp.com/" target="_blank" rel="noopener noreferrer">EquiStamp</a>, <a href="https://www.redwoodresearch.org/" target="_blank" rel="noopener noreferrer">Redwood Research</a>, and Luthien.</p>
+      <div class="hero-cta">
+        <a class="cta-primary" href="https://docs.linuxarena.ai" target="_blank" rel="noopener noreferrer">Docs</a>
+        <a class="cta-ghost" href="https://leaderboard.linuxarena.ai" target="_blank" rel="noopener noreferrer">Leaderboard</a>
+        <a class="cta-ghost" href="https://github.com/linuxarena/control-tower" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT IT'S FOR (sources: docs.linuxarena.ai overview, the README, leaderboard.linuxarena.ai) -->
+  <section class="section-reveal" id="for">
+    <h2 class="section-label">what it's for</h2>
+    <div class="container">
+      <ul class="for-list">
+        <li>Control Tower measures how well safety protocols work. It runs AI agents on tasks in realistic software environments.</li>
+        <li>It ships blue-team protocols, action- and trajectory-level monitors, control evaluations, safety-usefulness curves, and trajectory tooling.</li>
+        <li>Its public leaderboard reports how well frontier models complete their assigned tasks while a trusted monitor watches for sabotage.</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- BUILT BY (order and wording follow the README) -->
+  <section class="section-reveal" id="built-by">
+    <h2 class="section-label">built by</h2>
+    <div class="container">
+      <p class="built-by">Control Tower is developed by EquiStamp, Redwood Research, and Luthien. The leaderboard is run by Redwood Research and EquiStamp.</p>
+      <div class="org-logos">
+        <a href="https://equistamp.com/" target="_blank" rel="noopener noreferrer"><img src="../assets/images/logos/equistamp.png" alt="EquiStamp"></a>
+        <a href="https://www.redwoodresearch.org/" target="_blank" rel="noopener noreferrer"><img src="../assets/images/logos/redwood-research.svg" alt="Redwood Research"></a>
+        <a href="../"><img class="luthien" src="../assets/images/luthien-new.svg" alt="Luthien"></a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- TOP CONTRIBUTORS (counts: GitHub search API, repo:linuxarena/control-tower is:pr is:merged author:LOGIN, 2026-10-21; bot accounts excluded) -->
+  <section class="section-reveal" id="contributors">
+    <h2 class="section-label">top contributors by <span class="contrib-hl">merged PRs</span></h2>
+    <div class="container">
+      <p class="section-legend">Merged pull requests to <a href="https://github.com/linuxarena/control-tower" target="_blank" rel="noopener noreferrer">linuxarena/control-tower</a> as of October 21, 2026. Bot accounts are not counted.</p>
+      <div class="advisor-grid">
+        <div class="advisor"><a class="advisor-photo" href="https://github.com/henri123lemoine" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="../assets/images/team/ct/henri123lemoine.png" alt="Henri Lemoine" loading="lazy"></a><div><div class="n"><a href="https://github.com/henri123lemoine" target="_blank" rel="noopener noreferrer">Henri Lemoine</a></div><div class="r contrib-num"><a href="https://github.com/linuxarena/control-tower/pulls?q=is%3Apr+author%3Ahenri123lemoine+is%3Amerged" target="_blank" rel="noopener noreferrer" title="869 merged pull requests" aria-label="869 merged pull requests">869</a></div><div class="advisor-links"><a href="https://github.com/henri123lemoine" target="_blank" rel="noopener noreferrer" title="GitHub" aria-label="Henri Lemoine's GitHub"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a><a href="https://henrilemoine.com" target="_blank" rel="noopener noreferrer" title="Website" aria-label="Henri Lemoine's Website"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a></div></div></div>
+        <div class="advisor"><a class="advisor-photo" href="https://github.com/TommyBark" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="../assets/images/team/ct/TommyBark.png" alt="TommyBark" loading="lazy"></a><div><div class="n"><a href="https://github.com/TommyBark" target="_blank" rel="noopener noreferrer">TommyBark</a></div><div class="r contrib-num"><a href="https://github.com/linuxarena/control-tower/pulls?q=is%3Apr+author%3ATommyBark+is%3Amerged" target="_blank" rel="noopener noreferrer" title="194 merged pull requests" aria-label="194 merged pull requests">194</a></div><div class="advisor-links"><a href="https://github.com/TommyBark" target="_blank" rel="noopener noreferrer" title="GitHub" aria-label="TommyBark's GitHub"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a></div></div></div>
+        <div class="advisor"><a class="advisor-photo" href="https://github.com/metatrot" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="../assets/images/team/ct/metatrot.png" alt="Adam Hanson" loading="lazy"></a><div><div class="n"><a href="https://github.com/metatrot" target="_blank" rel="noopener noreferrer">Adam Hanson</a></div><div class="r contrib-num"><a href="https://github.com/linuxarena/control-tower/pulls?q=is%3Apr+author%3Ametatrot+is%3Amerged" target="_blank" rel="noopener noreferrer" title="174 merged pull requests" aria-label="174 merged pull requests">174</a></div><div class="advisor-links"><a href="https://github.com/metatrot" target="_blank" rel="noopener noreferrer" title="GitHub" aria-label="Adam Hanson's GitHub"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a></div></div></div>
+        <div class="advisor"><a class="advisor-photo" href="https://github.com/tylerthecoder" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="../assets/images/team/ct/tylerthecoder.jpg" alt="Tyler Tracy" loading="lazy"></a><div><div class="n"><a href="https://github.com/tylerthecoder" target="_blank" rel="noopener noreferrer">Tyler Tracy</a></div><div class="r contrib-num"><a href="https://github.com/linuxarena/control-tower/pulls?q=is%3Apr+author%3Atylerthecoder+is%3Amerged" target="_blank" rel="noopener noreferrer" title="96 merged pull requests" aria-label="96 merged pull requests">96</a></div><div class="advisor-links"><a href="https://github.com/tylerthecoder" target="_blank" rel="noopener noreferrer" title="GitHub" aria-label="Tyler Tracy's GitHub"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a><a href="https://www.tylertracy.com/" target="_blank" rel="noopener noreferrer" title="Website" aria-label="Tyler Tracy's Website"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a></div></div></div>
+        <div class="advisor"><a class="advisor-photo" href="https://github.com/HolyMichael" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="../assets/images/team/ct/HolyMichael.jpg" alt="Miguel Brandão" loading="lazy"></a><div><div class="n"><a href="https://github.com/HolyMichael" target="_blank" rel="noopener noreferrer">Miguel Brandão</a></div><div class="r contrib-num"><a href="https://github.com/linuxarena/control-tower/pulls?q=is%3Apr+author%3AHolyMichael+is%3Amerged" target="_blank" rel="noopener noreferrer" title="91 merged pull requests" aria-label="91 merged pull requests">91</a></div><div class="advisor-links"><a href="https://github.com/HolyMichael" target="_blank" rel="noopener noreferrer" title="GitHub" aria-label="Miguel Brandão's GitHub"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a></div></div></div>
+        <div class="advisor"><a class="advisor-photo" href="https://github.com/RadekBudz" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="../assets/images/team/ct/RadekBudz.jpg" alt="Radek Budzyński" loading="lazy"></a><div><div class="n"><a href="https://github.com/RadekBudz" target="_blank" rel="noopener noreferrer">Radek Budzyński</a></div><div class="r contrib-num"><a href="https://github.com/linuxarena/control-tower/pulls?q=is%3Apr+author%3ARadekBudz+is%3Amerged" target="_blank" rel="noopener noreferrer" title="34 merged pull requests" aria-label="34 merged pull requests">34</a></div><div class="advisor-links"><a href="https://github.com/RadekBudz" target="_blank" rel="noopener noreferrer" title="GitHub" aria-label="Radek Budzyński's GitHub"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a></div></div></div>
+        <div class="advisor"><a class="advisor-photo" href="https://github.com/rapturt9" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="../assets/images/team/ct/rapturt9.jpg" alt="Ram Potham" loading="lazy"></a><div><div class="n"><a href="https://github.com/rapturt9" target="_blank" rel="noopener noreferrer">Ram Potham</a></div><div class="r contrib-num"><a href="https://github.com/linuxarena/control-tower/pulls?q=is%3Apr+author%3Arapturt9+is%3Amerged" target="_blank" rel="noopener noreferrer" title="25 merged pull requests" aria-label="25 merged pull requests">25</a></div><div class="advisor-links"><a href="https://github.com/rapturt9" target="_blank" rel="noopener noreferrer" title="GitHub" aria-label="Ram Potham's GitHub"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a><a href="https://rampotham.com" target="_blank" rel="noopener noreferrer" title="Website" aria-label="Ram Potham's Website"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a></div></div></div>
+        <div class="advisor"><a class="advisor-photo" href="https://github.com/oscar-sykes" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="../assets/images/team/ct/oscar-sykes.jpg" alt="Oscar Sykes" loading="lazy"></a><div><div class="n"><a href="https://github.com/oscar-sykes" target="_blank" rel="noopener noreferrer">Oscar Sykes</a></div><div class="r contrib-num"><a href="https://github.com/linuxarena/control-tower/pulls?q=is%3Apr+author%3Aoscar-sykes+is%3Amerged" target="_blank" rel="noopener noreferrer" title="21 merged pull requests" aria-label="21 merged pull requests">21</a></div><div class="advisor-links"><a href="https://github.com/oscar-sykes" target="_blank" rel="noopener noreferrer" title="GitHub" aria-label="Oscar Sykes's GitHub"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand" style="flex-direction: column; align-items: flex-start; gap: 6px;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <img src="../assets/images/luthien-new.svg" alt="Luthien" style="height: 34px; width: auto; display: block;">
+            <span class="footer-year">&middot; 2026</span>
+          </div>
+          <a href="https://www.youtube.com/watch?v=YzjvBw96kas" target="_blank" rel="noopener noreferrer" class="footer-tagline">
+            Power is nothing without control.
+          </a>
+        </div>
+        <div class="footer-right">
+          <style>.footer-links.footer-icons{gap:6px;align-items:center}.footer-links.footer-icons a{display:flex;align-items:center;padding:5px}.footer-links.footer-icons a::after{display:none}</style>
+          <div class="footer-links footer-icons"><a href="https://github.com/LuthienResearch" target="_blank" rel="noopener noreferrer" title="GitHub" aria-label="Luthien on GitHub"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a><a href="https://linkedin.com/company/luthien-control" target="_blank" rel="noopener noreferrer" title="LinkedIn" aria-label="Luthien on LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="https://www.youtube.com/@LuthienControl" target="_blank" rel="noopener noreferrer" title="YouTube" aria-label="Luthien on YouTube"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a><a href="mailto:contact@luthienresearch.org" title="Email" aria-label="Email Luthien"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a></div>
+          <span class="footer-version">v12</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Section reveal on scroll -->
+  <script>
+    (function () {
+      var sections = document.querySelectorAll('.section-reveal');
+      if (!sections.length) return;
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      sections.forEach(function (s) { observer.observe(s); });
+    })();
+  </script>
+
+  <!-- Mobile hamburger menu toggle -->
+  <script>
+    (function () {
+      var btn = document.getElementById('navHamburger');
+      var nav = document.getElementById('navRight');
+      if (!btn || !nav) return;
+      btn.addEventListener('click', function () {
+        nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', nav.classList.contains('open'));
+      });
+      nav.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () { nav.classList.remove('open'); });
+      });
+    })();
+  </script>
+
+<script data-goatcounter="https://luthien.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
