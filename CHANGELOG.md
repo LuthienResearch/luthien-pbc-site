@@ -4,6 +4,7 @@
 
 | Version | Date | Summary |
 |---------|------|---------|
+| v12.30 | 2026-10-21 | MTS role retitled "Founding Member of Technical Staff" (page, home "join us", FDE cross-link) with the lead "Build open-source tools for frontier AI lab auditors and AI safety researchers." |
 | v12.29 | 2026-10-21 | Add a Founding Forward Deployed Engineer role page at `/fde/` (with a `/gtm` alias), in the same minimal format as `/mts/`, which links to it. The home page "join us" section names both roles, and the "careers" nav link and `/careers` now go there instead of `/mts/`. |
 | v12.28 | 2026-10-21 | Rewrite the Member of Technical Staff page to minimal copy: facts row (preferred cities, full-time once funded with flexible start, pay), what you'll do, you have, "How we work" (#how-we-work), how to apply. Links to the home page mission and team and the 2026 Theory of Change (new `#problems` and `#impact-strategy` anchors) instead of restating them. |
 | v12.27 | 2026-10-18 | Professional link icons (LinkedIn, GitHub, X, Substack, website, Google Scholar, email) under each named team member and advisor on the home page. Advisor cards become cards with their own icon row instead of single LinkedIn links. Footer links on every page become matching icons (GitHub, LinkedIn, YouTube, email to contact@), /blog/ and /frustrations.html get the standard footer, and site email links use contact@ instead of Scott's address. |
