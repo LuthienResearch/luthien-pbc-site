@@ -4,6 +4,7 @@
 
 | Version | Date | Summary |
 |---------|------|---------|
+| v12.32 | 2026-10-22 | Careers eligibility as three cards (Location: Remote-friendly; Type: Flexible; Pay: Negotiable), each with a short detail line, and a banner below them: "All full-time, paid roles are conditional on more Luthien funding or revenue." FDE drops its fourth bullet. |
 | v12.31 | 2026-10-21 | One careers page at `/careers/`: eligibility, roles (each expands in place), apply, and principles, each written once. "Principles" adds a Luthien leadership principle, Speed of Trust, built from the 13 behaviors in Covey's book, and quotes three of Amazon's Leadership Principles in full (Ownership; Have Backbone, Disagree and Commit; Deliver Results). `/mts/` and `/fde/` (and `/gtm`) redirect to their expanded section. The "careers" nav link goes to `/careers/`. |
 | v12.30 | 2026-10-21 | MTS role retitled "Founding Member of Technical Staff" (page, home "join us", FDE cross-link) with the lead "Build open-source tools for frontier AI lab auditors and AI safety researchers." |
 | v12.29 | 2026-10-21 | Add a Founding Forward Deployed Engineer role page at `/fde/` (with a `/gtm` alias), in the same minimal format as `/mts/`, which links to it. The home page "join us" section names both roles, and the "careers" nav link and `/careers` now go there instead of `/mts/`. |

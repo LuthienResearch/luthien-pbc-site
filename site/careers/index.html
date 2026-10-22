@@ -332,6 +332,16 @@
     .role-title { font-family: 'Raleway', sans-serif; font-size: 1rem; font-weight: 600; color: #EDE5D8; }
     .role .role-inner { padding: 4px 0 24px; }
     .section-sub { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #9891A8; max-width: 960px; margin: -14px auto 20px; padding: 0 24px; }
+    .dd-sub { display: block; font-size: 0.85rem; color: #9891A8; margin-top: 2px; }
+    .elig-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .elig-cards > div { border: 1px solid #28243A; border-radius: 6px; padding: 16px 18px; }
+    .elig-lbl { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: #9891A8; }
+    .elig-hd { font-family: 'Raleway', sans-serif; font-weight: 600; font-size: 1.05rem; color: #EDE5D8; margin: 6px 0; }
+    .elig-sb { font-size: 0.85rem; color: #9891A8; line-height: 1.5; }
+    .elig-note { display: flex; gap: 14px; align-items: center; border: 1px solid rgba(196,123,66,.45); background: rgba(196,123,66,.08); border-radius: 8px; padding: 18px 22px; margin-top: 18px; color: #C47B42; }
+    .elig-note svg { flex: none; }
+    .elig-note span { font-family: 'Raleway', sans-serif; font-size: 1.15rem; font-weight: 600; color: #EDE5D8; line-height: 1.4; }
+    @media (max-width: 680px) { .elig-cards { grid-template-columns: 1fr; } }
     .cp-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
     .cp { border: 1px solid #28243A; border-radius: 6px; padding: 18px 20px 36px; position: relative; }
     .cp .cp-logo { position: absolute; right: 12px; top: 14px; padding: 4px; }
@@ -379,11 +389,12 @@
   <section id="eligibility" style="padding-top: 104px;">
     <h2 class="section-label">eligibility</h2>
     <div class="container careers-body">
-      <dl class="role-facts">
-        <div><dt>Location</dt><dd>Seattle, SF, Pittsburgh or LA preferred</dd></div>
-        <div><dt>Type</dt><dd>Full-time once funded. You can start as an open-source contributor, paid contractor, or part-time.</dd></div>
-        <div><dt>Pay</dt><dd>Discussed when we talk</dd></div>
-      </dl>
+      <div class="elig-cards">
+        <div><div class="elig-lbl">Location</div><div class="elig-hd">Remote-friendly</div><div class="elig-sb">with travel to conferences (e.g., EAG, ControlConf) and quarterly team offsites. Hub Bonus Points: Seattle, SF, LA, Pittsburgh</div></div>
+        <div><div class="elig-lbl">Type</div><div class="elig-hd">Flexible</div><div class="elig-sb">You can start as an open-source contributor, paid contractor, or part-time.</div></div>
+        <div><div class="elig-lbl">Pay</div><div class="elig-hd">Negotiable</div><div class="elig-sb">Below market for now, with equity to make up the gap. We're aiming for market pay as funding and revenue grow.</div></div>
+      </div>
+      <div class="elig-note"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span>All full-time, paid roles are conditional on more Luthien funding or revenue.</span></div>
     </div>
   </section>
 
@@ -413,7 +424,6 @@
           <li>Do warm and cold outreach to prospective clients.</li>
           <li>Own 4-week sprints with each client to build tools that meet their needs.</li>
           <li>Maximize quality and frequency of user feedback (minimum every week).</li>
-          <li>Manage feedback from everyone at the client who uses our open-source tools.</li>
         </ul>
             </div>
           </div>
