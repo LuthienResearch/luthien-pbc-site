@@ -1,10 +1,13 @@
 /toc /blog/2026-theory-of-change/ 301
 /story /pitch/?mode=story 302
 /proxy /tools/ 301
-/careers /#join 302
 /updates/2025-03-redteam-as-upsampling* /blog/21-points/ 301
 /updates/2025-03-controlconf* /blog/controlconf-london-2025/ 301
 /updates /blog.html 301
 /updates/* /blog.html 301
 /feed.xml /blog.html 301
-/gtm /fde/ 301
+/gtm /careers/#fde 301
+/fde /careers/#fde 301
+/fde/ /careers/#fde 301
+/mts /careers/#mts 301
+/mts/ /careers/#mts 301
