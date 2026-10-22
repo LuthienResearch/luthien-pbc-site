@@ -328,6 +328,7 @@
     .btn-apply { display: block; text-align: center; padding: 12px 20px; border-radius: 4px; background: #3B9494; color: #141216; font-family: 'Raleway', sans-serif; font-weight: 600; }
     .btn-apply:hover { background: #2A8080; color: #141216; }
     .careers-body .btn-apply { display: inline-block; margin: 4px 0 8px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
     .role { border-top: 1px solid #28243A; }
     .role:last-child { border-bottom: 1px solid #28243A; }
     .role summary { cursor: pointer; list-style: none; padding: 18px 28px 18px 0; position: relative; display: flex; flex-direction: column; gap: 4px; }
@@ -369,25 +370,18 @@
 
   <main id="main">
 
-  <div class="role-header">
-    <div class="container">
-      <div class="role-kicker">careers</div>
-      <h1>Careers</h1>
-      <p class="role-context">Meet the <a href="../#team">team</a> and read our <a href="../#mission">mission</a>.</p>
-    </div>
-  </div>
-
   <div class="container">
-    <article class="careers-body" style="padding: 40px 0 8px;">
+    <article class="careers-body" style="padding: 120px 0 8px;">
+      <h1 class="sr-only">Careers</h1>
 
-      <h2 id="who-can-apply">Who can apply</h2>
+      <h2 id="eligibility">Eligibility</h2>
       <dl class="role-facts">
         <div><dt>Location</dt><dd>Seattle, SF, Pittsburgh or LA preferred</dd></div>
         <div><dt>Type</dt><dd>Full-time once funded. You can start as an open-source contributor, paid contractor, or part-time.</dd></div>
         <div><dt>Pay</dt><dd>Discussed when we talk</dd></div>
       </dl>
 
-      <h2 id="open-roles">Open roles</h2>
+      <h2 id="roles">Roles</h2>
       <div class="careers-roles">
         <details class="role" id="mts">
           <summary><span class="role-title">Founding Member of Technical Staff</span><span class="role-sum">Build open-source tools for frontier AI lab auditors and AI safety researchers.</span></summary>
@@ -432,14 +426,13 @@
       <p>Don't see your role? Pitch one in your email.</p>
 
 
-      <h2 id="how-to-apply">How to apply</h2>
+      <h2 id="apply">Apply</h2>
       <p>Email your CV, links to your work, and a few lines on why you want to join. Put the role in the subject line.</p>
       <a class="btn-apply" href="mailto:contact@luthienresearch.org">contact@luthienresearch.org</a>
 
-      <h2 id="what-we-look-for">What we look for</h2>
-      <p>Ownership, speed of trust, disagree and commit, and deliver results.</p>
+      <h2 id="principles">Principles</h2>
       <p class="lp"><strong>Speed of Trust.</strong> Leaders extend trust first and keep their commitments, so trust grows and work moves faster. They talk straight, demonstrate respect, create transparency and right wrongs. They show loyalty to people who aren't in the room, deliver results, get better, and confront reality. They clarify expectations, practice accountability, and listen first. From the 13 behaviors in Stephen M. R. Covey's <a href="https://www.speedoftrust.com/" target="_blank" rel="noopener noreferrer"><em>The Speed of Trust</em></a>.</p>
-      <p>The other three come from <a href="https://www.amazon.jobs/content/en/our-workplace/leadership-principles" target="_blank" rel="noopener noreferrer">Amazon's Leadership Principles</a>:</p>
+      <p>Plus three of <a href="https://www.amazon.jobs/content/en/our-workplace/leadership-principles" target="_blank" rel="noopener noreferrer">Amazon's Leadership Principles</a>:</p>
       <ul class="lp-list">
         <li>Customer Obsession</li>
         <li class="ours">Ownership</li>
