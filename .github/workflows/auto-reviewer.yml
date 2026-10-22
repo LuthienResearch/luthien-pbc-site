@@ -1,0 +1,21 @@
+# Requests a review from Matt (mjbroerman) on every PR Evan (ebright09) opens.
+# pull_request_target runs this repo's copy of the workflow, so it works for
+# PRs from forks. It never checks out the PR's code, so fork code never runs here.
+name: Auto-request reviewer
+
+on:
+  pull_request_target:
+    types: [opened, reopened, ready_for_review]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  request-review:
+    if: github.event.pull_request.user.login == 'ebright09'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Request review from Matt
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh pr edit ${{ github.event.pull_request.number }} --repo ${{ github.repository }} --add-reviewer mjbroerman
