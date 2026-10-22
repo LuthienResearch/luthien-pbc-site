@@ -318,6 +318,8 @@
     .role-body ul { padding-left: 20px; margin-bottom: 12px; }
     .role-body li { margin-bottom: 8px; }
     .role-body strong { color: #EDE5D8; }
+    .role-context { margin-top: 20px; color: #9891A8; font-size: 0.92rem; }
+    .role-context a { color: #3B9494; }
     .role-note { margin-top: 28px; padding: 14px 18px; border-left: 3px solid #C47B42; background: #1A1720; }
     .apply-box { position: sticky; top: 84px; border: 1px solid #28243A; border-radius: 10px; padding: 24px; background: #18151C; }
     .apply-box h3 { font-size: 1.1rem; margin-bottom: 10px; }
@@ -351,14 +353,15 @@
 
   <div class="role-header">
     <div class="container">
-      <div class="role-kicker">careers &middot; engineering</div>
+      <div class="role-kicker">careers</div>
       <h1>Member of Technical Staff</h1>
-      <p class="role-lead">Help build open tools that let AI auditors and AI safety/security researchers work out what AI agents did and test whether control measures would stop them.</p>
+      <p class="role-lead">Build and ship open-source tools with the auditors and researchers who use them.</p>
       <dl class="role-facts">
-        <div><dt>Location</dt><dd>Seattle or remote (US time zones)</dd></div>
-        <div><dt>Type</dt><dd>Full-time</dd></div>
-        <div><dt>Compensation</dt><dd>Discussed in conversation</dd></div>
+        <div><dt>Location</dt><dd>Seattle, SF, Pittsburgh or LA preferred</dd></div>
+        <div><dt>Type</dt><dd>Full-time once funded. You can start as an open-source contributor, paid contractor, or part-time.</dd></div>
+        <div><dt>Pay</dt><dd>Discussed when we talk</dd></div>
       </dl>
+      <p class="role-context">Meet the <a href="../#team">team</a>, read our <a href="../#mission">mission</a>, and see <a href="#how-we-work">how we work</a>.</p>
     </div>
   </div>
 
@@ -366,60 +369,41 @@
     <div class="role-layout">
       <article class="role-body">
 
-        <h2>About Luthien</h2>
-        <p>Luthien is a public benefit corporation. Our mission is to give auditors, both internal and third-party, and AI safety/security researchers superior tools to understand AI agent activity, identify harmful or misaligned behavior, and assess whether control measures are good enough to prevent harm. Our tools are open by default, designed to run in the user's own environment, and work for time-constrained audits.</p>
-        <p>We built the open-source <a href="../tools/">Luthien Proxy</a> for Claude Code, and since June 2026 we have worked with Redwood Research on <a href="../tools/#control-tower">Control Tower</a>, its leaderboard, onboarding and documentation. Read our <a href="../blog/2026-theory-of-change/">2026 Theory of Change</a> for the full picture.</p>
-
-        <h2>Why this role matters</h2>
-        <p>For investigation, it is difficult to reliably work out what agents did. The evidence is too large, split across coordinating swarms of agents, sometimes deliberately obscured, and possibly incomplete or altered. For testing, control evaluations don't reflect how agents are deployed inside the labs, so controls appear stronger than they actually are.</p>
-        <p>You would be one of our first full-time technical hires, and you would help set how we choose, build and ship these tools.</p>
-
         <h2>What you'll do</h2>
         <ul>
-          <li>Propose projects in short written briefs, or join one that is already underway.</li>
-          <li>Run 4-week sprints with weekly feedback from the project's customer, such as an auditor or an AI control researcher, ending in a review where users try the work.</li>
-          <li>Build tools that run in the auditor's own environment and test them against benchmarks with known answers.</li>
-          <li>Publish methods, results and code openly, so independent researchers and developers can build on them.</li>
+          <li>Join a project from our <a href="../blog/2026-theory-of-change/#impact-strategy">project briefs</a>, or propose one.</li>
+          <li>Run it as a 4-week sprint, with user feedback every week and a review where users try it.</li>
+          <li>Publish the code, and the results where users allow it.</li>
         </ul>
 
-        <h2>Projects in your first few months</h2>
-        <p>These four briefs are the leading candidates for our first sprints.</p>
-        <ul class="projects">
-          <li><strong>Auditor tooling (investigation).</strong> Measure which ways of presenting agent logs, chain of thought, and tool calls help an auditor catch sabotage most often, using Redwood's Auditing Sabotage Bench as the answer key.</li>
-          <li><strong>Rogue incident detection (investigation).</strong> Turn the methods Asymmetric Security, Transluce, Nightingale, and SwarmTraces used to find rogue agent activity in public records into automated detections.</li>
-          <li><strong>Harness red-teaming (testing).</strong> Build a kit that runs Redwood's harness attacks against Claude Code and Codex across real configurations and reports which attacks got past the safeguards.</li>
-          <li><strong>Loss of control threat model for Lab auditors.</strong> Place every Lab incident disclosed in 2026 on a severity scale and list the checks an auditor should run at each level.</li>
-        </ul>
-
-        <h2>Who we're looking for</h2>
-        <p>We're looking for a researcher who builds, or a builder who does research:</p>
+        <h2>You have</h2>
         <ul>
-          <li><strong>Researcher turned builder.</strong> You have done AI safety, security, evaluation or ML research, and you want your work to become tools that other people use.</li>
-          <li><strong>Builder who does research.</strong> You ship production software, and you are comfortable reading papers, designing experiments and measuring whether something works.</li>
+          <li>Shipped software other people use.</li>
+          <li>Built with LLMs or AI agents.</li>
+          <li>A drive to reduce risk from advanced AI.</li>
         </ul>
-        <p>Either way, you have hands-on experience with LLMs or AI agents, you use frontier AI coding tools fluently, and you are motivated to reduce risk from advanced AI. Non-traditional backgrounds are welcome.</p>
+        <p>Nice to have: AI safety, security or evaluation research. Non-traditional backgrounds are welcome.</p>
 
-        <h2>What you get</h2>
+        <h2 id="how-we-work">How we work</h2>
         <ul>
-          <li>Direct work with auditors and AI control researchers, the people our tools are for.</li>
-          <li>Work that others can build on: our tools are open by default, and we publish our methods and results.</li>
-          <li>A say in what we build: anyone on the team can propose a project.</li>
+          <li><strong>Ownership.</strong> You act for the whole company, not just your project.</li>
+          <li><strong>Speed of trust.</strong> We extend trust early and keep our commitments, as in Stephen M. R. Covey's <a href="https://www.speedoftrust.com/" target="_blank" rel="noopener noreferrer"><em>The Speed of Trust</em></a>.</li>
+          <li><strong>Disagree and commit.</strong> Argue before a decision, then back it fully.</li>
+          <li><strong>Deliver results.</strong></li>
         </ul>
-
-        <p class="role-note">This role depends on Luthien's funding. We will tell you plainly where that stands when we talk.</p>
       </article>
 
       <aside class="apply-box">
         <h3>How to apply</h3>
-        <p>Email your CV, links to notable work (repositories, papers, tools) and a few sentences on why you want to join.</p>
+        <p>Email your CV, links to your work, and a few lines on why you want to join.</p>
         <a class="btn-apply" href="mailto:contact@luthienresearch.org?subject=Member%20of%20Technical%20Staff">Apply by email</a>
-        <p class="apply-small">contact@luthienresearch.org<br>Questions go to the same address.</p>
+        <p class="apply-small">contact@luthienresearch.org</p>
       </aside>
     </div>
 
     <section class="no-fit">
-      <h2>Not seeing a fit?</h2>
-      <p>We are also thinking about adoption and go-to-market, and about technical program management. If that is you, or you want to pitch a role we haven't described, <a href="mailto:contact@luthienresearch.org">email us</a>.</p>
+      <h2>Other roles</h2>
+      <p><a href="mailto:contact@luthienresearch.org">Email us</a> to pitch another role.</p>
     </section>
   </div>
 
