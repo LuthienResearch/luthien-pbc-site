@@ -331,6 +331,14 @@
     .role[open] summary::after { content: "\2212"; }
     .role-title { font-family: 'Raleway', sans-serif; font-size: 1rem; font-weight: 600; color: #EDE5D8; }
     .role .role-inner { padding: 4px 0 24px; }
+    .section-sub { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #9891A8; max-width: 960px; margin: -14px auto 20px; padding: 0 24px; }
+    .cp-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .cp { border: 1px solid #28243A; border-radius: 6px; padding: 18px 20px; }
+    .cp h3 { font-family: 'Raleway', sans-serif; font-size: 1rem; font-weight: 600; color: #EDE5D8; margin: 4px 0 8px; }
+    .careers-body .cp p { font-size: 0.9rem; line-height: 1.6; margin: 0; color: #B0A8BE; }
+    .cp-src { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: #9891A8; }
+    .cp-src a { color: #9891A8; text-decoration: underline; text-decoration-color: #3B9494; }
+    @media (max-width: 680px) { .cp-grid { grid-template-columns: 1fr; } }
     .lp { margin: 14px 0; }
     .lp strong { color: #EDE5D8; }
     .lp-src { color: #9891A8; font-size: 0.85rem; }
@@ -413,13 +421,31 @@
   <hr class="divider">
 
   <section id="principles">
-    <h2 class="section-label">principles</h2>
+    <h2 class="section-label">cultural principles</h2>
+    <p class="section-sub">(unless you know better ones)</p>
     <div class="container careers-body">
-      <p class="lp"><strong>Speed of Trust.</strong> Leaders extend trust first and keep their commitments, so work moves faster. They talk straight, demonstrate respect, create transparency, right wrongs, show loyalty, deliver results, get better, confront reality, clarify expectations, practice accountability and listen first. From Stephen M. R. Covey's <a href="https://www.speedoftrust.com/" target="_blank" rel="noopener noreferrer"><em>The Speed of Trust</em></a>.</p>
-      <p class="lp"><strong>Ownership.</strong> Leaders are owners. They think long term and don't sacrifice long-term value for short-term results. They act on behalf of the entire company, beyond just their own team. They never say "that's not my job."</p>
-      <p class="lp"><strong>Have Backbone; Disagree and Commit.</strong> Leaders are obligated to respectfully challenge decisions when they disagree, even when doing so is uncomfortable or exhausting. Leaders have conviction and are tenacious. They do not compromise for the sake of social cohesion. Once a decision is determined, they commit wholly.</p>
-      <p class="lp"><strong>Deliver Results.</strong> Leaders focus on the key inputs for their business and deliver them with the right quality and in a timely fashion. Despite setbacks, they rise to the occasion and never settle.</p>
-      <p class="lp-src">These three are from <a href="https://www.amazon.jobs/content/en/our-workplace/leadership-principles" target="_blank" rel="noopener noreferrer">Amazon's Leadership Principles</a>.</p>
+      <div class="cp-grid">
+        <div class="cp">
+          <div class="cp-src">Luthien, from <a href="https://www.speedoftrust.com/" target="_blank" rel="noopener noreferrer">Covey</a></div>
+          <h3>Speed of Trust</h3>
+          <p>Leaders extend trust first and keep their commitments, so work moves faster. They talk straight, demonstrate respect, create transparency, right wrongs, show loyalty, deliver results, get better, confront reality, clarify expectations, practice accountability and listen first.</p>
+        </div>
+        <div class="cp">
+          <div class="cp-src"><a href="https://www.amazon.jobs/content/en/our-workplace/leadership-principles" target="_blank" rel="noopener noreferrer">Amazon</a></div>
+          <h3>Ownership</h3>
+          <p>Leaders are owners. They think long term and don't sacrifice long-term value for short-term results. They act on behalf of the entire company, beyond just their own team. They never say "that's not my job."</p>
+        </div>
+        <div class="cp">
+          <div class="cp-src"><a href="https://www.amazon.jobs/content/en/our-workplace/leadership-principles" target="_blank" rel="noopener noreferrer">Amazon</a></div>
+          <h3>Have Backbone; Disagree and Commit</h3>
+          <p>Leaders are obligated to respectfully challenge decisions when they disagree, even when doing so is uncomfortable or exhausting. Leaders have conviction and are tenacious. They do not compromise for the sake of social cohesion. Once a decision is determined, they commit wholly.</p>
+        </div>
+        <div class="cp">
+          <div class="cp-src"><a href="https://www.amazon.jobs/content/en/our-workplace/leadership-principles" target="_blank" rel="noopener noreferrer">Amazon</a></div>
+          <h3>Deliver Results</h3>
+          <p>Leaders focus on the key inputs for their business and deliver them with the right quality and in a timely fashion. Despite setbacks, they rise to the occasion and never settle.</p>
+        </div>
+      </div>
     </div>
   </section>
 
