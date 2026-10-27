@@ -4,7 +4,7 @@
 
 | Version | Date | Summary |
 |---------|------|---------|
-| v12.35 | 2026-10-26 | Add Sami Jawhar (Theorem, ex-Trajectory Labs) to the home page advisors section; he stays in top contributors too. |
+| v12.35 | 2026-10-26 | Add Sami Jawhar (Theorem, ex-METR) to the home page advisors section; he stays in top contributors too. Top contributors: opened-PR counts get their own color in the legend; active-month dates removed. |
 | v12.34 | 2026-10-21 | Team footnotes become tooltips (hover or focus on desktop, press and hold on phones) instead of static text under the team; roles shown larger; Matt's title shortened to "Founding MTS" (full title on hover); team bios become short one-fact lines; Scott's first line reads "Co-founded Luthien" instead of "Built our open-source proxy" (Jai merged most proxy PRs). |
 | v12.33 | 2026-10-21 | Add a "top contributors" section (advisor-style cards) after the team: GitHub photos, merged proxy PR counts (linked) with active months, and Kirill Novikov's security reviews in a second color, explained by a legend under the heading. |
 | v12.32 | 2026-10-22 | Careers eligibility as three cards (Location: Remote-friendly; Type: Flexible; Pay: Negotiable), each with a short detail line, and a banner below them: "All full-time, paid roles are conditional on more Luthien funding or revenue." FDE drops its fourth bullet. |
