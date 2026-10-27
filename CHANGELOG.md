@@ -4,7 +4,7 @@
 
 | Version | Date | Summary |
 |---------|------|---------|
-| v12.36 | 2026-10-26 | Team: Scott "Co-founder & CEO" with first line "Built, with Jai, luthien-proxy; raised $125k"; Allister "Co-founder & CTO"; Leo's advisor role on one line. |
+| v12.36 | 2026-10-26 | Team: Scott "Co-founder & CEO" with first line "Built, with Jai, luthien-proxy; raised $125k"; Allister "Co-founder & CTO"; Leo's advisor role on one line; bio links in the Verdigris link color (design system) instead of linen with an underline; Amazon unlinked in Scott's bio. |
 | v12.35 | 2026-10-26 | Add Sami Jawhar (Agent Wrangler, Theorem; ex-METR) to the home page advisors section; he stays in top contributors too. Top contributors: opened-PR counts get their own color in the legend; active-month dates removed. |
 | v12.34 | 2026-10-21 | Team footnotes become tooltips (hover or focus on desktop, press and hold on phones) instead of static text under the team; roles shown larger; Matt's title shortened to "Founding MTS" (full title on hover); team bios become short one-fact lines; Scott's first line reads "Co-founded Luthien" instead of "Built our open-source proxy" (Jai merged most proxy PRs). |
 | v12.33 | 2026-10-21 | Add a "top contributors" section (advisor-style cards) after the team: GitHub photos, merged proxy PR counts (linked) with active months, and Kirill Novikov's security reviews in a second color, explained by a legend under the heading. |
