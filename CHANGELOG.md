@@ -4,6 +4,7 @@
 
 | Version | Date | Summary |
 |---------|------|---------|
+| v12.38 | 2026-10-28 | Careers: the "project briefs" link goes straight to the four First Projects briefs in the 2026 Theory of Change (new `#first-projects` anchor) instead of the top of Impact Strategy, and Apply asks for links to your best pull requests or other public work, since we read work before scheduling a call. |
 | v12.32 | 2026-10-22 | Careers eligibility as three cards (Location: Remote-friendly; Type: Flexible; Pay: Negotiable), each with a short detail line, and a banner below them: "All full-time, paid roles are conditional on more Luthien funding or revenue." FDE drops its fourth bullet. |
 | v12.31 | 2026-10-21 | One careers page at `/careers/`: eligibility, roles (each expands in place), apply, and principles, each written once. "Principles" adds a Luthien leadership principle, Speed of Trust, built from the 13 behaviors in Covey's book, and quotes three of Amazon's Leadership Principles in full (Ownership; Have Backbone, Disagree and Commit; Deliver Results). `/mts/` and `/fde/` (and `/gtm`) redirect to their expanded section. The "careers" nav link goes to `/careers/`. |
 | v12.30 | 2026-10-21 | MTS role retitled "Founding Member of Technical Staff" (page, home "join us", FDE cross-link) with the lead "Build open-source tools for frontier AI lab auditors and AI safety researchers." |
