@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Missing Product Layers in AI Safety - Luthien</title>
+  <link rel="canonical" href="https://luthienresearch.org/blog/missing-product-layers-in-ai-safety/">
+  <meta name="description" content="A proposal from product builders for the shared product layers AI safety is missing, and how to start building them.">
+  <meta property="og:title" content="The Missing Product Layers in AI Safety">
+  <meta property="og:description" content="A proposal from product builders for the shared product layers AI safety is missing, and how to start building them.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://luthienresearch.org/blog/missing-product-layers-in-ai-safety/">
+  <meta property="og:image" content="https://luthienresearch.org/assets/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://luthienresearch.org/assets/images/og-image.png">
+  <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Lora:wght@400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../blog.css">
+</head>
+<body>
+
+  <nav class="top-nav">
+    <a href="../../" class="nav-left">
+      <img src="../../assets/images/luthien-new.svg" alt="Luthien" style="height: 38px; width: auto; display: block;">
+    </a>
+    <div class="nav-right" id="navRight">
+      <a href="../../" class="nav-link">mission</a>
+      <a href="../../index.html#team" class="nav-link">team</a>
+      <a href="../../tools/" class="nav-link">tools</a>
+      <a href="../../blog.html" class="nav-link active">blog</a>
+      <a href="../../careers/" class="nav-link">careers</a>
+    </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu" aria-expanded="false">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect y="3" width="20" height="2" rx="1"/><rect y="9" width="20" height="2" rx="1"/><rect y="15" width="20" height="2" rx="1"/></svg>
+    </button>
+  </nav>
+
+  <main>
+  <div class="container">
+    <div class="article-header">
+      <h1>The Missing Product Layers in AI Safety</h1>
+      <div class="article-meta">November 2026 &middot; Paul Davidson, Scott Wofford, Cibi Sounder</div>
+    </div>
+
+    <article>
+      <p class="callout">Cross-posted from <a href="https://www.lesswrong.com/posts/hAozFAsKhsr9HhyGi/the-missing-product-layers-in-ai-safety" target="_blank" rel="noopener noreferrer">LessWrong</a>.</p>
+
+      <p><em><strong>Epistemic Status:</strong></em><em> We're highly confident in how the larger tech industry defines roles, makes decisions and builds products based on our years of experience in it. We're fairly confident in the frontier labs operational models based on their job postings. Our suggestions for what to build and how to have gone through some pressure testing, and confidence could be raised through discussion with leaders in AI Safety to further understand what makes this space unique.</em></p>
+      <h2>Intro</h2>
+      <p>Frontier labs have adopted proven methodologies from tech to build their capabilities using matrixed organizations, including builders. This allows them to advance at a rapid pace, keeping their flywheel spinning, while AI safety struggles to keep up.</p>
+      <p>To prevent serious risks of advanced AI, AI safety needs to close that gap and one way to accomplish that is by building products that address common needs and diffuse AI safety outputs to compound their impact. There are aligned people that have extensive experience building products, but are not currently finding opportunities in existing organizations or through founder support to build them.</p>
+      <p>We (the authors and collaborators) each have 10+ years of experience at successful tech startups and in big tech. At EAGxBerkeley, we compared notes on gaps we were observing, our hypotheses on addressing them and wanted to share our perspectives with the broader community.</p>
+      <p>We're writing this post to generate awareness, discussion, and ideally to open up discussion with safety leaders, fieldbuilders and funders on how to start building.</p>
+      <h2>Background</h2>
+      <p>An AI safety output spans research, controls, defenses, governance, policy and more. The pace of outputs being generated continues to increase, but there is limited work to connect them back up the chain to the highest level impact of avoiding serious risks to humans. These outputs accumulate in a patchwork of papers, forum posts, blogs, GitHub repositories and more where they rely on a highly-engaged community to continuously discover, consume and adopt. It assumes that the best ideas will win out and gain traction, but provides no formal pathway to achieve that.</p>
+      <p>We observe a field primarily organized as many small research teams producing many small, loosely coupled artifacts, but lacking layers above those efforts to bring the outputs back together so that they can be quickly applied and adopted by the broader community. For example in the evals tooling landscape Inspect and Petri exist as frameworks but no layer sits above them to standardize the techniques, processes, data and connect all phases of evaluations to ensure that trustworthy results and reporting are generated.</p>
+      <p>Coefficient Giving's Fall 2026 Project Tailwind highlights this in multiple areas, such as this challenge statement for their proposed <a href="https://coefficientgiving.org/tailwind/initiatives/#ai-uplift-for-ai-safety" target="_blank" rel="noopener noreferrer">AI uplift for AI Safety initiative</a>:</p>
+      <blockquote>
+      <p>"There is a coordination failure here: investing in tools and best practices for using AI to accelerate AI safety and governance is a public good that individual contributors often lack capacity for. The individuals already doing this work have limited resources and can't serve the entire field."</p>
+      </blockquote>
+      <h3>Threat model</h3>
+      <p>We believe that AI is <em>not</em> <a href="https://knightcolumbia.org/content/ai-as-normal-technology" target="_blank" rel="noopener noreferrer"><em>normal technology</em></a> and poses serious risks to humans during both development and deployment across <a href="https://internationalaisafetyreport.org/publication/international-ai-safety-report-2026" target="_blank" rel="noopener noreferrer">misalignment, misuse, loss of control</a>, and <a href="https://arxiv.org/abs/2501.16946" target="_blank" rel="noopener noreferrer">systemic and structural harm</a>. Across all these vectors products and tools play a role in harm reduction (in addition to research and governance). There is awareness of the importance of products [<a href="https://www.lesswrong.com/posts/ouuhffhvvBkTfzxTY/ai-safety-needs-great-product-builders" target="_blank" rel="noopener noreferrer">goodgravy 2022</a>, <a href="https://www.lesswrong.com/posts/iwfdwzJerpC7FqbZG/the-case-for-agi-safety-products" target="_blank" rel="noopener noreferrer">Hobbhahn 2026</a>] and tools [<a href="https://www.lesswrong.com/posts/YDF7XhMThhNfHfim9/ai-safety-needs-great-engineers" target="_blank" rel="noopener noreferrer">Jones 2021</a>, <a href="https://blog.bluedot.org/p/im-an-experienced-swe" target="_blank" rel="noopener noreferrer">BlueDot 2025</a>], yet broadly AI safety doesn't clearly differentiate between the two currently, nor does it robustly support creating products.</p>
+      <h4>Examples of gaps observed in AI safety products and tools</h4>
+      <p>Below is a limited sample of the types of needs we've observed across AI safety with concrete references.</p>
+      <div style="overflow-x: auto;"><table class="comparison-table"><tbody><tr><th><p><strong>Risk vector and Jobs to Be Done</strong></p>
+      </th><th><p><strong>Exists</strong></p>
+      </th><th><p><strong>Missing</strong></p>
+      </th></tr><tr><th><p><strong>Misalignment:</strong> know when a model has the wrong objective and why</p>
+      </th><td><p><strong>Products:</strong> <a href="https://www.neuronpedia.org/" target="_blank" rel="noopener noreferrer">Neuronpedia</a></p>
+      <p><strong>Tools</strong>: <a href="https://github.com/meridianlabs-ai/inspect_petri" target="_blank" rel="noopener noreferrer">Petri</a>, <a href="https://github.com/safety-research/bloom" target="_blank" rel="noopener noreferrer">Bloom</a>, <a href="https://github.com/transformerlensorg/transformerlens" target="_blank" rel="noopener noreferrer">TransformerLens</a></p>
+      </td><td><p>Access to frontier models beyond black-box [<a href="https://arxiv.org/abs/2401.14446" target="_blank" rel="noopener noreferrer">Casper 2024</a>]</p>
+      </td></tr><tr><th><p><strong>Misuse:</strong> know when a model is being used for harmful purposes, and if a deployment can be jailbroken</p>
+      </th><td><p><strong>Products:</strong> per-deployer app-layer solutions (<a href="https://www.lakera.ai/ai-red-teaming" target="_blank" rel="noopener noreferrer">Lakera</a>,<a href="https://docs.giskard.ai/" target="_blank" rel="noopener noreferrer"></a> <a href="https://docs.giskard.ai/" target="_blank" rel="noopener noreferrer">Giskard</a>)</p>
+      <p><strong>Tools:</strong> <a href="https://www.aisi.gov.uk/blog/inspect-evals" target="_blank" rel="noopener noreferrer">Inspect</a> <a href="https://www.aisi.gov.uk/blog/inspect-evals" target="_blank" rel="noopener noreferrer">Evals</a> dangerous capabilities</p>
+      </td><td><p>Shared frontier uplift evals (vs bespoke ones from <a href="https://www.aisi.gov.uk/" target="_blank" rel="noopener noreferrer">AISI</a>,<a href="https://metr.org/" target="_blank" rel="noopener noreferrer"></a> <a href="https://metr.org/" target="_blank" rel="noopener noreferrer">METR</a>)</p>
+      </td></tr><tr><th><p><strong>Loss of control:</strong> detect and stop autonomous scheming or sabotage</p>
+      </th><td><p><strong>Products:</strong><a href="https://www.apolloresearch.ai/" target="_blank" rel="noopener noreferrer"></a> <a href="https://www.apolloresearch.ai/" target="_blank" rel="noopener noreferrer">Apollo Watcher</a> (monitor for coding agents); agent tracing in<a href="https://docs.wandb.ai/weave/concepts/what-is-weave" target="_blank" rel="noopener noreferrer"> Weave</a> and<a href="https://www.braintrust.dev/" target="_blank" rel="noopener noreferrer"></a> <br><a href="https://www.braintrust.dev/" target="_blank" rel="noopener noreferrer">Braintrust</a>; runtime guardrails e.g.<a href="https://www.lakera.ai/ai-red-teaming" target="_blank" rel="noopener noreferrer"> Lakera Guard</a>, which cover prompt injection, not control.</p>
+      <p><strong>Tools</strong>:<a href="https://github.com/linuxarena/control-tower/" target="_blank" rel="noopener noreferrer"> ControlTower</a> (Redwood, Equistamp, Luthien), <a href="https://github.com/meridianlabs-ai/inspect_sentinel" target="_blank" rel="noopener noreferrer">Inspect Sentinel</a>, <a href="https://luthien.cc/" target="_blank" rel="noopener noreferrer">Luthien-Proxy</a>, <a href="https://github.com/linuxarena/control-tower/" target="_blank" rel="noopener noreferrer">ControlArena</a> (UKAISI)</p>
+      </td><td><p>Shared autonomy evals.</p>
+      <p>Shared protocol results.</p>
+      <p>An agreed stop mechanism.</p>
+      <p>Limited benchmark coverage for evade-oversight, self-replication, and AI R&amp;D (<a href="https://arxiv.org/abs/2508.05464" target="_blank" rel="noopener noreferrer">Bench-2-CoP 2025</a>)</p>
+      </td></tr><tr><th><p><strong>Systemic and structural:</strong> know what is trending towards failure and disempowerment</p>
+      </th><td><p>Almost nothing specific. The nearest instruments are cross-cutting capability trends and incidents.</p>
+      </td><td><p>Measurement for concentration of power, epistemic harm, multi-agent effects</p>
+      </td></tr><tr><th><p><strong>Across all four risk vectors</strong></p>
+      </th><td><p>Products: <a href="https://docs.transluce.org/introduction" target="_blank" rel="noopener noreferrer">Docent</a>, <a href="https://epoch.ai/benchmarks" target="_blank" rel="noopener noreferrer">Epoch hub</a> for capability trends, <a href="https://incidentdatabase.ai/" target="_blank" rel="noopener noreferrer">AI Incident Database</a> for failures.</p>
+      <p>Tools: eval framework (<a href="https://inspect.aisi.org.uk/" target="_blank" rel="noopener noreferrer">Inspect</a>)</p>
+      </td><td><p>Widespread safe access layers (e.g. <a href="https://openmined.org/blog/secure-enclaves-for-ai-evaluation/" target="_blank" rel="noopener noreferrer">OpenMined</a>)</p>
+      <p>Standardized reports for policymakers with actionable insights.</p>
+      <p>Standard elicitation, so two evaluators with the same access get the same result</p>
+      <p>A full harness to monitor and reproduce a failure (logging, reconstruct, re-run)</p>
+      </td></tr></tbody></table></div>
+      <h2>How to Build Products that Compound AI Safety's Impact</h2>
+      <p>While the idea of a product and related roles stretches back decades, it really began to coalesce in the 2000s and saw broad adoption in the 2010s. Although it continues to evolve as AI disrupts our ways of working, the principles remain the primary structure of how big tech and the frontier labs operate at scale. This allows them to rapidly pivot to whatever will deliver the most value by focusing on deeply understanding their users needs through user research and objective metrics that allow them to continuously learn and iterate while measuring themselves through outcomes over outputs.</p>
+      <h3>Products vs tools</h3>
+      <p>A <strong>product</strong> can be used by a wide range of people [<a href="https://en.wikipedia.org/wiki/The_Mythical_Man-Month" target="_blank" rel="noopener noreferrer">Brooks 1975</a>, chapter 1], without discussion with the creator, for a "<a href="https://hbr.org/2016/09/know-your-customers-jobs-to-be-done" target="_blank" rel="noopener noreferrer">job-to-be-done</a>" (JTBD). These jobs are about achieving an outcome: "People don't want to buy a quarter-inch drill. They want a quarter-inch hole!" [<a href="https://www.library.hbs.edu/working-knowledge/what-customers-want-from-your-products" target="_blank" rel="noopener noreferrer">Levitt 1969</a>]. A product has <strong>customers</strong>: people who choose to adopt it and pay for it with their time (always) and their money (often). Products are complex to build and deliver, and require specific expertise. In the tech industry, a "product team" [<a href="https://www.svpg.com/product-vs-feature-teams/" target="_blank" rel="noopener noreferrer">Cagan 2019</a>] refers to a cross-functional team with product managers and engineers, and often designers and data scientists / data engineers. A product often starts off as a <strong>tool</strong>: built for a narrow purpose, by and for a narrower group of people. A product has one accountable <em>owner</em> for whether it gets adopted [<a href="https://www.google.com/books/edition/INSPIRED/QkY_DwAAQBAJ?hl=en&amp;gbpv=0" target="_blank" rel="noopener noreferrer">Cagan 2017</a>] whereas a tool has <em>maintainers</em>. Tools (such as open source libraries) may be powerful but are typically provided with few or <a href="https://opensource.org/license/mit" target="_blank" rel="noopener noreferrer">no guarantees of suitability</a>, which hampers widespread adoption.</p>
+      <h3>Theory of Change</h3>
+      <p>Our proposal is that building a new layer of products that continuously build on those outputs and connect them to users wherever they are will lower the barrier to adoption and application, and thus support bending the curve of AI safety efforts to close the gap to frontier capabilities. We would observe this through near-term signals that show a correlation of this work and increasing the output rate while decreasing the effort per safety output. In the medium-term we expect the time to detect a novel harmful capability or propensity to decrease, while the trustworthiness and credibility of outputs bend upwards.<br></p>
+      <div style="overflow-x: auto;"><table class="comparison-table"><tbody><tr><td><p><strong>Impact</strong></p>
+      </td><td><p>Avoid serious risks to humans during development and deployment of advanced AI across misalignment, misuse, loss of control, systemic and structural harm.</p>
+      </td></tr><tr><td><p><strong>Goal</strong></p>
+      </td><td><p>AI safety closes the gap to, and then keeps pace with frontier capabilities.</p>
+      </td></tr><tr><td><p><strong>Inputs</strong></p>
+      </td><td><p><strong>A pipeline:</strong> of experienced builders from industry paired up with a corpus of existing but disconnected AI safety research, analysis, policy, tooling and infrastructure work. Orgs and funding that are bought into the need to scale and are comfortable supporting something currently undefined.</p>
+      </td></tr><tr><td><p><strong>Outputs</strong></p>
+      </td><td><p><strong>Products:</strong> that solve common user needs built on top of existing tooling and infrastructure and alongside existing roles, by a newly defined builder role with prioritization authority and accountability to outcomes.</p>
+      </td></tr><tr><td><p><strong>Primary Outcome</strong><br><strong>(⭐ the spine)</strong></p>
+      </td><td><p><strong>Applied &amp; Adopted</strong>: AI safety outputs (research, controls, defenses, governance, policy and more) are broadly diffused across all functions, roles and orgs allowing widespread application and adoption. The field's output compounds instead of accumulating.</p>
+      </td></tr><tr><td><p><strong>2nd Outcome</strong></p>
+      </td><td><p><strong>Shared Scaffolding:</strong> AI safety orgs operate at maximum effectiveness as they adopt common infrastructure, tooling and processes to be used internally.</p>
+      </td></tr><tr><td><p><strong>3rd Outcome</strong></p>
+      </td><td><p><strong>Reproducible &amp; Comparable</strong>: AI safety outputs become faster, more trustworthy, and ready to be reproduced and reused because shared tooling makes it easy to access and review everyone's work.</p>
+      </td></tr></tbody></table></div>
+      <img src="ai-safety-capabilities-curve.png" alt="Figure 1: chart of an AI safety curve bending to close the gap with, and then pass, the AI capabilities curve."><p><em>Figure 1: Demonstration of bending AI safety curve to close and then bypass AI capabilities in support of alignment to reduce risks of harms.</em></p>
+      <h3>Principles of building AI safety products</h3>
+      <p>What we've observed independently, through conversations with those in AI safety, and through sources like <a href="https://coefficientgiving.org/tailwind/initiatives/" target="_blank" rel="noopener noreferrer">Project Tailwind 2026 initiatives</a> and <a href="https://www.forethought.org/research/design-sketches-for-a-more-sensible-world" target="_blank" rel="noopener noreferrer">Forethought's Design sketches for a more sensible world</a> is a through line of common principles. We think products should be built on principles like the ones below to maximize their adoption and usage:</p>
+      <ul>
+      <li value="1"><strong>Standardization:</strong> AI safety work and outputs are performed and captured consistently to create work that can be trusted and easily understood. Supports operational discipline, clear methodologies, calibrated reporting and excellent security. Examples: "...clear methodology, credible assessors (including potential subcontracts with existing third-party evaluators), calibrated reporting, and excellent internal security." - <a href="https://coefficientgiving.org/tailwind/initiatives/#independent-ai-auditors" target="_blank" rel="noopener noreferrer">Tailwind 2026: Independent AI auditors</a>. "Maintain a recommended suite of best practices for measuring and promoting monitorability of frontier models" - <a href="https://coefficientgiving.org/tailwind/initiatives/#oversight-of-cot-monitorability" target="_blank" rel="noopener noreferrer">Tailwind 2026: Oversight of CoT monitorability</a></li>
+      <li value="2"><strong>Centralization:</strong> Setups<strong>,</strong> inputs, results, analyses, final outputs and more are stored centrally in a consistent way that makes it easy for anyone to access and reuse. Examples: "That evidence is scattered across papers, blog posts, and Twitter threads, and the decision-makers who most need a clear view rarely have time to assemble it themselves." - <a href="https://coefficientgiving.org/tailwind/initiatives/#state-of-ai-risk" target="_blank" rel="noopener noreferrer">Tailwind 2026: State of AI Risk</a>. "understanding the state of AI safety practices across different companies is difficult, and there's no one canonical resource tracking and evaluating their safety practices" - <a href="https://coefficientgiving.org/tailwind/initiatives/#frontier-lab-accountability" target="_blank" rel="noopener noreferrer">Tailwind 2026: Frontier lab Accountability</a></li>
+      <li value="3"><strong>Democratization:</strong> Support for anyone to set up, run and review any AI safety work. Supports task completion by lower-tier roles without direct intervention or oversight from domain experts. "Highly customised tools help individuals to understand themselves better and make decisions they endorse. We vastly uplift forecasting and scenario planning, massively improving our strategic awareness, and democratizing access to this kind of information." - <a href="https://www.forethought.org/research/design-sketches-for-a-more-sensible-world#introduction" target="_blank" rel="noopener noreferrer">Forethought: Design Sketches for a More Sensible World</a>. "Providing non-technical audiences – and policymakers, in particular – with clear, accurate, and compelling information about the frontiers of AI is critical for sound policymaking and regulation." - <a href="https://coefficientgiving.org/tailwind/initiatives/#frontier-capabilities-observatory" target="_blank" rel="noopener noreferrer">Tailwind 2026: Frontier Capabilities Observatory</a>.</li>
+      <li value="4"><strong>Modularity and flexibility:</strong> Easily share, explore, try and adopt emerging AI safety capabilities. Allows rapid diffusion of new work across the space. Example: "Improving evals tooling is fairly architecture agnostic, or could be much more quickly adapted to future changes than it would take to build from scratch in the future." - <a href="https://www.lesswrong.com/posts/iwfdwzJerpC7FqbZG/the-case-for-agi-safety-products#Transfer_in_time__AGI_could_be_a_scaled_up_version_of_current_systems" target="_blank" rel="noopener noreferrer">LessWrong: Hobbhahn 2026</a></li>
+      <li value="5"><strong>End-to-End User Journeys:</strong> Create tools and solutions that span complete user journeys without the need to jump between or merge together multiple tools, datasets and codebases. Examples: "A largely automated eval stack that is able to iteratively design, test, and improve evaluations" - <a href="https://www.lesswrong.com/posts/iwfdwzJerpC7FqbZG/the-case-for-agi-safety-products#Argument_3__Automated_AI_safety_work_requires_scale" target="_blank" rel="noopener noreferrer">LessWrong: Hobbhahn 2026</a> . "Given a question, the tool gathers relevant evidence, lays out the competing arguments, identifies the main points, and provides an overall assessment with a stated confidence level." - <a href="https://coefficientgiving.org/tailwind/initiatives/#ai-for-decision-makers" target="_blank" rel="noopener noreferrer">Tailwind 2026: AI for decision-makers</a></li>
+      </ul>
+      <h3>Product Examples</h3>
+      <ul>
+      <li value="1"><strong>Centralized storage of research, differential data and more</strong> - Make it easy for anyone or any product to access all relevant data and information in their domain of interest.</li>
+      <li value="2"><strong>Policymaking Intelligence -</strong> Bridge the gaps between technical, bio, nuclear, cyber and other domains to policymakers, making it easy to stay up to date and make informed decisions.</li>
+      <li value="3"><strong>Unified automated evals platform</strong> - Encourages consistent setups, analysis and outputs while supporting emerging techniques from research through a marketplace.</li>
+      <li value="4"><strong>Unified controls platform -</strong> Makes it easy to design, stress-test and compare safety protocols and monitors for potentially misaligned AI agents, measuring the safety-usefulness tradeoff through consistent red-team vs. blue-team control evaluations.</li>
+      </ul>
+      <p>Additionally, Ankur Pandey has generated a <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTxko20RW37hL3qRLdAQ19xWUKcUnCRv_tqc71MdCd1RzBOzegOLt-9PdS59SsDO2guRmYHV2_JbzxC/pubhtml" target="_blank" rel="noopener noreferrer">related sample list here</a> as part of his <a href="https://aisafety.builders/" target="_blank" rel="noopener noreferrer">AISafety.Builders fellowship.</a></p>
+      <h3>How to Build Products</h3>
+      <p>Modern products and the teams that build them largely operate off of a few standard operating principles and practices built upon <a href="https://agilemanifesto.org/" rel="noreferrer">Agile</a>, with some highlights being:</p>
+      <ul>
+      <li value="1"><strong>Focus on the user</strong> - Deeply understand the user through user interviews, studying their feedback and objective measures, and ensure implementation meets their requirements.</li>
+      <li value="2"><strong>Bias for action -</strong> Continuously deliver proofs of concept and then small improvements to working software over long research and implementation cycles.</li>
+      <li value="3"><strong>Flexibility</strong> - Plans frequently change due to the above. Be willing to quickly pivot when something new emerges or something isn't working out.</li>
+      <li value="4"><strong>Measure outcomes over outputs -</strong> An output is simply creating something. Outcome is how you know the outputs delivered created the expected impact and value.</li>
+      <li value="5"><strong>Matrixed roles</strong> - Most orgs feature multiple people working together representing their points of view to arrive at a solution that balances all the variables of delivering high quality workflows through scalable and maintainable code and infrastructure. More on this below.</li>
+      </ul>
+      <h4>Why Agile or Other Common Methodologies?</h4>
+      <p>Given the existing gap to frontier capabilities, there is no time to reinvent the wheel while wasting time on ideas that are not panning out or delivering the largest impact. These methodologies offer a standardized way to cut through noise and organize work to be efficient and highly effective. They offer a set of principles and values, rather than a hard set of rules, although they have often gotten a bad reputation for being implemented as strict mandates.</p>
+      <p>While the exact implementation of these <a href="https://www.businesswire.com/news/home/20251028047166/en/Digital.ais-18th-State-of-Agile-Report-Marks-the-Start-of-the-Fourth-Wave-of-Software-Delivery-AI-Is-Transforming-Agile-from-a-Team-Practice-into-an-Enterprise-Wide-Advantage" target="_blank" rel="noopener noreferrer">continue to evolve</a> and vary org to org, overall big tech, startups and the frontier labs continue to employ them. Why? Because they're proven to help teams move faster and cheaper. <a href="https://www.bcg.com/capabilities/digital-technology-data/agile-at-scale" target="_blank" rel="noopener noreferrer">Leading Agile consultant BCG estimates Agile can unlock 2-4x acceleration in time-to-market and new product delivery while also offering 15-25% reduction in development costs</a>. The 2025 State of Agile reported, <a href="https://www.businesswire.com/news/home/20251028047166/en/Digital.ais-18th-State-of-Agile-Report-Marks-the-Start-of-the-Fourth-Wave-of-Software-Delivery-AI-Is-Transforming-Agile-from-a-Team-Practice-into-an-Enterprise-Wide-Advantage" target="_blank" rel="noopener noreferrer">"Focus is shifting to outcomes: Customer satisfaction (52%) remains the primary measure of success, followed by efficiency and cost reduction (40%)."</a></p>
+      <h3>Who Builds Products</h3>
+      <p>Anyone can build a product, regardless of their job title or function as long as they're focused on delivering outcomes. An exceptionally broadly talented engineer or researcher may be able to cover all or most functional areas below. But, it's often a lot of context to hold together, they don't always have strengths in each area, and there is a lot of benefit in regular discussion among peers with diverse points of view. This also differs from the generalist operational roles: the builders own the what, why and how and are often called to define that from vague open-ended problems. Paul has written more about the builder role profile, its differentiation and a sample job description in <a href="https://forum.effectivealtruism.org/posts/8x5F8QoNuDfnKd3CN/experienced-builders-role-profile-and-job-descriptions" rel="noreferrer">Experienced Builders Role Profile and Job Descriptions</a>.</p>
+      <p>These are some common roles used on teams developing products:</p>
+      <ul>
+      <li value="1"><strong>Product Managers -</strong> Represents the inputs from users, leadership and stakeholders. Leads the feature prioritization process and is accountable to the agreed upon outcomes.</li>
+      <li value="2"><strong>UX Designers</strong> - Often use <a href="https://en.wikipedia.org/wiki/Design_thinking" rel="noreferrer">design thinking</a>, <a href="https://www.gv.com/sprint/" rel="noreferrer">design sprints</a> and rapid prototyping to quickly gather data on how users interact with systems, in order to improve their design. UX Researchers use <a href="https://en.wikipedia.org/wiki/Human%E2%80%93computer_interaction" rel="noreferrer">human-computer interaction</a> (for software systems) and the techniques described in <a href="https://en.wikipedia.org/wiki/The_Design_of_Everyday_Things" rel="noreferrer">The Design of Everyday Things</a> (for anything including physical products) to understand the complex relationship between humans and products.</li>
+      <li value="3"><strong>Engineers</strong> - Represents creating outputs that can be scaled and sustainable. Identifies the options that can solve user problems the fastest.</li>
+      <li value="4"><strong>Scientists, Researchers &amp; Analysts</strong> - Represents robust methods for getting the right answers from the data that they may also help pull or generate. Especially important for products that use AI and/or ML.</li>
+      </ul>
+      <p><strong>A note on role flattening in the age of AI:</strong> While it's true that product and researcher/analyst roles are changing, product and engineering are owning more design, etc, it's still important to have core roles that cover the full product development lifecycle including continuous improvement. For example, engineering should still own ensuring the code implemented is robust, secure and ready to scale. Analysts should validate feedback and metrics pulled by product or engineering that's driving decisions, and product managers should guide how that data impacts feature prioritization.</p>
+      <h2>Conclusion and Call to Action</h2>
+      <p>We think there is a large set of challenges across the higher layers of AI safety that call for products to be built that would help close the gap to frontier capabilities. Further, we think that applying industry standard product practices and methodologies, and employing experienced builders from industry would allow them to be built faster, and more efficiently.</p>
+      <h3>How to Support This</h3>
+      <p><strong>We'd like to hear from funders, fieldbuilders, organizational leaders, and any other leaders in AI safety that deeply understand the current state and plans to close the gap to frontier capabilities to discuss integrating experienced builders into the ecosystem to build products.</strong></p>
+      <p>We propose AI Safety orgs take the following steps:</p>
+      <ul>
+      <li value="1"><strong>Field-builders should recruit experienced builders</strong> and help them build AI safety context and define potential products, then connect them to opportunities.</li>
+      <li value="2"><strong>Organizations should hire candidates</strong> that help existing orgs adopt product best practices, invest in building products, and hire builders to accelerate their development.</li>
+      <li value="3"><strong>Funders should support new organizations</strong> that build tools and products, especially if these don't cleanly fit into an existing organization's mission.</li>
+      </ul>
+      <h2>Appendix</h2>
+      <h3>References</h3>
+      <p>A lot has already been written about generalists and mid-to-late career professionals entering AI safety. The below articles are some of what we built on top of as we were writing this article.</p>
+      <ul>
+      <li value="1"><a href="https://forum.effectivealtruism.org/posts/k3nq7FxBCsrNFmAYi/ai-safety-s-biggest-talent-gap-isn-t-researchers-it-s-2" target="_blank" rel="noopener noreferrer">AI Safety's Biggest Talent Gap Isn't Researchers. It's Generalists. - Topaz - Effective Altruism Forum</a></li>
+      <li value="2"><a href="https://counterfactual.blog/p/welcome-to-the-pivotal-era" target="_blank" rel="noopener noreferrer">I Want You for AI Safety - Sophie Kim - The Counterfactual</a></li>
+      <li value="3"><a href="https://forum.effectivealtruism.org/posts/qe8fDz4kLfED8CGYD/ai-safety-needs-mid-career-on-ramps" target="_blank" rel="noopener noreferrer">AI Safety Needs Mid-Career On-Ramps - Sophie Kim - Effective Altruism Forum</a></li>
+      <li value="4"><a href="https://80000hours.org/career-reviews/scaling-organisations/?source=email&amp;uni_id=0" target="_blank" rel="noopener noreferrer">AI safety needs more operations professionals (Scaling organisations making AI go well) - Matt Beard - 80,000 Hours</a></li>
+      <li value="5"><a href="https://www.lesswrong.com/posts/WrGeH5Gz5KsAY5Lq2/lateral-workshop-applications-a-case-study" target="_blank" rel="noopener noreferrer">Lateral Workshop Applications: A Case Study - Jacob Brinton, Seth Lifland - LessWrong</a></li>
+      <li value="6"><a href="https://forum.effectivealtruism.org/posts/JrJWZK7Mqj3hS5xTk/new-talent-is-coming-to-ai-safety-what-happens-next" target="_blank" rel="noopener noreferrer">New talent is coming to AI safety. What happens next? - Enisa Ismaili - Effective Altruism Forum</a></li>
+      <li value="7"><a href="https://impactpro.substack.com/p/meta-the-job-almost-nobody-can-picture" target="_blank" rel="noopener noreferrer">Meta: The Job (Almost) Nobody Can Picture - Devon Fritz - Substack</a></li>
+      <li value="8"><a href="https://impactpro.substack.com/p/the-grown-ups-arent-coming" rel="noreferrer">The Grown-Ups Aren't Coming (Philanthropic capital is coming faster than the infrastructure to absorb it, and infrastructure takes years to build. Please build it!) - Devon Fritz - Substack</a></li>
+      <li value="9"><a href="https://www.lesswrong.com/posts/iwfdwzJerpC7FqbZG/the-case-for-agi-safety-products" target="_blank" rel="noopener noreferrer">The case for AGI safety products - Marius Hobbhahn - LessWrong</a></li>
+      <li value="10"><a href="https://abnormaltech.substack.com/p/the-case-for-building-ai-safety-tools" target="_blank" rel="noopener noreferrer">The Case for Building AI Safety Tools - Ankur Pandey - Substack</a></li>
+      </ul>
+      <hr>
+      <p><em>We'd like to thank Hernan Barijhoff for reviewing this post as it evolved, as well as a handful of others that helped grow this idea and provide initial inputs, but didn't wish to be named.</em></p>
+    </article>
+  </div>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-brand-row">
+            <img src="../../assets/images/luthien-new.svg" alt="Luthien" style="height: 34px; width: auto; display: block;">
+            <span class="footer-year">&middot; 2026</span>
+          </div>
+          <a href="https://www.youtube.com/watch?v=YzjvBw96kas" target="_blank" rel="noopener noreferrer" class="footer-tagline">Power is nothing without control.</a>
+        </div>
+        <div class="footer-right">
+          <style>.footer-links.footer-icons{gap:6px;align-items:center}.footer-links.footer-icons a{display:flex;align-items:center;padding:5px}.footer-links.footer-icons a::after{display:none}</style>
+          <div class="footer-links footer-icons"><a href="https://github.com/LuthienResearch" target="_blank" rel="noopener noreferrer" title="GitHub" aria-label="Luthien on GitHub"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a><a href="https://linkedin.com/company/luthien-control" target="_blank" rel="noopener noreferrer" title="LinkedIn" aria-label="Luthien on LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="https://www.youtube.com/@LuthienControl" target="_blank" rel="noopener noreferrer" title="YouTube" aria-label="Luthien on YouTube"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a><a href="mailto:contact@luthienresearch.org" title="Email" aria-label="Email Luthien"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a></div>
+          <span class="footer-version">v12</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var btn = document.getElementById('navHamburger');
+      var nav = document.getElementById('navRight');
+      if (!btn || !nav) return;
+      btn.addEventListener('click', function () {
+        nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', nav.classList.contains('open'));
+      });
+      nav.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () { nav.classList.remove('open'); });
+      });
+    })();
+  </script>
+
+  <script>
+  (function() {
+    var article = document.querySelector('article');
+    if (!article) return;
+    var headings = article.querySelectorAll('h2, h3');
+    if (headings.length < 3) return;
+
+    // Add IDs to headings
+    headings.forEach(function(h, i) {
+      if (!h.id) h.id = 'section-' + i;
+    });
+
+    // Build ToC
+    var nav = document.createElement('nav');
+    nav.className = 'toc-sidebar';
+    headings.forEach(function(h) {
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      if (h.tagName === 'H3') a.className = 'toc-h3';
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById(h.id).scrollIntoView({ behavior: 'smooth' });
+      });
+      nav.appendChild(a);
+    });
+    document.body.appendChild(nav);
+
+    // Scroll tracking
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          nav.querySelectorAll('a').forEach(function(a) { a.classList.remove('active'); });
+          var active = nav.querySelector('a[href="#' + entry.target.id + '"]');
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-80px 0px -70% 0px' });
+
+    headings.forEach(function(h) { observer.observe(h); });
+  })();
+  </script>
+
+<script data-goatcounter="https://luthien.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
