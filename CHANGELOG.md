@@ -6,6 +6,7 @@
 |---------|------|---------|
 | v12.40 | 2026-11-16 | Blog: add "Announcing Control Tower" (Scott Wofford, Tyler Tracy, Henri Lemoine) at `/blog/announcing-control-tower/`, cross-posted from LessWrong with a link back, and list it in both blog indexes. |
 | v12.39 | 2026-11-16 | Blog: add "The Missing Product Layers in AI Safety" (Paul Davidson, Scott Wofford, Cibi Sounder) at `/blog/missing-product-layers-in-ai-safety/`, cross-posted from LessWrong with a link back, and list it in both blog indexes. |
+| v12.39 | 2026-11-18 | Remove Jai Dhyani from the home page advisors section. He stays credited in Scott's bio ("Built, with Jai, luthien-proxy"), in blog bylines and on the hackathon page. |
 | v12.38 | 2026-10-31 | Careers: Netflix culture deck link points to a Google Drive copy instead of SlideShare. |
 | v12.37 | 2026-10-26 | Add advisors Ani Chennapragada (multi-agent monitoring, Google) and Amogh Sarda (founder, eesel), with LinkedIn photos. |
 | v12.36 | 2026-10-26 | Team: Scott "Co-founder & CEO" with first line "Built, with Jai, luthien-proxy; raised $125k"; Allister "Co-founder & CTO"; Leo's advisor role on one line; bio links in the Verdigris link color (design system) instead of linen with an underline; Amazon, McKesson, Adobe, Autodesk and Pitt unlinked in team bios. |
